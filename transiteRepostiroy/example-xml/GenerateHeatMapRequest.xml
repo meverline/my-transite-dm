@@ -1,0 +1,26 @@
+<GenerateHeatMapRequest xmlns="http://localhost/transiteRepositroy/schemas">
+  <agencyName>WAMTA</agencyName>
+  <LatLonBox>
+    <east>170.0</east>
+    <west>-170.0</west>
+    <north>89.9</north>
+    <south>-89.9</south>
+  </LatLonBox>
+  <Metric>
+    <metricData>Data</metricData>
+    <metricType>aType</metricType>
+  </Metric>
+  <Distance unit="ft">
+    <length>100.0</length>
+  </Distance>
+  <Grandiante>
+    <GradientParameters>
+      <startColorString>#A0A0FF</startColorString>
+      <endColorString>BLUE</endColorString>
+      <startPercential>0.1</startPercential>
+      <range>29.9</range>
+      <steps>15</steps>
+      <alphaValue>95</alphaValue>
+    </GradientParameters>
+  </Grandiante>
+</GenerateHeatMapRequest>

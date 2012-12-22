@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+
+<hibernate-mapping  xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
+		xsi:schemaLocation="org/hibernate/hibernate-mapping-4.0.xsd"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		package="me.transit.database" >
+	 
+	 <typedef name="RouteUserType" class="me.database.userTypes.CSVClobUsetDataType" >
+	       <param name="csvClass">me.transit.database.impl.RouteStopDataImpl</param>
+	 </typedef>
+	  
+     <class name="TransitStop"  table="tran_stop" >
+
+          <id name="UUID" unsaved-value="-1">
+  			<column name="STOP_UUID" not-null="true"/>
+			<generator class="native"/>
+		  </id>
+		  <discriminator column="TRANSIT_STOP_TYPE" type="string"/>
+		  <property name="id" column="ID" not-null="true" />
+		  <property name="code" column="CODE" />
+		  <property name="name" column="NAME"  not-null="true" />
+		  <property name="desc" column="DESCRIPTION" />
+		  
+		  <property name="location" column="LOCATION" 
+		  			type="org.hibernatespatial.GeometryUserType"  not-null="true" />
+		  			
+		  <property name="zoneId" column="ZONE"  />
+		  <property name="url" column="URL"  />
+		  
+		  <property name="locationType" column="TYPE" not-null="true" >
+		  	  <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">me.transit.database.TransitStop$LocationType</param>
+             </type>
+          </property>
+		  			
+		  <property name="parentStation" column="PARENT_STATION" />
+		  <property name="routes" column="ROUTES"  length="16777215" type="RouteUserType"/>   
+		  <property name="version" column="VERSION"  /> 
+		  
+		  <many-to-one name="agency"  
+		  			   class="Agency" 
+		  			   column="AGENCY_UUID" 
+		  			   not-null="true" 
+		  			   outer-join="true" />
+		  			   
+		  <subclass name="me.transit.database.impl.TransitStopImpl" discriminator-value="TransitStopImpl"/>
+		  		  
+	  </class>
+	  
+</hibernate-mapping>

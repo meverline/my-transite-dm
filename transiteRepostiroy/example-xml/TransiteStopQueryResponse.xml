@@ -1,0 +1,19 @@
+<TransiteStopQueryResponse xmlns="http://localhost/transiteRepositroy/schemas">
+  <stops>
+    <TransitStop>
+      <id>-1</id>
+      <code>1</code>
+      <name>Barton</name>
+      <desc>desc</desc>
+      <location>-70.0,49.0,0
+</location>
+      <url>http://</url>
+      <locationType>UNKNOW</locationType>
+      <parentStation>21</parentStation>
+      <TripRoutes>
+        <routeShortName>42</routeShortName>
+        <tripHeadSign>Balston</tripHeadSign>
+      </TripRoutes>
+    </TransitStop>
+  </stops>
+</TransiteStopQueryResponse>

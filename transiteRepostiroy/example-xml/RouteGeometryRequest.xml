@@ -1,0 +1,6 @@
+<RouteGeometryRequest xmlns="http://localhost/transiteRepositroy/schemas">
+  <Shape>
+    <agencyName>WMATA</agencyName>
+    <shapeId>1000</shapeId>
+  </Shape>
+</RouteGeometryRequest>

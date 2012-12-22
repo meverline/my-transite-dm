@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://localhost/transiteRepositroy/schemas" xmlns:schemas="http://localhost/transiteRepositroy/schemas">
+  <xs:element name="CircleQueryRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="schemas:agencyName"/>
+        <xs:element ref="schemas:Address"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Address">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="schemas:number"/>
+        <xs:element ref="schemas:street"/>
+        <xs:element ref="schemas:state"/>
+        <xs:element ref="schemas:city"/>
+        <xs:element ref="schemas:zipCode"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="number" type="xs:integer"/>
+  <xs:element name="street" type="xs:string"/>
+  <xs:element name="state" type="schemas:State"/>
+  <xs:simpleType name="State">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="AL" />
+      <xs:enumeration value="AK" />
+      <xs:enumeration value="AZ" />
+      <xs:enumeration value="CA" />
+      <xs:enumeration value="CO" />
+      <xs:enumeration value="CT" />
+      <xs:enumeration value="DC" />
+      <xs:enumeration value="DE" />
+      <xs:enumeration value="FL" />
+      <xs:enumeration value="GA" />
+      <xs:enumeration value="HI" />
+      <xs:enumeration value="ID" />
+      <xs:enumeration value="IL" />
+      <xs:enumeration value="IN" />
+      <xs:enumeration value="IA" />
+      <xs:enumeration value="KS" />
+      <xs:enumeration value="KY" />
+      <xs:enumeration value="LA" />
+      <xs:enumeration value="ME" />
+      <xs:enumeration value="MD" />
+      <xs:enumeration value="MA" />
+      <xs:enumeration value="MI" />
+      <xs:enumeration value="MN" />
+      <xs:enumeration value="MS" />
+      <xs:enumeration value="MO" />
+      <xs:enumeration value="MT" />
+      <xs:enumeration value="NE" />
+      <xs:enumeration value="NV" />
+      <xs:enumeration value="NH" />
+      <xs:enumeration value="NM" />
+      <xs:enumeration value="NY" />
+      <xs:enumeration value="NC" />
+      <xs:enumeration value="ND" />
+      <xs:enumeration value="OH" />
+      <xs:enumeration value="OK" />
+      <xs:enumeration value="OR" />
+      <xs:enumeration value="PA" />
+      <xs:enumeration value="RI" />
+      <xs:enumeration value="SC" />
+      <xs:enumeration value="SD" />
+      <xs:enumeration value="TN" />
+      <xs:enumeration value="TX" />
+      <xs:enumeration value="UT" />
+      <xs:enumeration value="VT" />
+      <xs:enumeration value="VA" />
+      <xs:enumeration value="WA" />
+      <xs:enumeration value="WV" />
+      <xs:enumeration value="WI" />
+      <xs:enumeration value="WY" />
+      <xs:enumeration value="AS" />
+      <xs:enumeration value="FM" />
+      <xs:enumeration value="GU" />
+      <xs:enumeration value="MH" />
+      <xs:enumeration value="MP" />
+      <xs:enumeration value="PW" />
+      <xs:enumeration value="PR" />
+      <xs:enumeration value="VI" />
+    </xs:restriction>
+  </xs:simpleType>  
+  <xs:element name="city" type="xs:string"/>
+  <xs:element name="zipCode" type="xs:integer"/>
+  <xs:element name="ClusterQueryRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="schemas:agencyName"/>
+        <xs:element ref="schemas:LatLonBox"/>
+        <xs:element ref="schemas:Metric"/>
+        <xs:element ref="schemas:Cluster"/>
+        <xs:element ref="schemas:Distance"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Cluster">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="schemas:hiRange"/>
+        <xs:element ref="schemas:lowRange"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="hiRange" type="xs:integer"/>
+  <xs:element name="lowRange" type="xs:integer"/>
+  <xs:element name="GenerateHeatMapRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="schemas:agencyName"/>
+        <xs:element ref="schemas:LatLonBox"/>
+        <xs:element ref="schemas:Metric"/>
+        <xs:element ref="schemas:Distance"/>
+        <xs:element ref="schemas:Grandiante"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Grandiante">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="schemas:GradientParameters"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GradientParameters">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="schemas:startColorString"/>
+        <xs:element ref="schemas:endColorString"/>
+        <xs:element ref="schemas:startPercential"/>
+        <xs:element ref="schemas:range"/>
+        <xs:element ref="schemas:steps"/>
+        <xs:element ref="schemas:alphaValue"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="startColorString" type="xs:string"/>
+  <xs:element name="endColorString" type="xs:string"/>
+  <xs:element name="startPercential" type="xs:decimal"/>
+  <xs:element name="range" type="xs:double"/>
+  <xs:element name="steps" type="xs:integer"/>
+  <xs:element name="alphaValue" type="xs:integer"/>
+  <xs:element name="RouteGeometryRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="schemas:Shape"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Shape">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="schemas:agencyName"/>
+        <xs:element ref="schemas:shapeId"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RouteGeometryResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="schemas:Shapes"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Shapes">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="schemas:id"/>
+        <xs:element ref="schemas:shape"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="shape">
+    <xs:complexType mixed="true"/>
+  </xs:element>
+  <xs:element name="RouteRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="schemas:routeTuples"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="routeTuples">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="schemas:RouteTuple"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RouteTuple">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="schemas:agencyName"/>
+        <xs:element ref="schemas:shortName"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RouteResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="schemas:routes"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="routes">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="schemas:Route"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Route">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="schemas:id"/>
+        <xs:element ref="schemas:shortName"/>
+        <xs:element ref="schemas:longName"/>
+        <xs:element ref="schemas:desc"/>
+        <xs:element ref="schemas:routeType"/>
+        <xs:element ref="schemas:url"/>
+        <xs:element ref="schemas:color"/>
+        <xs:element ref="schemas:textColor"/>
+        <xs:element ref="schemas:RouteTrip"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="longName" type="xs:string"/>
+  <xs:element name="routeType" type="xs:string"/>
+  <xs:element name="color" type="xs:string"/>
+  <xs:element name="textColor" type="xs:string"/>
+  <xs:element name="RouteTrip">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="schemas:id"/>
+        <xs:element ref="schemas:service"/>
+        <xs:element ref="schemas:headSign"/>
+        <xs:element ref="schemas:shortName"/>
+        <xs:element ref="schemas:directionId"/>
+        <xs:element ref="schemas:shapeId"/>
+        <xs:element ref="schemas:stopTimes"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="service">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="schemas:id"/>
+        <xs:element ref="schemas:startDate"/>
+        <xs:element ref="schemas:endDate"/>
+        <xs:element ref="schemas:serviceDayFlag"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="startDate" type="xs:dateTime"/>
+  <xs:element name="endDate" type="xs:dateTime"/>
+  <xs:element name="serviceDayFlag" type="xs:integer"/>
+  <xs:element name="headSign" type="xs:string"/>
+  <xs:element name="directionId" type="schemas:Direction"/>
+  <xs:simpleType name="Direction">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="IN_BOUND" />
+      <xs:enumeration value="OUT_BOUND" />
+      <xs:enumeration value="UNKOWN" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="stopTimes">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="schemas:arrivalTime"/>
+        <xs:element ref="schemas:departureTime"/>
+        <xs:element ref="schemas:stopHeadSign"/>
+        <xs:element ref="schemas:pickupType"/>
+        <xs:element ref="schemas:dropOffType"/>
+        <xs:element ref="schemas:shapeDistTravel"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="arrivalTime" type="xs:integer"/>
+  <xs:element name="departureTime" type="xs:integer"/>
+  <xs:element name="stopHeadSign" type="xs:string"/>
+  <xs:element name="pickupType" type="schemas:PickupType"/>
+  <xs:element name="dropOffType" type="schemas:PickupType"/>
+  <xs:simpleType name="PickupType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="REGULAR" />
+      <xs:enumeration value="NOPICKUP" />
+      <xs:enumeration value="PHONE" />
+      <xs:enumeration value="COORDINATE" />
+      <xs:enumeration value="UNKONWN" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="shapeDistTravel" type="xs:double"/>
+  <xs:element name="TransiteStopQueryRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="schemas:agencyName"/>
+        <xs:element ref="schemas:LatLonBox"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TransiteStopQueryResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="schemas:stops"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="stops">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="schemas:TransitStop"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TransitStop">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="schemas:id"/>
+        <xs:element ref="schemas:code"/>
+        <xs:element ref="schemas:name"/>
+        <xs:element ref="schemas:desc"/>
+        <xs:element ref="schemas:location"/>
+        <xs:element ref="schemas:url"/>
+        <xs:element ref="schemas:locationType"/>
+        <xs:element ref="schemas:parentStation"/>
+        <xs:element ref="schemas:TripRoutes"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="code" type="xs:integer"/>
+  <xs:element name="name" type="xs:string"/>
+  <xs:element name="location" type="xs:string"/>
+  <xs:element name="locationType" type="schemas:LocationType"/>
+  <xs:simpleType name="LocationType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="STOP" />
+      <xs:enumeration value="STATION" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="parentStation" type="xs:integer"/>
+  <xs:element name="TripRoutes">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="schemas:routeShortName"/>
+        <xs:element ref="schemas:tripHeadSign"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="routeShortName" type="xs:string"/>
+  <xs:element name="tripHeadSign" type="xs:string"/>
+  <xs:element name="agencyName" type="xs:string"/>
+  <xs:element name="LatLonBox">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="schemas:east"/>
+        <xs:element ref="schemas:west"/>
+        <xs:element ref="schemas:north"/>
+        <xs:element ref="schemas:south"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="east" type="xs:double"/>
+  <xs:element name="west" type="xs:double"/>
+  <xs:element name="north" type="xs:double"/>
+  <xs:element name="south" type="xs:double"/>
+  <xs:element name="Metric">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="schemas:metricData"/>
+        <xs:element ref="schemas:metricType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="metricData" type="schemas:MetricDataList"/>
+  <xs:simpleType name="MetricDataList">
+    <xs:list itemType="xs:string"/>
+  </xs:simpleType>
+  <xs:element name="metricType" type="schemas:MetricType"/>
+  <xs:simpleType name="MetricType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ServiceDate" />
+      <xs:enumeration value="TransitStop" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Distance">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="schemas:length"/>
+      </xs:sequence>
+      <xs:attribute name="unit" use="required" type="schemas:UnitType"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="UnitType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="FT" />
+      <xs:enumeration value="M" />
+      <xs:enumeration value="MI" />
+      <xs:enumeration value="KM" />
+      <xs:enumeration value="NM" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="length" type="xs:double"/>
+  <xs:element name="shortName" type="xs:string"/>
+  <xs:element name="id" type="xs:integer"/>
+  <xs:element name="desc" type="xs:string"/>
+  <xs:element name="url" type="xs:anyURI"/>
+  <xs:element name="shapeId" type="xs:integer"/>
+</xs:schema>
