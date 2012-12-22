@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+    <!-- a SessionFactory instance listed as /jndi/name -->
+    <session-factory
+        name="java:hibernate/SessionFactory">
+
+        <!-- properties -->
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5433/Transit</property>
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.connection.password">postgis84!</property>      
+        <property name="hibernate.dialect">org.hibernatespatial.postgis.PostgisDialect</property>
+        
+        <!-- Enable Hibernate's automatic session context management -->
+        <property name="current_session_context_class">thread</property>
+
+        <!-- Disable the second-level cache  -->
+        <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+
+        <!-- Echo all executed SQL to stdout -->
+        <property name="show_sql">false</property>
+
+        <!-- Drop and re-create the database schema on startup -->
+        <!-- property name="hbm2ddl.auto">create</property -->
+        <property name="hbm2ddl.auto">update</property>
+
+        <!-- mapping files -->
+        <mapping resource="config/hibernate/Agency.hbm.xml"/>
+        <mapping resource="config/hibernate/CalendarDate.hbm.xml"/>
+        <mapping resource="config/hibernate/Route.hbm.xml"/>
+        <mapping resource="config/hibernate/RouteGeometry.hbm.xml"/>
+        <mapping resource="config/hibernate/ServiceDate.hbm.xml"/>
+        <mapping resource="config/hibernate/TransitStop.hbm.xml"/>
+        <mapping resource="config/hibernate/Trip.hbm.xml"/>
+
+    </session-factory>
+
+</hibernate-configuration>

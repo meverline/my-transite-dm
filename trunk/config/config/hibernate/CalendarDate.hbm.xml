@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+
+<hibernate-mapping xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
+		xsi:schemaLocation="org/hibernate/hibernate-mapping-4.0.xsd"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		package="me.transit.database" >
+
+      <class name="CalendarDate"  table="tran_calendar_date" >
+
+          <id name="UUID" unsaved-value="-1">
+  			<column name="CALENDAR_DATE_UUID" not-null="true"/>
+			<generator class="native"/>
+		  </id>
+		  <discriminator column="CALENDARDATE_TYPE" type="string"/>
+		  <property name="id" column="ID" not-null="true" />
+		  <property name="date" column="DATE" not-null="true" type="java.util.Calendar" />
+		  <property name="exceptionType" column="EXCCEPTOIN_TYPE" not-null="true" >
+		  	 <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">me.transit.database.CalendarDate$ExceptionType</param>
+             </type>
+          </property>    
+		  <property name="version" column="VERSION"  />
+		  			
+		  <many-to-one name="agency"  
+		  			   class="Agency" 
+		  			   column="AGENCY_UUID" 
+		  			   not-null="true" 
+		  			   outer-join="true" />
+		  			   
+ 		  <subclass name="me.transit.database.impl.CalendarDateImpl" discriminator-value="CalendarDateImpl"/>		 
+		  
+      </class>
+ 
+ </hibernate-mapping>

@@ -1,0 +1,10 @@
+<CircleQueryRequest xmlns="http://localhost/transiteRepositroy/schemas">
+  <agencyName>WMTA</agencyName>
+  <Address>
+    <number>231</number>
+    <street>N Barton St.</street>
+    <state>VA</state>
+    <city>Arlington</city>
+    <zipCode>22201</zipCode>
+  </Address>
+</CircleQueryRequest>

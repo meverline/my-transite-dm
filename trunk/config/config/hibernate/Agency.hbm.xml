@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+
+<hibernate-mapping xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
+		xsi:schemaLocation="org/hibernate/hibernate-mapping-4.0.xsd"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		package="me.transit.database" >
+
+	  <class name="me.transit.database.Agency"  table="tran_agency" >
+
+          <id name="UUID" unsaved-value="-1">
+  			<column name="AGENCY_UUID" not-null="true"/>
+			<generator class="native"/>
+		  </id>
+		  
+		  <discriminator column="AGENCY_TYPE" type="string" />
+		  
+		  <property name="id" column="ID" />
+		  <property name="name" column="NAME" not-null="true" />
+          <property name="url" column="URL" not-null="true" />
+ 		  <property name="timezone" column="TIMEZONE" not-null="true" />
+          <property name="lang" column="LANG"  />
+ 		  <property name="phone" column="PHONE"  />
+ 		  <property name="version" column="VERSION"  />
+ 		  
+ 		  <subclass name="me.transit.database.impl.AgencyImpl" discriminator-value="AngencyImpl"/>
+                  
+	 </class>
+	  
+</hibernate-mapping>

@@ -1,0 +1,8 @@
+<RouteRequest xmlns="http://localhost/transiteRepositroy/schemas">
+  <routeTuples>
+    <RouteTuple>
+      <agencyName>WMATA</agencyName>
+      <shortName>4B</shortName>
+    </RouteTuple>
+  </routeTuples>
+</RouteRequest>
