@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+	
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName">
+        		<value>org.postgresql.Driver</value>
+        </property>
+        <property name="url">
+               <value>jdbc:postgresql://localhost:5432/Transit</value>
+        </property>
+        <property name="username">
+        	<value>postgres</value>
+        </property>
+        <property name="password">
+        		<value>Postgres</value>
+        </property>
+    </bean>
+	
+	<!-- Hibernate SessionFactory -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+        <property name="dataSource"><ref local="dataSource"/></property>
+        <property name="mappingResources">
+            <list>
+                <value>config/hibernate/Agency.hbm.xml</value>
+                <value>config/hibernate/CalendarDate.hbm.xml</value>
+                <value>config/hibernate/Route.hbm.xml</value>
+                <value>config/hibernate/RouteGeometry.hbm.xml</value>
+                <value>config/hibernate/ServiceDate.hbm.xml</value>
+				<value>config/hibernate/TransitStop.hbm.xml</value>
+				<value>config/hibernate/Trip.hbm.xml</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+        <props>
+            <prop key="hibernate.dialect">org.hibernatespatial.postgis.PostgisDialect</prop>
+            <prop key="hibernate.hbm2ddl.auto">update</prop>
+        </props>
+        </property>
+    </bean>
+				 
+    <bean id="hibernateConnection" class="me.transit.dao.hibernate.SpringHibernateConnection" >
+    	<property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+	<!-- Database access i.e. DAO's  -->		 
+	<bean id="agencyDao" class="me.transit.dao.impl.AgencyDaoImpl">
+		<property name="connection" ref="hibernateConnection"/>
+	</bean>
+	
+	<bean id="calendarDateDao" class="me.transit.dao.impl.CalendarDateDaoImpl">
+		<property name="connection" ref="hibernateConnection"/>
+	</bean>
+	
+	<bean id="routeDao" class="me.transit.dao.impl.RouteDaoImpl">
+		<property name="connection" ref="hibernateConnection"/>
+	</bean>
+		
+	<bean id="routeGeometryDao" class="me.transit.dao.impl.RouteGeometryDaoImpl">
+		<property name="connection" ref="hibernateConnection"/>
+	</bean>
+	
+	<bean id="serviceDateDao" class="me.transit.dao.impl.ServiceDateDaoImpl">
+		<property name="connection" ref="hibernateConnection"/>
+	</bean>
+		
+	<bean id="transiteStopDao" class="me.transit.dao.impl.TransiteStopDaoImpl">
+		<property name="connection" ref="hibernateConnection"/>
+	</bean>
+	
+	<bean id="tripDao" class="me.transit.dao.impl.TripDaoImpl">
+		<property name="connection" ref="hibernateConnection"/>
+	</bean>
+	
+	<!-- ***************************************************************************** -->
+	<!-- ***************************************************************************** -->
+	<!-- ***************************************************************************** -->
+	
+	<bean id="kernel" class="me.datamining.Kernel.Epanechnikov" />
+	<bean id="bandWidth" class="me.datamining.bandwidth.SlivermanRule" />
+	
+	<bean id="densityEstimateAlgorithm" class="me.datamining.densityEstimate.NonAdaptiveKDE">
+		<property name="denstiyKernel" ref="kernel"/>
+		<property name="XBandWidth" ref="bandWidth"/>
+		<property name="YBandWidth" ref="bandWidth"/>
+	</bean>
+
+	<bean id="clusteringAlgorithm" class="me.datamining.cluster.STING">
+		<property name="rangeHi" value="1000000"/>
+		<property name="rangeLow" value="0"/>
+		<property name="confidence" value="0.5"/>
+		<property name="density" value="1.0"/>
+	</bean>		
+	
+</beans>

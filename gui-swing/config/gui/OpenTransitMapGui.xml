@@ -1,0 +1,59 @@
+<OpenTransitMap>
+
+	 <size width="1200" height="800" />
+
+	 <menubar>
+	 
+	    <menu label="file">
+	    
+	        <menuItem label="Settings" actionListener="me.openMap.command.ApplicationSettingsCommand">
+	             <parameter value="me.openMap.dialogs.tabs.ADDRangeColorTab"/>
+	             <parameter value="me.openMap.dialogs.tabs.AgencyColorTab"/>
+	             <parameter value="me.openMap.dialogs.tabs.DataMiningColorsTab"/>
+	             <parameter value="me.openMap.dialogs.tabs.ClusterTab"/>
+	             <parameter value="me.openMap.dialogs.tabs.HeatMapTab"/>	             	             	             
+	        </menuItem>
+	        <menuItem label="Map As Image" actionListener="me.openMap.command.SaveAsImage"/>
+	        <separator/>
+	        <menuItem label="Exit" actionListener="me.openMap.command.ExitCommand"/>
+
+	    </menu>
+	    
+	 </menubar>
+	 
+ 	 <toolbar>
+ 	 
+ 	 	<checkBox label="Search Show Stops" 
+ 	 			  property="showStops"
+ 	 			  selected="true"
+ 	 			  actionListener="me.openMap.command.ShowStopsActionListener"/>
+ 	 	
+ 	 	<checkBox label="Stops ADD Limit" 
+ 	 	          property="adaStops"
+ 	 		      actionListener="me.openMap.command.ShowAddActionListener"/>
+ 	 	
+ 	 	<comboBox property="rangeBox"
+ 	 	          type="java.lang.Double"
+ 	 	          selectedItem="2"
+ 	 	          actionListener="me.openMap.command.RangeChangeActionListener" >
+ 	 	       <item value="0.25" />
+ 	 	       <item value="0.5" />
+ 	 	       <item value="0.75" />
+ 	 	       <item value="1.0" />
+ 	 	</comboBox>
+ 	 	
+ 	 </toolbar>
+ 	 	 
+ 	 <search>
+ 	 
+ 	 	<tab value="me.openMap.models.query.RegionalMapSearch" />
+ 	 	<tab value="me.openMap.models.query.KNNSearch" />
+ 	 	<tab value="me.openMap.models.query.DataMining" >
+ 	 	   <sample value="me.openMap.models.query.sample.StopSample" />
+ 	 	   <sample value="me.openMap.models.query.sample.ServiceSample" />
+ 	 	   <sample value="me.openMap.models.query.sample.FrequanceOfService" />
+ 	 	</tab>
+ 	 	
+ 	 </search>
+ 	 
+</OpenTransitMap>
