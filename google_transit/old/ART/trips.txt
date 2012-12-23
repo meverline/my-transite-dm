@@ -1,0 +1,1145 @@
+route_id,service_id,trip_id,trip_headsign,direction_id,block_id,shape_id
+1,3,655,East Falls Church Metro,0,1,223
+1,3,656,East Falls Church Metro,0,1,223
+1,3,657,East Falls Church Metro,0,1,223
+1,3,658,East Falls Church Metro,0,1,223
+1,3,659,East Falls Church Metro,0,1,223
+1,3,660,East Falls Church Metro,0,1,223
+1,3,661,East Falls Church Metro,0,1,223
+1,3,662,East Falls Church Metro,0,1,223
+1,3,663,East Falls Church Metro,0,1,223
+1,3,664,East Falls Church Metro,0,2,223
+1,3,665,East Falls Church Metro,0,2,223
+1,3,666,East Falls Church Metro,0,2,223
+1,3,667,East Falls Church Metro,0,2,223
+1,3,668,East Falls Church Metro,0,2,223
+1,3,669,East Falls Church Metro,0,2,223
+1,3,670,East Falls Church Metro,0,2,223
+1,3,671,East Falls Church Metro,0,2,223
+1,3,672,East Falls Church Metro,0,2,223
+2,3,673,West Falls Church,0,3,225
+2,3,674,West Falls Church,0,3,225
+2,3,675,West Falls Church,0,3,225
+2,3,676,West Falls Church,0,3,225
+2,3,677,West Falls Church,0,3,225
+2,3,678,West Falls Church,0,3,225
+2,3,679,West Falls Church,0,3,225
+2,3,680,West Falls Church,0,3,225
+2,3,681,West Falls Church,0,3,225
+2,3,682,West Falls Church,0,4,225
+2,3,683,West Falls Church,0,4,225
+2,3,684,West Falls Church,0,4,225
+2,3,685,West Falls Church,0,4,225
+2,3,686,West Falls Church,0,4,225
+2,3,687,West Falls Church,0,4,225
+2,3,688,West Falls Church,0,4,225
+3,1,393,Court House Metro,0,15,15
+3,1,395,Court House Metro,0,15,15
+3,1,397,Court House Metro,0,15,15
+3,1,399,Court House Metro,0,15,15
+3,1,401,Court House Metro,0,15,15
+3,1,403,Court House Metro,0,15,15
+3,1,405,Court House Metro,0,16,15
+3,1,407,Court House Metro,0,16,15
+3,1,409,Court House Metro,0,16,15
+3,1,411,Court House Metro,0,16,15
+3,1,413,Court House Metro,0,16,15
+3,1,415,Court House Metro,0,16,15
+3,1,417,Court House Metro,0,17,15
+3,1,419,Court House Metro,0,17,15
+3,1,421,Court House Metro,0,17,15
+3,1,423,Court House Metro,0,17,15
+3,1,425,Court House Metro,0,17,15
+3,1,427,Court House Metro,0,17,15
+3,1,429,Court House Metro,0,18,15
+3,1,431,Court House Metro,0,18,15
+3,1,433,Court House Metro,0,18,15
+3,1,435,Court House Metro,0,18,15
+3,1,437,Court House Metro,0,18,15
+3,1,439,Court House Metro,0,18,15
+3,1,441,Court House Metro,0,19,15
+3,1,443,Court House Metro,0,19,15
+3,1,445,Court House Metro,0,19,15
+3,1,447,Court House Metro,0,19,15
+3,1,449,Court House Metro,0,19,15
+3,1,451,Court House Metro,0,19,15
+3,1,453,Court House Metro,0,20,15
+3,1,455,Court House Metro,0,20,15
+3,1,457,Court House Metro,0,20,15
+3,1,459,Court House Metro,0,20,15
+3,1,461,Court House Metro,0,20,15
+3,1,463,Court House Metro,0,21,15
+3,1,465,Court House Metro,0,21,15
+3,1,467,Court House Metro,0,21,15
+3,1,469,Court House Metro,0,21,15
+3,1,471,Court House Metro,0,21,15
+3,1,473,Court House Metro,0,21,15
+3,1,475,Court House Metro,0,22,15
+3,1,477,Court House Metro,0,22,15
+3,1,479,Court House Metro,0,22,15
+3,1,481,Court House Metro,0,22,15
+3,1,483,Court House Metro,0,22,15
+3,2,485,Court House Metro,0,23,15
+3,2,487,Court House Metro,0,23,15
+3,2,489,Court House Metro,0,23,15
+3,2,491,Court House Metro,0,23,15
+3,2,493,Court House Metro,0,23,15
+3,2,495,Court House Metro,0,23,15
+3,2,497,Court House Metro,0,24,15
+3,2,499,Court House Metro,0,24,15
+3,2,501,Court House Metro,0,24,15
+3,2,503,Court House Metro,0,24,15
+3,2,505,Court House Metro,0,24,15
+3,2,507,Court House Metro,0,25,15
+3,2,509,Court House Metro,0,25,15
+3,2,511,Court House Metro,0,25,15
+3,2,513,Court House Metro,0,25,15
+3,2,515,Court House Metro,0,25,15
+3,2,517,Court House Metro,0,25,15
+3,2,519,Court House Metro,0,26,15
+3,2,521,Court House Metro,0,26,15
+3,2,523,Court House Metro,0,26,15
+3,2,525,Court House Metro,0,26,15
+3,2,527,Court House Metro,0,26,15
+3,2,529,Court House Metro,0,26,15
+3,2,531,Court House Metro,0,27,15
+3,2,533,Court House Metro,0,27,15
+3,2,535,Court House Metro,0,27,15
+3,2,537,Court House Metro,0,27,15
+3,2,539,Court House Metro,0,27,15
+3,3,541,Court House Metro,0,5,15
+3,3,543,Court House Metro,0,5,15
+3,3,545,Court House Metro,0,5,15
+3,3,547,Court House Metro,0,5,15
+3,3,549,Court House Metro,0,5,15
+3,3,551,Court House Metro,0,5,15
+3,3,553,Court House Metro,0,6,15
+3,3,555,Court House Metro,0,6,15
+3,3,557,Court House Metro,0,6,15
+3,3,559,Court House Metro,0,6,15
+3,3,561,Court House Metro,0,6,15
+3,3,563,Court House Metro,0,6,15
+3,3,565,Court House Metro,0,6,15
+3,3,567,Court House Metro,0,7,15
+3,3,569,Court House Metro,0,7,15
+3,3,571,Court House Metro,0,7,15
+3,3,573,Court House Metro,0,7,15
+3,3,575,Court House Metro,0,7,15
+3,3,577,Court House Metro,0,7,15
+3,3,579,Court House Metro,0,8,15
+3,3,581,Court House Metro,0,8,15
+3,3,583,Court House Metro,0,8,15
+3,3,585,Court House Metro,0,8,15
+3,3,587,Court House Metro,0,8,15
+3,3,589,Court House Metro,0,8,15
+3,3,591,Court House Metro,0,9,15
+3,3,593,Court House Metro,0,9,15
+3,3,595,Court House Metro,0,9,15
+3,3,597,Court House Metro,0,9,15
+3,3,599,Court House Metro,0,9,15
+3,3,601,Court House Metro,0,10,15
+3,3,603,Court House Metro,0,10,15
+3,3,605,Court House Metro,0,10,15
+3,3,607,Court House Metro,0,10,15
+3,3,609,Court House Metro,0,10,15
+3,3,611,Court House Metro,0,11,15
+3,3,613,Court House Metro,0,11,15
+3,3,615,Court House Metro,0,11,15
+3,3,617,Court House Metro,0,11,15
+3,3,619,Court House Metro,0,11,15
+3,3,621,Court House Metro,0,11,15
+3,3,623,Court House Metro,0,12,15
+3,3,625,Court House Metro,0,12,15
+3,3,627,Court House Metro,0,12,15
+3,3,629,Court House Metro,0,12,15
+3,3,631,Court House Metro,0,12,15
+3,3,633,Court House Metro,0,12,15
+3,3,635,Court House Metro,0,13,15
+3,3,637,Court House Metro,0,13,15
+3,3,639,Court House Metro,0,13,15
+3,3,641,Court House Metro,0,13,15
+3,3,643,Court House Metro,0,13,15
+3,3,645,Court House Metro,0,14,15
+3,3,647,Court House Metro,0,14,15
+3,3,649,Court House Metro,0,14,15
+3,3,651,Court House Metro,0,14,15
+3,3,653,Court House Metro,0,14,15
+4,1,394,Columbia Pike & Dinwiddie,0,15,14
+4,1,396,Columbia Pike & Dinwiddie,0,15,14
+4,1,398,Columbia Pike & Dinwiddie,0,15,14
+4,1,400,Columbia Pike & Dinwiddie,0,15,14
+4,1,402,Columbia Pike & Dinwiddie,0,15,14
+4,1,404,Columbia Pike & Dinwiddie,0,15,14
+4,1,406,Columbia Pike & Dinwiddie,0,16,14
+4,1,408,Columbia Pike & Dinwiddie,0,16,14
+4,1,410,Columbia Pike & Dinwiddie,0,16,14
+4,1,412,Columbia Pike & Dinwiddie,0,16,14
+4,1,414,Columbia Pike & Dinwiddie,0,16,14
+4,1,416,Columbia Pike & Dinwiddie,0,16,14
+4,1,418,Columbia Pike & Dinwiddie,0,17,14
+4,1,420,Columbia Pike & Dinwiddie,0,17,14
+4,1,422,Columbia Pike & Dinwiddie,0,17,14
+4,1,424,Columbia Pike & Dinwiddie,0,17,14
+4,1,426,Columbia Pike & Dinwiddie,0,17,14
+4,1,428,Columbia Pike & Dinwiddie,0,17,14
+4,1,430,Columbia Pike & Dinwiddie,0,18,14
+4,1,432,Columbia Pike & Dinwiddie,0,18,14
+4,1,434,Columbia Pike & Dinwiddie,0,18,14
+4,1,436,Columbia Pike & Dinwiddie,0,18,14
+4,1,438,Columbia Pike & Dinwiddie,0,18,14
+4,1,440,Columbia Pike & Dinwiddie,0,18,14
+4,1,442,Columbia Pike & Dinwiddie,0,19,14
+4,1,444,Columbia Pike & Dinwiddie,0,19,14
+4,1,446,Columbia Pike & Dinwiddie,0,19,14
+4,1,448,Columbia Pike & Dinwiddie,0,19,14
+4,1,450,Columbia Pike & Dinwiddie,0,19,14
+4,1,452,Columbia Pike & Dinwiddie,0,19,14
+4,1,454,Columbia Pike & Dinwiddie,0,20,14
+4,1,456,Columbia Pike & Dinwiddie,0,20,14
+4,1,458,Columbia Pike & Dinwiddie,0,20,14
+4,1,460,Columbia Pike & Dinwiddie,0,20,14
+4,1,462,Columbia Pike & Dinwiddie,0,20,14
+4,1,464,Columbia Pike & Dinwiddie,0,21,14
+4,1,466,Columbia Pike & Dinwiddie,0,21,14
+4,1,468,Columbia Pike & Dinwiddie,0,21,14
+4,1,470,Columbia Pike & Dinwiddie,0,21,14
+4,1,472,Columbia Pike & Dinwiddie,0,21,14
+4,1,474,Columbia Pike & Dinwiddie,0,21,14
+4,1,476,Columbia Pike & Dinwiddie,0,22,14
+4,1,478,Columbia Pike & Dinwiddie,0,22,14
+4,1,480,Columbia Pike & Dinwiddie,0,22,14
+4,1,482,Columbia Pike & Dinwiddie,0,22,14
+4,1,484,Columbia Pike & Dinwiddie,0,22,14
+4,2,486,Columbia Pike & Dinwiddie,0,23,14
+4,2,488,Columbia Pike & Dinwiddie,0,23,14
+4,2,490,Columbia Pike & Dinwiddie,0,23,14
+4,2,492,Columbia Pike & Dinwiddie,0,23,14
+4,2,494,Columbia Pike & Dinwiddie,0,23,14
+4,2,496,Columbia Pike & Dinwiddie,0,23,14
+4,2,498,Columbia Pike & Dinwiddie,0,24,14
+4,2,500,Columbia Pike & Dinwiddie,0,24,14
+4,2,502,Columbia Pike & Dinwiddie,0,24,14
+4,2,504,Columbia Pike & Dinwiddie,0,24,14
+4,2,506,Columbia Pike & Dinwiddie,0,24,14
+4,2,508,Columbia Pike & Dinwiddie,0,25,14
+4,2,510,Columbia Pike & Dinwiddie,0,25,14
+4,2,512,Columbia Pike & Dinwiddie,0,25,14
+4,2,514,Columbia Pike & Dinwiddie,0,25,14
+4,2,516,Columbia Pike & Dinwiddie,0,25,14
+4,2,518,Columbia Pike & Dinwiddie,0,25,14
+4,2,520,Columbia Pike & Dinwiddie,0,26,14
+4,2,522,Columbia Pike & Dinwiddie,0,26,14
+4,2,524,Columbia Pike & Dinwiddie,0,26,14
+4,2,526,Columbia Pike & Dinwiddie,0,26,14
+4,2,528,Columbia Pike & Dinwiddie,0,26,14
+4,2,530,Columbia Pike & Dinwiddie,0,26,14
+4,2,532,Columbia Pike & Dinwiddie,0,27,14
+4,2,534,Columbia Pike & Dinwiddie,0,27,14
+4,2,536,Columbia Pike & Dinwiddie,0,27,14
+4,2,538,Columbia Pike & Dinwiddie,0,27,14
+4,2,540,Columbia Pike & Dinwiddie,0,27,14
+4,3,542,Columbia Pike & Dinwiddie,0,5,14
+4,3,544,Columbia Pike & Dinwiddie,0,5,14
+4,3,546,Columbia Pike & Dinwiddie,0,5,14
+4,3,548,Columbia Pike & Dinwiddie,0,5,14
+4,3,550,Columbia Pike & Dinwiddie,0,5,14
+4,3,552,Columbia Pike & Dinwiddie,0,5,14
+4,3,554,Columbia Pike & Dinwiddie,0,6,14
+4,3,556,Columbia Pike & Dinwiddie,0,6,14
+4,3,558,Columbia Pike & Dinwiddie,0,6,14
+4,3,560,Columbia Pike & Dinwiddie,0,6,14
+4,3,562,Columbia Pike & Dinwiddie,0,6,14
+4,3,564,Columbia Pike & Dinwiddie,0,6,14
+4,3,566,Columbia Pike & Dinwiddie,0,6,14
+4,3,568,Columbia Pike & Dinwiddie,0,7,14
+4,3,570,Columbia Pike & Dinwiddie,0,7,14
+4,3,572,Columbia Pike & Dinwiddie,0,7,14
+4,3,574,Columbia Pike & Dinwiddie,0,7,14
+4,3,576,Columbia Pike & Dinwiddie,0,7,14
+4,3,578,Columbia Pike & Dinwiddie,0,7,14
+4,3,580,Columbia Pike & Dinwiddie,0,8,14
+4,3,582,Columbia Pike & Dinwiddie,0,8,14
+4,3,584,Columbia Pike & Dinwiddie,0,8,14
+4,3,586,Columbia Pike & Dinwiddie,0,8,14
+4,3,588,Columbia Pike & Dinwiddie,0,8,14
+4,3,590,Columbia Pike & Dinwiddie,0,8,14
+4,3,592,Columbia Pike & Dinwiddie,0,9,14
+4,3,594,Columbia Pike & Dinwiddie,0,9,14
+4,3,596,Columbia Pike & Dinwiddie,0,9,14
+4,3,598,Columbia Pike & Dinwiddie,0,9,14
+4,3,600,Columbia Pike & Dinwiddie,0,9,14
+4,3,602,Columbia Pike & Dinwiddie,0,10,14
+4,3,604,Columbia Pike & Dinwiddie,0,10,14
+4,3,606,Columbia Pike & Dinwiddie,0,10,14
+4,3,608,Columbia Pike & Dinwiddie,0,10,14
+4,3,610,Columbia Pike & Dinwiddie,0,10,14
+4,3,612,Columbia Pike & Dinwiddie,0,11,14
+4,3,614,Columbia Pike & Dinwiddie,0,11,14
+4,3,616,Columbia Pike & Dinwiddie,0,11,14
+4,3,618,Columbia Pike & Dinwiddie,0,11,14
+4,3,620,Columbia Pike & Dinwiddie,0,11,14
+4,3,622,Columbia Pike & Dinwiddie,0,11,14
+4,3,624,Columbia Pike & Dinwiddie,0,12,14
+4,3,626,Columbia Pike & Dinwiddie,0,12,14
+4,3,628,Columbia Pike & Dinwiddie,0,12,14
+4,3,630,Columbia Pike & Dinwiddie,0,12,14
+4,3,632,Columbia Pike & Dinwiddie,0,12,14
+4,3,634,Columbia Pike & Dinwiddie,0,12,14
+4,3,636,Columbia Pike & Dinwiddie,0,13,14
+4,3,638,Columbia Pike & Dinwiddie,0,13,14
+4,3,640,Columbia Pike & Dinwiddie,0,13,14
+4,3,642,Columbia Pike & Dinwiddie,0,13,14
+4,3,644,Columbia Pike & Dinwiddie,0,13,14
+4,3,646,Columbia Pike & Dinwiddie,0,14,14
+4,3,648,Columbia Pike & Dinwiddie,0,14,14
+4,3,650,Columbia Pike & Dinwiddie,0,14,14
+4,3,652,Columbia Pike & Dinwiddie,0,14,14
+4,3,654,Columbia Pike & Dinwiddie,0,14,14
+5,1,367,Pentagon Metro,0,32,39
+5,1,369,Pentagon Metro,0,32,39
+5,1,371,Pentagon Metro,0,32,39
+5,1,373,Pentagon Metro,0,32,39
+5,1,375,Pentagon Metro,0,32,39
+5,1,377,Pentagon Metro,0,32,39
+5,1,379,Pentagon Metro,0,33,39
+5,1,381,Pentagon Metro,0,33,39
+5,1,383,Pentagon Metro,0,33,39
+5,1,385,Pentagon Metro,0,33,39
+5,1,387,Pentagon Metro,0,33,39
+5,1,389,Pentagon Metro,0,33,39
+5,1,391,Pentagon Metro,0,33,39
+5,3,1072,Pentagon Metro,0,28,39
+5,3,1073,Pentagon Metro,0,29,39
+5,3,1074,Pentagon Metro,0,30,39
+5,3,1075,Pentagon Metro,0,28,39
+5,3,1076,Pentagon Metro,0,29,39
+5,3,1077,Pentagon Metro,0,30,39
+5,3,1078,Pentagon Metro,0,28,39
+5,3,1079,Pentagon Metro,0,29,39
+5,3,1080,Pentagon Metro,0,30,39
+5,3,1081,Pentagon Metro,0,28,39
+5,3,1082,Pentagon Metro,0,30,39
+5,3,1083,Pentagon Metro,0,28,39
+5,3,1084,Pentagon Metro,0,30,39
+5,3,1085,Pentagon Metro,0,28,39
+5,3,1086,Pentagon Metro,0,30,39
+5,3,1087,Pentagon Metro,0,28,39
+5,3,1088,Pentagon Metro,0,30,39
+5,3,1089,Pentagon Metro,0,28,39
+5,3,1090,Pentagon Metro,0,30,39
+5,3,1091,Pentagon Metro,0,28,39
+5,3,1092,Pentagon Metro,0,31,39
+5,3,1093,Pentagon Metro,0,30,39
+5,3,1094,Pentagon Metro,0,28,39
+5,3,1095,Pentagon Metro,0,31,39
+5,3,1096,Pentagon Metro,0,30,39
+5,3,1097,Pentagon Metro,0,28,39
+5,3,1098,Pentagon Metro,0,31,39
+5,3,1099,Pentagon Metro,0,30,39
+5,3,1100,Pentagon Metro,0,28,39
+5,3,1101,Pentagon Metro,0,31,39
+6,1,368,Ballston Metro,0,32,40
+6,1,370,Ballston Metro,0,32,40
+6,1,372,Ballston Metro,0,32,40
+6,1,374,Ballston Metro,0,32,40
+6,1,376,Ballston Metro,0,32,40
+6,1,378,Ballston Metro,0,32,40
+6,1,380,Ballston Metro,0,33,40
+6,1,382,Ballston Metro,0,33,40
+6,1,384,Ballston Metro,0,33,40
+6,1,386,Ballston Metro,0,33,40
+6,1,388,Ballston Metro,0,33,40
+6,1,390,Ballston Metro,0,33,40
+6,1,392,Ballston Metro,0,33,40
+6,3,1102,Ballston Metro,0,28,40
+6,3,1103,Ballston Metro,0,29,40
+6,3,1104,Ballston Metro,0,30,40
+6,3,1105,Ballston Metro,0,28,40
+6,3,1106,Ballston Metro,0,29,40
+6,3,1107,Ballston Metro,0,30,40
+6,3,1108,Ballston Metro,0,28,40
+6,3,1109,Ballston Metro,0,29,40
+6,3,1110,Ballston Metro,0,30,40
+6,3,1111,Ballston Metro,0,28,40
+6,3,1112,Ballston Metro,0,30,40
+6,3,1113,Ballston Metro,0,28,40
+6,3,1114,Ballston Metro,0,30,40
+6,3,1115,Ballston Metro,0,28,40
+6,3,1116,Ballston Metro,0,30,40
+6,3,1117,Ballston Metro,0,28,40
+6,3,1118,Ballston Metro,0,30,40
+6,3,1119,Ballston Metro,0,28,40
+6,3,1120,Ballston Metro,0,30,40
+6,3,1121,Ballston Metro,0,28,40
+6,3,1122,Ballston Metro,0,31,40
+6,3,1123,Ballston Metro,0,30,40
+6,3,1124,Ballston Metro,0,28,40
+6,3,1125,Ballston Metro,0,31,40
+6,3,1126,Ballston Metro,0,30,40
+6,3,1127,Ballston Metro,0,28,40
+6,3,1128,Ballston Metro,0,31,40
+6,3,1129,Ballston Metro,0,30,40
+6,3,1130,Ballston Metro,0,28,40
+6,3,1131,Ballston Metro,0,31,40
+7,3,818,Rosslyn Metro,0,34,226
+7,3,819,Rosslyn Metro,0,34,226
+7,3,820,Rosslyn Metro,0,34,226
+7,3,821,Rosslyn Metro,0,34,226
+7,3,822,Rosslyn Metro,0,34,226
+7,3,823,Rosslyn Metro,0,34,226
+7,3,824,Rosslyn Metro,0,34,226
+7,3,825,Rosslyn Metro,0,34,226
+7,3,826,Rosslyn Metro,0,34,226
+7,3,827,Rosslyn Metro,0,34,226
+7,3,828,Rosslyn Metro,0,34,226
+7,3,829,Rosslyn Metro,0,34,226
+7,3,830,Rosslyn Metro,0,34,226
+7,3,1033,Rosslyn Metro,0,35,226
+7,3,1034,Rosslyn Metro,0,35,226
+7,3,1035,Rosslyn Metro,0,35,226
+7,3,1036,Rosslyn Metro,0,35,226
+7,3,1037,Rosslyn Metro,0,35,226
+7,3,1038,Rosslyn Metro,0,35,226
+7,3,1039,Rosslyn Metro,0,35,226
+7,3,1040,Rosslyn Metro,0,35,226
+7,3,1041,Rosslyn Metro,0,35,226
+7,3,1042,Rosslyn Metro,0,35,226
+7,3,1043,Rosslyn Metro,0,35,226
+7,3,1044,Rosslyn Metro,0,35,226
+7,3,1045,Rosslyn Metro,0,35,226
+8,3,1046,Columbia Pike and Sth Glebe Rd,0,34,13
+8,3,1047,Columbia Pike and Sth Glebe Rd,0,35,13
+8,3,1048,Columbia Pike and Sth Glebe Rd,0,34,13
+8,3,1049,Columbia Pike and Sth Glebe Rd,0,35,13
+8,3,1050,Columbia Pike and Sth Glebe Rd,0,34,13
+8,3,1051,Columbia Pike and Sth Glebe Rd,0,35,13
+8,3,1052,Columbia Pike and Sth Glebe Rd,0,34,13
+8,3,1053,Columbia Pike and Sth Glebe Rd,0,35,13
+8,3,1054,Columbia Pike and Sth Glebe Rd,0,34,13
+8,3,1055,Columbia Pike and Sth Glebe Rd,0,35,13
+8,3,1056,Columbia Pike and Sth Glebe Rd,0,34,13
+8,3,1057,Columbia Pike and Sth Glebe Rd,0,35,13
+8,3,1058,Columbia Pike and Sth Glebe Rd,0,34,13
+8,3,1059,Columbia Pike and Sth Glebe Rd,0,35,13
+8,3,1060,Columbia Pike and Sth Glebe Rd,0,34,13
+8,3,1061,Columbia Pike and Sth Glebe Rd,0,35,13
+8,3,1062,Columbia Pike and Sth Glebe Rd,0,34,13
+8,3,1063,Columbia Pike and Sth Glebe Rd,0,35,13
+8,3,1064,Columbia Pike and Sth Glebe Rd,0,34,13
+8,3,1065,Columbia Pike and Sth Glebe Rd,0,35,13
+8,3,1066,Columbia Pike and Sth Glebe Rd,0,34,13
+8,3,1067,Columbia Pike and Sth Glebe Rd,0,35,13
+8,3,1068,Columbia Pike and Sth Glebe Rd,0,34,13
+8,3,1069,Columbia Pike and Sth Glebe Rd,0,35,13
+8,3,1070,Columbia Pike and Sth Glebe Rd,0,34,13
+8,3,1071,Columbia Pike and Sth Glebe Rd,0,35,13
+9,1,1,Lee Hwy via Virginia Hospital Center,0,37,1
+9,1,3,Lee Hwy via Virginia Hospital Center,0,37,1
+9,1,5,Lee Hwy via Virginia Hospital Center,0,37,1
+9,1,7,Lee Hwy via Virginia Hospital Center,0,37,1
+9,1,9,Lee Hwy via Virginia Hospital Center,0,37,1
+9,1,11,Lee Hwy via Virginia Hospital Center,0,37,1
+9,1,13,Lee Hwy via Virginia Hospital Center,0,37,1
+9,1,15,Lee Hwy via Virginia Hospital Center,0,37,1
+9,1,17,Lee Hwy via Virginia Hospital Center,0,37,1
+9,1,19,Lee Hwy via Virginia Hospital Center,0,37,1
+9,1,21,Lee Hwy via Virginia Hospital Center,0,37,1
+9,1,23,Lee Hwy via Virginia Hospital Center,0,37,1
+9,1,25,Lee Hwy via Virginia Hospital Center,0,37,1
+9,1,27,Lee Hwy via Virginia Hospital Center,0,37,1
+9,1,29,Lee Hwy via Virginia Hospital Center,0,37,1
+9,1,31,Lee Hwy via Virginia Hospital Center,0,37,1
+9,1,33,Lee Hwy via Virginia Hospital Center,0,37,1
+9,1,35,Lee Hwy via Virginia Hospital Center,0,37,1
+9,1,37,Lee Hwy via Virginia Hospital Center,0,41,1
+9,1,39,Lee Hwy via Virginia Hospital Center,0,41,1
+9,1,41,Lee Hwy via Virginia Hospital Center,0,41,1
+9,1,43,Lee Hwy via Virginia Hospital Center,0,41,1
+9,1,45,Lee Hwy via Virginia Hospital Center,0,41,1
+9,1,47,Lee Hwy via Virginia Hospital Center,0,41,1
+9,1,49,Lee Hwy via Virginia Hospital Center,0,41,1
+9,1,51,Lee Hwy via Virginia Hospital Center,0,41,1
+9,1,53,Lee Hwy via Virginia Hospital Center,0,41,1
+9,1,55,Lee Hwy via Virginia Hospital Center,0,41,1
+9,1,57,Lee Hwy via Virginia Hospital Center,0,41,1
+9,1,59,Lee Hwy via Virginia Hospital Center,0,41,1
+9,1,61,Lee Hwy via Virginia Hospital Center,0,41,1
+9,1,63,Lee Hwy via Virginia Hospital Center,0,41,1
+9,1,65,Lee Hwy via Virginia Hospital Center,0,41,1
+9,1,67,Lee Hwy via Virginia Hospital Center,0,41,1
+9,1,69,Lee Hwy via Virginia Hospital Center,0,41,1
+9,1,71,Lee Hwy via Virginia Hospital Center,0,41,1
+9,1,73,Lee Hwy via Virginia Hospital Center,0,41,1
+9,2,74,Lee Hwy via Virginia Hospital Center,0,38,1
+9,2,76,Lee Hwy via Virginia Hospital Center,0,38,1
+9,2,78,Lee Hwy via Virginia Hospital Center,0,38,1
+9,2,80,Lee Hwy via Virginia Hospital Center,0,38,1
+9,2,82,Lee Hwy via Virginia Hospital Center,0,38,1
+9,2,84,Lee Hwy via Virginia Hospital Center,0,38,1
+9,2,86,Lee Hwy via Virginia Hospital Center,0,38,1
+9,2,88,Lee Hwy via Virginia Hospital Center,0,38,1
+9,2,90,Lee Hwy via Virginia Hospital Center,0,38,1
+9,2,92,Lee Hwy via Virginia Hospital Center,0,38,1
+9,2,94,Lee Hwy via Virginia Hospital Center,0,38,1
+9,2,96,Lee Hwy via Virginia Hospital Center,0,38,1
+9,2,98,Lee Hwy via Virginia Hospital Center,0,38,1
+9,2,100,Lee Hwy via Virginia Hospital Center,0,38,1
+9,2,102,Lee Hwy via Virginia Hospital Center,0,38,1
+9,2,104,Lee Hwy via Virginia Hospital Center,0,38,1
+9,2,106,Lee Hwy via Virginia Hospital Center,0,42,1
+9,2,108,Lee Hwy via Virginia Hospital Center,0,42,1
+9,2,110,Lee Hwy via Virginia Hospital Center,0,42,1
+9,2,112,Lee Hwy via Virginia Hospital Center,0,42,1
+9,2,114,Lee Hwy via Virginia Hospital Center,0,42,1
+9,2,116,Lee Hwy via Virginia Hospital Center,0,42,1
+9,2,118,Lee Hwy via Virginia Hospital Center,0,42,1
+9,2,120,Lee Hwy via Virginia Hospital Center,0,42,1
+9,2,122,Lee Hwy via Virginia Hospital Center,0,42,1
+9,2,124,Lee Hwy via Virginia Hospital Center,0,42,1
+9,2,126,Lee Hwy via Virginia Hospital Center,0,42,1
+9,2,128,Lee Hwy via Virginia Hospital Center,0,42,1
+9,2,130,Lee Hwy via Virginia Hospital Center,0,42,1
+9,2,132,Lee Hwy via Virginia Hospital Center,0,42,1
+9,2,134,Lee Hwy via Virginia Hospital Center,0,42,1
+9,2,136,Lee Hwy via Virginia Hospital Center,0,42,1
+9,3,142,Lee Hwy via Virginia Hospital Center,0,36,1
+9,3,144,Lee Hwy via Virginia Hospital Center,0,36,1
+9,3,146,Lee Hwy via Virginia Hospital Center,0,36,1
+9,3,148,Lee Hwy via Virginia Hospital Center,0,36,1
+9,3,150,Lee Hwy via Virginia Hospital Center,0,36,1
+9,3,152,Lee Hwy via Virginia Hospital Center,0,36,1
+9,3,154,Lee Hwy via Virginia Hospital Center,0,36,1
+9,3,156,Lee Hwy via Virginia Hospital Center,0,36,1
+9,3,158,Lee Hwy via Virginia Hospital Center,0,36,1
+9,3,160,Lee Hwy via Virginia Hospital Center,0,36,1
+9,3,162,Lee Hwy via Virginia Hospital Center,0,36,1
+9,3,164,Lee Hwy via Virginia Hospital Center,0,36,1
+9,3,166,Lee Hwy via Virginia Hospital Center,0,36,1
+9,3,168,Lee Hwy via Virginia Hospital Center,0,39,1
+9,3,170,Lee Hwy via Virginia Hospital Center,0,39,1
+9,3,172,Lee Hwy via Virginia Hospital Center,0,39,1
+9,3,174,Lee Hwy via Virginia Hospital Center,0,39,1
+9,3,176,Lee Hwy via Virginia Hospital Center,0,39,1
+9,3,178,Lee Hwy via Virginia Hospital Center,0,39,1
+9,3,180,Lee Hwy via Virginia Hospital Center,0,39,1
+9,3,182,Lee Hwy via Virginia Hospital Center,0,39,1
+9,3,184,Lee Hwy via Virginia Hospital Center,0,39,1
+9,3,186,Lee Hwy via Virginia Hospital Center,0,39,1
+9,3,188,Lee Hwy via Virginia Hospital Center,0,39,1
+9,3,190,Lee Hwy via Virginia Hospital Center,0,39,1
+9,3,192,Lee Hwy via Virginia Hospital Center,0,40,1
+9,3,194,Lee Hwy via Virginia Hospital Center,0,40,1
+9,3,196,Lee Hwy via Virginia Hospital Center,0,40,1
+9,3,198,Lee Hwy via Virginia Hospital Center,0,40,1
+9,3,200,Lee Hwy via Virginia Hospital Center,0,40,1
+9,3,202,Lee Hwy via Virginia Hospital Center,0,40,1
+9,3,204,Lee Hwy via Virginia Hospital Center,0,40,1
+9,3,206,Lee Hwy via Virginia Hospital Center,0,40,1
+9,3,208,Lee Hwy via Virginia Hospital Center,0,40,1
+9,3,210,Lee Hwy via Virginia Hospital Center,0,40,1
+9,3,212,Lee Hwy via Virginia Hospital Center,0,40,1
+9,3,214,Lee Hwy via Virginia Hospital Center,0,40,1
+10,1,2,Ballston Metro,0,37,2
+10,1,4,Ballston Metro,0,37,2
+10,1,6,Ballston Metro,0,37,2
+10,1,8,Ballston Metro,0,37,2
+10,1,10,Ballston Metro,0,37,2
+10,1,12,Ballston Metro,0,37,2
+10,1,14,Ballston Metro,0,37,2
+10,1,16,Ballston Metro,0,37,2
+10,1,18,Ballston Metro,0,37,2
+10,1,20,Ballston Metro,0,37,2
+10,1,22,Ballston Metro,0,37,2
+10,1,24,Ballston Metro,0,37,2
+10,1,26,Ballston Metro,0,37,2
+10,1,28,Ballston Metro,0,37,2
+10,1,30,Ballston Metro,0,37,2
+10,1,32,Ballston Metro,0,37,2
+10,1,34,Ballston Metro,0,37,2
+10,1,36,Ballston Metro,0,37,2
+10,1,38,Ballston Metro,0,41,2
+10,1,40,Ballston Metro,0,41,2
+10,1,42,Ballston Metro,0,41,2
+10,1,44,Ballston Metro,0,41,2
+10,1,46,Ballston Metro,0,41,2
+10,1,48,Ballston Metro,0,41,2
+10,1,50,Ballston Metro,0,41,2
+10,1,52,Ballston Metro,0,41,2
+10,1,54,Ballston Metro,0,41,2
+10,1,56,Ballston Metro,0,41,2
+10,1,58,Ballston Metro,0,41,2
+10,1,60,Ballston Metro,0,41,2
+10,1,62,Ballston Metro,0,41,2
+10,1,64,Ballston Metro,0,41,2
+10,1,66,Ballston Metro,0,41,2
+10,1,68,Ballston Metro,0,41,2
+10,1,70,Ballston Metro,0,41,2
+10,1,72,Ballston Metro,0,41,2
+10,2,75,Ballston Metro,0,38,2
+10,2,77,Ballston Metro,0,38,2
+10,2,79,Ballston Metro,0,38,2
+10,2,81,Ballston Metro,0,38,2
+10,2,83,Ballston Metro,0,38,2
+10,2,85,Ballston Metro,0,38,2
+10,2,87,Ballston Metro,0,38,2
+10,2,89,Ballston Metro,0,38,2
+10,2,91,Ballston Metro,0,38,2
+10,2,93,Ballston Metro,0,38,2
+10,2,95,Ballston Metro,0,38,2
+10,2,97,Ballston Metro,0,38,2
+10,2,99,Ballston Metro,0,38,2
+10,2,101,Ballston Metro,0,38,2
+10,2,103,Ballston Metro,0,38,2
+10,2,105,Ballston Metro,0,38,2
+10,2,107,Ballston Metro,0,42,2
+10,2,109,Ballston Metro,0,42,2
+10,2,111,Ballston Metro,0,42,2
+10,2,113,Ballston Metro,0,42,2
+10,2,115,Ballston Metro,0,42,2
+10,2,117,Ballston Metro,0,42,2
+10,2,119,Ballston Metro,0,42,2
+10,2,121,Ballston Metro,0,42,2
+10,2,123,Ballston Metro,0,42,2
+10,2,125,Ballston Metro,0,42,2
+10,2,127,Ballston Metro,0,42,2
+10,2,129,Ballston Metro,0,42,2
+10,2,131,Ballston Metro,0,42,2
+10,2,133,Ballston Metro,0,42,2
+10,2,135,Ballston Metro,0,42,2
+10,3,143,Ballston Metro,0,36,2
+10,3,145,Ballston Metro,0,36,2
+10,3,147,Ballston Metro,0,36,2
+10,3,149,Ballston Metro,0,36,2
+10,3,151,Ballston Metro,0,36,2
+10,3,153,Ballston Metro,0,36,2
+10,3,155,Ballston Metro,0,36,2
+10,3,157,Ballston Metro,0,36,2
+10,3,159,Ballston Metro,0,36,2
+10,3,161,Ballston Metro,0,36,2
+10,3,163,Ballston Metro,0,36,2
+10,3,165,Ballston Metro,0,36,2
+10,3,167,Ballston Metro,0,36,2
+10,3,169,Ballston Metro,0,39,2
+10,3,171,Ballston Metro,0,39,2
+10,3,173,Ballston Metro,0,39,2
+10,3,175,Ballston Metro,0,39,2
+10,3,177,Ballston Metro,0,39,2
+10,3,179,Ballston Metro,0,39,2
+10,3,181,Ballston Metro,0,39,2
+10,3,183,Ballston Metro,0,39,2
+10,3,185,Ballston Metro,0,39,2
+10,3,187,Ballston Metro,0,39,2
+10,3,189,Ballston Metro,0,39,2
+10,3,191,Ballston Metro,0,39,2
+10,3,193,Ballston Metro,0,40,2
+10,3,195,Ballston Metro,0,40,2
+10,3,197,Ballston Metro,0,40,2
+10,3,199,Ballston Metro,0,40,2
+10,3,201,Ballston Metro,0,40,2
+10,3,203,Ballston Metro,0,40,2
+10,3,205,Ballston Metro,0,40,2
+10,3,207,Ballston Metro,0,40,2
+10,3,209,Ballston Metro,0,40,2
+10,3,211,Ballston Metro,0,40,2
+10,3,213,Ballston Metro,0,40,2
+10,3,215,Ballston Metro,0,40,2
+11,3,216,East Falls Church Metro,0,43,3
+11,3,218,East Falls Church Metro,0,43,3
+11,3,220,East Falls Church Metro,0,43,3
+11,3,222,East Falls Church Metro,0,43,3
+11,3,224,East Falls Church Metro,0,43,3
+11,3,226,East Falls Church Metro,0,43,3
+11,3,228,East Falls Church Metro,0,43,3
+11,3,230,East Falls Church Metro,0,44,3
+11,3,232,East Falls Church Metro,0,44,3
+11,3,234,East Falls Church Metro,0,44,3
+11,3,236,East Falls Church Metro,0,45,3
+11,3,238,East Falls Church Metro,0,45,3
+11,3,240,East Falls Church Metro,0,45,3
+11,3,242,East Falls Church Metro,0,45,3
+11,3,244,East Falls Church Metro,0,45,3
+11,3,246,East Falls Church Metro,0,45,3
+11,3,248,East Falls Church Metro,0,45,3
+11,3,250,East Falls Church Metro,0,45,3
+11,3,251,East Falls Church Metro,0,46,3
+11,3,253,East Falls Church Metro,0,46,3
+11,3,255,East Falls Church Metro,0,46,3
+11,3,257,East Falls Church Metro,0,46,3
+12,3,217,Ballston Metro,0,43,4
+12,3,219,Ballston Metro,0,43,4
+12,3,221,Ballston Metro,0,43,4
+12,3,223,Ballston Metro,0,43,4
+12,3,225,Ballston Metro,0,43,4
+12,3,227,Ballston Metro,0,43,4
+12,3,229,Ballston Metro,0,43,4
+12,3,231,Ballston Metro,0,44,4
+12,3,233,Ballston Metro,0,44,4
+12,3,235,Ballston Metro,0,44,4
+12,3,237,Ballston Metro,0,45,4
+12,3,239,Ballston Metro,0,45,4
+12,3,241,Ballston Metro,0,45,4
+12,3,243,Ballston Metro,0,45,4
+12,3,245,Ballston Metro,0,45,4
+12,3,247,Ballston Metro,0,45,4
+12,3,249,Ballston Metro,0,45,4
+12,3,252,Ballston Metro,0,46,4
+12,3,254,Ballston Metro,0,46,4
+12,3,256,Ballston Metro,0,46,4
+12,3,258,Ballston Metro,0,46,4
+13,3,138,East Falls Church Metro,0,47,164
+13,3,140,East Falls Church Metro,0,47,164
+13,3,702,East Falls Church Metro,0,47,164
+13,3,704,East Falls Church Metro,0,47,164
+13,3,706,East Falls Church Metro,0,47,164
+13,3,708,East Falls Church Metro,0,47,164
+13,3,710,East Falls Church Metro,0,47,164
+13,3,724,East Falls Church Metro,0,48,168
+13,3,726,East Falls Church Metro,0,48,164
+13,3,728,East Falls Church Metro,0,48,164
+13,3,730,East Falls Church Metro,0,48,164
+13,3,732,East Falls Church Metro,0,49,164
+13,3,734,East Falls Church Metro,0,49,164
+13,3,736,East Falls Church Metro,0,49,164
+13,3,744,East Falls Church Metro,0,49,164
+13,3,746,East Falls Church Metro,0,49,164
+13,3,756,East Falls Church Metro,0,50,164
+13,3,758,East Falls Church Metro,0,50,164
+14,3,703,Ballston Metro,0,47,167
+14,3,705,Ballston Metro,0,47,167
+14,3,707,Ballston Metro,0,47,167
+14,3,709,Ballston Metro,0,47,167
+14,3,711,Ballston Metro,0,47,167
+14,3,731,Ballston Metro,0,48,167
+14,3,733,Ballston Metro,0,49,167
+14,3,735,Ballston Metro,0,49,167
+14,3,737,Ballston Metro,0,49,167
+14,3,739,Ballston Metro,0,49,167
+14,3,741,Ballston Metro,0,49,167
+14,3,743,Ballston Metro,0,49,167
+14,3,745,Ballston Metro,0,49,167
+14,3,747,Ballston Metro,0,49,167
+14,3,749,Ballston Metro,0,50,167
+14,3,751,Ballston Metro,0,50,167
+14,3,753,Ballston Metro,0,50,167
+14,3,755,Ballston Metro,0,50,167
+14,3,757,Ballston Metro,0,50,167
+15,3,738,East Falls Church Metro,0,49,169
+15,3,740,East Falls Church Metro,0,49,169
+15,3,742,East Falls Church Metro,0,49,169
+15,3,748,East Falls Church Metro,0,50,169
+15,3,750,East Falls Church Metro,0,50,169
+15,3,752,East Falls Church Metro,0,50,169
+15,3,754,East Falls Church Metro,0,50,169
+16,3,137,Ballston Metro,0,47,165
+16,3,139,Ballston Metro,0,47,166
+16,3,141,Ballston Metro,0,47,166
+16,3,725,Ballston Metro,0,48,166
+16,3,727,Ballston Metro,0,48,166
+16,3,729,Ballston Metro,0,48,166
+17,3,259,Rosslyn Metro,0,51,18
+17,3,260,Rosslyn Metro,0,51,18
+17,3,261,Rosslyn Metro,0,51,18
+17,3,262,Rosslyn Metro,0,51,18
+17,3,263,Rosslyn Metro,0,51,18
+17,3,264,Rosslyn Metro,0,51,18
+17,3,265,Rosslyn Metro,0,51,18
+17,3,266,Rosslyn Metro,0,51,18
+17,3,267,Rosslyn Metro,0,51,18
+17,3,268,Rosslyn Metro,0,51,18
+17,3,284,Rosslyn Metro,0,54,18
+17,3,285,Rosslyn Metro,0,54,18
+17,3,286,Rosslyn Metro,0,54,18
+17,3,287,Rosslyn Metro,0,54,18
+17,3,288,Rosslyn Metro,0,54,18
+17,3,289,Rosslyn Metro,0,54,18
+17,3,290,Rosslyn Metro,0,54,18
+17,3,291,Rosslyn Metro,0,54,18
+17,3,292,Rosslyn Metro,0,54,18
+17,3,293,Rosslyn Metro,0,54,18
+18,3,269,Rosslyn Metro,0,52,160
+18,3,270,Rosslyn Metro,0,52,160
+18,3,271,Rosslyn Metro,0,52,160
+18,3,272,Rosslyn Metro,0,52,160
+18,3,273,Rosslyn Metro,0,52,160
+18,3,274,Rosslyn Metro,0,52,160
+18,3,275,Rosslyn Metro,0,52,160
+18,3,276,Courthouse Metro,0,52,161
+18,3,277,Rosslyn Metro,0,53,160
+18,3,278,Rosslyn Metro,0,53,160
+18,3,279,Rosslyn Metro,0,53,160
+18,3,280,Rosslyn Metro,0,53,160
+18,3,281,Rosslyn Metro,0,53,160
+18,3,282,Rosslyn Metro,0,53,160
+18,3,283,Rosslyn Metro,0,53,160
+19,3,294,Courthouse Metro,0,55,30
+19,3,296,Courthouse Metro,0,55,22
+19,3,298,Courthouse Metro,0,55,22
+19,3,300,Courthouse Metro,0,55,22
+19,3,302,Courthouse Metro,0,56,22
+19,3,304,Courthouse Metro,0,56,22
+19,3,306,Courthouse Metro,0,56,22
+19,3,308,Courthouse Metro,0,57,22
+19,3,310,Courthouse Metro,0,57,22
+19,3,312,Courthouse Metro,0,57,22
+19,3,314,Courthouse Metro,0,57,22
+19,3,316,Lorcom Lane,0,57,29
+19,3,317,Courthouse Metro,0,58,22
+19,3,319,Courthouse Metro,0,58,22
+19,3,321,Courthouse Metro,0,58,22
+20,3,295,Ballston Metro,0,55,21
+20,3,297,Ballston Metro,0,55,21
+20,3,299,Ballston Metro,0,55,21
+20,3,301,Ballston Metro,0,56,31
+20,3,303,Ballston Metro,0,56,21
+20,3,305,Ballston Metro,0,56,21
+20,3,307,Ballston Metro,0,56,21
+20,3,309,Ballston Metro,0,57,21
+20,3,311,Ballston Metro,0,57,21
+20,3,313,Ballston Metro,0,57,21
+20,3,315,Ballston Metro,0,57,21
+20,3,318,Ballston Metro,0,58,21
+20,3,320,Ballston Metro,0,58,21
+20,3,322,Lorcom Lane,0,58,32
+21,3,787,Pentagon Metro,0,59,228
+21,3,788,Pentagon Metro,0,59,228
+21,3,789,Pentagon Metro,0,59,228
+21,3,790,Pentagon Metro,0,59,228
+21,3,791,Pentagon Metro,0,60,228
+21,3,792,Pentagon Metro,0,60,228
+21,3,793,Pentagon Metro,0,60,228
+22,3,794,Halstead,0,61,229
+22,3,795,Halstead,0,61,229
+22,3,796,Halstead,0,61,229
+22,3,797,Halstead,0,61,229
+22,3,798,Halstead,0,62,229
+22,3,799,Halstead,0,62,229
+22,3,800,Halstead,0,62,229
+22,3,801,Halstead,0,62,229
+23,3,324,Wakefield HS,0,63,54
+23,3,326,Wakefield HS,0,63,54
+23,3,328,Wakefield HS,0,63,54
+23,3,331,Wakefield HS,0,64,54
+23,3,333,Wakefield HS,0,64,54
+23,3,335,Wakefield HS,0,64,54
+23,3,337,Wakefield HS,0,65,54
+23,3,339,Wakefield HS,0,65,54
+23,3,341,Wakefield HS,0,65,54
+23,3,343,Wakefield HS,0,65,54
+23,3,345,Wakefield HS,0,65,54
+23,3,347,Wakefield HS,0,66,54
+23,3,349,Wakefield HS,0,66,54
+23,3,351,Wakefield HS,0,66,54
+23,3,353,Wakefield HS,0,66,54
+24,3,323,Ballston Metro,0,63,55
+24,3,325,Ballston Metro,0,63,55
+24,3,327,Ballston Metro,0,63,55
+24,3,329,Ballston Metro,0,63,55
+24,3,330,Ballston Metro,0,64,55
+24,3,332,Ballston Metro,0,64,55
+24,3,334,Ballston Metro,0,64,55
+24,3,336,Ballston Metro,0,65,55
+24,3,338,Ballston Metro,0,65,55
+24,3,340,Ballston Metro,0,65,55
+24,3,342,Ballston Metro,0,65,55
+24,3,344,Ballston Metro,0,65,55
+24,3,346,Ballston Metro,0,66,55
+24,3,348,Ballston Metro,0,66,55
+24,3,350,Ballston Metro,0,66,55
+24,3,352,Ballston Metro,0,66,55
+25,3,354,Shirlington Station,0,68,196
+25,3,355,Shirlington Station,0,68,196
+25,3,356,Shirlington Station,0,68,196
+25,3,357,Shirlington Station,0,68,196
+25,3,358,Shirlington Station,0,68,196
+25,3,359,Shirlington Station,0,68,196
+25,3,360,Shirlington Station,0,68,196
+25,3,361,Shirlington Station,0,70,196
+25,3,362,Shirlington Station,0,70,196
+25,3,363,Shirlington Station,0,70,196
+25,3,364,Shirlington Station,0,70,196
+25,3,365,Shirlington Station,0,70,196
+25,3,366,Shirlington Station,0,70,196
+25,3,712,Shirlington Station,0,69,196
+25,3,713,Shirlington Station,0,69,196
+25,3,714,Shirlington Station,0,69,196
+25,3,715,Shirlington Station,0,69,196
+25,3,716,Shirlington Station,0,69,196
+25,3,717,Shirlington Station,0,69,196
+25,3,718,Shirlington Station,0,69,196
+25,3,759,Shirlington Station,0,67,196
+25,3,760,Shirlington Station,0,67,196
+25,3,761,Shirlington Station,0,67,196
+25,3,762,Shirlington Station,0,67,196
+25,3,763,Shirlington Station,0,67,196
+25,3,764,Shirlington Station,0,67,196
+25,3,765,Shirlington Station,0,67,196
+25,3,776,Shirlington Station,0,69,196
+25,3,778,Shirlington Station,0,69,196
+25,3,780,Shirlington Station,0,69,196
+25,3,782,Shirlington Station,0,70,196
+25,3,784,Shirlington Station,0,70,196
+25,3,786,Shirlington Station,0,70,196
+26,3,689,Court House Metro,0,67,194
+26,3,690,Court House Metro,0,67,194
+26,3,691,Court House Metro,0,67,194
+26,3,692,Court House Metro,0,67,194
+26,3,693,Court House Metro,0,67,194
+26,3,694,Court House Metro,0,67,194
+26,3,695,Court House Metro,0,67,194
+26,3,696,Court House Metro,0,69,194
+26,3,697,Court House Metro,0,69,194
+26,3,698,Court House Metro,0,69,194
+26,3,699,Court House Metro,0,69,194
+26,3,700,Court House Metro,0,69,194
+26,3,701,Court House Metro,0,69,194
+26,3,719,Court House Metro,0,70,194
+26,3,720,Court House Metro,0,70,194
+26,3,721,Court House Metro,0,70,194
+26,3,722,Court House Metro,0,70,194
+26,3,723,Court House Metro,0,70,194
+26,3,766,Court House Metro,0,68,194
+26,3,767,Court House Metro,0,68,194
+26,3,768,Court House Metro,0,68,194
+26,3,769,Court House Metro,0,68,194
+26,3,770,Court House Metro,0,68,194
+26,3,771,Court House Metro,0,68,194
+26,3,772,Court House Metro,0,68,194
+26,3,773,Court House Metro,0,67,194
+26,3,774,Court House Metro,0,68,194
+26,3,775,Court House Metro,0,69,194
+26,3,777,Court House Metro,0,69,194
+26,3,779,Court House Metro,0,69,194
+26,3,781,Court House Metro,0,70,194
+26,3,783,Court House Metro,0,70,194
+26,3,785,Court House Metro,0,70,194
+27,3,802,Pentagon Metro,0,71,230
+27,3,803,Pentagon Metro,0,71,230
+27,3,804,Pentagon Metro,0,71,230
+27,3,805,Pentagon Metro,0,71,230
+27,3,806,Pentagon Metro,0,72,230
+27,3,807,Pentagon Metro,0,72,230
+27,3,808,Pentagon Metro,0,72,230
+28,3,809,Pentagon Metro,0,73,231
+28,3,810,Pentagon Metro,0,73,231
+28,3,811,Pentagon Metro,0,73,231
+28,3,812,Pentagon Metro,0,73,231
+28,3,813,Pentagon Metro,0,73,231
+28,3,814,Pentagon Metro,0,74,231
+28,3,815,Pentagon Metro,0,74,231
+28,3,816,Pentagon Metro,0,74,231
+28,3,817,Pentagon Metro,0,74,231
+29,3,839,Shirlington Station,0,75,218
+29,3,850,Shirlington Station,0,76,218
+29,3,852,Shirlington Station,0,76,218
+29,3,854,Shirlington Station,0,76,218
+29,3,856,Shirlington Station,0,76,218
+29,3,858,Shirlington Station,0,76,218
+29,3,860,Shirlington Station,0,76,218
+29,3,862,Shirlington Station,0,76,218
+29,3,872,Shirlington Station,0,76,218
+29,3,874,Shirlington Station,0,76,218
+29,3,876,Shirlington Station,0,76,218
+29,3,878,Shirlington Station,0,76,218
+29,3,891,Shirlington Station,0,78,218
+29,3,893,Shirlington Station,0,78,218
+29,3,895,Shirlington Station,0,78,218
+29,3,897,Shirlington Station,0,78,218
+29,3,899,Shirlington Station,0,78,218
+29,3,901,Shirlington Station,0,78,218
+29,3,903,Shirlington Station,0,78,218
+29,3,911,Shirlington Station,0,78,218
+29,3,912,Shirlington Station,0,79,218
+29,3,924,Shirlington Station,0,79,218
+29,3,926,Shirlington Station,0,79,218
+29,3,928,Shirlington Station,0,79,218
+29,3,935,Shirlington Station,0,80,218
+29,3,936,Shirlington Station,0,76,218
+29,3,937,Shirlington Station,0,76,218
+29,3,938,Shirlington Station,0,76,218
+29,3,939,Shirlington Station,0,76,218
+29,3,940,Shirlington Station,0,82,218
+29,3,941,Shirlington Station,0,82,218
+29,3,944,Shirlington Station,0,82,218
+29,3,945,Shirlington Station,0,82,218
+29,3,946,Shirlington Station,0,82,218
+29,3,947,Shirlington Station,0,82,218
+29,3,953,Shirlington Station,0,78,218
+29,3,954,Shirlington Station,0,78,218
+29,3,955,Shirlington Station,0,78,218
+29,3,956,Shirlington Station,0,78,218
+29,3,957,Shirlington Station,0,81,218
+29,3,958,Shirlington Station,0,81,218
+29,3,959,Shirlington Station,0,81,218
+29,3,962,Shirlington Station,0,81,218
+29,3,963,Shirlington Station,0,83,218
+29,3,968,Shirlington Station,0,83,218
+29,3,969,Shirlington Station,0,83,218
+29,3,970,Shirlington Station,0,83,218
+29,3,973,Shirlington Station,0,84,218
+29,3,1027,Shirlington Station,0,75,218
+29,3,1032,Shirlington Station,0,76,218
+30,3,834,Pentagon Metro,0,75,215
+30,3,838,Pentagon Metro,0,75,215
+30,3,840,Pentagon Metro,0,75,215
+30,3,841,Pentagon Metro,0,76,215
+30,3,845,Pentagon Metro,0,76,215
+30,3,849,Pentagon Metro,0,76,215
+30,3,851,Pentagon Metro,0,76,215
+30,3,853,Pentagon Metro,0,76,215
+30,3,855,Pentagon Metro,0,76,215
+30,3,857,Pentagon Metro,0,76,215
+30,3,859,Pentagon Metro,0,76,215
+30,3,861,Pentagon Metro,0,76,215
+30,3,863,Pentagon Metro,0,76,215
+30,3,865,Pentagon Metro,0,76,215
+30,3,869,Pentagon Metro,0,76,215
+30,3,873,Pentagon Metro,0,76,215
+30,3,875,Pentagon Metro,0,76,215
+30,3,877,Pentagon Metro,0,76,215
+30,3,879,Pentagon Metro,0,77,215
+30,3,883,Pentagon Metro,0,77,215
+30,3,886,Pentagon Metro,0,78,215
+30,3,890,Pentagon Metro,0,78,215
+30,3,892,Pentagon Metro,0,78,215
+30,3,894,Pentagon Metro,0,78,215
+30,3,896,Pentagon Metro,0,78,215
+30,3,898,Pentagon Metro,0,78,215
+30,3,900,Pentagon Metro,0,78,215
+30,3,902,Pentagon Metro,0,78,215
+30,3,904,Pentagon Metro,0,78,215
+30,3,906,Pentagon Metro,0,78,215
+30,3,910,Pentagon Metro,0,78,215
+30,3,917,Pentagon Metro,0,79,215
+30,3,921,Pentagon Metro,0,79,215
+30,3,923,Pentagon Metro,0,79,215
+30,3,925,Pentagon Metro,0,79,215
+30,3,927,Pentagon Metro,0,79,215
+30,3,930,Pentagon Metro,0,80,215
+30,3,934,Pentagon Metro,0,80,215
+30,3,974,Pentagon Metro,0,75,215
+30,3,976,Pentagon Metro,0,75,215
+30,3,978,Pentagon Metro,0,75,215
+30,3,979,Pentagon Metro,0,75,215
+30,3,980,Pentagon Metro,0,76,215
+30,3,982,Pentagon Metro,0,76,215
+30,3,984,Pentagon Metro,0,76,215
+30,3,985,Pentagon Metro,0,76,215
+30,3,986,Pentagon Metro,0,76,215
+30,3,987,Pentagon Metro,0,76,215
+30,3,988,Pentagon Metro,0,76,215
+30,3,989,Pentagon Metro,0,82,215
+30,3,990,Pentagon Metro,0,82,215
+30,3,991,Pentagon Metro,0,82,215
+30,3,992,Pentagon Metro,0,82,215
+30,3,993,Pentagon Metro,0,82,215
+30,3,994,Pentagon Metro,0,82,215
+30,3,995,Pentagon Metro,0,82,215
+30,3,996,Pentagon Metro,0,82,215
+30,3,997,Pentagon Metro,0,77,215
+30,3,999,Pentagon Metro,0,77,215
+30,3,1001,Pentagon Metro,0,78,215
+30,3,1003,Pentagon Metro,0,78,215
+30,3,1004,Pentagon Metro,0,78,215
+30,3,1005,Pentagon Metro,0,78,215
+30,3,1006,Pentagon Metro,0,78,215
+30,3,1007,Pentagon Metro,0,81,215
+30,3,1008,Pentagon Metro,0,81,215
+30,3,1009,Pentagon Metro,0,81,215
+30,3,1010,Pentagon Metro,0,81,215
+30,3,1011,Pentagon Metro,0,81,215
+30,3,1012,Pentagon Metro,0,81,215
+30,3,1015,Pentagon Metro,0,83,215
+30,3,1016,Pentagon Metro,0,83,215
+30,3,1017,Pentagon Metro,0,83,215
+30,3,1018,Pentagon Metro,0,83,215
+30,3,1019,Pentagon Metro,0,83,215
+30,3,1020,Pentagon Metro,0,84,215
+30,3,1022,Pentagon Metro,0,84,215
+31,3,832,Pentagon Metro,0,75,220
+31,3,836,Pentagon Metro,0,75,220
+31,3,843,Pentagon Metro,0,76,220
+31,3,847,Pentagon Metro,0,76,220
+31,3,867,Pentagon Metro,0,76,220
+31,3,871,Pentagon Metro,0,76,220
+31,3,881,Pentagon Metro,0,77,220
+31,3,885,Pentagon Metro,0,77,220
+31,3,888,Pentagon Metro,0,78,220
+31,3,908,Pentagon Metro,0,78,220
+31,3,915,Pentagon Metro,0,79,220
+31,3,919,Pentagon Metro,0,79,220
+31,3,932,Pentagon Metro,0,80,220
+31,3,975,Pentagon Metro,0,75,220
+31,3,977,Pentagon Metro,0,75,220
+31,3,981,Pentagon Metro,0,76,220
+31,3,983,Pentagon Metro,0,76,220
+31,3,998,Pentagon Metro,0,77,220
+31,3,1000,Pentagon Metro,0,77,220
+31,3,1002,Pentagon Metro,0,78,220
+31,3,1014,Pentagon Metro,0,83,220
+31,3,1021,Pentagon Metro,0,84,220
+31,3,1132,Pentagon Metro,0,82,12
+31,3,1133,Pentagon Metro,0,82,12
+31,3,1134,Pentagon Metro,0,81,12
+31,3,1135,Pentagon Metro,0,83,12
+31,3,1141,Pentagon Metro,0,84,12
+31,3,1142,Pentagon Metro,0,84,12
+32,3,831,Pentagon Metro,0,75,221
+32,3,835,Pentagon Metro,0,75,221
+32,3,842,Pentagon Metro,0,76,221
+32,3,846,Pentagon Metro,0,76,221
+32,3,866,Pentagon Metro,0,76,221
+32,3,870,Pentagon Metro,0,76,221
+32,3,880,Pentagon Metro,0,77,221
+32,3,884,Pentagon Metro,0,77,221
+32,3,887,Pentagon Metro,0,78,221
+32,3,907,Pentagon Metro,0,78,221
+32,3,914,Pentagon Metro,0,79,221
+32,3,918,Pentagon Metro,0,79,221
+32,3,931,Pentagon Metro,0,80,221
+32,3,948,Pentagon Metro,0,77,221
+32,3,950,Pentagon Metro,0,77,221
+32,3,951,Pentagon Metro,0,78,221
+32,3,964,Pentagon Metro,0,83,221
+32,3,1023,Pentagon Metro,0,75,221
+32,3,1025,Pentagon Metro,0,75,221
+32,3,1028,Pentagon Metro,0,76,221
+32,3,1030,Pentagon Metro,0,76,221
+32,3,1136,Pentagon Metro,0,82,11
+32,3,1137,Pentagon Metro,0,82,11
+32,3,1138,Pentagon Metro,0,81,11
+32,3,1139,Pentagon Metro,0,83,11
+32,3,1140,Pentagon Metro,0,84,11
+32,3,1143,Pentagon Metro,0,84,11
+32,3,1144,Pentagon Metro,0,84,11
+33,3,913,Ballston Metro,0,79,235
+33,3,1013,Ballston Metro,0,83,235
+34,3,833,Shirlington Station,0,75,234
+34,3,837,Shirlington Station,0,75,234
+34,3,844,Shirlington Station,0,76,234
+34,3,848,Shirlington Station,0,76,234
+34,3,864,Shirlington Station,0,76,234
+34,3,868,Shirlington Station,0,76,234
+34,3,882,Shirlington Station,0,77,234
+34,3,889,Shirlington Station,0,78,234
+34,3,905,Shirlington Station,0,78,234
+34,3,909,Shirlington Station,0,78,234
+34,3,916,Shirlington Station,0,79,234
+34,3,920,Shirlington Station,0,79,234
+34,3,922,Shirlington Station,0,79,234
+34,3,929,Shirlington Station,0,80,234
+34,3,933,Shirlington Station,0,80,234
+34,3,942,Shirlington Station,0,82,234
+34,3,943,Shirlington Station,0,82,234
+34,3,949,Shirlington Station,0,77,234
+34,3,952,Shirlington Station,0,78,234
+34,3,960,Shirlington Station,0,81,234
+34,3,961,Shirlington Station,0,81,234
+34,3,965,Shirlington Station,0,83,234
+34,3,966,Shirlington Station,0,83,234
+34,3,967,Shirlington Station,0,83,234
+34,3,971,Shirlington Station,0,84,234
+34,3,972,Shirlington Station,0,84,234
+34,3,1024,Shirlington Station,0,75,234
+34,3,1026,Shirlington Station,0,75,234
+34,3,1029,Shirlington Station,0,76,234
+34,3,1031,Shirlington Station,0,76,234

@@ -1,0 +1,1133 @@
+stop_id,stop_code,stop_name,stop_desc,stop_lat,stop_lon,zone_id,stop_url,location_type
+1171,1171,NC 54 at Blanchard Rd,,35.902797,-78.906221,,,0
+1175,1175,NC 54 at Fayetteville Rd,,35.910257,-78.932714,,,0
+1805,1805,NC 54 at Amhurst St,,35.907155,-78.922743,,,0
+5001,5001,Campus Walk Ave at Millennium Hotel,,36.009743,-78.953546,,,0
+5002,5002,Riddle Rd at Ancroft Ave,,35.95263,-78.89703,,,0
+5003,5003,Stadium Dr at Chalk Level Rd,,36.05118,-78.91962,,,0
+5005,5005,Cornwallis Rd at Industry Ln,,35.94235,-78.8996,,,0
+5006,5006,Alston Ave at Durham Freeway,,35.981032,-78.89091,,,0
+5008,5008,S Alston Ave at Massey Ave,,35.978154,-78.892187,,,0
+5011,5011,Liberty St at Alston Ave,,35.9927,-78.88648,,,0
+5012,5012,1016 Cook Rd,,35.94778,-78.92038,,,0
+5016,5016,Cornwallis Rd at Bell Yeager Church,,35.96412,-78.91752,,,0
+5017,5017,Chapel Hill Rd at Mc Gehee St,,35.98128,-78.93415,,,0
+5018,5018,Morehead Ave at Vickers St,,35.99165,-78.91183,,,0
+5019,5019,Club Blvd at Chandlers Tire Company,,36.025331,-78.872554,,,0
+5020,5020,Fayetteville Rd at Laurel Springs Dr,,35.913671,-78.933016,,,0
+5021,5021,Chapel Hill Rd at W Cornwallis Rd,,35.97547,-78.93672,,,0
+5022,5022,Alston Ave at Drew St,,36.000798,-78.885864,,,0
+5023,5023,Avondale Dr at E Markham St,,36.008351,-78.885933,,,0
+5024,5024,2309 Angier Ave,,35.98067,-78.87443,,,0
+5026,5026,Woodcroft Pkwy at Winterberry Ridge,,35.921686,-78.949124,,,0
+5027,5027,W Club Blvd at Gregson St,,36.016743,-78.908658,,,0
+5028,5028,Umstead St at Fayetteville St,,35.982909,-78.898113,,,0
+5030,5030,Duke St at Main St,,35.999585,-78.907942,,,0
+5031,5031,Carver St at Guess Rd,,36.03778,-78.93043,,,0
+5032,5032,Roxboro Rd at Hammond St,,36.02485,-78.88987,,,0
+5033,5033,Roxboro Rd at Bush Dr,,36.07577,-78.90968,,,0
+5035,5035,Angier Ave at Pleasant Dr,,35.96362,-78.85662,,,0
+5036,5036,Roxboro Rd at Markham Ave (north),,36.01065,-78.8915,,,0
+5038,5038,Liberty St at Queen St,,35.99365,-78.89555,,,0
+5039,5039,Fayetteville St at E Piedmont Ave,,35.98433,-78.89912,,,0
+5042,5042,University Dr at Weymouth St,,35.96702,-78.94998,,,0
+5043,5043,Holloway St at S Adams St,,35.988808,-78.852489,,,0
+5044,5044,Duke St at Harper Pl,,36.006837,-78.905495,,,0
+5045,5045,Roxboro Rd at Edgewood Dr,,36.02775,-78.89,,,0
+5047,5047,Roxboro Rd at Markham Ave (south),,36.009347,-78.891827,,,0
+5048,5048,Chapel Hill Rd at Pinecrest Rd,,35.97935,-78.9352,,,0
+5050,5050,Fayetteville Rd at Herndon Rd,,35.90526,-78.937514,,,0
+5051,5051,Audubon Lake Dr at Starling Ln,,35.909606,-78.947147,,,0
+5054,5054,University Dr at Larchmont Dr,,35.960943,-78.962345,,,0
+5055,5055,Gregson St at Englewood Ave,,36.01503,-78.90837,,,0
+5056,5056,Lawson St at Sima Ave,,35.97452,-78.89097,,,0
+5057,5057,Angier Ave at Driver St,,35.9821,-78.87797,,,0
+5060,5060,Dearborn Dr at Bragtown Library,,36.037338,-78.871582,,,0
+5061,5061,Wedgedale Ave at Lynn Rd,,35.98235,-78.84277,,,0
+5063,5063,NC 54 at Residence Inn Blvd,,35.902743,-78.89819,,,0
+5064,5064,Otis St at Red Oak Ave,,35.970147,-78.909488,,,0
+5065,5065,Fayetteville St at ABC Store,,35.98483,-78.89897,,,0
+5066,5066,Revere Rd at Haledon Cir,,35.902486,-78.911626,,,0
+5067,5067,Mangum St at Geer St,,36.0039,-78.89463,,,0
+5068,5068,Holloway St at Junction Rd,,35.990079,-78.857383,,,0
+5069,5069,Holloway St at Walker's Garage,,35.981814,-78.822973,,,0
+5070,5070,Snow Hill Rd at Snow Hill Dr,,36.104547,-78.873526,,,0
+5071,5071,Lincoln St at Linwood Ave,,35.98068,-78.89592,,,0
+5073,5073,Cheek Rd at Hardee St,,36.00483,-78.86823,,,0
+5074,5074,Campus Walk Ave at Trinity Property,,36.00973,-78.95043,,,0
+5075,5075,Milton Rd at Eno Valley,,36.08612,-78.91153,,,0
+5078,5078,Trent Dr at Duke Hospital South,,36.004782,-78.934914,,,0
+5079,5079,Buchanan Blvd at Trinity Ave,,36.00535,-78.91232,,,0
+5080,5080,Fayetteville St at Econo Plaza,,35.96215,-78.9087,,,0
+5081,5081,Trent Dr at Parking Deck,,36.00628,-78.93447,,,0
+5084,5084,Old Farm Rd at JFK Towers,,36.0655,-78.90432,,,0
+5085,5085,Cornwallis Rd at Roxboro St,,35.96552,-78.91977,,,0
+5088,5088,S Alston Ave at Massey Ave,,35.97835,-78.89238,,,0
+5089,5089,Duke St at Englewood Ave,,36.015543,-78.905404,,,0
+5091,5091,E Club Blvd at Glenbrook St,,36.02387,-78.87682,,,0
+5092,5092,Tower Blvd at Social Security Office,,35.97295,-78.95788,,,0
+5093,5093,University Dr at South Square Mall,,35.965481,-78.957542,,,0
+5094,5094,Lakewood Ave at Blackwell St,,35.987322,-78.907022,,,0
+5097,5097,Roxboro Rd at Murray Ave,,36.0295,-78.89038,,,0
+5099,5099,E Carver St at Patrick Henry Dr,,36.040489,-78.897792,,,0
+5100,5100,3006 Weaver St,,35.963827,-78.914587,,,0
+5101,5101,E Club Blvd at Thorne St,,36.020647,-78.884432,,,0
+5102,5102,Shirley St at Crest St,,36.012601,-78.939748,,,0
+5104,5104,Roxboro Rd at Smith Dr,,36.10128,-78.91017,,,0
+5105,5105,Durham Regional Hospital,,36.038296,-78.89901,,,0
+5106,5106,Erwin Rd at Research Dr,,36.008728,-78.942173,,,0
+5110,5110,Fayetteville Rd at Wortley Dr,,35.933818,-78.91338,,,0
+5111,5111,Lawson St at WG Pearson Cafeteria,,35.97642,-78.89943,,,0
+5112,5112,Angier Ave at Commonwealth St,,35.97067,-78.86345,,,0
+5113,5113,Blackwell St at Forest Hills Apts,,35.988702,-78.906694,,,0
+5115,5115,Alston Ave at Old Holly Cross (out),,35.973833,-78.89409,,,0
+5116,5116,Roxboro Rd at Ryan St,,36.057,-78.90312,,,0
+5117,5117,Glenbrook St at Dubonnet Pl,,36.026391,-78.878737,,,0
+5118,5118,MLK Pkwy at Lake Camp Rd,,35.942583,-78.918953,,,0
+5119,5119,Roxboro Rd at Ellerbee St,,36.0214,-78.8898,,,0
+5120,5120,Garrett Rd at Jordan High,,35.921519,-78.960647,,,0
+5121,5121,University Dr at Kinder Care,,35.96685,-78.9499,,,0
+5123,5123,Front St at Medford Rd,,36.03145,-78.93812,,,0
+5125,5125,Hillsborough Rd at W Knox St,,36.01302,-78.93168,,,0
+5126,5126,Avondale Dr at Nancy St,,36.012071,-78.886833,,,0
+5127,5127,Seven Oaks Rd at Riverside Shopping,,36.06785,-78.9063,,,0
+5128,5128,Roxboro Rd at Bojangles,,36.05803,-78.90328,,,0
+5129,5129,NC 54 at The Hamptons Apts,,35.902813,-78.903274,,,0
+5131,5131,NC 54 at Seasons of Southpoint,,35.90643,-78.920381,,,0
+5132,5132,N Roxboro Rd at Crutchfield St,,36.039512,-78.899275,,,0
+5133,5133,University Dr at Westgate Dr,,35.964178,-78.959221,,,0
+5134,5134,Rummel St at Hwy 98,,35.98717,-78.84775,,,0
+5136,5136,Fayetteville Rd at Pearson Dr,,35.93408,-78.91325,,,0
+5138,5138,Angier Ave at Driver St,,35.982133,-78.877718,,,0
+5139,5139,Gregson St at Dacian Ave,,36.00775,-78.90838,,,0
+5141,5141,Avondale Dr at Beauty World,,36.007009,-78.885297,,,0
+5142,5142,Gregson St at Trinity Ave,,36.00565,-78.908374,,,0
+5144,5144,Dowd St at N Roxboro Rd,,36.000385,-78.893682,,,0
+5145,5145,Erwin Rd at Morreene Rd,,36.003901,-78.950716,,,0
+5148,5148,E Main St at Alston Ave,,35.9876,-78.88817,,,0
+5149,5149,NC 55 at Glenview Cemetery,,35.95693,-78.89198,,,0
+5150,5150,Erwin Rd at Duke Eye Center,,36.00837,-78.93972,,,0
+5152,5152,Mangum St at Seeman St,,36.00637,-78.89395,,,0
+5153,5153,Garrett Rd at Old Chapel Hill Rd,,35.94967,-78.96942,,,0
+5154,5154,Alston Ave at US 147,,35.980806,-78.891242,,,0
+5156,5156,Chapel Hill Rd at Lakewood Shopping,,35.98645,-78.928,,,0
+5157,5157,Fulton St at Pratt St,,36.010778,-78.937067,,,0
+5158,5158,Roxboro St at Lawson St,,35.977112,-78.906586,,,0
+5161,5161,NC 55 at Wendys,,35.90075,-78.89593,,,0
+5162,5162,Willard St at Ramada Inn,,35.993701,-78.907677,,,0
+5165,5165,Erwin Rd at Downing St,,36.008651,-78.943858,,,0
+5169,5169,Morehead Ave at Moreland Ave,,35.99193,-78.9209,,,0
+5175,5175,Holston St at Glasson St,,36.004715,-78.95652,,,0
+5178,5178,Club Blvd at Northgate Mall,,36.017055,-78.910124,,,0
+5179,5179,Roxboro St at Lodge St,,35.981227,-78.904206,,,0
+5183,5183,James St at Durham Chapel Hill Blvd,,35.97518,-78.92528,,,0
+5184,5184,Foushee St at Compare Foods,,36.018108,-78.887452,,,0
+5185,5185,Chapel Hill Rd at Pickett Rd,,35.97682,-78.9361,,,0
+5188,5188,Pettigrew St at Harnett St,,35.97927,-78.87833,,,0
+5189,5189,University Dr at Snow Crest Tr,,35.959558,-78.964667,,,0
+5190,5190,Nation Ave at Bedford St,,35.9777,-78.92807,,,0
+5191,5191,Fayetteville Rd at Woodcroft Pkwy,,35.9226,-78.92748,,,0
+5193,5193,Midvale Rd at Durham-Chapel Hill Blvd,,35.97495,-78.92857,,,0
+5195,5195,Mineral Spring Rd at Hwy 98,,35.98193,-78.8209,,,0
+5197,5197,Morehead Ave at Arnette Ave,,35.99165,-78.91445,,,0
+5198,5198,Holloway St at Hyde Park Ave,,35.994372,-78.882039,,,0
+5199,5199,Angier Ave at Wrenn Rd,,35.9525,-78.84937,,,0
+5200,5200,Guess Rd at Fawn Ave,,36.03362,-78.92908,,,0
+5202,5202,Roxboro Rd at Edwards St,,36.00438,-78.89272,,,0
+5203,5203,Avondale Dr at E Markham Ave,,36.009189,-78.885825,,,0
+5204,5204,S Alston Ave at Dupree St,,35.976404,-78.893068,,,0
+5205,5205,Angier Ave at Vine St,,35.983424,-78.881127,,,0
+5206,5206,Lawson St at Rosewood St,,35.975099,-78.892376,,,0
+5207,5207,Lasalle St at Grace Healthcare,,36.014183,-78.947841,,,0
+5208,5208,Chapel Hill Rd at Lakewood Ave,,35.98698,-78.92682,,,0
+5209,5209,Foushee St at Avondale Dr,,36.016485,-78.887403,,,0
+5210,5210,MLK Pkwy at Tweeter Audio-Video,,35.96092,-78.95805,,,0
+5211,5211,Fulton St at Shirley St,,36.01117,-78.93717,,,0
+5212,5212,Woodcroft Pkwy at Sandstone Ridge Dr,,35.921848,-78.948992,,,0
+5215,5215,Fayetteville St at Lawson St,,35.9768,-78.90083,,,0
+5218,5218,Holloway St at Elm St,,35.9945,-78.8874,,,0
+5219,5219,Roxboro Rd at Madden Ave,,36.10155,-78.91035,,,0
+5220,5220,Duke St at Demerius St,,36.01201,-78.905369,,,0
+5221,5221,E Weaver St at Jesmond St,,35.966673,-78.91146,,,0
+5222,5222,Duke St at Henderson Towers,,35.990796,-78.908798,,,0
+5224,5224,Fayetteville St at Burlington Ave,,35.96877,-78.90258,,,0
+5225,5225,Fayetteville St at Brant St,,35.975313,-78.901202,,,0
+5226,5226,Roxboro Rd at Oxford Commons,,36.035705,-78.893237,,,0
+5228,5228,Fulton St at VA Hospital,,36.00885,-78.93737,,,0
+5229,5229,Roxboro Rd at Hugo St,,36.02552,-78.88973,,,0
+5230,5230,Guess Rd at North Pointe Dr,,36.030312,-78.927788,,,0
+5231,5231,University Dr at Beech Lake Apts,,35.956633,-78.966273,,,0
+5233,5233,Freeman Rd at Clayton Rd,,35.99778,-78.82977,,,0
+5234,5234,Fayetteville Rd at Woodcroft Pkwy,,35.923674,-78.926495,,,0
+5235,5235,University Dr at University Pl,,35.952722,-78.9663,,,0
+5237,5237,US 70 at Pleasant Dr,,35.9652,-78.84675,,,0
+5238,5238,Avondale Dr at Nancy St,,36.011405,-78.886387,,,0
+5239,5239,Cornwallis Rd at Hollybrook St,,35.93833,-78.8954,,,0
+5240,5240,Freeman Rd at Valmet Dr,,35.9958,-78.818,,,0
+5241,5241,Lawson St at Durham Tech Library,,35.974301,-78.88245,,,0
+5242,5242,Riddle Rd at Kirby St,,35.9557,-78.893,,,0
+5244,5244,Woodcroft Shopping Center (across),,35.922695,-78.955644,,,0
+5245,5245,Holloway St at Alston Ave,,35.994417,-78.886353,,,0
+5246,5246,Fayetteville Rd at Sutton Square,,35.91815,-78.93055,,,0
+5247,5247,Fayetteville Rd at Juliette Dr,,35.931864,-78.91652,,,0
+5248,5248,Guess Rd at Duke Homestead Rd,,36.03177,-78.92892,,,0
+5252,5252,Fayetteville St at Lakewood Ave,,35.98643,-78.89848,,,0
+5253,5253,Holloway St at Brye St,,35.99348,-78.87232,,,0
+5255,5255,Erwin Rd at Lambeth Cir,,36.006641,-78.9474,,,0
+5257,5257,Shirley St at Ratcale Ln,,36.011406,-78.938079,,,0
+5259,5259,Alston Ave at Geer St,,36.003475,-78.885884,,,0
+5261,5261,University Dr at Westgate Dr,,35.9643,-78.95875,,,0
+5262,5262,Alston Ave at Dakota St,,35.967711,-78.895455,,,0
+5263,5263,Gregson St at Green St,,36.01118,-78.90832,,,0
+5264,5264,Bacon St at Lawson St,,35.974629,-78.884846,,,0
+5265,5265,E Main St at Blacknall St,,35.98657,-78.8859,,,0
+5268,5268,Waring St at Davinci St,,36.03172,-78.8806,,,0
+5269,5269,Stadium Dr at Townsend St,,36.05507,-78.91937,,,0
+5271,5271,Dearborn Dr at Thelma St (south),,36.032051,-78.87009,,,0
+5272,5272,Duke University Rd at Anderson St,,35.998358,-78.930508,,,0
+5273,5273,Roxboro Rd at Oxford Commons,,36.0359,-78.89403,,,0
+5274,5274,Holloway St at Hoover Rd,,35.99043,-78.85912,,,0
+5275,5275,Green St at Lancaster St,,36.011595,-78.91331,,,0
+5276,5276,Broad St at Forest Rd (out),,36.024545,-78.917307,,,0
+5277,5277,Dearborn Dr at Apollo St,,36.03713,-78.8704,,,0
+5278,5278,Markham Ave at Ninth St,,36.010132,-78.921768,,,0
+5280,5280,E Main St at S Dillard St,,35.9918,-78.8952,,,0
+5281,5281,Dearborn Dr at Maplewood Dr,,36.03419,-78.868488,,,0
+5282,5282,Hillsborough Rd at West Durham Lumber,,36.01593,-78.93708,,,0
+5283,5283,Cook Rd at MLK Pkwy,,35.94613,-78.92162,,,0
+5285,5285,Chapel Hill Rd at Valley Terrace,,35.97237,-78.93763,,,0
+5286,5286,Duke University Rd at Underwood Ave,,35.996675,-78.922416,,,0
+5290,5290,807 Bacon St,,35.975855,-78.88465,,,0
+5291,5291,Holloway St at Chester St,,35.99452,-78.88257,,,0
+5292,5292,Hillsborough Rd at Cook Out,,36.02303,-78.95468,,,0
+5296,5296,NC 55 at Cornwallis Rd,,35.93255,-78.88818,,,0
+5298,5298,Chapel Hill Rd at University Dr,,35.968683,-78.939883,,,0
+5300,5300,Leon St at Haverford St,,36.025419,-78.913527,,,0
+5304,5304,Simmons St at Grant St,,35.981881,-78.894306,,,0
+5305,5305,E Main St at Mangum St,,35.994917,-78.900251,,,0
+5306,5306,Morehead Ave at Arnette Ave,,35.99177,-78.91432,,,0
+5307,5307,Shannon Rd at BB&T,,35.96493,-78.9555,,,0
+5309,5309,Roxboro Rd at Club Blvd,,36.0198,-78.89002,,,0
+5310,5310,Angier Ave at Guthrie St,,35.98142,-78.87597,,,0
+5311,5311,Roxboro Rd at Maynard Ave,,36.02637,-78.88983,,,0
+5313,5313,Alston Ave at Chidley,,35.974952,-78.893617,,,0
+5314,5314,North Pointe Dr at Broad St,,36.02825,-78.91543,,,0
+5315,5315,NC 55 at Carpenter Fletcher Rd,,35.91447,-78.8917,,,0
+5316,5316,Lawson St at Durham Tech (across),,35.97428,-78.88077,,,0
+5317,5317,Duke University Rd at Anderson St,,35.998521,-78.93012,,,0
+5319,5319,Old Oxford Rd at Danube Ln,,36.036248,-78.888012,,,0
+5320,5320,Gregson St at W Knox St,,36.01313,-78.90833,,,0
+5321,5321,Snow Hill Rd at Roxboro Rd,,36.11652,-78.90297,,,0
+5322,5322,Meriwether Dr at E Carver St,,36.0434,-78.89157,,,0
+5323,5323,Pickett Rd at Petty Rd,,35.97372,-78.9593,,,0
+5324,5324,Roxboro St at Dunstan Ave,,35.980071,-78.905166,,,0
+5325,5325,Meriwether Dr at Carver Pond Apt,,36.038451,-78.89035,,,0
+5326,5326,Chapel Hill St at Arnette Ave,,35.996758,-78.914609,,,0
+5327,5327,Westgate Dr at Prudential,,35.96433,-78.9603,,,0
+5328,5328,Duke St at Staples,,36.0502,-78.90558,,,0
+5329,5329,Riddle Rd at Briggs Ave,,35.957996,-78.878816,,,0
+5330,5330,Pettigrew St at Harnett St (in),,35.979231,-78.878164,,,0
+5331,5331,Dearborn Dr at Old Oxford Rd,,36.038482,-78.884325,,,0
+5332,5332,University Dr at Shannon Rd,,35.96613,-78.95403,,,0
+5333,5333,Angier Ave at Jones Cir,,35.95724,-78.85315,,,0
+5334,5334,Old Oxford Rd at Danube Ln,,36.036691,-78.887437,,,0
+5335,5335,Angier Ave at Guthrie Ave,,35.98148,-78.8763,,,0
+5337,5337,Lakewood Ave at Heritage Square,,35.98718,-78.90033,,,0
+5340,5340,Morehead Ave at Kent St,,35.992023,-78.919681,,,0
+5341,5341,Chapel Hill Rd at University Dr,,35.96873,-78.93965,,,0
+5342,5342,Morehead Ave at Carroll St,,35.99182,-78.91607,,,0
+5344,5344,Chapel Hill Rd at Morehead Ave,,35.99155,-78.92273,,,0
+5345,5345,University Dr at BB&T,,35.965129,-78.95754,,,0
+5346,5346,1127 Raynor St,,35.9955,-78.86722,,,0
+5347,5347,E Club Blvd at Stephenson St,,36.021535,-78.882139,,,0
+5349,5349,Cook Rd at Kaitlin Dr,,35.949701,-78.916065,,,0
+5350,5350,Gary St at 612 Gary St,,35.99097,-78.87037,,,0
+5351,5351,Lasalle St at Bradford Ridge Apts,,36.008407,-78.947684,,,0
+5353,5353,University Dr at Arnold Rd,,35.96952,-78.93502,,,0
+5354,5354,NC 55 at Odyssey Dr (inbound),,35.92767,-78.88907,,,0
+5355,5355,Alston Ave at Riddle Rd,,35.956877,-78.892092,,,0
+5357,5357,Fayetteville St at Cecil St,,35.97153,-78.9012,,,0
+5358,5358,Holloway St at Bunn Terrace,,35.99383,-78.87373,,,0
+5359,5359,Gary St at Taylor,,35.98867,-78.87087,,,0
+5360,5360,Sima Ave at Dorothy Dr,,35.9763,-78.88883,,,0
+5361,5361,Westgate Dr at Target,,35.965571,-78.960702,,,0
+5362,5362,Woodcroft Pkwy at Old Fox Tr,,35.923391,-78.945032,,,0
+5363,5363,NC 54 at Waffle House,,35.910112,-78.932814,,,0
+5365,5365,Raynor St at Hardee St,,35.995705,-78.865252,,,0
+5367,5367,Angier Ave at Clay St,,35.982805,-78.879783,,,0
+5368,5368,Meriwether Dr at Carver St,,36.042964,-78.891253,,,0
+5370,5370,Dearborn Dr at Martin St,,36.03798,-78.87578,,,0
+5371,5371,NC 54 at Boulder Rd,,35.908575,-78.927689,,,0
+5372,5372,NC 54 at Boulder Rd,,35.908684,-78.927446,,,0
+5377,5377,Roxboro Rd at Monk Rd,,36.05987,-78.9031,,,0
+5378,5378,Avondale Dr at Alcott St,,36.009792,-78.886304,,,0
+5379,5379,University Dr at Colonial Apts,,35.967858,-78.941775,,,0
+5380,5380,Garrett Rd at Jordan High (out),,35.921239,-78.960768,,,0
+5384,5384,Lakewood Ave at Roxboro St,,35.98803,-78.90197,,,0
+5385,5385,E Main St at Y E Smith School,,35.986137,-78.872331,,,0
+5387,5387,Cornwallis Rd at Yorktown Ave,,35.93638,-78.89325,,,0
+5391,5391,Fayetteville Rd at Geneva Dr,,35.920893,-78.928534,,,0
+5392,5392,Cornwallis Rd at Burgess Ln,,35.96915,-78.92552,,,0
+5394,5394,Chapel Hill Rd at Palmer St,,35.98758,-78.92597,,,0
+5395,5395,Linwood Ave at S Alston Ave,,35.979722,-78.892403,,,0
+5396,5396,Fayetteville St at Red Oak Ave,,35.96657,-78.90462,,,0
+5397,5397,Fayetteville St at Dunbar St,,35.978849,-78.899984,,,0
+5398,5398,Constitution Dr at Forest Apts,,36.01328,-78.96642,,,0
+5399,5399,Club Blvd at Duke St,,36.017019,-78.906174,,,0
+5400,5400,Roxboro Rd at Wright School,,36.031871,-78.890738,,,0
+5401,5401,Sima Ave at Lawson St,,35.974795,-78.891144,,,0
+5403,5403,E Carver St at Patrick Henry Dr,,36.040651,-78.897859,,,0
+5404,5404,1707 E Main St,,35.9854,-78.88207,,,0
+5406,5406,Robinwood Rd at Fairfax Rd,,36.00223,-78.87358,,,0
+5407,5407,Tom Wilkinson Rd at Goldston Ave,,36.09498,-78.91218,,,0
+5409,5409,Chandler Rd at Clayton Rd,,35.99587,-78.8312,,,0
+5412,5412,Hinson Dr at Waring St,,36.030322,-78.87764,,,0
+5415,5415,Duke St at North Duke Crossing,,36.0491,-78.90568,,,0
+5416,5416,Glenbrook St at Dubonnet Pl,,36.02645,-78.87767,,,0
+5417,5417,East End Ave at Rowena Ave,,35.97497,-78.85898,,,0
+5419,5419,Holloway St at Chandler Rd,,35.985884,-78.840216,,,0
+5420,5420,E Main St at Corcoran St,,35.99559,-78.901506,,,0
+5423,5423,W Enterprise St at Roxboro St,,35.983572,-78.903383,,,0
+5424,5424,S Roxboro St at Bond St,,35.980161,-78.905344,,,0
+5425,5425,Cornwallis Rd at Augusta Dr,,35.970656,-78.92999,,,0
+5429,5429,Hillsborough Rd at Wendy's,,36.0216,-78.95173,,,0
+5430,5430,Riddle Rd at Kirby St (out),,35.955829,-78.893009,,,0
+5431,5431,Cornwallis Rd at Jan Ct,,35.960271,-78.912601,,,0
+5433,5433,Main St at Morgan St,,36.0012,-78.91108,,,0
+5434,5434,Milton Rd at Long Cresent Dr,,36.091973,-78.91416,,,0
+5435,5435,NC 55 at Burger King,,35.97068,-78.89485,,,0
+5436,5436,Meriwether Dr at Pickwick Tr,,36.041867,-78.890006,,,0
+5437,5437,Flowers Dr at Student Health Center,,36.00322,-78.93492,,,0
+5438,5438,Duke St at Corporation St,,36.00315,-78.90588,,,0
+5439,5439,Gregson St at Lamond Ave,,36.00233,-78.90835,,,0
+5441,5441,NC 54 at Waterford Valley Dr,,35.903231,-78.909291,,,0
+5442,5442,Stadium Dr at Wyldewood Rd,,36.05298,-78.9196,,,0
+5444,5444,Dowd St at Union Baptist,,36.000214,-78.893471,,,0
+5445,5445,Raynor St at The Village,,35.994308,-78.869739,,,0
+5446,5446,Guess Rd at Ellen St,,36.03985,-78.92963,,,0
+5447,5447,1904 Chapel Hill Rd,,35.9886,-78.92525,,,0
+5448,5448,4527 Hillsborough Rd,,36.03323,-78.97557,,,0
+5449,5449,US 70 at Lynn Rd,,35.96952,-78.84898,,,0
+5450,5450,Meriwether Dr at Oxford Ct,,36.038614,-78.890029,,,0
+5451,5451,Olympic Ave at Roxboro Rd,,36.036787,-78.896935,,,0
+5452,5452,Burlington Ave at Fayetteville St,,35.96932,-78.90178,,,0
+5453,5453,Cornwallis Rd at Atlantic St,,35.96023,-78.9114,,,0
+5455,5455,Liberty St at NC 55,,35.992848,-78.886414,,,0
+5456,5456,Shannon Rd at Windsor Apts,,35.96275,-78.95638,,,0
+5457,5457,Cook Rd at Ardmore Dr,,35.949845,-78.916176,,,0
+5458,5458,Roxboro Rd at North Duke Crossing,,36.04935,-78.90352,,,0
+5459,5459,Douglas St at Bristol Ct Apartments,,36.00967,-78.9427,,,0
+5460,5460,Erwin Rd at Lasalle St (northbound),,36.00798,-78.945586,,,0
+5463,5463,Fayetteville Rd at Obie Dr,,35.926656,-78.92316,,,0
+5464,5464,Morehead Ave at Vickers Ave,,35.99158,-78.9121,,,0
+5465,5465,Broad St at Dollar General,,36.01058,-78.91947,,,0
+5466,5466,Roxboro Rd at Argonne Dr,,36.06332,-78.904164,,,0
+5467,5467,Front St at Croasdaile Office Park,,36.03348,-78.9378,,,0
+5468,5468,Hillsborough Rd at Auto Zone,,36.0197,-78.94693,,,0
+5470,5470,1117 Raynor St,,35.99552,-78.86735,,,0
+5471,5471,Erwin Rd at Lenox Baker Children's,,36.004842,-78.949422,,,0
+5472,5472,416 Old Oxford Rd,,36.037234,-78.886362,,,0
+5473,5473,Roxboro Rd at Bywood Dr,,36.10947,-78.90762,,,0
+5475,5475,Club Blvd at Stephenson St,,36.0216,-78.8825,,,0
+5476,5476,Enterprise St at S Roxboro St,,35.983734,-78.903394,,,0
+5477,5477,Ross Rd at Charlestowne Apts,,35.99243,-78.84488,,,0
+5478,5478,E Club Blvd at Miriam Cir,,36.02647,-78.87145,,,0
+5479,5479,Cornwallis Rd at Weaver St,,35.962562,-78.915946,,,0
+5480,5480,Flowers Dr at Duke Garden,,36.001479,-78.936564,,,0
+5481,5481,Roxboro Rd at Davidson Ave,,36.0187,-78.8899,,,0
+5482,5482,Roxboro Rd at Lynch St,,36.00713,-78.89235,,,0
+5484,5484,Chapel Hill St at Underwood Ave,,35.99682,-78.9222,,,0
+5486,5486,Liberty St at Eastway Ave,,35.992738,-78.883298,,,0
+5489,5489,Dearborn Dr at Wiley Ave,,36.02918,-78.87035,,,0
+5490,5490,Chapel Hill Rd at Ward St,,35.98313,-78.93063,,,0
+5492,5492,Dearborn Dr at Cannada Ave,,36.038667,-78.882361,,,0
+5493,5493,Tower Blvd at McDonalds,,35.97053,-78.958,,,0
+5495,5495,W Club Blvd at Clarendon St,,36.017198,-78.918167,,,0
+5496,5496,Dearborn Dr at Maplewood Dr (north),,36.034596,-78.867901,,,0
+5497,5497,Roxboro St at CC Spaulding School,,35.978699,-78.906326,,,0
+5498,5498,Holloway St at Guthrie Ave (outbound),,35.99418,-78.87543,,,0
+5499,5499,Meriwether Dr at Pickwick Tr,,36.042066,-78.889918,,,0
+5501,5501,Chapel Hill Rd at Chapel Ridge Apt,,35.98498,-78.92927,,,0
+5503,5503,North Pointe Dr at Red Roof Inn,,36.030279,-78.923608,,,0
+5505,5505,Holloway St at Alston Ave,,35.994572,-78.8855,,,0
+5506,5506,Lawson St at Durham Tech Environmental,,35.974462,-78.882639,,,0
+5507,5507,Chapel Hill St at Gregson St,,35.997058,-78.909475,,,0
+5508,5508,Chapel Hill Rd at Morehead Ave,,35.991564,-78.922907,,,0
+5509,5509,Old Farm Rd at Seven Oaks Rd,,36.067032,-78.904866,,,0
+5510,5510,Roxboro Rd at Club Blvd,,36.01986,-78.889788,,,0
+5511,5511,3532 Hillsborough Rd,,36.0216,-78.95138,,,0
+5512,5512,Alston Ave at NCCU Law School,,35.972273,-78.894562,,,0
+5513,5513,Roxboro Rd at Cookout,,36.05027,-78.90358,,,0
+5515,5515,Glasson St at Morreene Rd,,36.005575,-78.95496,,,0
+5516,5516,Duke St at Carver St,,36.04005,-78.90587,,,0
+5517,5517,Fayetteville Rd at Southpoint Crossing,,35.912561,-78.93382,,,0
+5518,5518,Fayetteville St at Pekoe St,,35.97398,-78.90115,,,0
+5519,5519,University Dr at Forest Hills Shops,,35.985458,-78.910076,,,0
+5521,5521,University Dr at Hope Valley Rd,,35.97027,-78.9322,,,0
+5522,5522,Dearborn Dr at Disciples Church,,36.03849,-78.880851,,,0
+5523,5523,Miami Blvd at Greenbriar St,,36.00258,-78.8771,,,0
+5524,5524,Mangum St at Trinity Ave,,36.00548,-78.89418,,,0
+5525,5525,Hinson Dr at Davinci St,,36.03179,-78.878167,,,0
+5526,5526,Hillsborough Rd at Erwin Square,,36.01043,-78.9257,,,0
+5527,5527,Green St at Clarendon St,,36.011628,-78.918335,,,0
+5528,5528,MLK Pkwy at Fayetteville Rd,,35.939492,-78.907505,,,0
+5529,5529,Cornwallis Rd at Weaver St,,35.962687,-78.916235,,,0
+5530,5530,Cornwallis Rd at Century Oaks Dr,,35.94103,-78.89807,,,0
+5531,5531,Erwin Rd at Lasalle St (southbound),,36.008142,-78.945698,,,0
+5532,5532,S Alston Ave and Dupree St,,35.976341,-78.892879,,,0
+5533,5533,University Dr at Old Chapel Hill Rd,,35.96717,-78.94603,,,0
+5534,5534,Liberty St at Hyde Park Ave,,35.992551,-78.88241,,,0
+5537,5537,Buchanan Blvd at Markham Ave,,36.00987,-78.9123,,,0
+5538,5538,University Dr at Arnold Rd,,35.969417,-78.934919,,,0
+5539,5539,Roxboro Rd at Bywood Dr (in),,36.109589,-78.908149,,,0
+5540,5540,Chapel Hill Rd at Pickett Rd,,35.97678,-78.93625,,,0
+5541,5541,Club Blvd at Dominion St,,36.022222,-78.880909,,,0
+5543,5543,Guess Rd at Lombard Ave,,36.0361,-78.92928,,,0
+5544,5544,Fayetteville St at Homeland Ave,,35.96207,-78.9089,,,0
+5545,5545,Burlington Ave at Education Bldg,,35.969341,-78.895815,,,0
+5546,5546,E Main St at Briggs Ave,,35.98602,-78.87525,,,0
+5547,5547,Sima Ave at Bacon St,,35.97767,-78.88435,,,0
+5549,5549,Fayetteville St at Linwood Ave,,35.981104,-78.899216,,,0
+5550,5550,Hardee St at Delano St,,35.997221,-78.864414,,,0
+5552,5552,NC 55 at Meridian Pkwy,,35.90978,-78.89333,,,0
+5553,5553,Milton Rd at Eno Valley Elementary,,36.08645,-78.912,,,0
+5554,5554,Cook Rd at MLK Pkwy,,35.946444,-78.921129,,,0
+5555,5555,Cornwallis Rd at Augusta Dr,,35.969324,-78.92565,,,0
+5557,5557,Morreene Rd at Andrews Rd,,36.012935,-78.956144,,,0
+5558,5558,Broad St at North Pointe Dr,,36.02777,-78.91388,,,0
+5559,5559,Willard St at Blackwell St,,35.991507,-78.905684,,,0
+5561,5561,Leon St at Lednum St,,36.025454,-78.910432,,,0
+5563,5563,Duke St at Fairfield St,,36.04727,-78.90572,,,0
+5564,5564,Morreene Rd at Erwin Rd,,36.00382,-78.95275,,,0
+5565,5565,Fayetteville St at Utah Ave,,35.96492,-78.9061,,,0
+5567,5567,Fayetteville Rd at Juliette Dr,,35.931954,-78.916697,,,0
+5568,5568,Meriwether Dr at Old Oxford Rd,,36.03602,-78.89013,,,0
+5569,5569,Hillsborough Rd at Kroger,,36.0198,-78.94745,,,0
+5570,5570,Garrett Rd at Ample Storage,,35.959438,-78.975098,,,0
+5572,5572,Cornwallis Rd at Bainbridge Apt,,35.93967,-78.89673,,,0
+5573,5573,Holloway St at Elizabeth St,,35.994478,-78.891277,,,0
+5574,5574,US 15-501 at Pawn America,,35.97392,-78.93305,,,0
+5575,5575,Roxboro St at Charles St,,35.966886,-78.916428,,,0
+5578,5578,Fayetteville St at Simmons St,,35.982258,-78.899053,,,0
+5579,5579,North Pointe Dr at Kroger,,36.02857,-78.92028,,,0
+5580,5580,Fayetteville St at Know Bookstore,,35.96817,-78.903328,,,0
+5581,5581,E Club Blvd at Lindbergh St,,36.022849,-78.878892,,,0
+5582,5582,Angier Ave at East End Ave,,35.97445,-78.86823,,,0
+5583,5583,Gary St at Mozelle St,,35.98748,-78.87088,,,0
+5584,5584,Hardee St at Fiske St,,35.998797,-78.864541,,,0
+5586,5586,Torredge Rd at Treyburn Nursing Home,,36.09718,-78.86133,,,0
+5587,5587,Lakewood Ave at S Duke St,,35.98678,-78.90912,,,0
+5590,5590,Hillandale Rd at Loehmanns Plaza,,36.03147,-78.93578,,,0
+5591,5591,Roxboro St at Apt 2519,,35.96605,-78.91755,,,0
+5593,5593,2306 Lednum St,,36.02718,-78.9096,,,0
+5594,5594,Hillsborough Rd at Trent Dr,,36.012039,-78.930439,,,0
+5595,5595,Duke St at Markham Ave,,36.009649,-78.905438,,,0
+5596,5596,Foushee St at Avondale Dr,,36.016151,-78.887701,,,0
+5597,5597,Cornwallis Rd at Burgess Ln,,35.967824,-78.923349,,,0
+5598,5598,Fayetteville Rd at Geneva Dr,,35.920992,-78.928701,,,0
+5599,5599,Riddle Rd at Southpoint Family Dental,,35.94987,-78.9032,,,0
+5600,5600,E Carver St at Commons Blvd,,36.04137,-78.895,,,0
+5601,5601,Cornwallis Rd at Industry Ln,,35.94278,-78.89973,,,0
+5602,5602,E Main St at S Goley St,,35.986111,-78.884607,,,0
+5603,5603,Hardee St at Landon St,,35.999923,-78.865232,,,0
+5604,5604,Crest St at Zelko Ct,,36.01276,-78.941013,,,0
+5605,5605,Umstead St at Grant St,,35.98293,-78.89417,,,0
+5607,5607,Erwin Rd at Trent Dr,,36.007856,-78.934271,,,0
+5608,5608,S Hyde Park Ave at Lyons Club,,35.984531,-78.881641,,,0
+5609,5609,Sedwick Dr at NC 55,,35.888588,-78.896734,,,0
+5610,5610,Lincoln St at Linwood Ave,,35.980706,-78.895644,,,0
+5611,5611,Main St at N Maple St,,35.98512,-78.88057,,,0
+5612,5612,Chapel Hill St at GTI Auto Service,,35.996865,-78.911382,,,0
+5613,5613,3514 University Dr,,35.96733,-78.947139,,,0
+5615,5615,Gary St at Liberty St,,35.991008,-78.870583,,,0
+5616,5616,Cornwallis Rd at Yorktown Ave (out),,35.936461,-78.893408,,,0
+5618,5618,Holloway St at Joyland Ave,,35.98938,-78.855086,,,0
+5621,5621,Front St at Courtyard Marriott,,36.03025,-78.93715,,,0
+5622,5622,Glenbrook St at Club Blvd,,36.02425,-78.87708,,,0
+5623,5623,Umstead St at Durham County Library,,35.98277,-78.89847,,,0
+5624,5624,Revere Rd at Parkwood Field,,35.89392,-78.909988,,,0
+5625,5625,Sparger Rd at Food Lion,,36.03212,-78.9816,,,0
+5626,5626,New Castle Rd at FoxFire Mailboxes,,36.05002,-78.9232,,,0
+5627,5627,Holloway St at Spruce St,,35.994367,-78.880098,,,0
+5630,5630,Hinson Dr at Glenbrook St,,36.02845,-78.87915,,,0
+5632,5632,Green St at Lancaster St,,36.011441,-78.913487,,,0
+5633,5633,Fayetteville Rd at Sutton Square,,35.919222,-78.929979,,,0
+5634,5634,Roxboro Rd at St Paul St,,36.01758,-78.89008,,,0
+5635,5635,Angier Ave at Clay St,,35.982831,-78.880138,,,0
+5637,5637,Main St at Gregson St,,35.999781,-78.90903,,,0
+5639,5639,Main St at Morgan St,,36.000859,-78.910686,,,0
+5642,5642,Guess Rd at Lombard Ave,,36.03542,-78.929409,,,0
+5644,5644,Grant St at Simmons St,,35.98203,-78.89417,,,0
+5645,5645,Club Blvd at Midland Terrace,,36.027057,-78.870507,,,0
+5646,5646,Roxboro Rd at Davison Ave,,36.018651,-78.890106,,,0
+5647,5647,Angier Ave at Bingham St,,35.979567,-78.87231,,,0
+5648,5648,Lasalle St at Belmont Apartments,,36.01025,-78.94852,,,0
+5649,5649,Tower Blvd at McDonalds,,35.970418,-78.958095,,,0
+5650,5650,Durham Chapel Hill Blvd at Fosters ,,35.974231,-78.931046,,,0
+5651,5651,Duke St at Dacian Ave,,36.007567,-78.905486,,,0
+5652,5652,Campus Walk Ave at Lasalle St,,36.009675,-78.948643,,,0
+5653,5653,Fayetteville Rd at Southpoint Family,,35.94915,-78.90373,,,0
+5654,5654,Horton Rd at Roxboro Rd,,36.051027,-78.904332,,,0
+5657,5657,Chapel Hill St at Kent St,,35.99675,-78.91785,,,0
+5658,5658,Durham Chapel Hill Blvd at Grapevine,,35.974828,-78.926713,,,0
+5659,5659,Pickett Rd at Structure House Dr,,35.97465,-78.96238,,,0
+5661,5661,Holloway St at N Driver St,,35.99442,-78.87815,,,0
+5662,5662,Roxboro Rd at Lavender Ave,,36.023384,-78.889811,,,0
+5663,5663,New Hope Commons,,35.95435,-78.99653,,,0
+5664,5664,Dearborn Dr at Thelma St (north),,36.03753,-78.87295,,,0
+5665,5665,E Main St at Elm St,,35.988552,-78.889294,,,0
+5668,5668,Tom Wilkinson Rd at Northern High,,36.095,-78.9117,,,0
+5671,5671,Holloway St at Elm St,,35.994586,-78.887174,,,0
+5672,5672,Fayetteville St at WG Pearson,,35.95697,-78.90882,,,0
+5674,5674,University Dr at Springfield Apts,,35.958283,-78.966036,,,0
+5675,5675,Otis St at Alton St,,35.970754,-78.908293,,,0
+5677,5677,Broad St at Guess Rd,,36.023722,-78.918491,,,0
+5678,5678,Morehead Ave at Cornell St,,35.99183,-78.9191,,,0
+5679,5679,Crutchfield St at Crabtree Ave,,36.03892,-78.90312,,,0
+5681,5681,Dillard St at Holloway St,,35.9943,-78.89377,,,0
+5682,5682,Hillsborough Rd at Ample Storage,,36.033748,-78.970623,,,0
+5684,5684,W Club Blvd at Clarendon St,,36.017035,-78.918244,,,0
+5686,5686,Fayetteville Rd at Cook Rd,,35.928882,-78.9199,,,0
+5688,5688,Gregson St at Minerva Ave,,36.00453,-78.90832,,,0
+5689,5689,Roxboro St at Umstead St,,35.982518,-78.903157,,,0
+5690,5690,NC 54 at NC 55,,35.902389,-78.895308,,,0
+5693,5693,Bedford St at Balmoray Ct,,35.97688,-78.92862,,,0
+5695,5695,Hillandale Rd at Croasdaile Office ,,36.03357,-78.93572,,,0
+5700,5700,Roxboro St at Summit St,,35.971234,-78.915069,,,0
+5701,5701,Fayetteville St at Price Ave,,35.97997,-78.89975,,,0
+5702,5702,Roxboro Rd at E Knox St,,36.01263,-78.89102,,,0
+5703,5703,Guess Rd at Carver St,,36.03712,-78.92958,,,0
+5704,5704,Guess Rd at Duke Homestead,,36.03088,-78.92813,,,0
+5705,5705,Westgate Dr at Durham Chapel Hill Blvd,,35.96792,-78.9612,,,0
+5706,5706,Roxboro St at Masondale Ave,,35.975603,-78.908421,,,0
+5707,5707,Fayetteville St at Lakewood Ave (in),,35.986387,-78.898314,,,0
+5708,5708,Angier Ave at Hoover Rd,,35.97797,-78.87048,,,0
+5709,5709,Roxboro Rd at Markham Ave,,36.01043,-78.89173,,,0
+5710,5710,Angier Ave at Carter Ave,,35.96833,-78.8606,,,0
+5711,5711,Alston Ave at Lee St,,36.001979,-78.88569,,,0
+5713,5713,Rummel St at Walton St,,35.98585,-78.84565,,,0
+5714,5714,Morreene Rd at Sherwood Dr,,36.007135,-78.954611,,,0
+5716,5716,Hillsborough Rd at Hicks St,,36.01312,-78.93185,,,0
+5717,5717,Hillsborough Rd at Frazee Carpet,,36.0162,-78.93737,,,0
+5718,5718,Lasalle St at Campus Walk Dr,,36.01003,-78.9486,,,0
+5719,5719,Roxboro Rd at E Knox St,,36.012755,-78.891128,,,0
+5720,5720,Junction Rd at NC 98,,35.99053,-78.8579,,,0
+5721,5721,Chapel Hill Rd at Vineyard St,,35.97795,-78.93567,,,0
+5722,5722,Carver St at Carver Creek Apts,,36.044903,-78.890438,,,0
+5723,5723,2319 E Main St,,35.98615,-78.87313,,,0
+5724,5724,Angier Ave at Triangle Pointe Apt,,35.93887,-78.82187,,,0
+5727,5727,Broad St at Sprunt Ave,,36.02054,-78.918845,,,0
+5728,5728,Fayetteville Rd at United Dr,,35.93697,-78.9079,,,0
+5729,5729,Gregson St at Monmounth Ave,,36.00672,-78.90833,,,0
+5730,5730,Chapel Hill Rd at YMCA,,35.98492,-78.92915,,,0
+5732,5732,Hillsborough Rd at Carolina Ave,,36.010538,-78.925131,,,0
+5733,5733,Lawson St at Wabash St (westbound),,35.97382,-78.88892,,,0
+5734,5734,Hillsborough Rd at Rutherford St,,36.01047,-78.92755,,,0
+5735,5735,Holloway St at S Woodcrest St,,35.98845,-78.8507,,,0
+5738,5738,Lawson St at Alston Ave (eastbound),,35.975464,-78.894184,,,0
+5740,5740,Chandler Rd at Chance Dr,,35.99492,-78.83363,,,0
+5741,5741,E Main St at Roxboro St,,35.993921,-78.898484,,,0
+5742,5742,Mangum St at Parrish St,,35.99573,-78.90015,,,0
+5743,5743,Trent Dr at Duke Hospital South,,36.004529,-78.934846,,,0
+5744,5744,Holloway St at Brye St,,35.993267,-78.871888,,,0
+5746,5746,Roxboro St at Normandy St,,35.973566,-78.912206,,,0
+5747,5747,Umstead St at Merrick St,,35.982937,-78.897415,,,0
+5748,5748,University Dr at Chapel Hill Rd,,35.968441,-78.939283,,,0
+5749,5749,E Weaver St at Pilot St,,35.967722,-78.910178,,,0
+5750,5750,E Main St at Briggs Ave,,35.986231,-78.87486,,,0
+5753,5753,S Roxboro St at Lawson St,,35.977048,-78.906808,,,0
+5754,5754,Chapel Hill Rd at Lakewood Shopping,,35.98693,-78.92707,,,0
+5755,5755,Cook Rd at Fitts Powell Apts,,35.947951,-78.920049,,,0
+5756,5756,Lakewood Ave at Senior Apts,,35.98768,-78.90487,,,0
+5757,5757,Torredge Rd at Snow Hill Rd,,36.09798,-78.86573,,,0
+5759,5759,Robinwood Rd at Greenbriar St,,36.0036,-78.8731,,,0
+5763,5763,229 East End Ave,,35.97462,-78.8621,,,0
+5764,5764,Dearborn Dr at Forrester St,,36.0377,-78.87483,,,0
+5765,5765,Hillsborough Rd at Rosehill Ave,,36.010649,-78.927815,,,0
+5766,5766,University Dr at Hope Valley Rd,,35.969654,-78.933878,,,0
+5767,5767,NC 55 at Cherry Dr,,35.9604,-78.89348,,,0
+5768,5768,NC 55 at Gaston Ave,,35.96254,-78.894284,,,0
+5769,5769,Lawson St at Wabash St,,35.9739,-78.88948,,,0
+5770,5770,Lasalle St at Tire King,,36.01772,-78.94557,,,0
+5772,5772,University Dr at Hope Valley School,,35.96848,-78.93872,,,0
+5773,5773,Lawson St at Durham Tech,,35.974431,-78.880576,,,0
+5774,5774,Durham Station,,35.995949,-78.906005,,,0
+5775,5775,Duke University Rd at Swift Ave,,35.997076,-78.924248,,,0
+5776,5776,NC 54 at Headquarters Park,,35.901136,-78.891803,,,0
+5778,5778,Hillsborough Rd at Lawndale Ave,,36.01475,-78.93382,,,0
+5779,5779,Capps St at Athens St,,35.963407,-78.885629,,,0
+5780,5780,E Main St at Driver St,,35.985838,-78.877719,,,0
+5781,5781,W Enterprise St at Fargo St,,35.98373,-78.90752,,,0
+5782,5782,Woodcroft Pkwy at Autumn Woods,,35.923826,-78.944202,,,0
+5785,5785,Buchanan Blvd at Gloria Ave,,36.00348,-78.9125,,,0
+5786,5786,Lasalle St at Hillsborough Rd,,36.018,-78.9455,,,0
+5787,5787,Roxboro Rd at Argonne Dr (in),,36.062833,-78.90424,,,0
+5790,5790,Rummel St at Wedgedale Ave,,35.98623,-78.84737,,,0
+5792,5792,Lawson St at Rosewood St,,35.975154,-78.892066,,,0
+5793,5793,Fayetteville Rd at Crooked Creek Pkwy,,35.912101,-78.933752,,,0
+5794,5794,Alston Ave at Lee St,,36.002141,-78.88599,,,0
+5795,5795,Hinson St at DeMille St,,36.02937,-78.8786,,,0
+5796,5796,MLK Pkwy at Lake Cook Dr,,35.941741,-78.916778,,,0
+5797,5797,418 N Mineral Springs Rd,,35.98772,-78.81872,,,0
+5798,5798,US 15-501 at On the Border,,35.96102,-78.97835,,,0
+5800,5800,Roxboro Rd at Fairfield St,,36.047605,-78.903298,,,0
+5801,5801,Broad St at Markham Ave,,36.010453,-78.919662,,,0
+5802,5802,Broad St at F St,,36.01887,-78.91898,,,0
+5803,5803,Milton Rd at Fire Department,,36.088965,-78.913505,,,0
+5804,5804,US 70 at Vertical Edge Climbing Ctr,,35.941671,-78.824036,,,0
+5805,5805,Fayetteville St at Red Oak Ave,,35.96677,-78.904576,,,0
+5806,5806,Murray Ave at Broad St,,36.02912,-78.91203,,,0
+5809,5809,Hillsborough Rd at Self Storage,,36.03357,-78.97142,,,0
+5811,5811,Foushee St at Compare Foods,,36.018125,-78.887708,,,0
+5815,5815,East End Ave at Angier Ave,,35.97457,-78.86778,,,0
+5816,5816,Fayetteville St at Dunbar St,,35.979038,-78.900062,,,0
+5818,5818,Holloway St at Hoover Rd,,35.990265,-78.858925,,,0
+5819,5819,E Main St at Oldham Towers,,35.991937,-78.895095,,,0
+5820,5820,Cornwallis Rd at Century Oaks,,35.94093,-78.89815,,,0
+5821,5821,Holloway St at Briggs Ave,,35.99377,-78.87362,,,0
+5822,5822,NC 55 at Taco Bell,,35.90302,-78.89528,,,0
+5823,5823,University Dr at Academy Rd,,35.96737,-78.94497,,,0
+5824,5824,Lawson St at Concord St,,35.976345,-78.902969,,,0
+5825,5825,E Main St at Dillard St,,35.992332,-78.895784,,,0
+5826,5826,Roxboro Rd at Ellerbe St,,36.021653,-78.89006,,,0
+5827,5827,Angier Ave at Hoover Rd,,35.978335,-78.87102,,,0
+5829,5829,Fayetteville St at Pilot St,,35.9639,-78.90718,,,0
+5830,5830,Cornwallis Rd at Stuart Dr,,35.97028,-78.92745,,,0
+5832,5832,Dearborn Dr at Apollo St,,36.03681,-78.869716,,,0
+5833,5833,Dearborn Dr at Lakewood School,,36.038217,-78.877666,,,0
+5835,5835,Dillard St at Liberty St,,35.992766,-78.895075,,,0
+5836,5836,Dearborn Dr at Maplewood Dr (south),,36.033188,-78.869395,,,0
+5837,5837,Roxboro Rd at Infinity Rd,,36.07848,-78.91027,,,0
+5838,5838,Cornwallis Rd at Jan Ct,,35.96046,-78.912746,,,0
+5841,5841,Fayetteville St at Cornwallis Rd,,35.96037,-78.91037,,,0
+5842,5842,University Dt at Colonial Apartment,,35.967879,-78.940767,,,0
+5843,5843,Concord St at Brant St,,35.975553,-78.902811,,,0
+5844,5844,Linwood Ave at Colfax St,,35.979944,-78.893812,,,0
+5845,5845,Hillandale Rd at Durham Public Schools,,36.036341,-78.935682,,,0
+5846,5846,Chapel Hill Rd at Vineyard St,,35.97798,-78.93575,,,0
+5847,5847,Pickett Rd at Coachmans Way,,35.97525,-78.96407,,,0
+5848,5848,Flowers Dr at Duke Garden (out),,36.000156,-78.935705,,,0
+5849,5849,Dearborn Dr at Thelma St,,36.037318,-78.872481,,,0
+5850,5850,2435 Glenbrook St,,36.026142,-78.877061,,,0
+5851,5851,Lawson St at Ridgeway Ave,,35.973947,-78.887482,,,0
+5853,5853,Duke St at Urban St,,36.008658,-78.905468,,,0
+5854,5854,Fayetteville Rd at Brian Center,,35.917561,-78.931181,,,0
+5856,5856,2711 University Dr,,35.970218,-78.931818,,,0
+5857,5857,Riddle Rd at Triangle Day Care,,35.95137,-78.89937,,,0
+5858,5858,Chapel Hill Rd at Wa Wa Ave,,35.979646,-78.934904,,,0
+5859,5859,MLK Pkwy at Lake Cook Rd,,35.942065,-78.916912,,,0
+5860,5860,Roxboro Rd at Channing Ave,,36.0318,-78.89087,,,0
+5861,5861,Front St at Carver Terrance Apts,,36.03613,-78.93887,,,0
+5862,5862,Cornwallis Rd at Bainbridge Apt (in),,35.93994,-78.896922,,,0
+5863,5863,525 Burlington Ave,,35.96932,-78.89967,,,0
+5864,5864,University Dr at Forest Hills Shops,,35.985846,-78.909911,,,0
+5865,5865,2534 Chapel Hill Rd,,35.98088,-78.9345,,,0
+5866,5866,Hinson Dr at Glenbrook St,,36.028598,-78.878889,,,0
+5867,5867,Fayetteville St at Utah Ave,,35.965334,-78.905879,,,0
+5868,5868,Club Blvd at Cascadilla St,,36.020002,-78.886482,,,0
+5869,5869,Broad St at F St,,36.019052,-78.91915,,,0
+5870,5870,Holloway St at Herbert St,,35.9916,-78.86453,,,0
+5871,5871,Tower Blvd at Conifer Glen Ln,,35.972609,-78.957782,,,0
+5874,5874,Hilllsborough Rd at Hilton,,36.02548,-78.95765,,,0
+5876,5876,Ross Rd at Melbourne St,,35.99258,-78.8534,,,0
+5877,5877,S Roxboro St at Umstead St,,35.9825,-78.903401,,,0
+5880,5880,Club Blvd at Glenbrook Dr,,36.023854,-78.876399,,,0
+5881,5881,NC 54 at Harris Teeter,,35.910922,-78.936739,,,0
+5882,5882,Holloway St at Adams St,,35.98893,-78.85252,,,0
+5883,5883,Mangum St at Sloan Auto Parts,,35.998961,-78.897459,,,0
+5884,5884,Chapel Hill St at Brewster St,,35.996783,-78.919056,,,0
+5887,5887,Holloway St at Rochelle St,,35.98817,-78.84932,,,0
+5888,5888,Revere Rd at Sedwick Dr,,35.885025,-78.905881,,,0
+5890,5890,Gary St at E Main St,,35.9864,-78.87108,,,0
+5891,5891,Mt Moriah Rd at Comfort Inn,,35.95005,-78.99455,,,0
+5892,5892,Sima Ave at Building 18,,35.977291,-78.887383,,,0
+5893,5893,Liberty St at Brye St,,35.99143,-78.87418,,,0
+5894,5894,Woodcroft Shopping Center,,35.922524,-78.955599,,,0
+5895,5895,Cornwallis Rd at S Roxboro St,,35.96557,-78.91962,,,0
+5896,5896,Roxboro Rd at Old Oxford Rd,,36.03512,-78.89275,,,0
+5897,5897,Club Blvd at Dollar Ave,,36.01675,-78.909679,,,0
+5898,5898,Holloway St at N Driver St,,35.994516,-78.877869,,,0
+5899,5899,Briggs Ave at Person St,,35.969283,-78.877145,,,0
+5900,5900,1115 Chapel Hill St,,35.99668,-78.916882,,,0
+5901,5901,Umstead St at Merrick St,,35.982784,-78.897403,,,0
+5904,5904,Chapel Hill Rd at Anderson St,,35.98187,-78.93368,,,0
+5906,5906,Garrett Rd at Eno River Church,,35.952195,-78.970986,,,0
+5907,5907,Fayetteville St at Old Fayetteville,,35.98352,-78.89882,,,0
+5908,5908,Chapel Hill Rd at Gunter St,,35.99033,-78.92395,,,0
+5909,5909,Chapel Hill Rd at Colonial Apts,,35.970353,-78.938847,,,0
+5910,5910,Angier Ave at Ellis Rd,,35.97297,-78.8668,,,0
+5911,5911,Fayetteville Rd at Obie Dr,,35.926332,-78.923325,,,0
+5912,5912,Broad St at NCSSM Campus,,36.01752,-78.91908,,,0
+5914,5914,Morehead Ave at Carroll St (in),,35.991691,-78.915433,,,0
+5915,5915,Hillsborough Rd at Operations Rd,,36.0337,-78.968504,,,0
+5916,5916,W Club Blvd at Sedgefield St,,36.017147,-78.916924,,,0
+5917,5917,Angier Ave at Briggs Ave,,35.98098,-78.87515,,,0
+5918,5918,University Dr at Academy Rd,,35.967668,-78.942052,,,0
+5919,5919,Liberty St at Brye St (in),,35.991451,-78.8738,,,0
+5920,5920,Hardee St at Mimosa St,,36.001542,-78.866645,,,0
+5921,5921,Holloway St at Southerland St,,35.99078,-78.86062,,,0
+5922,5922,Main St at S Blacknall St,,35.98652,-78.886,,,0
+5927,5927,Chapel Hill St at City Hall Plaza,,35.996112,-78.898103,,,0
+5928,5928,James St at Nation Ave,,35.97732,-78.92623,,,0
+5929,5929,Briggs Ave at East Coast Metal Comp,,35.965178,-78.879305,,,0
+5930,5930,Broad St at Sprunt St,,36.021278,-78.918981,,,0
+5931,5931,Fayetteville St at Brant St,,35.975547,-78.901259,,,0
+5932,5932,Horton Rd at Chalk Level Rd,,36.05138,-78.90997,,,0
+5933,5933,Riddle Rd at Triangle Day Care,,35.951297,-78.90022,,,0
+5934,5934,Duke St at Jackson St,,35.995168,-78.90868,,,0
+5936,5936,E Club Blvd at Dominion St,,36.022078,-78.88082,,,0
+5937,5937,2919 University Dr,,35.969198,-78.935883,,,0
+5938,5938,S Roxboro St at CC Spaulding School,,35.978094,-78.90669,,,0
+5939,5939,Otis St at Nelson St,,35.97325,-78.905,,,0
+5940,5940,Hardee St at Benning St,,36.002766,-78.867226,,,0
+5941,5941,Green St at Broad St,,36.011833,-78.919345,,,0
+5942,5942,Roxboro St at Mallard Ave,,35.997705,-78.894992,,,0
+5943,5943,University Dr at Weymouth St,,35.96713,-78.94822,,,0
+5944,5944,Freeman Rd at Southern High,,35.997104,-78.825341,,,0
+5945,5945,Roxboro Rd at Berwyn Ave,,36.0343,-78.89153,,,0
+5946,5946,Cornwallis Rd at Rogers Herr School,,35.97407,-78.93567,,,0
+5947,5947,E Weaver St at Cornwallis Rd,,35.962859,-78.916091,,,0
+5948,5948,Enterprise St at Scout Dr,,35.983785,-78.904814,,,0
+5949,5949,Dearborn Dr at Deer Run,,36.031599,-78.870344,,,0
+5950,5950,Umstead St at Grant St,,35.983044,-78.894232,,,0
+5951,5951,Buchanan Blvd at Markham Ave,,36.009597,-78.912227,,,0
+5952,5952,Chapel Hill St at Police Station,,35.996895,-78.909873,,,0
+5953,5953,Main St at Albemarle St,,36.000599,-78.909998,,,0
+5954,5954,Dowd St at Hazel St,,36.000459,-78.888702,,,0
+5955,5955,Fayetteville St at White Rock,,35.95795,-78.91002,,,0
+5956,5956,Southpoint Mall at Movie Theater,,35.905061,-78.946458,,,0
+5957,5957,Duke University Rd at Chapel Hill Rd,,35.996598,-78.920686,,,0
+5958,5958,Duke St at Holt School Rd,,36.05353,-78.9045,,,0
+5959,5959,Liberty St at Park Ave,,35.992371,-78.877707,,,0
+5960,5960,Gary St at Shell Station,,35.99211,-78.869367,,,0
+5961,5961,Snow Hill Rd at Roxboro Rd,,36.116442,-78.902787,,,0
+5962,5962,Buchanan Blvd at Trinity Ave,,36.005766,-78.912457,,,0
+5963,5963,Cornwallis Rd at Bell Yeager Church,,35.964243,-78.917416,,,0
+5964,5964,Roxboro Rd at Maynard Ave,,36.02707,-78.889746,,,0
+5965,5965,Green St at Berkeley St,,36.011697,-78.915706,,,0
+5966,5966,Chapel Hill Rd at Vesson Ave,,35.98303,-78.93087,,,0
+5967,5967,Markham Ave at Iredell St,,36.00997,-78.92123,,,0
+5968,5968,Glenbrook St at Club Blvd,,36.024384,-78.877255,,,0
+5969,5969,Cornwallis Rd at Cornwallis Homes,,35.9648,-78.91857,,,0
+5970,5970,Fayetteville Rd at Cook Rd,,35.92917,-78.919856,,,0
+5971,5971,University Dr at Myra St,,35.9665,-78.95292,,,0
+5972,5972,Carver St at Charlotte St,,36.037715,-78.934167,,,0
+5973,5973,NC 55 at Meridian Pkwy,,35.910614,-78.892943,,,0
+5974,5974,Buchanan Blvd at Gloria Ave,,36.003333,-78.912315,,,0
+5975,5975,Duke St at Fernway St,,36.00098,-78.9072,,,0
+5977,5977,Robinwood Rd at Miami Blvd,,36.000821,-78.87535,,,0
+5979,5979,Emerald Pond Ln at Pickett Rd,,35.97532,-78.96993,,,0
+5980,5980,University Dr at Lyckan Pkwy,,35.963076,-78.960292,,,0
+5981,5981,Alston Ave at Geer St,,36.003195,-78.886149,,,0
+5982,5982,Duke University Rd at Swift Ave,,35.997328,-78.924603,,,0
+5983,5983,Duke St at Kinder Care,,36.0421,-78.9058,,,0
+5984,5984,NC 55 at Dakota St,,35.967234,-78.895287,,,0
+5985,5985,Mangum St at Markham Ave,,36.00895,-78.89332,,,0
+5986,5986,Green St at Sedgefield St,,36.011577,-78.917092,,,0
+5987,5987,Otis St at Cecil St,,35.97208,-78.90627,,,0
+5988,5988,Roxboro St at Gray St,,35.999005,-78.894099,,,0
+5989,5989,Avondale Dr at Trinity Ave,,36.007315,-78.885708,,,0
+5990,5990,Durham-Chapel Hill Blvd at Car Wash,,35.97408,-78.93042,,,0
+5991,5991,Lynn Rd at Holloway St,,35.98652,-78.84353,,,0
+5992,5992,E Club Blvd at Cascadilla St,,36.019858,-78.88636,,,0
+5993,5993,Duke St at Trinity Ave,,36.00497,-78.90555,,,0
+5995,5995,Green St at Berkeley St,,36.011544,-78.915916,,,0
+5996,5996,Meriwether Dr at Old Oxford Rd,,36.035929,-78.889875,,,0
+5997,5997,Hillsborough Rd at Hilton,,36.02485,-78.95708,,,0
+5998,5998,Liberty St at Park Ave (out),,35.992246,-78.877385,,,0
+5999,5999,Chapel Hill Rd at W Cornwallis Rd,,35.97543,-78.93652,,,0
+6000,6000,NC 54 at Pine Glenn Trail,,35.907371,-78.922877,,,0
+6002,6002,208 Lynn Rd,,35.9845,-78.84282,,,0
+6003,6003,Roxboro Rd at Bon Air Ave,,36.028286,-78.889972,,,0
+6004,6004,Alston Ave at Crete St,,35.959794,-78.893333,,,0
+6005,6005,Ben Franklin Blvd at Carolina House,,36.047653,-78.88987,,,0
+6006,6006,Buchanan Blvd at Green St,,36.011174,-78.912077,,,0
+6007,6007,Hillsborough Rd at Hillandale Rd,,36.01652,-78.93672,,,0
+6008,6008,Angier Ave at Beldon Dr,,35.94652,-78.83895,,,0
+6011,6011,Duke St at W Knox St,,36.013173,-78.905384,,,0
+6012,6012,Erwin Rd at Duke Hospital,,36.008163,-78.937778,,,0
+6013,6013,Mordecai St at Morreene Rd,,36.004684,-78.954657,,,0
+6014,6014,Roxboro St at First Baptist Church,,35.99632,-78.8962,,,0
+6016,6016,Lawson St at Bacon St,,35.97435,-78.884612,,,0
+6017,6017,Lakewood Ave at South St,,35.987251,-78.906634,,,0
+6018,6018,Hillsborough Rd at Food Lion,,36.01455,-78.93363,,,0
+6020,6020,Otis St at Pilot St,,35.969541,-78.910683,,,0
+6023,6023,Fayetteville St at Dupree St,,35.977009,-78.90061,,,0
+6024,6024,Lasalle St at Duke Manor,,36.01528,-78.94693,,,0
+6025,6025,East End Ave at Destinys Way,,35.97458,-78.86463,,,0
+6026,6026,Cornwallis Rd at Beechwood Ave,,35.96114,-78.915054,,,0
+6027,6027,Gregson St at Urban St,,36.008741,-78.908385,,,0
+6030,6030,Liberty St at Railroad St,,35.99293,-78.89058,,,0
+6031,6031,Dowd St at Alston Ave,,36.000302,-78.886228,,,0
+6032,6032,Fayetteville St at Cecil St,,35.971159,-78.901088,,,0
+6034,6034,Flowers Dr at Student Health Center,,36.003258,-78.935152,,,0
+6036,6036,University Dr at Kmart,,35.962652,-78.960279,,,0
+6039,6039,Main St at S Goley St,,35.98602,-78.88448,,,0
+6040,6040,Hillsborough Rd at Trent Dr (in),,36.011796,-78.93026,,,0
+6042,6042,American Dr at White Pine Dr,,36.016465,-78.966787,,,0
+6045,6045,Lasalle St at Blue Crest Apts,,36.013786,-78.948205,,,0
+6046,6046,Gary St at Mozelle St (out),,35.987438,-78.870916,,,0
+6047,6047,Green St at Buchanan Blvd,,36.01139,-78.912255,,,0
+6048,6048,Dearborn Dr at Ora St,,36.029329,-78.87017,,,0
+6049,6049,Hillsborough Rd at Hillandale (in),,36.016719,-78.936603,,,0
+6050,6050,Pickett Rd at Colony Rd,,35.975403,-78.964025,,,0
+6051,6051,Bacon St at Cooper St,,35.971952,-78.884926,,,0
+6052,6052,Lawson St at Ridgeway Ave,,35.973721,-78.887892,,,0
+6053,6053,Lawson St at Briggs Ave,,35.974393,-78.877128,,,0
+6054,6054,Cornwallis Rd at Hollywood St,,35.93817,-78.8951,,,0
+6055,6055,Green St at Clarendon St,,36.011782,-78.918091,,,0
+6057,6057,Chapel Hill Rd at Huron St,,35.982,-78.93245,,,0
+6058,6058,Lawson St at Durham Exchange Club Industries,,35.974231,-78.87715,,,0
+6059,6059,Chapel Hill Rd at Chesterfield Apts,,35.99012,-78.92418,,,0
+6060,6060,4605 Bennett Memorial Rd,,36.031164,-78.978967,,,0
+6061,6061,Ross Rd at Fernando St,,35.9924,-78.84257,,,0
+6062,6062,Gary St at Quincy St,,35.98948,-78.87068,,,0
+6063,6063,Main St at Alston Ave,,35.98755,-78.88823,,,0
+6064,6064,Roxboro Rd at Omega Rd,,36.07557,-78.9095,,,0
+6065,6065,Crutchfield St at Pendergrass St,,36.03897,-78.90478,,,0
+6066,6066,Hillsborough Rd at Mitsubishi,,36.02275,-78.95472,,,0
+6067,6067,Olympic Ave at Roxboro Rd,,36.036822,-78.897146,,,0
+6068,6068,Erwin Rd at Downing St (outbound),,36.008849,-78.943992,,,0
+6069,6069,Chapel Hill St at Carroll St,,35.99687,-78.91558,,,0
+6071,6071,Morehead Ave at Fairview St,,35.991928,-78.918051,,,0
+6073,6073,Gary St at N Miami Blvd,,35.992479,-78.869401,,,0
+6075,6075,Westgate Dr at Burger King,,35.966282,-78.961148,,,0
+6076,6076,Douglas St at Pratt St,,36.01117,-78.94275,,,0
+6077,6077,Fayetteville St at Pekoe Ave,,35.97352,-78.900919,,,0
+6078,6078,Mordecai St at Holston St,,36.00417,-78.9555,,,0
+6079,6079,Chapel Hill St at Arnette Ave (out),,35.996939,-78.914254,,,0
+6082,6082,Guess Rd at Fawn Ave,,36.033194,-78.929189,,,0
+6085,6085,Angier Ave at Hosiery Mills,,35.989321,-78.892003,,,0
+6086,6086,Main St at S Hyde Park Ave,,35.98532,-78.88195,,,0
+6087,6087,US 70 at Miami Blvd,,35.94837,-78.83663,,,0
+6088,6088,Angier Ave at E Main St,,35.989556,-78.891882,,,0
+6092,6092,Hardee St at Saint Joesph Church,,36.00458,-78.86717,,,0
+6093,6093,Miami Blvd at Holloway St,,35.99337,-78.8699,,,0
+6094,6094,Dillard St at Holloway St,,35.994346,-78.893961,,,0
+6095,6095,Durham Regional Hospital,,36.038121,-78.899053,,,0
+6096,6096,Roxboro Rd at Higbee St,,36.01662,-78.89012,,,0
+6097,6097,NC 55 at Gaston Ave (out),,35.962684,-78.894573,,,0
+6098,6098,Riddle Rd at Ancroft Ave,,35.95272,-78.897066,,,0
+6104,6104,Fulton St at VA Hospital,,36.008858,-78.937137,,,0
+6105,6105,Guess Rd at Hillcrest Dr,,36.02425,-78.91972,,,0
+6106,6106,Guess Rd at Lamar St,,36.02685,-78.92308,,,0
+6107,6107,Guess Rd at North Pointe Dr,,36.02945,-78.92638,,,0
+6109,6109,North Pointe Dr at Kroger,,36.02852,-78.92037,,,0
+6110,6110,North Pointe Dr at Broad St,,36.02803,-78.91508,,,0
+6114,6114,Guess Rd at Super 8,,36.02664,-78.92304,,,0
+6115,6115,Guess Rd at Hillcrest Dr,,36.024448,-78.920269,,,0
+6116,6116,North Pointe Dr at Woodmont Dr,,36.03087,-78.92688,,,0
+6121,6121,Snow Hill Rd at Whispering Meadows ,,36.10445,-78.87373,,,0
+6122,6122,Torredge Rd at Snow Hill Rd,,36.09793,-78.86587,,,0
+6125,6125,Horton Rd at Stonewood Apts,,36.05122,-78.90702,,,0
+6126,6126,Horton Rd at Chalk Level Rd,,36.0513,-78.90933,,,0
+6127,6127,1100 Wyldewood Rd,,36.05302,-78.91677,,,0
+6128,6128,Wyldewood Rd at Foxfire Apts,,36.05288,-78.92102,,,0
+6129,6129,New Castle Rd at 1475 Foxfire,,36.05138,-78.92357,,,0
+6130,6130,Lawson St at Bacon St,,35.974105,-78.885177,,,0
+6132,6132,Briggs Ave at UniFirst,,35.963091,-78.877635,,,0
+6133,6133,Briggs Ave at Riddle Rd,,35.9588,-78.8792,,,0
+6136,6136,Capps St at S Alston Ave,,35.962295,-78.886911,,,0
+6137,6137,Capps St at Bacon St,,35.965196,-78.88354,,,0
+6138,6138,1116 Hearthside St,,35.966379,-78.882191,,,0
+6139,6139,Hearthside St at Welch Pl,,35.967593,-78.883525,,,0
+6140,6140,Bacon Street at Hearthside St,,35.967923,-78.885012,,,0
+6142,6142,Fayetteville St at Mt Zion Church,,35.95598,-78.90757,,,0
+6143,6143,Fayetteville Rd at White Rock Church,,35.958781,-78.910334,,,0
+6144,6144,University Dr at Cornwallis Rd,,35.970727,-78.930434,,,0
+6145,6145,Pickett Rd at Western Bypass Rd,,35.97373,-78.95925,,,0
+6146,6146,Fayetteville St at Pilot St,,35.9637,-78.907248,,,0
+6147,6147,Fayetteville St at Cornwallis Rd,,35.960322,-78.910207,,,0
+6148,6148,Archdale Dr at Third Fork Rd,,35.957898,-78.928577,,,0
+6149,6149,S Roxboro St at Barnhill St,,35.962771,-78.922266,,,0
+6152,6152,W Enterprise St at Scout Dr,,35.983622,-78.905101,,,0
+6153,6153,Fayetteville Rd at Brian Center,,35.916298,-78.931696,,,0
+6154,6154,Roxboro St at Cornwallis Rd,,35.965529,-78.918751,,,0
+6155,6155,N Roxboro Rd at Durham Regional Hospital,,36.038513,-78.898628,,,0
+6156,6156,Carver St at Meriwether Dr,,36.043206,-78.891931,,,0
+6157,6157,Club Blvd at Lindbergh St,,36.023083,-78.878771,,,0
+6158,6158,Dowd St at Gurley St,,36.000406,-78.891918,,,0
+6159,6159,Dowd St at Gurley St,,36.000244,-78.892029,,,0
+6160,6160,Dowd St at Hazel St,,36.000296,-78.88889,,,0
+6161,6161,Dowd St at Alston St,,36.000464,-78.886384,,,0
+6162,6162,Duke St at Cobb St,,35.98903,-78.908858,,,0
+6163,6163,Chapel Hill Rd at Yates Church,,35.97405,-78.93693,,,0
+6164,6164,University Dr at Shannon Rd,,35.966229,-78.954307,,,0
+6165,6165,Old Chapel Hill Rd at Garrett Rd,,35.949599,-78.967982,,,0
+6166,6166,Hope Valley Rd at Woodcroft Shopping Center,,35.92148,-78.95808,,,0
+6167,6167,Chapel Hill Rd at Colonial Apts,,35.97058,-78.93868,,,0
+6168,6168,Buchanan Blvd at Minerva Ave,,36.00442,-78.91237,,,0
+6169,6169,Lasalle St at Duke Manor Apt,,36.015078,-78.946879,,,0
+6170,6170,Hillsborough Rd at Food Lion,,36.03292,-78.97917,,,0
+6171,6171,Lawson St at NCCU Track,,35.97618,-78.89662,,,0
+6172,6172,Hardee St at Holloway St,,35.99245,-78.865885,,,0
+6173,6173,Holloway St at Southerland St,,35.990587,-78.860324,,,0
+6174,6174,Burlington Ave at Lincoln St,,35.96927,-78.89663,,,0
+6176,6176,E Main St at Driver St,,35.985936,-78.877842,,,0
+6177,6177,Lawson St at Sima Ave (westbound),,35.97455,-78.89092,,,0
+6178,6178,Liberty St at Spruce St,,35.99248,-78.88007,,,0
+6180,6180,Liberty St at Spruce St (in),,35.992609,-78.880225,,,0
+6181,6181,Liberty St at Railroad St,,35.992985,-78.890041,,,0
+6182,6182,Morgan St at Mangum St,,35.99747,-78.89833,,,0
+6184,6184,Towerview Rd at Law Library,,36.000787,-78.945867,,,0
+6185,6185,Science Dr at Law Library,,35.9984,-78.945525,,,0
+6186,6186,Science Dr at Cameron Blvd,,35.995801,-78.946612,,,0
+6188,6188,S Roxboro St at Charles St,,35.963059,-78.922322,,,0
+6189,6189,Archdale Dr at High Ridge Dr,,35.95833,-78.93079,,,0
+6190,6190,Archdale Dr at High Ridge Dr,,35.958283,-78.932946,,,0
+6191,6191,Shannon Rd at Sams Club,,35.96752,-78.95514,,,0
+6193,6193,Fayetteville Rd at Turmeric Ln,,35.937202,-78.907995,,,0
+6195,6195,Old Chapel Hill Rd at Sherwood Githens Middle School,,35.942833,-78.979324,,,0
+6196,6196,3805 University Dr,,35.96655,-78.95174,,,0
+6197,6197,Witherspoon Blvd at McFarland Dr,,35.950922,-78.98968,,,0
+6198,6198,Mt. Moriah Rd at Danzinger Dr,,35.94895,-78.99436,,,0
+6199,6199,Garrett Rd at Daycare,,35.92522,-78.96078,,,0
+6200,6200,Garrett Rd at Jordan High Soccer,,35.925078,-78.96095,,,0
+6201,6201,Hillandale Rd at Hillandale Elementary,,36.05318,-78.93487,,,0
+6202,6202,Horton Rd at Sugarwood Pl,,36.057272,-78.933833,,,0
+6203,6203,Horton Rd at Guess Rd,,36.057324,-78.931269,,,0
+6204,6204,Guess Rd at Horton Rd,,36.05675,-78.92934,,,0
+6205,6205,Guess Rd at Peppertree St,,36.05456,-78.92945,,,0
+6206,6206,Guess Rd at Crystal Lake Rd,,36.0497,-78.92945,,,0
+6207,6207,Guess Rd at Bogarde St,,36.04375,-78.92957,,,0
+6208,6208,3037 Carver St,,36.037063,-78.938481,,,0
+6209,6209,2242 Hillandale Rd,,36.0407,-78.9353,,,0
+6210,6210,Hillandale Rd at Pinetree Ct,,36.04417,-78.93526,,,0
+6211,6211,Hillandale Rd at Samuel Dr,,36.04822,-78.93616,,,0
+6212,6212,Hillandale Rd at Croasdaile Farms,,36.050761,-78.935439,,,0
+6215,6215,Hope Valley Rd at Bank of America,,35.920731,-78.958915,,,0
+6217,6217,Page Rd Ext at Boats Unlimtied,,35.9315,-78.81045,,,0
+6218,6218,Page Rd Ext at Page Rd,,35.92889,-78.81254,,,0
+6221,6221,Brier Leaf Ln at Brier Creek Pkwy,,35.90902,-78.7863,,,0
+6222,6222,Alexander Promonade at Kohls,,35.914753,-78.777906,,,0
+6223,6223,Alexander Promonade at Walmart,,35.913158,-78.776801,,,0
+6224,6224,Brier Leaf Ln at Little Brier Creek,,35.91134,-78.7859,,,0
+6225,6225,Brier Creek Pkwy at Little Brier Creeky Ln,,35.90927,-78.78484,,,0
+6229,6229,Page Rd Ext at Southeast Food Systems,,35.92882,-78.81234,,,0
+6230,6230,Page Rd Ext at Kemps Seafood,,35.93134,-78.81026,,,0
+6237,6237,Page Rd at Alexander Village Shopping,,35.92132,-78.81287,,,0
+6238,6238,Page Rd at Raj Dr,,35.92271,-78.81308,,,0
+6239,6239,Alston Ave at 219 Alston Ave,,35.985155,-78.888862,,,0
+6241,6241,Rigsbee Ave at Seminary St,,35.999,-78.89989,,,0
+6242,6242,Rigsbee Ave at Corporation St,,36.00193,-78.89988,,,0
+6243,6243,W Geer St at Rigsbee Ave,,36.00374,-78.89963,,,0
+6244,6244,W Geer St at Glendale Ave,,36.00376,-78.89647,,,0
+6245,6245,Geer St at Glendale Ave,,36.00384,-78.89649,,,0
+6246,6246,Geer St at Rigsbee Ave,,36.00382,-78.89951,,,0
+6247,6247,Rigsbee Ave at W Corporation St,,36.002163,-78.900054,,,0
+6248,6248,Rigsbee Ave at Seminary St,,35.99942,-78.89997,,,0
+6251,6251,Renaissance Shopping Center,,35.904,-78.93737,,,0
+6252,6252,Renaissance Pkwy at Super Target,,35.902963,-78.953911,,,0
+6253,6253,Audubon Lake Dr at Highgate Dr,,35.910782,-78.945512,,,0
+6254,6254,5322 Highgate Dr,,35.91058,-78.94274,,,0
+6255,6255,Highgate Dr at Harris Teeter,,35.9102,-78.94089,,,0
+6256,6256,Fayetteville St at Cook Rd,,35.952898,-78.90558,,,0
+6257,6257,Fayetteville Rd at Hillside High School,,35.95325,-78.90559,,,0
+6258,6258,Fayetteville Rd at Mt Zion Church,,35.95592,-78.90729,,,0
+6259,6259,Pettigrew St at Bacon St,,35.981105,-78.882505,,,0
+6260,6260,Chattham at Pettigrew St (outbound),,35.98401,-78.89036,,,0
+6261,6261,Chattham at Pettigrew St (inbound),,35.98404,-78.8905,,,0
+6262,6262,Pettigrew St at Bernice St,,35.98103,-78.88291,,,0
+6263,6263,Bethesda Elementary,,35.941329,-78.839052,,,0
+6264,6264,Holloway St at Rummel St,,35.987727,-78.847973,,,0
+6265,6265,Holloway St at Lynn Rd,,35.9868,-78.84421,,,0
+6266,6266,Miami Blvd at New Haven,,35.93601,-78.8424,,,0
+6267,6267,TW Alexander Dr at Miami Blvd,,35.923375,-78.84512,,,0
+6268,6268,TW Alexander at Center Point,,35.92208,-78.83533,,,0
+6269,6269,TW Alexander at Lab Corp,,35.918734,-78.824498,,,0
+6270,6270,TW Alexander at 1725 Creekside,,35.922335,-78.83715,,,0
+6271,6271,TW Alexander at Jersey Mike's,,35.92322,-78.84427,,,0
+6272,6272,Miami Blvd at Sheetz Gas Station,,35.92547,-78.84589,,,0
+6273,6273,Miami Blvd at Bethesda United Methodist Church,,35.936683,-78.841998,,,0
+6274,6274,NC 54 at Alston Ave (eastbound),,35.9006,-78.88952,,,0
+6275,6275,S Alston Ave at Kestrel Heights,,35.89857,-78.88909,,,0
+6276,6276,5010 S Alston Ave,,35.890966,-78.885323,,,0
+6277,6277,S Alston Ave at Falls Pointe Apts,,35.884205,-78.885832,,,0
+6278,6278,NC 55 at Sedwick Dr,,35.89021,-78.89596,,,0
+6279,6279,NC 55 at Golden Corral,,35.8971,-78.89687,,,0
+6281,6281,Cook Rd at Tripoli Dr,,35.951733,-78.910586,,,0
+6282,6282,Forest at Duke Dr,,35.97465,-78.94927,,,0
+6283,6283,NC 55 at Allendown Dr,,35.89872,-78.89655,,,0
+6286,6286,Chapel at Duke University (PM),,35.998737,-78.933814,,,0
+6287,6287,S Alston Ave at Englert Dr,,35.8955,-78.88905,,,0
+6288,6288,E Geer St at Fay St,,36.004209,-78.875693,,,0
+6289,6289,E Geer St at Midland Terrace (out),,36.01428,-78.86316,,,0
+6290,6290,E Geer St at Landon Farms (out),,36.01994,-78.84943,,,0
+6291,6291,Walmart at Glenview Station Stop 1,,36.02733,-78.84287,,,0
+6292,6292,Walmart at Glenview Station Stop 2,,36.0288,-78.84075,,,0
+6293,6293,E Geer St at Landon Farm (inbound),,36.02016,-78.84949,,,0
+6294,6294,E Geer St at Midland Terrace (in),,36.01463,-78.86303,,,0
+6297,6297,Roxboro St at Liberty St,,35.99443,-78.89778,,,0
+6299,6299,Pettigrew St at Blackwell St (DPAC),,35.994669,-78.90239,,,0
+6300,6300,302 Pettigrew St,,35.99153,-78.89828,,,0
+6301,6301,Pettigrew St at Dillard St,,35.98988,-78.89732,,,0
+6302,6302,Pettigrew St at Dillard St,,35.990102,-78.897262,,,0
+6304,6304,E Geer St at Glenview Station,,36.02681,-78.84196,,,0
+6305,6305,E Chapel Hill St at Main St,,35.996882,-78.904117,,,0
+6306,6306,E Main St at Corcoran St (outbound),,35.995589,-78.901872,,,0
+6307,6307,E Main St at Mangum St (outbound),,35.994728,-78.900295,,,0
+6308,6308,E Chapel Hill St at Post Office,,35.99694,-78.902543,,,0
+6309,6309,N Dillard St at Main St,,35.99288,-78.89521,,,0
+6310,6310,US 70 at Hess Gas Station,,35.95604,-78.84148,,,0
+6311,6311,4319 Angier Ave,,35.94191,-78.83206,,,0
+6312,6312,Angier Ave at Miami Blvd,,35.94501,-78.83708,,,0
+6313,6313,Angier Ave at Bungalow Ave,,35.94963,-78.84415,,,0
+6314,6314,Angier Ave at Midway Ave,,35.96667,-78.85914,,,0
+6315,6315,Roxboro Rd at Foushee St,,36.01658,-78.88992,,,0
+6316,6316,Morgan St at The Carolina Theatre,,35.99819,-78.90256,,,0
+6317,6317,Pettigrew St at Mangum St,,35.994004,-78.901578,,,0
+6319,6319,MLK Pkwy at Stratford Lake Dr,,35.941195,-78.911445,,,0
+6320,6320,MLK Pkwy at Stratford Lake Dr,,35.941049,-78.912265,,,0
+6322,6322,Cornwallis Rd at Roxboro Rd,,35.96455,-78.91784,,,0
+6327,6327,Audubon Lake Dr at Johnson Lexus,,35.90717,-78.957717,,,0
+6328,6328,Revere Rd at Larkspur Dr,,35.888086,-78.907309,,,0
+6330,6330,Lakewood Ave at Fayetteville St,,35.986421,-78.899168,,,0
+6331,6331,Ewrin Rd at Emergency Dr (out),,36.008062,-78.934816,,,0
+6333,6333,American Dr at Constitution Dr,,36.016626,-78.967231,,,0
+6334,6334,Chapel Dr at Duke University Rd,,35.998305,-78.93379,,,0
+6335,6335,Hillsborough Rd at CVS,,36.022163,-78.953132,,,0
+6336,6336,Gregson St at Brightleaf,,35.999852,-78.909507,,,0
+6337,6337,Cornwallis Rd at Laurel Oaks Dr (out),,35.93495,-78.891708,,,0
+6338,6338,NC 55 at Martin Luther King Jr Pkwy,,35.931424,-78.888582,,,0
+6339,6339,NC 55 at Odyssey Dr (out),,35.927773,-78.889168,,,0
+6340,6340,NC 55 at Carpenter Fletcher Rd (out),,35.914898,-78.891617,,,0
+6343,6343,Highway 98 at Joyland Ave,,35.989426,-78.854731,,,0
+6344,6344,Holloway St at Herbert St,,35.991803,-78.864785,,,0
+6345,6345,Taylor St at Holton Resouce (out),,35.988972,-78.878528,,,0
+6346,6346,Angier Ave at Holman St,,35.985691,-78.887244,,,0
+6347,6347,Taylor St at Driver St,,35.988855,-78.878372,,,0
+6348,6348,Hwy 98 at Durham Assisted Living,,35.983236,-78.828998,,,0
+6349,6349,Mineral Springs Rd at Destrier Dr,,35.991105,-78.817519,,,0
+6350,6350,Freeman Rd at Mineral Springs Rd,,35.994912,-78.815221,,,0
+6351,6351,Ross Rd at Idlewood Rd,,35.992538,-78.848785,,,0
+6352,6352,Hwy 98 at Oak Grove Elementary,,35.981098,-78.819956,,,0
+6353,6353,Hwy 98 at Nicholas Farm,,35.979586,-78.81321,,,0
+6354,6354,Hwy 98 at Sherron Rd,,35.976445,-78.79228,,,0
+6355,6355,Neal Middle School,,35.976729,-78.782093,,,0
+6356,6356,Neal Middle School (inbound),,35.976259,-78.782933,,,0
+6357,6357,Hwy 98 at Olive Branch Rd,,35.975895,-78.785482,,,0
+6358,6358,Hwy 98 at Patterson Rd,,35.97667,-78.792436,,,0
+6359,6359,Hwy 98 at The Crossings at Grove Pk,,35.978999,-78.807798,,,0
+6360,6360,Hwy 98 at Oak Grove Parkway,,35.979685,-78.812889,,,0
+6361,6361,Hwy 98 at Mineral Springs (inbound),,35.981502,-78.820788,,,0
+6362,6362,Hwy 98 at Mineral Springs Shop (in),,35.982289,-78.824106,,,0
+6363,6363,Hwy 98 at Clayton (inbound),,35.98381,-78.830674,,,0
+6364,6364,Hwy 98 at Chandler Rd (inbound),,35.986011,-78.839784,,,0
+6365,6365,Hwy 98 at Vaughn Electric,,35.986753,-78.843124,,,0
+6366,6366,E Carver St at Commons Blvd,,36.041261,-78.894998,,,0
+6367,6367,Garrett Rd at Old Chapel Hill Rd,,35.947533,-78.968727,,,0
+6368,6368,Garrett Rd at Marydell Ln,,35.936572,-78.962894,,,0
+6369,6369,Woodcroft Pkwy at Highgate Dr,,35.922243,-78.936296,,,0
+6370,6370,Garrett Rd at Marydell Ln (in),,35.936762,-78.962662,,,0
+6373,6373,US 15-501 Service Rd at Car Dealer,,35.962984,-78.97355,,,0
+6374,6374,University Dr at South Square Mall,,35.965592,-78.9565,,,0
+6375,6375,Chapel Hill Rd at E Cornwallis Rd,,35.974099,-78.936789,,,0
+6376,6376,Vickers Ave at Cobb St,,35.98932,-78.912086,,,0
+6377,6377,Erwin Rd at Anderson St,,36.006678,-78.92993,,,0
+6379,6379,W Main St at Swift Ave,,36.005919,-78.919933,,,0
+6380,6380,W Main St at Campus Dr,,36.0033,-78.914666,,,0
+6381,6381,W Main St at Amtrak Station (out),,35.99786,-78.905829,,,0
+6382,6382,E Main St at Roxboro St,,35.993606,-78.898294,,,0
+6383,6383,Main St at Golden Belt,,35.989594,-78.891039,,,0
+6385,6385,Morris St at Durham Arts Council,,35.997477,-78.903742,,,0
+6386,6386,Main St at West Village,,35.998265,-78.906207,,,0
+6387,6387,Main St at Gregson St,,35.999988,-78.909031,,,0
+6389,6389,Main St at Campus Dr,,36.003597,-78.914867,,,0
+6390,6390,Main St at Iredell St,,36.006403,-78.920878,,,0
+6391,6391,Erwin Rd at Alexander Ave (inbound),,36.00584,-78.926488,,,0
+6392,6392,Erwin Rd at Anderson St (inbound),,36.006993,-78.930175,,,0
+6394,6394,Capps St at Athens St,,35.963299,-78.885573,,,0
+6395,6395,Briggs Ave at Person St (outbound),,35.969607,-78.877213,,,0
+6396,6396,Briggs Ave at East Coast Metal,,35.965304,-78.879128,,,0
+6397,6397,Alston Ave at Neff Rental Out,,35.957049,-78.883391,,,0
+6398,6398,Capps St at S Alston Ave,,35.962358,-78.887144,,,0
+6399,6399,Capps St at Bacon St,,35.96525,-78.883684,,,0
+6400,6400,1116 Hearthside St at Welch Pl,,35.966289,-78.882335,,,0
+6401,6401,Hearthside St at Welch Pl,,35.967529,-78.883769,,,0
+6402,6402,Bacon St at Hearthside St,,35.968013,-78.88529,,,0
+6403,6403,Erwin Rd at Alexander Ave,,36.005624,-78.92631,,,0
+6407,6407,Skyland Ridge Pkwy at Best Buy,,35.915057,-78.782787,,,0
+6424,6424,W Club Blvd at Waltown Park,,36.017099,-78.914284,,,0
+6425,6425,W Club Blvd at Berkeley St,,36.017105,-78.915416,,,0
+6426,6426,Broad St at Hillcrest Dr,,36.023967,-78.917948,,,0
+6427,6427,W Club Blvd at Sedgefield St,,36.016985,-78.916879,,,0
+6428,6428,Lednum St at Murray Ave,,36.028926,-78.90959,,,0
+6429,6429,W Club Blvd at Berkeley St,,36.016961,-78.91567,,,0
+6430,6430,W Club Blvd at Lancaster St,,36.016867,-78.913263,,,0
+6431,6431,E Main St at Queen St,,35.993023,-78.896962,,,0
+6433,6433,Hardee St at Naples Pl,,36.003578,-78.866951,,,0
+6434,6434,E Geer St at 1310 E Geer St,,36.006858,-78.871609,,,0
+6435,6435,Holloway St at Alma St,,35.994367,-78.875861,,,0
+6438,6438,Cornwallis Rd at Charles St,,35.967062,-78.92206,,,0
+6440,6440,Hillsborough Rd at Operations Dr,,36.033563,-78.969258,,,0
+6441,6441,Duke University Rd at Chapel Dr,,35.997541,-78.932878,,,0
+6442,6442,Lakewood at Poinciana Dr,,35.987067,-78.900434,,,0
+6443,6443,Linwood Ave at NC 55,,35.979417,-78.891958,,,0
+6444,6444,Cornwallis Rd at Campus Crossings,,35.94388,-78.900494,,,0
+6446,6446,5030 Alston Ave,,35.891477,-78.886676,,,0
+6447,6447,Cornwallis Rd at Laurel Oaks,,35.93505,-78.891641,,,0
+6448,6448,Cornwallis Rd at Campus Crossings,,35.94424,-78.900473,,,0
+6449,6449,Gary St at Quincy St,,35.989817,-78.870934,,,0
+6450,6450,Ellis Rd at New Haven Dr,,35.939243,-78.84635,,,0
+6451,6451,Ellis Rd at Research Triangle Academy,,35.938144,-78.851134,,,0
+6452,6452,Ellis Rd at Research Triangle Academy,,35.938306,-78.851135,,,0
+6453,6453,Ellis Rd at New Haven Dr (in),,35.939423,-78.84635,,,0
+6455,6455,Roxboro Rd at CBS Car Dealership,,36.053445,-78.903186,,,0
+6459,6459,Roxboro Rd at Rippling Stream Rd,,36.070935,-78.90821,,,0
+6460,6460,Roxboro Rd at Mickey Cir,,36.096265,-78.909745,,,0
+6461,6461,Roxboro Rd at Epperson Dr,,36.112632,-78.905628,,,0
+6462,6462,Roxboro Rd at Mickey Cir,,36.096309,-78.909945,,,0
+6463,6463,Milton Rd at Durham County Library,,36.087335,-78.913132,,,0
+6464,6464,Roxboro Rd at CVS,,36.078482,-78.910402,,,0
+6465,6465,Roxboro Rd at Rippling Stream Rd,,36.070917,-78.90841,,,0
+6466,6466,New Castle Rd at Strawberry Hill Apt,,36.050294,-78.920754,,,0
+6467,6467,Horton Rd at Casa St,,36.054394,-78.9134,,,0
+6469,6469,US 15-501 Service Rd at Garrett Rd,,35.959893,-78.974517,,,0
+6470,6470,Lawson St at BRITE Sci Complex,,35.976324,-78.9042,,,0
+6472,6472,Herndon Rd at Fayetteville Rd,,35.905677,-78.93684,,,0
+6473,6473,2835 Chapel Hill Rd,,35.972962,-78.937139,,,0
+6474,6474,Fayetteville Rd at Torrey Pine,,35.91776,-78.930794,,,0
+6475,6475,Fayetteville Rd at Innesbrook Way,,35.919205,-78.929747,,,0
+6476,6476,Fayetteville Rd at Timothy Ave,,35.957333,-78.908999,,,0
+6478,6478,3610 Wake Forest Rd,,35.982539,-78.826014,,,0
+6479,6479,Holloway St at Ganyard Farm Way,,35.984596,-78.834768,,,0
+6480,6480,Taylor St and Hyde Park,,35.988947,-78.881677,,,0
+6481,6481,Taylor St at Hyde Park Ave (In),,35.988786,-78.881488,,,0
+6482,6482,300 N Hyde Park,,35.98737,-78.881672,,,0
+6483,6483,Hyde Park at Morning Glory,,35.98728,-78.881871,,,0
+6484,6484,Broad St at Forest Rd (in),,36.024653,-78.917463,,,0
+6485,6485,Hardee St at Mimosa St,,36.001442,-78.866822,,,0
+6486,6486,Hardee St at Landon St,,35.999832,-78.86542,,,0
+6487,6487,Hardee St at Delano St,,35.99722,-78.864613,,,0
+6488,6488,Raynor St at Hardee St,,35.995867,-78.865219,,,0
+6489,6489,Raynor St at The Village,,35.99411,-78.869717,,,0
+6490,6490,Holloway St at Elizabeth St,,35.99464,-78.891256,,,0
+6491,6491,E Main St at Elm St,,35.988444,-78.889471,,,0
+6492,6492,North Pointe Dr at Red Roof Inn,,36.030441,-78.923587,,,0
+6493,6493,Willard St at Blackwell St,,35.991344,-78.905761,,,0
+6494,6494,Blackwell St at Forest Hills Apts,,35.988819,-78.906473,,,0
+6495,6495,MLK Pkwy at Bay Camp Dr,,35.942276,-78.919041,,,0
+6496,6496,Cook Rd at Tripoli Dr,,35.951643,-78.910375,,,0
+6498,6498,Milton Rd at Long Cresent Dr,,36.091955,-78.914271,,,0
+6499,6499,Trent Dr at Erwin Rd,,36.00755,-78.934193,,,0
+6501,6501,MLK Pkwy at Fayetteville Rd,,35.939808,-78.907484,,,0
+6502,6502,Erwin Rd at Pettigrew St,,36.005985,-78.922296,,,0
+6503,6503,E Main St at Hood St,,35.990518,-78.892972,,,0
+6505,6505,E Main St at Elizabeth St,,35.990474,-78.892528,,,0
+6506,6506,E Main St at Queen St,,35.992987,-78.896917,,,0
+6507,6507,E Geer St at Faucette Ave,,36.012116,-78.86558,,,0
+6510,6510,Buchanan Blvd at Urban Ave,,36.00857,-78.91219,,,0
+6515,6515,Buchanan Blvd at Urban Ave,,36.008821,-78.912379,,,0
+6520,6520,Ellis Rd at Miami Blvd,,35.94242,-78.838778,,,0
+6521,6521,Roxboro Rd at Pacific Ave,,36.045165,-78.90238,,,0
+6522,6522,Roxboro Rd at Newsom St,,36.041592,-78.900303,,,0
+6526,6526,Ben Franklin Blvd at Pacific Ave,,36.046837,-78.896304,,,0
+6527,6527,Dowd St at Mangum St,,36.000388,-78.896033,,,0
+6529,6529,Old Chapel Hill Rd at Farrington Rd,,35.943397,-78.983527,,,0
+6530,6530,Junction Rd at Ross Rd,,35.992522,-78.856781,,,0
+6531,6531,Pettigrew St at Roxboro St,,35.992954,-78.899523,,,0
+6532,6532,TW Alexander Dr at Implus Footcare,,35.918888,-78.823723,,,0
+6533,6533,Mangum St at Ramseur St,,35.994536,-78.901181,,,0
+6536,6536,Ben Franklin Blvd at Voyager Academy,,36.047428,-78.894176,,,0
+6537,6537,Ben Franklin Blvd at Triangle Orthopedic,,36.042797,-78.8974,,,0
+6538,6538,Enterprise St at American Tobacco Trail,,35.983929,-78.908817,,,0

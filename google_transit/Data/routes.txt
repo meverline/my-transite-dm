@@ -1,0 +1,20 @@
+route_id,agency_id,route_short_name,route_long_name,route_desc,route_type,route_url,route_color,route_text_color
+1,data,1,Northgate Mall & North Pointe,,3,http://www.gotriangle.org/transit/data-schedules-maps/,0033CC,FFFFFF
+10,data,10,Woodcroft & New Hope Commons,,3,http://www.gotriangle.org/transit/data-schedules-maps/,0033CC,FFFFFF
+11,data,11,Duke University & Hillsborough Rd,,3,http://www.gotriangle.org/transit/data-schedules-maps/,0033CC,FFFFFF
+12,data,12,Hwy 55 & Hwy 54,,3,http://www.gotriangle.org/transit/data-schedules-maps/,0033CC,FFFFFF
+13,data,13,Durham Tech & The Village,,3,http://www.gotriangle.org/transit/data-schedules-maps/,0033CC,FFFFFF
+15,data,15,TW Alexander Dr & Brier Creek,,3,http://www.gotriangle.org/transit/data-schedules-maps/,0033CC,FFFFFF
+16,data,16,Southern High School & The Village,,3,http://www.gotriangle.org/transit/data-schedules-maps/,0033CC,FFFFFF
+16b,data,16b,Neal Middle School,,3,http://www.gotriangle.org/transit/data-schedules-maps/,0033CC,FFFFFF
+16t,data,16t,Southern High School Tripper,,3,http://www.gotriangle.org/transit/data-schedules-maps/,0033CC,FFFFFF
+17,data,17,Snow Hill Rd & Horton Rd,,3,http://www.gotriangle.org/transit/data-schedules-maps/,0033CC,FFFFFF
+2,data,2,East Durham & Hwy 70,,3,http://www.gotriangle.org/transit/data-schedules-maps/,0033CC,FFFFFF
+3,data,3,Holloway St & The Village,,3,http://www.gotriangle.org/transit/data-schedules-maps/,0033CC,FFFFFF
+4,data,4,Durham Regional Hospital & N Roxboro Rd,,3,http://www.gotriangle.org/transit/data-schedules-maps/,0033CC,FFFFFF
+5,data,5,Fayetteville St & South Square,,3,http://www.gotriangle.org/transit/data-schedules-maps/,0033CC,FFFFFF
+6,data,6,Duke University & VA Hospital,,3,http://www.gotriangle.org/transit/data-schedules-maps/,0033CC,FFFFFF
+7,data,7,Fayetteville Rd & Southpoint Mall,,3,http://www.gotriangle.org/transit/data-schedules-maps/,0033CC,FFFFFF
+8,data,8,McDougald Terrace & Durham Tech,,3,http://www.gotriangle.org/transit/data-schedules-maps/,0033CC,FFFFFF
+9,data,9,Dearborn Dr & Durham Regional Hospital,,3,http://www.gotriangle.org/transit/data-schedules-maps/,0033CC,FFFFFF
+bcc,data,bcc,Bull City Connector,,3,http://www.gotriangle.org/transit/data-schedules-maps/,0033CC,FFFFFF
