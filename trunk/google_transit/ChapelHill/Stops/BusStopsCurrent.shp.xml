@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<metadata>
+	<idinfo>
+		<citation>
+			<citeinfo>
+				<origin>Planning Interns at the Town of Chapel Hill</origin>
+				<pubdate>June 2005</pubdate>
+				<title Sync="TRUE">BusStopsCurrent</title>
+				<geoform Sync="TRUE">vector digital data</geoform>
+				<othercit>bus stop data collected using GPS</othercit>
+				<onlink>\\PLANINTERN04\Intern Projects\shapefiles\transportation\bus_routes\Bus Stops (current).shp</onlink>
+				<ftname Sync="TRUE">BusStopsCurrent</ftname></citeinfo>
+		</citation>
+		<descript>
+			<abstract>Chapel Hill Transit bus stops, current as of February 2006, obtained using GPS since summer and winter 2002. Now with a projection defined!</abstract>
+			<purpose>For making bus route maps, and other applications. See BusStops_2005Boardings.shp for an expanded attribute table to show stops with high boardings!</purpose>
+			<langdata Sync="TRUE">en</langdata></descript>
+		<timeperd>
+			<timeinfo>
+				<sngdate>
+					<caldate>summer 2005</caldate>
+				</sngdate>
+			</timeinfo>
+			<current>publication date</current>
+		</timeperd>
+		<status>
+			<progress>Complete</progress>
+			<update>As needed</update>
+		</status>
+		<spdom>
+			<bounding>
+				<westbc Sync="TRUE">-79.101577</westbc>
+				<eastbc Sync="TRUE">-79.001952</eastbc>
+				<northbc Sync="TRUE">35.970071</northbc>
+				<southbc Sync="TRUE">35.852136</southbc>
+			</bounding>
+			<lboundng><leftbc Sync="TRUE">1969942.299143</leftbc><rightbc Sync="TRUE">1999421.677606</rightbc><bottombc Sync="TRUE">765089.478571</bottombc><topbc Sync="TRUE">808003.468810</topbc></lboundng></spdom>
+		<keywords>
+			<theme>
+				<themekt>REQUIRED: Reference to a formally registered thesaurus or a similar authoritative source of theme keywords.</themekt>
+				<themekey>Bus stops</themekey>
+			</theme>
+		</keywords>
+		<accconst>None</accconst>
+		<useconst>None</useconst>
+		<ptcontac>
+			<cntinfo>
+				<cntorgp>
+					<cntorg>Town of Chapel Hill Planning Department</cntorg>
+					<cntper>Transportation Planning Interns</cntper>
+				</cntorgp>
+				<cntvoice>919 968-2888 ext. 355</cntvoice>
+			</cntinfo>
+		</ptcontac>
+		<native Sync="TRUE">Microsoft Windows XP Version 5.1 (Build 2600) Service Pack 2; ESRI ArcCatalog 9.2.0.1324</native>
+		<natvform Sync="TRUE">Shapefile</natvform></idinfo>
+	<dataqual>
+		<lineage>
+			<procstep>
+				<procdesc>Dataset copied.</procdesc>
+				<srcused>\\planintern04\Intern Projects\PlanningIntern2_04_05\Shapefiles\bus-routes-sum04\bus-stops_6-04(current)</srcused>
+			</procstep>
+			<procstep>
+				<procdesc>Metadata imported.</procdesc>
+				<srcused>C:\DOCUME~1\pli2\LOCALS~1\Temp\xml200.tmp</srcused>
+			</procstep>
+			<procstep><procdesc Sync="TRUE">Metadata imported.</procdesc><srcused Sync="TRUE">C:\DOCUME~1\pli2\LOCALS~1\Temp\xml204.tmp</srcused><date Sync="TRUE">20050603</date><time Sync="TRUE">12000300</time></procstep><procstep><procdesc Sync="TRUE">Dataset copied.</procdesc><srcused Sync="TRUE">C:\Intern Projects\Shapefiles\Transportation\Bus_routes\Bus Stops (current)</srcused><date Sync="TRUE">20060216</date><time Sync="TRUE">10164600</time></procstep><procstep><procdesc Sync="TRUE">Dataset copied.</procdesc><srcused Sync="TRUE"></srcused><date Sync="TRUE">20060216</date><time Sync="TRUE">10180900</time></procstep><procstep><procdesc Sync="TRUE">Dataset copied.</procdesc><srcused Sync="TRUE">C:\Intern Projects\Shapefiles\Transportation\Bus_routes\BusStopsCurrent</srcused><date Sync="TRUE">20060926</date><time Sync="TRUE">13181900</time></procstep><procstep><procdesc Sync="TRUE">Dataset moved.</procdesc><srcused Sync="TRUE">U:\GIS\Bus_routes\BusStopsCurrent</srcused><procdate Sync="TRUE">20090107</procdate><proctime Sync="TRUE">11233600</proctime></procstep></lineage>
+	</dataqual>
+	<spdoinfo>
+		<direct Sync="TRUE">Vector</direct>
+		<ptvctinf>
+			<sdtsterm Name="BusStopsCurrent">
+				<sdtstype Sync="TRUE">Entity point</sdtstype>
+				<ptvctcnt Sync="TRUE">611</ptvctcnt>
+			</sdtsterm>
+			<esriterm Name="BusStopsCurrent"><efeatyp Sync="TRUE">Simple</efeatyp><efeageom Sync="TRUE">Point</efeageom><esritopo Sync="TRUE">FALSE</esritopo><efeacnt Sync="TRUE">611</efeacnt><spindex Sync="TRUE">TRUE</spindex><linrefer Sync="TRUE">FALSE</linrefer></esriterm></ptvctinf>
+	</spdoinfo>
+	<spref>
+		<horizsys>
+			<geodetic>
+				<horizdn Sync="TRUE">North American Datum of 1983</horizdn>
+				<ellips Sync="TRUE">Geodetic Reference System 80</ellips>
+				<semiaxis Sync="TRUE">6378137.000000</semiaxis>
+				<denflat Sync="TRUE">298.257222</denflat>
+			</geodetic>
+			<cordsysn><geogcsn Sync="TRUE">GCS_North_American_1983</geogcsn><projcsn Sync="TRUE">NAD_1983_StatePlane_North_Carolina_FIPS_3200_Feet</projcsn></cordsysn><planar><planci><plance Sync="TRUE">coordinate pair</plance><plandu Sync="TRUE">survey feet</plandu><coordrep><absres Sync="TRUE">0.000000</absres><ordres Sync="TRUE">0.000000</ordres></coordrep></planci><mapproj><mapprojn Sync="TRUE">Lambert Conformal Conic</mapprojn><lambertc><stdparll Sync="TRUE">34.333333</stdparll><stdparll Sync="TRUE">36.166667</stdparll><longcm Sync="TRUE">-79.000000</longcm><latprjo Sync="TRUE">33.750000</latprjo><feast Sync="TRUE">2000000.002617</feast><fnorth Sync="TRUE">0.000000</fnorth></lambertc></mapproj></planar></horizsys>
+	</spref>
+	<eainfo>
+		<detailed Name="BusStopsCurrent">
+			<enttyp>
+				<enttypl Sync="TRUE">BusStopsCurrent</enttypl>
+				<enttypt Sync="TRUE">Feature Class</enttypt><enttypc Sync="TRUE">611</enttypc></enttyp>
+			<attr>
+				<attrlabl>FID</attrlabl>
+				<attrdef>Internal feature number.</attrdef>
+				<attrdefs>ESRI</attrdefs>
+				<attrdomv>
+					<udom>Sequential unique whole numbers that are automatically generated.</udom>
+				</attrdomv>
+			</attr>
+			<attr>
+				<attrlabl>Shape</attrlabl>
+				<attrdef>Feature geometry.</attrdef>
+				<attrdefs>ESRI</attrdefs>
+				<attrdomv>
+					<udom>Coordinates defining the features.</udom>
+				</attrdomv>
+			</attr>
+			<attr>
+				<attrlabl>STOP_ID</attrlabl>
+				<attrdef>Numerical ID</attrdef>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">8</attwidth></attr>
+			<attr>
+				<attrlabl>NAME</attrlabl>
+				<attrdef>Name of bus stop (format: [ON street] at [CROSS street or address]</attrdef>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">35</attwidth></attr>
+			<attr>
+				<attrlabl>DIR</attrlabl>
+				<attrdef>Compass direction that buses serving a stop are traveling</attrdef>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">4</attwidth></attr>
+			<attr>
+				<attrlabl>ON</attrlabl>
+				<attrdef>Street on which the bus stop is located</attrdef>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">15</attwidth></attr>
+			<attr>
+				<attrlabl>AT</attrlabl>
+				<attrdef>Nearest cross street to the bus stop</attrdef>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">13</attwidth></attr>
+			<attr>
+				<attrlabl>LAT</attrlabl>
+				<attrdef>latitude of bus stop</attrdef>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">10</attwidth></attr>
+			<attr>
+				<attrlabl>LONG</attrlabl>
+				<attrdef>longitude of bus stop</attrdef>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">10</attwidth></attr>
+			<attr>
+				<attrlabl>A</attrlabl>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">2</attwidth></attr>
+			<attr>
+				<attrlabl>CL</attrlabl>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">3</attwidth></attr>
+			<attr>
+				<attrlabl>CM</attrlabl>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">4</attwidth></attr>
+			<attr>
+				<attrlabl>CMW_EVE</attrlabl>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">10</attwidth></attr>
+			<attr>
+				<attrlabl>CPX</attrlabl>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">4</attwidth></attr>
+			<attr>
+				<attrlabl>CW</attrlabl>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">4</attwidth></attr>
+			<attr>
+				<attrlabl>D</attrlabl>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">3</attwidth></attr>
+			<attr>
+				<attrlabl>F</attrlabl>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">3</attwidth></attr>
+			<attr>
+				<attrlabl>FCX</attrlabl>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">4</attwidth></attr>
+			<attr>
+				<attrlabl>G</attrlabl>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">3</attwidth></attr>
+			<attr>
+				<attrlabl>HS</attrlabl>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">3</attwidth></attr>
+			<attr>
+				<attrlabl>HU</attrlabl>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">3</attwidth></attr>
+			<attr>
+				<attrlabl>J</attrlabl>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">3</attwidth></attr>
+			<attr>
+				<attrlabl>JFX</attrlabl>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">4</attwidth></attr>
+			<attr>
+				<attrlabl>M</attrlabl>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">3</attwidth></attr>
+			<attr>
+				<attrlabl>N</attrlabl>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">3</attwidth></attr>
+			<attr>
+				<attrlabl>NS</attrlabl>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">3</attwidth></attr>
+			<attr>
+				<attrlabl>NU</attrlabl>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">3</attwidth></attr>
+			<attr>
+				<attrlabl>RU</attrlabl>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">3</attwidth></attr>
+			<attr>
+				<attrlabl>S</attrlabl>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">3</attwidth></attr>
+			<attr>
+				<attrlabl>T</attrlabl>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">3</attwidth></attr>
+			<attr>
+				<attrlabl>TG_EVE</attrlabl>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">8</attwidth></attr>
+			<attr>
+				<attrlabl>U</attrlabl>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">3</attwidth></attr>
+			<attr>
+				<attrlabl>V</attrlabl>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">3</attwidth></attr>
+			<attr>
+				<attrlabl>CMW_SAT</attrlabl>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">10</attwidth></attr>
+			<attr>
+				<attrlabl>DM_SAT</attrlabl>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">8</attwidth></attr>
+			<attr>
+				<attrlabl>FG_SAT</attrlabl>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">8</attwidth></attr>
+			<attr>
+				<attrlabl>X_COORD</attrlabl>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">7</attwidth></attr>
+			<attr>
+				<attrlabl>Y_COORD</attrlabl>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">6</attwidth></attr>
+			<attr>
+				<attrlabl>SFR_G</attrlabl>
+				<attrdef>bus stops serving the Safe Ride G route</attrdef>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">7</attwidth></attr>
+			<attr>
+				<attrlabl>JN_SAT</attrlabl>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">6</attwidth></attr>
+			<attr>
+				<attrlabl>T_SAT</attrlabl>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">6</attwidth></attr>
+			<attr>
+				<attrlabl>TARHEEL_EX</attrlabl>
+				<attrdef>bus stops serving the Tarheel Express</attrdef>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">12</attwidth></attr>
+			<attr>
+				<attrlabl>CORRIDORS</attrlabl>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">12</attwidth></attr>
+			<attr>
+				<attrlabl>WKDY_TOT</attrlabl>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">11</attwidth></attr>
+			<attr>
+				<attrlabl>WKEND_TOT</attrlabl>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">12</attwidth></attr>
+			<attr>
+				<attrlabl>ALL_RT_TOT</attrlabl>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">12</attwidth></attr>
+			<attr>
+				<attrlabl>SIGN</attrlabl>
+				<attrdef>presence of a bus stop sign (may be outdated)</attrdef>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">5</attwidth></attr>
+			<attr>
+				<attrlabl>BENCH</attrlabl>
+				<attrdef>presence of a bench</attrdef>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">7</attwidth></attr>
+			<attr>
+				<attrlabl>SITWALL</attrlabl>
+				<attrdef>presence of a wall suitable for sitting (as opposed to a bench)</attrdef>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">9</attwidth></attr>
+			<attr>
+				<attrlabl>HASSHELTER</attrlabl>
+				<attrdef>presence of a shelter</attrdef>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">13</attwidth></attr>
+			<attr>
+				<attrlabl>SHELTER</attrlabl>
+				<attrdef>number of shelters</attrdef>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">9</attwidth></attr>
+			<attr>
+				<attrlabl>SHELTBENCH</attrlabl>
+				<attrdef>number of benches in shelters</attrdef>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">13</attwidth></attr>
+			<attr>
+				<attrlabl>CASE</attrlabl>
+				<attrdef>number of map cases</attrdef>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">6</attwidth></attr>
+			<attr>
+				<attrlabl>CASESERVIC</attrlabl>
+				<attrdef>if the map case needs to be repaired</attrdef>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">13</attwidth></attr>
+			<attr>
+				<attrlabl>CASESIZE</attrlabl>
+				<attrdef>relative size of bus map case</attrdef>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">10</attwidth></attr>
+			<attr>
+				<attrlabl>TRASH</attrlabl>
+				<attrdef>presence of a trash can</attrdef>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">7</attwidth></attr>
+			<attr>
+				<attrlabl>RECYCLING</attrlabl>
+				<attrdef>presence of recycling bins</attrdef>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">11</attwidth></attr>
+			<attr>
+				<attrlabl>NEWSPAPER</attrlabl>
+				<attrdef>presence of newspaper vending machines</attrdef>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">13</attwidth></attr>
+			<attr>
+				<attrlabl>PHONE</attrlabl>
+				<attrdef>presence of a pay phone</attrdef>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">7</attwidth></attr>
+			<attr>
+				<attrlabl>BIKERACK</attrlabl>
+				<attrdef>presence of a bike rack</attrdef>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">10</attwidth></attr>
+			<attr>
+				<attrlabl>PAVED</attrlabl>
+				<attrdef>presence of pavement for waiting passengers</attrdef>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">7</attwidth></attr>
+			<attr>
+				<attrlabl>SIDEWALK</attrlabl>
+				<attrdef>if sidewalk exists to the bus stop</attrdef>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">10</attwidth></attr>
+			<attr>
+				<attrlabl>SCHEDULE</attrlabl>
+				<attrdef>presence of a posted bus schedule</attrdef>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">11</attwidth></attr>
+			<attr>
+				<attrlabl>OBSTRUCTED</attrlabl>
+				<attrdef>something - typically bus stop sign - is obstructed</attrdef>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">13</attwidth></attr>
+			<attr>
+				<attrlabl>TTA</attrlabl>
+				<attrdef>stop shared with TTA</attrdef>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">4</attwidth></attr>
+			<attr>
+				<attrlabl>OPT</attrlabl>
+				<attrdef>stop shared with OPT</attrdef>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">4</attwidth></attr>
+			<attr>
+				<attrlabl>SHAREDRIDE</attrlabl>
+				<attrdef>Served by shared-ride feeder service (may also be served by fixed routes)</attrdef>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">13</attwidth></attr>
+			<attr>
+				<attrlabl>TRAILWAYSG</attrlabl>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">13</attwidth></attr>
+			<attr>
+				<attrlabl>ELEVATION</attrlabl>
+				<attrdef>elevation (ft)</attrdef>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">11</attwidth></attr>
+			<attr>
+				<attrlabl>COLLECTED</attrlabl>
+				<attrdef>Date the stop's location was GPS'd</attrdef>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">12</attwidth></attr>
+			<attr>
+				<attrlabl>TRANCAD_ID</attrlabl>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">12</attwidth></attr>
+			<attr>
+				<attrlabl>WAYPT_ID</attrlabl>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">10</attwidth></attr>
+			<attr>
+				<attrlabl>COMMENTS</attrlabl>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">11</attwidth></attr>
+			<attr>
+				<attrlabl>SFR_J</attrlabl>
+				<attrdef>served by Safe Ride J Route</attrdef>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">12</attwidth></attr>
+			<attr>
+				<attrlabl>SFR_T</attrlabl>
+				<attrdef>served by Safe Ride T route</attrdef>
+				<attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">12</attwidth></attr>
+			<attr><attrlabl Sync="TRUE">NU_WKND</attrlabl><attalias Sync="TRUE">NU_WKND</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">10</attwidth></attr><attr><attrlabl Sync="TRUE">SAT_CM</attrlabl><attalias Sync="TRUE">SAT_CM</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">7</attwidth></attr><attr><attrlabl Sync="TRUE">SAT_CW</attrlabl><attalias Sync="TRUE">SAT_CW</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">8</attwidth></attr><attr><attrlabl Sync="TRUE">Sat_CM</attrlabl><attalias Sync="TRUE">Sat_CM</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">3</attwidth></attr><attr><attrlabl Sync="TRUE">Sat_CW</attrlabl><attalias Sync="TRUE">Sat_CW</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">4</attwidth></attr><attr><attrlabl Sync="TRUE">SU</attrlabl><attalias Sync="TRUE">SU</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">13</attwidth></attr><attr><attrlabl Sync="TRUE">BCX</attrlabl><attalias Sync="TRUE">BCX</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">4</attwidth></attr><attr><attrlabl Sync="TRUE">AVLsign</attrlabl><attalias Sync="TRUE">AVLsign</attalias><attrtype Sync="TRUE">Number</attrtype><attwidth Sync="TRUE">4</attwidth></attr><attr><attrlabl Sync="TRUE">safev</attrlabl><attalias Sync="TRUE">safev</attalias><attrtype Sync="TRUE">Number</attrtype><attwidth Sync="TRUE">4</attwidth></attr><attr><attrlabl Sync="TRUE">XLATDIF</attrlabl><attalias Sync="TRUE">XLATDIF</attalias><attrtype Sync="TRUE">Float</attrtype><attwidth Sync="TRUE">19</attwidth><atnumdec Sync="TRUE">11</atnumdec></attr><attr><attrlabl Sync="TRUE">CCX</attrlabl><attalias Sync="TRUE">CCX</attalias><attrtype Sync="TRUE">Number</attrtype><attwidth Sync="TRUE">4</attwidth></attr></detailed>
+	</eainfo>
+	<distinfo>
+		<resdesc>Downloadable Data</resdesc>
+		<stdorder>
+			<digform>
+				<digtinfo>
+					<transize>0.016</transize>
+					<dssize Sync="TRUE">0.016</dssize></digtinfo>
+			</digform>
+		</stdorder>
+	</distinfo>
+	<metainfo>
+		<metd Sync="TRUE">20070822</metd>
+		<metc>
+			<cntinfo>
+				<cntperp>
+					<cntper>Peter Ohlms</cntper>
+					<cntorg>TOCH Planning</cntorg>
+				</cntperp>
+				<cntpos>Transportation Planning Intern</cntpos>
+				<cntaddr>
+					<addrtype>REQUIRED: The mailing and/or physical address for the organization or individual.</addrtype>
+					<city>REQUIRED: The city of the address.</city>
+					<state>REQUIRED: The state or province of the address.</state>
+					<postal>REQUIRED: The ZIP or other postal code of the address.</postal>
+				</cntaddr>
+				<cntvoice>919 968-2888 ext 355</cntvoice>
+			</cntinfo>
+		</metc>
+		<metstdn Sync="TRUE">FGDC Content Standards for Digital Geospatial Metadata</metstdn>
+		<metstdv Sync="TRUE">FGDC-STD-001-1998</metstdv>
+		<mettc Sync="TRUE">local time</mettc>
+		<metextns>
+			<onlink>http://www.esri.com/metadata/esriprof80.html</onlink>
+			<metprof>ESRI Metadata Profile</metprof>
+		</metextns>
+		<metextns>
+			<onlink>http://www.esri.com/metadata/esriprof80.html</onlink>
+			<metprof>ESRI Metadata Profile</metprof>
+		</metextns>
+		<langmeta Sync="TRUE">en</langmeta><metextns><onlink Sync="TRUE">http://www.esri.com/metadata/esriprof80.html</onlink><metprof Sync="TRUE">ESRI Metadata Profile</metprof></metextns></metainfo>
+	<Esri><CreaDate>20060926</CreaDate><CreaTime>13181900</CreaTime><SyncOnce>FALSE</SyncOnce><SyncDate>20070822</SyncDate><SyncTime>15150500</SyncTime><ModDate>20070822</ModDate><ModTime>15150500</ModTime><DataProperties><lineage><Process Name="Project_1" ToolSource="C:\Program Files\ArcGIS\ArcToolbox\Toolboxes\Data Management Tools.tbx\Project" Date="20060216" Time="101810">Project "C:\Intern Projects\Shapefiles\Transportation\Bus_routes\Bus Stops (current)Copy.shp" "C:\Intern Projects\Shapefiles\Transportation\Bus_routes\BusStops(current)Copy_Projec.shp" PROJCS['NAD_1983_StatePlane_North_Carolina_FIPS_3200_Feet',GEOGCS['GCS_North_American_1983',DATUM['D_North_American_1983',SPHEROID['GRS_1980',6378137.0,298.257222101]],PRIMEM['Greenwich',0.0],UNIT['Degree',0.0174532925199433]],PROJECTION['Lambert_Conformal_Conic'],PARAMETER['False_Easting',2000000.002616666],PARAMETER['False_Northing',0.0],PARAMETER['Central_Meridian',-79.0],PARAMETER['Standard_Parallel_1',34.33333333333334],PARAMETER['Standard_Parallel_2',36.16666666666666],PARAMETER['Latitude_Of_Origin',33.75],UNIT['Foot_US',0.3048006096012192]] #</Process></lineage></DataProperties><MetaID>{F1CF687D-2425-4D77-94ED-9C9BD2DAD605}</MetaID></Esri><dataIdInfo><envirDesc Sync="TRUE">Microsoft Windows XP Version 5.1 (Build 2600) Service Pack 2; ESRI ArcCatalog 9.2.0.1324</envirDesc><dataLang><languageCode Sync="TRUE" value="en"></languageCode></dataLang><idCitation><resTitle Sync="TRUE">BusStopsCurrent</resTitle><presForm><PresFormCd Sync="TRUE" value="005"></PresFormCd></presForm></idCitation><spatRpType><SpatRepTypCd Sync="TRUE" value="001"></SpatRepTypCd></spatRpType><dataExt><geoEle><GeoBndBox esriExtentType="native"><westBL Sync="TRUE">1969942.299143</westBL><eastBL Sync="TRUE">1999421.677606</eastBL><northBL Sync="TRUE">808003.46881</northBL><southBL Sync="TRUE">765089.478571</southBL><exTypeCode Sync="TRUE">1</exTypeCode></GeoBndBox></geoEle></dataExt><geoBox esriExtentType="decdegrees"><westBL Sync="TRUE">-79.101577</westBL><eastBL Sync="TRUE">-79.001952</eastBL><northBL Sync="TRUE">35.970071</northBL><southBL Sync="TRUE">35.852136</southBL><exTypeCode Sync="TRUE">1</exTypeCode></geoBox></dataIdInfo><mdLang><languageCode Sync="TRUE" value="en"></languageCode></mdLang><mdStanName Sync="TRUE">ISO 19115 Geographic Information - Metadata</mdStanName><mdStanVer Sync="TRUE">DIS_ESRI1.0</mdStanVer><mdChar><CharSetCd Sync="TRUE" value="004"></CharSetCd></mdChar><mdHrLv><ScopeCd Sync="TRUE" value="005"></ScopeCd></mdHrLv><mdHrLvName Sync="TRUE">dataset</mdHrLvName><distInfo><distributor><distorTran><onLineSrc><orDesc Sync="TRUE">002</orDesc><linkage Sync="TRUE">file://\\tr1\users\mcecil\GIS\Shapefiles\BusStopsCurrent</linkage><protocol Sync="TRUE">Local Area Network</protocol></onLineSrc><transSize Sync="TRUE">0.016</transSize></distorTran><distorFormat><formatName Sync="TRUE">Shapefile</formatName></distorFormat></distributor></distInfo><refSysInfo><RefSystem><refSysID><identCode Sync="TRUE">NAD_1983_StatePlane_North_Carolina_FIPS_3200_Feet</identCode></refSysID></RefSystem></refSysInfo><spatRepInfo><VectSpatRep><topLvl><TopoLevCd Sync="TRUE" value="001"></TopoLevCd></topLvl><geometObjs Name="BusStopsCurrent"><geoObjTyp><GeoObjTypCd Sync="TRUE" value="004"></GeoObjTypCd></geoObjTyp><geoObjCnt Sync="TRUE">611</geoObjCnt></geometObjs></VectSpatRep></spatRepInfo><mdDateSt Sync="TRUE">20070822</mdDateSt></metadata>

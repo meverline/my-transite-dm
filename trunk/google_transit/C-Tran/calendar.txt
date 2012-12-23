@@ -1,0 +1,4 @@
+service_id,monday,tuesday,wednesday,thursday,friday,saturday,sunday,start_date,end_date
+2CASUN,0,0,0,0,0,0,1,20120723,20130106
+6CAHOL,0,0,0,0,0,0,0,20120723,20130106
+1CAWKD,1,1,1,1,1,1,0,20120723,20130106

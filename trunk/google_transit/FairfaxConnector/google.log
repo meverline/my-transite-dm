@@ -1,0 +1,282 @@
+Interface Name: GoogleExport
+Service Name: GoogleExport
+
+Export To: C:\data\google\JuneInfo2012\
+Log File: C:\data\google\JuneInfo2012\google.log
+
+Format: Delimiter
+Delimiter: ,
+Qualifier: "
+
+Selected Files: 
+	agency.txt
+	stops.txt
+	routes.txt
+	trips.txt
+	stop times.txt
+	calendar.txt
+
+SignUp Period:
+	2012_JUNE_INFO2
+
+ServiceGroup(s):
+	M-F Weekday             
+	SAT Saturday            
+	SUN-HOL Sunday-Holiday      
+
+Line(s):
+	101 - Fort Hunt Road Line             
+	109 - Huntington - Rose Hill Loop
+	151 - Richmond Hwy Line               
+	152 - Richmond Hwy Line               
+	159 - Engleside Limited Stop
+	161 - Huntington-Hospital Loop
+	162 - Huntington-Hospital Loop
+	171 - Huntington - Lorton Line
+	231 - Beulah/Kingstowne
+	232 - Beulah/Kingstowne
+	301 - Hayfield - Telegraph Rd Line
+	304 - Saratoga/Franconia-Springfield
+	305 - Newington Forest - Silverbrook Road
+	306 - GMU Line                        
+	310 - Franconia-Rolling Valley Line
+	321 - Greater Springfield Circulator
+	322 - Greater Springfield Circulator
+	333 - Newington Circulator
+	334 - Newington Circulator
+	335 - 335
+	371 - Lorton-Fullerton Road
+	395 - Backlick/Pentagon Express
+	401 - Backlick - Gallows Road Line    
+	402 - Tysons-Gallows-Springfield Line
+	425 - TWP/WFC
+	427 - TWP/WFC
+	462 - Vienna DunnLoring
+	463 - Vienna Metro/Dunn Loring
+	466 - VIENNA-OAKTON
+	505 - RTC - WFC                    
+	551 - 551                             
+	552 - 552                             
+	553 - 553                             
+	554 - 554                             
+	555 - Sunset Hills - WFC
+	557 - 557                             
+	574 - 574
+	585 - 585                             
+	595 - Pentagon Express
+	597 - Crystal City Express
+	605 - 605                             
+	621 - Fairfax Govt Center
+	622 - Fairfax Towne Center
+	623 - Fairfax Govt Center
+	630 - CENTREVILLE
+	631 - LITTLE ROCKY RUN
+	632 - WESTFIELDS
+	640 - SULLY
+	641 - SOUTH CENTREVILLE
+	642 - Sully Station
+	644 - Centreville PnR Express
+	650 - CHANTILLY
+	651 - SULLYFIELD
+	652 - AVION-FRANKLIN FARM
+	924 - 924                   
+	926 - 926
+	927 - 927                             
+	929 - 929                             
+	950 - 950                             
+	951 - 951        
+	952 - 952
+	980 - 980                             
+	981 - TWP - Dulles Airport
+	RIBS 1 - Ribs 1                       
+	RIBS 2 - Ribs 2                         
+	RIBS 3 - Ribs 3
+	RIBS 4 - Ribs 4                          
+	RIBS 5 - Ribs 5
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Date      time   Message                                                                                                       
+--------  -----  --------------------------------------------------------------------------------------------------------------
+07-06-12  12:47  Start export.                                                                                                 
+07-06-12  12:47  Loaded 0 supplementary Records.                                                                               
+07-06-12  12:47  Loaded signup.                                                                                                
+07-06-12  12:47  Loaded 214 Headsigns.                                                                                         
+07-06-12  12:47  Loaded 0 Calendar_dates.                                                                                      
+07-06-12  12:47  Loaded 6024 stop pattern distances.                                                                           
+07-06-12  12:47  Loaded 3 ServiceGroups.                                                                                       
+07-06-12  12:47  Loaded 0 rows of ServiceGroup/ExcCombo Info.                                                                  
+07-06-12  12:47  Loaded 68 lines.                                                                                              
+07-06-12  12:47  Loaded 3812 trips.                                                                                            
+07-06-12  12:47  Loaded 2354 stops.                                                                                            
+07-06-12  12:47  Session 1 was created.                                                                                        
+07-06-12  12:47  Exported agency file.                                                                                         
+07-06-12  12:47  Exported 2354 stops records.                                                                                  
+07-06-12  12:47  Exported 68 route records.                                                                                    
+07-06-12  12:47  Exported 3812 trip records.                                                                                   
+07-06-12  12:47  Exported 569 stop time records from trip 0 to 29.                                                             
+07-06-12  12:47  Got 1720 stop times from trip 30 to 59.                                                                       
+07-06-12  12:47  Got 1615 stop times from trip 60 to 89.                                                                       
+07-06-12  12:47  Got 1710 stop times from trip 90 to 119.                                                                      
+07-06-12  12:47  Got 442 stop times from trip 120 to 149.                                                                      
+07-06-12  12:47  Got 358 stop times from trip 150 to 179.                                                                      
+07-06-12  12:47  Got 150 stop times from trip 180 to 209.                                                                      
+07-06-12  12:47  Got 534 stop times from trip 210 to 239.                                                                      
+07-06-12  12:47  Got 816 stop times from trip 240 to 269.                                                                      
+07-06-12  12:47    *Error* Stop Pattern data did not match Stop Times data. (PatternId = 11627, TripId = 185014, sequence = 2) 
+07-06-12  12:47    *Error* Stop Pattern data did not match Stop Times data. (PatternId = 11627, TripId = 185015, sequence = 2) 
+07-06-12  12:47    *Error* Stop Pattern data did not match Stop Times data. (PatternId = 11627, TripId = 185016, sequence = 2) 
+07-06-12  12:47    *Error* Stop Pattern data did not match Stop Times data. (PatternId = 11627, TripId = 185017, sequence = 2) 
+07-06-12  12:47    *Error* Stop Pattern data did not match Stop Times data. (PatternId = 11627, TripId = 185018, sequence = 2) 
+07-06-12  12:47    *Error* Stop Pattern data did not match Stop Times data. (PatternId = 11627, TripId = 185019, sequence = 2) 
+07-06-12  12:47    *Error* Stop Pattern data did not match Stop Times data. (PatternId = 11627, TripId = 185020, sequence = 2) 
+07-06-12  12:47  Got 786 stop times from trip 270 to 299.                                                                      
+07-06-12  12:47  Got 709 stop times from trip 300 to 329.                                                                      
+07-06-12  12:47  Got 177 stop times from trip 330 to 359.                                                                      
+07-06-12  12:47  Got 717 stop times from trip 360 to 389.                                                                      
+07-06-12  12:47  Got 303 stop times from trip 390 to 419.                                                                      
+07-06-12  12:47  Got 729 stop times from trip 420 to 449.                                                                      
+07-06-12  12:47    *Error* Stop Pattern data did not match Stop Times data. (PatternId = 11656, TripId = 185201, sequence = 5) 
+07-06-12  12:47    *Error* Stop Pattern data did not match Stop Times data. (PatternId = 11656, TripId = 185202, sequence = 5) 
+07-06-12  12:47    *Error* Stop Pattern data did not match Stop Times data. (PatternId = 11656, TripId = 185203, sequence = 5) 
+07-06-12  12:47    *Error* Stop Pattern data did not match Stop Times data. (PatternId = 11656, TripId = 185204, sequence = 5) 
+07-06-12  12:47    *Error* Stop Pattern data did not match Stop Times data. (PatternId = 11656, TripId = 185205, sequence = 5) 
+07-06-12  12:47    *Error* Stop Pattern data did not match Stop Times data. (PatternId = 11656, TripId = 185206, sequence = 5) 
+07-06-12  12:47  Got 308 stop times from trip 450 to 479.                                                                      
+07-06-12  12:47    *Error* Stop Pattern data did not match Stop Times data. (PatternId = 11662, TripId = 185232, sequence = 8) 
+07-06-12  12:47    *Error* Stop Pattern data did not match Stop Times data. (PatternId = 11662, TripId = 185232, sequence = 19)
+07-06-12  12:47    *Error* Stop Pattern data did not match Stop Times data. (PatternId = 11662, TripId = 185232, sequence = 37)
+07-06-12  12:47    *Error* Stop Pattern data did not match Stop Times data. (PatternId = 11662, TripId = 185232, sequence = 38)
+07-06-12  12:47    *Error* Stop Pattern data did not match Stop Times data. (PatternId = 11662, TripId = 185233, sequence = 8) 
+07-06-12  12:47    *Error* Stop Pattern data did not match Stop Times data. (PatternId = 11662, TripId = 185233, sequence = 19)
+07-06-12  12:47    *Error* Stop Pattern data did not match Stop Times data. (PatternId = 11662, TripId = 185233, sequence = 37)
+07-06-12  12:47    *Error* Stop Pattern data did not match Stop Times data. (PatternId = 11662, TripId = 185233, sequence = 38)
+07-06-12  12:47    *Error* Stop Pattern data did not match Stop Times data. (PatternId = 11662, TripId = 185234, sequence = 8) 
+07-06-12  12:47    *Error* Stop Pattern data did not match Stop Times data. (PatternId = 11662, TripId = 185234, sequence = 19)
+07-06-12  12:47    *Error* Stop Pattern data did not match Stop Times data. (PatternId = 11662, TripId = 185234, sequence = 37)
+07-06-12  12:47    *Error* Stop Pattern data did not match Stop Times data. (PatternId = 11662, TripId = 185234, sequence = 38)
+07-06-12  12:47    *Error* Stop Pattern data did not match Stop Times data. (PatternId = 11662, TripId = 185235, sequence = 8) 
+07-06-12  12:47    *Error* Stop Pattern data did not match Stop Times data. (PatternId = 11662, TripId = 185235, sequence = 19)
+07-06-12  12:47    *Error* Stop Pattern data did not match Stop Times data. (PatternId = 11662, TripId = 185235, sequence = 37)
+07-06-12  12:47    *Error* Stop Pattern data did not match Stop Times data. (PatternId = 11662, TripId = 185235, sequence = 38)
+07-06-12  12:47    *Error* Stop Pattern data did not match Stop Times data. (PatternId = 11662, TripId = 185238, sequence = 8) 
+07-06-12  12:47    *Error* Stop Pattern data did not match Stop Times data. (PatternId = 11662, TripId = 185238, sequence = 19)
+07-06-12  12:47    *Error* Stop Pattern data did not match Stop Times data. (PatternId = 11662, TripId = 185238, sequence = 37)
+07-06-12  12:47    *Error* Stop Pattern data did not match Stop Times data. (PatternId = 11662, TripId = 185238, sequence = 38)
+07-06-12  12:47  Got 593 stop times from trip 480 to 509.                                                                      
+07-06-12  12:47  Got 563 stop times from trip 510 to 539.                                                                      
+07-06-12  12:47  Got 1031 stop times from trip 540 to 569.                                                                     
+07-06-12  12:47  Got 1500 stop times from trip 570 to 599.                                                                     
+07-06-12  12:47  Got 1170 stop times from trip 600 to 629.                                                                     
+07-06-12  12:47  Got 832 stop times from trip 630 to 659.                                                                      
+07-06-12  12:47  Got 1298 stop times from trip 660 to 689.                                                                     
+07-06-12  12:47  Got 1842 stop times from trip 690 to 719.                                                                     
+07-06-12  12:47  Got 1848 stop times from trip 720 to 749.                                                                     
+07-06-12  12:47  Got 2020 stop times from trip 750 to 779.                                                                     
+07-06-12  12:47  Got 1684 stop times from trip 780 to 809.                                                                     
+07-06-12  12:47  Got 958 stop times from trip 810 to 839.                                                                      
+07-06-12  12:47  Got 1361 stop times from trip 840 to 869.                                                                     
+07-06-12  12:47  Got 1382 stop times from trip 870 to 899.                                                                     
+07-06-12  12:47  Got 1410 stop times from trip 900 to 929.                                                                     
+07-06-12  12:47  Got 1442 stop times from trip 930 to 959.                                                                     
+07-06-12  12:47  Got 1467 stop times from trip 960 to 989.                                                                     
+07-06-12  12:47  Got 1346 stop times from trip 990 to 1019.                                                                    
+07-06-12  12:47  Got 1562 stop times from trip 1020 to 1049.                                                                   
+07-06-12  12:47  Got 1277 stop times from trip 1050 to 1079.                                                                   
+07-06-12  12:47  Got 1165 stop times from trip 1080 to 1109.                                                                   
+07-06-12  12:47  Got 2002 stop times from trip 1110 to 1139.                                                                   
+07-06-12  12:47  Got 2224 stop times from trip 1140 to 1169.                                                                   
+07-06-12  12:47  Got 1029 stop times from trip 1170 to 1199.                                                                   
+07-06-12  12:47  Got 745 stop times from trip 1200 to 1229.                                                                    
+07-06-12  12:47  Got 849 stop times from trip 1230 to 1259.                                                                    
+07-06-12  12:47  Got 1096 stop times from trip 1260 to 1289.                                                                   
+07-06-12  12:47  Got 610 stop times from trip 1290 to 1319.                                                                    
+07-06-12  12:47  Got 2228 stop times from trip 1320 to 1349.                                                                   
+07-06-12  12:47  Got 2220 stop times from trip 1350 to 1379.                                                                   
+07-06-12  12:47  Got 2313 stop times from trip 1380 to 1409.                                                                   
+07-06-12  12:47  Got 2406 stop times from trip 1410 to 1439.                                                                   
+07-06-12  12:47  Got 118 stop times from trip 1440 to 1469.                                                                    
+07-06-12  12:47  Got 165 stop times from trip 1470 to 1499.                                                                    
+07-06-12  12:47  Got 222 stop times from trip 1500 to 1529.                                                                    
+07-06-12  12:47  Got 322 stop times from trip 1530 to 1559.                                                                    
+07-06-12  12:47  Got 992 stop times from trip 1560 to 1589.                                                                    
+07-06-12  12:47  Got 894 stop times from trip 1590 to 1619.                                                                    
+07-06-12  12:47  Got 1078 stop times from trip 1620 to 1649.                                                                   
+07-06-12  12:47  Got 932 stop times from trip 1650 to 1679.                                                                    
+07-06-12  12:47  Got 210 stop times from trip 1680 to 1709.                                                                    
+07-06-12  12:47  Got 154 stop times from trip 1710 to 1739.                                                                    
+07-06-12  12:47  Got 419 stop times from trip 1740 to 1769.                                                                    
+07-06-12  12:47  Got 70 stop times from trip 1770 to 1799.                                                                     
+07-06-12  12:47  Got 120 stop times from trip 1800 to 1829.                                                                    
+07-06-12  12:47  Got 942 stop times from trip 1830 to 1859.                                                                    
+07-06-12  12:47  Got 1042 stop times from trip 1860 to 1889.                                                                   
+07-06-12  12:47  Got 999 stop times from trip 1890 to 1919.                                                                    
+07-06-12  12:47  Got 1460 stop times from trip 1920 to 1949.                                                                   
+07-06-12  12:47  Got 1265 stop times from trip 1950 to 1979.                                                                   
+07-06-12  12:47  Got 1020 stop times from trip 1980 to 2009.                                                                   
+07-06-12  12:47  Got 1054 stop times from trip 2010 to 2039.                                                                   
+07-06-12  12:47  Got 1080 stop times from trip 2040 to 2069.                                                                   
+07-06-12  12:47  Got 673 stop times from trip 2070 to 2099.                                                                    
+07-06-12  12:47  Got 120 stop times from trip 2100 to 2129.                                                                    
+07-06-12  12:47  Got 141 stop times from trip 2130 to 2159.                                                                    
+07-06-12  12:47  Got 677 stop times from trip 2160 to 2189.                                                                    
+07-06-12  12:47  Got 1595 stop times from trip 2190 to 2219.                                                                   
+07-06-12  12:47  Got 1557 stop times from trip 2220 to 2249.                                                                   
+07-06-12  12:47  Got 1573 stop times from trip 2250 to 2279.                                                                   
+07-06-12  12:47  Got 918 stop times from trip 2280 to 2309.                                                                    
+07-06-12  12:47  Got 1076 stop times from trip 2310 to 2339.                                                                   
+07-06-12  12:47  Got 1472 stop times from trip 2340 to 2369.                                                                   
+07-06-12  12:47  Got 1196 stop times from trip 2370 to 2399.                                                                   
+07-06-12  12:47  Got 1240 stop times from trip 2400 to 2429.                                                                   
+07-06-12  12:47  Got 1854 stop times from trip 2430 to 2459.                                                                   
+07-06-12  12:47  Got 2006 stop times from trip 2460 to 2489.                                                                   
+07-06-12  12:47  Got 1361 stop times from trip 2490 to 2519.                                                                   
+07-06-12  12:47  Got 1405 stop times from trip 2520 to 2549.                                                                   
+07-06-12  12:47  Got 1432 stop times from trip 2550 to 2579.                                                                   
+07-06-12  12:47  Got 1544 stop times from trip 2580 to 2609.                                                                   
+07-06-12  12:47  Got 2272 stop times from trip 2610 to 2639.                                                                   
+07-06-12  12:47  Got 1096 stop times from trip 2640 to 2669.                                                                   
+07-06-12  12:47  Got 735 stop times from trip 2670 to 2699.                                                                    
+07-06-12  12:47  Got 2310 stop times from trip 2700 to 2729.                                                                   
+07-06-12  12:47  Got 2382 stop times from trip 2730 to 2759.                                                                   
+07-06-12  12:47  Exported 101740 stop time records.                                                                            
+07-06-12  12:47  Got 726 stop times from trip 2760 to 2789.                                                                    
+07-06-12  12:47  Got 264 stop times from trip 2790 to 2819.                                                                    
+07-06-12  12:47  Got 690 stop times from trip 2820 to 2849.                                                                    
+07-06-12  12:47  Got 1212 stop times from trip 2850 to 2879.                                                                   
+07-06-12  12:47  Got 1130 stop times from trip 2880 to 2909.                                                                   
+07-06-12  12:47  Got 995 stop times from trip 2910 to 2939.                                                                    
+07-06-12  12:47  Got 1080 stop times from trip 2940 to 2969.                                                                   
+07-06-12  12:47  Got 217 stop times from trip 2970 to 2999.                                                                    
+07-06-12  12:47  Got 898 stop times from trip 3000 to 3029.                                                                    
+07-06-12  12:47  Got 1620 stop times from trip 3030 to 3059.                                                                   
+07-06-12  12:47  Got 1587 stop times from trip 3060 to 3089.                                                                   
+07-06-12  12:47  Got 1332 stop times from trip 3090 to 3119.                                                                   
+07-06-12  12:47  Got 1010 stop times from trip 3120 to 3149.                                                                   
+07-06-12  12:47  Got 1351 stop times from trip 3150 to 3179.                                                                   
+07-06-12  12:47  Got 1780 stop times from trip 3180 to 3209.                                                                   
+07-06-12  12:47  Got 1936 stop times from trip 3210 to 3239.                                                                   
+07-06-12  12:47  Got 1750 stop times from trip 3240 to 3269.                                                                   
+07-06-12  12:47  Got 1360 stop times from trip 3270 to 3299.                                                                   
+07-06-12  12:47  Got 1405 stop times from trip 3300 to 3329.                                                                   
+07-06-12  12:47  Got 1469 stop times from trip 3330 to 3359.                                                                   
+07-06-12  12:47  Got 2026 stop times from trip 3360 to 3389.                                                                   
+07-06-12  12:47  Got 1581 stop times from trip 3390 to 3419.                                                                   
+07-06-12  12:47  Got 869 stop times from trip 3420 to 3449.                                                                    
+07-06-12  12:47  Got 2310 stop times from trip 3450 to 3479.                                                                   
+07-06-12  12:47  Got 2386 stop times from trip 3480 to 3509.                                                                   
+07-06-12  12:47  Got 652 stop times from trip 3510 to 3539.                                                                    
+07-06-12  12:47  Got 279 stop times from trip 3540 to 3569.                                                                    
+07-06-12  12:47  Got 944 stop times from trip 3570 to 3599.                                                                    
+07-06-12  12:47  Got 1230 stop times from trip 3600 to 3629.                                                                   
+07-06-12  12:47  Got 1019 stop times from trip 3630 to 3659.                                                                   
+07-06-12  12:47  Got 1056 stop times from trip 3660 to 3689.                                                                   
+07-06-12  12:47  Got 372 stop times from trip 3690 to 3719.                                                                    
+07-06-12  12:47  Got 648 stop times from trip 3720 to 3749.                                                                    
+07-06-12  12:47  Got 1595 stop times from trip 3750 to 3779.                                                                   
+07-06-12  12:47  Got 1075 stop times from trip 3780 to 3809.                                                                   
+07-06-12  12:47  Got 70 stop times from trip 3810 to 3811.                                                                     
+07-06-12  12:47  Exported 41924 stop time records.                                                                             
+07-06-12  12:47  Exported 4 calendar records.                                                                                  
+07-06-12  12:47  Closed seeeion 1.                                                                                             
+

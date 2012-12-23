@@ -1,0 +1,1249 @@
+﻿route_id,service_id,trip_id,trip_headsign,direction_id,block_id,shape_id
+"1_42",1,8717,"Pentagon Metro",0,4205,39
+"1_42",1,8718,"Ballston Metro",1,4205,40
+"1_42",1,8719,"Pentagon Metro",0,4205,39
+"1_42",1,8720,"Ballston Metro",1,4205,40
+"1_42",1,8721,"Pentagon Metro",0,4205,39
+"1_42",1,8722,"Ballston Metro",1,4205,40
+"1_42",1,8723,"Pentagon Metro",0,4205,39
+"1_42",1,8724,"Ballston Metro",1,4205,40
+"1_42",1,8725,"Pentagon Metro",0,4205,39
+"1_42",1,8726,"Ballston Metro",1,4205,40
+"1_42",1,8727,"Pentagon Metro",0,4205,39
+"1_42",1,8728,"Ballston Metro",1,4205,40
+"1_87",3,9858,"Shirlington Station",0,8702,218
+"1_87",3,9859,"Shirlington Station",0,8702,218
+"1_87",3,9860,"Shirlington Station",0,8702,218
+"1_87",3,9861,"Shirlington Station",0,8702,218
+"1_87",3,9862,"Shirlington Station",0,8711,218
+"1_87",3,9863,"Shirlington Station",0,8711,218
+"1_87X",3,9864,"Shirlington Station",0,8711,234
+"1_87X",3,9866,"Shirlington Station",0,8711,234
+"1_87",3,9868,"Shirlington Station",0,8711,218
+"1_87",3,9869,"Shirlington Station",0,8711,218
+"1_87",3,9870,"Shirlington Station",0,8711,218
+"1_87",3,9871,"Shirlington Station",0,8711,218
+"1_87A",3,9872,"Pentagon Metro",0,8703,221
+"1_87X",3,9873,"Shirlington Station",0,8703,234
+"1_87A",3,9874,"Pentagon Metro",0,8703,221
+"1_87A",3,9875,"Pentagon Metro",0,8704,221
+"1_87X",3,9876,"Shirlington Station",0,8704,234
+"1_87",3,9877,"Shirlington Station",0,8704,218
+"1_87",3,9878,"Shirlington Station",0,8704,218
+"1_87",3,9879,"Shirlington Station",0,8704,218
+"1_87",3,9880,"Shirlington Station",0,8704,218
+"1_87",3,9881,"Shirlington Station",0,8710,218
+"1_87",3,9882,"Shirlington Station",0,8710,218
+"1_87",3,9883,"Shirlington Station",0,8710,218
+"1_87X",3,9884,"Shirlington Station",0,8710,234
+"1_87X",3,9886,"Shirlington Station",0,8710,234
+"1_87",3,9887,"Shirlington Station",0,8710,218
+"1_87",3,9888,"Shirlington Station",0,8712,218
+"1_87A",3,9889,"Pentagon Metro",0,8712,221
+"1_87X",3,9890,"Shirlington Station",0,8712,234
+"1_87X",3,9892,"Shirlington Station",0,8712,234
+"1_87X",3,9893,"Shirlington Station",0,8712,234
+"1_87",3,9894,"Shirlington Station",0,8712,218
+"1_87",3,9895,"Shirlington Station",0,8712,218
+"1_87",3,9896,"Shirlington Station",0,8712,218
+"1_87X",3,9897,"Shirlington Station",0,8713,234
+"1_87X",3,9899,"Shirlington Station",0,8713,234
+"1_87",3,9900,"Shirlington Station",0,8713,218
+"1_87",3,9901,"Pentagon Metro",1,8701,215
+"1_87A",3,9902,"Pentagon Metro",1,8701,220
+"1_87",3,9903,"Pentagon Metro",1,8701,215
+"1_87A",3,9904,"Pentagon Metro",1,8701,220
+"1_87",3,9905,"Pentagon Metro",1,8701,215
+"1_87",3,9906,"Pentagon Metro",1,8701,215
+"1_87",3,9907,"Pentagon Metro",1,8702,215
+"1_87A",3,9908,"Pentagon Metro",1,8702,220
+"1_87",3,9909,"Pentagon Metro",1,8702,215
+"1_87A",3,9910,"Pentagon Metro",1,8702,220
+"1_87",3,9911,"Pentagon Metro",1,8702,215
+"1_87",3,9912,"Pentagon Metro",1,8702,215
+"1_87",3,9913,"Pentagon Metro",1,8702,215
+"1_87",3,9914,"Pentagon Metro",1,8702,215
+"1_87",3,9915,"Pentagon Metro",1,8702,215
+"1_87",3,9916,"Pentagon Metro",1,8711,215
+"1_87",3,9917,"Pentagon Metro",1,8711,215
+"1_87",3,9918,"Pentagon Metro",1,8711,215
+"1_87",3,9919,"Pentagon Metro",1,8711,215
+"1_87",3,9921,"Pentagon Metro",1,8711,215
+"1_87",3,9923,"Pentagon Metro",1,8711,215
+"1_87",3,9924,"Pentagon Metro",1,8711,215
+"1_87",3,9925,"Pentagon Metro",1,8711,215
+"1_87",3,9926,"Pentagon Metro",1,8703,215
+"1_87A",3,9927,"Pentagon Metro",1,8703,220
+"1_87",3,9928,"Pentagon Metro",1,8703,215
+"1_87A",3,9929,"Pentagon Metro",1,8703,220
+"1_87",3,9930,"Pentagon Metro",1,8704,215
+"1_87A",3,9931,"Pentagon Metro",1,8704,220
+"1_87",3,9932,"Pentagon Metro",1,8704,215
+"1_87",3,9933,"Pentagon Metro",1,8704,215
+"1_87",3,9934,"Pentagon Metro",1,8704,215
+"1_87",3,9935,"Pentagon Metro",1,8704,215
+"1_87",3,9936,"Pentagon Metro",1,8710,215
+"1_87",3,9937,"Pentagon Metro",1,8710,215
+"1_87",3,9938,"Pentagon Metro",1,8710,215
+"1_87",3,9939,"Pentagon Metro",1,8710,215
+"1_87",3,9940,"Pentagon Metro",1,8710,215
+"1_87",3,9942,"Pentagon Metro",1,8710,215
+"1_87X",3,9943,"Pentagon Metro",1,8712,235
+"1_87A",3,9944,"Pentagon Metro",1,8712,220
+"1_87",3,9945,"Pentagon Metro",1,8712,215
+"1_87",3,9947,"Pentagon Metro",1,8712,215
+"1_87",3,9948,"Pentagon Metro",1,8712,215
+"1_87",3,9949,"Pentagon Metro",1,8712,215
+"1_87",3,9950,"Pentagon Metro",1,8712,215
+"1_87",3,9951,"Pentagon Metro",1,8713,215
+"1_87A",3,9952,"Pentagon Metro",1,8713,220
+"1_87",3,9953,"Pentagon Metro",1,8713,215
+"1_87A",3,9954,"Pentagon Metro",0,8701,221
+"1_87X",3,9955,"Shirlington Station",0,8701,234
+"1_87A",3,9956,"Pentagon Metro",0,8701,221
+"1_87X",3,9957,"Shirlington Station",0,8701,234
+"1_87",3,9958,"Shirlington Station",0,8701,218
+"1_87A",3,9959,"Pentagon Metro",0,8702,221
+"1_87X",3,9960,"Shirlington Station",0,8702,234
+"1_87A",3,9961,"Pentagon Metro",0,8702,221
+"1_87X",3,9962,"Shirlington Station",0,8702,234
+"1_87",3,9963,"Shirlington Station",0,8702,218
+"1_87A",3,10173,"Pentagon Metro",1,8711,12
+"1_87A",3,10174,"Pentagon Metro",1,8711,12
+"1_87A",3,10175,"Pentagon Metro",1,8710,12
+"1_87A",3,10176,"Pentagon Metro",1,8712,12
+"1_87A",3,10177,"Pentagon Metro",0,8711,11
+"1_87A",3,10178,"Pentagon Metro",0,8711,11
+"1_87A",3,10179,"Pentagon Metro",0,8710,11
+"1_87A",3,10180,"Pentagon Metro",0,8712,11
+"1_87A",3,10181,"Pentagon Metro",0,8713,11
+"1_87A",3,10182,"Pentagon Metro",1,8713,12
+"1_87A",3,10183,"Pentagon Metro",1,8713,12
+"1_87A",3,10184,"Pentagon Metro",0,8713,11
+"1_87A",3,10185,"Pentagon Metro",0,8713,11
+"1_87",1,10253,"Pentagon Metro",1,8705,215
+"1_87",1,10254,"Pentagon Metro",1,8706,215
+"1_87",1,10255,"Pentagon Metro",1,8705,215
+"1_87",1,10256,"Pentagon Metro",1,8706,215
+"1_87",1,10257,"Pentagon Metro",1,8705,215
+"1_87",1,10258,"Pentagon Metro",1,8706,215
+"1_87",1,10259,"Pentagon Metro",1,8705,215
+"1_87",1,10260,"Pentagon Metro",1,8706,215
+"1_87",1,10261,"Pentagon Metro",1,8705,215
+"1_87",1,10262,"Pentagon Metro",1,8706,215
+"1_87",1,10263,"Pentagon Metro",1,8705,215
+"1_87",1,10264,"Pentagon Metro",1,8706,215
+"1_87",1,10265,"Pentagon Metro",1,8705,215
+"1_87",1,10266,"Pentagon Metro",1,8706,215
+"1_87",1,10269,"Pentagon Metro",1,8715,215
+"1_87",1,10270,"Pentagon Metro",1,8716,215
+"1_87",1,10271,"Pentagon Metro",1,8715,215
+"1_87",1,10272,"Pentagon Metro",1,8716,215
+"1_87",1,10273,"Pentagon Metro",1,8715,215
+"1_87",1,10274,"Pentagon Metro",1,8716,215
+"1_87",1,10275,"Pentagon Metro",1,8715,215
+"1_87",1,10276,"Pentagon Metro",1,8716,215
+"1_87",1,10277,"Pentagon Metro",1,8715,215
+"1_87",1,10278,"Pentagon Metro",1,8716,215
+"1_87",1,10279,"Pentagon Metro",1,8715,215
+"1_87",1,10280,"Pentagon Metro",1,8716,215
+"1_87",1,10281,"Shirlington Station",0,8705,218
+"1_87",1,10282,"Shirlington Station",0,8706,218
+"1_87",1,10283,"Shirlington Station",0,8705,218
+"1_87",1,10284,"Shirlington Station",0,8706,218
+"1_87",1,10285,"Shirlington Station",0,8705,218
+"1_87",1,10286,"Shirlington Station",0,8706,218
+"1_87",1,10287,"Shirlington Station",0,8705,218
+"1_87",1,10288,"Shirlington Station",0,8706,218
+"1_87",1,10289,"Shirlington Station",0,8705,218
+"1_87",1,10290,"Shirlington Station",0,8706,218
+"1_87",1,10291,"Shirlington Station",0,8705,218
+"1_87",1,10292,"Shirlington Station",0,8706,218
+"1_87",1,10293,"Shirlington Station",0,8705,218
+"1_87",1,10294,"Shirlington Station",0,8706,218
+"1_87",1,10297,"Shirlington Station",0,8715,218
+"1_87",1,10298,"Shirlington Station",0,8716,218
+"1_87",1,10299,"Shirlington Station",0,8715,218
+"1_87",1,10300,"Shirlington Station",0,8716,218
+"1_87",1,10301,"Shirlington Station",0,8715,218
+"1_87",1,10302,"Shirlington Station",0,8716,218
+"1_87",1,10303,"Shirlington Station",0,8715,218
+"1_87",1,10304,"Shirlington Station",0,8716,218
+"1_87",1,10305,"Shirlington Station",0,8715,218
+"1_87",1,10306,"Shirlington Station",0,8716,218
+"1_87",1,10307,"Shirlington Station",0,8715,218
+"1_87",1,10308,"Shirlington Station",0,8716,218
+"1_41",3,10488,"Court House Metro",1,4104,15
+"1_87",3,10489,"Shirlington Station",0,8714,218
+"1_87X",3,10490,"Pentagon Metro",1,8714,235
+"1_87",3,10491,"Shirlington Station",0,8714,218
+"1_87X",3,10492,"Pentagon Metro",1,8714,235
+"1_87",3,10493,"Shirlington Station",0,8714,218
+"1_41",3,10494,"Court House Metro",1,4102,15
+"1_41",3,10495,"Court House Metro",1,4103,15
+"1_41",3,10496,"Court House Metro",1,4105,15
+"1_41",3,10497,"Court House Metro",1,4101,15
+"1_41",3,10498,"Court House Metro",1,4104,15
+"1_41",3,10499,"Court House Metro",1,4102,15
+"1_41",3,10500,"Court House Metro",1,4103,15
+"1_41",3,10501,"Court House Metro",1,4105,15
+"1_41",3,10502,"Court House Metro",1,4101,15
+"1_41",3,10503,"Court House Metro",1,4104,15
+"1_41",3,10504,"Court House Metro",1,4102,15
+"1_41",3,10505,"Court House Metro",1,4105,15
+"1_41",3,10506,"Court House Metro",1,4101,15
+"1_41",3,10507,"Court House Metro",1,4104,15
+"1_41",3,10508,"Court House Metro",1,4102,15
+"1_41",3,10509,"Court House Metro",1,4105,15
+"1_41",3,10510,"Court House Metro",1,4101,15
+"1_41",3,10511,"Court House Metro",1,4104,15
+"1_41",3,10550,"Columbia Pike & Dinwiddie",0,4101,14
+"1_41",3,10551,"Columbia Pike & Dinwiddie",0,4102,14
+"1_41",3,10552,"Columbia Pike & Dinwiddie",0,4103,14
+"1_41",3,10553,"Columbia Pike & Dinwiddie",0,4101,14
+"1_41",3,10554,"Columbia Pike & Dinwiddie",0,4104,14
+"1_41",3,10555,"Columbia Pike & Dinwiddie",0,4102,14
+"1_41",3,10556,"Columbia Pike & Dinwiddie",0,4103,14
+"1_41",3,10557,"Columbia Pike & Dinwiddie",0,4105,14
+"1_41",3,10558,"Columbia Pike & Dinwiddie",0,4101,14
+"1_41",3,10559,"Columbia Pike & Dinwiddie",0,4104,14
+"1_41",3,10560,"Columbia Pike & Dinwiddie",0,4102,14
+"1_41",3,10561,"Columbia Pike & Dinwiddie",0,4103,14
+"1_41",3,10562,"Columbia Pike & Dinwiddie",0,4105,14
+"1_41",3,10563,"Columbia Pike & Dinwiddie",0,4101,14
+"1_41",3,10564,"Columbia Pike & Dinwiddie",0,4104,14
+"1_41",3,10566,"Columbia Pike & Dinwiddie",0,4105,14
+"1_41",3,10567,"Columbia Pike & Dinwiddie",0,4101,14
+"1_41",3,10568,"Columbia Pike & Dinwiddie",0,4104,14
+"1_41",3,10569,"Columbia Pike & Dinwiddie",0,4102,14
+"1_41",3,10570,"Columbia Pike & Dinwiddie",0,4105,14
+"1_41",3,10571,"Columbia Pike & Dinwiddie",0,4101,14
+"1_41",3,10572,"Columbia Pike & Dinwiddie",0,4104,14
+"1_41",3,10614,"Court House Metro",1,4101,15
+"1_41",3,10615,"Court House Metro",1,4101,15
+"1_41",3,10616,"Court House Metro",1,4102,15
+"1_41",3,10617,"Court House Metro",1,4103,15
+"1_87",1,10662,"Shirlington Station",0,8706,218
+"1_87",1,10663,"Pentagon Metro",1,8705,215
+"1_87",1,10664,"Shirlington Station",0,8705,218
+"1_87",1,10665,"Pentagon Metro",1,8706,215
+"1_41",1,10683,"Court House Metro",1,4122,15
+"1_41",1,10684,"Columbia Pike & Dinwiddie",0,4120,14
+"1_41",2,10685,"Court House Metro",1,4153,15
+"1_51",1,10688,"Ballston Metro",0,5118,35
+"1_51",2,10689,"Ballston Metro",0,5109,35
+"1_41",3,10691,"Columbia Pike & Dinwiddie",0,4112,14
+"1_41",3,10692,"Columbia Pike & Dinwiddie",0,4102,14
+"1_41",3,10693,"Columbia Pike & Dinwiddie",0,4105,14
+"1_41",3,10694,"Columbia Pike & Dinwiddie",0,4111,14
+"1_41",3,10695,"Columbia Pike & Dinwiddie",0,4112,14
+"1_41",3,10697,"Columbia Pike & Dinwiddie",0,4114,14
+"1_41",3,10698,"Columbia Pike & Dinwiddie",0,4111,14
+"1_41",3,10699,"Columbia Pike & Dinwiddie",0,4115,14
+"1_41",3,10700,"Columbia Pike & Dinwiddie",0,4112,14
+"1_41",3,10701,"Columbia Pike & Dinwiddie",0,4113,14
+"1_41",3,10702,"Columbia Pike & Dinwiddie",0,4114,14
+"1_41",3,10703,"Columbia Pike & Dinwiddie",0,4111,14
+"1_41",3,10704,"Columbia Pike & Dinwiddie",0,4115,14
+"1_41",3,10705,"Columbia Pike & Dinwiddie",0,4112,14
+"1_41",3,10706,"Columbia Pike & Dinwiddie",0,4113,14
+"1_41",3,10707,"Columbia Pike & Dinwiddie",0,4114,14
+"1_41",3,10708,"Columbia Pike & Dinwiddie",0,4111,14
+"1_41",3,10709,"Columbia Pike & Dinwiddie",0,4115,14
+"1_41",3,10710,"Columbia Pike & Dinwiddie",0,4112,14
+"1_41",3,10711,"Columbia Pike & Dinwiddie",0,4113,14
+"1_41",3,10712,"Columbia Pike & Dinwiddie",0,4114,14
+"1_41",3,10713,"Columbia Pike & Dinwiddie",0,4111,14
+"1_41",3,10714,"Columbia Pike & Dinwiddie",0,4115,14
+"1_41",3,10715,"Columbia Pike & Dinwiddie",0,4112,14
+"1_41",3,10716,"Columbia Pike & Dinwiddie",0,4113,14
+"1_41",3,10717,"Columbia Pike & Dinwiddie",0,4114,14
+"1_41",3,10718,"Columbia Pike & Dinwiddie",0,4116,14
+"1_41",3,10719,"Columbia Pike & Dinwiddie",0,4115,14
+"1_41",3,10720,"Columbia Pike & Dinwiddie",0,4117,14
+"1_41",3,10721,"Columbia Pike & Dinwiddie",0,4116,14
+"1_41",3,10722,"Columbia Pike & Dinwiddie",0,4117,14
+"1_41",3,10723,"Columbia Pike & Dinwiddie",0,4116,14
+"1_41",3,10724,"Columbia Pike & Dinwiddie",0,4117,14
+"1_41",3,10725,"Columbia Pike & Dinwiddie",0,4116,14
+"1_41",3,10726,"Columbia Pike & Dinwiddie",0,4117,14
+"1_41",3,10727,"Columbia Pike & Dinwiddie",0,4116,14
+"1_41",3,10728,"Columbia Pike & Dinwiddie",0,4117,14
+"1_41",3,10729,"Columbia Pike & Dinwiddie",0,4116,14
+"1_41",3,10730,"Court House Metro",1,4102,15
+"1_41",3,10731,"Court House Metro",1,4105,15
+"1_41",3,10732,"Court House Metro",1,4111,15
+"1_41",3,10733,"Court House Metro",1,4112,15
+"1_41",3,10734,"Court House Metro",1,4113,15
+"1_41",3,10735,"Court House Metro",1,4114,15
+"1_41",3,10736,"Court House Metro",1,4111,15
+"1_41",3,10737,"Court House Metro",1,4115,15
+"1_41",3,10738,"Court House Metro",1,4112,15
+"1_41",3,10739,"Court House Metro",1,4113,15
+"1_41",3,10740,"Court House Metro",1,4114,15
+"1_41",3,10741,"Court House Metro",1,4111,15
+"1_41",3,10742,"Court House Metro",1,4115,15
+"1_41",3,10743,"Court House Metro",1,4112,15
+"1_41",3,10744,"Court House Metro",1,4113,15
+"1_41",3,10745,"Court House Metro",1,4114,15
+"1_41",3,10746,"Court House Metro",1,4111,15
+"1_41",3,10747,"Court House Metro",1,4115,15
+"1_41",3,10748,"Court House Metro",1,4112,15
+"1_41",3,10749,"Court House Metro",1,4113,15
+"1_41",3,10750,"Court House Metro",1,4114,15
+"1_41",3,10751,"Court House Metro",1,4111,15
+"1_41",3,10752,"Court House Metro",1,4115,15
+"1_41",3,10753,"Court House Metro",1,4112,15
+"1_41",3,10754,"Court House Metro",1,4113,15
+"1_41",3,10755,"Court House Metro",1,4114,15
+"1_41",3,10756,"Court House Metro",1,4116,15
+"1_41",3,10757,"Court House Metro",1,4115,15
+"1_41",3,10758,"Court House Metro",1,4117,15
+"1_41",3,10759,"Court House Metro",1,4116,15
+"1_41",3,10760,"Court House Metro",1,4117,15
+"1_41",3,10761,"Court House Metro",1,4116,15
+"1_41",3,10762,"Court House Metro",1,4117,15
+"1_41",3,10763,"Court House Metro",1,4116,15
+"1_41",3,10764,"Court House Metro",1,4117,15
+"1_41",3,10765,"Court House Metro",1,4116,15
+"1_41",3,10766,"Court House Metro",1,4117,15
+"1_41",3,10767,"Court House Metro",1,4116,15
+"1_41",1,10768,"Court House Metro",1,4120,15
+"1_41",1,10769,"Court House Metro",1,4121,15
+"1_41",1,10770,"Court House Metro",1,4122,15
+"1_41",1,10771,"Court House Metro",1,4120,15
+"1_41",1,10772,"Court House Metro",1,4121,15
+"1_41",1,10773,"Court House Metro",1,4122,15
+"1_41",1,10774,"Court House Metro",1,4120,15
+"1_41",1,10775,"Court House Metro",1,4121,15
+"1_41",1,10776,"Court House Metro",1,4120,15
+"1_41",1,10777,"Court House Metro",1,4121,15
+"1_41",1,10778,"Court House Metro",1,4122,15
+"1_41",1,10779,"Court House Metro",1,4120,15
+"1_41",1,10780,"Court House Metro",1,4121,15
+"1_41",1,10781,"Court House Metro",1,4122,15
+"1_41",1,10782,"Court House Metro",1,4120,15
+"1_41",1,10783,"Court House Metro",1,4121,15
+"1_41",1,10784,"Court House Metro",1,4122,15
+"1_41",1,10785,"Court House Metro",1,4130,15
+"1_41",1,10786,"Court House Metro",1,4120,15
+"1_41",1,10787,"Court House Metro",1,4131,15
+"1_41",1,10788,"Court House Metro",1,4122,15
+"1_41",1,10789,"Court House Metro",1,4130,15
+"1_41",1,10790,"Court House Metro",1,4132,15
+"1_41",1,10791,"Court House Metro",1,4131,15
+"1_41",1,10792,"Court House Metro",1,4133,15
+"1_41",1,10793,"Court House Metro",1,4130,15
+"1_41",1,10794,"Court House Metro",1,4132,15
+"1_41",1,10795,"Court House Metro",1,4131,15
+"1_41",1,10796,"Court House Metro",1,4133,15
+"1_41",1,10797,"Court House Metro",1,4130,15
+"1_41",1,10798,"Court House Metro",1,4132,15
+"1_41",1,10799,"Court House Metro",1,4131,15
+"1_41",1,10800,"Court House Metro",1,4133,15
+"1_41",1,10801,"Court House Metro",1,4130,15
+"1_41",1,10802,"Court House Metro",1,4132,15
+"1_41",1,10803,"Court House Metro",1,4131,15
+"1_41",1,10804,"Court House Metro",1,4133,15
+"1_41",1,10805,"Court House Metro",1,4130,15
+"1_41",1,10806,"Court House Metro",1,4132,15
+"1_41",1,10807,"Court House Metro",1,4131,15
+"1_41",1,10808,"Court House Metro",1,4133,15
+"1_41",1,10809,"Court House Metro",1,4130,15
+"1_41",1,10810,"Court House Metro",1,4132,15
+"1_41",1,10811,"Court House Metro",1,4134,15
+"1_41",1,10812,"Court House Metro",1,4133,15
+"1_41",1,10813,"Court House Metro",1,4135,15
+"1_41",1,10814,"Court House Metro",1,4134,15
+"1_41",1,10815,"Court House Metro",1,4135,15
+"1_41",1,10816,"Court House Metro",1,4134,15
+"1_41",1,10817,"Court House Metro",1,4135,15
+"1_41",1,10818,"Court House Metro",1,4134,15
+"1_41",1,10819,"Court House Metro",1,4135,15
+"1_41",1,10820,"Court House Metro",1,4134,15
+"1_41",1,10821,"Court House Metro",1,4135,15
+"1_41",1,10822,"Court House Metro",1,4134,15
+"1_41",1,10823,"Court House Metro",1,4135,15
+"1_41",1,10826,"Columbia Pike & Dinwiddie",0,4120,14
+"1_41",1,10827,"Columbia Pike & Dinwiddie",0,4121,14
+"1_41",1,10828,"Columbia Pike & Dinwiddie",0,4122,14
+"1_41",1,10829,"Columbia Pike & Dinwiddie",0,4120,14
+"1_41",1,10830,"Columbia Pike & Dinwiddie",0,4121,14
+"1_41",1,10831,"Columbia Pike & Dinwiddie",0,4122,14
+"1_41",1,10832,"Columbia Pike & Dinwiddie",0,4120,14
+"1_41",1,10833,"Columbia Pike & Dinwiddie",0,4121,14
+"1_41",1,10834,"Columbia Pike & Dinwiddie",0,4122,14
+"1_41",1,10835,"Columbia Pike & Dinwiddie",0,4120,14
+"1_41",1,10836,"Columbia Pike & Dinwiddie",0,4121,14
+"1_41",1,10837,"Columbia Pike & Dinwiddie",0,4122,14
+"1_41",1,10838,"Columbia Pike & Dinwiddie",0,4120,14
+"1_41",1,10839,"Columbia Pike & Dinwiddie",0,4121,14
+"1_41",1,10840,"Columbia Pike & Dinwiddie",0,4122,14
+"1_41",1,10841,"Columbia Pike & Dinwiddie",0,4121,14
+"1_41",1,10842,"Columbia Pike & Dinwiddie",0,4122,14
+"1_41",1,10843,"Columbia Pike & Dinwiddie",0,4130,14
+"1_41",1,10844,"Columbia Pike & Dinwiddie",0,4120,14
+"1_41",1,10845,"Columbia Pike & Dinwiddie",0,4131,14
+"1_41",1,10846,"Columbia Pike & Dinwiddie",0,4122,14
+"1_41",1,10847,"Columbia Pike & Dinwiddie",0,4130,14
+"1_41",1,10848,"Columbia Pike & Dinwiddie",0,4132,14
+"1_41",1,10849,"Columbia Pike & Dinwiddie",0,4131,14
+"1_41",1,10850,"Columbia Pike & Dinwiddie",0,4133,14
+"1_41",1,10851,"Columbia Pike & Dinwiddie",0,4130,14
+"1_41",1,10852,"Columbia Pike & Dinwiddie",0,4132,14
+"1_41",1,10853,"Columbia Pike & Dinwiddie",0,4131,14
+"1_41",1,10854,"Columbia Pike & Dinwiddie",0,4133,14
+"1_41",1,10855,"Columbia Pike & Dinwiddie",0,4130,14
+"1_41",1,10856,"Columbia Pike & Dinwiddie",0,4132,14
+"1_41",1,10857,"Columbia Pike & Dinwiddie",0,4131,14
+"1_41",1,10858,"Columbia Pike & Dinwiddie",0,4133,14
+"1_41",1,10859,"Columbia Pike & Dinwiddie",0,4130,14
+"1_41",1,10860,"Columbia Pike & Dinwiddie",0,4132,14
+"1_41",1,10861,"Columbia Pike & Dinwiddie",0,4131,14
+"1_41",1,10862,"Columbia Pike & Dinwiddie",0,4133,14
+"1_41",1,10863,"Columbia Pike & Dinwiddie",0,4130,14
+"1_41",1,10864,"Columbia Pike & Dinwiddie",0,4132,14
+"1_41",1,10865,"Columbia Pike & Dinwiddie",0,4131,14
+"1_41",1,10866,"Columbia Pike & Dinwiddie",0,4133,14
+"1_41",1,10867,"Columbia Pike & Dinwiddie",0,4130,14
+"1_41",1,10868,"Columbia Pike & Dinwiddie",0,4132,14
+"1_41",1,10869,"Columbia Pike & Dinwiddie",0,4134,14
+"1_41",1,10870,"Columbia Pike & Dinwiddie",0,4133,14
+"1_41",1,10871,"Columbia Pike & Dinwiddie",0,4135,14
+"1_41",1,10872,"Columbia Pike & Dinwiddie",0,4134,14
+"1_41",1,10873,"Columbia Pike & Dinwiddie",0,4135,14
+"1_41",1,10874,"Columbia Pike & Dinwiddie",0,4134,14
+"1_41",1,10875,"Columbia Pike & Dinwiddie",0,4135,14
+"1_41",1,10876,"Columbia Pike & Dinwiddie",0,4134,14
+"1_41",1,10877,"Columbia Pike & Dinwiddie",0,4135,14
+"1_41",1,10878,"Columbia Pike & Dinwiddie",0,4134,14
+"1_41",1,10879,"Columbia Pike & Dinwiddie",0,4135,14
+"1_41",1,10880,"Columbia Pike & Dinwiddie",0,4134,14
+"1_41",1,10881,"Columbia Pike & Dinwiddie",0,4135,14
+"1_41",2,10884,"Court House Metro",1,4141,15
+"1_41",2,10885,"Court House Metro",1,4142,15
+"1_41",2,10886,"Court House Metro",1,4141,15
+"1_41",2,10887,"Court House Metro",1,4142,15
+"1_41",2,10888,"Court House Metro",1,4141,15
+"1_41",2,10889,"Court House Metro",1,4142,15
+"1_41",2,10890,"Court House Metro",1,4143,15
+"1_41",2,10891,"Court House Metro",1,4141,15
+"1_41",2,10892,"Court House Metro",1,4142,15
+"1_41",2,10893,"Court House Metro",1,4143,15
+"1_41",2,10894,"Court House Metro",1,4141,15
+"1_41",2,10895,"Court House Metro",1,4142,15
+"1_41",2,10896,"Court House Metro",1,4143,15
+"1_41",2,10897,"Court House Metro",1,4141,15
+"1_41",2,10898,"Court House Metro",1,4142,15
+"1_41",2,10899,"Court House Metro",1,4143,15
+"1_41",2,10900,"Court House Metro",1,4141,15
+"1_41",2,10901,"Court House Metro",1,4151,15
+"1_41",2,10902,"Court House Metro",1,4142,15
+"1_41",2,10903,"Court House Metro",1,4143,15
+"1_41",2,10904,"Court House Metro",1,4152,15
+"1_41",2,10905,"Court House Metro",1,4151,15
+"1_41",2,10906,"Court House Metro",1,4154,15
+"1_41",2,10907,"Court House Metro",1,4152,15
+"1_41",2,10908,"Court House Metro",1,4151,15
+"1_41",2,10909,"Court House Metro",1,4153,15
+"1_41",2,10910,"Court House Metro",1,4154,15
+"1_41",2,10911,"Court House Metro",1,4152,15
+"1_41",2,10912,"Court House Metro",1,4151,15
+"1_41",2,10913,"Court House Metro",1,4153,15
+"1_41",2,10914,"Court House Metro",1,4154,15
+"1_41",2,10915,"Court House Metro",1,4152,15
+"1_41",2,10916,"Court House Metro",1,4151,15
+"1_41",2,10917,"Court House Metro",1,4153,15
+"1_41",2,10918,"Court House Metro",1,4154,15
+"1_41",2,10919,"Court House Metro",1,4152,15
+"1_41",2,10920,"Court House Metro",1,4153,15
+"1_41",2,10921,"Court House Metro",1,4152,15
+"1_41",2,10922,"Court House Metro",1,4153,15
+"1_41",2,10923,"Court House Metro",1,4152,15
+"1_41",2,10924,"Court House Metro",1,4153,15
+"1_41",2,10925,"Columbia Pike & Dinwiddie",0,4141,14
+"1_41",2,10926,"Columbia Pike & Dinwiddie",0,4142,14
+"1_41",2,10927,"Columbia Pike & Dinwiddie",0,4141,14
+"1_41",2,10928,"Columbia Pike & Dinwiddie",0,4142,14
+"1_41",2,10929,"Columbia Pike & Dinwiddie",0,4141,14
+"1_41",2,10930,"Columbia Pike & Dinwiddie",0,4142,14
+"1_41",2,10931,"Columbia Pike & Dinwiddie",0,4143,14
+"1_41",2,10932,"Columbia Pike & Dinwiddie",0,4141,14
+"1_41",2,10933,"Columbia Pike & Dinwiddie",0,4142,14
+"1_41",2,10934,"Columbia Pike & Dinwiddie",0,4143,14
+"1_41",2,10935,"Columbia Pike & Dinwiddie",0,4141,14
+"1_41",2,10936,"Columbia Pike & Dinwiddie",0,4142,14
+"1_41",2,10937,"Columbia Pike & Dinwiddie",0,4143,14
+"1_41",2,10938,"Columbia Pike & Dinwiddie",0,4141,14
+"1_41",2,10939,"Columbia Pike & Dinwiddie",0,4142,14
+"1_41",2,10940,"Columbia Pike & Dinwiddie",0,4143,14
+"1_41",2,10941,"Columbia Pike & Dinwiddie",0,4141,14
+"1_41",2,10942,"Columbia Pike & Dinwiddie",0,4151,14
+"1_41",2,10943,"Columbia Pike & Dinwiddie",0,4142,14
+"1_41",2,10944,"Columbia Pike & Dinwiddie",0,4143,14
+"1_41",2,10945,"Columbia Pike & Dinwiddie",0,4152,14
+"1_41",2,10946,"Columbia Pike & Dinwiddie",0,4151,14
+"1_41",2,10947,"Columbia Pike & Dinwiddie",0,4153,14
+"1_41",2,10948,"Columbia Pike & Dinwiddie",0,4154,14
+"1_41",2,10949,"Columbia Pike & Dinwiddie",0,4152,14
+"1_41",2,10950,"Columbia Pike & Dinwiddie",0,4151,14
+"1_41",2,10951,"Columbia Pike & Dinwiddie",0,4153,14
+"1_41",2,10952,"Columbia Pike & Dinwiddie",0,4154,14
+"1_41",2,10953,"Columbia Pike & Dinwiddie",0,4152,14
+"1_41",2,10954,"Columbia Pike & Dinwiddie",0,4151,14
+"1_41",2,10955,"Columbia Pike & Dinwiddie",0,4153,14
+"1_41",2,10956,"Columbia Pike & Dinwiddie",0,4154,14
+"1_41",2,10957,"Columbia Pike & Dinwiddie",0,4152,14
+"1_41",2,10958,"Columbia Pike & Dinwiddie",0,4151,14
+"1_41",2,10959,"Columbia Pike & Dinwiddie",0,4153,14
+"1_41",2,10960,"Columbia Pike & Dinwiddie",0,4154,14
+"1_41",2,10961,"Columbia Pike & Dinwiddie",0,4152,14
+"1_41",2,10962,"Columbia Pike & Dinwiddie",0,4153,14
+"1_41",2,10963,"Columbia Pike & Dinwiddie",0,4152,14
+"1_41",2,10964,"Columbia Pike & Dinwiddie",0,4153,14
+"1_41",2,10965,"Columbia Pike & Dinwiddie",0,4152,14
+"1_41",2,10966,"Columbia Pike & Dinwiddie",0,4153,14
+"1_51",3,11019,"Ballston Metro",0,5106,35
+"1_51",3,11020,"Ballston Metro",0,5106,35
+"1_51",3,11021,"Ballston Metro",0,5106,35
+"1_51",3,11022,"Ballston Metro",0,5106,35
+"1_51",3,11023,"Ballston Metro",0,5106,35
+"1_51",3,11024,"Ballston Metro",0,5106,35
+"1_51",3,11025,"Ballston Metro",0,5106,35
+"1_51",3,11026,"Ballston Metro",0,5106,35
+"1_51",3,11027,"Ballston Metro",0,5106,35
+"1_51",3,11028,"Ballston Metro",0,5106,35
+"1_51",3,11029,"Ballston Metro",0,5106,35
+"1_51",3,11030,"Ballston Metro",0,5106,35
+"1_51",3,11031,"Ballston Metro",0,5106,35
+"1_51",3,11032,"Ballston Metro",0,5116,35
+"1_51",3,11033,"Ballston Metro",0,5116,35
+"1_51",3,11034,"Ballston Metro",0,5116,35
+"1_51",3,11035,"Ballston Metro",0,5116,35
+"1_51",3,11036,"Ballston Metro",0,5116,35
+"1_51",3,11037,"Ballston Metro",0,5116,35
+"1_51",3,11038,"Ballston Metro",0,5116,35
+"1_51",3,11039,"Ballston Metro",0,5116,35
+"1_51",3,11040,"Ballston Metro",0,5116,35
+"1_51",3,11041,"Ballston Metro",0,5116,35
+"1_51",3,11042,"Ballston Metro",0,5116,35
+"1_51",3,11043,"Ballston Metro",0,5116,35
+"1_51",3,11044,"Ballston Metro",0,5117,35
+"1_51",3,11045,"Ballston Metro",0,5117,35
+"1_51",3,11046,"Ballston Metro",0,5117,35
+"1_51",3,11047,"Ballston Metro",0,5117,35
+"1_51",3,11048,"Ballston Metro",0,5117,35
+"1_51",3,11049,"Ballston Metro",0,5117,35
+"1_51",3,11050,"Ballston Metro",0,5117,35
+"1_51",3,11051,"Ballston Metro",0,5117,35
+"1_51",3,11052,"Ballston Metro",0,5117,35
+"1_51",3,11053,"Ballston Metro",0,5117,35
+"1_51",3,11054,"Ballston Metro",0,5117,35
+"1_51",1,11090,"Ballston Metro",0,5108,35
+"1_51",1,11091,"Ballston Metro",0,5108,35
+"1_51",1,11092,"Ballston Metro",0,5108,35
+"1_51",1,11093,"Ballston Metro",0,5108,35
+"1_51",1,11094,"Ballston Metro",0,5108,35
+"1_51",1,11095,"Ballston Metro",0,5108,35
+"1_51",1,11096,"Ballston Metro",0,5108,35
+"1_51",1,11097,"Ballston Metro",0,5108,35
+"1_51",1,11098,"Ballston Metro",0,5108,35
+"1_51",1,11099,"Ballston Metro",0,5108,35
+"1_51",1,11100,"Ballston Metro",0,5108,35
+"1_51",1,11101,"Ballston Metro",0,5108,35
+"1_51",1,11102,"Ballston Metro",0,5108,35
+"1_51",1,11103,"Ballston Metro",0,5118,35
+"1_51",1,11104,"Ballston Metro",0,5118,35
+"1_51",1,11105,"Ballston Metro",0,5118,35
+"1_51",1,11106,"Ballston Metro",0,5118,35
+"1_51",1,11107,"Ballston Metro",0,5118,35
+"1_51",1,11108,"Ballston Metro",0,5118,35
+"1_51",1,11109,"Ballston Metro",0,5118,35
+"1_51",1,11110,"Ballston Metro",0,5118,35
+"1_51",1,11111,"Ballston Metro",0,5118,35
+"1_51",1,11112,"Ballston Metro",0,5118,35
+"1_51",1,11113,"Ballston Metro",0,5118,35
+"1_51",1,11114,"Ballston Metro",0,5119,35
+"1_51",1,11115,"Ballston Metro",0,5119,35
+"1_51",1,11116,"Ballston Metro",0,5119,35
+"1_51",1,11117,"Ballston Metro",0,5119,35
+"1_51",1,11118,"Ballston Metro",0,5119,35
+"1_51",1,11119,"Ballston Metro",0,5119,35
+"1_51",1,11120,"Ballston Metro",0,5119,35
+"1_51",1,11121,"Ballston Metro",0,5119,35
+"1_51",1,11122,"Ballston Metro",0,5119,35
+"1_51",1,11123,"Ballston Metro",0,5119,35
+"1_51",1,11124,"Ballston Metro",0,5119,35
+"1_51",2,11125,"Lee Hwy",1,5109,36
+"1_51",2,11126,"Lee Hwy",1,5109,36
+"1_51",2,11127,"Lee Hwy",1,5109,36
+"1_51",2,11128,"Lee Hwy",1,5109,36
+"1_51",2,11129,"Lee Hwy",1,5109,36
+"1_51",2,11130,"Lee Hwy",1,5109,36
+"1_51",2,11131,"Lee Hwy",1,5109,36
+"1_51",2,11132,"Lee Hwy",1,5109,36
+"1_51",2,11133,"Lee Hwy",1,5109,36
+"1_51",2,11134,"Lee Hwy",1,5109,36
+"1_51",2,11135,"Lee Hwy",1,5109,36
+"1_51",2,11136,"Lee Hwy",1,5109,36
+"1_51",2,11137,"Lee Hwy",1,5109,36
+"1_51",2,11138,"Lee Hwy",1,5109,36
+"1_51",2,11139,"Lee Hwy",1,5109,36
+"1_51",2,11140,"Lee Hwy",1,5109,36
+"1_51",2,11141,"Lee Hwy",1,5120,36
+"1_51",2,11142,"Lee Hwy",1,5120,36
+"1_51",2,11143,"Lee Hwy",1,5120,36
+"1_51",2,11144,"Lee Hwy",1,5120,36
+"1_51",2,11145,"Lee Hwy",1,5120,36
+"1_51",2,11146,"Lee Hwy",1,5120,36
+"1_51",2,11147,"Lee Hwy",1,5120,36
+"1_51",2,11148,"Lee Hwy",1,5120,36
+"1_51",2,11149,"Lee Hwy",1,5120,36
+"1_51",2,11150,"Lee Hwy",1,5120,36
+"1_51",2,11151,"Lee Hwy",1,5120,36
+"1_51",2,11152,"Lee Hwy",1,5120,36
+"1_51",2,11153,"Lee Hwy",1,5120,36
+"1_51",2,11154,"Lee Hwy",1,5120,36
+"1_51",2,11155,"Lee Hwy",1,5120,36
+"1_51",2,11156,"Lee Hwy",1,5120,36
+"1_51",2,11157,"Ballston Metro",0,5109,35
+"1_51",2,11158,"Ballston Metro",0,5109,35
+"1_51",2,11159,"Ballston Metro",0,5109,35
+"1_51",2,11160,"Ballston Metro",0,5109,35
+"1_51",2,11161,"Ballston Metro",0,5109,35
+"1_51",2,11162,"Ballston Metro",0,5109,35
+"1_51",2,11163,"Ballston Metro",0,5109,35
+"1_51",2,11164,"Ballston Metro",0,5109,35
+"1_51",2,11165,"Ballston Metro",0,5109,35
+"1_51",2,11166,"Ballston Metro",0,5109,35
+"1_51",2,11167,"Ballston Metro",0,5109,35
+"1_51",2,11168,"Ballston Metro",0,5109,35
+"1_51",2,11169,"Ballston Metro",0,5109,35
+"1_51",2,11170,"Ballston Metro",0,5109,35
+"1_51",2,11171,"Ballston Metro",0,5109,35
+"1_51",2,11172,"Ballston Metro",0,5120,35
+"1_51",2,11173,"Ballston Metro",0,5120,35
+"1_51",2,11174,"Ballston Metro",0,5120,35
+"1_51",2,11175,"Ballston Metro",0,5120,35
+"1_51",2,11176,"Ballston Metro",0,5120,35
+"1_51",2,11177,"Ballston Metro",0,5120,35
+"1_51",2,11178,"Ballston Metro",0,5120,35
+"1_51",2,11179,"Ballston Metro",0,5120,35
+"1_51",2,11180,"Ballston Metro",0,5120,35
+"1_51",2,11181,"Ballston Metro",0,5120,35
+"1_51",2,11182,"Ballston Metro",0,5120,35
+"1_51",2,11183,"Ballston Metro",0,5120,35
+"1_51",2,11184,"Ballston Metro",0,5120,35
+"1_51",2,11185,"Ballston Metro",0,5120,35
+"1_51",2,11186,"Ballston Metro",0,5120,35
+"1_51",1,11268,"Lee Hwy",1,5118,36
+"1_51",3,11269,"Lee Hwy",1,5106,36
+"1_51",3,11270,"Lee Hwy",1,5106,36
+"1_51",3,11271,"Lee Hwy",1,5106,36
+"1_51",3,11272,"Lee Hwy",1,5106,36
+"1_51",3,11273,"Lee Hwy",1,5106,36
+"1_51",3,11274,"Lee Hwy",1,5106,36
+"1_51",3,11275,"Lee Hwy",1,5106,36
+"1_51",3,11276,"Lee Hwy",1,5106,36
+"1_51",3,11277,"Lee Hwy",1,5106,36
+"1_51",3,11278,"Lee Hwy",1,5106,36
+"1_51",3,11279,"Lee Hwy",1,5106,36
+"1_51",3,11280,"Lee Hwy",1,5106,36
+"1_51",3,11281,"Lee Hwy",1,5106,36
+"1_51",3,11282,"Lee Hwy",1,5116,36
+"1_51",3,11283,"Lee Hwy",1,5116,36
+"1_51",3,11284,"Lee Hwy",1,5116,36
+"1_51",3,11285,"Lee Hwy",1,5116,36
+"1_51",3,11286,"Lee Hwy",1,5116,36
+"1_51",3,11287,"Lee Hwy",1,5116,36
+"1_51",3,11288,"Lee Hwy",1,5116,36
+"1_51",3,11289,"Lee Hwy",1,5116,36
+"1_51",3,11290,"Lee Hwy",1,5116,36
+"1_51",3,11291,"Lee Hwy",1,5116,36
+"1_51",3,11292,"Lee Hwy",1,5116,36
+"1_51",3,11293,"Lee Hwy",1,5116,36
+"1_51",3,11294,"Lee Hwy",1,5117,36
+"1_51",3,11295,"Lee Hwy",1,5117,36
+"1_51",3,11296,"Lee Hwy",1,5117,36
+"1_51",3,11297,"Lee Hwy",1,5117,36
+"1_51",3,11298,"Lee Hwy",1,5117,36
+"1_51",3,11299,"Lee Hwy",1,5117,36
+"1_51",3,11300,"Lee Hwy",1,5117,36
+"1_51",3,11301,"Lee Hwy",1,5117,36
+"1_51",3,11302,"Lee Hwy",1,5117,36
+"1_51",3,11303,"Lee Hwy",1,5117,36
+"1_51",3,11304,"Lee Hwy",1,5117,36
+"1_51",1,11305,"Lee Hwy",1,5108,36
+"1_51",1,11306,"Lee Hwy",1,5108,36
+"1_51",1,11307,"Lee Hwy",1,5108,36
+"1_51",1,11308,"Lee Hwy",1,5108,36
+"1_51",1,11309,"Lee Hwy",1,5108,36
+"1_51",1,11310,"Lee Hwy",1,5108,36
+"1_51",1,11311,"Lee Hwy",1,5108,36
+"1_51",1,11312,"Lee Hwy",1,5108,36
+"1_51",1,11313,"Lee Hwy",1,5108,36
+"1_51",1,11314,"Lee Hwy",1,5108,36
+"1_51",1,11315,"Lee Hwy",1,5108,36
+"1_51",1,11316,"Lee Hwy",1,5108,36
+"1_51",1,11317,"Lee Hwy",1,5108,36
+"1_51",1,11318,"Lee Hwy",1,5118,36
+"1_51",1,11319,"Lee Hwy",1,5118,36
+"1_51",1,11320,"Lee Hwy",1,5118,36
+"1_51",1,11321,"Lee Hwy",1,5118,36
+"1_51",1,11322,"Lee Hwy",1,5118,36
+"1_51",1,11323,"Lee Hwy",1,5118,36
+"1_51",1,11324,"Lee Hwy",1,5118,36
+"1_51",1,11325,"Lee Hwy",1,5118,36
+"1_51",1,11326,"Lee Hwy",1,5118,36
+"1_51",1,11327,"Lee Hwy",1,5118,36
+"1_51",1,11328,"Lee Hwy",1,5118,36
+"1_51",1,11329,"Lee Hwy",1,5119,36
+"1_51",1,11330,"Lee Hwy",1,5119,36
+"1_51",1,11331,"Lee Hwy",1,5119,36
+"1_51",1,11332,"Lee Hwy",1,5119,36
+"1_51",1,11333,"Lee Hwy",1,5119,36
+"1_51",1,11334,"Lee Hwy",1,5119,36
+"1_51",1,11335,"Lee Hwy",1,5119,36
+"1_51",1,11336,"Lee Hwy",1,5119,36
+"1_51",1,11337,"Lee Hwy",1,5119,36
+"1_51",1,11338,"Lee Hwy",1,5119,36
+"1_51",1,11339,"Lee Hwy",1,5119,36
+"1_62",3,11398,"Court House Metro",0,6201,49
+"1_62",3,11399,"Court House Metro",0,6202,50
+"1_62",3,11400,"Court House Metro",0,6201,50
+"1_62",3,11401,"Court House Metro",0,6202,50
+"1_62",3,11402,"Court House Metro",0,6201,50
+"1_62",3,11403,"Court House Metro",0,6202,50
+"1_62",3,11404,"Court House Metro",0,6201,50
+"1_62",3,11405,"Court House Metro",0,6210,50
+"1_62",3,11406,"Court House Metro",0,6210,50
+"1_62",3,11407,"Court House Metro",0,6211,50
+"1_62",3,11408,"Court House Metro",0,6210,50
+"1_62",3,11409,"Court House Metro",0,6211,50
+"1_62",3,11410,"Court House Metro",0,6210,50
+"1_62",3,11411,"Court House Metro",0,6211,50
+"1_62",3,11412,"Court House Metro",0,6210,50
+"1_62",3,11413,"Ballston Metro",1,6202,51
+"1_62",3,11414,"Ballston Metro",1,6201,42
+"1_62",3,11415,"Ballston Metro",1,6202,42
+"1_62",3,11416,"Ballston Metro",1,6201,42
+"1_62",3,11417,"Ballston Metro",1,6202,42
+"1_62",3,11418,"Ballston Metro",1,6201,42
+"1_62",3,11419,"Ballston Metro",1,6202,42
+"1_62",3,11420,"Ballston Metro",1,6210,42
+"1_62",3,11421,"Ballston Metro",1,6210,42
+"1_62",3,11422,"Ballston Metro",1,6211,42
+"1_62",3,11423,"Ballston Metro",1,6210,42
+"1_62",3,11424,"Ballston Metro",1,6211,42
+"1_62",3,11425,"Ballston Metro",1,6210,42
+"1_62",3,11426,"Ballston Metro",1,6211,42
+"1_42",3,11427,"Pentagon Metro",0,4203,39
+"1_52",3,11428,"East Falls Church Metro",1,5203,77
+"1_75",3,11429,"Shirlington Station",0,7512,19
+"1_77",3,11430,"Shirlington Station",0,7701,16
+"1_77",3,11431,"Court House Metro",1,7710,20
+"1_77",1,11432,"Shirlington Station",0,7732,16
+"1_42",3,11433,"Pentagon Metro",0,4203,39
+"1_42",3,11434,"Pentagon Metro",0,4203,39
+"1_42",3,11435,"Pentagon Metro",0,4204,39
+"1_42",3,11436,"Pentagon Metro",0,4204,39
+"1_42",3,11437,"Pentagon Metro",0,4204,39
+"1_42",3,11438,"Pentagon Metro",0,4210,39
+"1_42",3,11439,"Pentagon Metro",0,4210,39
+"1_42",3,11440,"Pentagon Metro",0,4210,39
+"1_42",3,11441,"Pentagon Metro",0,4210,39
+"1_42",3,11442,"Pentagon Metro",0,4210,39
+"1_42",3,11443,"Pentagon Metro",0,4210,39
+"1_42",3,11444,"Pentagon Metro",0,4211,39
+"1_42",3,11445,"Pentagon Metro",0,4211,39
+"1_42",3,11446,"Pentagon Metro",0,4211,39
+"1_42",3,11447,"Pentagon Metro",0,4211,39
+"1_42",3,11448,"Pentagon Metro",0,4211,39
+"1_42",3,11449,"Pentagon Metro",0,4212,39
+"1_42",3,11450,"Pentagon Metro",0,4212,39
+"1_42",3,11451,"Pentagon Metro",0,4212,39
+"1_42",3,11452,"Pentagon Metro",0,4212,39
+"1_42",3,11453,"Pentagon Metro",0,4212,39
+"1_42",3,11454,"Pentagon Metro",0,4213,39
+"1_42",3,11455,"Pentagon Metro",0,4213,39
+"1_42",3,11456,"Pentagon Metro",0,4213,39
+"1_42",3,11457,"Pentagon Metro",0,4213,39
+"1_52",3,11458,"Ballston Metro via Ballston Metro",0,5203,76
+"1_52",3,11459,"Ballston Metro via Ballston Metro",0,5203,76
+"1_52",3,11460,"Ballston Metro via Ballston Metro",0,5203,76
+"1_52",3,11461,"Ballston Metro via Ballston Metro",0,5203,76
+"1_52",3,11462,"Ballston Metro via Ballston Metro",0,5203,76
+"1_52",3,11463,"Ballston Metro via Ballston Metro",0,5203,76
+"1_52",3,11464,"Ballston Metro via Ballston Metro",0,5203,76
+"1_52",3,11465,"Ballston Metro via Ballston Metro",0,5203,76
+"1_52",3,11466,"Ballston Metro via Ballston Metro",0,5204,76
+"1_52",3,11467,"Ballston Metro via Ballston Metro",0,5204,76
+"1_52",3,11468,"Ballston Metro via Ballston Metro",0,5204,76
+"1_52",3,11469,"Ballston Metro via Ballston Metro",0,5204,76
+"1_52",3,11470,"Ballston Metro via Ballston Metro",0,5213,76
+"1_52",3,11471,"Ballston Metro via Ballston Metro",0,5213,76
+"1_52",3,11472,"Ballston Metro via Ballston Metro",0,5213,76
+"1_52",3,11473,"Ballston Metro via Ballston Metro",0,5213,76
+"1_52",3,11474,"Ballston Metro via Ballston Metro",0,5213,76
+"1_52",3,11475,"Ballston Metro via Ballston Metro",0,5213,76
+"1_52",3,11476,"Ballston Metro via Ballston Metro",0,5213,76
+"1_52",3,11477,"Ballston Metro via Ballston Metro",0,5213,76
+"1_52",3,11478,"Ballston Metro via Ballston Metro",0,5214,76
+"1_52",3,11479,"Ballston Metro via Ballston Metro",0,5214,76
+"1_52",3,11480,"Ballston Metro via Ballston Metro",0,5214,76
+"1_52",3,11481,"Ballston Metro via Ballston Metro",0,5214,76
+"1_52",3,11482,"Ballston Metro via Ballston Metro",0,5214,76
+"1_52",3,11483,"Ballston Metro via Ballston Metro",0,5214,76
+"1_52",3,11484,"East Falls Church Metro",1,5203,77
+"1_52",3,11485,"East Falls Church Metro",1,5203,77
+"1_52",3,11486,"East Falls Church Metro",1,5203,77
+"1_52",3,11487,"East Falls Church Metro",1,5203,77
+"1_52",3,11488,"East Falls Church Metro",1,5203,77
+"1_52",3,11489,"East Falls Church Metro",1,5203,77
+"1_52",3,11490,"East Falls Church Metro",1,5203,77
+"1_52",3,11491,"East Falls Church Metro",1,5204,77
+"1_52",3,11492,"East Falls Church Metro",1,5204,77
+"1_52",3,11493,"East Falls Church Metro",1,5204,77
+"1_52",3,11494,"East Falls Church Metro",1,5213,77
+"1_52",3,11495,"East Falls Church Metro",1,5213,77
+"1_52",3,11496,"East Falls Church Metro",1,5213,77
+"1_52",3,11497,"East Falls Church Metro",1,5213,77
+"1_52",3,11498,"East Falls Church Metro",1,5213,77
+"1_52",3,11499,"East Falls Church Metro",1,5213,77
+"1_52",3,11500,"East Falls Church Metro",1,5213,77
+"1_52",3,11501,"East Falls Church Metro",1,5214,77
+"1_52",3,11502,"East Falls Church Metro",1,5214,77
+"1_52",3,11503,"East Falls Church Metro",1,5214,77
+"1_52",3,11504,"East Falls Church Metro",1,5214,77
+"1_52",3,11505,"East Falls Church Metro",1,5214,77
+"1_52",3,11506,"East Falls Church Metro",1,5214,77
+"1_75",3,11507,"Shirlington Station",0,7501,19
+"1_75",3,11508,"Shirlington Station",0,7501,19
+"1_75",3,11509,"Shirlington Station",0,7501,19
+"1_75",3,11510,"Shirlington Station",0,7501,19
+"1_75",3,11511,"Shirlington Station",0,7501,19
+"1_75",3,11512,"Shirlington Station",0,7502,19
+"1_75",3,11513,"Shirlington Station",0,7502,19
+"1_75",3,11514,"Shirlington Station",0,7502,19
+"1_75",3,11515,"Shirlington Station",0,7502,19
+"1_75",3,11516,"Shirlington Station",0,7502,19
+"1_75",3,11517,"Shirlington Station",0,7503,19
+"1_75",3,11518,"Shirlington Station",0,7503,19
+"1_75",3,11519,"Shirlington Station",0,7503,19
+"1_75",3,11520,"Shirlington Station",0,7503,19
+"1_75",3,11521,"Shirlington Station",0,7503,19
+"1_75",3,11522,"Shirlington Station",0,7511,19
+"1_75",3,11523,"Shirlington Station",0,7511,19
+"1_75",3,11524,"Shirlington Station",0,7511,19
+"1_75",3,11525,"Shirlington Station",0,7511,19
+"1_75",3,11526,"Shirlington Station",0,7511,19
+"1_75",3,11527,"Shirlington Station",0,7511,19
+"1_75",3,11528,"Shirlington Station",0,7512,19
+"1_75",3,11529,"Shirlington Station",0,7512,19
+"1_75",3,11530,"Shirlington Station",0,7512,19
+"1_75",3,11531,"Shirlington Station",0,7512,19
+"1_75",3,11532,"Shirlington Station",0,7512,19
+"1_75",3,11533,"Shirlington Station",0,7513,19
+"1_75",3,11534,"Shirlington Station",0,7513,19
+"1_75",3,11535,"Shirlington Station",0,7513,19
+"1_75",3,11536,"Shirlington Station",0,7513,19
+"1_75",3,11537,"Shirlington Station",0,7513,19
+"1_75",3,11538,"Shirlington Station",0,7513,19
+"1_75",3,11539,"Virginia Square Metro",1,7501,10
+"1_75",3,11540,"Virginia Square Metro",1,7501,10
+"1_75",3,11541,"Virginia Square Metro",1,7501,10
+"1_75",3,11542,"Virginia Square Metro",1,7501,10
+"1_75",3,11543,"Virginia Square Metro",1,7501,10
+"1_75",3,11544,"Virginia Square Metro",1,7502,10
+"1_75",3,11545,"Virginia Square Metro",1,7502,10
+"1_75",3,11546,"Virginia Square Metro",1,7502,10
+"1_75",3,11547,"Virginia Square Metro",1,7502,10
+"1_75",3,11548,"Virginia Square Metro",1,7502,10
+"1_75",3,11549,"Virginia Square Metro",1,7503,10
+"1_75",3,11550,"Virginia Square Metro",1,7503,10
+"1_75",3,11551,"Virginia Square Metro",1,7503,10
+"1_75",3,11552,"Virginia Square Metro",1,7503,10
+"1_75",3,11553,"Virginia Square Metro",1,7503,10
+"1_75",3,11554,"Virginia Square Metro",1,7511,10
+"1_75",3,11556,"Virginia Square Metro",1,7511,10
+"1_75",3,11557,"Virginia Square Metro",1,7511,10
+"1_75",3,11558,"Virginia Square Metro",1,7511,10
+"1_75",3,11559,"Virginia Square Metro",1,7511,10
+"1_75",3,11560,"Virginia Square Metro",1,7511,10
+"1_75",3,11561,"Virginia Square Metro",1,7512,10
+"1_75",3,11562,"Virginia Square Metro",1,7512,10
+"1_75",3,11563,"Virginia Square Metro",1,7512,10
+"1_75",3,11564,"Virginia Square Metro",1,7512,10
+"1_75",3,11565,"Virginia Square Metro",1,7512,10
+"1_75",3,11566,"Virginia Square Metro",1,7512,10
+"1_75",3,11567,"Virginia Square Metro",1,7513,10
+"1_75",3,11568,"Virginia Square Metro",1,7513,10
+"1_75",3,11569,"Virginia Square Metro",1,7513,10
+"1_75",3,11570,"Virginia Square Metro",1,7513,10
+"1_75",3,11571,"Virginia Square Metro",1,7513,10
+"1_75",3,11572,"Virginia Square Metro",1,7513,10
+"1_77",3,11573,"Shirlington Station",0,7701,16
+"1_77",3,11574,"Shirlington Station",0,7701,16
+"1_77",3,11575,"Shirlington Station",0,7701,16
+"1_77",3,11576,"Shirlington Station",0,7701,16
+"1_77",3,11577,"Shirlington Station",0,7701,16
+"1_77",3,11578,"Shirlington Station",0,7701,16
+"1_77",3,11579,"Shirlington Station",0,7701,16
+"1_77",3,11580,"Shirlington Station",0,7702,16
+"1_77",3,11581,"Shirlington Station",0,7702,16
+"1_77",3,11582,"Shirlington Station",0,7702,16
+"1_77",3,11583,"Shirlington Station",0,7702,16
+"1_77",3,11584,"Shirlington Station",0,7702,16
+"1_77",3,11585,"Shirlington Station",0,7702,16
+"1_77",3,11586,"Shirlington Station",0,7702,16
+"1_77",3,11587,"Shirlington Station",0,7702,16
+"1_77",3,11588,"Shirlington Station",0,7710,16
+"1_77",3,11589,"Shirlington Station",0,7710,16
+"1_77",3,11590,"Shirlington Station",0,7710,16
+"1_77",3,11591,"Shirlington Station",0,7710,16
+"1_77",3,11592,"Shirlington Station",0,7710,16
+"1_77",3,11593,"Shirlington Station",0,7710,16
+"1_77",3,11594,"Shirlington Station",0,7710,16
+"1_77",3,11595,"Shirlington Station",0,7710,16
+"1_77",3,11596,"Shirlington Station",0,7710,16
+"1_77",3,11597,"Shirlington Station",0,7711,16
+"1_77",3,11598,"Shirlington Station",0,7711,16
+"1_77",3,11599,"Shirlington Station",0,7711,16
+"1_77",3,11600,"Shirlington Station",0,7711,16
+"1_77",3,11601,"Shirlington Station",0,7711,16
+"1_77",3,11602,"Shirlington Station",0,7711,16
+"1_77",3,11603,"Shirlington Station",0,7711,16
+"1_77",3,11604,"Shirlington Station",0,7711,16
+"1_77",3,11605,"Court House Metro",1,7701,20
+"1_77",3,11606,"Court House Metro",1,7701,20
+"1_77",3,11607,"Court House Metro",1,7701,20
+"1_77",3,11608,"Court House Metro",1,7701,20
+"1_77",3,11609,"Court House Metro",1,7701,20
+"1_77",3,11610,"Court House Metro",1,7701,20
+"1_77",3,11611,"Court House Metro",1,7701,20
+"1_77",3,11612,"Court House Metro",1,7701,20
+"1_77",3,11613,"Court House Metro",1,7702,20
+"1_77",3,11614,"Court House Metro",1,7702,20
+"1_77",3,11615,"Court House Metro",1,7702,20
+"1_77",3,11616,"Court House Metro",1,7702,20
+"1_77",3,11617,"Court House Metro",1,7702,20
+"1_77",3,11618,"Court House Metro",1,7702,20
+"1_77",3,11619,"Court House Metro",1,7702,20
+"1_77",3,11620,"Court House Metro",1,7702,20
+"1_77",3,11621,"Court House Metro",1,7710,20
+"1_77",3,11622,"Court House Metro",1,7710,20
+"1_77",3,11623,"Court House Metro",1,7710,20
+"1_77",3,11624,"Court House Metro",1,7710,20
+"1_77",3,11625,"Court House Metro",1,7710,20
+"1_77",3,11626,"Court House Metro",1,7710,20
+"1_77",3,11627,"Court House Metro",1,7710,20
+"1_77",3,11628,"Court House Metro",1,7710,20
+"1_77",3,11629,"Court House Metro",1,7711,20
+"1_77",3,11630,"Court House Metro",1,7711,20
+"1_77",3,11631,"Court House Metro",1,7711,20
+"1_77",3,11632,"Court House Metro",1,7711,20
+"1_77",3,11633,"Court House Metro",1,7711,20
+"1_77",3,11634,"Court House Metro",1,7711,20
+"1_77",3,11635,"Court House Metro",1,7711,20
+"1_77",3,11636,"Court House Metro",1,7711,20
+"1_77",1,11637,"Shirlington Station",0,7720,16
+"1_77",1,11638,"Shirlington Station",0,7720,16
+"1_77",1,11639,"Shirlington Station",0,7720,16
+"1_77",1,11640,"Shirlington Station",0,7720,16
+"1_77",1,11641,"Shirlington Station",0,7720,16
+"1_77",1,11642,"Shirlington Station",0,7720,16
+"1_77",1,11643,"Shirlington Station",0,7720,16
+"1_77",1,11644,"Shirlington Station",0,7720,16
+"1_77",1,11645,"Shirlington Station",0,7721,16
+"1_77",1,11646,"Shirlington Station",0,7721,16
+"1_77",1,11647,"Shirlington Station",0,7721,16
+"1_77",1,11648,"Shirlington Station",0,7721,16
+"1_77",1,11649,"Shirlington Station",0,7721,16
+"1_77",1,11650,"Shirlington Station",0,7721,16
+"1_77",1,11651,"Shirlington Station",0,7721,16
+"1_77",1,11652,"Shirlington Station",0,7721,16
+"1_77",1,11653,"Shirlington Station",0,7731,16
+"1_77",1,11654,"Shirlington Station",0,7731,16
+"1_77",1,11655,"Shirlington Station",0,7731,16
+"1_77",1,11656,"Shirlington Station",0,7731,16
+"1_77",1,11657,"Shirlington Station",0,7731,16
+"1_77",1,11658,"Shirlington Station",0,7731,16
+"1_77",1,11659,"Shirlington Station",0,7731,16
+"1_77",1,11660,"Shirlington Station",0,7731,16
+"1_77",1,11661,"Shirlington Station",0,7731,16
+"1_77",1,11662,"Shirlington Station",0,7732,16
+"1_77",1,11663,"Shirlington Station",0,7732,16
+"1_77",1,11664,"Shirlington Station",0,7732,16
+"1_77",1,11665,"Shirlington Station",0,7732,16
+"1_77",1,11666,"Shirlington Station",0,7732,16
+"1_77",1,11667,"Shirlington Station",0,7732,16
+"1_77",1,11668,"Shirlington Station",0,7732,16
+"1_77",1,11669,"Court House Metro",1,7720,20
+"1_77",1,11670,"Court House Metro",1,7720,20
+"1_77",1,11671,"Court House Metro",1,7720,20
+"1_77",1,11672,"Court House Metro",1,7720,20
+"1_77",1,11673,"Court House Metro",1,7720,20
+"1_77",1,11674,"Court House Metro",1,7720,20
+"1_77",1,11675,"Court House Metro",1,7720,20
+"1_77",1,11676,"Court House Metro",1,7720,20
+"1_77",1,11677,"Court House Metro",1,7721,20
+"1_77",1,11678,"Court House Metro",1,7721,20
+"1_77",1,11679,"Court House Metro",1,7721,20
+"1_77",1,11680,"Court House Metro",1,7721,20
+"1_77",1,11681,"Court House Metro",1,7721,20
+"1_77",1,11682,"Court House Metro",1,7721,20
+"1_77",1,11683,"Court House Metro",1,7721,20
+"1_77",1,11684,"Court House Metro",1,7721,20
+"1_77",1,11685,"Court House Metro",1,7731,20
+"1_77",1,11686,"Court House Metro",1,7731,20
+"1_77",1,11687,"Court House Metro",1,7731,20
+"1_77",1,11688,"Court House Metro",1,7731,20
+"1_77",1,11689,"Court House Metro",1,7731,20
+"1_77",1,11690,"Court House Metro",1,7731,20
+"1_77",1,11691,"Court House Metro",1,7731,20
+"1_77",1,11692,"Court House Metro",1,7731,20
+"1_77",1,11693,"Court House Metro",1,7731,20
+"1_77",1,11694,"Court House Metro",1,7732,20
+"1_77",1,11695,"Court House Metro",1,7732,20
+"1_77",1,11696,"Court House Metro",1,7732,20
+"1_77",1,11697,"Court House Metro",1,7732,20
+"1_77",1,11698,"Court House Metro",1,7732,20
+"1_77",1,11699,"Court House Metro",1,7732,20
+"1_77",1,11700,"Court House Metro",1,7732,20
+"1_77",1,11701,"Court House Metro",1,7732,20
+"1_41",3,11702,"Columbia Pike & Dinwiddie",0,4102,14
+"1_42",3,11703,"Ballston Metro",1,4201,40
+"1_42",3,11704,"Ballston Metro",1,4201,40
+"1_42",3,11705,"Ballston Metro",1,4201,40
+"1_42",3,11706,"Ballston Metro",1,4201,40
+"1_42",3,11707,"Ballston Metro",1,4201,40
+"1_42",3,11708,"Ballston Metro",1,4201,40
+"1_42",3,11709,"Ballston Metro",1,4201,40
+"1_42",3,11710,"Ballston Metro",1,4202,40
+"1_42",3,11711,"Ballston Metro",1,4202,40
+"1_42",3,11712,"Ballston Metro",1,4202,40
+"1_42",3,11713,"Ballston Metro",1,4203,40
+"1_42",3,11714,"Ballston Metro",1,4203,40
+"1_42",3,11715,"Ballston Metro",1,4203,40
+"1_42",3,11716,"Ballston Metro",1,4203,40
+"1_42",3,11717,"Ballston Metro",1,4203,40
+"1_42",3,11718,"Ballston Metro",1,4203,40
+"1_42",3,11719,"Ballston Metro",1,4204,40
+"1_42",3,11720,"Ballston Metro",1,4204,40
+"1_42",3,11721,"Ballston Metro",1,4204,40
+"1_42",3,11722,"Ballston Metro",1,4210,40
+"1_42",3,11723,"Ballston Metro",1,4210,40
+"1_42",3,11724,"Ballston Metro",1,4210,40
+"1_42",3,11725,"Ballston Metro",1,4210,40
+"1_42",3,11726,"Ballston Metro",1,4210,40
+"1_42",3,11727,"Ballston Metro",1,4210,40
+"1_42",3,11728,"Ballston Metro",1,4211,40
+"1_42",3,11729,"Ballston Metro",1,4211,40
+"1_42",3,11730,"Ballston Metro",1,4211,40
+"1_42",3,11731,"Ballston Metro",1,4211,40
+"1_42",3,11732,"Ballston Metro",1,4211,40
+"1_42",3,11733,"Ballston Metro",1,4211,40
+"1_42",3,11734,"Ballston Metro",1,4212,40
+"1_42",3,11735,"Ballston Metro",1,4212,40
+"1_42",3,11736,"Ballston Metro",1,4212,40
+"1_42",3,11737,"Ballston Metro",1,4212,40
+"1_42",3,11738,"Ballston Metro",1,4212,40
+"1_42",3,11739,"Ballston Metro",1,4213,40
+"1_42",3,11740,"Ballston Metro",1,4213,40
+"1_42",3,11741,"Ballston Metro",1,4213,40
+"1_42",3,11742,"Ballston Metro",1,4213,40
+"1_42",3,11743,"Pentagon Metro",0,4201,39
+"1_42",3,11744,"Pentagon Metro",0,4201,39
+"1_42",3,11745,"Pentagon Metro",0,4201,39
+"1_42",3,11746,"Pentagon Metro",0,4201,39
+"1_42",3,11747,"Pentagon Metro",0,4201,39
+"1_42",3,11748,"Pentagon Metro",0,4201,39
+"1_42",3,11749,"Pentagon Metro",0,4201,39
+"1_42",3,11750,"Pentagon Metro",0,4202,39
+"1_42",3,11751,"Pentagon Metro",0,4202,39
+"1_42",3,11752,"Pentagon Metro",0,4202,39
+"1_42",3,11753,"Pentagon Metro",0,4203,39
+"1_42",3,11754,"Pentagon Metro",0,4203,39
+"1_42",3,11755,"Pentagon Metro",0,4203,39
+"1_42",3,11756,"Pentagon Metro",0,4203,39
+"1_41",3,11757,"Columbia Pike & Dinwiddie",0,4113,14
+"1_75",3,11758,"Virginia Square Metro",1,7511,10
+"1_45",3,11759,"Columbia Pike",0,4504,37
+"1_61A",3,11760,"Court House Metro",1,6101,75
+"1_61A",3,11761,"Court House Metro",1,6101,75
+"1_61A",3,11762,"Court House Metro",1,6101,75
+"1_61A",3,11763,"Court House Metro",1,6101,75
+"1_61A",3,11764,"Court House Metro",1,6101,75
+"1_61A",3,11765,"Court House Metro",1,6101,75
+"1_61A",3,11766,"Court House Metro",1,6101,75
+"1_61A",3,11767,"Court House Metro",1,6101,75
+"1_61B",3,11768,"Court House Metro",0,6102,73
+"1_61B",3,11769,"Court House Metro",0,6102,73
+"1_61B",3,11770,"Court House Metro",0,6102,73
+"1_61B",3,11771,"Court House Metro",0,6102,73
+"1_61B",3,11772,"Court House Metro",0,6102,73
+"1_61B",3,11773,"Court House Metro",0,6102,73
+"1_61B",3,11774,"Court House Metro",0,6102,73
+"1_61B",3,11775,"Court House Metro",0,6102,73
+"1_61B",3,11777,"Court House Metro",0,6110,73
+"1_61B",3,11778,"Court House Metro",0,6110,73
+"1_61B",3,11779,"Court House Metro",0,6110,73
+"1_61B",3,11780,"Court House Metro",0,6110,73
+"1_61B",3,11781,"Court House Metro",0,6110,73
+"1_61B",3,11782,"Court House Metro",0,6110,73
+"1_61B",3,11783,"Court House Metro",0,6110,73
+"1_61A",3,11785,"Court House Metro",1,6111,75
+"1_61A",3,11786,"Court House Metro",1,6111,75
+"1_61A",3,11787,"Court House Metro",1,6111,75
+"1_61A",3,11788,"Court House Metro",1,6111,75
+"1_61A",3,11789,"Court House Metro",1,6111,75
+"1_61A",3,11790,"Court House Metro",1,6111,75
+"1_61A",3,11791,"Court House Metro",1,6111,75
+"1_61A",3,11792,"Court House Metro",1,6111,75
+"1_45",3,11793,"Columbia Pike",0,4503,37
+"1_45",3,11794,"Columbia Pike",0,4504,37
+"1_45",3,11795,"Columbia Pike",0,4505,37
+"1_45",3,11796,"Columbia Pike",0,4503,37
+"1_45",3,11797,"Columbia Pike",0,4504,37
+"1_45",3,11798,"Columbia Pike",0,4505,37
+"1_45",3,11799,"Columbia Pike",0,4503,37
+"1_45",3,11800,"Columbia Pike",0,4504,37
+"1_45",3,11801,"Columbia Pike",0,4505,37
+"1_45",3,11802,"Columbia Pike",0,4503,37
+"1_45",3,11803,"Columbia Pike",0,4505,37
+"1_45",3,11804,"Columbia Pike",0,4513,37
+"1_45",3,11805,"Columbia Pike",0,4514,37
+"1_45",3,11806,"Columbia Pike",0,4515,37
+"1_45",3,11807,"Columbia Pike",0,4513,37
+"1_45",3,11808,"Columbia Pike",0,4514,37
+"1_45",3,11809,"Columbia Pike",0,4515,37
+"1_45",3,11810,"Columbia Pike",0,4513,37
+"1_45",3,11811,"Columbia Pike",0,4514,37
+"1_45",3,11812,"Columbia Pike",0,4515,37
+"1_45",3,11813,"Columbia Pike",0,4513,37
+"1_45",3,11814,"Columbia Pike",0,4514,37
+"1_45",3,11815,"Columbia Pike",0,4515,37
+"1_45",3,11816,"Columbia Pike",0,4513,37
+"1_45",3,11817,"Columbia Pike",0,4514,37
+"1_45",3,11818,"Rosslyn Metro",1,4503,23
+"1_45",3,11819,"Rosslyn Metro",1,4504,23
+"1_45",3,11820,"Rosslyn Metro",1,4505,23
+"1_45",3,11821,"Rosslyn Metro",1,4503,23
+"1_45",3,11822,"Rosslyn Metro",1,4504,23
+"1_45",3,11823,"Rosslyn Metro",1,4505,23
+"1_45",3,11824,"Rosslyn Metro",1,4503,23
+"1_45",3,11825,"Rosslyn Metro",1,4504,23
+"1_45",3,11826,"Rosslyn Metro",1,4505,23
+"1_45",3,11827,"Rosslyn Metro",1,4503,23
+"1_45",3,11828,"Rosslyn Metro",1,4504,23
+"1_45",3,11829,"Rosslyn Metro",1,4505,23
+"1_45",3,11830,"Rosslyn Metro",1,4513,23
+"1_45",3,11831,"Rosslyn Metro",1,4514,23
+"1_45",3,11832,"Rosslyn Metro",1,4515,23
+"1_45",3,11833,"Rosslyn Metro",1,4513,23
+"1_45",3,11834,"Rosslyn Metro",1,4514,23
+"1_45",3,11835,"Rosslyn Metro",1,4515,23
+"1_45",3,11836,"Rosslyn Metro",1,4513,23
+"1_45",3,11837,"Rosslyn Metro",1,4514,23
+"1_45",3,11838,"Rosslyn Metro",1,4515,23
+"1_45",3,11839,"Rosslyn Metro",1,4513,23
+"1_45",3,11840,"Rosslyn Metro",1,4514,23
+"1_45",3,11841,"Rosslyn Metro",1,4515,23
+"1_45",3,11842,"Rosslyn Metro",1,4513,23
+"1_45",3,11843,"Rosslyn Metro",1,4514,23
+"1_42",1,11846,"Pentagon Metro",0,4215,39
+"1_42",1,11847,"Pentagon Metro",0,4215,39
+"1_42",1,11848,"Pentagon Metro",0,4215,39
+"1_42",1,11849,"Pentagon Metro",0,4215,39
+"1_42",1,11850,"Pentagon Metro",0,4215,39
+"1_42",1,11851,"Pentagon Metro",0,4215,39
+"1_42",1,11852,"Pentagon Metro",0,4215,39
+"1_42",1,11853,"Ballston Metro",1,4215,40
+"1_42",1,11854,"Ballston Metro",1,4215,40
+"1_42",1,11855,"Ballston Metro",1,4215,40
+"1_42",1,11856,"Ballston Metro",1,4215,40
+"1_42",1,11857,"Ballston Metro",1,4215,40
+"1_42",1,11858,"Ballston Metro",1,4215,40
+"1_42",1,11859,"Ballston Metro",1,4215,40
+"1_61B",3,11860,"Court House Metro",1,6110,70
+"1_61A",3,11861,"Court House Metro",1,6111,71
+"1_53A",3,11862,"Ballston Metro",0,5310,167
+"1_53A",3,11863,"Ballston Metro",0,5311,167
+"1_53A",3,11864,"Ballston Metro",0,5310,167
+"1_74",3,11865,"Pentagon City Metro",0,7451,228
+"1_74",3,11866,"Pentagon City Metro",0,7451,228
+"1_74",3,11867,"Pentagon City Metro",0,7451,228
+"1_74",3,11868,"Pentagon City Metro",0,7451,228
+"1_74",3,11869,"Pentagon City Metro",0,7451,228
+"1_74",3,11870,"Pentagon City Metro",0,7451,228
+"1_74",3,11871,"Pentagon City Metro",0,7451,228
+"1_74",3,11872,"Halstead",1,7461,229
+"1_74",3,11873,"Halstead",1,7461,229
+"1_74",3,11874,"Halstead",1,7461,229
+"1_74",3,11875,"Halstead",1,7461,229
+"1_74",3,11876,"Halstead",1,7461,229
+"1_74",3,11877,"Halstead",1,7461,229
+"1_74",3,11878,"Halstead",1,7461,229
+"1_74",3,11879,"Halstead",1,7461,229
+"1_74",3,11880,"Halstead",1,7461,229
+"1_84",3,11882,"Pentagon City Metro",0,8401,69
+"1_84",3,11883,"Pentagon City Metro",0,8402,69
+"1_84",3,11884,"Pentagon City Metro",0,8401,69
+"1_84",3,11885,"Pentagon City Metro",0,8402,69
+"1_84",3,11886,"Pentagon City Metro",0,8401,69
+"1_84",3,11887,"Pentagon City Metro",0,8402,69
+"1_84",3,11888,"Pentagon City Metro",0,8401,69
+"1_84",3,11889,"Pentagon City Metro",0,8402,69
+"1_84",3,11890,"Pentagon City Metro",0,8401,69
+"1_84",3,11891,"Pentagon City Metro",0,8402,69
+"1_84",3,11892,"Pentagon City Metro",0,8401,69
+"1_84",3,11893,"Douglas Park",1,8410,68
+"1_84",3,11894,"Douglas Park",1,8411,68
+"1_84",3,11895,"Douglas Park",1,8410,68
+"1_84",3,11896,"Douglas Park",1,8411,68
+"1_84",3,11897,"Douglas Park",1,8410,68
+"1_84",3,11898,"Douglas Park",1,8411,68
+"1_84",3,11899,"Douglas Park",1,8410,68
+"1_84",3,11900,"Douglas Park",1,8411,68
+"1_84",3,11901,"Douglas Park",1,8410,68
+"1_84",3,11902,"Douglas Park",1,8411,68
+"1_84",3,11903,"Douglas Park",1,8410,68
+"1_84",3,11904,"Douglas Park",1,8411,68
+"1_84",3,11905,"Douglas Park",1,8410,68
+"1_53A",3,11906,"East Falls Church Metro",1,5302,168
+"1_53A",3,11907,"East Falls Church Metro",1,5301,164
+"1_53A",3,11908,"East Falls Church Metro",1,5302,164
+"1_53A",3,11909,"East Falls Church Metro",1,5301,164
+"1_53A",3,11910,"East Falls Church Metro",1,5302,164
+"1_53A",3,11911,"East Falls Church Metro",1,5301,164
+"1_53A",3,11912,"East Falls Church Metro",1,5301,164
+"1_53A",3,11913,"East Falls Church Metro",1,5301,164
+"1_53A",3,11914,"East Falls Church Metro",1,5301,164
+"1_53A",3,11915,"East Falls Church Metro",1,5310,164
+"1_53A",3,11916,"East Falls Church Metro",1,5310,164
+"1_53B",3,11917,"East Falls Church Metro",1,5311,169
+"1_53B",3,11918,"East Falls Church Metro",1,5310,169
+"1_53B",3,11919,"East Falls Church Metro",1,5311,169
+"1_53B",3,11920,"East Falls Church Metro",1,5310,169
+"1_53B",3,11921,"East Falls Church Metro",1,5311,169
+"1_53B",3,11922,"East Falls Church Metro",1,5310,169
+"1_53A",3,11923,"East Falls Church Metro",1,5311,164
+"1_53A",3,11924,"East Falls Church Metro",1,5310,164
+"1_53A",3,11925,"East Falls Church Metro",1,5311,164
+"1_53B",3,11926,"Ballston Metro",0,5301,165
+"1_53B",3,11927,"Ballston Metro",0,5302,166
+"1_53B",3,11928,"Ballston Metro",0,5301,166
+"1_53B",3,11929,"Ballston Metro",0,5302,166
+"1_53B",3,11930,"Ballston Metro",0,5301,166
+"1_53A",3,11931,"Ballston Metro",0,5302,167
+"1_53A",3,11932,"Ballston Metro",0,5301,167
+"1_53A",3,11933,"Ballston Metro",0,5301,167
+"1_53A",3,11934,"Ballston Metro",0,5301,167
+"1_53A",3,11935,"Ballston Metro",0,5310,167
+"1_53A",3,11936,"Ballston Metro",0,5310,167
+"1_53A",3,11937,"Ballston Metro",0,5310,167
+"1_53A",3,11938,"Ballston Metro",0,5311,167
+"1_53A",3,11939,"Ballston Metro",0,5310,167
+"1_53A",3,11940,"Ballston Metro",0,5311,167
+"1_53A",3,11941,"Ballston Metro",0,5310,167
+"1_53A",3,11942,"Ballston Metro",0,5311,167
