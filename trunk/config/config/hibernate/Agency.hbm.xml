@@ -1,9 +1,8 @@
 <?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
-<hibernate-mapping xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
-		xsi:schemaLocation="org/hibernate/hibernate-mapping-4.0.xsd"
-		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		package="me.transit.database" >
+<hibernate-mapping package="me.transit.database" >
 
 	  <class name="me.transit.database.Agency"  table="tran_agency" >
 

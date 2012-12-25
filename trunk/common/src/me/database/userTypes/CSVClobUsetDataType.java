@@ -12,7 +12,6 @@ import java.util.Properties;
 import me.database.CSVFieldType;
 
 import org.hibernate.HibernateException;
-import org.hibernate.engine.spi.SessionImplementor;
 import org.hibernate.usertype.ParameterizedType;
 import org.hibernate.usertype.UserType;
 
@@ -34,16 +33,16 @@ public class CSVClobUsetDataType implements UserType, ParameterizedType {
 			csvClass = Class.forName(enumClassName).asSubclass(
 					CSVFieldType.class);
 		} catch (ClassNotFoundException cfne) {
-			throw new HibernateException("CSVClobUsetDataType class not found", cfne);
+			throw new HibernateException("CSVFieldType class not found", cfne);
 		}
 
 		try {
 			@SuppressWarnings("unused")
 			Object obj = csvClass.newInstance();
 		} catch (InstantiationException e) {
-			throw new HibernateException("CSVClobUsetDataType unable to create: " + enumClassName + " " + csvClass, e);
+			throw new HibernateException("CSVFieldType unable to create", e);
 		} catch (IllegalAccessException e) {
-			throw new HibernateException("CSVClobUsetDataType unable to create " + enumClassName + " " + csvClass, e);
+			throw new HibernateException("CSVFieldType unable to create", e);
 		}
 
 	}
@@ -63,7 +62,8 @@ public class CSVClobUsetDataType implements UserType, ParameterizedType {
 	 * 
 	 */
 	@Override
-	public Object nullSafeGet(ResultSet rs, String[] names, SessionImplementor arg2, Object owner) throws HibernateException, SQLException {
+	public Object nullSafeGet(ResultSet rs, String[] names, Object owner)
+			throws HibernateException, SQLException {
 		String value = rs.getString(names[0]);
 		if ( value == null || value.trim().isEmpty() ) {
 			return null;
@@ -81,7 +81,8 @@ public class CSVClobUsetDataType implements UserType, ParameterizedType {
 	 * 
 	 */
 	@Override
-	public void nullSafeSet(PreparedStatement st, Object value, int index,SessionImplementor arg3) throws HibernateException, SQLException {
+	public void nullSafeSet(PreparedStatement st, Object value, int index)
+			throws HibernateException, SQLException {
 		if ( value == null ) {
 			st.setNull(index, Types.VARCHAR);
 		}

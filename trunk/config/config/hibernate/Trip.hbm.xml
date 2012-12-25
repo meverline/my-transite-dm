@@ -1,9 +1,13 @@
 <?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
-<hibernate-mapping xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
-			xsi:schemaLocation="/org/hibernate/hibernate-mapping-4.0.xsd"
-			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		package="me.transit.database" >
+<hibernate-mapping package="me.transit.database" >
+
+	  <typedef name="DirectionTypeUserType" class="org.hibernate.type.EnumType" >
+          <param name="enumClass">me.transit.database.Trip$DirectionType</param>
+          <param name="type">12</param>
+	  </typedef>
 	  
 	  <typedef name="StopTimeUserType" class="me.database.userTypes.CSVClobUsetDataType" >
           <param name="csvClass">me.transit.database.impl.StopTimeImpl</param>
@@ -18,11 +22,7 @@
 		  <discriminator column="TRIP_TYPE" type="string"/>
 		  <property name="headSign" column="HEAD_SIGN"  /> 
 	      <property name="shortName" column="NAME" />
-		  <property name="directionId" column="DIRECTION" not-null="true" >
-		     <type name="org.hibernate.type.EnumType">
-                <param name="enumClass">me.transit.database.Trip$DirectionType</param>
-             </type>
-           </property>
+		  <property name="directionId" column="DIRECTION" not-null="true" type="DirectionTypeUserType" />
 		       
 		  <many-to-one name="shape"  
 		  			   class="RouteGeometry" 

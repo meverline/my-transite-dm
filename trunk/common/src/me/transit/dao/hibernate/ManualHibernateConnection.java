@@ -12,17 +12,13 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.metamodel.MetadataSources;
-import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
 
 public class ManualHibernateConnection implements HibernateConnection {
 
 	private  SessionFactory fact = null;
 	private  Connection conn = null;
 	private  Configuration cfg = null;
-	private  ServiceRegistry serviceRegistry;
-	
+
 	private Log log = LogFactory.getLog(ManualHibernateConnection.class);
 	
 	/**
@@ -36,13 +32,7 @@ public class ManualHibernateConnection implements HibernateConnection {
 			cfg = new Configuration().configure();
 			openConnection(cfg);
 			cfg.setProperties(System.getProperties());
-			
-			ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().configure().buildServiceRegistry();
-			MetadataSources metadataSources = new MetadataSources(serviceRegistry);
-			fact = metadataSources.buildMetadata().buildSessionFactory();
-			
-			//serviceRegistry = new ServiceRegistryBuilder().applySettings(cfg.getProperties()).buildServiceRegistry(); 
-			//fact = new Configuration().configure().buildSessionFactory(serviceRegistry);
+			fact = new Configuration().configure().buildSessionFactory();
 
 		} catch (MappingException e) {
 			log.error(e.getLocalizedMessage(), e);
