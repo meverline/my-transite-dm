@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
-<hibernate-mapping  xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
-		xsi:schemaLocation="org/hibernate/hibernate-mapping-4.0.xsd"
-		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		package="me.transit.database" >
+<hibernate-mapping package="me.transit.database" >
 
-	  <typedef name="ServiceDateUserType" class="me.database.userTypes.GenericEnumUserType" >
+	  <typedef name="ServiceDateUserType" class="org.hibernate.type.EnumType" >
 	       <param name="enumClass">me.transit.database.ServiceDate$ServiceDays</param>
+	       <param name="type">12</param>
 	  </typedef>
  	  
      <class name="ServiceDate"  table="tran_service_date" >
@@ -23,11 +23,8 @@
 		  
 		  <property name="serviceDayFlag" column="SERVICE_DAYS" not-null="true" /> 
 		  
-		  <property name="service" column="SERVICE_TYPE" not-null="true" >
-		  	 <type name="org.hibernate.type.EnumType">
-                <param name="enumClass">me.transit.database.ServiceDate$ServiceDays</param>
-             </type>
-          </property>
+		  <property name="service" column="SERVICE_TYPE"  
+		  			type="ServiceDateUserType" not-null="true" />
 		  <property name="version" column="VERSION"  />
 		  			
 		  <many-to-one name="agency"  

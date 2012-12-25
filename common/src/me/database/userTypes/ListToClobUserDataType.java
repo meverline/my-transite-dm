@@ -9,7 +9,6 @@ import java.util.HashSet;
 import java.util.List;
 
 import org.hibernate.HibernateException;
-import org.hibernate.engine.spi.SessionImplementor;
 import org.hibernate.usertype.UserType;
 
 public class ListToClobUserDataType implements UserType {
@@ -18,7 +17,7 @@ public class ListToClobUserDataType implements UserType {
 	 * 
 	 */
 	@Override
-	public Object nullSafeGet(ResultSet rs, String[] names, SessionImplementor arg2, Object owner)
+	public Object nullSafeGet(ResultSet rs, String[] names, Object owner)
 			throws HibernateException, SQLException {
 		String value = rs.getString(names[0]);
 		if ( value == null || value.trim().isEmpty() ) {
@@ -37,7 +36,7 @@ public class ListToClobUserDataType implements UserType {
 	 * 
 	 */
 	@Override
-	public void nullSafeSet(PreparedStatement st, Object value, int index, SessionImplementor arg2)
+	public void nullSafeSet(PreparedStatement st, Object value, int index)
 			throws HibernateException, SQLException {
 		if ( value == null ) {
 			st.setNull(index, Types.VARCHAR);

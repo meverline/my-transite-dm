@@ -3,7 +3,6 @@ package me.transit.parser;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FilenameFilter;
 import java.lang.reflect.Method;
@@ -43,8 +42,6 @@ import org.apache.commons.logging.LogFactory;
 
 import org.nocrala.tools.gis.data.esri.shapefile.ShapeFileReader;
 import org.nocrala.tools.gis.data.esri.shapefile.ValidationPreferences;
-import org.nocrala.tools.gis.data.esri.shapefile.exception.InvalidShapeFileException;
-import org.nocrala.tools.gis.data.esri.shapefile.header.ShapeFileHeader;
 import org.nocrala.tools.gis.data.esri.shapefile.shape.AbstractShape;
 import org.nocrala.tools.gis.data.esri.shapefile.shape.PointData;
 import org.nocrala.tools.gis.data.esri.shapefile.shape.shapes.PolylineShape;
@@ -743,6 +740,7 @@ public class TransitFeedParser {
 	 * Parse the shape file.
 	 * @param shapeFile
 	 */
+	@SuppressWarnings("unused")
 	private HashMap<Long,RouteTripPair> readRouteShapeFile(String shapeFile ) 
 	{
 		HashMap<Long,RouteTripPair> tripMap = new HashMap<Long,RouteTripPair>();
@@ -799,6 +797,7 @@ public class TransitFeedParser {
 	 * Parse the shape file.
 	 * @param shapeFile
 	 */
+	@SuppressWarnings("unused")
 	private void readStopShapeFile(String shapeFile, HashMap<Long,RouteTripPair> tripMap) 
 	{	
 		File fp = new File(shapeFile);
