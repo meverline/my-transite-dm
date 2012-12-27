@@ -11,7 +11,7 @@
 
         <!-- properties -->
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5433/Transit</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/Transit</property>
         <property name="hibernate.connection.username">postgres</property>
         <property name="hibernate.connection.password">Postgres</property>      
         <property name="hibernate.dialect">org.hibernatespatial.postgis.PostgisDialect</property>

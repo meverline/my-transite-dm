@@ -65,7 +65,7 @@ public abstract class TransitDaoImpl extends HibernateDaoImpl implements Transit
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
-	public  Object loadById(long id, String agencyName) {
+	public  Object loadById(String id, String agencyName) {
 		
 		List<Object> aList = null;
 		try {

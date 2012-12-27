@@ -37,11 +37,11 @@ public interface TransitData {
 	/**
 	 * @return the serviceId
 	 */
-	public long getId();
+	public String getId();
 
 	/**
 	 * @param serviceId the serviceId to set
 	 */
-	public void setId(long id);
+	public void setId(String id);
 
 }

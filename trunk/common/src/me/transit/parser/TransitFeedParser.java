@@ -69,9 +69,9 @@ public class TransitFeedParser {
 	private static GeometryFactory factory = new GeometryFactory();
 	private Agency agency = null;
 	private Properties properties = new Properties();
-	private HashMap<Long,RouteGeometry> shaps = new HashMap<Long,RouteGeometry>();
-	private HashMap<Long,ServiceDate> service = new HashMap<Long,ServiceDate>();
-	private HashMap<Long,Long> tripToRoute = new HashMap<Long, Long>();
+	private HashMap<String,RouteGeometry> shaps = new HashMap<String,RouteGeometry>();
+	private HashMap<String,ServiceDate> service = new HashMap<String,ServiceDate>();
+	private HashMap<String,String> tripToRoute = new HashMap<String, String>();
 	
 	public static Log log = LogFactory.getLog(TransitFeedParser.class);
 	
@@ -180,7 +180,8 @@ public class TransitFeedParser {
 	public void parse(String diretory)
 	{
 		String files[] = getProperties().get("order").toString().split(",");
-		HashMap<Long, RouteTripPair> tripMap = null;
+		HashMap<String, RouteTripPair> tripMap = null;
+		
 		for ( String dataFile : files ) {	
 			log.info("parse: " + dataFile + " " + diretory);
 			if ( dataFile.trim().compareTo("shapes.txt") == 0 ) {
@@ -538,9 +539,7 @@ public class TransitFeedParser {
 				
 				ServiceDate sd = new ServiceDateImpl();
 				
-				long lng = Long.parseLong(id.trim());
-				
-				sd.setId(lng);
+				sd.setId(id.trim());
 				sd.setStartDate( this.convertDate(data[indexMap.get("StartDate")]));
 				sd.setEndDate( this.convertDate(data[indexMap.get("EndDate")]));
 				sd.setAgency(getAgency());
@@ -603,7 +602,7 @@ public class TransitFeedParser {
 		
 	}
 	
-	private void saveShape(long id, List<Coordinate> coords)
+	private void saveShape(String id, List<Coordinate> coords)
 	{
 		Coordinate array[] = new Coordinate[coords.size()];
 		coords.toArray(array);
@@ -645,13 +644,13 @@ public class TransitFeedParser {
 			HashMap<String,Integer> indexMap = processHeader(inStream.readLine(), "shape", header);
 			
 			List<Coordinate> coords = new ArrayList<Coordinate>();
-			long current = -1;
+			String current = null;
 			while ( inStream.ready() ) {
 				String line = inStream.readLine();
 				String data[] = line.split(",");
-				long id = Long.parseLong(data[indexMap.get(TransitFeedParser.ID)].trim());
+			    String id = data[indexMap.get(TransitFeedParser.ID)].trim();
 				
-				if ( current == -1 ) { current = id; }
+				if ( current == null ) { current = id; }
 				
 				if ( current != id ) {
 					saveShape(current, coords);
@@ -676,7 +675,7 @@ public class TransitFeedParser {
 	 * @param routeId
 	 * @return
 	 */
-	private void updateStop(long stopId, HashMap<Long, String> routeTrips )
+	private void updateStop(String stopId, HashMap<String, String> routeTrips )
 	{
 		RouteDao dao = 
 			RouteDao.class.cast(DaoBeanFactory.create().getDaoBean(RouteDao.class));
@@ -690,7 +689,7 @@ public class TransitFeedParser {
 			
 			List<RouteStopData> routesList = new ArrayList<RouteStopData>();
 			
-			for ( Entry<Long,String> entry : routeTrips.entrySet() ) {
+			for ( Entry<String,String> entry : routeTrips.entrySet() ) {
 				route = Route.class.cast(dao.loadById(entry.getKey(), getAgencyName()));
 				if ( route != null ) {
 					routesList.add( new RouteStopDataImpl( route.getShortName(), entry.getValue()));
@@ -711,7 +710,7 @@ public class TransitFeedParser {
 	 * @param routeId
 	 * @param aStopList
 	 */
-	private void updateRoute(long routeId, List<Trip> tripList)
+	private void updateRoute(String routeId, List<Trip> tripList)
 	{
 		Route route = null;
 		try {
@@ -852,9 +851,9 @@ public class TransitFeedParser {
 	 * Parse the shape file.
 	 * @param shapeFile
 	 */
-	private HashMap<Long,RouteTripPair> parseTrip(String shapeFile) 
+	private HashMap<String,RouteTripPair> parseTrip(String shapeFile) 
 	{
-		HashMap<Long,RouteTripPair> tripMap = new HashMap<Long,RouteTripPair>();
+		HashMap<String,RouteTripPair> tripMap = new HashMap<String,RouteTripPair>();
 		try {
 			
 			File fp = new File(shapeFile);
@@ -869,7 +868,7 @@ public class TransitFeedParser {
 			List<String> header = new ArrayList<String>();
 			HashMap<String,Integer> indexMap = processHeader(inStream.readLine(), "trip", header);
 
-			long routeId = -1;
+			String routeId = null;
 			
 			this.tripToRoute.clear();
 			
@@ -881,11 +880,11 @@ public class TransitFeedParser {
 				Trip trip = new TripImpl();
 								
 				if ( indexMap.containsKey("RouteId") ) {
-				   routeId = Long.parseLong(data[indexMap.get("RouteId")].trim());			 
+				   routeId = data[indexMap.get("RouteId")].trim();			 
 				} 
 				
 				if ( indexMap.containsKey("Id") ) {
-				   long id = Long.parseLong(data[indexMap.get("Id")].trim());
+				   String id = data[indexMap.get("Id")].trim();
 				   trip.setId(id);
 				}
 				
@@ -929,7 +928,7 @@ public class TransitFeedParser {
 	 * Parse the shape file.
 	 * @param shapeFile
 	 */
-	private void parseStopTime(String shapeFile, HashMap<Long, RouteTripPair> tripMap) 
+	private void parseStopTime(String shapeFile, HashMap<String, RouteTripPair> tripMap) 
 	{
 		try {
 			
@@ -945,7 +944,7 @@ public class TransitFeedParser {
 			List<String> header = new ArrayList<String>();
 			HashMap<String,Integer> indexMap = processHeader(inStream.readLine(), "shape", header);
 			
-			long current = -1;
+			String current = null;
 			long lineCnt = 0;
 			long cnt = 0;
 			StopTime last = null;
@@ -953,7 +952,7 @@ public class TransitFeedParser {
 			RouteTripPair trip = null;
 			StopTime stopTime = null;
 			
-			HashMap<Long,HashMap<Long,String>> stopMap = new HashMap<Long,HashMap<Long,String>>();
+			HashMap<String,HashMap<String,String>> stopMap = new HashMap<String,HashMap<String,String>>();
 			
 			while ( inStream.ready() ) {
 				
@@ -962,7 +961,7 @@ public class TransitFeedParser {
 				
 				stopTime = new StopTimeImpl(last);
 				
-				long id = Long.parseLong(data[indexMap.get("TripId")].trim());
+				String id = data[indexMap.get("TripId")].trim();
 				
 				if ( indexMap.containsKey("ArrivalTime") ) {
 				  String time[] = data[indexMap.get("ArrivalTime")].trim().split(":");
@@ -984,7 +983,7 @@ public class TransitFeedParser {
 					if ( builder.toString().length() > 0 ) {	 
 					   stopTime.setDepartureTime(Long.parseLong(builder.toString()));	
 					}
-					stopTime.setStopId(Long.parseLong(data[indexMap.get("StopId")].trim()));
+					stopTime.setStopId(data[indexMap.get("StopId")].trim());
 				} 
 				
 				if ( indexMap.containsKey("DropOffType") ) {
@@ -1007,16 +1006,15 @@ public class TransitFeedParser {
 				}
 				
 				if ( indexMap.containsKey("StopId") ) {
-					long stopId = Long.parseLong(data[indexMap.get("StopId")].trim());	
-					stopTime.setStopId(stopId);
-					if ( ! stopMap.containsKey(stopId) ) {
-						stopMap.put(stopId, new HashMap<Long,String>());
+					stopTime.setStopId(data[indexMap.get("StopId")].trim());
+					if ( ! stopMap.containsKey( stopTime.getStopId()) ) {
+						stopMap.put( stopTime.getStopId(), new HashMap<String,String>());
 					}
 				}
 				
-				if ( current == -1 ) { current = id; }
+				if ( current == null ) { current = id; }
 				
-				if ( current != id ) {
+				if ( current.compareTo(id) != 0 ) {
 					trip = tripMap.get(id);
 					trip.getTrip().addStopTime(stopTime);
 					
@@ -1049,7 +1047,7 @@ public class TransitFeedParser {
 			   }
 			}
 			
-			HashMap<Long,List<Trip>> routeToTrip = new HashMap<Long,List<Trip>>();
+			HashMap<String,List<Trip>> routeToTrip = new HashMap<String,List<Trip>>();
 			
 			for ( RouteTripPair pair : tripMap.values()) {
 				if ( ! routeToTrip.containsKey(pair.getRouteId()) ) {
@@ -1058,11 +1056,11 @@ public class TransitFeedParser {
 				routeToTrip.get(pair.getRouteId()).add(pair.getTrip());
 			}
 			
-			for ( Entry<Long,List<Trip>> data : routeToTrip.entrySet()) {
+			for ( Entry<String,List<Trip>> data : routeToTrip.entrySet()) {
 				updateRoute(data.getKey(), data.getValue());
 			}
 			
-			for ( Entry<Long,HashMap<Long,String>> entry : stopMap.entrySet()) {
+			for ( Entry<String,HashMap<String,String>> entry : stopMap.entrySet()) {
 				this.updateStop(entry.getKey(), entry.getValue());
 			}
 			
@@ -1106,16 +1104,16 @@ public class TransitFeedParser {
 	
 	private class RouteTripPair {
 		
-		private long routeId = -1;
+		private String routeId = null;
 		private Trip trip = null;
 		
-		public RouteTripPair(long routeId, Trip trip)
+		public RouteTripPair(String routeId, Trip trip)
 		{
 			this.routeId = routeId;
 			this.trip = trip;
 		}
 
-		public long getRouteId() {
+		public String getRouteId() {
 			return routeId;
 		}
 

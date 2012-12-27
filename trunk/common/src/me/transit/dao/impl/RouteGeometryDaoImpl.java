@@ -23,14 +23,14 @@ public class RouteGeometryDaoImpl extends TransitDaoImpl implements RouteGeometr
 	 * @see me.transit.dao.TransitDao#loadById(long, java.lang.String)
 	 */
 	@Override
-	public synchronized Object loadById(long id, String agencyName) {
+	public synchronized Object loadById(String id, String agencyName) {
 		RouteGeometry rtn = RouteGeometry.class.cast(super.loadById(id, agencyName));
 		
 		Hibernate.initialize(rtn.getAgency());
 		return rtn;
 	}
 	
-	public RouteGeometry findGeometryById(long id, String agencyName) throws DaoException
+	public RouteGeometry findGeometryById(String id, String agencyName) throws DaoException
 	{
 		return RouteGeometry.class.cast(this.loadById(id, agencyName));
 	}

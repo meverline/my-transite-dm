@@ -20,7 +20,7 @@ public class TripDaoImpl extends TransitDaoImpl implements TripDao {
 	 * @see me.transit.dao.TransitDao#loadById(long, java.lang.String)
 	 */
 	@Override
-	public synchronized Object loadById(long id, String agencyName) {
+	public synchronized Object loadById(String id, String agencyName) {
 		Trip obj = Trip.class.cast(super.loadById(id, agencyName));
 		
 		Hibernate.initialize(obj.getAgency());
