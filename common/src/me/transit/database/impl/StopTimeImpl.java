@@ -13,7 +13,7 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 public class StopTimeImpl implements StopTime {
 
 	@XStreamOmitField
-	private long stopId = -1;
+	private String stopId = null;
 	@XStreamAlias("arrivalTime")
 	private long arrivalTime = 0;
 	@XStreamAlias("departureTime")
@@ -82,14 +82,14 @@ public class StopTimeImpl implements StopTime {
 	/**
 	 * @return the stopId
 	 */
-	public long getStopId() {
+	public String getStopId() {
 		return stopId;
 	}
 
 	/**
 	 * @param stopId the stopId to set
 	 */
-	public void setStopId(long stopId) {
+	public void setStopId(String stopId) {
 		this.stopId = stopId;
 	}
 

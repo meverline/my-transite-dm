@@ -12,7 +12,7 @@ public class TransitDateImpl implements TransitData {
 	private long uuid = -1;
 	private Agency agency = null;
 	@XStreamOmitField
-	private long id = -1;
+	private String id = null;
 	@XStreamAlias("version")
 	private String version = "0.5";
 	
@@ -61,14 +61,14 @@ public class TransitDateImpl implements TransitData {
 	/**
 	 * @return the serviceId
 	 */
-	public long getId() {
+	public String getId() {
 		return id;
 	}
 
 	/**
 	 * @param serviceId the serviceId to set
 	 */
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

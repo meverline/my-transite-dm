@@ -38,12 +38,12 @@ public interface StopTime extends CSVFieldType {
 	/**
 	 * @return the stopId
 	 */
-	public long getStopId();
+	public String getStopId();
 
 	/**
 	 * @param stopId the stopId to set
 	 */
-	public void setStopId(long stopId);
+	public void setStopId(String stopId);
 
 	/**
 	 * @return the stopHeadSign

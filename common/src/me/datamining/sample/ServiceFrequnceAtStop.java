@@ -41,7 +41,7 @@ public class ServiceFrequnceAtStop extends AbstractSpatialSampleData {
 	@XStreamConverter(me.database.ServiceDateSampleDataValueConverter.class)
 	private AbstractSpatialSampleData self = this;
 	
-	private HashMap<Long,Integer> stopValue = new HashMap<Long, Integer>();
+	private HashMap<String,Integer> stopValue = new HashMap<String, Integer>();
 
 	/**
 	 * @return the self

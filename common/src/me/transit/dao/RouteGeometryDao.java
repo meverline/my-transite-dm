@@ -5,6 +5,6 @@ import me.transit.database.RouteGeometry;
 
 public interface RouteGeometryDao extends TransitDao {
 
-	public abstract RouteGeometry findGeometryById(long id, String agencyName) throws DaoException;
+	public abstract RouteGeometry findGeometryById(String id, String agencyName) throws DaoException;
 
 }

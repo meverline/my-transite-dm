@@ -67,7 +67,7 @@ public class DataSaver {
 		ROUTE {
 			@Override
 			public Object convert(String data) {
-				long id = Long.parseLong(data.trim());
+				String id = data.trim();
 				RouteDao dao = RouteDao.class.cast(DaoBeanFactory.create().getDaoBean(RouteDao.class));
 				return Route.class.cast(dao.loadById(id, getParser().getAgencyName()));
 			}

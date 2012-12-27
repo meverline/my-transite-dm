@@ -25,6 +25,6 @@ public interface TransitDao extends HibernateDao {
 	/**
 	 * 
 	 */
-	public abstract Object loadById(long id, String agencyName);
+	public abstract Object loadById(String id, String agencyName);
 
 }

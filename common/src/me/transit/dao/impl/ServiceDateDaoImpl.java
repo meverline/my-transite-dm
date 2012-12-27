@@ -22,7 +22,7 @@ public class ServiceDateDaoImpl extends TransitDaoImpl implements ServiceDateDao
 	 * @see me.transit.dao.TransitDao#loadById(long, java.lang.String)
 	 */
 	@Override
-	public synchronized Object loadById(long id, String agencyName) {
+	public synchronized Object loadById(String id, String agencyName) {
 		ServiceDate rtn = ServiceDate.class.cast(super.loadById(id, agencyName));
 		
 		Hibernate.initialize(rtn.getAgency());

@@ -29,7 +29,7 @@ public class RouteDaoImpl extends TransitDaoImpl implements RouteDao {
 	 * @see me.transit.dao.impl.RouteDao#loadById(long, java.lang.String)
 	 */
 	@Override
-	public synchronized Object loadById(long id, String agencyName) {
+	public synchronized Object loadById(String id, String agencyName) {
 		Route rtn = Route.class.cast(super.loadById(id, agencyName));
 		
 		Hibernate.initialize(rtn.getAgency());
