@@ -11,7 +11,7 @@
         <property name="password" value="Postgres" />
     </bean>
 	
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="mappingResources">
             <list>
@@ -26,7 +26,7 @@
         </property>
         <property name="hibernateProperties">
         <props>
-            <prop key="hibernate.dialect">org.hibernatespatial.postgis.PostgisDialect</prop>
+            <prop key="hibernate.dialect">org.hibernate.spatial.dialect.postgis.PostgisDialect</prop>
             <prop key="hibernate.hbm2ddl.auto">update</prop>
         </props>
         </property>

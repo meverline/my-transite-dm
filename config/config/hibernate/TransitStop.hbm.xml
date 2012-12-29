@@ -30,7 +30,7 @@
 		  <property name="desc" column="DESCRIPTION" />
 		  
 		  <property name="location" column="LOCATION" 
-		  			type="org.hibernatespatial.GeometryUserType"  not-null="true" />
+		  			type="org.hibernate.spatial.GeometryType"  not-null="true" />
 		  			
 		  <property name="zoneId" column="ZONE"  />
 		  <property name="url" column="URL"  />
