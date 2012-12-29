@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-configuration PUBLIC
     "-//Hibernate/Hibernate Configuration DTD//EN"
     "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
-
+    
 <hibernate-configuration>
 
     <!-- a SessionFactory instance listed as /jndi/name -->
@@ -10,11 +10,11 @@
         name="java:hibernate/SessionFactory">
 
         <!-- properties -->
+        <property name="hibernate.dialect">org.hibernate.spatial.dialect.postgis.PostgisDialect</property>
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
         <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/Transit</property>
         <property name="hibernate.connection.username">postgres</property>
         <property name="hibernate.connection.password">Postgres</property>      
-        <property name="hibernate.dialect">org.hibernatespatial.postgis.PostgisDialect</property>
         
         <!-- Enable Hibernate's automatic session context management -->
         <property name="current_session_context_class">thread</property>
@@ -27,6 +27,7 @@
 
         <!-- Drop and re-create the database schema on startup -->
         <!-- property name="hbm2ddl.auto">create</property -->
+        
         <property name="hbm2ddl.auto">update</property>
 
         <!-- mapping files -->

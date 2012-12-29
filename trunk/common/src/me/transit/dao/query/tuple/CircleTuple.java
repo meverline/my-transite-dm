@@ -24,8 +24,8 @@ import me.output.KmlFormatter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
-import org.hibernatespatial.Circle;
-import org.hibernatespatial.criterion.SpatialRestrictions;
+import org.hibernate.spatial.Circle;
+import org.hibernate.spatial.criterion.SpatialRestrictions;
 
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;
