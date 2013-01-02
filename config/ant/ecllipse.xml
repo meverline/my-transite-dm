@@ -1,0 +1,27 @@
+<project xmlns:ivy="antlib:org.apache.ivy.ant" name="ecllipse" basedir=".">
+
+	<loadproperties srcFile="${basedir}/../config/properties/build.all.properties"/>
+	<loadproperties srcFile="${basedir}/../config/properties/build.${os.name}.properties"/>
+
+	<target name="classPath" >
+		<java classname="com.iai.ant.tools.EcllipseClassPath">
+			<classpath>
+			    <pathelement location="../config/build"/>
+			</classpath>
+			<arg value="lib:${basedir}/${lib}"/>
+			<arg value="file:${basedir}/.classpath"/>
+			<arg value="depends:${depends}" />
+			<arg value="source:${source}" />
+		</java>
+    </target>
+		
+	<target name="project" >
+		<java classname="com.iai.ant.tools.EcllipseProject">
+			<classpath>
+		  	  <pathelement location="../config/build"/>
+			</classpath>
+			<arg value="project:${ant.project.name}" />
+		</java>
+	</target>
+	
+</project>

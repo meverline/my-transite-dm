@@ -1,0 +1,30 @@
+<project xmlns:ivy="antlib:org.apache.ivy.ant" name="utilities" basedir=".">
+
+	<loadproperties srcFile="${basedir}/../config/properties/build.all.properties"/>
+	<loadproperties srcFile="${basedir}/../config/properties/build.${os.name}.properties"/>
+
+	<target name="property-list" description="--> list project properties">
+		<echoproperties/> 
+	</target>
+	
+	<target name="clean-cache" description="--> cleans the ivy cache">
+		<ivy:settings file="${ivy.settings.file}" />
+		<ivy:cleancache />
+		<delete>
+			<fileset dir="${lib}" includes="**/*.jar"/>
+		</delete>
+	</target>
+	
+	<target name="resolve" description="--> retrieve dependencies with ivy">
+		<ivy:settings file="${ivy.settings.file}" />
+		<ivy:retrieve/>
+	</target>
+		
+	<target name="clean" description="--> clean up" >
+		<!-- Delete the ${build} and ${dist} directory trees -->
+		<delete dir="${build}"/>
+		<delete dir="${dist}"/>
+		<delete dir="${lib}"/>
+	</target>
+	
+</project>
