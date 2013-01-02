@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+   Licensed to the Apache Software Foundation (ASF) under one
+   or more contributor license agreements.  See the NOTICE file
+   distributed with this work for additional information
+   regarding copyright ownership.  The ASF licenses this file
+   to you under the Apache License, Version 2.0 (the
+   "License"); you may not use this file except in compliance
+   with the License.  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing,
+   software distributed under the License is distributed on an
+   "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+   KIND, either express or implied.  See the License for the
+   specific language governing permissions and limitations
+   under the License.    
+-->
+<ivy-module version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
+    <info organisation=""  module="common" />
+
+	<dependencies>
+	
+	    <dependency org="org.hibernate" name="hibernate-core" rev="${ivy.hibernate.ver}" >
+           <exclude org="org.jboss.javaee" module="jboss-jacc-api_JDK4" />
+           <exclude org="ant" />
+           <exclude org="xerces" />
+        </dependency>
+        
+        <dependency org="dom4j" name="dom4j" rev="${ivy.dom4j.ver}"  />
+        <dependency org="javassist" name="javassist" rev="${ivy.javassist.ver}" />
+        <dependency org="commons-logging" name="commons-logging" rev="1.1" />
+        
+        <dependency org="org.springframework" name="org.springframework.core" transitive="false" rev="${ivy.spring.ver}" >
+           <artifact name="org.springframework.core" type="jar" />
+        </dependency>
+        
+        <dependency org="org.springframework" name="org.springframework.expression" rev="${ivy.spring.ver}" transitive="false">
+           <artifact name="org.springframework.expression" type="jar" />
+        </dependency>
+        
+        <dependency org="org.springframework" name="org.springframework.beans" transitive="false" rev="${ivy.spring.ver}" >
+            <artifact name="org.springframework.beans" type="jar" />
+        </dependency>
+        
+        <dependency org="org.springframework" name="org.springframework.context" transitive="false" rev="${ivy.spring.ver}" >
+            <artifact name="org.springframework.context" type="jar" />
+        </dependency>
+        
+        <dependency org="org.springframework" name="org.springframework.jdbc" rev="${ivy.spring.ver}" transitive="false" >
+       		 <artifact name="org.springframework.jdbc" type="jar" />
+        </dependency>
+      
+       <dependency org="org.springframework" name="spring-tx" rev="${ivy.spring.ver}" transitive="false" >
+       		 <artifact name="spring-tx" type="jar" />
+        </dependency>
+        
+        <dependency org="org.springframework" name="org.springframework.orm" rev="${ivy.spring.ver}" transitive="false" >
+             <artifact name="org.springframework.orm" type="jar" />
+        </dependency>
+        
+        <dependency org="org.postgresql" name="com.springsource.org.postgresql.jdbc3" rev="${ivy.postgresql.ver}" >
+      		<artifact name="com.springsource.org.postgresql.jdbc3" type="jar" />
+        </dependency>
+        
+        <dependency org="org.codehaus.xstream" name="xstream" rev="${ivy.xstream.ver}" >
+       		<artifact name="xstream" type="jar" />
+       		<exclude org="xerces" />
+        </dependency>
+        
+        <dependency org="org.slf4j" name="com.springsource.slf4j.log4j" rev="${ivy.slf4j.ver}" transitive="false" >
+        	<artifact name="com.springsource.slf4j.log4j" type="jar" />
+        </dependency>
+        
+       <dependency org="org.springframework" name="org.springframework.test" rev="${ivy.spring.ver}" transitive="false" >
+       		<artifact name="org.springframework.test" type="jar" />
+        </dependency> 
+        
+       <dependency org="org.springframework" name="org.springframework.asm" rev="${ivy.spring.ver}" transitive="false" >
+       		<artifact name="org.springframework.asm" type="jar" />
+        </dependency>
+        
+        <dependency org="org.apache.geronimo.javamail" name="geronimo-javamail_1.4_mail" rev="1.7" />    
+        <dependency org="junit" name="junit" rev="4.8.2" />  
+        <dependency org="org.apache.lucene" name="lucene-core" rev="3.1.0"  />   
+        <dependency  org="hsqldb" name="hsqldb" rev="1.8.0.7" />
+        <dependency org="javax" name="javaee-api" rev="6.0" />
+        
+        <dependency org="com.sun.xml.bind" name="jaxb-impl" rev="2.1.13" />
+        
+    </dependencies>
+</ivy-module>
