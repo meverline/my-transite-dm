@@ -4,12 +4,10 @@
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry exported="true" kind="src" path="/common"/>
 	<classpathentry exported="true" kind="lib" path="/Users/markeverline/Perforce/Transite/lib/ant-swing-1.6.5.jar"/>
-	<classpathentry exported="true" kind="lib" path="/Users/markeverline/Perforce/Transite/lib/antlr-2.7.6.jar"/>
 	<classpathentry exported="true" kind="lib" path="/Users/markeverline/Perforce/Transite/lib/asm-attrs.jar"/>
 	<classpathentry exported="true" kind="lib" path="/Users/markeverline/Perforce/Transite/lib/asm.jar"/>
 	<classpathentry exported="true" kind="lib" path="/Users/markeverline/Perforce/Transite/lib/c3p0-0.9.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="/Users/markeverline/Perforce/Transite/lib/cglib-2.1.3.jar"/>
-	<classpathentry exported="true" kind="lib" path="/Users/markeverline/Perforce/Transite/lib/commons-collections-2.1.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="/Users/markeverline/Perforce/Transite/lib/commons-logging-1.0.4.jar"/>
 	<classpathentry exported="true" kind="lib" path="/Users/markeverline/Perforce/Transite/lib/commons-math-2.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="/Users/markeverline/Perforce/Transite/lib/concurrent-1.3.2.jar"/>
@@ -17,7 +15,6 @@
 	<classpathentry exported="true" kind="lib" path="/Users/markeverline/Perforce/Transite/lib/jta.jar"/>
 	<classpathentry exported="true" kind="lib" path="/Users/markeverline/Perforce/Transite/lib/jts-1.8.jar"/>
 	<classpathentry exported="true" kind="lib" path="/Users/markeverline/Perforce/Transite/lib/jtsio-1.8.jar"/>
-	<classpathentry exported="true" kind="lib" path="/Users/markeverline/Perforce/Transite/lib/log4j-1.2.11.jar"/>
 	<classpathentry exported="true" kind="lib" path="/Users/markeverline/Perforce/Transite/lib/oscache-2.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="/Users/markeverline/Perforce/Transite/lib/postgis_1.3.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="/Users/markeverline/Perforce/Transite/lib/spring.jar"/>
@@ -30,9 +27,14 @@
 	<classpathentry exported="true" kind="lib" path="/Users/markeverline/Perforce/Transite/lib/xstream-1.3.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="/Users/markeverline/Perforce/Transite/lib/javassist-3.17.1-GA.jar"/>
 	<classpathentry exported="true" kind="lib" path="/Users/markeverline/Perforce/Transite/lib/postgresql-9.1-901.jdbc3.jar"/>
-	<classpathentry kind="lib" path="/Users/markeverline/Perforce/Transite/lib/hibernate-spatial-1.1.1.jar"/>
-	<classpathentry kind="lib" path="/Users/markeverline/Perforce/Transite/lib/hibernate-spatial-postgis-1.0.jar"/>
-	<classpathentry kind="lib" path="/Users/markeverline/Perforce/Transite/lib/hibernate3.jar"/>
-	<classpathentry kind="lib" path="/Users/markeverline/Perforce/Transite/lib/slf4j-api-1.6.1.jar"/>
+	<classpathentry kind="lib" path="/Users/markeverline/Perforce/Transite/lib/commons-collections-3.1.jar"/>
+	<classpathentry kind="lib" path="/Users/markeverline/Perforce/Transite/lib/hibernate-jpa-2.0-api-1.0.1.Final.jar"/>
+	<classpathentry kind="lib" path="/Users/markeverline/Perforce/Transite/lib/hibernate-commons-annotations-4.0.1.Final.jar"/>
+	<classpathentry kind="lib" path="/Users/markeverline/Perforce/Transite/lib/hibernate-core-4.1.9.Final.jar"/>
+	<classpathentry kind="lib" path="/Users/markeverline/Perforce/Transite/lib/hibernate-spatial-4.0-M1.jar"/>
+	<classpathentry kind="lib" path="/Users/markeverline/Perforce/Transite/lib/jboss-logging-3.1.0.GA.jar"/>
+	<classpathentry kind="lib" path="/Users/markeverline/Perforce/Transite/lib/jboss-transaction-api_1.1_spec-1.0.0.Final.jar"/>
+	<classpathentry kind="lib" path="/Users/markeverline/Perforce/Transite/lib/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="/Users/markeverline/Perforce/Transite/lib/antlr-2.7.7.jar"/>
 	<classpathentry kind="output" path="build"/>
 </classpath>

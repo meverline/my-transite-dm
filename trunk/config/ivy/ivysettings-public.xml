@@ -12,6 +12,8 @@
 
 		<ibiblio name="jboss" m2compatible="true" root="http://repository.jboss.com/maven2/" />
 		<ibiblio name="ibiblio-maven2" m2compatible="true" />
+		<ibiblio name="Hibernate-Spatial" m2compatible="true" root="http://www.hibernatespatial.org/repository/" />
+		<ibiblio name="OSGEO-GeoTools" m2compatible="true" root="http://download.osgeo.org/webdav/geotools/" />
 
 		<!-- //////////////////////////////////////////////////////////////////////////////////// 
 			ivy package repository this repository type is typically taking bundles and 
@@ -58,6 +60,8 @@
 			<resolver ref="jboss" />
 			<resolver ref="spring" />
 			<resolver ref="ibiblio-maven2" />
+			<resolver ref="Hibernate-Spatial" />
+			<resolver ref="OSGEO-GeoTools" />
 		</chain>
 
 		<!-- the default chain used by ivy -->
