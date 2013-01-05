@@ -12,6 +12,7 @@
 			<arg value="file:${basedir}/.classpath"/>
 			<arg value="depends:${depends}" />
 			<arg value="source:${source}" />
+			<arg value="nowrite" />
 		</java>
     </target>
 		

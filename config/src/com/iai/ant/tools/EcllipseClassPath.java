@@ -214,6 +214,7 @@ public class EcllipseClassPath {
 		System.out.println("\tfile:<path>    Ecllipse .classpath file to modify");
 		System.out.println("\tdepends:<project>;<project> list of projects");
 		System.out.println("\tsource:true/false include source jar files");
+		System.out.println("\tnowrite don't write class path");
 		System.out.println("\thelp    this message");
 		System.exit(0);	
 	}
@@ -226,6 +227,7 @@ public class EcllipseClassPath {
 		List<String> depends = new ArrayList<String>();
 		boolean includeSource = false;
 		boolean debug = false;
+		boolean nowrite = false;
 		
 		for ( int ndx = 0; ndx < args.length; ndx++) {
 			if ( args[ndx].startsWith("lib:")) {
@@ -254,6 +256,8 @@ public class EcllipseClassPath {
 					
 			} else if ( args[ndx].startsWith("debug")) {
 				debug = true;
+			} else if ( args[ndx].startsWith("nowrite")) {
+				nowrite = true;
 			} else if ( args[ndx].startsWith("help")) {
 				help();	
 			}
@@ -264,10 +268,15 @@ public class EcllipseClassPath {
 			help();
 		}
 		
-		EcllipseClassPath pathFixer = new EcllipseClassPath(includeSource, debug);
-		if ( ! pathFixer.fixPath(classPathFile, libPath, depends)) {
-			System.exit(-1);
+		if ( nowrite ) {
+			return;
+		} else {
+			EcllipseClassPath pathFixer = new EcllipseClassPath(includeSource, debug);
+			if ( ! pathFixer.fixPath(classPathFile, libPath, depends)) {
+				System.exit(-1);
+			}
 		}
+		
 		return;
 	}
 	
