@@ -40,7 +40,9 @@
         </property>
     </bean>
        
-    <bean id="hibernateConnection" class="me.transit.dao.hibernate.SpringHibernateConnection" />
+    <bean id="hibernateConnection" class="me.transit.dao.hibernate.SpringHibernateConnection" >
+    	<property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
     
 	<!-- Database access i.e. DAO's  -->		 
 	<bean id="agencyDao" class="me.transit.dao.impl.AgencyDaoImpl">
