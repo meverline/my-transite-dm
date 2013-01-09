@@ -58,6 +58,9 @@ import com.vividsolutions.jts.geom.LineString;
  */
 public class TransitFeedParser {
 
+	private static final String WINDOWS_PATH = "C:/java/me-transite/my-transite-dm";
+	private static final String UNIX_PATH ="/Users/markeverline/Perforce/Transite";
+	
 	private static final String LOCATION = "Location";
 	private static final String LATITUDE = "Latitude";
 	private static final String LONGITUDE = "Longitude";
@@ -78,10 +81,10 @@ public class TransitFeedParser {
 	/**
 	 * 
 	 */
-	public TransitFeedParser()
+	public TransitFeedParser(String path)
 	{
 		DaoBeanFactory.initilize();
-		initilize();
+		initilize(path);
 	}
 	
 	/**
@@ -124,11 +127,11 @@ public class TransitFeedParser {
 	/**
 	 * 
 	 */
-	private void initilize()
+	private void initilize(String path)
 	{
 		FileReader inStream;
 		try {
-			inStream = new FileReader("/Users/markeverline/Perforce/Transite/common/config/ClassMap.properties");
+			inStream = new FileReader( path + "/common/config/ClassMap.properties");
 			getProperties().load(inStream);
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage(), e);
@@ -1078,9 +1081,14 @@ public class TransitFeedParser {
 	 * @throws SQLException
 	 */
 	public static void main(String[] args) {
-		TransitFeedParser feedParser = new TransitFeedParser();
 		
-		String dir = "/Users/markeverline/Perforce/Transite/google_transit";
+		String path = TransitFeedParser.UNIX_PATH;
+		if ( System.getProperty("os.name").toLowerCase().contains("windows")) {
+			path = TransitFeedParser.WINDOWS_PATH;
+		}
+		TransitFeedParser feedParser = new TransitFeedParser(path);
+		
+		String dir = path + "/google_transit";
 		String orginization[] = { "metro", 
 								  "ART", 
 								  "DC_Circulator", 
