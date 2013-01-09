@@ -3,12 +3,20 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
 	
-	<!-- Hibernate SessionFactory
+	<!-- Hibernate SessionFactory -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="org.postgresql.Driver"/>
-        <property name="url" value="jdbc:postgresql://localhost:5432/Transit" />
-        <property name="username" value="postgres" />
-        <property name="password" value="Postgres" />
+	    <property name="driverClassName">
+        		<value>org.postgresql.Driver</value>
+        </property>
+        <property name="url">
+               <value>jdbc:postgresql://localhost:5433/Transit</value>
+        </property>
+        <property name="username">
+        	<value>postgres</value>
+        </property>
+        <property name="password">
+        		<value>postgis84!</value>
+        </property>
     </bean>
 	
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
@@ -31,10 +39,8 @@
         </props>
         </property>
     </bean>
-    
-    -->
-    
-    <bean id="hibernateConnection" class="me.transit.dao.hibernate.ManualHibernateConnection" />
+       
+    <bean id="hibernateConnection" class="me.transit.dao.hibernate.SpringHibernateConnection" />
     
 	<!-- Database access i.e. DAO's  -->		 
 	<bean id="agencyDao" class="me.transit.dao.impl.AgencyDaoImpl">

@@ -23,7 +23,15 @@
 
 	<dependencies>
 	
-	    <dependency org="org.hibernate" name="hibernate-core" rev="${ivy.hibernate.ver}" conf="default->master" >
+	    <dependency org="org.hibernate" name="hibernate-core" rev="${ivy.hibernate.ver}" conf="default->runtime" >
+           <exclude org="org.jboss.javaee" module="jboss-jacc-api_JDK4" />
+           <exclude org="ant" />
+           <exclude org="xerces" />
+            <exclude org="xerces" />
+           <exclude org="dom4j" />
+        </dependency>
+        
+        <dependency org="org.hibernate" name="hibernate-core" rev="${ivy.hibernate.ver}" conf="default->master" >
            <exclude org="org.jboss.javaee" module="jboss-jacc-api_JDK4" />
            <exclude org="ant" />
            <exclude org="xerces" />
