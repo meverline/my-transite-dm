@@ -1086,6 +1086,11 @@ public class TransitFeedParser {
 		if ( System.getProperty("os.name").toLowerCase().contains("windows")) {
 			path = TransitFeedParser.WINDOWS_PATH;
 		}
+		
+		if ( args.length > 0 ) {
+			path =  args[0];
+		}
+
 		TransitFeedParser feedParser = new TransitFeedParser(path);
 		
 		String dir = path + "/google_transit";
