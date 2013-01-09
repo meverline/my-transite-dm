@@ -34,7 +34,7 @@ import me.utils.TransiteEnums;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.commons.math.stat.descriptive.DescriptiveStatistics;
+import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 import org.jdesktop.swingx.mapviewer.GeoPosition;
 
 import com.vividsolutions.jts.geom.Coordinate;
