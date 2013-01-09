@@ -4,7 +4,7 @@
 	<loadproperties srcFile="${basedir}/../config/properties/build.${os.name}.properties"/>
 
 	<target name="property-list" description="--> list project properties">
-		<echoproperties/> 
+		<echoproperties prefix="ivy."/>
 	</target>
 	
 	<target name="clean-cache" description="--> cleans the ivy cache">
@@ -12,14 +12,16 @@
 		<ivy:cleancache />
 		<delete>
 			<fileset dir="${lib}" includes="**/*.jar"/>
+			<fileset dir="${lib.dir}/source" includes="**/**"/>
+			<fileset dir="${lib.dir}/javadoc" includes="**/**"/>
 		</delete>
 	</target>
 	
 	<target name="resolve" description="--> retrieve dependencies with ivy">
 		<ivy:settings file="${ivy.settings.file}" />
-		<ivy:retrieve/>
+		<ivy:retrieve pattern="${lib.dir}/[type]/[artifact]-[revision].[ext]" />
 	</target>
-		
+			
 	<target name="clean" description="--> clean up" >
 		<!-- Delete the ${build} and ${dist} directory trees -->
 		<delete dir="${build}"/>

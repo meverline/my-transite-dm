@@ -1,22 +1,21 @@
-<project xmlns:ivy="antlib:org.apache.ivy.ant" name="common" default="dist" basedir=".">
-  
+<project xmlns:ivy="antlib:org.apache.ivy.ant" name="gui-swing" default="dist" basedir=".">
+ 	
   <!-- set global properties for this build -->
   <loadproperties srcFile="${basedir}/../config/properties/build.all.properties"/>
   <loadproperties srcFile="${basedir}/../config/properties/build.${os.name}.properties"/>
-	
+		
   <!-- targets for building the ecllipse project need to handle both windows and others -->
-	
+		
   <include file="${ant.utilities.xml.file}" />
   <include file="${ant.ecllipse.xml.file}" />
-	
+		
   <target name="libs" description="--> resolve external libs and fix class path">
-	<antcall target="utilities.resolve"/>
-  	<copy file="../jar-repository/shapefilereader-1.0.jar" todir="${lib}" />
-	<antcall target="ecllipse.classPath">
-		<param name="${classpath.projectDepends.parm}" value="/config"/>
-		<param name="${classpath.includeSource.parm}" value="false"/>
-		<param name="${classpath.exclude.parm}" value="swingx%transite-common"/>
-	</antcall>
+      <antcall target="utilities.resolve"/>
+  	  <copy file="../jar-repository/swingx-ws-2008_10_12.jar" todir="${lib}" />
+	  <antcall target="ecllipse.classPath">
+		 <param name="${classpath.projectDepends.parm}" value="/config%/common"/>
+		 <param name="${classpath.includeSource.parm}" value="false"/>
+	  </antcall>
   </target>
 
   <target name="init">
@@ -25,15 +24,17 @@
     <!-- Create the build directory structure used by compile -->
     <mkdir dir="${build}"/>
   	<mkdir dir="${dist}"/>
-  	<mkdir dir="${lib.dir}"/>
+  </target>
+	
+  <target name="common-compile" >
+ 	 <ant dir="../common" />
   </target>
 
-  <target name="compile" depends="init,libs"
+  <target name="compile" depends="init,libs,common-compile"
         description="compile the source " >
     <!-- Compile the java code from ${src} into ${build} -->
-    <javac srcdir="${src}" destdir="${build}" includeJavaRuntime="false" includeantruntime="false" >
+    <javac srcdir="${src}" destdir="${build}" includeAntRuntime="false" >
   	   <classpath>
-  	     <pathelement path="${classpath}"/>
        	 <fileset dir="${lib}">
             <include name="**/*.jar"/>
         </fileset>
@@ -47,8 +48,7 @@
     <mkdir dir="${dist}/lib"/>
 
     <!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
-    <jar jarfile="${dist}/lib/transite-common-${transite-common.ver}.jar" basedir="${build}" />
-  	<copy file="${dist}/lib/transite-common-${transite-common.ver}.jar" todir="${lib}" />
+    <jar jarfile="${dist}/gui-swing-${DSTAMP}.jar" basedir="${build}" />
   </target>
 
   <target name="clean"
@@ -56,6 +56,5 @@
     <!-- Delete the ${build} and ${dist} directory trees -->
     <delete dir="${build}"/>
     <delete dir="${dist}"/>
-  	<delete dir="${lib}"/>
   </target>
 </project>

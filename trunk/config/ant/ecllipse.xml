@@ -11,8 +11,8 @@
 			<arg value="lib:${basedir}/${lib}"/>
 			<arg value="file:${basedir}/.classpath"/>
 			<arg value="depends:${depends}" />
+			<arg value="exclude:${exclude}" />
 			<arg value="source:${source}" />
-			<arg value="nowrite" />
 		</java>
     </target>
 		
