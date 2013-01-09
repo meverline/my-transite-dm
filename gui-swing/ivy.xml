@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+   Licensed to the Apache Software Foundation (ASF) under one
+   or more contributor license agreements.  See the NOTICE file
+   distributed with this work for additional information
+   regarding copyright ownership.  The ASF licenses this file
+   to you under the Apache License, Version 2.0 (the
+   "License"); you may not use this file except in compliance
+   with the License.  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing,
+   software distributed under the License is distributed on an
+   "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+   KIND, either express or implied.  See the License for the
+   specific language governing permissions and limitations
+   under the License.    
+-->
+<ivy-module version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
+    <info organisation=""  module="gui" />
+
+	<dependencies>
+	
+		<dependency org="org.swinglabs.swingx" name="swingx-beaninfo" rev="1.6.4" conf="default->runtime" >
+			<artifact name="swingx-beaninfo" type="jar" />
+			<exclude org="com.jhlabs" />
+			<exclude org="junit" />
+			<exclude org="org.mockito" />
+		</dependency>
+				
+		<dependency org="org.swinglabs.swingx" name="swingx-plaf" rev="1.6.4" conf="default->runtime" >
+			<artifact name="swingx-plaf" type="jar" />
+			<exclude org="com.jhlabs" />
+			<exclude org="junit" />
+			<exclude org="org.mockito" />
+		</dependency>
+		
+		<dependency org="org.swinglabs.swingx" name="swingx-painters" rev="1.6.4" conf="default->runtime" >
+			<artifact name="swingx-painters" type="jar" />
+			<exclude org="com.jhlabs" />
+			<exclude org="junit" />
+			<exclude org="org.mockito" />
+		</dependency>
+		
+		<dependency org="org.swinglabs.swingx" name="swingx-action" rev="1.6.4" conf="default->runtime" >
+			<artifact name="swingx-action" type="jar" />
+			<exclude org="com.jhlabs" />
+			<exclude org="junit" />
+			<exclude org="org.mockito" />
+		</dependency>
+		
+		<dependency org="org.swinglabs.swingx" name="swingx-autocomplete" rev="1.6.4" conf="default->runtime" >
+			<artifact name="swingx-autocomplete" type="jar" />
+			<exclude org="com.jhlabs" />
+			<exclude org="junit" />
+			<exclude org="org.mockito" />
+		</dependency>
+		
+		<dependency org="org.swinglabs.swingx" name="swingx-graphics" rev="1.6.4" conf="default->runtime" >
+			<artifact name="swingx-graphics" type="jar" />
+			<exclude org="com.jhlabs" />
+			<exclude org="junit" />
+			<exclude org="org.mockito" />
+		</dependency>
+	
+		<dependency org="org.swinglabs.swingx" name="swingx-common" rev="1.6.4" conf="default->runtime" >
+			<artifact name="swingx-common" type="jar" />
+			<exclude org="xerces" />
+			<exclude org="jtidy" />
+			<exclude org="commons-logging" />
+			<exclude org="rome" />
+			<exclude org="net.sf.json-lib" />
+			<exclude org="junit" />
+		</dependency>
+		
+		<dependency org="org.swinglabs.swingx" name="swingx-project" rev="1.6.4" >
+			<artifact name="swingx-project" type="jar" />
+			<exclude org="xerces" />
+			<exclude org="jtidy" />
+			<exclude org="commons-logging" />
+			<exclude org="rome" />
+			<exclude org="net.sf.json-lib" />
+			<exclude org="junit" />
+		</dependency>
+		    	
+        <dependency org="org.jfree" name="jfreechart" rev="1.0.13" />
+   
+    </dependencies>
+</ivy-module>

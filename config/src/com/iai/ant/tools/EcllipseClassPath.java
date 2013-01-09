@@ -28,14 +28,16 @@ public class EcllipseClassPath {
 	public static final String PATH ="path";
 	public static final String CLASSPATH ="classpath";
 	
-	private SAXParser  parser = null;
-	private boolean    includeSource = false;
-	private boolean    debug = false;
+	private SAXParser    parser = null;
+	private boolean      includeSource = false;
+	private boolean      debug = false;
+	private List<String> excludePattern = new ArrayList<String>();
 	
-	public EcllipseClassPath(boolean incSrc, boolean debug)
+	public EcllipseClassPath(boolean incSrc, boolean debug, List<String> exclude)
 	{
 		this.includeSource = incSrc;
 		this.debug = debug;
+		this.excludePattern = exclude;
 		try {
 			SAXParserFactory factory = SAXParserFactory.newInstance();
 			setParser(factory.newSAXParser());
@@ -64,11 +66,36 @@ public class EcllipseClassPath {
 	
 	/**
 	 * 
+	 * @param name
+	 * @return
+	 */
+	private boolean includeLib(String name)
+	{
+		for ( String pattern : this.excludePattern ) {
+			
+			if ( name.contains(pattern) ) {
+				if ( this.debug ) {
+					System.out.println( "exclude: " +  name);
+				} 
+				return false;
+			}
+		}
+		if ( this.debug ) {
+			System.out.println( "include: " +  name);
+		} 
+		return true;
+	}
+	
+	/**
+	 * 
 	 * @param directory
 	 * @return
 	 */
 	private void scanDir(String directory, List<List<Entry>> pathEntry) {
 		
+		if ( this.debug ) {
+			System.out.println( "scanDir: " +  directory);
+		} 
 		File dirFile = new File(directory);
 		if ( ! dirFile.exists() ) { return ; }
 		for ( File fp : dirFile.listFiles()) {
@@ -80,7 +107,7 @@ public class EcllipseClassPath {
 				   add = this.includeSource;
 				}
 				
-				if ( add ) {
+				if ( add && this.includeLib( fp.getName()) ) {
 					List<Entry> map = new ArrayList<Entry>();
 					
 					map.add( new Entry(KIND, "lib"));
@@ -214,6 +241,7 @@ public class EcllipseClassPath {
 		System.out.println("\tfile:<path>    Ecllipse .classpath file to modify");
 		System.out.println("\tdepends:<project>;<project> list of projects");
 		System.out.println("\tsource:true/false include source jar files");
+		System.out.println("\texclude:<files>");
 		System.out.println("\tnowrite don't write class path");
 		System.out.println("\thelp    this message");
 		System.exit(0);	
@@ -225,6 +253,7 @@ public class EcllipseClassPath {
 		String libPath = null;
 		String classPathFile = null;
 		List<String> depends = new ArrayList<String>();
+		List<String> exclude = new ArrayList<String>();
 		boolean includeSource = false;
 		boolean debug = false;
 		boolean nowrite = false;
@@ -248,6 +277,15 @@ public class EcllipseClassPath {
 			   for (String p : projs) {
 				   depends.add(p);
 			   }
+			   
+			} else if ( args[ndx].startsWith("exclude:")) {
+				
+				   int index = args[ndx].indexOf(":");
+				   
+				   String [] projs = args[ndx].substring(index+1).replace('\\', '/').split("%");
+				   for (String p : projs) {
+					   exclude.add(p);
+				   }
 
 			} else if ( args[ndx].startsWith("source:")) {
 				
@@ -271,7 +309,7 @@ public class EcllipseClassPath {
 		if ( nowrite ) {
 			return;
 		} else {
-			EcllipseClassPath pathFixer = new EcllipseClassPath(includeSource, debug);
+			EcllipseClassPath pathFixer = new EcllipseClassPath(includeSource, debug, exclude);
 			if ( ! pathFixer.fixPath(classPathFile, libPath, depends)) {
 				System.exit(-1);
 			}
