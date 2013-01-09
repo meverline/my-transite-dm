@@ -1,9 +1,0 @@
-<TransiteStopQueryRequest xmlns="http://localhost/transiteRepositroy/schemas">
-  <agencyName>WAMTA</agencyName>
-  <LatLonBox>
-    <east>170.0</east>
-    <west>-170.0</west>
-    <north>89.9</north>
-    <south>-89.9</south>
-  </LatLonBox>
-</TransiteStopQueryRequest>
