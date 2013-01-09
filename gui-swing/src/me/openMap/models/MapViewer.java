@@ -171,7 +171,7 @@ public class MapViewer extends JPanel implements MapRender, OverlayChangedListen
 	/**
 	 * Called when all overlays are done.
 	 */
-
+    
 	public void done()
 	{
 		if ( painter_ == null ) {
@@ -179,6 +179,7 @@ public class MapViewer extends JPanel implements MapRender, OverlayChangedListen
 		   this.painters_.add(painter_);
 		}
 		 
+		@SuppressWarnings("rawtypes")
 		Painter paint[] = new Painter[painters_.size()];
 		painters_.toArray(paint);
 	

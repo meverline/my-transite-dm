@@ -32,7 +32,7 @@ import me.datamining.bandwidth.IBandwidth;
 import me.utils.ColorGradient;
 import me.utils.GradientParameters;
 
-import org.apache.commons.math.stat.descriptive.DescriptiveStatistics;
+import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.annotations.XStreamAlias;

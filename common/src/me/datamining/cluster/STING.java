@@ -32,10 +32,10 @@ import me.math.kdtree.search.RangeSearch;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.commons.math.MathException;
-import org.apache.commons.math.distribution.BinomialDistributionImpl;
-import org.apache.commons.math.distribution.NormalDistributionImpl;
-import org.apache.commons.math.distribution.PoissonDistributionImpl;
+import org.apache.commons.math3.exception.NumberIsTooLargeException;
+import org.apache.commons.math3.distribution.BinomialDistribution;
+import org.apache.commons.math3.distribution.NormalDistribution;
+import org.apache.commons.math3.distribution.PoissonDistribution;
 
 import com.vividsolutions.jts.geom.Point;
 
@@ -160,10 +160,10 @@ public class STING implements ClusteringAlgorithm {
 		if (std == 0) {
 			return 0;
 		}
-		NormalDistributionImpl sdf = new NormalDistributionImpl(mean, std);
+		NormalDistribution sdf = new NormalDistribution(mean, std);
 		try {
 			return sdf.cumulativeProbability(value);
-		} catch (MathException e) {
+		} catch (NumberIsTooLargeException e) {
 			return 0;
 		}
 	}
@@ -178,8 +178,9 @@ public class STING implements ClusteringAlgorithm {
 		if (lambda == 0) {
 			return 0;
 		}
-		PoissonDistributionImpl pdf = new PoissonDistributionImpl(lambda);
-		return pdf.probability(value);
+		PoissonDistribution pdf = new PoissonDistribution(lambda);
+		//TODO: fix needs to take in double
+		return pdf.probability((int)value);
 	}
 
 	/**
@@ -190,7 +191,7 @@ public class STING implements ClusteringAlgorithm {
 	 * @return
 	 */
 	public static double binomialPDF(int value, double number, double probabilty) {
-		BinomialDistributionImpl bdf = new BinomialDistributionImpl(
+		BinomialDistribution bdf = new BinomialDistribution(
 				(int) value, probabilty);
 
 		return bdf.probability(value);

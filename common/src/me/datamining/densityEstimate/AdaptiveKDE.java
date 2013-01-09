@@ -15,7 +15,7 @@ import me.math.kdtree.INode;
 import me.math.kdtree.KDTree;
 import me.math.kdtree.search.RangeSearch;
 
-import org.apache.commons.math.stat.descriptive.DescriptiveStatistics;
+import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
 public class AdaptiveKDE extends AbstractDensityEstimateAlgorithm {
 

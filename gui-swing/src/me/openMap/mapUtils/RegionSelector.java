@@ -20,6 +20,7 @@ public class RegionSelector implements MouseListener, MouseMotionListener {
 	private MouseListener[] oldMouseListeners;
 	private MouseMotionListener[] oldMouseMotionListeners;
 	
+	@SuppressWarnings("rawtypes")
 	private Painter oldPainter;
 
 	private RegionSelectListener listener;
