@@ -1,16 +1,17 @@
 package me.transit.dao.hibernate;
 
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface HibernateDao {
+public interface HibernateDao<T extends Serializable> {
 
 	/**
 	 * 
 	 * @param item
 	 * @throws SQLException
 	 */
-	public abstract void save(Object item) throws SQLException;
+	public abstract void save(T item) throws SQLException;
 
 	/**
 	 * 
@@ -31,7 +32,6 @@ public interface HibernateDao {
 	 * @param id
 	 * @return
 	 */
-	public abstract Object loadByUUID(Long id,
-			@SuppressWarnings("rawtypes") Class aClass);
+	public abstract T loadByUUID(Long id, Class<?> aClass);
 
 }

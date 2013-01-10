@@ -17,6 +17,7 @@
 	  <antcall target="ecllipse.classPath">
 		 <param name="${classpath.projectDepends.parm}" value="/config%/common"/>
 		 <param name="${classpath.includeSource.parm}" value="false"/>
+	  	 <param name="${classpath.exclude.parm}" value="transite-common"/>
 	  </antcall>
   </target>
 

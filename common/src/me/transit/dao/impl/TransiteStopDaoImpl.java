@@ -14,7 +14,7 @@ import me.transit.dao.TransiteStopDao;
 import me.transit.dao.query.StopQueryConstraint;
 import me.transit.database.TransitStop;
 
-public class TransiteStopDaoImpl extends TransitDaoImpl implements TransiteStopDao {
+public class TransiteStopDaoImpl extends TransitDaoImpl<TransitStop> implements TransiteStopDao {
 	
 	/**
 	 * 
@@ -84,8 +84,8 @@ public class TransiteStopDaoImpl extends TransitDaoImpl implements TransiteStopD
 	 * @see me.transit.dao.TransitDao#loadById(long, java.lang.String)
 	 */
 	@Override
-	public Object loadById(String id, String agencyName) {
-		TransitStop rtn = TransitStop.class.cast(super.loadById(id, agencyName));
+	public TransitStop loadById(String id, String agencyName) {
+		TransitStop rtn = super.loadById(id, agencyName);
 		
 		Hibernate.initialize(rtn.getAgency());
 		return rtn;

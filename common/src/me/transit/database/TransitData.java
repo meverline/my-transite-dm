@@ -1,6 +1,8 @@
 package me.transit.database;
 
-public interface TransitData {
+import java.io.Serializable;
+
+public interface TransitData extends Serializable {
 
 	/**
 	 * @return the uuid

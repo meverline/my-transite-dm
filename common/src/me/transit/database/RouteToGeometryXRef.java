@@ -1,6 +1,8 @@
 package me.transit.database;
 
-public interface RouteToGeometryXRef {
+import java.io.Serializable;
+
+public interface RouteToGeometryXRef extends Serializable {
 	
 	/**
 	 * @return the uuid

@@ -5,6 +5,7 @@ import me.transit.database.RouteToGeometryXRef;
 
 public class RouteToGeometryXRefImpl implements RouteToGeometryXRef {
 
+	private static final long serialVersionUID = 1L;
 	private long uuid = -1;
 	private RouteGeometry shape = null;
 	

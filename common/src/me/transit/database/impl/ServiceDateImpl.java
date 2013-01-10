@@ -10,6 +10,8 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 public class ServiceDateImpl extends TransitDateImpl implements ServiceDate{
 
+	@XStreamOmitField
+	private static final long serialVersionUID = 1L;
 	@XStreamAlias("startDate")
 	@XStreamConverter(me.database.SingleValueCalendarConverter.class)
 	private Calendar startDate = null;

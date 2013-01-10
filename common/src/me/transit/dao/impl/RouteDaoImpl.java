@@ -14,7 +14,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
-public class RouteDaoImpl extends TransitDaoImpl implements RouteDao {
+public class RouteDaoImpl extends TransitDaoImpl<Route> implements RouteDao {
 	
 	/**
 	 * 
@@ -29,8 +29,8 @@ public class RouteDaoImpl extends TransitDaoImpl implements RouteDao {
 	 * @see me.transit.dao.impl.RouteDao#loadById(long, java.lang.String)
 	 */
 	@Override
-	public synchronized Object loadById(String id, String agencyName) {
-		Route rtn = Route.class.cast(super.loadById(id, agencyName));
+	public synchronized Route loadById(String id, String agencyName) {
+		Route rtn = super.loadById(id, agencyName);
 		
 		Hibernate.initialize(rtn.getAgency());
 		Hibernate.initialize(rtn.getTripList());

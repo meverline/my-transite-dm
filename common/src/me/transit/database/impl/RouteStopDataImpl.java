@@ -4,9 +4,12 @@ import me.database.CSVFieldType;
 import me.transit.database.RouteStopData;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 public class RouteStopDataImpl implements RouteStopData {
 
+	@XStreamOmitField
+	private static final long serialVersionUID = 1L;
 	@XStreamAlias("routeShortName")
 	private String routeShortName = null;
 	@XStreamAlias("tripHeadSign")

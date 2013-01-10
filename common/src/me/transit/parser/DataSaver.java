@@ -1,4 +1,4 @@
-package me.transit.parser;
+ package me.transit.parser;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -69,7 +69,7 @@ public class DataSaver {
 			public Object convert(String data) {
 				String id = data.trim();
 				RouteDao dao = RouteDao.class.cast(DaoBeanFactory.create().getDaoBean(RouteDao.class));
-				return Route.class.cast(dao.loadById(id, getParser().getAgencyName()));
+				return dao.loadById(id, getParser().getAgencyName());
 			}
 			
 		},
@@ -85,7 +85,7 @@ public class DataSaver {
 			@Override
 			public Object convert(String data) {
 				AgencyDao dao = AgencyDao.class.cast(DaoBeanFactory.create().getDaoBean(AgencyDao.class));
-				return Agency.class.cast(dao.findByName(data));
+				return dao.findByName(data);
 			}
 			
 		},

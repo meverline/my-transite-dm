@@ -8,7 +8,7 @@ import me.transit.database.RouteGeometry;
 
 import org.hibernate.Hibernate;
 
-public class RouteGeometryDaoImpl extends TransitDaoImpl implements RouteGeometryDao {
+public class RouteGeometryDaoImpl extends TransitDaoImpl<RouteGeometry> implements RouteGeometryDao {
 	
 	/**
 	 * 
@@ -23,8 +23,8 @@ public class RouteGeometryDaoImpl extends TransitDaoImpl implements RouteGeometr
 	 * @see me.transit.dao.TransitDao#loadById(long, java.lang.String)
 	 */
 	@Override
-	public synchronized Object loadById(String id, String agencyName) {
-		RouteGeometry rtn = RouteGeometry.class.cast(super.loadById(id, agencyName));
+	public synchronized RouteGeometry loadById(String id, String agencyName) {
+		RouteGeometry rtn = super.loadById(id, agencyName);
 		
 		Hibernate.initialize(rtn.getAgency());
 		return rtn;

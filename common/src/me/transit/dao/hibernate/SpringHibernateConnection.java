@@ -5,8 +5,11 @@ package me.transit.dao.hibernate;
 
 import java.sql.SQLException;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 /**
  * @author meverline
@@ -14,6 +17,7 @@ import org.hibernate.SessionFactory;
  */
 public class SpringHibernateConnection implements HibernateConnection {
 
+	private Log log = LogFactory.getLog(SpringHibernateConnection.class);
 	private SessionFactory sessionFactory;    
 	
 	/* (non-Javadoc)
@@ -36,10 +40,29 @@ public class SpringHibernateConnection implements HibernateConnection {
 	 */
 	@Override
 	public synchronized void save(Object item) throws SQLException {
-		Session session = getSessionFactory().getCurrentSession();
-		session.save(item);
-		session.flush();
-		session.close();
+		
+		Session session = null;
+		Transaction tx = null;
+		
+		try {
+
+			session = getSessionFactory().openSession();
+			tx = session.beginTransaction();
+
+			session.saveOrUpdate(item);
+			tx.commit();
+			session.flush();
+			session.close();
+
+		} catch (Exception ex) {
+			if ( session != null ) {
+				tx.rollback();
+				session.close();
+		    }
+			
+			log.error(ex);
+			throw new SQLException(ex.getLocalizedMessage());
+		}
 	}
 	
 }

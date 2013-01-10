@@ -12,10 +12,10 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import me.transit.dao.AgencyDao;
-import me.transit.dao.hibernate.HibernateDaoImpl;
+import me.transit.dao.hibernate.AbstractHibernateDao;
 import me.transit.database.Agency;
 
-public class AgencyDaoImpl extends HibernateDaoImpl implements AgencyDao {
+public class AgencyDaoImpl extends AbstractHibernateDao<Agency> implements AgencyDao {
 
 	/**
 	 * 
@@ -26,22 +26,20 @@ public class AgencyDaoImpl extends HibernateDaoImpl implements AgencyDao {
 		super(Agency.class);
 	}
 	
-	/* (non-Javadoc)
-	 * @see me.transit.dao.impl.AgencyDao#findByName(java.lang.String)
+	/**
+	 * 
+	 * @param id
+	 * @return
 	 */
-	@Override
 	public synchronized Agency findByName(String id) {
-		Object obj = this.loadByField(id, "name");
-		if ( obj != null ) {
-			return Agency.class.cast(obj);
-		}
-		return null;
+		return this.loadByField(id, "name");
 	}
 	
-	/* (non-Javadoc)
-	 * @see me.transit.dao.impl.AgencyDao#findAllByName(java.lang.String)
+	/**
+	 * 
+	 * @param id
+	 * @return
 	 */
-	@Override
 	public synchronized List<Agency> findAllByName(String id) {
 		
 		List<Agency> rtn = new ArrayList<Agency>();
@@ -65,10 +63,11 @@ public class AgencyDaoImpl extends HibernateDaoImpl implements AgencyDao {
 		return null;
 	}
 	
-	/* (non-Javadoc)
-	 * @see me.transit.dao.impl.AgencyDao#loadById(java.lang.String)
+	/**
+	 * 
+	 * @param id
+	 * @return
 	 */
-	@Override
 	public synchronized Object loadById(String id) {
 		
 		try {
@@ -90,10 +89,10 @@ public class AgencyDaoImpl extends HibernateDaoImpl implements AgencyDao {
 		return null;
 	}
 	
-	/* (non-Javadoc)
-	 * @see me.transit.dao.impl.AgencyDao#list()
+	/**
+	 * 
+	 * @return
 	 */
-	@Override
 	@SuppressWarnings("rawtypes")
 	public List<Agency> list()
 	{

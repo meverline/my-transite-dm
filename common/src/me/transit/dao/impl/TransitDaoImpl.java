@@ -1,11 +1,12 @@
 package me.transit.dao.impl;
 
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import me.transit.dao.TransitDao;
-import me.transit.dao.hibernate.HibernateDaoImpl;
+import me.transit.dao.hibernate.AbstractHibernateDao;
 import me.transit.database.Agency;
 
 import org.hibernate.Criteria;
@@ -14,7 +15,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
-public abstract class TransitDaoImpl extends HibernateDaoImpl implements TransitDao {
+public abstract class TransitDaoImpl<T extends Serializable> extends AbstractHibernateDao<T> implements TransitDao<T> {
 
 	protected TransitDaoImpl(Class<?> aClass) throws SQLException, ClassNotFoundException {
 		super(aClass);
@@ -65,7 +66,7 @@ public abstract class TransitDaoImpl extends HibernateDaoImpl implements Transit
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
-	public  Object loadById(String id, String agencyName) {
+	public  T loadById(String id, String agencyName) {
 		
 		List<Object> aList = null;
 		try {
@@ -77,11 +78,9 @@ public abstract class TransitDaoImpl extends HibernateDaoImpl implements Transit
 			crit.createAlias("agency", "agency").add(
 									Restrictions.eq("agency.name", agencyName));
 			
-			aList = crit.list();
-			// Object rtn = crit.uniqueResult();
-			
+			aList = crit.list();			
 			session.close();
-			return aList.get(0);
+			return (T) aList.get(0);
 
 		} catch (Exception ex) {
 			getLog().error(getDaoClass().getName() + 

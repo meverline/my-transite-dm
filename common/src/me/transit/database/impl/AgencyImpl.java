@@ -7,6 +7,11 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 public class AgencyImpl implements Agency {
 
+	/**
+	 * 
+	 */
+	@XStreamOmitField
+	private static final long serialVersionUID = 1L;
 	@XStreamOmitField
 	private long uuid = -1;
 	@XStreamAlias("name")

@@ -1,12 +1,13 @@
 package me.transit.dao;
 
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
 
 import me.transit.dao.hibernate.HibernateDao;
 import me.transit.database.Agency;
 
-public interface TransitDao extends HibernateDao {
+public interface TransitDao<T extends Serializable> extends HibernateDao<T> {
 
 	/**
 	 * 
@@ -25,6 +26,6 @@ public interface TransitDao extends HibernateDao {
 	/**
 	 * 
 	 */
-	public abstract Object loadById(String id, String agencyName);
+	public abstract T loadById(String id, String agencyName);
 
 }
