@@ -185,4 +185,5 @@ public class TransitStopImpl extends TransitDateImpl implements TransitStop {
 		builder.append("routes size: " + this.getRoutes().size());
 		return builder.toString();
 	}
+
 }

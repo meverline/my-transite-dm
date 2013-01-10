@@ -78,7 +78,7 @@ public interface Route extends TransitData {
 	 * @param textColor the textColor to set
 	 */
 	public void setTextColor(String textColor);
-
+	
 	/**
 	 * @param schedule the schedule to set
 	 */
