@@ -628,21 +628,22 @@ public class TransitFeedParser {
 	
 	private void saveShape(String id, List<Coordinate> coords)
 	{
-		Coordinate array[] = new Coordinate[coords.size()];
-		coords.toArray(array);
-	
-		LineString poly =  factory.createLineString(array);
-		
-		RouteGeometry db = new RouteGeometryImpl();
-		db.setAgency(getAgency());
-		db.setId(id);
-		db.setShape(poly);
 		try {
+			Coordinate array[] = new Coordinate[coords.size()];
+			coords.toArray(array);
+			
+			LineString poly =  factory.createLineString(array);
+		
+			RouteGeometry db = new RouteGeometryImpl();
+			db.setAgency(getAgency());
+			db.setId(id);
+			db.setShape(poly);
+
 			RouteGeometryDao dao = 
 				RouteGeometryDao.class.cast(DaoBeanFactory.create().getDaoBean(RouteGeometryDao.class));
 			dao.save(db);
 			this.shaps.put(id, db);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			log.error("ID: " + id + " : coords size " + coords.size() + "\n" + e.getLocalizedMessage()  , e);
 		}
 		
@@ -676,7 +677,7 @@ public class TransitFeedParser {
 				
 				if ( current == null ) { current = id; }
 				
-				if ( current != id ) {
+				if ( current.compareTo(id) != 0 ) {
 					saveShape(current, coords);
 					coords.clear();
 					current = id;
@@ -911,8 +912,12 @@ public class TransitFeedParser {
 				}
 				
 				if ( indexMap.containsKey("ServiceId") ) {
-				   long id = Long.parseLong(data[indexMap.get("ServiceId")].trim());
-				   trip.setService(service.get(id));
+				   try {
+					   long id = Long.parseLong(data[indexMap.get("ServiceId")].trim());
+					   trip.setService(service.get(id));
+				   } catch (Exception e) {
+					   log.error(e.getLocalizedMessage(), e);
+				   }
 				}
 				
 				if ( indexMap.containsKey("Headsign") ) {

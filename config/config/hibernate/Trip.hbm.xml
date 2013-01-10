@@ -31,7 +31,7 @@
 		  <many-to-one name="service"  
 		               class="ServiceDate" 
 		               column="SERVICE_DATE_UUID" 
-		               not-null="true" 
+		               not-null="false" 
 		               outer-join="true" />
 		 
 		  <property name="stopTimes" column="STOP_TIMES"  length="16777215" type="StopTimeUserType"/>

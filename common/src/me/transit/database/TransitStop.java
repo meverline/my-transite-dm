@@ -72,7 +72,7 @@ public interface TransitStop extends TransitData {
 	 * @param url the url to set
 	 */
 	public void setUrl(String url);
-
+	
 	/**
 	 * @return the locationType
 	 */
