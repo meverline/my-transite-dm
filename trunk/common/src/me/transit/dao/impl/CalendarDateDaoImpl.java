@@ -7,7 +7,7 @@ import org.hibernate.Hibernate;
 import me.transit.dao.CalendarDateDao;
 import me.transit.database.CalendarDate;
 
-public class CalendarDateDaoImpl extends TransitDaoImpl implements CalendarDateDao {
+public class CalendarDateDaoImpl extends TransitDaoImpl<CalendarDate> implements CalendarDateDao {
 	
 	/**
 	 * 
@@ -22,8 +22,8 @@ public class CalendarDateDaoImpl extends TransitDaoImpl implements CalendarDateD
 	 * @see me.transit.dao.TransitDao#loadById(long, java.lang.String)
 	 */
 	@Override
-	public synchronized Object loadById(String id, String agencyName) {
-		CalendarDate rtn = CalendarDate.class.cast(super.loadById(id, agencyName));
+	public synchronized CalendarDate loadById(String id, String agencyName) {
+		CalendarDate rtn = super.loadById(id, agencyName);
 		
 		Hibernate.initialize(rtn.getAgency());
 		return rtn;

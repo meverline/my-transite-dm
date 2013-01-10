@@ -5,7 +5,7 @@ import java.util.List;
 import me.transit.dao.hibernate.HibernateDao;
 import me.transit.database.Agency;
 
-public interface AgencyDao extends HibernateDao {
+public interface AgencyDao extends HibernateDao<Agency> {
 
 	/**
 	 * 

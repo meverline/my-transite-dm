@@ -4,7 +4,7 @@ import java.util.List;
 
 import me.transit.database.Route;
 
-public interface RouteDao extends TransitDao {
+public interface RouteDao extends TransitDao<Route> {
 
 	/**
 	 * 

@@ -9,10 +9,13 @@ import me.transit.database.TransitStop;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import com.vividsolutions.jts.geom.Point;
 
 public class TransitStopImpl extends TransitDateImpl implements TransitStop {
 
+	@XStreamOmitField
+	private static final long serialVersionUID = 1L;
 	@XStreamAlias("code")
 	private long code = -1;
 	@XStreamAlias("name")

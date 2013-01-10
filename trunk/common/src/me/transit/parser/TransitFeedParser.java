@@ -21,8 +21,8 @@ import me.transit.dao.RouteDao;
 import me.transit.dao.RouteGeometryDao;
 import me.transit.dao.ServiceDateDao;
 import me.transit.dao.TransiteStopDao;
-import me.transit.dao.hibernate.HibernateDao;
 import me.transit.database.Agency;
+import me.transit.database.CalendarDate;
 import me.transit.database.Route;
 import me.transit.database.RouteGeometry;
 import me.transit.database.RouteStopData;
@@ -138,11 +138,7 @@ public class TransitFeedParser {
 		}
 	}
 	
-	public void save(Object obj) throws SQLException
-	{
-		HibernateDao dao = DaoBeanFactory.create().getDaoBean( RouteDao.class);
-		dao.save(obj);
-	}
+
 	
 	/**
 	 * @param agencyId the agencyId to set
@@ -199,12 +195,6 @@ public class TransitFeedParser {
 			else if ( dataFile.trim().compareTo("trips.txt") == 0 ) {
 				tripMap = parseTrip(filePath(diretory,dataFile));
 			}
-			//else if ( dataFile.trim().compareTo("Stops") == 0 ) {
-			//	 readStopShapeFile(filePath(diretory,dataFile), tripMap);
-			//}
-			//else if ( dataFile.trim().compareTo("Routes") == 0 ) {
-			//	tripMap = readRouteShapeFile(filePath(diretory,dataFile));
-			//}
 			else {
 				parse(filePath(diretory,dataFile), dataFile);
 			}
@@ -252,7 +242,7 @@ public class TransitFeedParser {
 	 * @return
 	 * @throws NoSuchMethodException
 	 */
-	private List<DataSaver> mapMethods(String header, String type, @SuppressWarnings("rawtypes") Class objClass) throws NoSuchMethodException 
+	private List<DataSaver> mapMethods(String header, String type, Class<?> objClass) throws NoSuchMethodException 
 	{
 		List<DataSaver> rtn = new ArrayList<DataSaver>();
 		
@@ -418,6 +408,34 @@ public class TransitFeedParser {
 		
 	}
 	
+	public void save(Object obj) throws SQLException
+	{
+		if ( obj instanceof Agency ) {
+			AgencyDao dao = 
+					 AgencyDao.class.cast(DaoBeanFactory.create().getDaoBean( AgencyDao.class));
+			
+			dao.save( Agency.class.cast(obj));
+		} else	if ( obj instanceof  TransitStop ) {
+			TransiteStopDao dao = 
+					TransiteStopDao.class.cast(DaoBeanFactory.create().getDaoBean( TransiteStopDao.class));
+			
+			dao.save( TransitStop.class.cast(obj));
+		} else	if ( obj instanceof  Route ) {
+			RouteDao dao = 
+					RouteDao.class.cast(DaoBeanFactory.create().getDaoBean( RouteDao.class));
+			
+			dao.save( Route.class.cast(obj));
+		} else	if ( obj instanceof  CalendarDate ) {
+			CalendarDateDao dao = 
+					CalendarDateDao.class.cast(DaoBeanFactory.create().getDaoBean( CalendarDateDao.class));
+			
+			dao.save( CalendarDate.class.cast(obj));
+		} else {
+			log.error("save: Unkown class: " + obj.getClass().getName() );
+		}
+		
+	}
+	
 	/**
 	 * Parse the calendar file.
 	 * @param shapeFile
@@ -492,6 +510,7 @@ public class TransitFeedParser {
 						TransitData td = TransitData.class.cast(obj);
 						td.setAgency(this.getAgency());
 					}
+					
 					save(obj);
 				
 				} catch (Exception e) {
@@ -593,8 +612,10 @@ public class TransitFeedParser {
 				}
 				
 				sd.setServiceDayFlag(serviceFlag);
-								
-				save(sd);
+					
+				ServiceDateDao serviceDao = 
+						ServiceDateDao.class.cast(DaoBeanFactory.create().getDaoBean( ServiceDateDao.class));				
+				serviceDao.save(sd);
 				this.service.put(sd.getId(), sd);
 			}
 			inStream.close();
@@ -622,7 +643,7 @@ public class TransitFeedParser {
 			dao.save(db);
 			this.shaps.put(id, db);
 		} catch (SQLException e) {
-			log.error(e.getLocalizedMessage(), e);
+			log.error("ID: " + id + " : coords size " + coords.size() + "\n" + e.getLocalizedMessage()  , e);
 		}
 		
 	}
@@ -787,8 +808,7 @@ public class TransitFeedParser {
 			    }
 				
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				log.error(e.getLocalizedMessage(), e);
 			}
 			
 		}
@@ -843,8 +863,7 @@ public class TransitFeedParser {
 			    }
 				
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				log.error(e.getLocalizedMessage(), e);
 			}
 		}	
 		return;

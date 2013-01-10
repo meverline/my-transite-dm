@@ -1,11 +1,11 @@
 package me.transit.database.impl;
 
 import java.util.Calendar;
-
 import me.transit.database.CalendarDate;
 
 public class CalendarDateImpl extends TransitDateImpl implements CalendarDate {
 
+	private static final long serialVersionUID = 1L;
 	private Calendar date = null;
 	private ExceptionType  exceptionType = ExceptionType.UNKNOWN;
 	

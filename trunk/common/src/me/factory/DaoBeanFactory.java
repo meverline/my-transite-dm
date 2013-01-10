@@ -48,13 +48,13 @@ public class DaoBeanFactory {
 	 * @param beanClass
 	 * @return
 	 */
-	public HibernateDao getDaoBean(Class<?> beanClass)
+	public HibernateDao<?> getDaoBean(Class<?> beanClass)
 	{
 		StringBuilder beanName = new StringBuilder();
 		
 		beanName.append( beanClass.getSimpleName().substring(0,1).toLowerCase());
 		beanName.append( beanClass.getSimpleName().substring(1));
-		return (HibernateDao) context_.getBean(beanName.toString());
+		return (HibernateDao<?>) context_.getBean(beanName.toString());
 	}
 	
 	/**

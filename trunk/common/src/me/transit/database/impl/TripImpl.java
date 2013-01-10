@@ -11,9 +11,12 @@ import me.transit.database.Trip;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 public class TripImpl extends TransitDateImpl implements Trip {
 
+	@XStreamOmitField
+	private static final long serialVersionUID = 1L;
 	@XStreamAlias("service")
 	private ServiceDate service = null;
 	@XStreamAlias("headSign")

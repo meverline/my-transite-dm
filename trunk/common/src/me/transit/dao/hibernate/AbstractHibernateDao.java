@@ -1,5 +1,6 @@
 package me.transit.dao.hibernate;
 
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -10,16 +11,17 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
-public class HibernateDaoImpl implements HibernateDao {
+public abstract class AbstractHibernateDao<T extends Serializable> {
 
-	private Log log = LogFactory.getLog(HibernateDaoImpl.class);
+	private Log log = LogFactory.getLog(AbstractHibernateDao.class);
 	private HibernateConnection connection = null;;
 	//private SessionFactory sessionFactory;    
 	private Class<?> daoClass;
 	
-	protected HibernateDaoImpl(Class<?> aClass) throws SQLException, ClassNotFoundException {
+	protected AbstractHibernateDao(Class<?> aClass) throws SQLException, ClassNotFoundException {
 		this.setDaoClass(aClass);
 	}
 	
@@ -80,26 +82,33 @@ public class HibernateDaoImpl implements HibernateDao {
 		this.daoClass = daoClass;
 	}
 
-	/* (non-Javadoc)
-	 * @see me.transit.dao.hibernate.HibernateDao#save(java.lang.Object)
+	/**
+	 * 
+	 * @param item
+	 * @throws SQLException
 	 */
-	@Override
-	public synchronized void save(Object item) throws SQLException {
+	public synchronized void save(T item) throws SQLException {
 		this.getConnection().save(item);
 	}
 	
-	/* (non-Javadoc)
-	 * @see me.transit.dao.hibernate.HibernateDao#delete(long)
+	/**
+	 * 
+	 * @param uuid
+	 * @throws SQLException
 	 */
-	@Override
 	public synchronized void delete(long uuid) throws SQLException {
+				
+		Session session = null;
+		Transaction tx = null;
+		
 		try {
-			Session session = getSession();
+			session = getSessionFactory().openSession();
 			Criteria crit = session.createCriteria(this.getDaoClass());
 			
 			crit.add( Restrictions.eq("UUID", uuid));
-			
+			tx = session.beginTransaction();
 			session.delete(crit.uniqueResult());
+			tx.commit();
 			session.flush();
 			session.close();
 		} catch (HibernateException ex) {
@@ -107,24 +116,23 @@ public class HibernateDaoImpl implements HibernateDao {
 		}
 	}
 	
-	/* (non-Javadoc)
-	 * @see me.transit.dao.hibernate.HibernateDao#delete(java.util.List)
+	/**
+	 * 
+	 * @param uuids
+	 * @throws SQLException
 	 */
-	@Override
 	public synchronized void delete(List<Long> uuids) throws SQLException {
 		for (Long uuid : uuids) {
 			this.delete(uuid);
 		}
 	}
 	
-
-	
 	/**
 	 *
 	 * @param id
 	 * @return
 	 */
-	protected Object loadByField(String id, String property) {
+	protected T loadByField(String id, String property) {
 
 		try {
 
@@ -133,7 +141,8 @@ public class HibernateDaoImpl implements HibernateDao {
 			
 			crit.add( Restrictions.eq(property, id));
 			
-			Object rtn = crit.uniqueResult();
+			@SuppressWarnings("unchecked")
+			T rtn = (T) crit.uniqueResult();
 
 			session.close();
 			return rtn;
@@ -146,11 +155,13 @@ public class HibernateDaoImpl implements HibernateDao {
 
 	}
 	
-	/* (non-Javadoc)
-	 * @see me.transit.dao.hibernate.HibernateDao#loadByUUID(java.lang.Long, java.lang.Class)
+	/**
+	 * 
+	 * @param id
+	 * @param aClass
+	 * @return
 	 */
-	@Override
-	public  Object loadByUUID(Long id, @SuppressWarnings("rawtypes") Class aClass) {
+	public  T loadByUUID(Long id, @SuppressWarnings("rawtypes") Class aClass) {
 
 		try {
 
@@ -159,7 +170,8 @@ public class HibernateDaoImpl implements HibernateDao {
 			
 			crit.add( Restrictions.eq("UUID", id));
 			
-			Object rtn = crit.uniqueResult();
+			@SuppressWarnings("unchecked")
+			T rtn = (T) crit.uniqueResult();
 
 			session.close();
 			return rtn;

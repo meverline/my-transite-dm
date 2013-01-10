@@ -5,7 +5,7 @@ import java.util.List;
 import me.transit.dao.query.StopQueryConstraint;
 import me.transit.database.TransitStop;
 
-public interface TransiteStopDao extends TransitDao {
+public interface TransiteStopDao extends TransitDao<TransitStop> {
 
 	/**
 	 * 

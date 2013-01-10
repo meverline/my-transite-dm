@@ -1,9 +1,11 @@
 package me.transit.database;
 
+import java.io.Serializable;
+
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("Agency")
-public interface Agency {
+public interface Agency extends Serializable {
 
 	/**
 	 * @return the uuid

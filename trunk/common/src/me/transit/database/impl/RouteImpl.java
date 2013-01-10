@@ -8,10 +8,13 @@ import me.transit.database.Trip;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 @XStreamAlias("Route")
 public class RouteImpl extends TransitDateImpl implements Route {
 	
+	@XStreamOmitField
+	private static final long serialVersionUID = 1L;
 	@XStreamAlias("shortName")
 	private String shortName = "";
 	@XStreamAlias("longName")

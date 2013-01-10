@@ -8,6 +8,8 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 public class TransitDateImpl implements TransitData {
 	
+	@XStreamOmitField
+	private static final long serialVersionUID = 1L;
 	@XStreamAlias("id")
 	private long uuid = -1;
 	private Agency agency = null;

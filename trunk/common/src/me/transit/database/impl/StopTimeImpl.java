@@ -13,6 +13,8 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 public class StopTimeImpl implements StopTime {
 
 	@XStreamOmitField
+	private static final long serialVersionUID = 1L;
+	@XStreamOmitField
 	private String stopId = null;
 	@XStreamAlias("arrivalTime")
 	private long arrivalTime = 0;
