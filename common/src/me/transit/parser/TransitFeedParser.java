@@ -408,6 +408,12 @@ public class TransitFeedParser {
 		
 	}
 	
+	/**
+	 * 
+	 * 
+	 * @param obj
+	 * @throws SQLException
+	 */
 	public void save(Object obj) throws SQLException
 	{
 		if ( obj instanceof Agency ) {
@@ -695,71 +701,7 @@ public class TransitFeedParser {
 		}
 	}
 	
-	/**
-	 * 
-	 * @param routeId
-	 * @return
-	 */
-	private void updateStop(String stopId, HashMap<String, String> routeTrips )
-	{
-		RouteDao dao = 
-			RouteDao.class.cast(DaoBeanFactory.create().getDaoBean(RouteDao.class));
-		TransiteStopDao stopDao = 
-			TransiteStopDao.class.cast(DaoBeanFactory.create().getDaoBean(TransiteStopDao.class));
 
-		TransitStop stop = null;
-		Route route = null;; 
-		
-		try {
-			
-			List<RouteStopData> routesList = new ArrayList<RouteStopData>();
-			
-			for ( Entry<String,String> entry : routeTrips.entrySet() ) {
-				route = Route.class.cast(dao.loadById(entry.getKey(), getAgencyName()));
-				if ( route != null ) {
-					routesList.add( new RouteStopDataImpl( route.getShortName(), entry.getValue()));
-				}
-			}
-			
-			stop = TransitStop.class.cast(stopDao.loadById(stopId, getAgencyName()));
-			stop.setRoutes(routesList);
-			stopDao.save(stop);
-			
-		} catch (Exception e) {
-			log.error(e.getLocalizedMessage(), e);
-		}
-	}
-	
-	/**
-	 * 
-	 * @param routeId
-	 * @param aStopList
-	 */
-	private void updateRoute(String routeId, List<Trip> tripList)
-	{
-		Route route = null;
-		try {
-			
-			RouteDao dao = 
-				RouteDao.class.cast(DaoBeanFactory.create().getDaoBean(RouteDao.class));
-			
-			route = Route.class.cast(dao.loadById(routeId, getAgencyName()));
-			if ( route == null ) {
-				log.info("Unable to find Route: " + routeId);
-				return;
-			}
-			
-			route.getTripList().addAll(tripList);
-			dao.save(route);
-		
-		} catch (SQLException e) {
-			if ( route != null ) {
-				log.error("Route:" + route.toString());
-			}
-			log.error(e.getLocalizedMessage(), e);
-		}
-	}
-	
 	/**
 	 * Parse the shape file.
 	 * @param shapeFile
@@ -912,12 +854,8 @@ public class TransitFeedParser {
 				}
 				
 				if ( indexMap.containsKey("ServiceId") ) {
-				   try {
-					   long id = Long.parseLong(data[indexMap.get("ServiceId")].trim());
-					   trip.setService(service.get(id));
-				   } catch (Exception e) {
-					   log.error(e.getLocalizedMessage(), e);
-				   }
+					String id = data[indexMap.get("ServiceId")].trim();
+					trip.setService(service.get(id));
 				}
 				
 				if ( indexMap.containsKey("Headsign") ) {
@@ -952,6 +890,101 @@ public class TransitFeedParser {
 	}
 	
 	/**
+	 * 
+	 * @param routeId
+	 * @return
+	 */
+	private void updateStop(StopRouteList data )
+	{
+		TransiteStopDao stopDao = 
+			TransiteStopDao.class.cast(DaoBeanFactory.create().getDaoBean(TransiteStopDao.class));
+
+		TransitStop stop = null;
+		
+		try {
+			
+			stop = TransitStop.class.cast(stopDao.loadById(data.getStop(), getAgencyName()));
+			stop.setRoutes(data.getRouteList());
+			stopDao.save(stop);
+			
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage(), e);
+		}
+	}
+	
+	/**
+	 * 
+	 * @param routeId
+	 * @param aStopList
+	 */
+	private void updateRoute(String routeId, List<Trip> tripList)
+	{
+		Route route = null;
+		try {
+			
+			RouteDao dao = 
+				RouteDao.class.cast(DaoBeanFactory.create().getDaoBean(RouteDao.class));
+			
+			route = Route.class.cast(dao.loadById(routeId, getAgencyName()));
+			if ( route == null ) {
+				log.info("Unable to find Route: " + routeId);
+				return;
+			}
+			
+			route.getTripList().addAll(tripList);
+			dao.save(route);
+		
+		} catch (SQLException e) {
+			if ( route != null ) {
+				log.error("Route:" + route.toString());
+			}
+			log.error(e.getLocalizedMessage(), e);
+		}
+	}
+	
+	/**
+	 * 
+	 * @param stopMap
+	 * @return
+	 */
+	private List<StopRouteList> xrefStopToRoutes(HashMap<String,List<StopTripInfo>> stopMap)
+	{
+		List<StopRouteList> rtn = new ArrayList<StopRouteList>();
+		
+		RouteDao dao = 
+				RouteDao.class.cast(DaoBeanFactory.create().getDaoBean(RouteDao.class));
+	
+		Route route = null; 
+		HashMap<String, String> routeMap = new HashMap<String, String>();
+		
+		try {
+			
+			for ( Entry<String,List<StopTripInfo>> entry : stopMap.entrySet()) {
+				List<RouteStopData> routesList = new ArrayList<RouteStopData>();
+
+				for ( StopTripInfo info : entry.getValue() ) {
+					if ( ! routeMap.containsKey(info.getTripId()) ) {
+						route = Route.class.cast(dao.loadById(info.getTripId(), getAgencyName()));
+						if ( route != null ) {
+							routeMap.put(info.getTripId(), route.getShortName());
+						}
+					}
+					if ( routeMap.containsKey(info.getTripId()) ) {
+						routesList.add( new RouteStopDataImpl( routeMap.get(info.getTripId()), info.getHeadSign()));
+					}
+				}
+				
+				rtn.add( new StopRouteList( entry.getKey(), routesList) );
+			}
+			
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage(), e);
+		}
+		
+		return rtn;
+	}
+	
+	/**
 	 * Parse the shape file.
 	 * @param shapeFile
 	 */
@@ -979,7 +1012,7 @@ public class TransitFeedParser {
 			RouteTripPair trip = null;
 			StopTime stopTime = null;
 			
-			HashMap<String,HashMap<String,String>> stopMap = new HashMap<String,HashMap<String,String>>();
+			HashMap<String,List<StopTripInfo>> stopMap = new HashMap<String,List<StopTripInfo>>();
 			
 			while ( inStream.ready() ) {
 				
@@ -1035,7 +1068,7 @@ public class TransitFeedParser {
 				if ( indexMap.containsKey("StopId") ) {
 					stopTime.setStopId(data[indexMap.get("StopId")].trim());
 					if ( ! stopMap.containsKey( stopTime.getStopId()) ) {
-						stopMap.put( stopTime.getStopId(), new HashMap<String,String>());
+						stopMap.put( stopTime.getStopId(), new ArrayList<StopTripInfo>());
 					}
 				}
 				
@@ -1045,8 +1078,9 @@ public class TransitFeedParser {
 					trip = tripMap.get(id);
 					trip.getTrip().addStopTime(stopTime);
 					
-					if ( ! stopMap.get(stopTime.getStopId()).containsKey(trip.getRouteId()) ) {
-						stopMap.get(stopTime.getStopId()).put(trip.getRouteId(), trip.getTrip().getHeadSign());
+					if ( ! stopMap.get(stopTime.getStopId()).contains(trip.getRouteId()) ) {
+						stopMap.get(stopTime.getStopId()).add( new StopTripInfo( trip.getRouteId(), 
+																				 trip.getTrip().getHeadSign()));
 					}
 					current = id;
 					trip = null;
@@ -1054,12 +1088,13 @@ public class TransitFeedParser {
 					
 				trip = tripMap.get(current);
 				trip.getTrip().addStopTime(stopTime);
-				if ( ! stopMap.get(stopTime.getStopId()).containsKey(trip.getRouteId()) ) {
-					stopMap.get(stopTime.getStopId()).put(trip.getRouteId(), trip.getTrip().getHeadSign());
+				if ( ! stopMap.get(stopTime.getStopId()).contains(trip.getRouteId()) ) {
+					stopMap.get(stopTime.getStopId()).add( new StopTripInfo( trip.getRouteId(), 
+																			 trip.getTrip().getHeadSign()));
 				}
 				lineCnt++;
 				cnt++;
-				if ( cnt > 10000 ) {
+				if ( cnt > 100000 ) {
 					log.info("parseStopTimes " + lineCnt + " ...");
 					cnt = 0;
 				}
@@ -1069,13 +1104,15 @@ public class TransitFeedParser {
 			if ( stopTime != null ) {
 			   trip = tripMap.get(current);
 			   trip.getTrip().addStopTime(stopTime);
-			   if ( ! stopMap.get(stopTime.getStopId()).containsKey(trip.getRouteId()) ) {
-				  stopMap.get(stopTime.getStopId()).put(trip.getRouteId(), trip.getTrip().getHeadSign());
+			   if ( ! stopMap.get(stopTime.getStopId()).contains(trip.getRouteId()) ) {
+				  stopMap.get(stopTime.getStopId()).add( new StopTripInfo( trip.getRouteId(), 
+							 											   trip.getTrip().getHeadSign()));
 			   }
 			}
 			
 			HashMap<String,List<Trip>> routeToTrip = new HashMap<String,List<Trip>>();
 			
+			log.info("parseStopTimes:routetoTrip " + lineCnt + " ...");
 			for ( RouteTripPair pair : tripMap.values()) {
 				if ( ! routeToTrip.containsKey(pair.getRouteId()) ) {
 					routeToTrip.put(pair.getRouteId(), new ArrayList<Trip>());
@@ -1083,15 +1120,20 @@ public class TransitFeedParser {
 				routeToTrip.get(pair.getRouteId()).add(pair.getTrip());
 			}
 			
+			log.info("parseStopTimes:updateRoute " + lineCnt + " ...");
 			for ( Entry<String,List<Trip>> data : routeToTrip.entrySet()) {
 				updateRoute(data.getKey(), data.getValue());
 			}
 			
-			for ( Entry<String,HashMap<String,String>> entry : stopMap.entrySet()) {
-				this.updateStop(entry.getKey(), entry.getValue());
-			}
-			
 			inStream.close();
+			
+			log.info("parseStopTimes:xrefStopToRoutes " + stopMap.size());
+			List<StopRouteList> aList = this.xrefStopToRoutes(stopMap);
+			
+			log.info("parseStopTimes:updateStop " + aList.size());
+			for ( StopRouteList entry : aList) {
+				this.updateStop(entry);
+			}
 			
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage(), e);
@@ -1159,6 +1201,59 @@ public class TransitFeedParser {
 		}
 	}
 	
+	//////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////
+
+	private class StopRouteList {
+		
+		private String stop = null;
+		private List<RouteStopData> routesList = null;
+		
+		public StopRouteList(String id, List<RouteStopData> list ) {
+			stop = id;
+			routesList = list;
+		}
+		
+		public String getStop() {
+			return stop;
+		}
+		
+		public List<RouteStopData> getRouteList() {
+			return this.routesList;
+		}
+
+	}
+	
+	//////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////
+
+	private class StopTripInfo  {
+		
+		private String tripId = null;
+		private String headSign = null;
+		
+		public StopTripInfo(String id, String head ) {
+			tripId = id;
+			headSign = head;
+		}
+
+		public String getTripId() {
+			return tripId;
+		}
+
+		public String getHeadSign() {
+			return headSign;
+		}
+		
+		public int hashCode() {
+			return tripId.hashCode();
+		}
+		
+	}
+	
+	//////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////
+
 	private class ShapeFileFilter implements FilenameFilter {
 
 		@Override
