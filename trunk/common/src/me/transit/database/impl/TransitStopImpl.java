@@ -17,7 +17,7 @@ public class TransitStopImpl extends TransitDateImpl implements TransitStop {
 	@XStreamOmitField
 	private static final long serialVersionUID = 1L;
 	@XStreamAlias("code")
-	private long code = -1;
+	private String code = "";
 	@XStreamAlias("name")
 	private String name = "";
 	@XStreamAlias("desc")
@@ -39,14 +39,14 @@ public class TransitStopImpl extends TransitDateImpl implements TransitStop {
 	/**
 	 * @return the code
 	 */
-	public long getCode() {
+	public String getCode() {
 		return code;
 	}
 
 	/**
 	 * @param code the code to set
 	 */
-	public void setCode(long code) {
+	public void setCode(String code) {
 		this.code = code;
 	}
 

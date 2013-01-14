@@ -16,12 +16,12 @@ public interface TransitStop extends TransitData {
 	/**
 	 * @return the code
 	 */
-	public long getCode();
+	public String getCode();
 
 	/**
 	 * @param code the code to set
 	 */
-	public void setCode(long code);
+	public void setCode(String code);
 
 	/**
 	 * @return the name
