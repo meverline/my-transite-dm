@@ -872,7 +872,7 @@ public class TransitFeedParser {
 				} 
 				
 				if ( indexMap.containsKey("ShapeId") ) {
-				   long id = Long.parseLong(data[indexMap.get("ShapeId")].trim());
+				   String id = data[indexMap.get("ShapeId")].trim();
 				   trip.setShape( shaps.get(id));
 				}
 				

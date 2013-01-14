@@ -32,8 +32,10 @@ public class RouteDaoImpl extends TransitDaoImpl<Route> implements RouteDao {
 	public synchronized Route loadById(String id, String agencyName) {
 		Route rtn = super.loadById(id, agencyName);
 		
-		Hibernate.initialize(rtn.getAgency());
-		Hibernate.initialize(rtn.getTripList());
+		if ( rtn != null ) {
+			Hibernate.initialize(rtn.getAgency());
+			Hibernate.initialize(rtn.getTripList());
+		}
 		return rtn;
 	}
 
