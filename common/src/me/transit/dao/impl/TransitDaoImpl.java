@@ -80,6 +80,10 @@ public abstract class TransitDaoImpl<T extends Serializable> extends AbstractHib
 			
 			aList = crit.list();			
 			session.close();
+			if ( aList.size() < 1 ) {
+				getLog().info(" Unable to find Id: " + id + " agency " + agencyName);
+				return null;
+			}
 			return (T) aList.get(0);
 
 		} catch (Exception ex) {

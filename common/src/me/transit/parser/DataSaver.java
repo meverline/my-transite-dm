@@ -138,9 +138,9 @@ public class DataSaver {
 				cal.set(Calendar.MINUTE, 0);
 				cal.set(Calendar.SECOND, 0);
 				cal.set(Calendar.MILLISECOND, 0);
-				cal.set(Calendar.YEAR, Integer.parseInt(data.substring(0,4)));
-				cal.set(Calendar.MONTH, Integer.parseInt(data.substring(4,6)) - 1);
-				cal.set(Calendar.DAY_OF_MONTH, Integer.parseInt(data.substring(6)));
+				cal.set(Calendar.YEAR, Integer.parseInt(data.substring(0,4).replace('"', ' ').trim()));
+				cal.set(Calendar.MONTH, Integer.parseInt(data.substring(4,6).replace('"', ' ').trim()) - 1);
+				cal.set(Calendar.DAY_OF_MONTH, Integer.parseInt(data.substring(6).replace('"', ' ').trim()));
 				return cal;
 			}
 		},

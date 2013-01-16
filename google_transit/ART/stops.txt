@@ -1,4 +1,4 @@
-﻿stop_id,stop_code,stop_name,stop_lat,stop_lon,stop_url
+stop_id,stop_code,stop_name,stop_lat,stop_lon,stop_url
 83,51001,"Ballston Metro, Fairfax Dr, EB @ N Stafford St, NS",38.882092,-77.110876,"http://www.arlingtontransit.com/pages/rider-tools/realtime/?Stop=A51001#realTimeResultsContainer"
 84,51002,"Fairfax Drive, WB @ N Taylor Street, NS",38.882281,-77.112455,"http://www.arlingtontransit.com/pages/rider-tools/realtime/?Stop=A51002#realTimeResultsContainer"
 85,51003,"Fairfax Drive, WB @ N Utah Street, FS",38.882254,-77.114353,"http://www.arlingtontransit.com/pages/rider-tools/realtime/?Stop=A51003#realTimeResultsContainer"

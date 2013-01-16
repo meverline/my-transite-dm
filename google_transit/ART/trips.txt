@@ -1,4 +1,4 @@
-﻿route_id,service_id,trip_id,trip_headsign,direction_id,block_id,shape_id
+route_id,service_id,trip_id,trip_headsign,direction_id,block_id,shape_id
 "1_42",1,8717,"Pentagon Metro",0,4205,39
 "1_42",1,8718,"Ballston Metro",1,4205,40
 "1_42",1,8719,"Pentagon Metro",0,4205,39

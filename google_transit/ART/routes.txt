@@ -1,4 +1,4 @@
-﻿route_id,agency_id,route_short_name,route_long_name,route_type,route_url
+route_id,agency_id,route_short_name,route_long_name,route_type,route_url
 "1_41",1,"41","Columbia Pike-Ballston-Court House",3,"http://realtime.commuterpage.com/RTT/Public/Schedule.aspx?RouteNo=41"
 "1_42",1,"42","Ballston-Pentagon",3,"http://realtime.commuterpage.com/RTT/Public/Schedule.aspx?RouteNo=42"
 "1_45",1,"45","Columbia Pike-DHS/Sequoia-Rosslyn",3,"http://realtime.commuterpage.com/RTT/Public/Schedule.aspx?RouteNo=45"
