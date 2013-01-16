@@ -874,7 +874,12 @@ public class TransitFeedParser {
 				
 				if ( indexMap.containsKey("ServiceId") ) {
 					String id = data[indexMap.get("ServiceId")].trim();
-					trip.setService(service.get(id));
+					
+					if ( service.get(id) != null ) {
+						trip.setService(service.get(id));
+					} else {
+						log.error("Invalid trip service id: " + id + " route: " + routeId);
+					}
 				}
 				
 				if ( indexMap.containsKey("Headsign") ) {
@@ -1094,25 +1099,23 @@ public class TransitFeedParser {
 					
 					if ( current == null ) { current = id; }
 					
-					if ( current.compareTo(id) != 0 && tripMap.get(id) != null) {
-						trip = tripMap.get(id);
-						trip.getTrip().addStopTime(stopTime);
-						
-						if ( ! stopMap.get(stopTime.getStopId()).contains(trip.getRouteId()) ) {
-							stopMap.get(stopTime.getStopId()).add( new StopTripInfo( trip.getRouteId(), 
-																					 trip.getTrip().getHeadSign()));
-						}
+					if ( current.compareTo(id) != 0 ) {
+							trip = tripMap.get(id);
+							trip.getTrip().addStopTime(stopTime);
+							
+							if ( ! stopMap.get(stopTime.getStopId()).contains(trip.getRouteId()) ) {
+								stopMap.get(stopTime.getStopId()).add( new StopTripInfo( trip.getRouteId(), 
+																						 trip.getTrip().getHeadSign()));
+							}
 						current = id;
 						trip = null;
 					}
 						
 					trip = tripMap.get(current);
-					if ( trip != null ) {
-						trip.getTrip().addStopTime(stopTime);
-						if ( ! stopMap.get(stopTime.getStopId()).contains(trip.getRouteId()) ) {
-							stopMap.get(stopTime.getStopId()).add( new StopTripInfo( trip.getRouteId(), 
-																					 trip.getTrip().getHeadSign()));
-						}
+					trip.getTrip().addStopTime(stopTime);
+					if ( ! stopMap.get(stopTime.getStopId()).contains(trip.getRouteId()) ) {
+						stopMap.get(stopTime.getStopId()).add( new StopTripInfo( trip.getRouteId(), 
+																				 trip.getTrip().getHeadSign()));
 					}
 					lineCnt++;
 					cnt++;
@@ -1123,7 +1126,7 @@ public class TransitFeedParser {
 				}
 			}
 			
-			if ( stopTime != null  && tripMap.get(current) != null) {
+			if ( stopTime != null ) {
 			   trip = tripMap.get(current);
 			   trip.getTrip().addStopTime(stopTime);
 			   if ( ! stopMap.get(stopTime.getStopId()).contains(trip.getRouteId()) ) {

@@ -1,5 +1,6 @@
 package me.openMap.models;
 
+import java.util.HashSet;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
@@ -14,7 +15,6 @@ public class StopTableModel extends AbstractTableModel {
 	private List<TransitStopQueryResult> tableData_ = null; 
 	private Class<?> columanClass_[] = { Boolean.class, String.class, String.class };
 	private String columanName_[] = { " ", "Stop", "Route(s)" };
-	//private List<DisplayFlag> flags = new ArrayList<DisplayFlag>();
 	
 	/**
 	 * @return the tableData_
@@ -79,10 +79,17 @@ public class StopTableModel extends AbstractTableModel {
 			case 2:
 				StringBuilder builder = new StringBuilder();
 				int ndx = 0;
-				for (RouteStopData r : row.getRoutes() ) {
-					if ( ndx != 0 ) { builder.append(", "); }
-					builder.append(r.getRouteShortName());
-					ndx++;
+				
+				if ( row.getRoutes() != null ) {
+					HashSet<String> map = new HashSet<String>();
+					for (RouteStopData r : row.getRoutes() ) {
+						if ( ! map.contains(r.getRouteShortName()) ) {
+							if ( ndx != 0 ) { builder.append(", "); }
+							builder.append(r.getRouteShortName());
+							ndx++;
+							map.add(r.getRouteShortName());
+						}
+					}
 				}
 				return builder.toString();
 		}

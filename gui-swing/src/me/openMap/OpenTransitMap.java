@@ -88,7 +88,7 @@ public class OpenTransitMap extends JFrame {
 	
 	public OpenTransitMap()
 	{
-		printClassPath();
+		//printClassPath();
 		DaoBeanFactory.initilize();
 		build();
 		
