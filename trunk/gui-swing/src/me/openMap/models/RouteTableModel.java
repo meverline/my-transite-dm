@@ -150,6 +150,7 @@ public class RouteTableModel extends AbstractTableModel {
 	
 	private void getServiceTypes(DisplayCell cell, String route, String agencyName)
 	{
+		ServiceDate service = null;
 		try {
 
 			RouteDao dao =
@@ -158,14 +159,16 @@ public class RouteTableModel extends AbstractTableModel {
 			List<Route> list = dao.findByRouteNumber(route, agencyName);
 			int serviceDays = 0x0;
 			int ndx  = 0;
+			
 			for ( Route rt : list ) {
 				for ( Trip trip : rt.getTripList()) {
 					
-					ServiceDate service = trip.getService();
-					
-					for ( ServiceDate.WeekDay value : ServiceDate.WeekDay.values()) {
-						if ( service.hasService(value)) {
-							serviceDays |= value.getBit();
+					if ( service != null ) {
+						service = trip.getService();
+						for ( ServiceDate.WeekDay value : ServiceDate.WeekDay.values()) {
+							if ( service.hasService(value)) {
+								serviceDays |= value.getBit();
+							}
 						}
 					}
 				}
@@ -177,7 +180,7 @@ public class RouteTableModel extends AbstractTableModel {
 			
 			cell.setService(serviceDays);
 		
-		} catch (DaoException e) {
+		} catch (Exception e) {
 			return;
 		}
 		return;
