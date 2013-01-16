@@ -213,24 +213,30 @@ public class TransitFeedParser {
 		String fields[] = header.split(",");
 		HashMap<String,Integer> indexMap = new HashMap<String,Integer>(); 
 
-		for ( String fld : fields) {
-			String data[] = fld.toLowerCase().split("_");
-			StringBuilder fieldName = new StringBuilder();
-			
-			for ( String name : data) {
-				if ( name.compareTo(strip) != 0) {
-					String mapTo = name.substring(0,1).toUpperCase() + name.substring(1);
-					fieldName.append(mapTo);
-				}
-			}
-			order.add(fieldName.toString());
-		}
-		
 		int ndx = 0;
-		for ( String h : order) {
-			indexMap.put(h, ndx);
+		String mapTo = null;
+		for ( String fld : fields) {
+			String item = fld.replace('"', ' ').trim();
+			if ( item.indexOf('_') == -1 ) {
+				mapTo = item.substring(0,1).toUpperCase() + item.substring(1);
+				order.add(mapTo);
+			    indexMap.put(mapTo, ndx);
+			} else {
+				String data[] = item.toLowerCase().split("_");
+				StringBuilder fieldName = new StringBuilder();
+				
+				for ( String name : data) {
+					if ( name.compareTo(strip) != 0) {
+					     mapTo = name.substring(0,1).toUpperCase() + name.substring(1);
+						fieldName.append(mapTo);
+					}
+				}
+				order.add(fieldName.toString());
+				indexMap.put(fieldName.toString(), ndx);
+			}
 			ndx++;
 		}
+		
 		return indexMap;
 	}
 	
@@ -378,6 +384,7 @@ public class TransitFeedParser {
 	 */
 	private void deleteAgencyData(Agency agency)
 	{
+		/**
 		AgencyDao agencyDao = 
 			 AgencyDao.class.cast(DaoBeanFactory.create().getDaoBean( AgencyDao.class));
 		
@@ -405,6 +412,7 @@ public class TransitFeedParser {
 		} catch (SQLException e) {
 			log.error(e.getLocalizedMessage(), e);
 		}
+		**/
 		
 	}
 	
@@ -561,68 +569,79 @@ public class TransitFeedParser {
 			
 			while ( inStream.ready() ) {
 				String line = inStream.readLine();
-				String data[] = line.split(",");
+				if ( line.trim().length() > 0 && line.indexOf(',') != -1)  {
+					String data[] = line.split(",");
 				
-				String id = data[indexMap.get( TransitFeedParser.ID )];
-				
-				ServiceDate sd = new ServiceDateImpl();
-				
-				sd.setId(id.trim());
-				sd.setStartDate( this.convertDate(data[indexMap.get("StartDate")]));
-				sd.setEndDate( this.convertDate(data[indexMap.get("EndDate")]));
-				sd.setAgency(getAgency());
-				
-				int serviceFlag = 0;
-				boolean weekday = false, sat = false, sun = false;
-				if ( this.convertToBoolean(data[indexMap.get("Sunday")]) ) {
-					serviceFlag |= ServiceDate.WeekDay.SUNDAY.getBit();
-					sun = true;
-				}
-				if ( this.convertToBoolean(data[indexMap.get("Monday")]) ) {
-					serviceFlag |= ServiceDate.WeekDay.MONDAY.getBit();
-					weekday |= true;
-				}
-				if ( this.convertToBoolean(data[indexMap.get("Tuesday")]) ) {
-					serviceFlag |= ServiceDate.WeekDay.TUESDAY.getBit();
-					weekday |= true;
-				}
-				if ( this.convertToBoolean(data[indexMap.get("Wednesday")]) ) {
-					serviceFlag |= ServiceDate.WeekDay.WENSDAY.getBit();
-					weekday |= true;
-				}
-				if ( this.convertToBoolean(data[indexMap.get("Thursday")]) ) {
-					serviceFlag |= ServiceDate.WeekDay.THURSDAY.getBit();
-					weekday |= true;
-				}
-				if ( this.convertToBoolean(data[indexMap.get("Friday")]) ) {
-					serviceFlag |= ServiceDate.WeekDay.FRIDAY.getBit();
-					weekday |= true;
-				}
-				if ( this.convertToBoolean(data[indexMap.get("Saturday")]) ) {
-					serviceFlag |= ServiceDate.WeekDay.SATURDAY.getBit();
-					sat = true;
-				}
-				
-				if ( sat && sun && weekday ) {
-					sd.setService( ServiceDate.ServiceDays.ALL_WEEK );
-				} else if ( weekday ) {
-					sd.setService( ServiceDate.ServiceDays.WEEKDAY_SERVICE );
-				} else if ( sat && weekday ) {
-					sd.setService( ServiceDate.ServiceDays.WEEKDAY_SAT_SERVICE );
-				} else if ( sat && sun ) {
-					sd.setService( ServiceDate.ServiceDays.WEEKEND_SERVICE );
-				} else if ( sat ) {
-					sd.setService( ServiceDate.ServiceDays.SATURDAY_SERVICE );
-				} else if ( sun ) {
-					sd.setService( ServiceDate.ServiceDays.SUNDAY_SERVICE );
-				}
-				
-				sd.setServiceDayFlag(serviceFlag);
+					String id = null;
+					if ( indexMap.get( TransitFeedParser.ID ) != null ) {
+						id = data[indexMap.get( TransitFeedParser.ID )];
+					} else {
+						if ( indexMap.get( "serviceId" ) == null ) {
+							id = data[0];
+						} else {
+							id = data[indexMap.get( "serviceId" )];
+						}
+					}
 					
-				ServiceDateDao serviceDao = 
-						ServiceDateDao.class.cast(DaoBeanFactory.create().getDaoBean( ServiceDateDao.class));				
-				serviceDao.save(sd);
-				this.service.put(sd.getId(), sd);
+					ServiceDate sd = new ServiceDateImpl();
+					
+					sd.setId(id.trim());
+					sd.setStartDate( this.convertDate(data[indexMap.get("StartDate")].replace('"', ' ').trim()));
+					sd.setEndDate( this.convertDate(data[indexMap.get("EndDate")].replace('"', ' ').trim()));
+					sd.setAgency(getAgency());
+					
+					int serviceFlag = 0;
+					boolean weekday = false, sat = false, sun = false;
+					if ( this.convertToBoolean(data[indexMap.get("Sunday")]) ) {
+						serviceFlag |= ServiceDate.WeekDay.SUNDAY.getBit();
+						sun = true;
+					}
+					if ( this.convertToBoolean(data[indexMap.get("Monday")]) ) {
+						serviceFlag |= ServiceDate.WeekDay.MONDAY.getBit();
+						weekday |= true;
+					}
+					if ( this.convertToBoolean(data[indexMap.get("Tuesday")]) ) {
+						serviceFlag |= ServiceDate.WeekDay.TUESDAY.getBit();
+						weekday |= true;
+					}
+					if ( this.convertToBoolean(data[indexMap.get("Wednesday")]) ) {
+						serviceFlag |= ServiceDate.WeekDay.WENSDAY.getBit();
+						weekday |= true;
+					}
+					if ( this.convertToBoolean(data[indexMap.get("Thursday")]) ) {
+						serviceFlag |= ServiceDate.WeekDay.THURSDAY.getBit();
+						weekday |= true;
+					}
+					if ( this.convertToBoolean(data[indexMap.get("Friday")]) ) {
+						serviceFlag |= ServiceDate.WeekDay.FRIDAY.getBit();
+						weekday |= true;
+					}
+					if ( this.convertToBoolean(data[indexMap.get("Saturday")]) ) {
+						serviceFlag |= ServiceDate.WeekDay.SATURDAY.getBit();
+						sat = true;
+					}
+					
+					if ( sat && sun && weekday ) {
+						sd.setService( ServiceDate.ServiceDays.ALL_WEEK );
+					} else if ( weekday ) {
+						sd.setService( ServiceDate.ServiceDays.WEEKDAY_SERVICE );
+					} else if ( sat && weekday ) {
+						sd.setService( ServiceDate.ServiceDays.WEEKDAY_SAT_SERVICE );
+					} else if ( sat && sun ) {
+						sd.setService( ServiceDate.ServiceDays.WEEKEND_SERVICE );
+					} else if ( sat ) {
+						sd.setService( ServiceDate.ServiceDays.SATURDAY_SERVICE );
+					} else if ( sun ) {
+						sd.setService( ServiceDate.ServiceDays.SUNDAY_SERVICE );
+					}
+					
+					sd.setServiceDayFlag(serviceFlag);
+						
+					ServiceDateDao serviceDao = 
+							ServiceDateDao.class.cast(DaoBeanFactory.create().getDaoBean( ServiceDateDao.class));				
+					serviceDao.save(sd);
+					this.service.put(sd.getId(), sd);
+				}
 			}
 			inStream.close();
 		
@@ -845,7 +864,7 @@ public class TransitFeedParser {
 				Trip trip = new TripImpl();
 								
 				if ( indexMap.containsKey("RouteId") ) {
-				   routeId = data[indexMap.get("RouteId")].trim();			 
+				   routeId = data[indexMap.get("RouteId")].replace('"', ' ').trim();			 
 				} 
 				
 				if ( indexMap.containsKey("Id") ) {
@@ -871,7 +890,7 @@ public class TransitFeedParser {
 				   }
 				} 
 				
-				if ( indexMap.containsKey("ShapeId") ) {
+				if ( indexMap.containsKey("ShapeId") &&  data.length > indexMap.get("ShapeId")  ) {
 				   String id = data[indexMap.get("ShapeId")].trim();
 				   trip.setShape( shaps.get(id));
 				}
@@ -1017,91 +1036,94 @@ public class TransitFeedParser {
 			while ( inStream.ready() ) {
 				
 				String line = inStream.readLine();
-				String data[] = line.split(",");
-				
-				stopTime = new StopTimeImpl(last);
-				
-				String id = data[indexMap.get("TripId")].trim();
-				
-				if ( indexMap.containsKey("ArrivalTime") ) {
-				  String time[] = data[indexMap.get("ArrivalTime")].trim().split(":");
-				  StringBuilder builder = new StringBuilder();
-				  for ( String str : time ) {
-					  builder.append(str);
-				  }
-				  if ( builder.toString().length() > 0 ) {	  
-					  stopTime.setArrivalTime(Long.parseLong(builder.toString()));
-				  }
-				} 
-				
-				if ( indexMap.containsKey("DepartureTime") ) {
-					String time[]  = data[indexMap.get("DepartureTime")].trim().split(":");
-					StringBuilder builder = new StringBuilder();
-					for ( String str : time ) {
-						builder.append(str);
-					}
-					if ( builder.toString().length() > 0 ) {	 
-					   stopTime.setDepartureTime(Long.parseLong(builder.toString()));	
-					}
-					stopTime.setStopId(data[indexMap.get("StopId")].trim());
-				} 
-				
-				if ( indexMap.containsKey("DropOffType") ) {
-				  int ndx = Integer.parseInt(data[indexMap.get("DropOffType")].trim());
-				  stopTime.setDropOffType(StopTime.PickupType.values()[ndx]);
-				} 
-				
-				if ( indexMap.containsKey("PickupType") ) {
-				   int ndx = Integer.parseInt(data[indexMap.get("PickupType")].trim());
-				   stopTime.setPickupType(StopTime.PickupType.values()[ndx]);
-				} 
-				
-				if ( indexMap.containsKey("DistTravel") ) {
-					double dist = Double.parseDouble(data[indexMap.get("DistTravel")].trim());
-					stopTime.setShapeDistTravel(dist);
-				} 
-				
-				if ( indexMap.containsKey("StopHeadSign") ) {
-					stopTime.setStopHeadSign(data[indexMap.get("StopHeadSign")].trim());
-				}
-				
-				if ( indexMap.containsKey("StopId") ) {
-					stopTime.setStopId(data[indexMap.get("StopId")].trim());
-					if ( ! stopMap.containsKey( stopTime.getStopId()) ) {
-						stopMap.put( stopTime.getStopId(), new ArrayList<StopTripInfo>());
-					}
-				}
-				
-				if ( current == null ) { current = id; }
-				
-				if ( current.compareTo(id) != 0 ) {
-					trip = tripMap.get(id);
-					trip.getTrip().addStopTime(stopTime);
+				if ( line.trim().length() > 0 && line.indexOf(',') != -1 ) {
+					String data[] = line.split(",");
 					
-					if ( ! stopMap.get(stopTime.getStopId()).contains(trip.getRouteId()) ) {
-						stopMap.get(stopTime.getStopId()).add( new StopTripInfo( trip.getRouteId(), 
-																				 trip.getTrip().getHeadSign()));
-					}
-					current = id;
-					trip = null;
-				}
+					stopTime = new StopTimeImpl(last);
 					
-				trip = tripMap.get(current);
-				trip.getTrip().addStopTime(stopTime);
-				if ( ! stopMap.get(stopTime.getStopId()).contains(trip.getRouteId()) ) {
-					stopMap.get(stopTime.getStopId()).add( new StopTripInfo( trip.getRouteId(), 
-																			 trip.getTrip().getHeadSign()));
+					String id = data[indexMap.get("TripId")].replace('"', ' ').trim();
+					
+					if ( indexMap.containsKey("ArrivalTime") ) {
+					  String time[] = data[indexMap.get("ArrivalTime")].trim().split(":");
+					  StringBuilder builder = new StringBuilder();
+					  for ( String str : time ) {
+						  builder.append(str);
+					  }
+					  if ( builder.toString().length() > 0 ) {	  
+						  stopTime.setArrivalTime(Long.parseLong(builder.toString().replace('"', ' ').trim()));
+					  }
+					} 
+					
+					if ( indexMap.containsKey("DepartureTime") ) {
+						String time[]  = data[indexMap.get("DepartureTime")].trim().split(":");
+						StringBuilder builder = new StringBuilder();
+						for ( String str : time ) {
+							builder.append(str);
+						}
+						if ( builder.toString().length() > 0 ) {	 
+						   stopTime.setDepartureTime(Long.parseLong(builder.toString().replace('"', ' ').trim()));	
+						}
+						stopTime.setStopId(data[indexMap.get("StopId")].replace('"', ' ').trim());
+					} 
+					
+					if ( indexMap.containsKey("DropOffType") ) {
+					  int ndx = Integer.parseInt(data[indexMap.get("DropOffType")].replace('"', ' ').trim());
+					  stopTime.setDropOffType(StopTime.PickupType.values()[ndx]);
+					} 
+					
+					if ( indexMap.containsKey("PickupType") ) {
+					   int ndx = Integer.parseInt(data[indexMap.get("PickupType")].replace('"', ' ').trim());
+					   stopTime.setPickupType(StopTime.PickupType.values()[ndx]);
+					} 
+					
+					if ( indexMap.containsKey("DistTravel") ) {
+						double dist = Double.parseDouble(data[indexMap.get("DistTravel")].replace('"', ' ').trim());
+						stopTime.setShapeDistTravel(dist);
+					} 
+					
+					if ( indexMap.containsKey("StopHeadSign") ) {
+						stopTime.setStopHeadSign(data[indexMap.get("StopHeadSign")].trim());
+					}
+					
+					if ( indexMap.containsKey("StopId") ) {
+						stopTime.setStopId(data[indexMap.get("StopId")].replace('"', ' ').trim());
+						if ( ! stopMap.containsKey( stopTime.getStopId()) ) {
+							stopMap.put( stopTime.getStopId(), new ArrayList<StopTripInfo>());
+						}
+					}
+					
+					if ( current == null ) { current = id; }
+					
+					if ( current.compareTo(id) != 0 && tripMap.get(id) != null) {
+						trip = tripMap.get(id);
+						trip.getTrip().addStopTime(stopTime);
+						
+						if ( ! stopMap.get(stopTime.getStopId()).contains(trip.getRouteId()) ) {
+							stopMap.get(stopTime.getStopId()).add( new StopTripInfo( trip.getRouteId(), 
+																					 trip.getTrip().getHeadSign()));
+						}
+						current = id;
+						trip = null;
+					}
+						
+					trip = tripMap.get(current);
+					if ( trip != null ) {
+						trip.getTrip().addStopTime(stopTime);
+						if ( ! stopMap.get(stopTime.getStopId()).contains(trip.getRouteId()) ) {
+							stopMap.get(stopTime.getStopId()).add( new StopTripInfo( trip.getRouteId(), 
+																					 trip.getTrip().getHeadSign()));
+						}
+					}
+					lineCnt++;
+					cnt++;
+					if ( cnt > 100000 ) {
+						log.info("parseStopTimes " + lineCnt + " ...");
+						cnt = 0;
+					}
 				}
-				lineCnt++;
-				cnt++;
-				if ( cnt > 100000 ) {
-					log.info("parseStopTimes " + lineCnt + " ...");
-					cnt = 0;
-				}
-				
 			}
 			
-			if ( stopTime != null ) {
+			if ( stopTime != null  && tripMap.get(current) != null) {
 			   trip = tripMap.get(current);
 			   trip.getTrip().addStopTime(stopTime);
 			   if ( ! stopMap.get(stopTime.getStopId()).contains(trip.getRouteId()) ) {
@@ -1160,15 +1182,16 @@ public class TransitFeedParser {
 		TransitFeedParser feedParser = new TransitFeedParser(path);
 		
 		String dir = path + "/google_transit";
-		String orginization[] = { "metro", 
-								  "ART", 
-								  "DC_Circulator", 
-								  "FairfaxConnector",
+		String orginization[] = { "ChapelHill", 
 								  "C-Tran", 
-								  "ChapelHill", 
 								  "Data", 
-								  "TriangleTransite",
-								  "TriangleTransite"
+								  "CAT",
+								  "TriangleTransit",
+								  "TriangleTransit-Express",
+								  "FairfaxConnector",
+								  "ART",
+								  "metro",
+								  "DC_Circulator"
 								  };
 		
 		for ( String agency : orginization ) {

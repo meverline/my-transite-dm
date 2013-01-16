@@ -86,7 +86,6 @@ public class TransiteStopDaoImpl extends TransitDaoImpl<TransitStop> implements 
 	@Override
 	public TransitStop loadById(String id, String agencyName) {
 		TransitStop rtn = super.loadById(id, agencyName);
-		
 		Hibernate.initialize(rtn.getAgency());
 		return rtn;
 	}
