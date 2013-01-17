@@ -82,6 +82,11 @@
   	    </fileset>
   	</copy>
   	<copy todir="${dist}" file="OpenTransiteMap.sh" />
+  	<copy todir="${dist}" file="DatabaseLoader.sh" />
+  	
+  	<chmod file="${dist}/OpenTransiteMap.sh" perm="ugo+rx"/>
+  	<chmod file="${dist}/DatabaseLoader.sh" perm="ugo+rx"/>
+  	<copy todir="${dist}/config" file="../common/config/ClassMap.properties" />
     <jar jarfile="${dist}/gui-swing-0.9.jar" basedir="${build}" />
   	
   </target>
