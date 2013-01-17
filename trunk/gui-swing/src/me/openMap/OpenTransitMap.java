@@ -177,7 +177,7 @@ public class OpenTransitMap extends JFrame {
 		////////////////////////////////////////////////////////////////////
 
 		JPanel searchTab = new JPanel();
-		primarySplit.setLeftComponent(searchTab);
+		primarySplit.setLeftComponent(new JScrollPane(searchTab));
 		
 		searchTab.setLayout( new BorderLayout());
 		
@@ -188,6 +188,7 @@ public class OpenTransitMap extends JFrame {
 		searchButton.addActionListener(command);
 		
 		searchTab.add(searchButton, BorderLayout.SOUTH);
+		
 		
 		tabbedPane_ = new JTabbedPane();
 		searchTab.add(tabbedPane_, BorderLayout.CENTER);

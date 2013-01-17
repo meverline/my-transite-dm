@@ -36,6 +36,8 @@
  	 	          type="java.lang.Double"
  	 	          selectedItem="2"
  	 	          actionListener="me.openMap.command.RangeChangeActionListener" >
+ 	 	       <item value="0.1" />
+ 	 	       <item value="0.2" />
  	 	       <item value="0.25" />
  	 	       <item value="0.5" />
  	 	       <item value="0.75" />
