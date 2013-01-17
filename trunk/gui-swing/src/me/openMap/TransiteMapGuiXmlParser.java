@@ -134,6 +134,8 @@ public class TransiteMapGuiXmlParser extends DefaultHandler {
 		try {
 
 			buffer_.delete(0, buffer_.length());
+			
+			
 			parser_.parse(new InputSource(new FileReader(data)), this);
 
 		} catch (SAXException e) {
