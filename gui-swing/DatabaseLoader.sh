@@ -13,5 +13,5 @@ while (my $file = readdir(DIR)) {
 
 $ENV{'CLASSPATH'} = join(";",@classPath);
 
-my @args=("java", "me.openMap.OpenTransitMap" );
+my @args=("java", "me.transit.parser.TransitFeedParser"  $ARGV[1]);
 exec @args
