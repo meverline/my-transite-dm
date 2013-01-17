@@ -574,12 +574,12 @@ public class TransitFeedParser {
 				
 					String id = null;
 					if ( indexMap.get( TransitFeedParser.ID ) != null ) {
-						id = data[indexMap.get( TransitFeedParser.ID )];
+						id = data[indexMap.get( TransitFeedParser.ID )].replace('"', ' ').trim();
 					} else {
 						if ( indexMap.get( "serviceId" ) == null ) {
-							id = data[0];
+							id = data[0].replace('"', ' ').trim();
 						} else {
-							id = data[indexMap.get( "serviceId" )];
+							id = data[indexMap.get( "serviceId" )].replace('"', ' ').trim();
 						}
 					}
 					
