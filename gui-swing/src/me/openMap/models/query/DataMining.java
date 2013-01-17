@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -35,7 +36,9 @@ import me.utils.TransiteEnums;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
+import org.apache.commons.math3.stat.descriptive.rank.Percentile;
 import org.jdesktop.swingx.mapviewer.GeoPosition;
+import org.jfree.util.ArrayUtilities;
 
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;
@@ -51,9 +54,11 @@ public class DataMining extends AbstractSearchParameters
 
 	private JFormattedTextField  lrlat_;
 	private JFormattedTextField  lrlon_;
+	
 	private JComboBox agencyBox = null;
 	private JComboBox produceBox = null;
 	private JFormattedTextField  gridSize_ = null;
+	private JComboBox  percentile_;
 	private JPanel samplePanel = null;
 	private JComboBox sampleTypes = null;
 	private JComboBox units = null;
@@ -161,6 +166,13 @@ public class DataMining extends AbstractSearchParameters
 		units = new JComboBox( TransiteEnums.DistanceUnitType.values());
 		inputs.add(units);
 		fields.add(inputs);
+		
+		// 4. UpperLeft Coordinagte
+		fields.add(new JLabel("Percentail Min"));
+
+		Integer array[] = { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90 };
+		percentile_ = new JComboBox(array);
+		fields.add(percentile_);
 
 		// 5. Coordinagte
 		fields.add(new JLabel("Coordinates"));
@@ -214,7 +226,7 @@ public class DataMining extends AbstractSearchParameters
 		inputs.add(button);
 		
 		SpringLayoutUtilities.makeCompactGrid(fields,
-	                 						  5, 2, //rows, cols
+	                 						  6, 2, //rows, cols
 	                 						  6, 6,        //initX, initY
 	                 						  6, 6);       //xPad, yPad
 
@@ -281,11 +293,29 @@ public class DataMining extends AbstractSearchParameters
 
 		DescriptiveStatistics stats = new DescriptiveStatistics();
 		List<SpatialGridPoint> data = sample.process(results, ur, ll, distanceInMeters, dmType);
+		
+		double [] array = new double[data.size()];
+		int ndx = 0;
 		for (SpatialGridPoint pt : data) {
-			stats.addValue(pt.getData().getInterpolationValue());
+			double value = pt.getData().getInterpolationValue();
+			stats.addValue(value);
+			array[ndx++] = value;
 		}
 
 		ApplicationSettings.create().setColorGradient(ApplicationSettings.create().getGradParms(), stats);
+		
+		if ( percentile_.getSelectedIndex() != 0  ) {
+			Arrays.sort(array);					
+			int index = (int) Math.rint(array.length / 10.0) * percentile_.getSelectedIndex();
+			List<SpatialGridPoint> toDisplay = new ArrayList<SpatialGridPoint>();
+
+			for (SpatialGridPoint pt : data) {
+				if ( pt.getData().getInterpolationValue() > array[index] ) {
+					toDisplay.add(pt);
+				}
+			}
+			data = toDisplay;		
+		}
 
 		rtn.add(new SpatialPointDataHandler(data));
 		rtn.add(new TransitStopDataHandler(results));
