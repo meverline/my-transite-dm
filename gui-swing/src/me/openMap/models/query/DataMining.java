@@ -36,9 +36,7 @@ import me.utils.TransiteEnums;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
-import org.apache.commons.math3.stat.descriptive.rank.Percentile;
 import org.jdesktop.swingx.mapviewer.GeoPosition;
-import org.jfree.util.ArrayUtilities;
 
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;

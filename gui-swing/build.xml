@@ -33,7 +33,7 @@
  	 <ant dir="../common" />
   </target>
 
-  <target name="compile" depends="init,libs,common-compile"
+  <target name="compile" depends="init,common-compile,libs"
         description="compile the source " >
     <!-- Compile the java code from ${src} into ${build} -->
     <javac srcdir="${src}" destdir="${build}" includeAntRuntime="false" >
@@ -43,15 +43,47 @@
         </fileset>
   	   </classpath>
   	 </javac>
+  	
   </target>
-
-  <target name="dist" depends="compile"
-        description="generate the distribution" >
+	
+  <target name="dist" depends="clean,compile" description="generate the distribution" >
+  	
+  	<delete dir="${dist}"/>
     <!-- Create the distribution directory -->
+  	<mkdir dir="${dist}"/>
     <mkdir dir="${dist}/lib"/>
-
+  	<mkdir dir="${dist}/config"/>
+  	
+  	<copy todir="${dist}/lib">
+  	    <fileset dir="${lib}">
+  	    	<include name="**/*.jar"/>
+  	    </fileset>
+  	</copy>
+  	
+  	<mkdir dir="${dist}/config/gui"/>
+  	<copy todir="${dist}/config/gui">
+  	    <fileset dir="config/gui">
+  	    	<include name="**/*.xml"/>
+  	    </fileset>
+  	</copy>
+  	
+  	<mkdir dir="${dist}/config/spring"/>
+  	<copy todir="${dist}/config/spring">
+  	    <fileset dir="config/spring">
+  	    	<include name="**/*.xml"/>
+  	    </fileset>
+  	</copy>
+  	
     <!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
-    <jar jarfile="${dist}/gui-swing-${DSTAMP}.jar" basedir="${build}" />
+  	<mkdir dir="${build}/config"/>
+  	<copy todir="${build}/config/hibernate">
+  	    <fileset dir="../config/config/hibernate">
+  	    	<include name="**/*.xml"/>
+  	    </fileset>
+  	</copy>
+  	<copy todir="${dist}" file="OpenTransiteMap.sh" />
+    <jar jarfile="${dist}/gui-swing-0.9.jar" basedir="${build}" />
+  	
   </target>
 
   <target name="clean"
@@ -59,5 +91,6 @@
     <!-- Delete the ${build} and ${dist} directory trees -->
     <delete dir="${build}"/>
     <delete dir="${dist}"/>
+  	<delete dir="${lib}"/>
   </target>
 </project>
