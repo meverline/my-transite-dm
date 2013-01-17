@@ -7,7 +7,6 @@ opendir(DIR, $dir) or die $!;
 my @classPath = split(";", $ENV{'CLASSPATH'});
 push(@classPath,"gui-swing-0.9.jar");
 while (my $file = readdir(DIR)) {
-	print "$file\n";
 	push(@classPath, "lib/$file");
 }
 
