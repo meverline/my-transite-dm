@@ -3,6 +3,16 @@ package me.transite.feeds.transloc
 /*
  * Transloc Version 1.1 Agenecies api inside Data array
  * 
+ * URL
+ *    http://api.transloc.com/version/agencies.json
+ * Rate Limit
+ *  Can be requested every 10 seconds from the same IP address.
+ *  Required Parameters
+ *   None
+ * Optional Parameters
+ *   agencies - a list of agency IDs which to retrieve
+ *   geo_area - a geographical area filter (see geo_area)
+ * 
  *       {
  * 			 "agency_id": "agency_id",
  *           "name": "sample-agency",
@@ -18,11 +28,16 @@ package me.transite.feeds.transloc
  *           ]
  *        }
  */
-class Agency ( agencyId:String,
-			   name:String, 
-			   shortName:String, 
-			   longName:String, 
-			   url:String, 
-			   timezone:String ) {
-
+class Agency ( val agencyId:String,
+			   val name:String, 
+			   val shortName:String, 
+			   val longName:String, 
+			   val url:String, 
+			   val timezone:String ) {
+  
+  
+   def toUrlString() : String = {
+       agencyId
+   } 
+      
 }
