@@ -80,3 +80,11 @@ class Vehicles( val id:String,
 				val lastUpdate:String) {
 
 }
+
+//////////////////////////////////////////////////////////////////////////////////
+
+object Vehicles {
+   def url(agences:Array[Agency]):String = { 
+     "http://api.transloc.com/1.1/vehicles.json" 
+   }
+}

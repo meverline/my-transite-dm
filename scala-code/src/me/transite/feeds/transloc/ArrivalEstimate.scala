@@ -54,3 +54,9 @@ class ArrivalEstimate(val agency:Agency,
 					  val arrivals:Array[TimeEstimate]) {
  
 }
+
+//////////////////////////////////////////////////////////////////////////////////
+
+object ArrivalEstimate {
+   def url(agences:Array[Agency]):String = {  "http://api.transloc.com/1.1/arrival-estimates.json" }
+}

@@ -59,3 +59,9 @@ class Route (val id:String,
      } 
 
 }
+
+//////////////////////////////////////////////////////////////////////////////////
+
+object Route {
+   def url(agences:Array[Agency]):String = {  "http://api.transloc.com/1.1/routes.json" }
+}
