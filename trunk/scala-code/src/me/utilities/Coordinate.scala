@@ -1,5 +1,5 @@
 package me.utilities
 
-class Coordinate (lat: Double, lon:Double){
+class Coordinate (val lat: Double, val lon:Double){
 
 }
