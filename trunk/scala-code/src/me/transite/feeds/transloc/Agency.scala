@@ -41,3 +41,9 @@ class Agency ( val agencyId:String,
    } 
       
 }
+
+//////////////////////////////////////////////////////////////////////////////////
+
+object Agency {
+   def url():String = {  "http://api.transloc.com/1.1/agencies.json" }
+}

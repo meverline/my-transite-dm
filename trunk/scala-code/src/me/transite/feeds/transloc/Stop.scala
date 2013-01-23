@@ -59,3 +59,9 @@ class Stop(val stop_id:String,
    } 
 
 }
+
+//////////////////////////////////////////////////////////////////////////////////
+
+object Stop {
+   def url(agences:Array[Agency]):String = {  "http://api.transloc.com/1.1/stops.json" }
+}

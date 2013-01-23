@@ -26,7 +26,13 @@ import me.utilities.Coordinate
  *   }
  * }
 */
-class TransLocSegements (val segementId:String, val pologon: Array[Coordinate]) {
+class Segements (val segementId:String, val pologon: Array[Coordinate]) {
 
    
+}
+
+//////////////////////////////////////////////////////////////////////////////////
+
+object Segements {
+   def url(agences:Array[Agency]):String = {  "http://api.transloc.com/1.1/segments.json" }
 }
