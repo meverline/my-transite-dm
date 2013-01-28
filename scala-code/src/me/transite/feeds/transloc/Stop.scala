@@ -52,7 +52,7 @@ class Stop(val stop_id:String,
 		   val url:String,
 		   val locType:LocationType,
 		   val coord:Coordinate,
-		   val routes:Array[String]) {
+		   val routes:Array[Route]) {
   
      def toUrlString() : String = {
        stop_id
