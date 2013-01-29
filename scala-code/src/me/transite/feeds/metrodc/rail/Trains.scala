@@ -33,13 +33,13 @@ object Trains {
   
    //////////////////////////////////////////////////////////////////////////////////
   
-   def jason(list:Array[Station]):String = {
-      LicenseKey.RAIL_SVC + "json/" + endPoint + toUrlQueryString(list)
+   def url(list:Array[Station]):String = {
+      LicenseKey.RAIL_SVC + LicenseKey.JASON + "/" + endPoint + toUrlQueryString(list)
    }
  
    //////////////////////////////////////////////////////////////////////////////////
    
-   def xml(list:Array[Station]):String = {
+   def xmlUrl(list:Array[Station]):String = {
       LicenseKey.RAIL_SVC + endPoint  + toUrlQueryString(list)
    }
 }

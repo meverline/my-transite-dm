@@ -28,7 +28,7 @@ object Routes {
    //////////////////////////////////////////////////////////////////////////////////
   
    def jason():String = { 
-     LicenseKey.BUS_SVC +"json/J" + endPoint + LicenseKey.toUrlString() 
+     LicenseKey.BUS_SVC + LicenseKey.JASON_J  + endPoint + LicenseKey.toUrlString() 
    }
   
    //////////////////////////////////////////////////////////////////////////////////

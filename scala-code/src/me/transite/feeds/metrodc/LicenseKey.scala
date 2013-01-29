@@ -6,6 +6,9 @@ object LicenseKey {
     val key:String = "fjp2vuqvc4bv5h6nbbcs4byy"
     val status:String = "active"
       
+    val JASON = "json"
+    val JASON_J = JASON + "/j"
+    
     val BUS_SVC = "http://api.wmata.com/Bus.svc/"
     val RAIL_SVC = "http://api.wmata.com/Rail.svc/"
     val RADIUS = "&radius="

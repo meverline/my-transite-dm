@@ -36,13 +36,13 @@ object Stations {
 
    //////////////////////////////////////////////////////////////////////////////////
   
-   def jason(railLine:Line ):String = {
-      LicenseKey.RAIL_SVC + "json/J" + endPoint + toUrlQueryString(railLine)
+   def url(railLine:Line ):String = {
+      LicenseKey.RAIL_SVC + LicenseKey.JASON_J  + endPoint + toUrlQueryString(railLine)
    }
    
    //////////////////////////////////////////////////////////////////////////////////
   
-   def xml(railLine:Line ):String = { 
+   def xmlUrl(railLine:Line ):String = { 
       LicenseKey.RAIL_SVC + endPoint + toUrlQueryString(railLine)
    }
 }

@@ -34,13 +34,13 @@ object Predictions {
   
    //////////////////////////////////////////////////////////////////////////////////
   
-   def jason(stopId:Stop):String = {
-      LicenseKey.BUS_SVC + "json/J" + endPoint + toUrlQueryString(stopId)
+   def url(stopId:Stop):String = {
+      LicenseKey.BUS_SVC + LicenseKey.JASON_J  + endPoint + toUrlQueryString(stopId)
    }
  
    //////////////////////////////////////////////////////////////////////////////////
    
-   def xml(stopId:Stop):String = {
+   def xmlUrl(stopId:Stop):String = {
       LicenseKey.BUS_SVC + endPoint  + toUrlQueryString(stopId)
    }
    

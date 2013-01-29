@@ -33,13 +33,13 @@ object Positions {
   
    //////////////////////////////////////////////////////////////////////////////////
   
-   def jason(location:Coordinate, radiusMeters:Double):String = {
-      LicenseKey.BUS_SVC + "json/J" + endPoint + toUrlQueryString(location, radiusMeters)
+   def url(location:Coordinate, radiusMeters:Double):String = {
+      LicenseKey.BUS_SVC + LicenseKey.JASON_J + endPoint + toUrlQueryString(location, radiusMeters)
    }
  
    //////////////////////////////////////////////////////////////////////////////////
    
-   def xml(location:Coordinate, radiusMeters:Double):String = {
+   def xmlUrl(location:Coordinate, radiusMeters:Double):String = {
       LicenseKey.BUS_SVC + endPoint  + toUrlQueryString(location, radiusMeters)
    }
 }
