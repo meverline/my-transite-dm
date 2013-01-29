@@ -1,7 +1,7 @@
 package me.transite.feeds.transloc
 
 import me.transite.feeds.transloc.utils.RouteType
-
+import me.transite.feeds.transloc.utils.GeoArea
 
 /*
  * Transloc Version 1.1 Agenecies api inside Data array
@@ -54,14 +54,26 @@ class Route (val id:String,
 			 val segments: Array[String],
 			 val stops: Array[String]) {
   
-     def toUrlString() : String = {
-       id
+     override def toString() : String = {
+        id
      } 
-
+     
 }
 
 //////////////////////////////////////////////////////////////////////////////////
 
 object Route {
-   def url(agences:Array[Agency]):String = {  "http://api.transloc.com/1.1/routes.json" }
+  
+   val endPoint:String = "routes.json?agencies="
+     
+   def url(agences:Array[Agency]):String = { 
+        TransLoc.URL + endPoint + agences.mkString(",") 
+   }
+   
+   //////////////////////////////////////////////////////////////////////////////////
+   
+   def url(agences:Array[Agency], area:GeoArea):String = { 
+       TransLoc.URL + endPoint + agences.mkString(",") + "&" + area.toUrlString()
+   }
+   
 }

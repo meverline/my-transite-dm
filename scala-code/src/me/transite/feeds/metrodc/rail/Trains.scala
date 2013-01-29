@@ -1,8 +1,9 @@
 package me.transite.feeds.metrodc.rail
 
 /*
- *  Description: Returns train arrival information as it appears on the 
- *               Public Information Displays throughout the system.
+ * Method 5: Rail Station Prediction
+ * Description: Returns train arrival information as it appears on the 
+ *              Public Information Displays throughout the system.
  * 
  *  XML:
  *   <AIMPredictionResp xmlns="http://www.wmata.com" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
@@ -24,6 +25,8 @@ class Trains (val predictions: Array[PredictionTrainInfo]){
 
 object Trains {
   
+   val endPoint:String = "GetPrediction/"
+  
    private def toUrlQueryString(list:Array[Station]):String = {
       list.mkString(",") + "?" + LicenseKey.key;
    }
@@ -31,12 +34,12 @@ object Trains {
    //////////////////////////////////////////////////////////////////////////////////
   
    def jason(list:Array[Station]):String = {
-      "http://api.wmata.com/Rail.svc/json/GetPrediction/" + toUrlQueryString(list)
+      LicenseKey.RAIL_SVC + "json/" + endPoint + toUrlQueryString(list)
    }
  
    //////////////////////////////////////////////////////////////////////////////////
    
    def xml(list:Array[Station]):String = {
-      "http://api.wmata.com/Rail.svc/GetPrediction/"  + toUrlQueryString(list)
+      LicenseKey.RAIL_SVC + endPoint  + toUrlQueryString(list)
    }
 }

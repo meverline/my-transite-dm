@@ -28,6 +28,9 @@ package me.transite.feeds.transloc
  *           ]
  *        }
  */
+
+import me.transite.feeds.transloc.utils.GeoArea
+
 class Agency ( val agencyId:String,
 			   val name:String, 
 			   val shortName:String, 
@@ -36,14 +39,26 @@ class Agency ( val agencyId:String,
 			   val timezone:String ) {
   
   
-   def toUrlString() : String = {
+   override def toString() : String = {
        agencyId
    } 
-      
+     
 }
 
 //////////////////////////////////////////////////////////////////////////////////
 
 object Agency {
-   def url():String = {  "http://api.transloc.com/1.1/agencies.json" }
+  
+   val endPoint:String = "agencies.json"
+  
+   def url():String = { 
+     TransLoc.URL + endPoint 
+   }
+   
+   //////////////////////////////////////////////////////////////////////////////////
+   
+   def url(area:GeoArea):String = {
+       TransLoc.URL + endPoint + "?" + area.toUrlString() 
+   }
+      
 }

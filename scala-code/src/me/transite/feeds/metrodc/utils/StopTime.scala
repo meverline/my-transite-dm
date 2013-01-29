@@ -11,8 +11,11 @@ package me.transite.feeds.metrodc.utils
  * </StopTime>
  *
  */
+
+import java.util.Calendar
+
 class StopTime (val stop:Stop, 
-				val time:String, 
+				val time:Calendar, 
 				val seq:Integer) {
 
 }

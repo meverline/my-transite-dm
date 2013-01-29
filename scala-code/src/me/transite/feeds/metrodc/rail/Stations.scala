@@ -5,6 +5,7 @@ import me.transite.feeds.metrodc.utils.Station
 import me.transite.feeds.metrodc.utils.Line
 
 /*
+ * Method 2: Rail Stations
  * Description: Returns list of all stations in the system or all stations by line.
  * 
  * XML
@@ -22,24 +23,26 @@ class Stations(val stations:Array[Station]) {
 
 object Stations {
   
+   val endPoint:String = "Stations?"
+  
    //////////////////////////////////////////////////////////////////////////////////
   
    private def toUrlQueryString(railLine:Line):String = {
        railLine match {
          case a:Any => railLine.toUrlString() +  "&" + LicenseKey.toUrlString()
-         case _ => "&" + LicenseKey.toUrlString()
+         case _ => LicenseKey.toUrlString()
        }  	
    }
 
    //////////////////////////////////////////////////////////////////////////////////
   
    def jason(railLine:Line ):String = {
-       "http://api.wmata.com/Rail.svc/json/JStations" + toUrlQueryString(railLine)
+      LicenseKey.RAIL_SVC + "json/J" + endPoint + toUrlQueryString(railLine)
    }
    
    //////////////////////////////////////////////////////////////////////////////////
   
    def xml(railLine:Line ):String = { 
-      "http://api.wmata.com/Rail.svc/Stations" + toUrlQueryString(railLine)
+      LicenseKey.RAIL_SVC + endPoint + toUrlQueryString(railLine)
    }
 }

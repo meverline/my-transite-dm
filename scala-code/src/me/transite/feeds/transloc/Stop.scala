@@ -42,7 +42,7 @@ package me.transite.feeds.transloc
 
 import me.utilities.Coordinate
 import me.transite.feeds.transloc.utils.LocationType
-
+import me.transite.feeds.transloc.utils.GeoArea
 
 class Stop(val stop_id:String, 
 		   val agency_id:String, 
@@ -54,14 +54,25 @@ class Stop(val stop_id:String,
 		   val coord:Coordinate,
 		   val routes:Array[Route]) {
   
-     def toUrlString() : String = {
+     override  def toString() : String = {
        stop_id
-   } 
+     } 
 
 }
 
 //////////////////////////////////////////////////////////////////////////////////
 
 object Stop {
-   def url(agences:Array[Agency]):String = {  "http://api.transloc.com/1.1/stops.json" }
+  
+   val endPoint = "stops.json?agencies="
+  
+   def url(agences:Array[Agency]):String = { 
+      TransLoc.URL + endPoint + agences.mkString(",") 
+   }
+   
+   //////////////////////////////////////////////////////////////////////////////////
+   
+   def url(agences:Array[Agency], area:GeoArea):String = { 
+      TransLoc.URL + endPoint + agences.mkString(",") + "&" + area.toUrlString()
+   }
 }

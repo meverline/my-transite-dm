@@ -1,6 +1,7 @@
 package me.transite.feeds.metrodc.bus
 
 /*
+ * Method 15: Bus Prediction
  * Description: Returns the bus arrival predictions for a specific bus stop according to the 
  *              real-time positions of the buses.
  * 
@@ -24,6 +25,8 @@ class Predictions( val stopName:String,
 //////////////////////////////////////////////////////////////////////////////////
 
 object Predictions {
+    
+   val endPoint:String = "Predictions?"
   
    private def toUrlQueryString(stopId:Stop):String = {
       stopId.toUrlString() + "&" + LicenseKey.toUrlString()
@@ -32,12 +35,13 @@ object Predictions {
    //////////////////////////////////////////////////////////////////////////////////
   
    def jason(stopId:Stop):String = {
-      "http://api.wmata.com/Rail.svc/json/JPredictions?" + toUrlQueryString(stopId)
+      LicenseKey.BUS_SVC + "json/J" + endPoint + toUrlQueryString(stopId)
    }
  
    //////////////////////////////////////////////////////////////////////////////////
    
    def xml(stopId:Stop):String = {
-      "http://api.wmata.com/Rail.svc/Predictions?"  + toUrlQueryString(stopId)
+      LicenseKey.BUS_SVC + endPoint  + toUrlQueryString(stopId)
    }
+   
 }

@@ -4,6 +4,7 @@ import me.transite.feeds.metrodc.LicenseKey
 import me.transite.feeds.metrodc.utils.Line
 
 /*
+ * Method 1: Rail Lines
  * Description: Returns descriptive information about all rail lines.
  *  
  * XML:
@@ -20,16 +21,18 @@ class Lines(val railLines:Array[Line]) {
 
 object Lines {
   
+   val endPoint:String = "Lines?"
+     
    //////////////////////////////////////////////////////////////////////////////////
   
    def jason():String = {  
-      "http://api.wmata.com/Rail.svc/json/JLines?" + LicenseKey.toUrlString() 
+     LicenseKey.RAIL_SVC + "json/J" + endPoint + LicenseKey.toUrlString() 
    }
    
    //////////////////////////////////////////////////////////////////////////////////
    
    def xml():String = { 
-     "http://api.wmata.com/Rail.svc/Lines?" + LicenseKey.toUrlString()
+     LicenseKey.RAIL_SVC + endPoint + LicenseKey.toUrlString()
    }
    
 }

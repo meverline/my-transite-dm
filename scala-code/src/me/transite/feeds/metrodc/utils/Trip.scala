@@ -22,11 +22,13 @@ package me.transite.feeds.metrodc.utils
  * 
  */
 
+import java.util.Calendar
+
 class Trip (val direction:String, 
 			val headSign:String, 
 			val route:Route,
-			val startTime:String, 
-			val endTime:String, 
+			val startTime:Calendar, 
+			val endTime:Calendar, 
 			val stops:Array[StopTime],
 			val id:String ) {
 
