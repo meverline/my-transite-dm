@@ -1,6 +1,7 @@
 package me.transite.feeds.transloc
 
 import me.utilities.Coordinate
+import me.transite.feeds.transloc.utils.GeoArea
 
 /*
  * Transloc Version 1.1 Agenecies api inside Data array
@@ -28,11 +29,22 @@ import me.utilities.Coordinate
 */
 class Segements (val segementId:String, val pologon: Array[Coordinate]) {
 
-   
 }
 
 //////////////////////////////////////////////////////////////////////////////////
 
 object Segements {
-   def url(agences:Array[Agency]):String = {  "http://api.transloc.com/1.1/segments.json" }
+  
+   val endPoint:String = "segments.json?agencies="
+     
+   def url(agences:Array[Agency]):String = { 
+       TransLoc.URL + endPoint + agences.mkString(",") 
+   }
+   
+   //////////////////////////////////////////////////////////////////////////////////
+   
+   def url(agences:Array[Agency], area:GeoArea):String = { 
+       TransLoc.URL + endPoint + agences.mkString(",") + "&" + area.toUrlString()
+   }
+     
 }

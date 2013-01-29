@@ -2,14 +2,16 @@ package me.transite.feeds.transloc.utils
 
 import me.utilities.Coordinate
 
-class GeoArea;
+abstract class GeoArea {
+   def toUrlString(): String;
+}
 
 ///////////////////////////////////////////////////////////////////////////////////
 
 class Rectangle ( val upperRight: Coordinate, val lowerleft:Coordinate) extends GeoArea 
 {
     def toUrlString() : String = {
-      "geo_area=" + upperRight.lat + "," + upperRight.lon + "|" + lowerleft.lat + "," + lowerleft.lon 
+      "geo_area=" + upperRight.toTranslocString() + "|" + lowerleft.toTranslocString() 
    } 
 }
 
@@ -18,6 +20,6 @@ class Rectangle ( val upperRight: Coordinate, val lowerleft:Coordinate) extends 
 class Circle ( val center: Coordinate, val radius:Double) extends GeoArea 
 {
     def toUrlString() : String = {
-      "geo_area=" + center.lat + "," + center.lon + "|" + radius.toString() 
+      "geo_area=" + center.toTranslocString() + "|" + radius.toString() 
    } 
 }

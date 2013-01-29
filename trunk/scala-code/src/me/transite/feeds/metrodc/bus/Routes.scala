@@ -1,6 +1,7 @@
 package me.transite.feeds.metrodc.bus
 
 /*
+ * Method 9: Bus Routes
  * Description: Returns a list of all bus routes.
  * 
  * XML
@@ -22,16 +23,18 @@ class Routes(val list:Array[Route]) {
 
 object Routes {
   
+   val endPoint = "Routes?"
+     
    //////////////////////////////////////////////////////////////////////////////////
   
    def jason():String = { 
-     "http://api.wmata.com/Bus.svc/json/JRoutes?" + LicenseKey.toUrlString() 
+     LicenseKey.BUS_SVC +"json/J" + endPoint + LicenseKey.toUrlString() 
    }
   
    //////////////////////////////////////////////////////////////////////////////////
    
    def xml():String = { 
-     "http://api.wmata.com/Bus.svc/Routes?" + LicenseKey.toUrlString()  
+     LicenseKey.BUS_SVC + endPoint + LicenseKey.toUrlString()  
    }
    
 }

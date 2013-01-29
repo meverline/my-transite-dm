@@ -51,6 +51,7 @@ import me.transite.feeds.transloc.utils.TimeEstimate
 
 class ArrivalEstimate(val agency:Agency, 
 					  val stopId:String, 
+					  val expiresIn:Integer,
 					  val arrivals:Array[TimeEstimate]) {
  
 }
@@ -58,5 +59,29 @@ class ArrivalEstimate(val agency:Agency,
 //////////////////////////////////////////////////////////////////////////////////
 
 object ArrivalEstimate {
-   def url(agences:Array[Agency]):String = {  "http://api.transloc.com/1.1/arrival-estimates.json" }
+   
+   val endPoint:String = "arrival-estimates.json?agencies="
+  
+   def url(agences:Array[Agency]):String = { 
+       TransLoc.URL + endPoint + agences.mkString(",")
+   }
+   
+   //////////////////////////////////////////////////////////////////////////////////
+
+   def url(agences:Array[Agency], routes:Array[Route]):String = { 
+       TransLoc.URL + endPoint + agences.mkString(",") + TransLoc.toRoutesCgiList(routes)
+   }
+   
+   //////////////////////////////////////////////////////////////////////////////////
+
+   def url(agences:Array[Agency], routes:Array[Route], stops:Array[Stop]):String = { 
+       TransLoc.URL + endPoint + agences.mkString(",") + TransLoc.toRoutesCgiList(routes) +
+    		   	TransLoc.toStopsCgiList(stops) 
+   }
+   
+   //////////////////////////////////////////////////////////////////////////////////
+
+   def url(agences:Array[Agency], stops:Array[Stop]):String = { 
+       TransLoc.URL + endPoint + agences.mkString(",")  + TransLoc.toStopsCgiList(stops)
+   }
 }

@@ -1,6 +1,8 @@
 package me.transite.feeds.transloc.utils
 
-class TimeEstimate (val routeId:String, val estimate: String ) {
+import java.util.Calendar
+
+class TimeEstimate (val routeId:String, val estimate: Calendar ) {
   
     private var stopId:String = _;
     private var vehicleId:String = _;
@@ -8,14 +10,14 @@ class TimeEstimate (val routeId:String, val estimate: String ) {
     
     ////////////////////////////////////////////////////////////////////////////////////
     
-    def this(routeId:String, estimate: String, stop:String) {
+    def this(routeId:String, estimate: Calendar, stop:String) {
        this(routeId, estimate)
        stopId = stop;
     }
     
     ////////////////////////////////////////////////////////////////////////////////////
  
-    def this(routeId:String, estimate: String, vehicle:String, etype:EstimateType) {
+    def this(routeId:String, estimate:Calendar, vehicle:String, etype:EstimateType) {
        this(routeId, estimate)
        vehicleId = vehicle
        estimateType = etype

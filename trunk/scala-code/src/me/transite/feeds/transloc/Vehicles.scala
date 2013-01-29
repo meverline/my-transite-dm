@@ -66,6 +66,8 @@ package me.transite.feeds.transloc
 import me.utilities.Coordinate
 import me.transite.feeds.transloc.utils.TimeEstimate
 import me.transite.feeds.transloc.utils.TrackingStatus
+import me.transite.feeds.transloc.utils.GeoArea
+import java.util.Calendar
 
 class Vehicles( val id:String, 
 				val name:String, 
@@ -76,15 +78,38 @@ class Vehicles( val id:String,
 				val esitmates:Array[TimeEstimate],
 				val route:String,
 				val segment:String,
-				val speed:String,
-				val lastUpdate:String) {
+				val speedKph:String,
+				val lastUpdate:Calendar) {
 
 }
 
 //////////////////////////////////////////////////////////////////////////////////
 
 object Vehicles {
+  
+   val endPoint:String = "vehicles.json?agencies="
+     
    def url(agences:Array[Agency]):String = { 
-     "http://api.transloc.com/1.1/vehicles.json" 
+     TransLoc.URL + endPoint + agences.mkString(",") 
    }
+   
+   //////////////////////////////////////////////////////////////////////////////////
+   
+   def url(agences:Array[Agency], area:GeoArea):String = { 
+      TransLoc.URL + endPoint + agences.mkString(",") + "&" + area.toUrlString()
+   }
+
+   //////////////////////////////////////////////////////////////////////////////////
+
+   def url(agences:Array[Agency], routes:Array[Route]):String = { 
+       TransLoc.URL + endPoint + agences.mkString(",") + TransLoc.toRoutesCgiList(routes)
+   }
+   
+   //////////////////////////////////////////////////////////////////////////////////
+
+   def url(agences:Array[Agency], area:GeoArea, routes:Array[Route]):String = { 
+       TransLoc.URL + endPoint + agences.mkString(",") + "&" + area.toUrlString() +
+    		   TransLoc.toRoutesCgiList(routes)
+   }
+   
 }

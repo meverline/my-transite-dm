@@ -1,6 +1,7 @@
 package me.transite.feeds.metrodc.bus
 
 /*
+ * Method 13: Bus Positions
  * Description: Returns the real-time positions of each bus travel a specified route inside
  *              specified area.  Bus position information is updated every two minutes or less.
  *  XML:
@@ -24,19 +25,21 @@ class Positions(val busLocation:Array[BusPosition]) {
 
 object Positions {
   
+   val endPoint:String = "BusPositions?"
+     
    private def toUrlQueryString(location:Coordinate, radiusMeters:Double):String = {
-      location.toUrlString() + "&radius=" + radiusMeters + "&" + LicenseKey.toUrlString()
+      location.toMetroString() + LicenseKey.RADIUS + radiusMeters + "&" + LicenseKey.toUrlString()
    }
   
    //////////////////////////////////////////////////////////////////////////////////
   
    def jason(location:Coordinate, radiusMeters:Double):String = {
-      "http://api.wmata.com/Rail.svc/json/JBusPositions?" + toUrlQueryString(location, radiusMeters)
+      LicenseKey.BUS_SVC + "json/J" + endPoint + toUrlQueryString(location, radiusMeters)
    }
  
    //////////////////////////////////////////////////////////////////////////////////
    
    def xml(location:Coordinate, radiusMeters:Double):String = {
-      "http://api.wmata.com/Rail.svc/BusPositions?"  + toUrlQueryString(location, radiusMeters)
+      LicenseKey.BUS_SVC + endPoint  + toUrlQueryString(location, radiusMeters)
    }
 }

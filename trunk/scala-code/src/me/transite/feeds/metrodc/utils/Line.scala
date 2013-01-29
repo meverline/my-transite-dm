@@ -29,7 +29,7 @@ class Line (val displayName:String,
 			 val startStationCode:String) {
   
       def toUrlString() : String = {
-      	"LineCode==" + lineCode
+      	"LineCode=" + lineCode
       } 
 
 }
