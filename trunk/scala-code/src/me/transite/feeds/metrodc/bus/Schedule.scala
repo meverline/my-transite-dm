@@ -32,13 +32,13 @@ object Schedule {
      
    //////////////////////////////////////////////////////////////////////////////////
   
-   def jason(route:Route):String = { 
-        LicenseKey.BUS_SVC +"json/J" + endPoint + route.toUrlString() + "&" + LicenseKey.toUrlString()
+   def url(route:Route):String = { 
+        LicenseKey.BUS_SVC + LicenseKey.JASON_J  + endPoint + route.toUrlString() + "&" + LicenseKey.toUrlString()
    }
   
    //////////////////////////////////////////////////////////////////////////////////
    
-   def xml(route:Route):String = { 
+   def xmlUrl(route:Route):String = { 
       LicenseKey.BUS_SVC + endPoint + route.toUrlString() + "&" + LicenseKey.toUrlString()
    }
    

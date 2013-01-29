@@ -25,13 +25,13 @@ object Lines {
      
    //////////////////////////////////////////////////////////////////////////////////
   
-   def jason():String = {  
-     LicenseKey.RAIL_SVC + "json/J" + endPoint + LicenseKey.toUrlString() 
+   def url():String = {  
+     LicenseKey.RAIL_SVC + LicenseKey.JASON_J  + endPoint + LicenseKey.toUrlString() 
    }
    
    //////////////////////////////////////////////////////////////////////////////////
    
-   def xml():String = { 
+   def xmlUrl():String = { 
      LicenseKey.RAIL_SVC + endPoint + LicenseKey.toUrlString()
    }
    

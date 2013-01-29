@@ -43,13 +43,13 @@ object RouteDetails {
   
    //////////////////////////////////////////////////////////////////////////////////
   
-   def jason(routeId:Route):String = {
-      LicenseKey.BUS_SVC + "json/J" + endPoint + toUrlQueryString(routeId)
+   def url(routeId:Route):String = {
+      LicenseKey.BUS_SVC + LicenseKey.JASON_J  + endPoint + toUrlQueryString(routeId)
    }
  
    //////////////////////////////////////////////////////////////////////////////////
    
-   def xml(routeId:Route):String = {
+   def xmlUrl(routeId:Route):String = {
       LicenseKey.BUS_SVC + endPoint  + toUrlQueryString(routeId)
    }
 }
