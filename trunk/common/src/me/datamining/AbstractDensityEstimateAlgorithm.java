@@ -141,11 +141,11 @@ public abstract class AbstractDensityEstimateAlgorithm implements DensityEstimat
 	@Override
     public void saveGird(String fileName, String dir) throws FileNotFoundException
     {
-        if (dir == null) {
-           dumpGrid(grid.getClass().getSimpleName() + "_"+ fileName);
-        } else {
-           dumpGrid(dir + "/" + grid.getClass().getSimpleName() + "_"+ fileName);
-        }
+        //if (dir == null) {
+        //   dumpGrid(grid.getClass().getSimpleName() + "_"+ fileName);
+        //} else {
+        //   dumpGrid(dir + "/" + grid.getClass().getSimpleName() + "_"+ fileName);
+        // }
     }
     
 	/*
