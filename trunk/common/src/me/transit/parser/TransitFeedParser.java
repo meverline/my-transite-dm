@@ -1100,13 +1100,13 @@ public class TransitFeedParser {
 					if ( current == null ) { current = id; }
 					
 					if ( current.compareTo(id) != 0 ) {
-							trip = tripMap.get(id);
-							trip.getTrip().addStopTime(stopTime);
-							
-							if ( ! stopMap.get(stopTime.getStopId()).contains(trip.getRouteId()) ) {
-								stopMap.get(stopTime.getStopId()).add( new StopTripInfo( trip.getRouteId(), 
-																						 trip.getTrip().getHeadSign()));
-							}
+						trip = tripMap.get(id);
+						trip.getTrip().addStopTime(stopTime);
+						
+						if ( ! stopMap.get(stopTime.getStopId()).contains(trip.getRouteId()) ) {
+							stopMap.get(stopTime.getStopId()).add( new StopTripInfo( trip.getRouteId(), 
+																					 trip.getTrip().getHeadSign()));
+						}
 						current = id;
 						trip = null;
 					}
