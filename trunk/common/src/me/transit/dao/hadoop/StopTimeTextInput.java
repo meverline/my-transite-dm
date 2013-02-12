@@ -24,17 +24,26 @@ import org.apache.hadoop.mapred.RecordReader;
 import org.apache.hadoop.mapred.Reporter;
 
 public class StopTimeTextInput extends
-		FileInputFormat<Text, List<StopTimeImpl>> {
+		FileInputFormat<Text, ArrayListWriteable<StopTimeImpl>> {
 
 	@Override
-	public RecordReader<Text, List<StopTimeImpl>> getRecordReader(
+	public RecordReader<Text, ArrayListWriteable<StopTimeImpl>> getRecordReader(
 			InputSplit split, JobConf job, Reporter arg2) throws IOException {
-		// TODO Auto-generated method stub
 		return new StopTripRecordReader( job, FileSplit.class.cast(split));
 	}
+	
+	@Override
+	protected boolean isSplitable(FileSystem fs, Path filename) {
+		return true;
+	}
 
+	/**
+	 * 
+	 * @author meverline
+	 *
+	 */
 	public class StopTripRecordReader implements
-			RecordReader<Text, List<StopTimeImpl>> {
+			RecordReader<Text, ArrayListWriteable<StopTimeImpl>> {
 
 		private CompressionCodecFactory compressionCodecs = null;
 		private long start;
@@ -133,8 +142,8 @@ public class StopTimeTextInput extends
 		}
 
 		@Override
-		public List<StopTimeImpl> createValue() {
-			return new ArrayList<StopTimeImpl>();
+		public ArrayListWriteable<StopTimeImpl> createValue() {
+			return new ArrayListWriteable<StopTimeImpl>();
 		}
 
 		@Override
@@ -219,10 +228,16 @@ public class StopTimeTextInput extends
 		 * 
 		 */
 		@Override
-		public boolean next(Text key, List<StopTimeImpl> value)
+		public boolean next(Text key, ArrayListWriteable<StopTimeImpl> value)
 				throws IOException {
 			
 			boolean endTrip = false;
+			
+			if ( last != null ) {
+				value.add(last);
+				key.set(last.getTripId());
+			}
+			
 			while (endTrip) {
 				
 				int newSize = in.readLine(buffer);
