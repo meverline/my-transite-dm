@@ -28,9 +28,9 @@ public class StopTimeTextInput extends
 
 	@Override
 	public RecordReader<Text, List<StopTimeImpl>> getRecordReader(
-			InputSplit arg0, JobConf arg1, Reporter arg2) throws IOException {
+			InputSplit split, JobConf job, Reporter arg2) throws IOException {
 		// TODO Auto-generated method stub
-		return null;
+		return new StopTripRecordReader( job, FileSplit.class.cast(split));
 	}
 
 	public class StopTripRecordReader implements
@@ -40,9 +40,11 @@ public class StopTimeTextInput extends
 		private long start;
 		private long pos;
 		private long end;
-		private StopTimeTextInput.LineReader in;
+		private StopTimeTextInput.streambuf in;
 		private StopTimeImpl last= null;
 		private HashMap<String,Integer> indexMap = null;
+		private StringBuffer buffer = new StringBuffer();
+		
 		/**
 		 * 
 		 * @param job
@@ -60,33 +62,22 @@ public class StopTimeTextInput extends
 			// open the file and seek to the start of the split
 			FileSystem fs = file.getFileSystem(job);
 			FSDataInputStream fileIn = fs.open(split.getPath());
-			boolean skipFirstLine = false;
+
 			if (codec != null) {
-				in = new LineReader(codec.createInputStream(fileIn), job);
+				in = new streambuf(codec.createInputStream(fileIn), job);
 				end = Long.MAX_VALUE;
 			} else {
 				if (start != 0) {
-					skipFirstLine = true;
 					--start;
 					fileIn.seek(start);
 				}
-				in = new LineReader(fileIn, job);
+				in = new streambuf(fileIn, job);
 			}
 			
 			List<String> header = new ArrayList<String>();
 			
-			Text data = new Text();
-			in.readLine(data, 
-					    maxLineLength,
-					    Math.max((int) Math.min(Integer.MAX_VALUE, end - pos),
-								  maxLineLength));
-			
-			indexMap = processHeader(data.toString(), "shape", header);
-			
-			if (skipFirstLine) { // skip first line and re-establish "start".
-				start += in.readLine(new Text(), 0,
-						(int) Math.min((long) Integer.MAX_VALUE, end - start));
-			}
+			in.readLine(buffer);
+			indexMap = processHeader(buffer.toString(), "shape", header);
 			this.pos = start;
 		}
 		
@@ -173,6 +164,8 @@ public class StopTimeTextInput extends
 			
 			String id = data[indexMap.get("TripId")].replace('"', ' ').trim();
 			
+			stopTime.setTripId(id);
+			
 			if ( indexMap.containsKey("ArrivalTime") ) {
 			  String time[] = data[indexMap.get("ArrivalTime")].trim().split(":");
 			  StringBuilder builder = new StringBuilder();
@@ -217,36 +210,35 @@ public class StopTimeTextInput extends
 			
 			if ( indexMap.containsKey("StopId") ) {
 				stopTime.setStopId(data[indexMap.get("StopId")].replace('"', ' ').trim());
-				if ( ! stopMap.containsKey( stopTime.getStopId()) ) {
-					stopMap.put( stopTime.getStopId(), new ArrayList<StopTripInfo>());
-				}
 			}
+			
+			return stopTime;
 		}
 
+		/**
+		 * 
+		 */
 		@Override
 		public boolean next(Text key, List<StopTimeImpl> value)
 				throws IOException {
 			
-			Text data = new Text();
-			while (pos < end) {
+			boolean endTrip = false;
+			while (endTrip) {
 				
-				int newSize = in.readLine(data, 
-										  maxLineLength,
-										  Math.max((int) Math.min(Integer.MAX_VALUE, end - pos),
-												  	maxLineLength));
-				processLine(data.toString());
-				if (newSize == 0) {
-					return false;
+				int newSize = in.readLine(buffer);
+				if ( newSize == -1 ) {
+					endTrip = true;
+				} else {
+					StopTimeImpl stopTime = processLine(buffer.toString());
+					
+					if ( stopTime.getTripId().compareTo(last.getTripId()) != 0 ) {
+						endTrip = true;
+					} else {
+						key.set(stopTime.getTripId());
+						value.add(stopTime);
+					}
+					last = stopTime;
 				}
-				pos += newSize;
-				if (newSize < maxLineLength) {
-					key.set(pos);
-					return true;
-				}
-
-				// line too long. try again
-				LOG.info("Skipped line of size " + newSize + " at pos "
-						+ (pos - newSize));
 			}
 
 			return false;
@@ -254,20 +246,19 @@ public class StopTimeTextInput extends
 	}
 
 	/**
-	 * Copied from Hadoop LineRecorederReader source
 	 * 
 	 * @author meverline
 	 * 
 	 */
-	public static class LineReader {
+	public static class streambuf {
 		private final static int BUFFER_SIZE = 1024;
 		private InputStream in;
 		private byte[] buffer;
 		// the number of bytes of real data in the buffer
-		private int bufferLength = 0;
+		private int egptr = 0;
 		// the current position in the buffer
-		private int bufferPosn = 0;
-
+		private int gptr = 0;
+		
 		/**
 		 * Create a line reader that reads from the given stream using the given
 		 * buffer-size.
@@ -275,9 +266,9 @@ public class StopTimeTextInput extends
 		 * @param in
 		 * @throws IOException
 		 */
-		LineReader(InputStream in) {
+		streambuf(InputStream in) {
 			this.in = in;
-			this.buffer = new byte[LineReader.BUFFER_SIZE];
+			this.buffer = new byte[streambuf.BUFFER_SIZE];
 		}
 
 		/**
@@ -291,9 +282,31 @@ public class StopTimeTextInput extends
 		 *            configuration
 		 * @throws IOException
 		 */
-		public LineReader(InputStream in, Configuration conf)
+		public streambuf(InputStream in, Configuration conf)
 				throws IOException {
 			this(in);
+		}
+		
+		/**
+		 * 
+		 * @return
+		 */
+		private byte sgetc() throws IOException {
+			if ( gptr > egptr ) {
+				underflow();
+			}
+			return buffer[gptr++];
+		}
+		
+		/**
+		 * 
+		 * @return
+		 */
+		private int in_avail() throws IOException {
+			if ( gptr > egptr ) {
+				underflow();
+			}
+			return egptr - gptr;
 		}
 
 		/**
@@ -302,10 +315,10 @@ public class StopTimeTextInput extends
 		 * @return was there more data?
 		 * @throws IOException
 		 */
-		boolean backfill() throws IOException {
-			bufferPosn = 0;
-			bufferLength = in.read(buffer);
-			return bufferLength > 0;
+		private boolean underflow() throws IOException {
+			gptr = 0;
+			egptr = in.read(buffer);
+			return egptr > 0;
 		}
 
 		/**
@@ -318,79 +331,29 @@ public class StopTimeTextInput extends
 		}
 
 		/**
-		 * Read from the InputStream into the given Text.
 		 * 
-		 * @param str
-		 *            the object to store the given line
-		 * @param maxLineLength
-		 *            the maximum number of bytes to store into str.
-		 * @param maxBytesToConsume
-		 *            the maximum number of bytes to consume in this call.
-		 * @return the number of bytes read including the newline
+		 * @param strBuffer
+		 * @return
 		 * @throws IOException
-		 *             if the underlying stream throws
 		 */
-		public int readLine(Text str) throws IOException {
-			
-			str.clear();
-			boolean hadFinalNewline = false;
-			boolean hadFinalReturn = false;
-			boolean hitEndOfFile = false;
-			int startPosn = bufferPosn;
-			long bytesConsumed = 0;
-			
-			outerLoop: while (true) {
-				if (bufferPosn >= bufferLength) {
-					if (!backfill()) {
-						hitEndOfFile = true;
-						break;
-					}
-				}
-				startPosn = bufferPosn;
-				for (; bufferPosn < bufferLength; ++bufferPosn) {
-					switch (buffer[bufferPosn]) {
+		public int readLine(StringBuffer strBuffer) throws IOException {
+						
+			strBuffer.delete(0, strBuffer.length());
+			while ( in_avail() > 0 ) {
+				
+				byte c = sgetc();
+				switch ( c ) {
 					case '\n':
-						hadFinalNewline = true;
-						bufferPosn += 1;
-						break outerLoop;
+						return in_avail();
 					case '\r':
-						if (hadFinalReturn) {
-							// leave this \r in the stream, so we'll get it next
-							// time
-							break outerLoop;
-						}
-						hadFinalReturn = true;
-						break;
+						return in_avail();
 					default:
-						if (hadFinalReturn) {
-							break outerLoop;
-						}
-					}
+						strBuffer.append(c);
 				}
-				bytesConsumed += bufferPosn - startPosn;
-				int length = bufferPosn - startPosn - (hadFinalReturn ? 1 : 0);
-				length = (int) Math
-						.min(length, maxLineLength - str.getLength());
-				if (length >= 0) {
-					str.append(buffer, startPosn, length);
-				}
-				if (bytesConsumed >= maxBytesToConsume) {
-					return (int) Math.min(bytesConsumed,
-							(long) Integer.MAX_VALUE);
-				}
+				
 			}
-			int newlineLength = (hadFinalNewline ? 1 : 0)
-					+ (hadFinalReturn ? 1 : 0);
-			if (!hitEndOfFile) {
-				bytesConsumed += bufferPosn - startPosn;
-				int length = bufferPosn - startPosn - newlineLength;
-				length = (int) Math
-						.min(length, maxLineLength - str.getLength());
-				if (length > 0) {
-					str.append(buffer, startPosn, length);
-				}
-			}
-			return (int) Math.min(bytesConsumed, (long) Integer.MAX_VALUE);
+			return in_avail();
+
 		}
 
 	}

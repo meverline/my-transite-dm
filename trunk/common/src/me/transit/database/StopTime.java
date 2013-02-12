@@ -11,6 +11,16 @@ public interface StopTime extends CSVFieldType {
 	public enum PickupType { REGULAR, NOPICKUP, PHONE, COORDINATE, UNKNOWN };
 	
 	/**
+	 * @return the TripId
+	 */
+	public String getTripId();
+
+	/**
+	 * @param arrivalTime the TripId to set
+	 */
+	public void setTripId(String id);
+	
+	/**
 	 * @return the arrivalTime
 	 */
 	public long getArrivalTime();
