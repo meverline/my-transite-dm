@@ -28,6 +28,8 @@ public class StopTimeImpl implements StopTime {
 	private PickupType dropOffType = PickupType.UNKNOWN;
 	@XStreamAlias("shapeDistTravel")
 	private double shapeDistTravel = -1;
+	@XStreamOmitField
+	private String tripId = null;
 	
 	public StopTimeImpl()
 	{
@@ -42,6 +44,22 @@ public class StopTimeImpl implements StopTime {
 			setPickupType(copy.getPickupType());
 			setStopHeadSign(copy.getStopHeadSign());
 		}
+	}
+	
+	/**
+	 * @return the TripId
+	 */
+	public String getTripId()
+	{
+		return tripId;
+	}
+
+	/**
+	 * @param arrivalTime the TripId to set
+	 */
+	public void setTripId(String id)
+	{
+		tripId = id;
 	}
 	
 	/**
