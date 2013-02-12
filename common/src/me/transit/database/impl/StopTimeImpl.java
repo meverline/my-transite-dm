@@ -1,8 +1,15 @@
 package me.transit.database.impl;
 
+import java.io.DataInput;
+import java.io.DataOutput;
+import java.io.IOException;
+
+import org.apache.hadoop.io.Writable;
+
 import me.database.CSVFieldType;
 import me.factory.DaoBeanFactory;
 import me.transit.dao.TransiteStopDao;
+import me.transit.dao.hadoop.HadoopUtils;
 import me.transit.database.Agency;
 import me.transit.database.StopTime;
 import me.transit.database.TransitStop;
@@ -10,7 +17,7 @@ import me.transit.database.TransitStop;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
-public class StopTimeImpl implements StopTime {
+public class StopTimeImpl implements StopTime, Writable {
 
 	@XStreamOmitField
 	private static final long serialVersionUID = 1L;
@@ -169,6 +176,9 @@ public class StopTimeImpl implements StopTime {
 		this.shapeDistTravel = shapeDistTravel;
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public void fromCSVLine(String line) {
 		
@@ -187,6 +197,9 @@ public class StopTimeImpl implements StopTime {
 		return;
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public String toCSVLine() {
 		StringBuilder builder = new StringBuilder();
@@ -207,4 +220,37 @@ public class StopTimeImpl implements StopTime {
 		
 		return builder.toString();
 	}
+	
+	/**
+	 * 
+	 */
+	@Override
+	public void readFields(DataInput in) throws IOException {
+		this.setArrivalTime(in.readLong());
+		this.setDepartureTime(in.readLong());
+		this.setShapeDistTravel(in.readDouble());
+		this.setDropOffType( PickupType.values()[in.readInt()]);
+		this.setPickupType( PickupType.values()[in.readInt()]);
+		this.setStopHeadSign( HadoopUtils.readString(in));
+		this.setStopId( HadoopUtils.readString(in));
+		this.setTripId( HadoopUtils.readString(in));
+	}
+
+	/**
+	 * 
+	 */
+	@Override
+	public void write(DataOutput out) throws IOException {
+		out.writeLong(this.getArrivalTime());
+		out.writeLong(this.getDepartureTime());
+		out.writeDouble(this.getShapeDistTravel());
+		out.writeInt(this.getDropOffType().ordinal());
+		out.writeInt(this.getPickupType().ordinal());
+		
+		HadoopUtils.writeString(this.getStopHeadSign(), out);
+		HadoopUtils.writeString(this.getStopId(), out);
+		HadoopUtils.writeString(this.getTripId(), out);
+	}
+	
+	
 }
