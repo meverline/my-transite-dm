@@ -8,7 +8,6 @@ import java.util.Iterator;
 
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
-import org.apache.hadoop.mapred.JobConf;
 import org.apache.hadoop.mapred.MapReduceBase;
 import org.apache.hadoop.mapred.OutputCollector;
 import org.apache.hadoop.mapred.Reducer;
@@ -29,10 +28,4 @@ public class StopTimeReducer extends MapReduceBase implements
 		
 	}
 	
-	@Override
-	public void configure(JobConf job) {
-		// TODO Auto-generated method stub
-		super.configure(job);
-	}
-
 }

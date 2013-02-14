@@ -1,7 +1,6 @@
 package me.transit.dao.hadoop;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -49,7 +48,7 @@ public class StopTimeTextInput extends
 		private long start;
 		private long pos;
 		private long end;
-		private StopTimeTextInput.streambuf in;
+		private Streambuf in;
 		private StopTimeImpl last= null;
 		private HashMap<String,Integer> indexMap = null;
 		private StringBuffer buffer = new StringBuffer();
@@ -73,14 +72,14 @@ public class StopTimeTextInput extends
 			FSDataInputStream fileIn = fs.open(split.getPath());
 
 			if (codec != null) {
-				in = new streambuf(codec.createInputStream(fileIn), job);
+				in = new Streambuf(codec.createInputStream(fileIn), job);
 				end = Long.MAX_VALUE;
 			} else {
 				if (start != 0) {
 					--start;
 					fileIn.seek(start);
 				}
-				in = new streambuf(fileIn, job);
+				in = new Streambuf(fileIn, job);
 			}
 			
 			List<String> header = new ArrayList<String>();
@@ -258,119 +257,6 @@ public class StopTimeTextInput extends
 
 			return false;
 		}
-	}
-
-	/**
-	 * 
-	 * @author meverline
-	 * 
-	 */
-	public static class streambuf {
-		private final static int BUFFER_SIZE = 1024;
-		private InputStream in;
-		private byte[] buffer;
-		// the number of bytes of real data in the buffer
-		private int egptr = 0;
-		// the current position in the buffer
-		private int gptr = 0;
-		
-		/**
-		 * Create a line reader that reads from the given stream using the given
-		 * buffer-size.
-		 * 
-		 * @param in
-		 * @throws IOException
-		 */
-		streambuf(InputStream in) {
-			this.in = in;
-			this.buffer = new byte[streambuf.BUFFER_SIZE];
-		}
-
-		/**
-		 * Create a line reader that reads from the given stream using the
-		 * <code>io.file.buffer.size</code> specified in the given
-		 * <code>Configuration</code>.
-		 * 
-		 * @param in
-		 *            input stream
-		 * @param conf
-		 *            configuration
-		 * @throws IOException
-		 */
-		public streambuf(InputStream in, Configuration conf)
-				throws IOException {
-			this(in);
-		}
-		
-		/**
-		 * 
-		 * @return
-		 */
-		private byte sgetc() throws IOException {
-			if ( gptr > egptr ) {
-				underflow();
-			}
-			return buffer[gptr++];
-		}
-		
-		/**
-		 * 
-		 * @return
-		 */
-		private int in_avail() throws IOException {
-			if ( gptr > egptr ) {
-				underflow();
-			}
-			return egptr - gptr;
-		}
-
-		/**
-		 * Fill the buffer with more data.
-		 * 
-		 * @return was there more data?
-		 * @throws IOException
-		 */
-		private boolean underflow() throws IOException {
-			gptr = 0;
-			egptr = in.read(buffer);
-			return egptr > 0;
-		}
-
-		/**
-		 * Close the underlying stream.
-		 * 
-		 * @throws IOException
-		 */
-		public void close() throws IOException {
-			in.close();
-		}
-
-		/**
-		 * 
-		 * @param strBuffer
-		 * @return
-		 * @throws IOException
-		 */
-		public int readLine(StringBuffer strBuffer) throws IOException {
-						
-			strBuffer.delete(0, strBuffer.length());
-			while ( in_avail() > 0 ) {
-				
-				byte c = sgetc();
-				switch ( c ) {
-					case '\n':
-						return in_avail();
-					case '\r':
-						return in_avail();
-					default:
-						strBuffer.append(c);
-				}
-				
-			}
-			return in_avail();
-
-		}
-
 	}
 
 }

@@ -5,6 +5,8 @@ import java.io.DataOutput;
 import java.io.IOException;
 
 public class HadoopUtils {
+	
+	public final static String STOP_ID_LIST = "stopIdList";
 
 	/**
 	 * Private function to read a string from DataInput
