@@ -9,13 +9,13 @@
         		<value>org.postgresql.Driver</value>
         </property>
         <property name="url">
-               <value>jdbc:postgresql://localhost:5433/Transit</value>
+               <value>jdbc:postgresql://localhost:5432/Transit</value>
         </property>
         <property name="username">
         	<value>postgres</value>
         </property>
         <property name="password">
-        		<value>postgis84!</value>
+        		<value>Postgres</value>
         </property>
     </bean>
 	
@@ -30,6 +30,9 @@
                 <value>config/hibernate/ServiceDate.hbm.xml</value>
 				<value>config/hibernate/TransitStop.hbm.xml</value>
 				<value>config/hibernate/Trip.hbm.xml</value>
+				<value>config/hibernate/Crime.hbm.xml</value>
+				<value>config/hibernate/Address.hbm.xml</value>
+				<value>config/hibernate/URCCatagories.hbm.xml</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -72,6 +75,18 @@
 	</bean>
 	
 	<bean id="tripDao" class="me.transit.dao.impl.TripDaoImpl" parent="AbstractHibernateDAO">
+		<property name="connection" ref="hibernateConnection"/>
+	</bean>
+	
+	<bean id="crimeDao" class="me.crime.dao.impl.CrimeDaoImpl" parent="AbstractHibernateDAO">
+		<property name="connection" ref="hibernateConnection"/>
+	</bean>
+	
+	<bean id="addressDao" class="me.crime.dao.impl.AddressDaoImpl" parent="AbstractHibernateDAO">
+		<property name="connection" ref="hibernateConnection"/>
+	</bean>
+	
+	<bean id="URCCatagoriesDao" class="me.crime.dao.impl.URCCatagoriesDaoImpl" parent="AbstractHibernateDAO">
 		<property name="connection" ref="hibernateConnection"/>
 	</bean>
 	

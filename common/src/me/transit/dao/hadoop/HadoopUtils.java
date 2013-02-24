@@ -7,6 +7,8 @@ import java.io.IOException;
 public class HadoopUtils {
 	
 	public final static String STOP_ID_LIST = "stopIdList";
+	public final static String DIR_PATH = "transite";
+	public final static String OUTPUT_PATH = "output";
 
 	/**
 	 * Private function to read a string from DataInput
