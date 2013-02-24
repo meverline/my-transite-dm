@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<!-- 
+	  CIRAS: Crime Information Retrieval and Analysis System
+    Copyright © 2009 by Russ Brasser, Mark Everline and Eric Franklin
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ -->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="ciras.db" >
+
+      <class name="Crime"  table="CRIME" >
+
+          <id name="id" unsaved-value="0">
+  			<column name="CRIME_ID" not-null="true"/>
+			<generator class="native"/>
+		  </id>
+
+		  <property name="bussiness" column="BUSSINESS" not-null="false" />
+		  <property name="description"  type="text" column="DESCRIPTION" not-null="true" length="16777215" />
+		  <property name="startDate" type="java.util.Calendar">
+		  	 <column name="START_DATE" not-null="false" index="START_DATE_IDX" />
+		  </property>	
+		  <property name="file"  column="FILE" not-null="false" />
+		  <property name="crimeNumber"  column="CRIME_NUMBER" not-null="false" />
+		  <property name="county"  column="COUNTY" not-null="false" />
+		  <property name="catagory"  column="CRIMECATAGORY" not-null="false" />
+		  <property name="time" column="TIME_ORDINAL" not-null="false" />
+				  
+		  <many-to-one name="codes"  class="URCCatagories" column="URC_ID" not-null="true" outer-join="true" />
+
+		  <many-to-one name="address"  class="Address" column="ADDRESS_ID" not-null="true" outer-join="true" />
+
+		  <list name="Arrested" table="ARRESTED" lazy="true" cascade="save-update" outer-join="true">
+              <key column="CRIME_ID"/>
+              <index column="ARRESTED_INDX"/>
+              <one-to-many class="Arrested"/>
+		  </list>
+
+      </class>
+
+      <class name="Address"  table="Address" >
+
+         <id name="id" unsaved-value="0">
+  			<column name="ADDRESS_ID" not-null="true"/>
+			<generator class="native"/>
+		 </id>
+
+		 <property name="location" column="LOCATION" not-null="true" />
+		 <property name="city" column="CITY" not-null="true" />
+		 <property name="state" column="STATE" not-null="true" />
+		 <property name="zipCode" column="ZIPCODE" not-null="true" />
+		 <property name="service" column="SERVICE" not-null="true" />
+		 <property name="accuracy" column="ACCURACY" />
+		 <property name="point" type="org.hibernatespatial.GeometryUserType" column="COORDINATE" not-null="true" />
+
+      </class>
+
+      <class name="Arrested" table="ARRESTED" >
+
+         <id name="id" unsaved-value="0">
+  			<column name="ARRESTED_ID" not-null="true"/>
+			<generator class="native"/>
+		 </id>
+
+		 <property name="name" column="NAME" not-null="true" />
+		 <property name="age"  column="AGE" not-null="true" />
+		 <property name="address"  column="ADDRESS"  />
+
+		 <property name="point" type="org.hibernatespatial.GeometryUserType" column="COORDINATE" not-null="false" />
+
+      </class>
+
+      <class name="URCCatagories" table="URCCatagories" >
+
+          <id name="id" unsaved-value="0">
+  			<column name="URC_ID" not-null="true"/>
+			<generator class="native"/>
+		 </id>
+
+		 <property name="catagorie" column="CATAGORIE" not-null="true" />
+		 <property name="crimeGroup" column="CRIMEGROUP" not-null="true" />
+
+      </class>
+
+</hibernate-mapping>
