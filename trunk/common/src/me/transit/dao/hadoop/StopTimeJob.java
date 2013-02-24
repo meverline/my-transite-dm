@@ -1,14 +1,17 @@
 package me.transit.dao.hadoop;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import me.transit.database.Agency;
 import me.transit.database.impl.StopTimeImpl;
 
+import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapred.FileInputFormat;
@@ -25,7 +28,7 @@ import org.apache.hadoop.mapred.TextOutputFormat;
 public class StopTimeJob {
 	
 	
-	public Map<String, Integer> findStops(List<String> stops, List<Agency> agencys) {
+	public Map<String, Integer> findStops(List<String> stops, List<Agency> agencyList) {
 
 		JobConf conf = new JobConf(StopTimeJob.class);
 		conf.setJobName("stopService");
@@ -38,11 +41,40 @@ public class StopTimeJob {
 		conf.setReducerClass(StopTimeReducer.class);
 		conf.setInputFormat(StopTimeTextInput.class);
 		conf.setOutputFormat(TextOutputFormat.class);
+		
+		StringBuffer buffer = new StringBuffer();
+		for (String ids : stops) {
+			if ( buffer.length() > 0 ) { buffer.append(","); }
+			buffer.append(ids);
+		}
+		conf.set(HadoopUtils.STOP_ID_LIST, buffer.toString());
+		
+	
+		for ( Agency agency : agencyList ) {
+			buffer.delete(0, buffer.length());
+			buffer.append( HadoopUtils.DIR_PATH );
+			buffer.append( File.pathSeparator);
+			buffer.append( agency.getName() );
+			buffer.append( "_trips.txt");
+			FileInputFormat.addInputPath(conf, new Path(buffer.toString()));
+		}
+		
+		buffer.delete(0, buffer.length());
+		buffer.append( HadoopUtils.OUTPUT_PATH );
+		
+		UUID id = UUID.randomUUID();
+		buffer.append("StopCounts");
+		buffer.append(id.toString());
+		buffer.append(".txt");
+		
+		FileOutputFormat.setOutputPath(conf, new Path(buffer.toString()));
 
-		FileInputFormat.setInputPaths(conf, new Path(args[0]));
-		FileOutputFormat.setOutputPath(conf, new Path(args[1]));
-
-		JobClient.runJob(conf);
+		try {
+			JobClient.runJob(conf);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return new HashMap<String, Integer>();
 	}
 
