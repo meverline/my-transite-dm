@@ -42,41 +42,43 @@
         </props>
         </property>
     </bean>
-				 
+    
+    <bean id="AbstractHibernateDAO" abstract="true" class="me.transit.dao.hibernate.AbstractHibernateDAO"/>
+ 			 
     <bean id="hibernateConnection" class="me.transit.dao.hibernate.SpringHibernateConnection" >
     	<property name="sessionFactory" ref="sessionFactory"/>
     </bean>
     
 	<!-- Database access i.e. DAO's  -->		 
-	<bean id="agencyDao" class="me.transit.dao.impl.AgencyDaoImpl">
+	<bean id="agencyDao" class="me.transit.dao.impl.AgencyDaoImpl" parent="AbstractHibernateDAO">
 		<property name="connection" ref="hibernateConnection"/>
 	</bean>
 	
-	<bean id="calendarDateDao" class="me.transit.dao.impl.CalendarDateDaoImpl">
+	<bean id="calendarDateDao" class="me.transit.dao.impl.CalendarDateDaoImpl" parent="AbstractHibernateDAO">
 		<property name="connection" ref="hibernateConnection"/>
 	</bean>
 	
-	<bean id="routeDao" class="me.transit.dao.impl.RouteDaoImpl">
+	<bean id="routeDao" class="me.transit.dao.impl.RouteDaoImpl" parent="AbstractHibernateDAO">
 		<property name="connection" ref="hibernateConnection"/>
 	</bean>
 		
-	<bean id="routeGeometryDao" class="me.transit.dao.impl.RouteGeometryDaoImpl">
+	<bean id="routeGeometryDao" class="me.transit.dao.impl.RouteGeometryDaoImpl" parent="AbstractHibernateDAO">
 		<property name="connection" ref="hibernateConnection"/>
 	</bean>
 	
-	<bean id="serviceDateDao" class="me.transit.dao.impl.ServiceDateDaoImpl">
+	<bean id="serviceDateDao" class="me.transit.dao.impl.ServiceDateDaoImpl" parent="AbstractHibernateDAO">
 		<property name="connection" ref="hibernateConnection"/>
 	</bean>
 		
-	<bean id="transiteStopDao" class="me.transit.dao.impl.TransiteStopDaoImpl">
+	<bean id="transiteStopDao" class="me.transit.dao.impl.TransiteStopDaoImpl" parent="AbstractHibernateDAO">
 		<property name="connection" ref="hibernateConnection"/>
 	</bean>
 	
-	<bean id="tripDao" class="me.transit.dao.impl.TripDaoImpl">
+	<bean id="tripDao" class="me.transit.dao.impl.TripDaoImpl" parent="AbstractHibernateDAO">
 		<property name="connection" ref="hibernateConnection"/>
 	</bean>
 	
-	<bean id="crimeDao" class="me.crime.dao.impl.CrimeDaoImpl" parent="AbstractHibernateDAO">
+	<bean id="crimeDao" class="me.crime.dao.impl.CrimeDaoImpl" parent="AbstractHibernateDAO" >
 		<property name="connection" ref="hibernateConnection"/>
 	</bean>
 	
@@ -84,7 +86,7 @@
 		<property name="connection" ref="hibernateConnection"/>
 	</bean>
 	
-	<bean id="URCCatagoriesDao" class="me.crime.dao.impl.URCCatagoriesDaoImpl" parent="AbstractHibernateDAO">
+	<bean id="URCCatagoriesDao" class="me.crime.dao.impl.URCCatagoriesDAOImpl" parent="AbstractHibernateDAO" >
 		<property name="connection" ref="hibernateConnection"/>
 	</bean>
 	
