@@ -155,9 +155,9 @@ public class DataBaseLoader extends DefaultHandler implements XmlTags {
 				URCCatagoriesDAO.class.cast(DaoBeanFactory.create().getDaoBean(URCCatagoriesDAO.class));
 		
 		// Read in the URC Codes.
-		InputStream s = ClassLoader.getSystemResourceAsStream("ciras/parser/CrimeData.txt");
+		InputStream s = ClassLoader.getSystemResourceAsStream("me/crime/loader/CrimeData.txt");
 		if (s == null) {
-			 log_.error("unable to find ciras/parser/CrimeData.txt");
+			 log_.error("unable to find me/crime/loader/CrimeData.txt");
 		} else {
 
 			try {
