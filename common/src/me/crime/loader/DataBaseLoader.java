@@ -25,6 +25,8 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Method;
 import java.sql.SQLException;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Stack;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -32,7 +34,10 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import me.crime.dao.URCCatagoriesDAO;
+import me.crime.database.Address;
+import me.crime.database.Arrested;
 import me.crime.database.Crime;
+import me.crime.database.GeoPoint;
 import me.crime.database.URCCatagories;
 import me.crime.database.XmlReadable;
 import me.crime.database.XmlTags;
@@ -54,10 +59,18 @@ public class DataBaseLoader extends DefaultHandler implements XmlTags {
 	private XmlReadable        curObject_ = null;
 	private Stack<XmlReadable> stack_ = new Stack<XmlReadable>();
 	private int                count_ = 0;
+	private Map<String,String> classMap_ = new HashMap<String,String>();
 
 	protected static Log log_ = LogFactory.getLog(DataBaseLoader.class);
 
 	public DataBaseLoader() {
+		
+		classMap_.put("ciras.db.Crime", Crime.class.getName());
+		classMap_.put("ciras.db.Address", Address.class.getName());
+		classMap_.put("ciras.db.Arrested", Arrested.class.getName());
+		classMap_.put("ciras.db.URCCatagories", URCCatagories.class.getName());
+		classMap_.put("ciras.db.GeoPoint", GeoPoint.class.getName());
+		
 		try {
 			SAXParserFactory factory = SAXParserFactory.newInstance();
 			parser_ = factory.newSAXParser();
@@ -124,9 +137,9 @@ public class DataBaseLoader extends DefaultHandler implements XmlTags {
 		}
 	    else if ( name.compareTo(XmlTags.CLASS ) == 0) {
 			if (stack_.empty()) {
-				if ( curObject_ instanceof me.crime.database.Crime ) {
-					Crime cr = Crime.class.cast(curObject_);
-				}
+				//( curObject_ instanceof me.crime.database.Crime ) {
+				//	Crime cr = Crime.class.cast(curObject_);
+				//}
 				try {
 					curObject_.save();
 				} catch (SQLException e) {
@@ -261,6 +274,9 @@ public class DataBaseLoader extends DefaultHandler implements XmlTags {
 		}
 	    else if ( name.compareTo(XmlTags.CLASS ) == 0) {
 	    	String className  = attributes.getValue(XmlTags.NAME).trim();
+	    	if ( this.classMap_.containsKey(className)) {
+	    		className = classMap_.get(className);
+	    	}
 	    	try {
 	    		Class<?> cls = this.getClass().getClassLoader().loadClass(className);
 				Object obj = cls.newInstance();

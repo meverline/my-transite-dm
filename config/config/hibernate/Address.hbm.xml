@@ -22,7 +22,7 @@
 
 <hibernate-mapping package="me.crime.database" >
 
-     <class name="Address"  table="Address" >
+     <class name="Address"  table="crm_Address" >
 
          <id name="id" unsaved-value="0">
   			<column name="ADDRESS_ID" not-null="true"/>

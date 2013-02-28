@@ -86,7 +86,7 @@
 		<property name="connection" ref="hibernateConnection"/>
 	</bean>
 	
-	<bean id="uRCCatagoriesDao" class="me.crime.dao.impl.URCCatagoriesDAOImpl" parent="AbstractHibernateDAO" >
+	<bean id="uRCCatagoriesDAO" class="me.crime.dao.impl.URCCatagoriesDAOImpl" parent="AbstractHibernateDAO" >
 		<property name="connection" ref="hibernateConnection"/>
 	</bean>
 	
