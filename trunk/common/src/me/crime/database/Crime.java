@@ -329,7 +329,7 @@ public class Crime implements Serializable, XmlReadable {
 			URCCatagories cat = URCCatagories.class.cast(obj);
 			URCCatagories dbcat = dao.findURCbyCatagory(cat.getCatagorie());
 			if ( dbcat == null ) {
-				dao.save(dbcat);
+				dao.save(cat);
 				dbcat = dao.findURCbyCatagory(cat.getCatagorie());
 			}
 			setCodes(dbcat);
@@ -403,6 +403,15 @@ public class Crime implements Serializable, XmlReadable {
 				double timeOrd = (dts - dayOrd) * 24; // track time as hour.fraction_of_hour
 				
 				this.setTime( timeOrd );
+				
+				AddressDao locDao = AddressDao.class.cast(DaoBeanFactory.create().getDaoBean(AddressDao.class));
+				
+				Address location = locDao.loadAddress( this.getAddress().getLocation() );
+			    if ( location != null ) {
+					 this.setAddress(location);
+			    } else {
+			    	 locDao.save(this.getAddress());
+				}
 				
 				dao.save(this);
 			}

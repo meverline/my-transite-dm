@@ -22,7 +22,7 @@
 
 <hibernate-mapping package="me.crime.database" >
 
-     <class name="URCCatagories" table="URCCatagories" >
+     <class name="URCCatagories" table="crm_URCCatagories" >
 
           <id name="id" unsaved-value="0">
   			<column name="URC_ID" not-null="true"/>
