@@ -1,12 +1,14 @@
 package me.transit.database;
 
 import me.database.CSVFieldType;
+import me.transit.dao.mongo.IDocument;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("StopTime")
-public interface StopTime extends CSVFieldType {
+public interface StopTime extends CSVFieldType, IDocument {
 	
+	public final static String COLLECTION = "stopTime";
 
 	public enum PickupType { REGULAR, NOPICKUP, PHONE, COORDINATE, UNKNOWN };
 	

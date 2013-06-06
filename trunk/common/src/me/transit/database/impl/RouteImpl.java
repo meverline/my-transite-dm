@@ -1,8 +1,11 @@
 package me.transit.database.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import me.transit.dao.mongo.IDocument;
 import me.transit.database.Route;
 import me.transit.database.Trip;
 
@@ -164,6 +167,36 @@ public class RouteImpl extends TransitDateImpl implements Route {
 		builder.append("\n");
 		builder.append("trip size: " + this.getTripList().size());
 		return builder.toString();
+	}
+
+	@Override
+	public Map<String, Object> toDocument() {
+		
+		Map<String,Object> rtn = new HashMap<String,Object>();
+
+		rtn.put(IDocument.CLASS, RouteImpl.class.getName());
+		rtn.put(IDocument.ID, this.getShortName() + ": " + this.getAgency().getName());
+		
+		rtn.put("agency", this.getAgency().getName());
+		rtn.put("uuid", this.getUUID());
+		rtn.put("shortName", this.getShortName());
+		rtn.put("longName", this.getLongName());
+		rtn.put("desc", this.getDesc());
+		rtn.put("routeType", this.getType().name());
+		rtn.put("trips", this.getTripList());
+		return rtn;
+	}
+	
+	@Override
+	public String getCollection() {
+		return Route.COLLECTION;
+	}
+
+
+	@Override
+	public void fromDocument(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

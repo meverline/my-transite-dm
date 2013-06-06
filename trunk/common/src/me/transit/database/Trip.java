@@ -2,10 +2,14 @@ package me.transit.database;
 
 import java.util.List;
 
+import me.transit.dao.mongo.IDocument;
+
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
-@XStreamAlias("Route")
-public interface Trip extends TransitData{
+@XStreamAlias("Trip")
+public interface Trip extends TransitData, IDocument {
+
+	public final static String COLLECTION = "trip";
 
 	public enum DirectionType { OUT_BOUND, IN_BOUND, UNKOWN };
 	

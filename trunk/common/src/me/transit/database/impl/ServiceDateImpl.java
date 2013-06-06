@@ -1,7 +1,14 @@
 package me.transit.database.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import me.transit.dao.mongo.IDocument;
 import me.transit.database.ServiceDate;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
@@ -131,5 +138,37 @@ public class ServiceDateImpl extends TransitDateImpl implements ServiceDate{
 	 */
 	public boolean isSaturday() {
 		return hasService( ServiceDate.WeekDay.SATURDAY);
+	}
+
+	@Override
+	public Map<String, Object> toDocument() {
+		Map<String,Object> rtn = new HashMap<String,Object>();
+
+		SimpleDateFormat sdf = new SimpleDateFormat();
+		rtn.put(IDocument.CLASS, ServiceDateImpl.class.getName());
+		rtn.put(IDocument.ID, this.getUUID());
+		rtn.put("startDate", sdf.format(new Date(getStartDate().get(Calendar.MILLISECOND))));
+		rtn.put("endDate", sdf.format(new Date(getEndDate().get(Calendar.MILLISECOND))));
+		
+		List<String> str = new ArrayList<String>();
+		
+		for (WeekDay day : ServiceDate.WeekDay.values()) {
+			if ( this.hasService(day) ) {
+				str.add(day.name());
+			}
+		}
+		rtn.put("serviceDayFlag", str);
+		return rtn;
+	}
+	
+	@Override
+	public String getCollection() {
+		return ServiceDate.COLLECTION;
+	}
+
+	@Override
+	public void fromDocument(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -5,15 +5,15 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import me.transit.dao.AgencyDao;
+import me.transit.dao.hibernate.AbstractHibernateDao;
+import me.transit.database.Agency;
+
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
-
-import me.transit.dao.AgencyDao;
-import me.transit.dao.hibernate.AbstractHibernateDao;
-import me.transit.database.Agency;
 
 public class AgencyDaoImpl extends AbstractHibernateDao<Agency> implements AgencyDao {
 
@@ -119,6 +119,5 @@ public class AgencyDaoImpl extends AbstractHibernateDao<Agency> implements Agenc
 
 		return null;
 	}
-
 	
 }

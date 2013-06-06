@@ -1,8 +1,11 @@
 package me.transit.database.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import me.transit.dao.mongo.IDocument;
 import me.transit.database.RouteGeometry;
 import me.transit.database.ServiceDate;
 import me.transit.database.StopTime;
@@ -141,5 +144,34 @@ public class TripImpl extends TransitDateImpl implements Trip {
 		builder.append("\n");
 		builder.append("stopsTimes size: " + this.getStopTimes().size());
 		return builder.toString();
+	}
+
+	@Override
+	public Map<String, Object> toDocument() {
+		Map<String,Object> rtn = new HashMap<String,Object>();
+
+		rtn.put(IDocument.CLASS, TripImpl.class.getName());
+		rtn.put(IDocument.ID, this.getUUID());
+		rtn.put("service", this.getService());
+		if ( this.getHeadSign() != null ) {
+			rtn.put("headSign", this.getHeadSign());
+		}
+		if ( this.getShortName() != null ) {
+			rtn.put("shortName", this.getShortName());
+		}
+		rtn.put("directionId", this.getDirectionId());
+		rtn.put("stopTimes", this.getStopTimes());
+		return rtn;
+	}
+	
+	@Override
+	public String getCollection() {
+		return Trip.COLLECTION;
+	}
+
+	@Override
+	public void fromDocument(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		
 	}
 }

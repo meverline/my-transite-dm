@@ -135,6 +135,8 @@
         <dependency org="org.apache.hadoop" name="hadoop-core" rev="1.1.1" transitive="false">
         	<artifact name="hadoop-core" type="jar" />
         </dependency>
-                              
+        
+        <dependency  org="org.mongodb"  name="mongo-java-driver"  rev="2.7.2" />
+                                      
     </dependencies>
 </ivy-module>
