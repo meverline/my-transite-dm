@@ -3,16 +3,19 @@ package me.transit.database.impl;
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
-
-import org.apache.hadoop.io.Writable;
+import java.util.HashMap;
+import java.util.Map;
 
 import me.database.CSVFieldType;
 import me.factory.DaoBeanFactory;
 import me.transit.dao.TransiteStopDao;
 import me.transit.dao.hadoop.HadoopUtils;
+import me.transit.dao.mongo.IDocument;
 import me.transit.database.Agency;
 import me.transit.database.StopTime;
 import me.transit.database.TransitStop;
+
+import org.apache.hadoop.io.Writable;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
@@ -250,6 +253,47 @@ public class StopTimeImpl implements StopTime, Writable {
 		HadoopUtils.writeString(this.getStopHeadSign(), out);
 		HadoopUtils.writeString(this.getStopId(), out);
 		HadoopUtils.writeString(this.getTripId(), out);
+	}
+
+	@Override
+	public Map<String, Object> toDocument() {
+		Map<String,Object> rtn = new HashMap<String,Object>();
+
+		rtn.put(IDocument.CLASS, StopTimeImpl.class);
+		if ( this.getStopId() != null ) {
+			rtn.put("stopId", this.getStopId());
+		}
+		if ( this.getStopHeadSign() != null ) {
+			rtn.put("headSign", this.getStopHeadSign());
+		}
+		
+		if ( this.getShapeDistTravel() != -1 ) {
+			rtn.put("shapeDistTravel", this.getShapeDistTravel());
+		}
+		
+		String time = Long.toString(this.getArrivalTime());
+		if ( time.length() < 6 ) { time = "0" + time; }
+
+		rtn.put("arrivalTime", time);
+		
+		time = Long.toString(this.getDepartureTime());
+		if ( time.length() < 6 ) { time = "0" + time; }
+		
+		rtn.put("departureTime", time);
+		rtn.put("dropOffType", this.getDropOffType().name());
+		rtn.put("pickupType", this.getPickupType().name());
+		return rtn;
+	}
+	
+	@Override
+	public String getCollection() {
+		return StopTime.COLLECTION;
+	}
+
+	@Override
+	public void fromDocument(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

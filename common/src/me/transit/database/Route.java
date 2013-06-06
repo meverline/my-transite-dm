@@ -2,10 +2,14 @@ package me.transit.database;
 
 import java.util.List;
 
+import me.transit.dao.mongo.IDocument;
+
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("Route")
-public interface Route extends TransitData {
+public interface Route extends TransitData, IDocument {
+	
+	public final static String COLLECTION = "route";
 	
 	public enum RouteType { TRAM, SUBWAY, RAIL, BUS, FERRY, CABLE_CAR, GONDOLA, FUNICULAR, UNKOWN };
 	
