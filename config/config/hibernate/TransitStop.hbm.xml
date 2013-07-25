@@ -12,11 +12,7 @@
      <typedef name="RouteTypeUserType" class="org.hibernate.type.EnumType" >
          <param name="enumClass">me.transit.database.Route$RouteType</param>
 	 </typedef>
-	 
-	 <typedef name="RouteUserType" class="me.database.userTypes.CSVClobUsetDataType" >
-	       <param name="csvClass">me.transit.database.impl.RouteStopDataImpl</param>
-	 </typedef>
-	  
+	   
      <class name="TransitStop"  table="tran_stop" >
 
           <id name="UUID" unsaved-value="-1">
@@ -38,8 +34,7 @@
 		  <property name="locationType" column="TYPE" type="LocationTypeUserType" 
 		  			not-null="true" />
 		  			
-		  <property name="parentStation" column="PARENT_STATION" />
-		  <property name="routes" column="ROUTES"  length="16777215" type="RouteUserType"/>   
+		  <property name="parentStation" column="PARENT_STATION" />  
 		  <property name="version" column="VERSION"  /> 
 		  
 		  <many-to-one name="agency"  

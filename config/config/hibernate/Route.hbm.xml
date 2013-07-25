@@ -31,12 +31,6 @@
 		  			   column="AGENCY_UUID" 
 		  			   not-null="true" 
 		  			   outer-join="true" />
-		  			   
-		  <list name="tripList" table="tran_trip" lazy="true" cascade="save-update" outer-join="true">
-              <key column="ROUTE_UUID"/>
-              <index column="TRIP_INDX"/>
-              <one-to-many class="Trip"/>
-		  </list>
 		  
 		  <subclass name="me.transit.database.impl.RouteImpl" discriminator-value="RouteImpl"/>		 
 		  

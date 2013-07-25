@@ -13,14 +13,15 @@ import java.util.Set;
 import me.factory.DaoBeanFactory;
 import me.transit.dao.DaoException;
 import me.transit.dao.RouteDao;
+import me.transit.dao.neo4j.GraphDatabaseDAO;
 import me.transit.database.Route;
-import me.transit.database.RouteStopData;
 import me.transit.database.ServiceDate;
 import me.transit.database.TransitStop;
 import me.transit.database.Trip;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.neo4j.graphdb.Node;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
@@ -84,18 +85,21 @@ public class ServiceDateSample extends AbstractSpatialSampleData {
 				RouteDao.class));
 
 		int total = 0;
-		for (RouteStopData route : stop.getRoutes()) {
+		List<Node> relations = this.getRoutes(stop);
+		for (Node route : relations) {
 
-			if (!routeSerive.containsKey(route.getRouteShortName())) {
+			String dbName = String.class.cast(route.getProperty(GraphDatabaseDAO.FIELD.db_name.name()));
+			if (!routeSerive.containsKey(dbName)) {
 
 				try {
-					List<Route> list = dao.findByRouteNumber(route.getRouteShortName(),
+					List<Route> list = dao.findByRouteNumber(dbName,
 												 			 stop.getAgency().getName());
 
 					List<ServiceDate.WeekDay> aList = new ArrayList<ServiceDate.WeekDay>();
 
 					for (Route rt : list) {
-						for (Trip trip : rt.getTripList()) {
+						List<Trip> tripList = this.getTrips(rt);
+						for (Trip trip : tripList) {
 							ServiceDate service = trip.getService();
 
 							for (ServiceDate.WeekDay value : ServiceDate.WeekDay.values()) {
@@ -106,14 +110,14 @@ public class ServiceDateSample extends AbstractSpatialSampleData {
 						}
 					}
 					
-					routeSerive.put(route.getRouteShortName(), aList);
+					routeSerive.put(dbName, aList);
 					
 				} catch (DaoException e) {
 					log.error(e);
 				}
 			}
 
-			total += routeSerive.get(route.getRouteShortName()).size();
+			total += routeSerive.get(dbName).size();
 		}
 
 		return total;

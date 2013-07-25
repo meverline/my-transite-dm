@@ -37,7 +37,6 @@ public class RouteDaoImpl extends TransitDaoImpl<Route> implements RouteDao {
 		
 		if ( rtn != null ) {
 			Hibernate.initialize(rtn.getAgency());
-			Hibernate.initialize(rtn.getTripList());
 		}
 		return rtn;
 	}
@@ -63,9 +62,7 @@ public class RouteDaoImpl extends TransitDaoImpl<Route> implements RouteDao {
 			for ( Object obj : crit.list()) {
 				Route rt = Route.class.cast(obj);
 				
-				Hibernate.initialize(rt.getAgency());
-				Hibernate.initialize(rt.getTripList());
-				
+				Hibernate.initialize(rt.getAgency());				
 				rtn.add(rt);
 			}
 			session.close();
@@ -164,9 +161,7 @@ public class RouteDaoImpl extends TransitDaoImpl<Route> implements RouteDao {
 				while ( this._results.next() && ndx < RouteListIterator.BUFFER_SIZE ) {
 					Route rt = Route.class.cast(_results.get()[0]);
 					
-					Hibernate.initialize(rt.getAgency());
-					Hibernate.initialize(rt.getTripList());
-					
+					Hibernate.initialize(rt.getAgency());					
 					this._bufferList.add(rt);
 					ndx++;
 				}

@@ -132,20 +132,6 @@ public class RouteImpl extends TransitDateImpl implements Route {
 	public void setTextColor(String textColor) {
 		this.textColor = textColor;
 	}
-
-	/**
-	 * @param schedule the schedule to set
-	 */
-	public void setTripList(List<Trip> schedule) {
-		this.trips = schedule;
-	}
-
-	/**
-	 * @return the schedule
-	 */
-	public List<Trip> getTripList() {
-		return trips;
-	}
 	
 	@Override
 	public String toString() {
@@ -164,8 +150,6 @@ public class RouteImpl extends TransitDateImpl implements Route {
 		builder.append("color: " + this.getColor());
 		builder.append("\n");
 		builder.append("text Color: " + this.getTextColor());
-		builder.append("\n");
-		builder.append("trip size: " + this.getTripList().size());
 		return builder.toString();
 	}
 
@@ -183,20 +167,12 @@ public class RouteImpl extends TransitDateImpl implements Route {
 		rtn.put("longName", this.getLongName());
 		rtn.put("desc", this.getDesc());
 		rtn.put("routeType", this.getType().name());
-		rtn.put("trips", this.getTripList());
 		return rtn;
 	}
 	
 	@Override
 	public String getCollection() {
 		return Route.COLLECTION;
-	}
-
-
-	@Override
-	public void fromDocument(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		
 	}
 	
 }

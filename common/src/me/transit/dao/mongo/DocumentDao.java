@@ -12,7 +12,10 @@ import com.mongodb.DBCollection;
 import com.mongodb.Mongo;
 
 public class DocumentDao {
+	
+	public final static String COLLECTION = "route";
 
+	private static DocumentDao _theOne = null;
 	private static Mongo _connection = null;
 	private DB _transDoc = null;
 	
@@ -20,12 +23,24 @@ public class DocumentDao {
 	 * 
 	 * @throws UnknownHostException
 	 */
-	public DocumentDao() throws UnknownHostException
+	private DocumentDao() throws UnknownHostException
 	{
 		if ( _connection == null ) {
 			_connection = new Mongo("localhost");
 			_transDoc = _connection.getDB("transDoc");
 		}
+	}
+	
+	/**
+	 * 
+	 * @return
+	 * @throws UnknownHostException
+	 */
+	public static synchronized DocumentDao instance() throws UnknownHostException {
+		if ( _theOne == null ) {
+			_theOne = new DocumentDao();
+		}
+		return _theOne;
 	}
 
 	/**
@@ -38,6 +53,30 @@ public class DocumentDao {
 		    DBCollection collection = _transDoc.getCollection(document.getCollection());
 		    collection.insert( this.toMongoObject(document));
 		}
+	}
+	
+	/**
+	 * 
+	 * @param data
+	 * @param collectName
+	 */
+	public void add(Map<String,Object> data, String collectName)
+	{
+		if ( data != null ) {
+		    DBCollection collection = _transDoc.getCollection(collectName);
+		    collection.insert( this.toMongoObject(data));
+		}
+	}
+	
+	/**
+	 * 
+	 * @param data
+	 * @param collectName
+	 */
+	public Map<String,Object> findDocumentBy(String field, String value)
+	{
+		// TODO:  find the doucment and return the map.
+		return null;
 	}
 	
 	private boolean isPrimativeType(Class<?> type ) {
@@ -58,10 +97,19 @@ public class DocumentDao {
 	 * @return
 	 */
 	private BasicDBObject toMongoObject(IDocument document)
+	{	  	
+	  	return this.toMongoObject(document.toDocument());
+	}
+	
+	/**
+	 * 
+	 * @param document
+	 * @return
+	 */
+	private BasicDBObject toMongoObject(Map<String,Object> data)
 	{
 	  	BasicDBObject rtn = new BasicDBObject();
 	  	
-	  	Map<String,Object> data = document.toDocument();
 	  	for ( Entry<String,Object> entry : data.entrySet()) {
 	  		
 	  		if ( this.isPrimativeType(entry.getValue().getClass()) ) {

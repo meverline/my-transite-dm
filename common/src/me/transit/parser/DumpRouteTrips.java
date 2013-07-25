@@ -26,7 +26,7 @@ public class DumpRouteTrips {
 		long count = 0;
 		try {
 					
-			DocumentDao docDao = new DocumentDao();
+			DocumentDao docDao = DocumentDao.instance();
 			
 			List<Agency> list = agencyDao.list();
 			for ( Agency agency : list) {

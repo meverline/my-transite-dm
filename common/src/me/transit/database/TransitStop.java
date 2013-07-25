@@ -1,7 +1,5 @@
 package me.transit.database;
 
-import java.util.List;
-
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.vividsolutions.jts.geom.Point;
 
@@ -92,15 +90,5 @@ public interface TransitStop extends TransitData {
 	 * @param parentStation the parentStation to set
 	 */
 	public void setParentStation(int parentStation);
-
-	/**
-	 * @return the routes
-	 */
-	public List<RouteStopData> getRoutes();
-
-	/**
-	 * @param routes the routes to set
-	 */
-	public void setRoutes(List<RouteStopData> routes);
 	
 }

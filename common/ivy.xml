@@ -137,6 +137,8 @@
         </dependency>
         
         <dependency  org="org.mongodb"  name="mongo-java-driver"  rev="2.7.2" />
+                         
+        <dependency org="org.neo4j" name="neo4j" rev="1.7.2" />
                                       
     </dependencies>
 </ivy-module>

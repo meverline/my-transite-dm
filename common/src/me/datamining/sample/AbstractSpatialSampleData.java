@@ -1,16 +1,32 @@
 package me.datamining.sample;
 
+import java.net.UnknownHostException;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.neo4j.graphdb.Node;
 
 import me.datamining.SpatialSamplePoint;
 import me.math.grid.SpatialGridData;
+import me.transit.dao.mongo.DocumentDao;
+import me.transit.dao.neo4j.GraphDatabaseDAO;
+import me.transit.dao.neo4j.GraphDatabaseDAO.FIELD;
+import me.transit.dao.neo4j.GraphDatabaseDAO.REL_TYPES;
+import me.transit.database.Route;
 import me.transit.database.TransitStop;
+import me.transit.database.Trip;
+import me.transit.parser.TransitFeedParser;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 public abstract class AbstractSpatialSampleData extends SpatialGridData implements SpatialSamplePoint {
+
+	@XStreamOmitField
+	public static Log log = LogFactory.getLog(TransitFeedParser.class);
 
 	@XStreamOmitField
 	private Map<Long, TransitStop> dataList = new HashMap<Long,TransitStop>();
@@ -144,6 +160,34 @@ public abstract class AbstractSpatialSampleData extends SpatialGridData implemen
                 return 0;
         }
         return Math.sqrt(total / getDataList().size());
+	}
+	
+	/**
+	 * 
+	 * @param stop
+	 * @return
+	 */
+	public List<Node> getRoutes(TransitStop stop) {
+		GraphDatabaseDAO db = GraphDatabaseDAO.instance();
+		
+		Node node = db.findNodeByField(FIELD.stop, stop.getName(), stop.getAgency().getName());
+		return db.allRelationships(REL_TYPES.HAS_ROUTE, node);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Trip> getTrips(Route route) {
+		
+		List<Trip> rtn = null;
+		try {
+			DocumentDao dao = DocumentDao.instance();
+			Map<String,Object> data = dao.findDocumentBy("shortName", route.getShortName());
+			
+			rtn = (List<Trip>) data.get("tripList");
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rtn;
 	}
 
 	

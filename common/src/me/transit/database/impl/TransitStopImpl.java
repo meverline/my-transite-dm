@@ -1,14 +1,9 @@
 package me.transit.database.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import me.transit.database.RouteStopData;
 import me.transit.database.TransitStop;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
-import com.thoughtworks.xstream.annotations.XStreamImplicit;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import com.vividsolutions.jts.geom.Point;
 
@@ -33,8 +28,6 @@ public class TransitStopImpl extends TransitDateImpl implements TransitStop {
 	private LocationType locationType = LocationType.UNKNOW;
 	@XStreamAlias("parentStation")
 	private int parentStation = -1;
-	@XStreamImplicit(itemFieldName="TripRoutes")
-	private List<RouteStopData> routes = new ArrayList<RouteStopData>();
 		
 	/**
 	 * @return the code
@@ -147,20 +140,6 @@ public class TransitStopImpl extends TransitDateImpl implements TransitStop {
 	public void setParentStation(int parentStation) {
 		this.parentStation = parentStation;
 	}
-
-	/**
-	 * @return the routes
-	 */
-	public List<RouteStopData> getRoutes() {
-		return routes;
-	}
-
-	/**
-	 * @param routes the routes to set
-	 */
-	public void setRoutes(List<RouteStopData> routes) {
-		this.routes = routes;
-	}
 	
 	@Override
 	public String toString() {
@@ -181,8 +160,6 @@ public class TransitStopImpl extends TransitDateImpl implements TransitStop {
 		builder.append("locationType: " + this.getLocationType());
 		builder.append("\n");
 		builder.append("parentStation: " + this.getParentStation());
-		builder.append("\n");
-		builder.append("routes size: " + this.getRoutes().size());
 		return builder.toString();
 	}
 

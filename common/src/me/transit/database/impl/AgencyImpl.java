@@ -177,8 +177,4 @@ public class AgencyImpl implements Agency {
 		return Agency.COLLECTION;
 	}
 
-	@Override
-	public void fromDocument(Map<String, Object> map) {
-		// TODO Auto-generated method stub	
-	}
 }
