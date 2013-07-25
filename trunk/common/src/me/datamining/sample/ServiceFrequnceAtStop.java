@@ -9,8 +9,8 @@ import java.util.Set;
 import me.factory.DaoBeanFactory;
 import me.transit.dao.DaoException;
 import me.transit.dao.RouteDao;
+import me.transit.dao.neo4j.GraphDatabaseDAO;
 import me.transit.database.Route;
-import me.transit.database.RouteStopData;
 import me.transit.database.ServiceDate;
 import me.transit.database.StopTime;
 import me.transit.database.TransitStop;
@@ -18,6 +18,7 @@ import me.transit.database.Trip;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.neo4j.graphdb.Node;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
@@ -147,14 +148,17 @@ public class ServiceFrequnceAtStop extends AbstractSpatialSampleData {
 		}
 		
 		List<StopTime> stopTimes = new ArrayList<StopTime>();
-		for (RouteStopData route : stop.getRoutes()) {
+		List<Node> relations = this.getRoutes(stop);
+		for (Node route : relations) {
 
+			String dbName = String.class.cast(route.getProperty(GraphDatabaseDAO.FIELD.db_name.name()));
 			try {
-				List<Route> list = dao.findByRouteNumber(route.getRouteShortName(), 
+				List<Route> list = dao.findByRouteNumber(dbName, 
 														 stop.getAgency().getName());
 
 				Route rt = list.get(0);
-				for (Trip trip : rt.getTripList()) {
+				List<Trip> tripList = this.getTrips(rt);
+				for (Trip trip : tripList) {
 					if (isScheduleOfIntrest(trip.getService())) {
 						List<StopTime> schedule = this.findStopTimes(stop,
 																	 trip.getStopTimes());

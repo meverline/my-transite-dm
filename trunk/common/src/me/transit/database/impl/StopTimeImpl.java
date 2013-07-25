@@ -289,12 +289,5 @@ public class StopTimeImpl implements StopTime, Writable {
 	public String getCollection() {
 		return StopTime.COLLECTION;
 	}
-
-	@Override
-	public void fromDocument(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 	
 }

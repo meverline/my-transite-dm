@@ -169,9 +169,4 @@ public class TripImpl extends TransitDateImpl implements Trip {
 		return Trip.COLLECTION;
 	}
 
-	@Override
-	public void fromDocument(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		
-	}
 }

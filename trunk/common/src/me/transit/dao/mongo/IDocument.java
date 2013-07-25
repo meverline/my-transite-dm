@@ -15,12 +15,6 @@ public interface IDocument {
 	
 	/**
 	 * 
-	 * @param map
-	 */
-	public void fromDocument(Map<String,Object> map);
-	
-	/**
-	 * 
 	 * @return
 	 */
 	public String getCollection();

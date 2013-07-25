@@ -1,4 +1,4 @@
-package me.transit.parser;
+ package me.transit.parser;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
 
@@ -21,6 +22,8 @@ import me.transit.dao.RouteDao;
 import me.transit.dao.RouteGeometryDao;
 import me.transit.dao.ServiceDateDao;
 import me.transit.dao.TransiteStopDao;
+import me.transit.dao.mongo.DocumentDao;
+import me.transit.dao.neo4j.GraphDatabaseDAO;
 import me.transit.database.Agency;
 import me.transit.database.CalendarDate;
 import me.transit.database.Route;
@@ -40,6 +43,7 @@ import me.transit.database.impl.TripImpl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import org.neo4j.graphdb.Node;
 import org.nocrala.tools.gis.data.esri.shapefile.ShapeFileReader;
 import org.nocrala.tools.gis.data.esri.shapefile.ValidationPreferences;
 import org.nocrala.tools.gis.data.esri.shapefile.shape.AbstractShape;
@@ -71,11 +75,14 @@ public class TransitFeedParser {
 
 	private static GeometryFactory factory = new GeometryFactory();
 	private Agency agency = null;
+	private Node agengyNode = null;
 	private Properties properties = new Properties();
 	private HashMap<String,RouteGeometry> shaps = new HashMap<String,RouteGeometry>();
 	private HashMap<String,ServiceDate> service = new HashMap<String,ServiceDate>();
 	private HashMap<String,String> tripToRoute = new HashMap<String, String>();
-	
+	private HashMap<String,Node> stopNodes = new HashMap<String, Node>();
+	private HashMap<String,Node> routeNodes = new HashMap<String, Node>();
+
 	public static Log log = LogFactory.getLog(TransitFeedParser.class);
 	
 	/**
@@ -424,21 +431,37 @@ public class TransitFeedParser {
 	 */
 	public void save(Object obj) throws SQLException
 	{
+		GraphDatabaseDAO graph = GraphDatabaseDAO.instance();
+		
 		if ( obj instanceof Agency ) {
 			AgencyDao dao = 
 					 AgencyDao.class.cast(DaoBeanFactory.create().getDaoBean( AgencyDao.class));
 			
-			dao.save( Agency.class.cast(obj));
+			Agency agency = Agency.class.cast(obj);
+			dao.save( agency);
+			this.agengyNode = graph.addNode(agency);
 		} else	if ( obj instanceof  TransitStop ) {
 			TransiteStopDao dao = 
 					TransiteStopDao.class.cast(DaoBeanFactory.create().getDaoBean( TransiteStopDao.class));
 			
-			dao.save( TransitStop.class.cast(obj));
+			TransitStop stop = TransitStop.class.cast(obj);
+			dao.save( stop);
+			Node n = graph.addNode( stop);
+			this.stopNodes.put(stop.getId(), n);
+			
+		    graph.createRelationShip(this.agengyNode, n, GraphDatabaseDAO.REL_TYPES.OWNS_STOP);
+		    
 		} else	if ( obj instanceof  Route ) {
 			RouteDao dao = 
 					RouteDao.class.cast(DaoBeanFactory.create().getDaoBean( RouteDao.class));
 			
-			dao.save( Route.class.cast(obj));
+			Route route = Route.class.cast(obj);
+			dao.save( route);
+			Node n = graph.addNode( route );
+			
+			this.routeNodes.put( route.getShortName(), n);
+		    graph.createRelationShip(this.agengyNode, n, GraphDatabaseDAO.REL_TYPES.RUNS_ROUTE);
+			
 		} else	if ( obj instanceof  CalendarDate ) {
 			CalendarDateDao dao = 
 					CalendarDateDao.class.cast(DaoBeanFactory.create().getDaoBean( CalendarDateDao.class));
@@ -920,19 +943,13 @@ public class TransitFeedParser {
 	 */
 	private void updateStop(StopRouteList data )
 	{
-		TransiteStopDao stopDao = 
-			TransiteStopDao.class.cast(DaoBeanFactory.create().getDaoBean(TransiteStopDao.class));
-
-		TransitStop stop = null;
+		GraphDatabaseDAO dao = GraphDatabaseDAO.instance();
 		
-		try {
-			
-			stop = TransitStop.class.cast(stopDao.loadById(data.getStop(), getAgencyName()));
-			stop.setRoutes(data.getRouteList());
-			stopDao.save(stop);
-			
-		} catch (Exception e) {
-			log.error(e.getLocalizedMessage(), e);
+		Node stopNode = this.stopNodes.get(data.getStop());
+		
+		for ( RouteStopData item : data.getRouteList()) {
+			Node routeNode = this.routeNodes.get(item.getRouteShortName());
+			dao.createRelationShip(stopNode, routeNode, GraphDatabaseDAO.REL_TYPES.HAS_ROUTE);
 		}
 	}
 	
@@ -955,10 +972,13 @@ public class TransitFeedParser {
 				return;
 			}
 			
-			route.getTripList().addAll(tripList);
-			dao.save(route);
+			DocumentDao docDao = DocumentDao.instance();
+			Map<String,Object> data = route.toDocument();
+			data.put("tripList", tripList);
+			
+			docDao.add(data, route.getCollection());
 		
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			if ( route != null ) {
 				log.error("Route:" + route.toString());
 			}
@@ -1107,6 +1127,7 @@ public class TransitFeedParser {
 							stopMap.get(stopTime.getStopId()).add( new StopTripInfo( trip.getRouteId(), 
 																					 trip.getTrip().getHeadSign()));
 						}
+
 						current = id;
 						trip = null;
 					}

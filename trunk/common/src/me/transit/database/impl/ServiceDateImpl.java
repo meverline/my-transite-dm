@@ -166,9 +166,4 @@ public class ServiceDateImpl extends TransitDateImpl implements ServiceDate{
 		return ServiceDate.COLLECTION;
 	}
 
-	@Override
-	public void fromDocument(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		
-	}
 }
