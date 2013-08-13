@@ -130,6 +130,23 @@ public class TripImpl extends TransitDateImpl implements Trip {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public StopTime findStopTimeById(String id) {
+		for ( StopTime item : this.getStopTimes() ) {
+			if ( item.getStopId().compareTo(id) == 0 ) {
+				return item;
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * 
+	 */
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder( "Trip: {" + super.toString() + "}");
@@ -146,20 +163,26 @@ public class TripImpl extends TransitDateImpl implements Trip {
 		return builder.toString();
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public Map<String, Object> toDocument() {
 		Map<String,Object> rtn = new HashMap<String,Object>();
 
 		rtn.put(IDocument.CLASS, TripImpl.class.getName());
 		rtn.put(IDocument.ID, this.getUUID());
-		rtn.put("service", this.getService());
+		rtn.put("tripId", this.getId());
+		if ( this.getService() != null ) {
+		    rtn.put("service", this.getService());
+		}
 		if ( this.getHeadSign() != null ) {
 			rtn.put("headSign", this.getHeadSign());
 		}
 		if ( this.getShortName() != null ) {
 			rtn.put("shortName", this.getShortName());
 		}
-		rtn.put("directionId", this.getDirectionId());
+		rtn.put("directionId", this.getDirectionId().name());
 		rtn.put("stopTimes", this.getStopTimes());
 		return rtn;
 	}
@@ -167,6 +190,34 @@ public class TripImpl extends TransitDateImpl implements Trip {
 	@Override
 	public String getCollection() {
 		return Trip.COLLECTION;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		
+		boolean rtn = false;
+		
+		if ( Trip.class.isAssignableFrom(obj.getClass()) ) {
+			Trip rhs = Trip.class.cast(obj);
+			rtn = true;
+			if ( ! this.getAgency().equals(rhs.getAgency()) ) {
+				rtn = false;
+			}
+			if ( this.getService() != null && (! this.getService().equals(rhs.getService()))) {
+				rtn = false;
+			}
+			if ( this.getDirectionId() != rhs.getDirectionId()) {
+				rtn = false;
+			}
+			if ( this.getShortName() != null && (! this.getShortName().equals(rhs.getShortName())) ) {
+				rtn = false;
+			}
+			if ( this.getHeadSign() != null && (! this.getHeadSign().equals(rhs.getHeadSign())) ) {
+				rtn = false;
+			}
+			
+		}
+		return rtn;
 	}
 
 }

@@ -3,7 +3,10 @@ package me.transit.database.impl;
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import me.database.CSVFieldType;
@@ -27,9 +30,9 @@ public class StopTimeImpl implements StopTime, Writable {
 	@XStreamOmitField
 	private String stopId = null;
 	@XStreamAlias("arrivalTime")
-	private long arrivalTime = 0;
+	private List<Long> arrivalTime = new ArrayList<Long>();
 	@XStreamAlias("departureTime")
-	private long departureTime = 0;
+	private List<Long> departureTime = new ArrayList<Long>();
 	@XStreamAlias("stopHeadSign")
 	private String stopHeadSign = "";
 	@XStreamAlias("pickupType")
@@ -75,29 +78,47 @@ public class StopTimeImpl implements StopTime, Writable {
 	/**
 	 * @return the arrivalTime
 	 */
-	public long getArrivalTime() {
+	public List<Long> getArrivalTime() {
 		return arrivalTime;
 	}
 
 	/**
 	 * @param arrivalTime the arrivalTime to set
 	 */
-	public void setArrivalTime(long arrivalTime) {
+	public void setArrivalTime(List<Long> arrivalTime) {
 		this.arrivalTime = arrivalTime;
 	}
+	
+	/**
+	 * 
+	 * @param departureTime
+	 */
+	public void addArrivalTime(long arrivalTime) {
+		this.arrivalTime.add(arrivalTime);
+	}
+
 
 	/**
 	 * @return the departureTime
 	 */
-	public long getDepartureTime() {
+	public List<Long> getDepartureTime() {
 		return departureTime;
 	}
 
 	/**
 	 * @param departureTime the departureTime to set
 	 */
-	public void setDepartureTime(long departureTime) {
+	public void setDepartureTime(List<Long> departureTime) {
 		this.departureTime = departureTime;
+	}
+	
+	/**
+	 * 
+	 * @param departureTime
+	 */
+	public void addDepartureTime(long departureTime)
+	{
+		this.departureTime.add(departureTime);
 	}
 
 	/**
@@ -187,8 +208,6 @@ public class StopTimeImpl implements StopTime, Writable {
 		
 		String data[] = line.split(CSVFieldType.COMMA);
 		
-		this.setArrivalTime( Long.parseLong(data[0]));
-		this.setDepartureTime(Long.parseLong(data[1]));
 		this.setStopHeadSign( data[2]);
 		this.setDropOffType( PickupType.valueOf(data[3]));
 		this.setPickupType(PickupType.valueOf(data[4]));
@@ -229,8 +248,6 @@ public class StopTimeImpl implements StopTime, Writable {
 	 */
 	@Override
 	public void readFields(DataInput in) throws IOException {
-		this.setArrivalTime(in.readLong());
-		this.setDepartureTime(in.readLong());
 		this.setShapeDistTravel(in.readDouble());
 		this.setDropOffType( PickupType.values()[in.readInt()]);
 		this.setPickupType( PickupType.values()[in.readInt()]);
@@ -244,8 +261,6 @@ public class StopTimeImpl implements StopTime, Writable {
 	 */
 	@Override
 	public void write(DataOutput out) throws IOException {
-		out.writeLong(this.getArrivalTime());
-		out.writeLong(this.getDepartureTime());
 		out.writeDouble(this.getShapeDistTravel());
 		out.writeInt(this.getDropOffType().ordinal());
 		out.writeInt(this.getPickupType().ordinal());
@@ -271,15 +286,10 @@ public class StopTimeImpl implements StopTime, Writable {
 			rtn.put("shapeDistTravel", this.getShapeDistTravel());
 		}
 		
-		String time = Long.toString(this.getArrivalTime());
-		if ( time.length() < 6 ) { time = "0" + time; }
-
-		rtn.put("arrivalTime", time);
-		
-		time = Long.toString(this.getDepartureTime());
-		if ( time.length() < 6 ) { time = "0" + time; }
-		
-		rtn.put("departureTime", time);
+		Collections.sort(this.getDepartureTime());
+		rtn.put("departureTime", this.getDepartureTime());
+		Collections.sort(this.getArrivalTime());
+		rtn.put("arrivalTime", this.getArrivalTime());
 		rtn.put("dropOffType", this.getDropOffType().name());
 		rtn.put("pickupType", this.getPickupType().name());
 		return rtn;

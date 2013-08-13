@@ -1,5 +1,7 @@
 package me.transit.database;
 
+import java.util.List;
+
 import me.database.CSVFieldType;
 import me.transit.dao.mongo.IDocument;
 
@@ -25,22 +27,34 @@ public interface StopTime extends CSVFieldType, IDocument {
 	/**
 	 * @return the arrivalTime
 	 */
-	public long getArrivalTime();
+	public List<Long> getArrivalTime();
 
 	/**
 	 * @param arrivalTime the arrivalTime to set
 	 */
-	public void setArrivalTime(long arrivalTime);
+	public void setArrivalTime(List<Long> arrivalTime);
+	
+	/**
+	 * 
+	 * @param departureTime
+	 */
+	public void addArrivalTime(long arrivalTime);
 
 	/**
 	 * @return the departureTime
 	 */
-	public long getDepartureTime() ;
+	public List<Long> getDepartureTime() ;
 
 	/**
 	 * @param departureTime the departureTime to set
 	 */
-	public void setDepartureTime(long departureTime);
+	public void setDepartureTime(List<Long> departureTime);
+	
+	/**
+	 * 
+	 * @param departureTime
+	 */
+	public void addDepartureTime(long departureTime);
 
 	/**
 	 * @return the stopId

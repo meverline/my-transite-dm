@@ -1,5 +1,7 @@
 package me.transit.database;
 
+import java.util.List;
+
 import me.transit.dao.mongo.IDocument;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
@@ -80,5 +82,15 @@ public interface Route extends TransitData, IDocument {
 	 * @param textColor the textColor to set
 	 */
 	public void setTextColor(String textColor);
+	
+	/**
+	 * @return the textColor
+	 */
+	public List<Trip> getTripList();
+
+	/**
+	 * @param textColor the textColor to set
+	 */
+	public void setTripList(List<Trip> list);
 	
 }

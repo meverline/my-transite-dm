@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
@@ -13,8 +16,9 @@ import com.mongodb.Mongo;
 
 public class DocumentDao {
 	
-	public final static String COLLECTION = "route";
+	public final static String COLLECTION = "schedules";
 
+	private Log log = LogFactory.getLog(DocumentDao.class);
 	private static DocumentDao _theOne = null;
 	private static Mongo _connection = null;
 	private DB _transDoc = null;
@@ -27,7 +31,7 @@ public class DocumentDao {
 	{
 		if ( _connection == null ) {
 			_connection = new Mongo("localhost");
-			_transDoc = _connection.getDB("transDoc");
+			_transDoc = _connection.getDB("transiteDoc");
 		}
 	}
 	
@@ -110,27 +114,32 @@ public class DocumentDao {
 	{
 	  	BasicDBObject rtn = new BasicDBObject();
 	  	
-	  	for ( Entry<String,Object> entry : data.entrySet()) {
-	  		
-	  		if ( this.isPrimativeType(entry.getValue().getClass()) ) {
-	  			rtn.append(entry.getKey(), entry.getValue());
-	  		} else if (List.class.isAssignableFrom(entry.getValue().getClass()) ) {
-	  			List<?> list = List.class.cast(entry.getValue());
+		for (Entry<String, Object> entry : data.entrySet()) {
 
-				BasicDBList dbList = new BasicDBList();
-				for (Object item : list) {
-					if ( IDocument.class.isAssignableFrom(item.getClass()) ) {
-						dbList.add(this.toMongoObject(IDocument.class.cast(item)));
-					} else if ( this.isPrimativeType(item.getClass()) ) {
-						dbList.add(item);
+			if (entry.getValue() == null) {
+			   log.warn("toMongoObject entry value is null: " + entry.getKey());
+			} else {
+				if (this.isPrimativeType(entry.getValue().getClass())) {
+					rtn.append(entry.getKey(), entry.getValue());
+				} else if (List.class.isAssignableFrom(entry.getValue().getClass())) {
+					List<?> list = List.class.cast(entry.getValue());
+
+					BasicDBList dbList = new BasicDBList();
+					for (Object item : list) {
+						if (IDocument.class.isAssignableFrom(item.getClass())) {
+							dbList.add(this.toMongoObject(IDocument.class.cast(item)));
+						} else if (this.isPrimativeType(item.getClass())) {
+							dbList.add(item);
+						}
 					}
+					rtn.append(entry.getKey(), dbList);
+
+				} else if (IDocument.class.isAssignableFrom(entry.getValue().getClass())) {
+					rtn.append(entry.getKey(), 
+							   this.toMongoObject(IDocument.class.cast(entry.getValue())));
 				}
-				rtn.append(entry.getKey(), dbList);
-				
-	  		} else if ( IDocument.class.isAssignableFrom(entry.getValue().getClass()) ) {
-	  			rtn.append(entry.getKey(),this.toMongoObject(IDocument.class.cast(entry.getValue()))); 
-	  		}
-	  	}
+			}
+		}
 	  	return rtn;
 	}
 	

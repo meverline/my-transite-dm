@@ -8,11 +8,7 @@
           <param name="enumClass">me.transit.database.Trip$DirectionType</param>
           <param name="type">12</param>
 	  </typedef>
-	  
-	  <typedef name="StopTimeUserType" class="me.database.userTypes.CSVClobUsetDataType" >
-          <param name="csvClass">me.transit.database.impl.StopTimeImpl</param>
-	  </typedef>
-	  
+	  	  
      <class name="Trip"  table="tran_trip" >
 
           <id name="UUID" unsaved-value="-1">
@@ -34,7 +30,6 @@
 		               not-null="true" 
 		               outer-join="true" />
 		 
-		  <property name="stopTimes" column="STOP_TIMES"  length="16777215" type="StopTimeUserType"/>
 		  <property name="version" column="VERSION"  />
 		      
  		  <subclass name="me.transit.database.impl.TripImpl" discriminator-value="TripImpl"/>		          
