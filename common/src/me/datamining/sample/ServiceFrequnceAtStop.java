@@ -120,14 +120,15 @@ public class ServiceFrequnceAtStop extends AbstractSpatialSampleData {
 	{
 		List<StopTime> rtn = new ArrayList<StopTime>();
 		
-		for ( StopTime st : schedule) {
-			if ( st.getStopId() == stop.getId() ) {
-				if ( st.getArrivalTime() > this.getStartTime() && 
-					 st.getArrivalTime() < this.getEndTime()) 
-				{
-					rtn.add(st);
+		for (StopTime st : schedule) {
+			if (st.getStopId() == stop.getId()) {
+
+				for (Long time : st.getArrivalTime()) {
+					if (time > this.getStartTime() && time < this.getEndTime()) {
+						rtn.add(st);
+					}
 				}
-				
+
 			}
 		}
 		return rtn;		

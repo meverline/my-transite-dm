@@ -181,7 +181,7 @@ public class StopTimeTextInput extends
 				  builder.append(str);
 			  }
 			  if ( builder.toString().length() > 0 ) {	  
-				  stopTime.setArrivalTime(Long.parseLong(builder.toString().replace('"', ' ').trim()));
+//				  stopTime.setArrivalTime(Long.parseLong(builder.toString().replace('"', ' ').trim()));
 			  }
 			} 
 			
@@ -192,7 +192,7 @@ public class StopTimeTextInput extends
 					builder.append(str);
 				}
 				if ( builder.toString().length() > 0 ) {	 
-				   stopTime.setDepartureTime(Long.parseLong(builder.toString().replace('"', ' ').trim()));	
+//				   stopTime.setDepartureTime(Long.parseLong(builder.toString().replace('"', ' ').trim()));	
 				}
 				stopTime.setStopId(data[indexMap.get("StopId")].replace('"', ' ').trim());
 			} 

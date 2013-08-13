@@ -133,6 +133,21 @@ public class RouteImpl extends TransitDateImpl implements Route {
 		this.textColor = textColor;
 	}
 	
+	/**
+	 * @return the textColor
+	 */
+	public List<Trip> getTripList()
+	{
+		return this.trips;
+	}
+
+	/**
+	 * @param textColor the textColor to set
+	 */
+	public void setTripList(List<Trip> list) {
+		this.trips = list;
+	}
+	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder( "Route: {" + super.toString() + "}");

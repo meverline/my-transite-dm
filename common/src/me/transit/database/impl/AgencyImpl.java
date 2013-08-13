@@ -176,5 +176,25 @@ public class AgencyImpl implements Agency {
 	public String getCollection() {
 		return Agency.COLLECTION;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		
+		boolean rtn = false;
+		if ( Agency.class.isAssignableFrom(obj.getClass()) ) {
+			Agency rhs = Agency.class.cast(obj);				
+			rtn = true;
+			if ( ! this.getName().equals(rhs.getName() )) {
+				rtn = false;
+			}
+			if ( ! this.getUrl().equals(rhs.getUrl()) ) {
+				rtn = false;
+			}
+			if ( ! this.getPhone().equals(rhs.getPhone()) ) {
+				rtn = false;
+			}	
+		}
+		return rtn;
+	}
 
 }

@@ -74,10 +74,10 @@
 		<property name="connection" ref="hibernateConnection"/>
 	</bean>
 	
-	<bean id="tripDao" class="me.transit.dao.impl.TripDaoImpl" parent="AbstractHibernateDAO">
+    <bean id="tripDao" class="me.transit.dao.impl.TripDaoImpl" parent="AbstractHibernateDAO">
 		<property name="connection" ref="hibernateConnection"/>
 	</bean>
-	
+
 	<bean id="crimeDao" class="me.crime.dao.impl.CrimeDaoImpl" parent="AbstractHibernateDAO">
 		<property name="connection" ref="hibernateConnection"/>
 	</bean>

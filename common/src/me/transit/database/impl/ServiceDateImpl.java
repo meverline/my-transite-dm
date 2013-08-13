@@ -1,11 +1,8 @@
 package me.transit.database.impl;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import me.transit.dao.mongo.IDocument;
@@ -144,20 +141,22 @@ public class ServiceDateImpl extends TransitDateImpl implements ServiceDate{
 	public Map<String, Object> toDocument() {
 		Map<String,Object> rtn = new HashMap<String,Object>();
 
-		SimpleDateFormat sdf = new SimpleDateFormat();
+		SimpleDateFormat sdf = new SimpleDateFormat("MMM dd yyyy");
 		rtn.put(IDocument.CLASS, ServiceDateImpl.class.getName());
 		rtn.put(IDocument.ID, this.getUUID());
-		rtn.put("startDate", sdf.format(new Date(getStartDate().get(Calendar.MILLISECOND))));
-		rtn.put("endDate", sdf.format(new Date(getEndDate().get(Calendar.MILLISECOND))));
+		rtn.put("startDate", sdf.format(getStartDate().getTime()));
+		rtn.put("endDate", sdf.format(getEndDate().getTime()));
+		rtn.put("serviceDays", this.getService().name());
 		
-		List<String> str = new ArrayList<String>();
+		StringBuffer buffer = new StringBuffer();
 		
 		for (WeekDay day : ServiceDate.WeekDay.values()) {
 			if ( this.hasService(day) ) {
-				str.add(day.name());
+				if ( buffer.length() > 0) { buffer.append(" "); }
+				buffer.append(day.name());
 			}
 		}
-		rtn.put("serviceDayFlag", str);
+		rtn.put("serviceDayFlag", buffer);
 		return rtn;
 	}
 	
@@ -165,5 +164,38 @@ public class ServiceDateImpl extends TransitDateImpl implements ServiceDate{
 	public String getCollection() {
 		return ServiceDate.COLLECTION;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		
+		boolean rtn = false;
+		if ( obj == null ) { return rtn; }
+		if ( ServiceDate.class.isAssignableFrom(obj.getClass()) ) {
+			ServiceDate rhs = ServiceDate.class.cast(obj);
+			rtn = true;
+			if ( ! this.getAgency().equals(rhs.getAgency()) ) {
+				rtn = false;
+			}
+			if ( ! this.getEndDate().equals(rhs.getEndDate()) ) {
+				rtn = false;
+			}
+			if ( ! this.getStartDate().equals(rhs.getStartDate()) ) {
+				rtn = false;
+			}
+			if ( this.getService() != rhs.getService() ) {
+				rtn = false;
+			}
+			if ( this.getServiceDayFlag() != rhs.getServiceDayFlag()) {
+				rtn = false;
+			}
+			if ( ! this.getId().equals(rhs.getId()) ) {
+				rtn = false;
+			}
+		}
+		return rtn;
+	}
+	
+	
+	
 
 }

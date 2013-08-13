@@ -79,4 +79,11 @@ public interface Trip extends TransitData, IDocument {
 	 */
 	public void addStopTime(StopTime stopTime);
 	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public StopTime findStopTimeById(String id);
+	
 }
