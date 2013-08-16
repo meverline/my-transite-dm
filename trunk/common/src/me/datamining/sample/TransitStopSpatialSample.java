@@ -2,9 +2,8 @@ package me.datamining.sample;
 
 import java.util.List;
 
+import me.transit.database.RouteStopData;
 import me.transit.database.TransitStop;
-
-import org.neo4j.graphdb.Node;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
@@ -39,7 +38,7 @@ public class TransitStopSpatialSample extends AbstractSpatialSampleData {
 	
 	protected double getMetric(TransitStop stop)
 	{
-		List<Node> relations = this.getRoutes(stop);
+		List<RouteStopData>  relations = this.getRoutes(stop);
 		if ( stop != null && relations!= null )  {
 			return relations.size();
 		}
