@@ -31,21 +31,18 @@ import me.transit.database.Agency;
 import me.transit.database.CalendarDate;
 import me.transit.database.Route;
 import me.transit.database.RouteGeometry;
-import me.transit.database.RouteStopData;
 import me.transit.database.ServiceDate;
 import me.transit.database.StopTime;
 import me.transit.database.TransitData;
 import me.transit.database.TransitStop;
 import me.transit.database.Trip;
 import me.transit.database.impl.RouteGeometryImpl;
-import me.transit.database.impl.RouteStopDataImpl;
 import me.transit.database.impl.ServiceDateImpl;
 import me.transit.database.impl.StopTimeImpl;
 import me.transit.database.impl.TripImpl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.neo4j.graphdb.Node;
 import org.nocrala.tools.gis.data.esri.shapefile.ShapeFileReader;
 import org.nocrala.tools.gis.data.esri.shapefile.ValidationPreferences;
 import org.nocrala.tools.gis.data.esri.shapefile.shape.AbstractShape;
@@ -77,12 +74,9 @@ public class TransitFeedParser {
 
 	private static GeometryFactory factory = new GeometryFactory();
 	private Agency agency = null;
-	private Node agengyNode = null;
 	private Properties properties = new Properties();
 	private HashMap<String,RouteGeometry> shaps = new HashMap<String,RouteGeometry>();
 	private HashMap<String,ServiceDate> service = new HashMap<String,ServiceDate>();
-	private HashMap<String,Node> stopNodes = new HashMap<String, Node>();
-	private HashMap<String,Node> routeNodes = new HashMap<String, Node>();
     private HashMap<String,String> routeShortName = new HashMap<String, String>();
 	public static Log log = LogFactory.getLog(TransitFeedParser.class);
 	
@@ -188,6 +182,11 @@ public class TransitFeedParser {
 	{
 		String files[] = getProperties().get("order").toString().split(",");
 		HashMap<String, RouteTripPair> tripMap = null;
+		
+		this.routeShortName = new HashMap<String,String>();
+		this.service = new HashMap<String,ServiceDate>();
+		this.shaps = new HashMap<String,RouteGeometry>();
+		this.agency = null;
 		
 		for ( String dataFile : files ) {	
 			log.info("parse: " + dataFile + " " + diretory);
@@ -388,44 +387,6 @@ public class TransitFeedParser {
 	
 	/**
 	 * 
-	 * @param agency
-	 */
-	private void deleteAgencyData(Agency agency)
-	{
-		/**
-		AgencyDao agencyDao = 
-			 AgencyDao.class.cast(DaoBeanFactory.create().getDaoBean( AgencyDao.class));
-		
-		List<Agency> found = agencyDao.findAllByName(agency.getName());
-		if  ( found.isEmpty() ) { 
-			return; 
-		}
-		
-		try {
-			for ( Agency rec : found ) {
-				
-				CalendarDateDao calDao = 
-					CalendarDateDao.class.cast(DaoBeanFactory.create().getDaoBean( CalendarDateDao.class));
-				calDao.deleteByAgency(rec);
-				
-				ServiceDateDao serviceDao = 
-					ServiceDateDao.class.cast(DaoBeanFactory.create().getDaoBean( ServiceDateDao.class));
-				serviceDao.deleteByAgency(rec);
-				
-				RouteDao routeDao = 
-					RouteDao.class.cast(DaoBeanFactory.create().getDaoBean( RouteDao.class));
-				routeDao.deleteByAgency(rec);
-				agencyDao.delete(rec.getUUID());
-			}
-		} catch (SQLException e) {
-			log.error(e.getLocalizedMessage(), e);
-		}
-		**/
-		
-	}
-	
-	/**
-	 * 
 	 * 
 	 * @param obj
 	 * @throws SQLException
@@ -440,17 +401,15 @@ public class TransitFeedParser {
 			
 			Agency agency = Agency.class.cast(obj);
 			dao.save( agency);
-			this.agengyNode = graph.addNode(agency);
+		    graph.addNode(agency);
+		    
 		} else	if ( obj instanceof  TransitStop ) {
 			TransiteStopDao dao = 
 					TransiteStopDao.class.cast(DaoBeanFactory.create().getDaoBean( TransiteStopDao.class));
 			
 			TransitStop stop = TransitStop.class.cast(obj);
 			dao.save( stop);
-			Node n = graph.addNode( stop);
-			this.stopNodes.put(stop.getId(), n);
-			
-		    graph.createRelationShip(this.agengyNode, n, GraphDatabaseDAO.REL_TYPES.OWNS_STOP);
+		    graph.addNode( stop);
 		    
 		} else	if ( obj instanceof  Route ) {
 			RouteDao dao = 
@@ -458,10 +417,7 @@ public class TransitFeedParser {
 			
 			Route route = Route.class.cast(obj);
 			dao.save( route);
-			Node n = graph.addNode( route );
-			
-			this.routeNodes.put( route.getShortName(), n);
-		    graph.createRelationShip(this.agengyNode, n, GraphDatabaseDAO.REL_TYPES.RUNS_ROUTE);
+			graph.addNode( route );
 			
 		} else	if ( obj instanceof  CalendarDate ) {
 			CalendarDateDao dao = 
@@ -541,7 +497,6 @@ public class TransitFeedParser {
 					if ( obj instanceof Agency ) {
 						Agency rec = Agency.class.cast(obj);
 						this.setAgency(rec);
-						deleteAgencyData(rec);
 					}
 					
 					if ( TransitData.class.isAssignableFrom(obj.getClass()) ) {
@@ -863,6 +818,7 @@ public class TransitFeedParser {
 	{
 		HashMap<String,RouteTripPair> tripMap = new HashMap<String,RouteTripPair>();
 		HashMap<String, List<Trip>> routeToTrips = new HashMap<String, List<Trip>>();
+		Set<String> invalidService = new HashSet<String>();
 		
 		routeShortName.clear();
 		try {
@@ -908,7 +864,10 @@ public class TransitFeedParser {
 					if ( service.get(id) != null ) {
 						trip.setService(service.get(id));
 					} else {
-						log.error("Invalid trip service id: " + id + " route: " + routeId);
+						if ( ! invalidService.contains(id) ) {
+							log.error("Invalid trip service id: " + id + " route: " + routeId);
+							invalidService.add(id);
+						}
 					}
 				}
 				
@@ -952,6 +911,7 @@ public class TransitFeedParser {
 			
 			log.info("parseTrip:updateRoute ");
 			
+			GraphDatabaseDAO graphdb = GraphDatabaseDAO.instance();
 			RouteDao dao = RouteDao.class.cast(DaoBeanFactory.create().getDaoBean(RouteDao.class));
 			for ( Entry<String,List<Trip>> data : routeToTrips.entrySet()) {
 				
@@ -959,6 +919,10 @@ public class TransitFeedParser {
 				route.setTripList(data.getValue());
 				dao.save(route);
 				routeShortName.put(data.getKey(), route.getShortName());
+				
+				for ( Trip entry : data.getValue() ) {
+					graphdb.createRelationShip(route, entry);
+				}
 			}
 							
 		} catch (Exception e) {
@@ -966,97 +930,52 @@ public class TransitFeedParser {
 		}
 		return tripMap;
 	}
-	
-	/**
-	 * 
-	 * @param routeId
-	 * @return
-	 */
-	private void updateStop(StopRouteList data )
-	{
-		GraphDatabaseDAO dao = GraphDatabaseDAO.instance();
-		
-		Node stopNode = this.stopNodes.get(data.getStop());
-		
-		for ( RouteStopData item : data.getRouteList()) {
-			Node routeNode = this.routeNodes.get(item.getRouteShortName());
-			// TODO: add a Trip relation which  goes Stop <--- Trip ----> Route
-			dao.createRelationShip(routeNode, stopNode, GraphDatabaseDAO.REL_TYPES.HAS_STOP);
-		}
-	}
-	
-	/**
-	 * 
-	 * @param routeId
-	 * @param aStopList
-	 */
-	private void updateRoute(String routeId, List<Trip> tripList)
-	{
-		Route route = null;
-		try {
 			
-			RouteDao dao = 
-				RouteDao.class.cast(DaoBeanFactory.create().getDaoBean(RouteDao.class));
-			
-			route = Route.class.cast(dao.loadById(routeId, getAgencyName()));
-			if ( route == null ) {
-				log.info("Unable to find Route: " + routeId);
-				return;
-			}
-			
-			DocumentDao docDao = DocumentDao.instance();
-			Map<String,Object> data = route.toDocument();
-			data.put("tripList", tripList);
-			
-			docDao.add(data, route.getCollection());
-		
-		} catch (Exception e) {
-			if ( route != null ) {
-				log.error("Route:" + route.toString());
-			}
-			log.error(e.getLocalizedMessage(), e);
-		}
-	}
-	
 	/**
 	 * 
 	 * @param stopMap
 	 * @return
 	 */
-	private List<StopRouteList> xrefStopToRoutes(HashMap<String, List<Trip>> tripMap)
-	{
-		List<StopRouteList> rtn = new ArrayList<StopRouteList>();	
-		Route route = null; 
-		HashMap<String, Set<String>> routeMap = new HashMap<String, Set<String>>();
+	private void xrefStopToRoutes(HashMap<String, List<Trip>> tripMap)
+	{		
+		RouteDao dao = RouteDao.class.cast(DaoBeanFactory.create().getDaoBean(RouteDao.class));
+		TransiteStopDao stopDao = TransiteStopDao.class.cast(DaoBeanFactory.create().getDaoBean(TransiteStopDao.class));
+		GraphDatabaseDAO graphdb = GraphDatabaseDAO.instance();
 		
 		try {
 			
 			for ( Entry<String, List<Trip>> entry : tripMap.entrySet() ) {
-				List<RouteStopData> routesList = new ArrayList<RouteStopData>();
-
+				Map<String, TransitStop> stopIds = new HashMap<String, TransitStop>();
+				
+				Route route = dao.loadById(entry.getKey(), this.getAgencyName());
 				for ( Trip trip : entry.getValue() ) {
 					for ( StopTime info : trip.getStopTimes() ) {
-						if ( ! routeMap.containsKey(entry.getKey()) ) {
-							if ( route != null ) {
-								routeMap.put(entry.getKey(),  new HashSet<String>() );
-							}
+						
+						if ( ! stopIds.containsKey(info.getStopId()) ) {
+							TransitStop stop = stopDao.loadById(info.getStopId(), this.getAgencyName());
+							stopIds.put(info.getStopId(), stop);
 						}
-						if ( routeMap.containsKey(entry.getKey()) ) {
-							routeMap.get(entry.getKey()).add(info.getStopId());
-							// TODO: add in the route short name.
-							routesList.add( new RouteStopDataImpl( info.getTripId(), info.getStopHeadSign()));
-						}
+						graphdb.createRelationShip(trip, stopIds.get(info.getStopId()));
 					}
 				}
 				
-				rtn.add( new StopRouteList( entry.getKey(), routesList) );
+				for ( TransitStop stopInfo : stopIds.values()) {
+					graphdb.createRelationShip(route, stopInfo);
+				}
+				
+				DocumentDao docDao = DocumentDao.instance();
+				Map<String,Object> data = route.toDocument();
+				data.put("tripList", entry.getValue());
+				
+				docDao.add(data, route.getCollection());
+
 			}
 			
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage(), e);
 		}
 		
-		return rtn;
+		return;
 	}
 	
 	/**
@@ -1173,18 +1092,8 @@ public class TransitFeedParser {
 			    }
 			}
 			
-			log.info("parseStopTimes:xrefStopToRoutes " + tripMap.size());
-			List<StopRouteList> aList = this.xrefStopToRoutes(routeToTrips);
-			
-			log.info("parseStopTimes:updateRoutes " + aList.size());
-			for ( Entry<String,List<Trip>> data : routeToTrips.entrySet() ) {
-				this.updateRoute(data.getKey(), data.getValue());
-			}
-	
-			log.info("parseStopTimes:updateStop " + aList.size());
-			for ( StopRouteList entry : aList) {
-				this.updateStop(entry);
-			}
+			log.info("parseStopTimes:xrefStopToRoutes " + routeToTrips.size());
+			this.xrefStopToRoutes(routeToTrips);
 			
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage(), e);
@@ -1268,29 +1177,6 @@ public class TransitFeedParser {
 		
 	}
 	
-	//////////////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////////////
-
-	private class StopRouteList {
-		
-		private String stop = null;
-		private List<RouteStopData> routesList = null;
-		
-		public StopRouteList(String id, List<RouteStopData> list ) {
-			stop = id;
-			routesList = list;
-		}
-		
-		public String getStop() {
-			return stop;
-		}
-		
-		public List<RouteStopData> getRouteList() {
-			return this.routesList;
-		}
-
-	}
-		
 	//////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////
 
