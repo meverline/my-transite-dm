@@ -47,5 +47,13 @@ public class CalendarDateImpl extends TransitDateImpl implements CalendarDate {
 		builder.append("\n");
 		return builder.toString();
 	}
+	
+	/**
+	 * 
+	 */
+	public boolean valid() 
+	{
+		return true;
+	}
 
 }

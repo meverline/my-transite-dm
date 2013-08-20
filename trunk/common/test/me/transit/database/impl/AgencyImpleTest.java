@@ -8,6 +8,9 @@ import org.junit.Test;
 
 public class AgencyImpleTest {
 
+	/**
+	 * 
+	 */
 	@Test
 	public void constructor() {
 		
@@ -41,6 +44,9 @@ public class AgencyImpleTest {
 		
 	}
 	
+	/**
+	 * 
+	 */
 	@Test
 	public void getsAndSets() {
 		

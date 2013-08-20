@@ -27,6 +27,7 @@ import org.neo4j.graphdb.factory.GraphDatabaseSettings;
 import org.neo4j.graphdb.index.ReadableIndex;
 import org.neo4j.graphdb.traversal.Evaluators;
 import org.neo4j.graphdb.traversal.TraversalDescription;
+import org.neo4j.kernel.CommonBranchOrdering;
 import org.neo4j.kernel.Traversal;
 
 public class GraphDatabaseDAO {
@@ -203,6 +204,7 @@ public class GraphDatabaseDAO {
 		Node node = graphDb.createNode();
         node.setProperty(FIELD.agency.name(), agency.getName());
         node.setProperty(FIELD.db_id.name(), agency.getId());
+        node.setProperty(FIELD.className.name(), agency.getClass().getSimpleName());
         return node;
 	}
 	
@@ -251,6 +253,7 @@ public class GraphDatabaseDAO {
 				node.setProperty( FIELD.stop.name(), FIELD.stop.makeKey(stop));
 		        node.setProperty( FIELD.db_name.name(), stop.getName());
 		        node.setProperty( FIELD.db_id.name(), stop.getId());
+		        node.setProperty(FIELD.className.name(),stop.getClass().getSimpleName());
 		        
 		        if ( coord == null ) {
 					coord = graphDb.createNode();
@@ -293,6 +296,8 @@ public class GraphDatabaseDAO {
 				node.setProperty(FIELD.route.name(), FIELD.route.makeKey(route));
 				node.setProperty(FIELD.db_name.name(), route.getShortName());
 				node.setProperty(FIELD.db_id.name(), route.getId());
+				node.setProperty(FIELD.className.name(), route.getClass().getSimpleName());
+				
 				createRelationShip(node, route.getAgency());
 				tx.success();
 			} catch (Exception ex) {
@@ -321,6 +326,8 @@ public class GraphDatabaseDAO {
 				node = graphDb.createNode();
 				node.setProperty(FIELD.trip.name(), FIELD.trip.makeKey(trip));
 				node.setProperty(FIELD.db_name.name(), trip.getHeadSign());
+				node.setProperty(FIELD.className.name(), trip.getClass().getSimpleName());
+				
 				if (trip.getShortName() != null) {
 					node.setProperty(FIELD.db_id.name(), trip.getShortName());
 				}
@@ -469,19 +476,39 @@ public class GraphDatabaseDAO {
 		String key = type.makeKey(stop);
 		Node stopNode = index.get(type.name(), key).getSingle();
 		
-		TraversalDescription td = Traversal.description().breadthFirst().relationships(REL_TYPES.HAS_STOP, Direction.INCOMING).evaluator( Evaluators.excludeStartPosition());
+		TraversalDescription td = Traversal.description().
+											 order(CommonBranchOrdering.PREORDER_DEPTH_FIRST).
+											 relationships(REL_TYPES.HAS_A, Direction.INCOMING).
+											 evaluator( Evaluators.excludeStartPosition());
 		
 		List<RouteStopData> rtn = new ArrayList<RouteStopData>();
 		if ( stopNode != null ) {
 			org.neo4j.graphdb.traversal.Traverser routes = td.traverse(stopNode);
+			String currentRoute = null;
 			for ( Path path : routes) {
-				RouteStopDataImpl item = new RouteStopDataImpl();
 				
 				Node node = path.endNode();
-				item.setRouteShortName( node.getProperty(FIELD.db_name.name()).toString());
-				item.setTripHeadSign( node.getProperty("tripHeadSign").toString());
+				Iterable<String> keys =  node.getPropertyKeys();
 				
-				rtn.add(item);
+				String className = node.getProperty(FIELD.className.name()).toString();
+				String name = node.getProperty(FIELD.db_name.name()).toString();
+				
+				if ( className.equals(Route.class.getSimpleName()) ) {
+					
+					if ( currentRoute == null ) {
+						currentRoute = name;
+					} else if ( ! currentRoute.equals(name) ) {
+						currentRoute = name;
+					}
+					
+				} else if ( className.equals(Trip.class.getSimpleName()) ) {
+					RouteStopDataImpl item = new RouteStopDataImpl();
+
+					item.setRouteShortName( currentRoute );
+					item.setTripHeadSign( name );
+					rtn.add(item);
+				}
+				
 			}
 		}
 		return rtn;

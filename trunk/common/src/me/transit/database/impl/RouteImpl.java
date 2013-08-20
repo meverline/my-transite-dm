@@ -190,4 +190,12 @@ public class RouteImpl extends TransitDateImpl implements Route {
 		return Route.COLLECTION;
 	}
 	
+	/**
+	 * 
+	 */
+	public boolean valid() 
+	{
+		return true;
+	}
+	
 }

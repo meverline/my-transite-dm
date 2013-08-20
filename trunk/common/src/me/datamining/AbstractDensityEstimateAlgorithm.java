@@ -120,7 +120,7 @@ public abstract class AbstractDensityEstimateAlgorithm implements DensityEstimat
 	 * 
 	 * @param fileName
 	 */
-	private void dumpGrid(String fileName) throws FileNotFoundException 
+	public void dumpGrid(String fileName) throws FileNotFoundException 
 	{
 		PrintStream ps = new PrintStream(new FileOutputStream(fileName));
 

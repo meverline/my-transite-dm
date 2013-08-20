@@ -219,5 +219,15 @@ public class TripImpl extends TransitDateImpl implements Trip {
 		}
 		return rtn;
 	}
+	
+	
+	public boolean valid() 
+	{
+		if ( this.getService() == null || this.getStopTimes().size() < 1 )
+		{
+			return false;
+		}
+		return true;
+	}
 
 }

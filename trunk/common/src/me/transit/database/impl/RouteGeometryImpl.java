@@ -29,4 +29,12 @@ public class RouteGeometryImpl extends TransitDateImpl implements RouteGeometry 
 		this.shape = shape;
 	}
 	
+	/**
+	 * 
+	 */
+	public boolean valid() 
+	{
+		return true;
+	}
+	
 }

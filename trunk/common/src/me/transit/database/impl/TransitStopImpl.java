@@ -14,7 +14,7 @@ public class TransitStopImpl extends TransitDateImpl implements TransitStop {
 	@XStreamAlias("code")
 	private String code = "";
 	@XStreamAlias("name")
-	private String name = "";
+	private String name = null;
 	@XStreamAlias("desc")
 	private String desc = "";
 	@XStreamAlias("location")
@@ -161,6 +161,14 @@ public class TransitStopImpl extends TransitDateImpl implements TransitStop {
 		builder.append("\n");
 		builder.append("parentStation: " + this.getParentStation());
 		return builder.toString();
+	}
+	
+	public boolean valid() 
+	{
+		if ( this.getName() == null || this.getName().length() < 0 ) {
+			return false;
+		}
+		return true;
 	}
 
 }

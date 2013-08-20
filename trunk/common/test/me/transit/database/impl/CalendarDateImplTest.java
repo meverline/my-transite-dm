@@ -11,6 +11,9 @@ import org.junit.Test;
 
 public class CalendarDateImplTest {
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testConstructor() {
 		CalendarDate cal = new CalendarDateImpl();
@@ -24,6 +27,9 @@ public class CalendarDateImplTest {
 		
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testGetsAndSets() {
 		Agency agency = new AgencyImpl("test");

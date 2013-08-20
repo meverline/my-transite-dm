@@ -6,7 +6,7 @@ import me.transit.database.TransitData;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
-public class TransitDateImpl implements TransitData {
+public abstract class TransitDateImpl implements TransitData {
 	
 	@XStreamOmitField
 	private static final long serialVersionUID = 1L;
