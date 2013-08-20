@@ -45,5 +45,11 @@ public interface TransitData extends Serializable {
 	 * @param serviceId the serviceId to set
 	 */
 	public void setId(String id);
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean valid();
 
 }

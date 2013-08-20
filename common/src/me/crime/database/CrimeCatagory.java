@@ -21,7 +21,7 @@ public class CrimeCatagory {
 	public static final long serialVersionUID = 1;
 	
 	private long id_ = 0;
-	private String crime_;
+	private String crime_ = null;
 	
 	
 	public CrimeCatagory() 

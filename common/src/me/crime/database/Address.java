@@ -126,26 +126,10 @@ public class Address implements Serializable, XmlReadable {
 		this.point_ = point_;
 	}
 
-	public String html() {
-        StringBuffer buff = new StringBuffer();
-
-        buff.append("<table>");
-		buff.append("<tr><td><b>Location</b></td><td>" + getLocation() + "<td></tr>");
-		buff.append("<tr><td><b>City</b></td><td>" + getCity() + "<td></tr>");
-		buff.append("<tr><td><b>State</b></td><td>" + getState() + "<td></tr>");
-		buff.append("<tr><td><b>Zip</b></td><td>" + getZipCode() + "<td></tr>");
-		if (getPoint() != null ) {
-		    buff.append("<tr><td><b>GPS</b></td><td>");
-			buff.append(getPoint().getX() + ", ");
-			buff.append(getPoint().getY());
-			buff.append("<i> (Service: " + getService() + ", Accuracy: ");
-			buff.append( getAccuracy() + ")</i>" );
-			buff.append("<td></tr>");
-		}
-		buff.append("</table>");
-		return buff.toString();
-	}
-
+    /**
+     * 
+     * @return
+     */
 	public String getFullAddress()
 	{
 		StringBuffer buf = new StringBuffer();
@@ -240,6 +224,7 @@ public class Address implements Serializable, XmlReadable {
 		setPoint( from.getPoint());
 		setZipCode( from.getZipCode());
 		setState( from.getState());
+		setLocation( from.getLocation());
 	}
 
 	/**

@@ -195,7 +195,12 @@ public class ServiceDateImpl extends TransitDateImpl implements ServiceDate{
 		return rtn;
 	}
 	
+	/**
+	 * 
+	 */
+	public boolean valid() 
+	{
+		return true;
+	}
 	
-	
-
 }

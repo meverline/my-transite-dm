@@ -26,10 +26,12 @@ import me.factory.DaoBeanFactory;
 public class URCCatagories implements Serializable, XmlReadable {
 
 	public static final long serialVersionUID = 1;
+	public static final String CAT_DEFAULT = "ALL OTHER OFFENSES";
+	public static final String GROUP_DEFAULT = "B";
 
 	private long id_ = 0;
-	private String catagorie_ = "ALL OTHER OFFENSES";
-	private String group = "B";
+	private String catagorie_ = URCCatagories.CAT_DEFAULT;
+	private String group = URCCatagories.GROUP_DEFAULT;
 
 	public long getId() {
 		return id_;

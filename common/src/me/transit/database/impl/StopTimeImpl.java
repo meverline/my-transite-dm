@@ -1,8 +1,5 @@
 package me.transit.database.impl;
 
-import java.io.DataInput;
-import java.io.DataOutput;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -12,18 +9,17 @@ import java.util.Map;
 import me.database.CSVFieldType;
 import me.factory.DaoBeanFactory;
 import me.transit.dao.TransiteStopDao;
-import me.transit.dao.hadoop.HadoopUtils;
 import me.transit.dao.mongo.IDocument;
 import me.transit.database.Agency;
 import me.transit.database.StopTime;
 import me.transit.database.TransitStop;
 
-import org.apache.hadoop.io.Writable;
-
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
-public class StopTimeImpl implements StopTime, Writable {
+public class StopTimeImpl implements StopTime {
+	
+	private static final String SEPERATOR = ";";
 
 	@XStreamOmitField
 	private static final long serialVersionUID = 1L;
@@ -208,6 +204,18 @@ public class StopTimeImpl implements StopTime, Writable {
 		
 		String data[] = line.split(CSVFieldType.COMMA);
 		
+		String time[] = data[0].split(StopTimeImpl.SEPERATOR);
+		this.getArrivalTime().clear();
+		for ( String ndx : time) {
+			this.addArrivalTime( Long.parseLong(ndx));
+		}
+		
+	    time = data[1].split(StopTimeImpl.SEPERATOR);
+		this.getDepartureTime().clear();
+		for ( String ndx : time) {
+			this.addDepartureTime( Long.parseLong(ndx));
+		}
+		
 		this.setStopHeadSign( data[2]);
 		this.setDropOffType( PickupType.valueOf(data[3]));
 		this.setPickupType(PickupType.valueOf(data[4]));
@@ -215,6 +223,8 @@ public class StopTimeImpl implements StopTime, Writable {
 		if ( data[5].trim().length() > 0) {
 			this.setShapeDistTravel( Double.parseDouble(data[5]));
 		}
+		this.setStopId( data[6]);
+		this.setTripId(data[7]);
 		
 		return;
 	}
@@ -226,50 +236,37 @@ public class StopTimeImpl implements StopTime, Writable {
 	public String toCSVLine() {
 		StringBuilder builder = new StringBuilder();
 	
-		builder.append( this.getArrivalTime());
+		StringBuilder tmp = new StringBuilder();
+		for ( Long l : this.getArrivalTime()) {
+			if ( tmp.length() > 0 ) { tmp.append(StopTimeImpl.SEPERATOR); }
+			tmp.append(l.longValue());
+		}
+		builder.append(tmp);
 		builder.append( CSVFieldType.COMMA );
-		builder.append( this.getDepartureTime());
+		
+		tmp = new StringBuilder();
+		for ( Long l : this.getDepartureTime()) {
+			if ( tmp.length() > 0 ) { tmp.append(StopTimeImpl.SEPERATOR); }
+			tmp.append(l .longValue());
+		}
+		builder.append(tmp);
+	
 		builder.append( CSVFieldType.COMMA);
 		builder.append( this.getStopHeadSign());
 		builder.append( CSVFieldType.COMMA);
-		builder.append( this.getDropOffType());
+		builder.append( this.getDropOffType().name());
 		builder.append( CSVFieldType.COMMA);
-		builder.append( this.getPickupType());
+		builder.append( this.getPickupType().name());
 		builder.append( CSVFieldType.COMMA);
 		builder.append( this.getShapeDistTravel());
 		builder.append( CSVFieldType.COMMA );
 		builder.append( this.getStopId());
+		builder.append( CSVFieldType.COMMA );
+		builder.append( this.getTripId());
 		
 		return builder.toString();
 	}
 	
-	/**
-	 * 
-	 */
-	@Override
-	public void readFields(DataInput in) throws IOException {
-		this.setShapeDistTravel(in.readDouble());
-		this.setDropOffType( PickupType.values()[in.readInt()]);
-		this.setPickupType( PickupType.values()[in.readInt()]);
-		this.setStopHeadSign( HadoopUtils.readString(in));
-		this.setStopId( HadoopUtils.readString(in));
-		this.setTripId( HadoopUtils.readString(in));
-	}
-
-	/**
-	 * 
-	 */
-	@Override
-	public void write(DataOutput out) throws IOException {
-		out.writeDouble(this.getShapeDistTravel());
-		out.writeInt(this.getDropOffType().ordinal());
-		out.writeInt(this.getPickupType().ordinal());
-		
-		HadoopUtils.writeString(this.getStopHeadSign(), out);
-		HadoopUtils.writeString(this.getStopId(), out);
-		HadoopUtils.writeString(this.getTripId(), out);
-	}
-
 	@Override
 	public Map<String, Object> toDocument() {
 		Map<String,Object> rtn = new HashMap<String,Object>();

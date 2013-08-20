@@ -47,7 +47,7 @@ public class Crime implements Serializable, XmlReadable {
 	private String   catagory_ = null;
 	
 	@XStreamAlias("name")
-	private String   name_ = "";
+	private String   bussiness_ = "";
 	
 	@XStreamAlias("startdate")
 	private Calendar startDate_ = null;
@@ -68,10 +68,10 @@ public class Crime implements Serializable, XmlReadable {
 	private String      crimeNumber_ = "";
 	
 	@XStreamAlias("rank")
-	private double	rank_;
+	private double	rank_ = 0.0;
 	
 	@XStreamAlias("time")
-	private double time_;
+	private double time_ = 0.0;
 	
 	protected static Log log_ = LogFactory.getLog(Crime.class);
 
@@ -153,14 +153,6 @@ public class Crime implements Serializable, XmlReadable {
 		return "";
 	}
 
-
-	public String getIcon() {
-		String [] month = { "January", "Febuary", "March", "Aprial", "May",
-							"June", "July", "August", "September", "October", "November", "December" };
-
-		return "images/" + month[ getStartDate().get(Calendar.MONTH)] + ".png";
-	}
-
 	public void setStartDate(Calendar startDate_) {
 		this.startDate_ = startDate_;
 	}
@@ -215,7 +207,7 @@ public class Crime implements Serializable, XmlReadable {
 	}
 
 	public String getBussiness() {
-		return name_;
+		return bussiness_;
 	}
 
     public void setBussiness(String name_) {
@@ -223,7 +215,7 @@ public class Crime implements Serializable, XmlReadable {
         if  ( name_.length() > 254 ) {
             bussiness = name_.substring(0, 254);
         }
-        this.name_ = bussiness;
+        this.bussiness_ = bussiness;
     }
 
     public String getFile() {
@@ -256,34 +248,6 @@ public class Crime implements Serializable, XmlReadable {
 	 */
 	public void setCatagory(String catagory_) {
 		this.catagory_ = catagory_;
-	}
-
-	public String asText(boolean showArrested) {
-		StringBuffer buf = new StringBuffer("");
-
-		buf.append("County:\t" + getCounty());
-		buf.append("\n");
-		buf.append("FBI URC:\t" + getCodes().getCatagorie());
-		buf.append("\n");
-		buf.append("Date of Crime:\t" + getStartDate().getTime().toString());
-
-		String tmp = getBussiness().toLowerCase();
-		if ( ! tmp.startsWith(getAddress().getLocation().toLowerCase()) ) {
-			buf.append("\n");
-			buf.append("Bussiness\t" + getBussiness());
-		}
-		buf.append("\n");
-		buf.append("Address:\t" + getAddress().getLocation());
-		buf.append("\n");
-		buf.append("\nDescription:\n\n");
-		String str = this.getDescription();
-		while ( str.length() > 80)  {
-			String buftmp = str.substring(0,80);
-			buf.append(buftmp + "\n");
-			str = str.substring(80);
-		}
-
-		return buf.toString();
 	}
 
 	/**

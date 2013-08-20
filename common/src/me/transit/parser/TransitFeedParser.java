@@ -408,6 +408,11 @@ public class TransitFeedParser {
 					TransiteStopDao.class.cast(DaoBeanFactory.create().getDaoBean( TransiteStopDao.class));
 			
 			TransitStop stop = TransitStop.class.cast(obj);
+			
+			if ( stop.getDesc().isEmpty() ) {
+				stop.setDesc(stop.getName());
+			}
+			stop.setName(stop.getName().toLowerCase());
 			dao.save( stop);
 		    graph.addNode( stop);
 		    
@@ -499,12 +504,19 @@ public class TransitFeedParser {
 						this.setAgency(rec);
 					}
 					
+					boolean valid = true;
 					if ( TransitData.class.isAssignableFrom(obj.getClass()) ) {
 						TransitData td = TransitData.class.cast(obj);
 						td.setAgency(this.getAgency());
+						if ( ! td.valid() ) {
+							valid = false;
+							log.error("Invalid : " + obj.getClass().getSimpleName() + " >" + line);
+						}
 					}
 					
-					save(obj);
+					if ( valid ) {
+					   save(obj);
+					}
 				
 				} catch (Exception e) {
 					log.error(e.getLocalizedMessage() + " >> " + line, e);
