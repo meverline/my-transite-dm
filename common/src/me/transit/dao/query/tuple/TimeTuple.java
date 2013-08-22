@@ -1,11 +1,16 @@
 package me.transit.dao.query.tuple;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 
+import com.mongodb.BasicDBObject;
+
 public class TimeTuple extends AbstractQueryTuple {
+	
+	public static final String SDF_DATE_FORMAT = "MMM dd yyyy";
 
 	private Calendar startTime = null;
 	private Calendar endTime = null;
@@ -53,6 +58,15 @@ public class TimeTuple extends AbstractQueryTuple {
 		} else {
 			crit.add(Restrictions.between(getField(), startTime, endTime));
 		}
+	}
+	
+	@Override
+	public void getDoucmentQuery(BasicDBObject query) {
+		SimpleDateFormat sdf = new SimpleDateFormat( TimeTuple.SDF_DATE_FORMAT);
+		
+		String start = sdf.format(startTime.getTime());
+		String end = sdf.format(endTime.getTime());
+		query.append(getField(), new BasicDBObject("$ge", start).append("$le", end) );
 	}
 
 }

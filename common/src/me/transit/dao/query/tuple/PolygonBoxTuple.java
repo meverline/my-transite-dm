@@ -22,6 +22,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.spatial.criterion.SpatialRestrictions;
 
+import com.mongodb.BasicDBObject;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.Point;
@@ -98,6 +99,28 @@ public class PolygonBoxTuple extends AbstractQueryTuple {
 			crit.add(SpatialRestrictions.within( getField(), range));
 		}
 		
+	}
+	
+	public void getDoucmentQuery(BasicDBObject query) {
+		
+		StringBuilder buf = new StringBuilder("[ ");
+		
+		for ( Point pt : this.pointLine) {
+			buf.append("[");
+			buf.append(pt.getCoordinate().x);
+			buf.append(' ');
+			buf.append(pt.getCoordinate().y);
+			buf.append(" ], ");
+		}
+		buf.append("[");
+		buf.append(this.pointLine.get(0).getCoordinate().x);
+		buf.append(' ');
+		buf.append(this.pointLine.get(0).getCoordinate().y);
+		buf.append(" ] ");
+		buf.append("]");
+		
+		BasicDBObject circle = new BasicDBObject("$polygon", buf.toString() );
+		query.append(getField(), new BasicDBObject("$geoWithin", circle));
 	}
 
 }

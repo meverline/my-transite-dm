@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import me.transit.dao.mongo.IDocument;
+import me.transit.dao.query.tuple.TimeTuple;
 import me.transit.database.ServiceDate;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
@@ -87,6 +88,11 @@ public class ServiceDateImpl extends TransitDateImpl implements ServiceDate{
 	{
 		return ((this.serviceDayFlag & day.getBit()) == day.getBit());
 	}
+	
+	public void addServiceData(ServiceDate.WeekDay day)
+	{
+		this.serviceDayFlag = this.serviceDayFlag | day.getBit();
+	}
 
 	/**
 	 * @return the sunday
@@ -136,17 +142,18 @@ public class ServiceDateImpl extends TransitDateImpl implements ServiceDate{
 	public boolean isSaturday() {
 		return hasService( ServiceDate.WeekDay.SATURDAY);
 	}
+	
 
 	@Override
 	public Map<String, Object> toDocument() {
 		Map<String,Object> rtn = new HashMap<String,Object>();
-
-		SimpleDateFormat sdf = new SimpleDateFormat("MMM dd yyyy");
+		
+		SimpleDateFormat sdf = new SimpleDateFormat( TimeTuple.SDF_DATE_FORMAT);
 		rtn.put(IDocument.CLASS, ServiceDateImpl.class.getName());
 		rtn.put(IDocument.ID, this.getUUID());
-		rtn.put("startDate", sdf.format(getStartDate().getTime()));
-		rtn.put("endDate", sdf.format(getEndDate().getTime()));
-		rtn.put("serviceDays", this.getService().name());
+		rtn.put(ServiceDate.STARTDATE, sdf.format(getStartDate().getTime()));
+		rtn.put(ServiceDate.ENDDATE, sdf.format(getEndDate().getTime()));
+		rtn.put(ServiceDate.SERVICEDAYS, this.getService().name());
 		
 		StringBuffer buffer = new StringBuffer();
 		
@@ -156,15 +163,10 @@ public class ServiceDateImpl extends TransitDateImpl implements ServiceDate{
 				buffer.append(day.name());
 			}
 		}
-		rtn.put("serviceDayFlag", buffer);
+		rtn.put(ServiceDate.SERVICEDAYFLAG, buffer);
 		return rtn;
 	}
 	
-	@Override
-	public String getCollection() {
-		return ServiceDate.COLLECTION;
-	}
-
 	@Override
 	public boolean equals(Object obj) {
 		
@@ -193,6 +195,23 @@ public class ServiceDateImpl extends TransitDateImpl implements ServiceDate{
 			}
 		}
 		return rtn;
+	}
+	
+	/**
+	 * 
+	 */
+	@Override
+	public void handleEnum(String key, Object value)
+	{
+		if ( key.equals(ServiceDate.SERVICEDAYS) ) {
+			this.setService( ServiceDate.ServiceDays.valueOf(value.toString()));
+		} else if ( key.equals( ServiceDate.SERVICEDAYFLAG ) ) {
+			
+			String [] data = value.toString().split(" ");
+			for ( String day : data) {
+				this.addServiceData( ServiceDate.WeekDay.valueOf(day.trim() ));
+			}
+		}
 	}
 	
 	/**

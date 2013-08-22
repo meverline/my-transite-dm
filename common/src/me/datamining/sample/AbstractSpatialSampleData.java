@@ -1,6 +1,7 @@
 package me.datamining.sample;
 
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +11,8 @@ import me.datamining.SpatialSamplePoint;
 import me.math.grid.SpatialGridData;
 import me.transit.dao.mongo.DocumentDao;
 import me.transit.dao.neo4j.GraphDatabaseDAO;
+import me.transit.dao.query.tuple.IQueryTuple;
+import me.transit.dao.query.tuple.StringTuple;
 import me.transit.database.Route;
 import me.transit.database.RouteStopData;
 import me.transit.database.TransitStop;
@@ -170,15 +173,29 @@ public abstract class AbstractSpatialSampleData extends SpatialGridData implemen
 		return db.findRoutes(stop);
 	}
 	
-	@SuppressWarnings("unchecked")
+	/**
+	 * 
+	 * @param route
+	 * @return
+	 */
 	public List<Trip> getTrips(Route route) {
 		
 		List<Trip> rtn = null;
 		try {
 			DocumentDao dao = DocumentDao.instance();
-			Map<String,Object> data = dao.findDocumentBy("shortName", route.getShortName());
 			
-			rtn = (List<Trip>) data.get("tripList");
+			List<String> fields = new ArrayList<String>();
+			fields.add( Route.SHORTNAME);
+			
+			List<IQueryTuple> list = new ArrayList<IQueryTuple>();
+			
+			list.add( new StringTuple(DocumentDao.toDocField(fields), 
+					                  route.getShortName(), 
+					                  StringTuple.MATCH.EXACT ));
+			
+			List<Route> data = dao.find(list);
+			
+			rtn = data.get(0).getTripList();
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

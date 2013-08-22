@@ -965,6 +965,7 @@ public class TransitFeedParser {
 						
 						if ( ! stopIds.containsKey(info.getStopId()) ) {
 							TransitStop stop = stopDao.loadById(info.getStopId(), this.getAgencyName());
+							info.setStopName(stop.getName());
 							stopIds.put(info.getStopId(), stop);
 						}
 						graphdb.createRelationShip(trip, stopIds.get(info.getStopId()));
@@ -977,9 +978,9 @@ public class TransitFeedParser {
 				
 				DocumentDao docDao = DocumentDao.instance();
 				Map<String,Object> data = route.toDocument();
-				data.put("tripList", entry.getValue());
+				data.put( Route.TRIPLIST, entry.getValue());
 				
-				docDao.add(data, route.getCollection());
+				docDao.add(data);
 
 			}
 			
@@ -1035,6 +1036,7 @@ public class TransitFeedParser {
 							newStop = true;
 							trip.getTrip().addStopTime(stopTime);
 						}
+					
 					}
 					
 					if ( indexMap.containsKey("ArrivalTime") && data[indexMap.get("ArrivalTime")] != null ) {
@@ -1048,17 +1050,7 @@ public class TransitFeedParser {
 					  }
 					} 
 					
-					if ( indexMap.containsKey("DepartureTime") &&  data[indexMap.get("DepartureTime")] != null ) {
-						String time[]  = data[indexMap.get("DepartureTime")].trim().split(":");
-						StringBuilder builder = new StringBuilder();
-						for ( String str : time ) {
-							builder.append(str);
-						}
-						if ( builder.toString().length() > 0 ) {	 
-						   stopTime.addDepartureTime(Long.parseLong(builder.toString().replace('"', ' ').trim()));	
-						}
-						stopTime.setStopId(data[indexMap.get("StopId")].replace('"', ' ').trim());
-					} 
+
 					
 					if ( ! newStop ) {
 						if ( indexMap.containsKey("DropOffType") ) {
@@ -1069,11 +1061,6 @@ public class TransitFeedParser {
 						if ( indexMap.containsKey("PickupType") ) {
 						   int ndx = Integer.parseInt(data[indexMap.get("PickupType")].replace('"', ' ').trim());
 						   stopTime.setPickupType(StopTime.PickupType.values()[ndx]);
-						} 
-						
-						if ( indexMap.containsKey("DistTravel") ) {
-							double dist = Double.parseDouble(data[indexMap.get("DistTravel")].replace('"', ' ').trim());
-							stopTime.setShapeDistTravel(dist);
 						} 
 						
 						if ( indexMap.containsKey("StopHeadSign") ) {

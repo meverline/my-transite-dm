@@ -1,9 +1,15 @@
 package me.transit.dao.mongo;
 
+import java.lang.reflect.Method;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import me.transit.dao.query.tuple.IQueryTuple;
+import me.transit.database.Route;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -12,16 +18,21 @@ import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
 import com.mongodb.Mongo;
 
 public class DocumentDao {
 	
 	public final static String COLLECTION = "schedules";
+	public final static String TRANSITEDOC = "transiteDoc";
+	public final static String LOCALHOST = "localhost";
 
 	private Log log = LogFactory.getLog(DocumentDao.class);
 	private static DocumentDao _theOne = null;
 	private static Mongo _connection = null;
 	private DB _transDoc = null;
+	private Map<String, Map<String,Method>> methodMap = new HashMap<String,Map<String,Method>>();
 	
 	/**
 	 * 
@@ -30,8 +41,8 @@ public class DocumentDao {
 	private DocumentDao() throws UnknownHostException
 	{
 		if ( _connection == null ) {
-			_connection = new Mongo("localhost");
-			_transDoc = _connection.getDB("transiteDoc");
+			_connection = new Mongo(DocumentDao.LOCALHOST);
+			_transDoc = _connection.getDB(DocumentDao.TRANSITEDOC);
 		}
 	}
 	
@@ -54,7 +65,7 @@ public class DocumentDao {
 	public void add(IDocument document)
 	{
 		if ( document != null ) {
-		    DBCollection collection = _transDoc.getCollection(document.getCollection());
+		    DBCollection collection = _transDoc.getCollection(DocumentDao.COLLECTION);
 		    collection.insert( this.toMongoObject(document));
 		}
 	}
@@ -64,24 +75,15 @@ public class DocumentDao {
 	 * @param data
 	 * @param collectName
 	 */
-	public void add(Map<String,Object> data, String collectName)
+	public void add(Map<String,Object> data)
 	{
 		if ( data != null ) {
-		    DBCollection collection = _transDoc.getCollection(collectName);
+		    DBCollection collection = _transDoc.getCollection(DocumentDao.COLLECTION);
 		    collection.insert( this.toMongoObject(data));
 		}
 	}
 	
-	/**
-	 * 
-	 * @param data
-	 * @param collectName
-	 */
-	public Map<String,Object> findDocumentBy(String field, String value)
-	{
-		// TODO:  find the doucment and return the map.
-		return null;
-	}
+
 	
 	private boolean isPrimativeType(Class<?> type ) {
 		
@@ -143,5 +145,157 @@ public class DocumentDao {
 	  	return rtn;
 	}
 	
+	/**
+	 * 
+	 * @param fieldList
+	 * @return
+	 */
+	public static String toDocField(List<String> fieldList)
+	{
+		StringBuilder queryField = new StringBuilder();
+		
+		for ( String fld : fieldList) {
+			if ( queryField.length() > 0 ) { queryField.append("."); }
+			queryField.append(fld);
+		}
+		return queryField.toString();
+	}
+	
+	/**
+	 * 
+	 * @param obj
+	 * @param field
+	 * @param value
+	 * @return
+	 */
+	private boolean setValue(Object obj, String field, Object value)
+	{
+		boolean rtn = true;
+		if ( ! methodMap.containsKey(obj.getClass().getName()) ) {
+			methodMap.put(obj.getClass().getName(), new HashMap<String, Method>());
+		}
+		
+		Map<String, Method> methods = methodMap.get(obj.getClass().getName());
+		
+		try {
+
+			Method mth = null;
+			if ( methods.containsKey(field) ) {
+			   	mth = methods.get(field);
+			} else {
+				String methodName = "set" + field.substring(0,1).toUpperCase() + field.substring(1);
+				for ( Method m : obj.getClass().getMethods() ) {
+					if ( m.getName().equals(methodName) && m.getParameterTypes().length == 1)  {
+						mth = m;
+						break;
+					}
+				}
+			   
+				if ( mth != null ) {
+					methods.put(field, mth);
+				}
+			}
+			
+			if ( mth == null ) {
+				log.warn("Unable to setField: " + field + " : " + " no set method " + obj.getClass().getName());
+				rtn = false;
+			} else {
+				
+				Class<?> type = mth.getParameterTypes()[0];
+				if ( type.isEnum() ) {
+					IDocument doc = IDocument.class.cast(obj);
+					
+					doc.handleEnum(field.trim(), value);
+				} else {
+					Object args[] = new Object[1];
+					args[0] = value;
+					
+					mth.invoke(obj, args);
+				}
+			}
+			
+		} catch (Exception e) {
+			this.log.error(e);
+			rtn = false;
+		}
+		return rtn;
+	}
+	
+	/**
+	 * 
+	 * @param item
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	private Object translateToDbObject(DBObject item)
+	{
+		Object rtn = null;
+		String className = String.class.cast(item.get(IDocument.CLASS));
+		
+		try {
+			rtn = this.getClass().getClassLoader().loadClass(className).newInstance();
+			for ( String key : item.keySet()) {
+				Object value = item.get(key);
+				
+				if ( this.isPrimativeType(value.getClass())) {
+					this.setValue(rtn, key, value);
+				} else if ( value instanceof BasicDBObject ) {
+					Object newValue = this.translateToDbObject(BasicDBObject.class.cast(value));
+					this.setValue(rtn, key, newValue);
+				} else if ( value instanceof BasicDBList) {
+					BasicDBList dbList = BasicDBList.class.cast(value);
+					@SuppressWarnings("rawtypes")
+					List aList = new ArrayList();
+					for ( Object entry : dbList) {
+						if ( this.isPrimativeType(entry.getClass())) {
+							aList.add(entry);
+						} else if ( entry instanceof BasicDBObject ) {
+							Object newValue = this.translateToDbObject(BasicDBObject.class.cast(value));
+							aList.add(newValue);
+						}
+					}
+					this.setValue(rtn, key, aList);
+				}
+				
+			}
+		} catch (Exception e) {
+			this.log.error(e);
+		} 
+		return rtn;
+	}
+	
+	/**
+	 * 
+	 * @param data
+	 * @param collectName
+	 */
+	public List<Route> find(List<IQueryTuple> tupleList)
+	{
+		DBCollection collection = _transDoc.getCollection(DocumentDao.COLLECTION);
+		BasicDBObject query = new BasicDBObject();
+		
+		for ( IQueryTuple tuple : tupleList) {
+			tuple.getDoucmentQuery(query);
+		}
+		
+		DBCursor results = collection.find(query);
+				
+		List<Route> rtn = new ArrayList<Route>( );
+		
+		System.out.println(query.toString() + " ---> " + results.count() + " " + collection.count());
+		while ( results.hasNext()) {			
+			Object obj = this.translateToDbObject(results.next());
+			if ( Route.class.isAssignableFrom(obj.getClass())) {
+				rtn.add( Route.class.cast(obj));
+			}
+		}
+		
+		return rtn;
+	}
+	
+	public long size() {
+		DBCollection collection = _transDoc.getCollection(DocumentDao.COLLECTION);
+		return collection.count();
+	}
 
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import me.transit.dao.mongo.IDocument;
+import me.transit.database.Agency;
 import me.transit.database.Route;
 import me.transit.database.Trip;
 
@@ -15,6 +16,11 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 @XStreamAlias("Route")
 public class RouteImpl extends TransitDateImpl implements Route {
+	
+	public static final String SHORTNAME = "shortName";
+	public static final String LONGNAME = "longName";
+	public static final String DESC = "dec";
+	public static final String ROUTETYPE = "routeType";
 	
 	@XStreamOmitField
 	private static final long serialVersionUID = 1L;
@@ -176,20 +182,23 @@ public class RouteImpl extends TransitDateImpl implements Route {
 		rtn.put(IDocument.CLASS, RouteImpl.class.getName());
 		rtn.put(IDocument.ID, this.getShortName() + ": " + this.getAgency().getName());
 		
-		rtn.put("agency", this.getAgency().getName());
-		rtn.put("uuid", this.getUUID());
-		rtn.put("shortName", this.getShortName());
-		rtn.put("longName", this.getLongName());
-		rtn.put("desc", this.getDesc());
-		rtn.put("routeType", this.getType().name());
+		rtn.put( Agency.AGENCY, this.getAgency().getName());
+		rtn.put( Agency.UUID, this.getUUID());
+		rtn.put( Route.SHORTNAME, this.getShortName());
+		rtn.put( Route.LONGNAME, this.getLongName());
+		rtn.put( Route.DESC, this.getDesc());
+		rtn.put( Route.ROUTETYPE, this.getType().name());
 		return rtn;
 	}
 	
 	@Override
-	public String getCollection() {
-		return Route.COLLECTION;
+	public void handleEnum(String key, Object value)
+	{
+		if ( key.equals(Route.ROUTETYPE) ) {
+			this.setType( Route.RouteType.valueOf(value.toString()));
+		}
 	}
-	
+		
 	/**
 	 * 
 	 */

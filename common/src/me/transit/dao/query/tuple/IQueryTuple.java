@@ -18,6 +18,8 @@ package me.transit.dao.query.tuple;
 
 import org.hibernate.Criteria;
 
+import com.mongodb.BasicDBObject;
+
 public interface IQueryTuple {
 	
 	public String getField();
@@ -28,5 +30,7 @@ public interface IQueryTuple {
 	 */
 	//@SuppressWarnings("unchecked")
 	public abstract void getCriterion(Criteria crit);
+	
+	public abstract void getDoucmentQuery(BasicDBObject query); 
 
 }

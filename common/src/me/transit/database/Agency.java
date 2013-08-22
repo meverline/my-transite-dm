@@ -9,7 +9,9 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 @XStreamAlias("Agency")
 public interface Agency extends Serializable, IDocument {
 
-	public final static String COLLECTION = "agency";
+	public static final String AGENCY = "agency";
+	public static final String UUID = "uuid";
+
 	/**
 	 * @return the uuid
 	 */

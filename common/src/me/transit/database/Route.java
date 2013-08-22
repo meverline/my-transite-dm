@@ -9,7 +9,12 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 @XStreamAlias("Route")
 public interface Route extends TransitData, IDocument {
 	
-	public final static String COLLECTION = "route";
+	public final static String TRIPLIST = "tripList";
+	public static final String SHORTNAME = "shortName";
+	public static final String LONGNAME = "longName";
+	public static final String DESC = "dec";
+	public static final String ROUTETYPE = "routeType";
+	
 	
 	public enum RouteType { TRAM, SUBWAY, RAIL, BUS, FERRY, CABLE_CAR, GONDOLA, FUNICULAR, UNKOWN };
 	

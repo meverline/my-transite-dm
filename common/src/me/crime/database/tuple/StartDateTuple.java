@@ -24,6 +24,8 @@ import me.transit.dao.query.tuple.AbstractQueryTuple;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 
+import com.mongodb.BasicDBObject;
+
 
 public class StartDateTuple extends AbstractQueryTuple {
 
@@ -47,6 +49,11 @@ public class StartDateTuple extends AbstractQueryTuple {
 		builder.append(getField());
 		
 		crit.add( Restrictions.ge( builder.toString(), startDate_));
+	}
+	
+	@Override
+	public void getDoucmentQuery(BasicDBObject query) {
+		throw new UnsupportedOperationException();
 	}
 
 }

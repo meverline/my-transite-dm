@@ -27,16 +27,14 @@ public class StopTimeImpl implements StopTime {
 	private String stopId = null;
 	@XStreamAlias("arrivalTime")
 	private List<Long> arrivalTime = new ArrayList<Long>();
-	@XStreamAlias("departureTime")
-	private List<Long> departureTime = new ArrayList<Long>();
 	@XStreamAlias("stopHeadSign")
 	private String stopHeadSign = "";
+	@XStreamAlias("stopName")
+	private String stopName = "";
 	@XStreamAlias("pickupType")
 	private PickupType pickupType = PickupType.UNKNOWN;
 	@XStreamAlias("dropOffType")
 	private PickupType dropOffType = PickupType.UNKNOWN;
-	@XStreamAlias("shapeDistTravel")
-	private double shapeDistTravel = -1;
 	@XStreamOmitField
 	private String tripId = null;
 	
@@ -48,7 +46,6 @@ public class StopTimeImpl implements StopTime {
 	{
 		if ( copy != null ) {
 			setArrivalTime(copy.getArrivalTime());
-			setDepartureTime(copy.getDepartureTime());
 			setDropOffType(copy.getDropOffType());
 			setPickupType(copy.getPickupType());
 			setStopHeadSign(copy.getStopHeadSign());
@@ -93,30 +90,6 @@ public class StopTimeImpl implements StopTime {
 		this.arrivalTime.add(arrivalTime);
 	}
 
-
-	/**
-	 * @return the departureTime
-	 */
-	public List<Long> getDepartureTime() {
-		return departureTime;
-	}
-
-	/**
-	 * @param departureTime the departureTime to set
-	 */
-	public void setDepartureTime(List<Long> departureTime) {
-		this.departureTime = departureTime;
-	}
-	
-	/**
-	 * 
-	 * @param departureTime
-	 */
-	public void addDepartureTime(long departureTime)
-	{
-		this.departureTime.add(departureTime);
-	}
-
 	/**
 	 * @return the stopId
 	 */
@@ -138,6 +111,21 @@ public class StopTimeImpl implements StopTime {
 	 */
 	public void setStopId(String stopId) {
 		this.stopId = stopId;
+	}
+	
+	/**
+	 * @return the stopId
+	 */
+	public String getStopName() {
+		return this.stopName;
+	}
+
+	/**
+	 * @param stopId the stopId to set
+	 */
+	public void setStopName(String name)
+	{
+		this.stopName = name;
 	}
 
 	/**
@@ -183,20 +171,6 @@ public class StopTimeImpl implements StopTime {
 	}
 
 	/**
-	 * @return the shapeDistTravel
-	 */
-	public double getShapeDistTravel() {
-		return shapeDistTravel;
-	}
-
-	/**
-	 * @param shapeDistTravel the shapeDistTravel to set
-	 */
-	public void setShapeDistTravel(double shapeDistTravel) {
-		this.shapeDistTravel = shapeDistTravel;
-	}
-
-	/**
 	 * 
 	 */
 	@Override
@@ -209,22 +183,13 @@ public class StopTimeImpl implements StopTime {
 		for ( String ndx : time) {
 			this.addArrivalTime( Long.parseLong(ndx));
 		}
-		
-	    time = data[1].split(StopTimeImpl.SEPERATOR);
-		this.getDepartureTime().clear();
-		for ( String ndx : time) {
-			this.addDepartureTime( Long.parseLong(ndx));
-		}
-		
-		this.setStopHeadSign( data[2]);
-		this.setDropOffType( PickupType.valueOf(data[3]));
-		this.setPickupType(PickupType.valueOf(data[4]));
-		
-		if ( data[5].trim().length() > 0) {
-			this.setShapeDistTravel( Double.parseDouble(data[5]));
-		}
-		this.setStopId( data[6]);
-		this.setTripId(data[7]);
+				
+		this.setStopHeadSign( data[1]);
+		this.setDropOffType( PickupType.valueOf(data[2]));
+		this.setPickupType(PickupType.valueOf(data[3]));
+		this.setStopId( data[4]);
+		this.setStopName( data[5]);
+		this.setTripId(data[6]);
 		
 		return;
 	}
@@ -243,58 +208,55 @@ public class StopTimeImpl implements StopTime {
 		}
 		builder.append(tmp);
 		builder.append( CSVFieldType.COMMA );
-		
-		tmp = new StringBuilder();
-		for ( Long l : this.getDepartureTime()) {
-			if ( tmp.length() > 0 ) { tmp.append(StopTimeImpl.SEPERATOR); }
-			tmp.append(l .longValue());
-		}
-		builder.append(tmp);
-	
-		builder.append( CSVFieldType.COMMA);
 		builder.append( this.getStopHeadSign());
 		builder.append( CSVFieldType.COMMA);
 		builder.append( this.getDropOffType().name());
 		builder.append( CSVFieldType.COMMA);
 		builder.append( this.getPickupType().name());
-		builder.append( CSVFieldType.COMMA);
-		builder.append( this.getShapeDistTravel());
 		builder.append( CSVFieldType.COMMA );
 		builder.append( this.getStopId());
+		builder.append( CSVFieldType.COMMA );
+		builder.append( this.getStopName());
 		builder.append( CSVFieldType.COMMA );
 		builder.append( this.getTripId());
 		
 		return builder.toString();
 	}
-	
+		
 	@Override
 	public Map<String, Object> toDocument() {
 		Map<String,Object> rtn = new HashMap<String,Object>();
 
 		rtn.put(IDocument.CLASS, StopTimeImpl.class);
 		if ( this.getStopId() != null ) {
-			rtn.put("stopId", this.getStopId());
+			rtn.put( StopTime.STOPID, this.getStopId());
+		}
+		if ( this.getStopName() != null ) {
+			rtn.put( StopTime.STOPNAME, this.getStopName());
 		}
 		if ( this.getStopHeadSign() != null ) {
-			rtn.put("headSign", this.getStopHeadSign());
+			rtn.put( StopTime.HEADSIGN, this.getStopHeadSign());
 		}
-		
-		if ( this.getShapeDistTravel() != -1 ) {
-			rtn.put("shapeDistTravel", this.getShapeDistTravel());
-		}
-		
-		Collections.sort(this.getDepartureTime());
-		rtn.put("departureTime", this.getDepartureTime());
+				
 		Collections.sort(this.getArrivalTime());
-		rtn.put("arrivalTime", this.getArrivalTime());
-		rtn.put("dropOffType", this.getDropOffType().name());
-		rtn.put("pickupType", this.getPickupType().name());
+		rtn.put( StopTime.ARRIVALTIME, this.getArrivalTime());
+		rtn.put( StopTime.DROPOFFTYPE, this.getDropOffType().name());
+		rtn.put( StopTime.PICKUPTYPE, this.getPickupType().name());
 		return rtn;
 	}
 	
+	/**
+	 * 
+	 */
 	@Override
-	public String getCollection() {
-		return StopTime.COLLECTION;
+	public void handleEnum(String key, Object value)
+	{
+		if ( key.equals(StopTime.PICKUPTYPE) ) {
+			this.setPickupType( StopTime.PickupType.valueOf(value.toString()));
+		} else 	if ( key.equals(StopTime.DROPOFFTYPE) ) {
+			this.setDropOffType( StopTime.PickupType.valueOf(value.toString()));
+		}
 	}
-	
+
+		
 }

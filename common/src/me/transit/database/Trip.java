@@ -9,7 +9,12 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 @XStreamAlias("Trip")
 public interface Trip extends TransitData, IDocument {
 
-	public final static String COLLECTION = "trip";
+	public static final String TRIPID = "tripId";
+	public static final String SERVICE = "service";
+	public static final String HEADSIGN = "headSign";
+	public static final String SHORTNAME = "shortName";
+	public static final String DIRECTIONID = "directionId";
+	public static final String STOPTIMES = "stopTimes";
 
 	public enum DirectionType { OUT_BOUND, IN_BOUND, UNKOWN };
 	

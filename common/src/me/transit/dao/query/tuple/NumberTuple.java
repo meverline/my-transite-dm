@@ -3,6 +3,8 @@ package me.transit.dao.query.tuple;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 
+import com.mongodb.BasicDBObject;
+
 public class NumberTuple extends AbstractQueryTuple {
 	
 	public enum LOGIC { 
@@ -10,54 +12,96 @@ public class NumberTuple extends AbstractQueryTuple {
 			public void restriction(Criteria crit, Number value, String field) {
 				crit.add( Restrictions.eq(field, value));
 			}
+			
+			public void docuument(BasicDBObject query,Number value, String field) {
+				query.append(field, new BasicDBObject("$eq", value.toString()));
+			}
+
 		},
 		NEQ {
 			public void restriction(Criteria crit, Number value, String field) {
 				crit.add( Restrictions.not(Restrictions.eq(field, value)));
+			}
+			
+			public void docuument(BasicDBObject query,Number value, String field) {
+				query.append(field, new BasicDBObject("$ne", value.toString()));
 			}
 		},
 		GT{
 			public void restriction(Criteria crit, Number value, String field) {
 				crit.add( Restrictions.gt(field, value));
 			}
+			
+			public void docuument(BasicDBObject query, Number value, String field) {
+				query.append(field, new BasicDBObject("$gt", value.toString()));
+			}
 		},
 		GEQ{
 			public void restriction(Criteria crit, Number value, String field) {
 				crit.add( Restrictions.ge(field, value));
+			}
+			
+			public void docuument(BasicDBObject query, Number value, String field) {
+				query.append(field, new BasicDBObject("$ge", value.toString()));
 			}
 		},
 		NGT{
 			public void restriction(Criteria crit, Number value, String field) {
 				crit.add( Restrictions.not(Restrictions.gt(field, value)));
 			}
+			
+			public void docuument(BasicDBObject query, Number value, String field) {
+				query.append(field, new BasicDBObject("$not", new BasicDBObject("$ge", value.toString())));
+			}
 		},
 		NGEQ{
 			public void restriction(Criteria crit, Number value, String field) {
 				crit.add( Restrictions.not(Restrictions.gt(field, value)));
+			}
+			
+			public void docuument(BasicDBObject query, Number value, String field) {
+				query.append(field, new BasicDBObject("$not", new BasicDBObject("$ge", value.toString())));
 			}
 		},
 		LT{
 			public void restriction(Criteria crit, Number value, String field) {
 				crit.add( Restrictions.lt(field, value));
 			}
+			
+			public void docuument(BasicDBObject query, Number value, String field) {
+				query.append(field, new BasicDBObject("$lt", value.toString()));
+			}
 		},
 		LEQ{
 			public void restriction(Criteria crit, Number value, String field) {
 				crit.add( Restrictions.le(field, value));
+			}
+			
+			public void docuument(BasicDBObject query, Number value, String field) {
+				query.append(field, new BasicDBObject("$le", value.toString()));
 			}
 		},
 		NLT{
 			public void restriction(Criteria crit, Number value, String field) {
 				crit.add( Restrictions.not(Restrictions.lt(field, value)));
 			}
+			
+			public void docuument(BasicDBObject query, Number value, String field) {
+				query.append(field, new BasicDBObject("$not", new BasicDBObject("$lt", value.toString())));
+			}
 		},
 		NLEQ{
 			public void restriction(Criteria crit, Number value, String field) {
 				crit.add( Restrictions.not(Restrictions.le(field, value)));
 			}
+			
+			public void docuument(BasicDBObject query,Number value, String field) {
+				query.append(field, new BasicDBObject("$not", new BasicDBObject("$le", value.toString())));
+			}
 		};
 		
 		public abstract void restriction(Criteria crit, Number value, String field);
+		public abstract void docuument(BasicDBObject query, Number value, String field);
 		
 	}
 	
@@ -177,8 +221,15 @@ public class NumberTuple extends AbstractQueryTuple {
 				crit.add(Restrictions.between(getField(), getHi(), getLo()));
 			}
 		}
+	}
+	
+	public void getDoucmentQuery(BasicDBObject query) {
 		
-
+		if ( getLo() == null ) {
+			getLogic().docuument(query, hi, getField());
+		} else {
+			throw new java.lang.IllegalArgumentException("Between operator not supported");
+		}
 	}
 
 }
