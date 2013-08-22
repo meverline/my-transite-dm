@@ -10,6 +10,9 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 public class AgencyImpl implements Agency {
+	
+	public static final String AGENCY = "agency";
+	public static final String UUID = "uuid";
 
 	/**
 	 * 
@@ -173,11 +176,6 @@ public class AgencyImpl implements Agency {
 	}
 	
 	@Override
-	public String getCollection() {
-		return Agency.COLLECTION;
-	}
-	
-	@Override
 	public boolean equals(Object obj) {
 		
 		boolean rtn = false;
@@ -195,6 +193,11 @@ public class AgencyImpl implements Agency {
 			}	
 		}
 		return rtn;
+	}
+	
+	@Override
+	public void handleEnum(String key, Object value)
+	{
 	}
 
 }

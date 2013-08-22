@@ -28,7 +28,6 @@ public class TripImpl extends TransitDateImpl implements Trip {
 	private String shortName = "";
 	@XStreamAlias("directionId")
 	private DirectionType directionId = DirectionType.UNKOWN;
-	
 	@XStreamAlias("shapeId")
 	@XStreamConverter(me.database.ShapeConverter.class)
 	private RouteGeometry shape = null;
@@ -162,6 +161,7 @@ public class TripImpl extends TransitDateImpl implements Trip {
 		builder.append("stopsTimes size: " + this.getStopTimes().size());
 		return builder.toString();
 	}
+	
 
 	/**
 	 * 
@@ -172,24 +172,27 @@ public class TripImpl extends TransitDateImpl implements Trip {
 
 		rtn.put(IDocument.CLASS, TripImpl.class.getName());
 		rtn.put(IDocument.ID, this.getUUID());
-		rtn.put("tripId", this.getId());
+		rtn.put( Trip.TRIPID, this.getId());
 		if ( this.getService() != null ) {
-		    rtn.put("service", this.getService());
+		    rtn.put( Trip.SERVICE, this.getService());
 		}
 		if ( this.getHeadSign() != null ) {
-			rtn.put("headSign", this.getHeadSign());
+			rtn.put( Trip.HEADSIGN, this.getHeadSign());
 		}
 		if ( this.getShortName() != null ) {
-			rtn.put("shortName", this.getShortName());
+			rtn.put( Trip.SHORTNAME, this.getShortName());
 		}
-		rtn.put("directionId", this.getDirectionId().name());
-		rtn.put("stopTimes", this.getStopTimes());
+		rtn.put( Trip.DIRECTIONID, this.getDirectionId().name());
+		rtn.put( Trip.STOPTIMES, this.getStopTimes());
 		return rtn;
 	}
 	
 	@Override
-	public String getCollection() {
-		return Trip.COLLECTION;
+	public void handleEnum(String key, Object value)
+	{
+		if ( key.equals( Trip.DIRECTIONID ) ) {
+			this.setDirectionId( Trip.DirectionType.valueOf(value.toString()));
+		}
 	}
 	
 	@Override

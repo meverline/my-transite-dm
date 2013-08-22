@@ -24,6 +24,8 @@ import me.transit.dao.query.tuple.AbstractQueryTuple;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 
+import com.mongodb.BasicDBObject;
+
 public class EndDateTuple extends AbstractQueryTuple {
 
 	private Calendar endDate_ = null;
@@ -48,4 +50,8 @@ public class EndDateTuple extends AbstractQueryTuple {
 		crit.add( Restrictions.le( builder.toString(), endDate_));
 	}
 
+	@Override
+	public void getDoucmentQuery(BasicDBObject query) {
+		throw new UnsupportedOperationException();
+	}
 }

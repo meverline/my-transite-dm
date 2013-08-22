@@ -27,6 +27,7 @@ import org.hibernate.Criteria;
 import org.hibernate.spatial.Circle;
 import org.hibernate.spatial.criterion.SpatialRestrictions;
 
+import com.mongodb.BasicDBObject;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.Point;
@@ -137,6 +138,22 @@ public class CircleTuple extends AbstractQueryTuple {
 		}
 		
 	}
+	
+	public void getDoucmentQuery(BasicDBObject query) {
+		
+		StringBuilder buf = new StringBuilder("[ [");
+		buf.append(this.center_.getCoordinate().x);
+		buf.append(' ');
+		buf.append(this.center_.getCoordinate().y);
+		buf.append(" ], ");
+		buf.append(this.distanceInMeters_ );
+		buf.append("]");
+		
+		
+		BasicDBObject circle = new BasicDBObject("$circle", buf.toString() );		
+		query.append(getField(), new BasicDBObject("$geoWithin", circle));
+	}
+
 
 }
 

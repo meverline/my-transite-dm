@@ -16,7 +16,10 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 @XStreamAlias("ServiceDate")
 public interface ServiceDate extends TransitData, IDocument {
 	
-	public final static String COLLECTION = "serviceDate";
+	public static final String STARTDATE = "startDate";
+	public static final String ENDDATE = "endDate";
+	public static final String SERVICEDAYS = "serviceDays";
+	public static final String SERVICEDAYFLAG = "serviceDayFlag";
 	
 	public enum ServiceDays { ALL_WEEK, 
 							  WEEKDAY_SERVICE,

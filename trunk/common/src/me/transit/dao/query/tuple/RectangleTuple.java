@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.spatial.criterion.SpatialRestrictions;
 
+import com.mongodb.BasicDBObject;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.Point;
@@ -96,6 +97,28 @@ public class RectangleTuple extends AbstractQueryTuple {
 			crit.add(SpatialRestrictions.filter( getField(), range));
 			crit.add(SpatialRestrictions.within( getField(), range));
 		}
+		
+	}
+	
+	public void getDoucmentQuery(BasicDBObject query) {
+		
+		StringBuilder buf = new StringBuilder("[ ");
+		
+		buf.append("[");
+		buf.append(ul.getCoordinate().x);
+		buf.append(' ');
+		buf.append(lr.getCoordinate().y);
+		buf.append(" ], ");
+		
+		buf.append("[");
+		buf.append(lr.getCoordinate().x);
+		buf.append(' ');
+		buf.append(ul.getCoordinate().y);
+		buf.append(" ] ");
+		buf.append("]");
+		
+		BasicDBObject circle = new BasicDBObject("$box", buf.toString() );
+		query.append(getField(), new BasicDBObject("$geoWithin", circle));
 		
 	}
 	

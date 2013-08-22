@@ -24,6 +24,8 @@ import me.transit.dao.query.tuple.AbstractQueryTuple;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 
+import com.mongodb.BasicDBObject;
+
 public class CatagoryTuple extends AbstractQueryTuple {
 
 	private List<String> catagorys_ = null;
@@ -50,6 +52,11 @@ public class CatagoryTuple extends AbstractQueryTuple {
 		
 		crit.createAlias(name, name);
 		crit.add(Restrictions.in( builder.toString(), rest));
+	}
+	
+	@Override
+	public void getDoucmentQuery(BasicDBObject query) {
+		throw new UnsupportedOperationException();
 	}
 
 }

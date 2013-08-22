@@ -13,10 +13,6 @@ public interface IDocument {
 	 */
 	public Map<String,Object> toDocument();
 	
-	/**
-	 * 
-	 * @return
-	 */
-	public String getCollection();
+	public void handleEnum(String key, Object value);
 	
 }

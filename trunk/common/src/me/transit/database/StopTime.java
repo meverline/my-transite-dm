@@ -10,7 +10,12 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 @XStreamAlias("StopTime")
 public interface StopTime extends CSVFieldType, IDocument {
 	
-	public final static String COLLECTION = "stopTime";
+	public static final String STOPID = "stopId";
+	public static final String STOPNAME = "stopName";
+	public static final String HEADSIGN = "headSign";
+	public static final String ARRIVALTIME = "arrivalTime";
+	public static final String DROPOFFTYPE = "dropOffType";
+	public static final String PICKUPTYPE = "pickupType";
 
 	public enum PickupType { REGULAR, NOPICKUP, PHONE, COORDINATE, UNKNOWN };
 	
@@ -41,22 +46,6 @@ public interface StopTime extends CSVFieldType, IDocument {
 	public void addArrivalTime(long arrivalTime);
 
 	/**
-	 * @return the departureTime
-	 */
-	public List<Long> getDepartureTime() ;
-
-	/**
-	 * @param departureTime the departureTime to set
-	 */
-	public void setDepartureTime(List<Long> departureTime);
-	
-	/**
-	 * 
-	 * @param departureTime
-	 */
-	public void addDepartureTime(long departureTime);
-
-	/**
 	 * @return the stopId
 	 */
 	public TransitStop getStop(Agency agency);
@@ -70,6 +59,17 @@ public interface StopTime extends CSVFieldType, IDocument {
 	 * @param stopId the stopId to set
 	 */
 	public void setStopId(String stopId);
+	
+	/**
+	 * @return the stopId
+	 */
+	public String getStopName();
+
+	/**
+	 * @param stopId the stopId to set
+	 */
+	public void setStopName(String name);
+
 
 	/**
 	 * @return the stopHeadSign
@@ -100,15 +100,5 @@ public interface StopTime extends CSVFieldType, IDocument {
 	 * @param dropOffType the dropOffType to set
 	 */
 	public void setDropOffType(PickupType dropOffType);
-
-	/**
-	 * @return the shapeDistTravel
-	 */
-	public double getShapeDistTravel();
-
-	/**
-	 * @param shapeDistTravel the shapeDistTravel to set
-	 */
-	public void setShapeDistTravel(double shapeDistTravel);
 
 }

@@ -195,6 +195,16 @@ public class GraphDatabaseDAO {
 		return;
 	}
 	
+	private String getInterface(Object obj)
+	{
+		String className = obj.getClass().getSimpleName();
+		int ndx = className.indexOf("Impl");
+		if ( ndx != -1 ) {
+			return className.substring(0, ndx);
+		}
+		return className;
+	}
+	
 	/**
 	 * 
 	 * @param agency
@@ -204,7 +214,7 @@ public class GraphDatabaseDAO {
 		Node node = graphDb.createNode();
         node.setProperty(FIELD.agency.name(), agency.getName());
         node.setProperty(FIELD.db_id.name(), agency.getId());
-        node.setProperty(FIELD.className.name(), agency.getClass().getSimpleName());
+        node.setProperty(FIELD.className.name(), this.getInterface(agency));
         return node;
 	}
 	
@@ -253,7 +263,7 @@ public class GraphDatabaseDAO {
 				node.setProperty( FIELD.stop.name(), FIELD.stop.makeKey(stop));
 		        node.setProperty( FIELD.db_name.name(), stop.getName());
 		        node.setProperty( FIELD.db_id.name(), stop.getId());
-		        node.setProperty(FIELD.className.name(),stop.getClass().getSimpleName());
+		        node.setProperty(FIELD.className.name(), this.getInterface(stop));
 		        
 		        if ( coord == null ) {
 					coord = graphDb.createNode();
@@ -264,7 +274,7 @@ public class GraphDatabaseDAO {
 				}
 		        
 		        Relationship relationship = node.createRelationshipTo( coord, REL_TYPES.LOCATION );
-		        relationship.setProperty(FIELD.className.name(), stop.getLocation().getClass().getSimpleName());
+		        relationship.setProperty(FIELD.className.name(), this.getInterface(stop.getLocation()));
 		        
 		        createRelationShip(node, stop.getAgency());
 		        tx.success();
@@ -296,7 +306,7 @@ public class GraphDatabaseDAO {
 				node.setProperty(FIELD.route.name(), FIELD.route.makeKey(route));
 				node.setProperty(FIELD.db_name.name(), route.getShortName());
 				node.setProperty(FIELD.db_id.name(), route.getId());
-				node.setProperty(FIELD.className.name(), route.getClass().getSimpleName());
+				node.setProperty(FIELD.className.name(), this.getInterface(route));
 				
 				createRelationShip(node, route.getAgency());
 				tx.success();
@@ -326,7 +336,7 @@ public class GraphDatabaseDAO {
 				node = graphDb.createNode();
 				node.setProperty(FIELD.trip.name(), FIELD.trip.makeKey(trip));
 				node.setProperty(FIELD.db_name.name(), trip.getHeadSign());
-				node.setProperty(FIELD.className.name(), trip.getClass().getSimpleName());
+				node.setProperty(FIELD.className.name(), this.getInterface(trip));
 				
 				if (trip.getShortName() != null) {
 					node.setProperty(FIELD.db_id.name(), trip.getShortName());
@@ -366,7 +376,7 @@ public class GraphDatabaseDAO {
 		Transaction tx = beginTransaction();
 		try {
 			Relationship relationship = from.createRelationshipTo(to,REL_TYPES.HAS_A);
-			relationship.setProperty(FIELD.className.name(), fromTrip.getClass().getSimpleName());
+			relationship.setProperty(FIELD.className.name(), this.getInterface(fromTrip));
 			tx.success();
 		} catch (Exception ex) {
 			tx.failure();
@@ -400,7 +410,7 @@ public class GraphDatabaseDAO {
 		Transaction tx = beginTransaction();
 		try {
 		   Relationship relationship = from.createRelationshipTo( to, REL_TYPES.HAS_STOP );
-		   relationship.setProperty( FIELD.className.name(), fromRoute.getClass().getSimpleName());
+		   relationship.setProperty( FIELD.className.name(), this.getInterface(fromRoute));
 		   tx.success();
 		} catch (Exception ex) {
 			tx.failure();
@@ -434,7 +444,7 @@ public class GraphDatabaseDAO {
 		Transaction tx = beginTransaction();
 		try {
 		   Relationship relationship = from.createRelationshipTo( to, REL_TYPES.HAS_A );
-		   relationship.setProperty( FIELD.className.name(), fromRoute.getClass().getSimpleName());
+		   relationship.setProperty( FIELD.className.name(), this.getInterface(fromRoute));
 		   tx.success();
 		} catch (Exception ex) {
 			tx.failure();
@@ -492,6 +502,8 @@ public class GraphDatabaseDAO {
 				
 				String className = node.getProperty(FIELD.className.name()).toString();
 				String name = node.getProperty(FIELD.db_name.name()).toString();
+				
+				System.out.println(className + " " + name + " path: " + path.toString());
 				
 				if ( className.equals(Route.class.getSimpleName()) ) {
 					
