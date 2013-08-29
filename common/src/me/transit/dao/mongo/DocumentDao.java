@@ -4,12 +4,17 @@ import java.lang.reflect.Method;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import me.transit.dao.query.tuple.IQueryTuple;
+import me.transit.database.Agency;
 import me.transit.database.Route;
+import me.transit.database.StopTime;
+import me.transit.database.impl.AgencyImpl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -19,7 +24,6 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
 import com.mongodb.Mongo;
 
 public class DocumentDao {
@@ -33,6 +37,7 @@ public class DocumentDao {
 	private static Mongo _connection = null;
 	private DB _transDoc = null;
 	private Map<String, Map<String,Method>> methodMap = new HashMap<String,Map<String,Method>>();
+	private Set<String> undefined = new HashSet<String>();
 	
 	/**
 	 * 
@@ -123,6 +128,8 @@ public class DocumentDao {
 			} else {
 				if (this.isPrimativeType(entry.getValue().getClass())) {
 					rtn.append(entry.getKey(), entry.getValue());
+				} else if ( entry.getValue().getClass().isArray() ) {
+					rtn.append(entry.getKey(), entry.getValue());
 				} else if (List.class.isAssignableFrom(entry.getValue().getClass())) {
 					List<?> list = List.class.cast(entry.getValue());
 
@@ -161,6 +168,18 @@ public class DocumentDao {
 		return queryField.toString();
 	}
 	
+	private boolean skipField(String field) {
+		
+		String [] data = { "_id", "@class", StopTime.LOCATION };
+		
+		for ( String item : data ) {
+			if ( field.equals(item) ) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	/**
 	 * 
 	 * @param obj
@@ -170,20 +189,23 @@ public class DocumentDao {
 	 */
 	private boolean setValue(Object obj, String field, Object value)
 	{
+		String fieldName = field;
+		if ( field.equals("uuid") ) {
+			fieldName = field.toUpperCase();
+		}
 		boolean rtn = true;
 		if ( ! methodMap.containsKey(obj.getClass().getName()) ) {
 			methodMap.put(obj.getClass().getName(), new HashMap<String, Method>());
 		}
 		
 		Map<String, Method> methods = methodMap.get(obj.getClass().getName());
-		
+		Method mth = null;
 		try {
 
-			Method mth = null;
-			if ( methods.containsKey(field) ) {
-			   	mth = methods.get(field);
+			if ( methods.containsKey(fieldName) ) {
+			   	mth = methods.get(fieldName);
 			} else {
-				String methodName = "set" + field.substring(0,1).toUpperCase() + field.substring(1);
+				String methodName = "set" + fieldName.substring(0,1).toUpperCase() + fieldName.substring(1);
 				for ( Method m : obj.getClass().getMethods() ) {
 					if ( m.getName().equals(methodName) && m.getParameterTypes().length == 1)  {
 						mth = m;
@@ -192,12 +214,15 @@ public class DocumentDao {
 				}
 			   
 				if ( mth != null ) {
-					methods.put(field, mth);
+					methods.put(fieldName, mth);
 				}
 			}
 			
 			if ( mth == null ) {
-				log.warn("Unable to setField: " + field + " : " + " no set method " + obj.getClass().getName());
+				if ( ! undefined.contains(field) ) {
+				  undefined.add(field);
+				  log.warn("Unable to setField: " + field + " : " + " no set method " + obj.getClass().getName() + " " + value.toString());
+				}
 				rtn = false;
 			} else {
 				
@@ -205,7 +230,7 @@ public class DocumentDao {
 				if ( type.isEnum() ) {
 					IDocument doc = IDocument.class.cast(obj);
 					
-					doc.handleEnum(field.trim(), value);
+					doc.handleEnum(fieldName.trim(), value);
 				} else {
 					Object args[] = new Object[1];
 					args[0] = value;
@@ -215,7 +240,8 @@ public class DocumentDao {
 			}
 			
 		} catch (Exception e) {
-			this.log.error(e);
+			e.printStackTrace();
+			this.log.error( mth.getName() + " "+ obj.getClass().getName() + " " + e);
 			rtn = false;
 		}
 		return rtn;
@@ -227,7 +253,7 @@ public class DocumentDao {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	private Object translateToDbObject(DBObject item)
+	private Object translateToDbObject(Map<String, Object> item)
 	{
 		Object rtn = null;
 		String className = String.class.cast(item.get(IDocument.CLASS));
@@ -237,29 +263,36 @@ public class DocumentDao {
 			for ( String key : item.keySet()) {
 				Object value = item.get(key);
 				
-				if ( this.isPrimativeType(value.getClass())) {
-					this.setValue(rtn, key, value);
-				} else if ( value instanceof BasicDBObject ) {
-					Object newValue = this.translateToDbObject(BasicDBObject.class.cast(value));
-					this.setValue(rtn, key, newValue);
-				} else if ( value instanceof BasicDBList) {
-					BasicDBList dbList = BasicDBList.class.cast(value);
-					@SuppressWarnings("rawtypes")
-					List aList = new ArrayList();
-					for ( Object entry : dbList) {
-						if ( this.isPrimativeType(entry.getClass())) {
-							aList.add(entry);
-						} else if ( entry instanceof BasicDBObject ) {
-							Object newValue = this.translateToDbObject(BasicDBObject.class.cast(value));
-							aList.add(newValue);
+				if ( ! this.skipField(key) ) {
+					if ( this.isPrimativeType(value.getClass())) {
+						Object setValue = value;
+						if ( key.equals(Agency.AGENCY) ) {
+						   	setValue = new AgencyImpl(value.toString());
+						} 
+						this.setValue(rtn, key, setValue);
+					} else if ( value instanceof BasicDBObject ) {
+						Object newValue = this.translateToDbObject(BasicDBObject.class.cast(value));
+						this.setValue(rtn, key, newValue);
+					} else if ( value instanceof BasicDBList) {
+						BasicDBList dbList = BasicDBList.class.cast(value);
+						@SuppressWarnings("rawtypes")
+						List aList = new ArrayList();
+						for ( Object entry : dbList) {
+							if ( this.isPrimativeType(entry.getClass())) {
+								aList.add(entry);
+							} else if ( entry instanceof BasicDBObject ) {
+								Object newValue = this.translateToDbObject(BasicDBObject.class.cast(entry));
+								aList.add(newValue);
+							}
 						}
+						this.setValue(rtn, key, aList);
 					}
-					this.setValue(rtn, key, aList);
 				}
 				
 			}
 		} catch (Exception e) {
-			this.log.error(e);
+			e.printStackTrace();
+			this.log.error(className + " " + e + " " + e.getLocalizedMessage());
 		} 
 		return rtn;
 	}
@@ -283,13 +316,15 @@ public class DocumentDao {
 		List<Route> rtn = new ArrayList<Route>( );
 		
 		System.out.println(query.toString() + " ---> " + results.count() + " " + collection.count());
+		
 		while ( results.hasNext()) {			
-			Object obj = this.translateToDbObject(results.next());
+			@SuppressWarnings("unchecked")
+			Object obj = this.translateToDbObject((Map<String,Object>)results.next().toMap());
 			if ( Route.class.isAssignableFrom(obj.getClass())) {
 				rtn.add( Route.class.cast(obj));
 			}
 		}
-		
+		results.close();
 		return rtn;
 	}
 	

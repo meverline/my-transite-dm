@@ -1,12 +1,10 @@
 package me.transit.database.impl;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 import me.transit.dao.mongo.IDocument;
-import me.transit.dao.query.tuple.TimeTuple;
 import me.transit.database.ServiceDate;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
@@ -148,12 +146,11 @@ public class ServiceDateImpl extends TransitDateImpl implements ServiceDate{
 	public Map<String, Object> toDocument() {
 		Map<String,Object> rtn = new HashMap<String,Object>();
 		
-		SimpleDateFormat sdf = new SimpleDateFormat( TimeTuple.SDF_DATE_FORMAT);
 		rtn.put(IDocument.CLASS, ServiceDateImpl.class.getName());
 		rtn.put(IDocument.ID, this.getUUID());
-		rtn.put(ServiceDate.STARTDATE, sdf.format(getStartDate().getTime()));
-		rtn.put(ServiceDate.ENDDATE, sdf.format(getEndDate().getTime()));
-		rtn.put(ServiceDate.SERVICEDAYS, this.getService().name());
+		rtn.put(ServiceDate.STARTDATE, getStartDate().getTime());
+		rtn.put(ServiceDate.ENDDATE, getEndDate().getTime());
+		rtn.put(ServiceDate.SERVICE, this.getService().name());
 		
 		StringBuffer buffer = new StringBuffer();
 		
@@ -203,7 +200,7 @@ public class ServiceDateImpl extends TransitDateImpl implements ServiceDate{
 	@Override
 	public void handleEnum(String key, Object value)
 	{
-		if ( key.equals(ServiceDate.SERVICEDAYS) ) {
+		if ( key.equals(ServiceDate.SERVICE) ) {
 			this.setService( ServiceDate.ServiceDays.valueOf(value.toString()));
 		} else if ( key.equals( ServiceDate.SERVICEDAYFLAG ) ) {
 			

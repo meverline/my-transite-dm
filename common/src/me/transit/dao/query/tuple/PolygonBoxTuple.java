@@ -102,25 +102,21 @@ public class PolygonBoxTuple extends AbstractQueryTuple {
 	}
 	
 	public void getDoucmentQuery(BasicDBObject query) {
-		
-		StringBuilder buf = new StringBuilder("[ ");
+				
+		List<Double[]> list = new ArrayList<Double[]>();
 		
 		for ( Point pt : this.pointLine) {
-			buf.append("[");
-			buf.append(pt.getCoordinate().x);
-			buf.append(' ');
-			buf.append(pt.getCoordinate().y);
-			buf.append(" ], ");
+			Double [] data = new Double[2];
+			data[0] = pt.getCoordinate().x;
+			data[1] = pt.getCoordinate().y;
+			list.add(data);
 		}
-		buf.append("[");
-		buf.append(this.pointLine.get(0).getCoordinate().x);
-		buf.append(' ');
-		buf.append(this.pointLine.get(0).getCoordinate().y);
-		buf.append(" ] ");
-		buf.append("]");
 		
-		BasicDBObject circle = new BasicDBObject("$polygon", buf.toString() );
-		query.append(getField(), new BasicDBObject("$geoWithin", circle));
+		Double [] data = new Double[2];
+		data[0] = this.pointLine.get(0).getCoordinate().x;
+		data[1] = this.pointLine.get(0).getCoordinate().y;
+		
+		query.put(getField(), new BasicDBObject("$geoWithin", list));
 	}
 
 }

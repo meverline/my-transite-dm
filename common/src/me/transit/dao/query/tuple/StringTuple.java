@@ -110,6 +110,6 @@ public class StringTuple extends AbstractQueryTuple {
 	
 	@Override
 	public void getDoucmentQuery(BasicDBObject query) {
-		query.append(getField(), Pattern.compile(matchType.docuument(value)) );
+		query.put(getField(), Pattern.compile(matchType.docuument(value), Pattern.CASE_INSENSITIVE) );
 	}
 }

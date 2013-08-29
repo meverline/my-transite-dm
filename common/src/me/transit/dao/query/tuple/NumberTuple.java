@@ -4,6 +4,7 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 
 import com.mongodb.BasicDBObject;
+import com.mongodb.QueryOperators;
 
 public class NumberTuple extends AbstractQueryTuple {
 	
@@ -13,8 +14,8 @@ public class NumberTuple extends AbstractQueryTuple {
 				crit.add( Restrictions.eq(field, value));
 			}
 			
-			public void docuument(BasicDBObject query,Number value, String field) {
-				query.append(field, new BasicDBObject("$eq", value.toString()));
+			public void docuument(BasicDBObject query, Number value, String field) {
+				query.put(field, value);
 			}
 
 		},
@@ -23,8 +24,8 @@ public class NumberTuple extends AbstractQueryTuple {
 				crit.add( Restrictions.not(Restrictions.eq(field, value)));
 			}
 			
-			public void docuument(BasicDBObject query,Number value, String field) {
-				query.append(field, new BasicDBObject("$ne", value.toString()));
+			public void docuument(BasicDBObject query, Number value, String field) {
+				query.put(field, new BasicDBObject( QueryOperators.NE, value));
 			}
 		},
 		GT{
@@ -32,8 +33,8 @@ public class NumberTuple extends AbstractQueryTuple {
 				crit.add( Restrictions.gt(field, value));
 			}
 			
-			public void docuument(BasicDBObject query, Number value, String field) {
-				query.append(field, new BasicDBObject("$gt", value.toString()));
+			public void docuument(BasicDBObject query,  Number value, String field) {
+				query.put(field, new BasicDBObject( QueryOperators.GT, value));
 			}
 		},
 		GEQ{
@@ -41,8 +42,8 @@ public class NumberTuple extends AbstractQueryTuple {
 				crit.add( Restrictions.ge(field, value));
 			}
 			
-			public void docuument(BasicDBObject query, Number value, String field) {
-				query.append(field, new BasicDBObject("$ge", value.toString()));
+			public void docuument(BasicDBObject query,  Number value, String field) {
+				query.put(field, new BasicDBObject( QueryOperators.GTE, value));
 			}
 		},
 		NGT{
@@ -51,7 +52,7 @@ public class NumberTuple extends AbstractQueryTuple {
 			}
 			
 			public void docuument(BasicDBObject query, Number value, String field) {
-				query.append(field, new BasicDBObject("$not", new BasicDBObject("$ge", value.toString())));
+				query.put(field, new BasicDBObject("$not", new BasicDBObject( QueryOperators.GT, value)));
 			}
 		},
 		NGEQ{
@@ -60,7 +61,7 @@ public class NumberTuple extends AbstractQueryTuple {
 			}
 			
 			public void docuument(BasicDBObject query, Number value, String field) {
-				query.append(field, new BasicDBObject("$not", new BasicDBObject("$ge", value.toString())));
+				query.put(field, new BasicDBObject("$not", new BasicDBObject( QueryOperators.GTE, value)));
 			}
 		},
 		LT{
@@ -68,8 +69,8 @@ public class NumberTuple extends AbstractQueryTuple {
 				crit.add( Restrictions.lt(field, value));
 			}
 			
-			public void docuument(BasicDBObject query, Number value, String field) {
-				query.append(field, new BasicDBObject("$lt", value.toString()));
+			public void docuument(BasicDBObject query,  Number value, String field) {
+				query.put(field, new BasicDBObject( QueryOperators.LT, value));
 			}
 		},
 		LEQ{
@@ -78,7 +79,7 @@ public class NumberTuple extends AbstractQueryTuple {
 			}
 			
 			public void docuument(BasicDBObject query, Number value, String field) {
-				query.append(field, new BasicDBObject("$le", value.toString()));
+				query.put(field, new BasicDBObject( QueryOperators.LTE, value));
 			}
 		},
 		NLT{
@@ -87,7 +88,7 @@ public class NumberTuple extends AbstractQueryTuple {
 			}
 			
 			public void docuument(BasicDBObject query, Number value, String field) {
-				query.append(field, new BasicDBObject("$not", new BasicDBObject("$lt", value.toString())));
+				query.put(field, new BasicDBObject("$not", new BasicDBObject( QueryOperators.LT, value)));
 			}
 		},
 		NLEQ{
@@ -95,8 +96,8 @@ public class NumberTuple extends AbstractQueryTuple {
 				crit.add( Restrictions.not(Restrictions.le(field, value)));
 			}
 			
-			public void docuument(BasicDBObject query,Number value, String field) {
-				query.append(field, new BasicDBObject("$not", new BasicDBObject("$le", value.toString())));
+			public void docuument(BasicDBObject query, Number value, String field) {
+				query.put(field, new BasicDBObject("$not", new BasicDBObject( QueryOperators.LTE, value)));
 			}
 		};
 		
@@ -228,7 +229,7 @@ public class NumberTuple extends AbstractQueryTuple {
 		if ( getLo() == null ) {
 			getLogic().docuument(query, hi, getField());
 		} else {
-			throw new java.lang.IllegalArgumentException("Between operator not supported");
+			throw new IllegalArgumentException("Between operator not supported");
 		}
 	}
 

@@ -16,6 +16,7 @@ import me.transit.database.TransitStop;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import com.vividsolutions.jts.geom.Point;
 
 public class StopTimeImpl implements StopTime {
 	
@@ -37,6 +38,8 @@ public class StopTimeImpl implements StopTime {
 	private PickupType dropOffType = PickupType.UNKNOWN;
 	@XStreamOmitField
 	private String tripId = null;
+	@XStreamOmitField
+	private Point location = null;
 	
 	public StopTimeImpl()
 	{
@@ -111,6 +114,20 @@ public class StopTimeImpl implements StopTime {
 	 */
 	public void setStopId(String stopId) {
 		this.stopId = stopId;
+	}
+	
+	/**
+	 * @return the stopId
+	 */
+	public Point getLocation() {
+		return this.location;
+	}
+
+	/**
+	 * @param stopId the stopId to set
+	 */
+	public void setLocation(Point stopId) {
+		this.location = stopId;
 	}
 	
 	/**
@@ -227,7 +244,7 @@ public class StopTimeImpl implements StopTime {
 	public Map<String, Object> toDocument() {
 		Map<String,Object> rtn = new HashMap<String,Object>();
 
-		rtn.put(IDocument.CLASS, StopTimeImpl.class);
+		rtn.put(IDocument.CLASS, StopTimeImpl.class.getName());
 		if ( this.getStopId() != null ) {
 			rtn.put( StopTime.STOPID, this.getStopId());
 		}
@@ -235,13 +252,21 @@ public class StopTimeImpl implements StopTime {
 			rtn.put( StopTime.STOPNAME, this.getStopName());
 		}
 		if ( this.getStopHeadSign() != null ) {
-			rtn.put( StopTime.HEADSIGN, this.getStopHeadSign());
+			rtn.put( StopTime.STOPHEADSIGN, this.getStopHeadSign());
 		}
 				
 		Collections.sort(this.getArrivalTime());
 		rtn.put( StopTime.ARRIVALTIME, this.getArrivalTime());
 		rtn.put( StopTime.DROPOFFTYPE, this.getDropOffType().name());
 		rtn.put( StopTime.PICKUPTYPE, this.getPickupType().name());
+		
+		if ( location != null ) {
+			Double [] data = new Double[2];
+			data[0] = location.getCoordinate().x;
+			data[1] = location.getCoordinate().y;
+			
+			rtn.put( StopTime.LOCATION, data);
+		}
 		return rtn;
 	}
 	
