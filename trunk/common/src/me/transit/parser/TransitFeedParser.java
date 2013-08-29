@@ -966,6 +966,7 @@ public class TransitFeedParser {
 						if ( ! stopIds.containsKey(info.getStopId()) ) {
 							TransitStop stop = stopDao.loadById(info.getStopId(), this.getAgencyName());
 							info.setStopName(stop.getName());
+							info.setLocation(stop.getLocation());
 							stopIds.put(info.getStopId(), stop);
 						}
 						graphdb.createRelationShip(trip, stopIds.get(info.getStopId()));

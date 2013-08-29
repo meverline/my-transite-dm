@@ -375,7 +375,7 @@ public class GraphDatabaseDAO {
 		
 		Transaction tx = beginTransaction();
 		try {
-			Relationship relationship = from.createRelationshipTo(to,REL_TYPES.HAS_A);
+			Relationship relationship = to.createRelationshipTo(from,REL_TYPES.HAS_A);
 			relationship.setProperty(FIELD.className.name(), this.getInterface(fromTrip));
 			tx.success();
 		} catch (Exception ex) {
@@ -402,7 +402,7 @@ public class GraphDatabaseDAO {
 			to = this.addNode(toStop);
 		}
 		
-		Node from = index.get(FIELD.trip.name(), FIELD.trip.makeKey(fromRoute)).getSingle();
+		Node from = index.get(FIELD.route.name(), FIELD.route.makeKey(fromRoute)).getSingle();
 		if ( from == null ) { 
 			from = this.addNode(fromRoute);
 		}
@@ -443,7 +443,7 @@ public class GraphDatabaseDAO {
 		
 		Transaction tx = beginTransaction();
 		try {
-		   Relationship relationship = from.createRelationshipTo( to, REL_TYPES.HAS_A );
+		   Relationship relationship = to.createRelationshipTo( from, REL_TYPES.HAS_A );
 		   relationship.setProperty( FIELD.className.name(), this.getInterface(fromRoute));
 		   tx.success();
 		} catch (Exception ex) {
@@ -497,9 +497,7 @@ public class GraphDatabaseDAO {
 			String currentRoute = null;
 			for ( Path path : routes) {
 				
-				Node node = path.endNode();
-				Iterable<String> keys =  node.getPropertyKeys();
-				
+				Node node = path.endNode();				
 				String className = node.getProperty(FIELD.className.name()).toString();
 				String name = node.getProperty(FIELD.db_name.name()).toString();
 				

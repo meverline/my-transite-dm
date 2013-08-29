@@ -7,6 +7,7 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 
 import com.mongodb.BasicDBObject;
+import com.mongodb.QueryOperators;
 
 public class TimeTuple extends AbstractQueryTuple {
 	
@@ -66,7 +67,7 @@ public class TimeTuple extends AbstractQueryTuple {
 		
 		String start = sdf.format(startTime.getTime());
 		String end = sdf.format(endTime.getTime());
-		query.append(getField(), new BasicDBObject("$ge", start).append("$le", end) );
+		query.put(getField(), new BasicDBObject(QueryOperators.GTE, start).append(QueryOperators.LTE, end) );
 	}
 
 }

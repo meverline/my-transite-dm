@@ -115,4 +115,26 @@ public class MongoDBTest {
 		
 		
 	}
+	
+	
+	@Test
+	public void testList() {
+		
+		List<IQueryTuple> query = new ArrayList<IQueryTuple>();
+	
+		DocumentDao dao;
+		try {
+			dao = DocumentDao.instance();
+			List<Route> routes = dao.find(query);
+			
+			assertNotNull(routes);
+			assertEquals(dao.size(), routes.size());
+			
+		} catch (UnknownHostException e) {
+			fail(e.getLocalizedMessage());
+			
+		}
+		
+		
+	}
 }

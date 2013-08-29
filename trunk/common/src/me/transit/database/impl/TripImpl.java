@@ -172,7 +172,7 @@ public class TripImpl extends TransitDateImpl implements Trip {
 
 		rtn.put(IDocument.CLASS, TripImpl.class.getName());
 		rtn.put(IDocument.ID, this.getUUID());
-		rtn.put( Trip.TRIPID, this.getId());
+		rtn.put( Trip.ID, this.getId());
 		if ( this.getService() != null ) {
 		    rtn.put( Trip.SERVICE, this.getService());
 		}

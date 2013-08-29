@@ -16,12 +16,7 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 @XStreamAlias("Route")
 public class RouteImpl extends TransitDateImpl implements Route {
-	
-	public static final String SHORTNAME = "shortName";
-	public static final String LONGNAME = "longName";
-	public static final String DESC = "dec";
-	public static final String ROUTETYPE = "routeType";
-	
+		
 	@XStreamOmitField
 	private static final long serialVersionUID = 1L;
 	@XStreamAlias("shortName")
@@ -187,14 +182,14 @@ public class RouteImpl extends TransitDateImpl implements Route {
 		rtn.put( Route.SHORTNAME, this.getShortName());
 		rtn.put( Route.LONGNAME, this.getLongName());
 		rtn.put( Route.DESC, this.getDesc());
-		rtn.put( Route.ROUTETYPE, this.getType().name());
+		rtn.put( Route.TYPE, this.getType().name());
 		return rtn;
 	}
 	
 	@Override
 	public void handleEnum(String key, Object value)
 	{
-		if ( key.equals(Route.ROUTETYPE) ) {
+		if ( key.equals(Route.TYPE) ) {
 			this.setType( Route.RouteType.valueOf(value.toString()));
 		}
 	}

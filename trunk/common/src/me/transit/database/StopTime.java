@@ -6,16 +6,18 @@ import me.database.CSVFieldType;
 import me.transit.dao.mongo.IDocument;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.vividsolutions.jts.geom.Point;
 
 @XStreamAlias("StopTime")
 public interface StopTime extends CSVFieldType, IDocument {
 	
 	public static final String STOPID = "stopId";
 	public static final String STOPNAME = "stopName";
-	public static final String HEADSIGN = "headSign";
+	public static final String STOPHEADSIGN = "stopHeadSign";
 	public static final String ARRIVALTIME = "arrivalTime";
 	public static final String DROPOFFTYPE = "dropOffType";
 	public static final String PICKUPTYPE = "pickupType";
+	public static final String LOCATION = "location";
 
 	public enum PickupType { REGULAR, NOPICKUP, PHONE, COORDINATE, UNKNOWN };
 	
@@ -100,5 +102,16 @@ public interface StopTime extends CSVFieldType, IDocument {
 	 * @param dropOffType the dropOffType to set
 	 */
 	public void setDropOffType(PickupType dropOffType);
+	
+	
+	/**
+	 * @return the dropOffType
+	 */
+	public Point getLocation();
+
+	/**
+	 * @param dropOffType the dropOffType to set
+	 */
+	public void setLocation(Point dropOffType);
 
 }

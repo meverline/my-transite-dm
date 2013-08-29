@@ -140,18 +140,10 @@ public class CircleTuple extends AbstractQueryTuple {
 	}
 	
 	public void getDoucmentQuery(BasicDBObject query) {
-		
-		StringBuilder buf = new StringBuilder("[ [");
-		buf.append(this.center_.getCoordinate().x);
-		buf.append(' ');
-		buf.append(this.center_.getCoordinate().y);
-		buf.append(" ], ");
-		buf.append(this.distanceInMeters_ );
-		buf.append("]");
-		
-		
-		BasicDBObject circle = new BasicDBObject("$circle", buf.toString() );		
-		query.append(getField(), new BasicDBObject("$geoWithin", circle));
+				
+		Coordinate coord = this.center_.getCoordinate();		
+		query.append(getField(), new BasicDBObject("$geoWithin", 
+				                                   new Object[]{ new Double[]{ coord.x , coord.y } , this.distanceInMeters_  }));
 	}
 
 

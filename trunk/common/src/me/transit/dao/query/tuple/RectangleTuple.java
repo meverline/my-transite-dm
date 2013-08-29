@@ -101,24 +101,17 @@ public class RectangleTuple extends AbstractQueryTuple {
 	}
 	
 	public void getDoucmentQuery(BasicDBObject query) {
+				
+		Double [] ulc = new Double[2];
 		
-		StringBuilder buf = new StringBuilder("[ ");
+		ulc[0] = ul.getCoordinate().x;
+		ulc[1] = lr.getCoordinate().y;
+
+		Double [] urc = new Double[2];
+	    urc[0] = lr.getCoordinate().x;
+	    urc[1] = ul.getCoordinate().y;
 		
-		buf.append("[");
-		buf.append(ul.getCoordinate().x);
-		buf.append(' ');
-		buf.append(lr.getCoordinate().y);
-		buf.append(" ], ");
-		
-		buf.append("[");
-		buf.append(lr.getCoordinate().x);
-		buf.append(' ');
-		buf.append(ul.getCoordinate().y);
-		buf.append(" ] ");
-		buf.append("]");
-		
-		BasicDBObject circle = new BasicDBObject("$box", buf.toString() );
-		query.append(getField(), new BasicDBObject("$geoWithin", circle));
+		query.put(getField(), new BasicDBObject("$geoWithin", new Object[] { ulc, urc } ));
 		
 	}
 	
