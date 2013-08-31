@@ -1,9 +1,8 @@
 package me.transit.database.impl;
 
-import static org.junit.Assert.*;
-
-import java.util.Map;
-
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import me.transit.database.StopTime;
 
 import org.junit.Test;
@@ -90,9 +89,6 @@ public class StopTimeImplTest {
 			assertEquals( lhs.getArrivalTime().get(0).intValue(), rhs.getArrivalTime().get(0).intValue());
 		}
 				
-		Map<String, Object> map = rhs.toDocument();
-		assertNotNull(map);
-		
 	}
 
 }

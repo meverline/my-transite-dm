@@ -1,9 +1,10 @@
 package me.transit.dao.query.tuple;
 
+import me.transit.dao.mongo.JongoQueryBuilder;
+
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 
-import com.mongodb.BasicDBObject;
 import com.mongodb.QueryOperators;
 
 public class NumberTuple extends AbstractQueryTuple {
@@ -14,8 +15,10 @@ public class NumberTuple extends AbstractQueryTuple {
 				crit.add( Restrictions.eq(field, value));
 			}
 			
-			public void docuument(BasicDBObject query, Number value, String field) {
-				query.put(field, value);
+			public void docuument(JongoQueryBuilder query, Number value, String field) {
+				query.start(field);
+				query.is(value);
+				query.end();
 			}
 
 		},
@@ -24,8 +27,10 @@ public class NumberTuple extends AbstractQueryTuple {
 				crit.add( Restrictions.not(Restrictions.eq(field, value)));
 			}
 			
-			public void docuument(BasicDBObject query, Number value, String field) {
-				query.put(field, new BasicDBObject( QueryOperators.NE, value));
+			public void docuument(JongoQueryBuilder query, Number value, String field) {
+				query.start(field);
+				  query.addOpperand(QueryOperators.NE, value);
+				query.end();
 			}
 		},
 		GT{
@@ -33,8 +38,10 @@ public class NumberTuple extends AbstractQueryTuple {
 				crit.add( Restrictions.gt(field, value));
 			}
 			
-			public void docuument(BasicDBObject query,  Number value, String field) {
-				query.put(field, new BasicDBObject( QueryOperators.GT, value));
+			public void docuument(JongoQueryBuilder query,  Number value, String field) {
+				query.start(field);
+				  query.addOpperand(QueryOperators.GT, value);
+				query.end();
 			}
 		},
 		GEQ{
@@ -42,8 +49,10 @@ public class NumberTuple extends AbstractQueryTuple {
 				crit.add( Restrictions.ge(field, value));
 			}
 			
-			public void docuument(BasicDBObject query,  Number value, String field) {
-				query.put(field, new BasicDBObject( QueryOperators.GTE, value));
+			public void docuument(JongoQueryBuilder query,  Number value, String field) {
+				query.start(field);
+				  query.addOpperand(QueryOperators.GTE, value);
+				query.end();
 			}
 		},
 		NGT{
@@ -51,8 +60,12 @@ public class NumberTuple extends AbstractQueryTuple {
 				crit.add( Restrictions.not(Restrictions.gt(field, value)));
 			}
 			
-			public void docuument(BasicDBObject query, Number value, String field) {
-				query.put(field, new BasicDBObject("$not", new BasicDBObject( QueryOperators.GT, value)));
+			public void docuument(JongoQueryBuilder query, Number value, String field) {
+				query.start(field);
+					query.start(JongoQueryBuilder.NOT);
+					  query.addOpperand(QueryOperators.GT, value);
+					query.end();
+				query.end();
 			}
 		},
 		NGEQ{
@@ -60,8 +73,12 @@ public class NumberTuple extends AbstractQueryTuple {
 				crit.add( Restrictions.not(Restrictions.gt(field, value)));
 			}
 			
-			public void docuument(BasicDBObject query, Number value, String field) {
-				query.put(field, new BasicDBObject("$not", new BasicDBObject( QueryOperators.GTE, value)));
+			public void docuument(JongoQueryBuilder query, Number value, String field) {
+				query.start(field);
+					query.start(JongoQueryBuilder.NOT);
+					  query.addOpperand(QueryOperators.GTE, value);
+					query.end();
+				query.end();
 			}
 		},
 		LT{
@@ -69,8 +86,10 @@ public class NumberTuple extends AbstractQueryTuple {
 				crit.add( Restrictions.lt(field, value));
 			}
 			
-			public void docuument(BasicDBObject query,  Number value, String field) {
-				query.put(field, new BasicDBObject( QueryOperators.LT, value));
+			public void docuument(JongoQueryBuilder query,  Number value, String field) {
+				query.start(field);
+				  query.addOpperand(QueryOperators.LT, value);
+				query.end();
 			}
 		},
 		LEQ{
@@ -78,8 +97,10 @@ public class NumberTuple extends AbstractQueryTuple {
 				crit.add( Restrictions.le(field, value));
 			}
 			
-			public void docuument(BasicDBObject query, Number value, String field) {
-				query.put(field, new BasicDBObject( QueryOperators.LTE, value));
+			public void docuument(JongoQueryBuilder query, Number value, String field) {
+				query.start(field);
+				  query.addOpperand(QueryOperators.LTE, value);
+				query.end();
 			}
 		},
 		NLT{
@@ -87,8 +108,12 @@ public class NumberTuple extends AbstractQueryTuple {
 				crit.add( Restrictions.not(Restrictions.lt(field, value)));
 			}
 			
-			public void docuument(BasicDBObject query, Number value, String field) {
-				query.put(field, new BasicDBObject("$not", new BasicDBObject( QueryOperators.LT, value)));
+			public void docuument(JongoQueryBuilder query, Number value, String field) {			
+				query.start(field);
+					query.start(JongoQueryBuilder.NOT);
+					  query.addOpperand(QueryOperators.LT, value);
+					query.end();
+				query.end();
 			}
 		},
 		NLEQ{
@@ -96,13 +121,17 @@ public class NumberTuple extends AbstractQueryTuple {
 				crit.add( Restrictions.not(Restrictions.le(field, value)));
 			}
 			
-			public void docuument(BasicDBObject query, Number value, String field) {
-				query.put(field, new BasicDBObject("$not", new BasicDBObject( QueryOperators.LTE, value)));
+			public void docuument(JongoQueryBuilder query, Number value, String field) {
+				query.start(field);
+				query.start(JongoQueryBuilder.NOT);
+				  query.addOpperand(QueryOperators.LTE, value);
+				query.end();
+			query.end();
 			}
 		};
 		
 		public abstract void restriction(Criteria crit, Number value, String field);
-		public abstract void docuument(BasicDBObject query, Number value, String field);
+		public abstract void docuument(JongoQueryBuilder query, Number value, String field);
 		
 	}
 	
@@ -224,7 +253,7 @@ public class NumberTuple extends AbstractQueryTuple {
 		}
 	}
 	
-	public void getDoucmentQuery(BasicDBObject query) {
+	public void getDoucmentQuery(JongoQueryBuilder query) {
 		
 		if ( getLo() == null ) {
 			getLogic().docuument(query, hi, getField());

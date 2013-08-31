@@ -3,13 +3,11 @@ package me.transit.database;
 import java.util.List;
 
 import me.database.CSVFieldType;
-import me.transit.dao.mongo.IDocument;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.vividsolutions.jts.geom.Point;
 
 @XStreamAlias("StopTime")
-public interface StopTime extends CSVFieldType, IDocument {
+public interface StopTime extends CSVFieldType {
 	
 	public static final String STOPID = "stopId";
 	public static final String STOPNAME = "stopName";
@@ -107,11 +105,11 @@ public interface StopTime extends CSVFieldType, IDocument {
 	/**
 	 * @return the dropOffType
 	 */
-	public Point getLocation();
+	public Double[] getLocation();
 
 	/**
 	 * @param dropOffType the dropOffType to set
 	 */
-	public void setLocation(Point dropOffType);
+	public void setLocation(Double[] dropOffType);
 
 }

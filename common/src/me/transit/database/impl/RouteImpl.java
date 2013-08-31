@@ -1,13 +1,10 @@
 package me.transit.database.impl;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import me.transit.dao.mongo.IDocument;
-import me.transit.database.Agency;
 import me.transit.database.Route;
+import me.transit.database.RouteDocument;
 import me.transit.database.Trip;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
@@ -19,13 +16,13 @@ public class RouteImpl extends TransitDateImpl implements Route {
 		
 	@XStreamOmitField
 	private static final long serialVersionUID = 1L;
-	@XStreamAlias("shortName")
+	@XStreamAlias(Route.SHORTNAME)
 	private String shortName = "";
-	@XStreamAlias("longName")
+	@XStreamAlias(Route.LONGNAME)
 	private String longName = "";
-	@XStreamAlias("desc")
+	@XStreamAlias(Route.DESC)
 	private String desc = "";
-	@XStreamAlias("routeType")
+	@XStreamAlias(Route.TYPE)
 	private RouteType type = RouteType.UNKOWN;
 	@XStreamAlias("url")
 	private String url = "";
@@ -33,7 +30,7 @@ public class RouteImpl extends TransitDateImpl implements Route {
 	private String color = "";
 	@XStreamAlias("textColor")
 	private String textColor = "";
-	@XStreamImplicit(itemFieldName="RouteTrip")
+	@XStreamImplicit(itemFieldName=Route.TRIPLIST)
 	private List<Trip> trips = new ArrayList<Trip>();
 	
 	/**
@@ -168,31 +165,6 @@ public class RouteImpl extends TransitDateImpl implements Route {
 		builder.append("text Color: " + this.getTextColor());
 		return builder.toString();
 	}
-
-	@Override
-	public Map<String, Object> toDocument() {
-		
-		Map<String,Object> rtn = new HashMap<String,Object>();
-
-		rtn.put(IDocument.CLASS, RouteImpl.class.getName());
-		rtn.put(IDocument.ID, this.getShortName() + ": " + this.getAgency().getName());
-		
-		rtn.put( Agency.AGENCY, this.getAgency().getName());
-		rtn.put( Agency.UUID, this.getUUID());
-		rtn.put( Route.SHORTNAME, this.getShortName());
-		rtn.put( Route.LONGNAME, this.getLongName());
-		rtn.put( Route.DESC, this.getDesc());
-		rtn.put( Route.TYPE, this.getType().name());
-		return rtn;
-	}
-	
-	@Override
-	public void handleEnum(String key, Object value)
-	{
-		if ( key.equals(Route.TYPE) ) {
-			this.setType( Route.RouteType.valueOf(value.toString()));
-		}
-	}
 		
 	/**
 	 * 
@@ -200,6 +172,22 @@ public class RouteImpl extends TransitDateImpl implements Route {
 	public boolean valid() 
 	{
 		return true;
+	}
+	
+	/**
+	 * 
+	 */
+	public RouteDocument toRouteDocument()  {
+		RouteDocument rtn = new RouteDocument();
+		
+		rtn.setAgency(this.getAgency().getName());
+		rtn.setDesc(this.getDesc());
+		rtn.setLongName(this.getLongName());
+		rtn.setShortName(this.getShortName());
+		rtn.setType(this.getType());
+		rtn.setUUID(this.getUUID());
+		
+		return rtn;
 	}
 	
 }

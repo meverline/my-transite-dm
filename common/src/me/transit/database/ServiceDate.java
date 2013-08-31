@@ -2,8 +2,6 @@ package me.transit.database;
 
 import java.util.Calendar;
 
-import me.transit.dao.mongo.IDocument;
-
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 /**
@@ -14,7 +12,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
  *
  */
 @XStreamAlias("ServiceDate")
-public interface ServiceDate extends TransitData, IDocument {
+public interface ServiceDate extends TransitData {
 	
 	public static final String STARTDATE = "startDate";
 	public static final String ENDDATE = "endDate";

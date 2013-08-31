@@ -27,7 +27,6 @@ import org.neo4j.graphdb.factory.GraphDatabaseSettings;
 import org.neo4j.graphdb.index.ReadableIndex;
 import org.neo4j.graphdb.traversal.Evaluators;
 import org.neo4j.graphdb.traversal.TraversalDescription;
-import org.neo4j.kernel.CommonBranchOrdering;
 import org.neo4j.kernel.Traversal;
 
 public class GraphDatabaseDAO {
@@ -363,19 +362,19 @@ public class GraphDatabaseDAO {
 		
 		ReadableIndex<Node> index = graphDb.index().getNodeAutoIndexer().getAutoIndex();
 		
-		Node to = index.get(FIELD.stop.name(), FIELD.stop.makeKey(toStop)).getSingle();
-		if ( to == null ) { 
-			to = this.addNode(toStop);
+		Node from = index.get(FIELD.stop.name(), FIELD.stop.makeKey(toStop)).getSingle();
+		if ( from == null ) { 
+			from = this.addNode(toStop);
 		}
 		
-		Node from = index.get(FIELD.trip.name(), FIELD.trip.makeKey(fromTrip)).getSingle();
-		if ( from == null ) { 
-			from = this.addNode(fromTrip);
+		Node to = index.get(FIELD.trip.name(), FIELD.trip.makeKey(fromTrip)).getSingle();
+		if ( to == null ) { 
+			to = this.addNode(fromTrip);
 		}
 		
 		Transaction tx = beginTransaction();
 		try {
-			Relationship relationship = to.createRelationshipTo(from,REL_TYPES.HAS_A);
+			Relationship relationship = from.createRelationshipTo(to, REL_TYPES.HAS_A);
 			relationship.setProperty(FIELD.className.name(), this.getInterface(fromTrip));
 			tx.success();
 		} catch (Exception ex) {
@@ -431,19 +430,19 @@ public class GraphDatabaseDAO {
 		
 		ReadableIndex<Node> index = graphDb.index().getNodeAutoIndexer().getAutoIndex();
 		
-		Node to = index.get(FIELD.trip.name(), FIELD.trip.makeKey(toTrip)).getSingle();
-		if ( to == null ) { 
-			to = this.addNode(toTrip);
+		Node from = index.get(FIELD.trip.name(), FIELD.trip.makeKey(toTrip)).getSingle();
+		if ( from == null ) { 
+			from = this.addNode(toTrip);
 		}
 		
-		Node from = index.get(FIELD.route.name(), FIELD.route.makeKey(fromRoute)).getSingle();
-		if ( from == null ) { 
-			from = this.addNode(fromRoute);
+		Node to = index.get(FIELD.route.name(), FIELD.route.makeKey(fromRoute)).getSingle();
+		if ( to == null ) { 
+			to = this.addNode(fromRoute);
 		}
 		
 		Transaction tx = beginTransaction();
 		try {
-		   Relationship relationship = to.createRelationshipTo( from, REL_TYPES.HAS_A );
+		   Relationship relationship = from.createRelationshipTo( to, REL_TYPES.HAS_A );
 		   relationship.setProperty( FIELD.className.name(), this.getInterface(fromRoute));
 		   tx.success();
 		} catch (Exception ex) {
@@ -482,17 +481,16 @@ public class GraphDatabaseDAO {
 				
 		ReadableIndex<Node> index = graphDb.index().getNodeAutoIndexer().getAutoIndex();
 		
-		FIELD type = FIELD.stop;
-		String key = type.makeKey(stop);
-		Node stopNode = index.get(type.name(), key).getSingle();
-		
-		TraversalDescription td = Traversal.description().
-											 order(CommonBranchOrdering.PREORDER_DEPTH_FIRST).
-											 relationships(REL_TYPES.HAS_A, Direction.INCOMING).
-											 evaluator( Evaluators.excludeStartPosition());
+		Node stopNode = index.get(FIELD.stop.name(), FIELD.stop.makeKey(stop)).getSingle();
 		
 		List<RouteStopData> rtn = new ArrayList<RouteStopData>();
 		if ( stopNode != null ) {
+			
+			TraversalDescription td = Traversal.description().
+												 depthFirst().
+												 relationships(REL_TYPES.HAS_A, Direction.OUTGOING).
+												 evaluator( Evaluators.excludeStartPosition());
+			
 			org.neo4j.graphdb.traversal.Traverser routes = td.traverse(stopNode);
 			String currentRoute = null;
 			for ( Path path : routes) {

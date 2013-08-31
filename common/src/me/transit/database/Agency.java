@@ -2,12 +2,10 @@ package me.transit.database;
 
 import java.io.Serializable;
 
-import me.transit.dao.mongo.IDocument;
-
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("Agency")
-public interface Agency extends Serializable, IDocument {
+public interface Agency extends Serializable {
 
 	public static final String AGENCY = "agency";
 	public static final String UUID = "uuid";

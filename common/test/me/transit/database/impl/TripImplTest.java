@@ -1,9 +1,8 @@
 package me.transit.database.impl;
 
-import static org.junit.Assert.*;
-
-import java.util.Map;
-
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import me.transit.database.Agency;
 import me.transit.database.RouteGeometry;
 import me.transit.database.ServiceDate;
@@ -102,8 +101,6 @@ public class TripImplTest {
 			assertEquals( tmp.getStopId(), st.getStopId());
 		}
 		
-		Map<String,Object> map = trip.toDocument();
-		assertNotNull(map);
 	}
 
 

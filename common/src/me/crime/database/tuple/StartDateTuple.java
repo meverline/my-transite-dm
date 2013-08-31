@@ -19,12 +19,11 @@ package me.crime.database.tuple;
 import java.util.Calendar;
 
 import me.crime.database.Crime;
+import me.transit.dao.mongo.JongoQueryBuilder;
 import me.transit.dao.query.tuple.AbstractQueryTuple;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
-
-import com.mongodb.BasicDBObject;
 
 
 public class StartDateTuple extends AbstractQueryTuple {
@@ -52,7 +51,7 @@ public class StartDateTuple extends AbstractQueryTuple {
 	}
 	
 	@Override
-	public void getDoucmentQuery(BasicDBObject query) {
+	public void getDoucmentQuery(JongoQueryBuilder query) {
 		throw new UnsupportedOperationException();
 	}
 
