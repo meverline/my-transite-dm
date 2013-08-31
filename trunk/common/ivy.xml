@@ -136,8 +136,10 @@
         	<artifact name="hadoop-core" type="jar" />
         </dependency>
         
-        <dependency  org="org.mongodb"  name="mongo-java-driver"  rev="2.7.2" />
-                         
+        <dependency  org="org.mongodb"  name="mongo-java-driver"  rev="2.11.2" />
+        
+        <dependency org="org.jongo" name="jongo" rev="0.4" />
+                    
         <dependency org="org.neo4j" name="neo4j" rev="1.7.2" />
                                       
     </dependencies>

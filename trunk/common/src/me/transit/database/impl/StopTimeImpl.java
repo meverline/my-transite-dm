@@ -1,45 +1,50 @@
 package me.transit.database.impl;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import me.database.CSVFieldType;
 import me.factory.DaoBeanFactory;
 import me.transit.dao.TransiteStopDao;
-import me.transit.dao.mongo.IDocument;
 import me.transit.database.Agency;
 import me.transit.database.StopTime;
 import me.transit.database.TransitStop;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
-import com.vividsolutions.jts.geom.Point;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class StopTimeImpl implements StopTime {
 	
 	private static final String SEPERATOR = ";";
-
+	
 	@XStreamOmitField
 	private static final long serialVersionUID = 1L;
 	@XStreamOmitField
+	@JsonProperty(StopTime.STOPID)
 	private String stopId = null;
-	@XStreamAlias("arrivalTime")
+	@JsonProperty(StopTime.ARRIVALTIME)
+	@XStreamAlias(StopTime.ARRIVALTIME)
 	private List<Long> arrivalTime = new ArrayList<Long>();
-	@XStreamAlias("stopHeadSign")
+	@JsonProperty(StopTime.STOPHEADSIGN)
+	@XStreamAlias(StopTime.STOPHEADSIGN)
 	private String stopHeadSign = "";
-	@XStreamAlias("stopName")
+	@JsonProperty(StopTime.STOPNAME)
+	@XStreamAlias(StopTime.STOPNAME)
 	private String stopName = "";
-	@XStreamAlias("pickupType")
+	@JsonProperty(StopTime.PICKUPTYPE)
+	@XStreamAlias(StopTime.PICKUPTYPE)
 	private PickupType pickupType = PickupType.UNKNOWN;
-	@XStreamAlias("dropOffType")
+	@JsonProperty(StopTime.DROPOFFTYPE)
+	@XStreamAlias(StopTime.DROPOFFTYPE)
 	private PickupType dropOffType = PickupType.UNKNOWN;
 	@XStreamOmitField
 	private String tripId = null;
 	@XStreamOmitField
-	private Point location = null;
+	@JsonProperty(StopTime.LOCATION)
+	private Double[] location = null;
 	
 	public StopTimeImpl()
 	{
@@ -119,14 +124,14 @@ public class StopTimeImpl implements StopTime {
 	/**
 	 * @return the stopId
 	 */
-	public Point getLocation() {
+	public Double[] getLocation() {
 		return this.location;
 	}
-
+	
 	/**
 	 * @param stopId the stopId to set
 	 */
-	public void setLocation(Point stopId) {
+	public void setLocation(Double[] stopId) {
 		this.location = stopId;
 	}
 	
@@ -239,49 +244,5 @@ public class StopTimeImpl implements StopTime {
 		
 		return builder.toString();
 	}
-		
-	@Override
-	public Map<String, Object> toDocument() {
-		Map<String,Object> rtn = new HashMap<String,Object>();
-
-		rtn.put(IDocument.CLASS, StopTimeImpl.class.getName());
-		if ( this.getStopId() != null ) {
-			rtn.put( StopTime.STOPID, this.getStopId());
-		}
-		if ( this.getStopName() != null ) {
-			rtn.put( StopTime.STOPNAME, this.getStopName());
-		}
-		if ( this.getStopHeadSign() != null ) {
-			rtn.put( StopTime.STOPHEADSIGN, this.getStopHeadSign());
-		}
 				
-		Collections.sort(this.getArrivalTime());
-		rtn.put( StopTime.ARRIVALTIME, this.getArrivalTime());
-		rtn.put( StopTime.DROPOFFTYPE, this.getDropOffType().name());
-		rtn.put( StopTime.PICKUPTYPE, this.getPickupType().name());
-		
-		if ( location != null ) {
-			Double [] data = new Double[2];
-			data[0] = location.getCoordinate().x;
-			data[1] = location.getCoordinate().y;
-			
-			rtn.put( StopTime.LOCATION, data);
-		}
-		return rtn;
-	}
-	
-	/**
-	 * 
-	 */
-	@Override
-	public void handleEnum(String key, Object value)
-	{
-		if ( key.equals(StopTime.PICKUPTYPE) ) {
-			this.setPickupType( StopTime.PickupType.valueOf(value.toString()));
-		} else 	if ( key.equals(StopTime.DROPOFFTYPE) ) {
-			this.setDropOffType( StopTime.PickupType.valueOf(value.toString()));
-		}
-	}
-
-		
 }

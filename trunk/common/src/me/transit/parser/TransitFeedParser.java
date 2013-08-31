@@ -30,6 +30,7 @@ import me.transit.dao.neo4j.GraphDatabaseDAO;
 import me.transit.database.Agency;
 import me.transit.database.CalendarDate;
 import me.transit.database.Route;
+import me.transit.database.RouteDocument;
 import me.transit.database.RouteGeometry;
 import me.transit.database.ServiceDate;
 import me.transit.database.StopTime;
@@ -52,7 +53,6 @@ import org.nocrala.tools.gis.data.esri.shapefile.shape.shapes.PolylineShape;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.LineString;
-
 
 /**
  * 
@@ -966,7 +966,12 @@ public class TransitFeedParser {
 						if ( ! stopIds.containsKey(info.getStopId()) ) {
 							TransitStop stop = stopDao.loadById(info.getStopId(), this.getAgencyName());
 							info.setStopName(stop.getName());
-							info.setLocation(stop.getLocation());
+							
+							Double [] location = new Double[2];
+							location[0] = stop.getLocation().getCoordinate().x;
+							location[1] = stop.getLocation().getCoordinate().y;
+							info.setLocation(location);
+							
 							stopIds.put(info.getStopId(), stop);
 						}
 						graphdb.createRelationShip(trip, stopIds.get(info.getStopId()));
@@ -978,9 +983,8 @@ public class TransitFeedParser {
 				}
 				
 				DocumentDao docDao = DocumentDao.instance();
-				Map<String,Object> data = route.toDocument();
-				data.put( Route.TRIPLIST, entry.getValue());
-				
+				RouteDocument data = route.toRouteDocument();
+				data.setTrips(entry.getValue());				
 				docDao.add(data);
 
 			}

@@ -16,12 +16,12 @@
 
 package me.crime.database.tuple;
 
+import me.transit.dao.mongo.JongoQueryBuilder;
 import me.transit.dao.query.tuple.AbstractQueryTuple;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 
-import com.mongodb.BasicDBObject;
 import com.sun.jndi.cosnaming.IiopUrl.Address;
 
 
@@ -48,7 +48,7 @@ public class AddressTuple extends AbstractQueryTuple {
 	}
 
 	@Override
-	public void getDoucmentQuery(BasicDBObject query) {
+	public void getDoucmentQuery(JongoQueryBuilder query) {
 		throw new UnsupportedOperationException();
 	}
 

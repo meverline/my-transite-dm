@@ -1,11 +1,9 @@
 package me.transit.dao.query.tuple;
 
-import java.util.regex.Pattern;
+import me.transit.dao.mongo.JongoQueryBuilder;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
-
-import com.mongodb.BasicDBObject;
 
 public class StringTuple extends AbstractQueryTuple {
 	
@@ -17,7 +15,7 @@ public class StringTuple extends AbstractQueryTuple {
 			}
 			
 			public String docuument( String value) {
-				return "/*" +value + "/";
+				return "/." +value + "/";
 			}
 		},
 		END {
@@ -27,7 +25,7 @@ public class StringTuple extends AbstractQueryTuple {
 			}
 			
 			public String docuument( String value) {
-				return "/" +value + "*/";
+				return "/" +value + "./";
 			}
 		},
 		CONTAINS {
@@ -37,7 +35,7 @@ public class StringTuple extends AbstractQueryTuple {
 			}
 			
 			public String docuument( String value) {
-				return "/*" +value + "*/";
+				return "/." +value + "./";
 			}
 		},
 		EXACT {
@@ -47,7 +45,7 @@ public class StringTuple extends AbstractQueryTuple {
 			}
 			
 			public String docuument( String value) {
-				return "/" + value + "/";
+				return  value;
 			}
 		};
 		
@@ -109,7 +107,14 @@ public class StringTuple extends AbstractQueryTuple {
 	}
 	
 	@Override
-	public void getDoucmentQuery(BasicDBObject query) {
-		query.put(getField(), Pattern.compile(matchType.docuument(value), Pattern.CASE_INSENSITIVE) );
+	public void getDoucmentQuery(JongoQueryBuilder query) {
+		
+		query.start(getField());
+		if ( matchType == MATCH.EXACT ) {
+			query.is(value);
+		} else {
+			query.addOpperand("$regex", matchType.docuument(value));
+		}
+		query.end();
 	}
 }

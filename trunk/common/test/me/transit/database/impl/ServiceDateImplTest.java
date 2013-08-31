@@ -1,9 +1,9 @@
 package me.transit.database.impl;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import java.util.Calendar;
-import java.util.Map;
 
 import me.transit.database.Agency;
 import me.transit.database.ServiceDate;
@@ -91,10 +91,7 @@ public class ServiceDateImplTest {
 			assertEquals(value, service.getServiceDayFlag());
 			assertEquals(true, service.hasService(day));
 		}
-		
-		Map<String, Object> map = service.toDocument();
-		assertNotNull(map);
-		
+				
 	}
 
 }

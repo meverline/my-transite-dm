@@ -1,28 +1,32 @@
 package me.transit.database.impl;
 
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
 
-import me.transit.dao.mongo.IDocument;
 import me.transit.database.ServiceDate;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ServiceDateImpl extends TransitDateImpl implements ServiceDate{
 
 	@XStreamOmitField
 	private static final long serialVersionUID = 1L;
-	@XStreamAlias("startDate")
+	@JsonProperty(ServiceDate.STARTDATE)
+	@XStreamAlias(ServiceDate.STARTDATE)
 	@XStreamConverter(me.database.SingleValueCalendarConverter.class)
 	private Calendar startDate = null;
-	@XStreamAlias("endDate")
+	@JsonProperty(ServiceDate.ENDDATE)
+	@XStreamAlias(ServiceDate.ENDDATE)
 	@XStreamConverter(me.database.SingleValueCalendarConverter.class)
 	private Calendar endDate = null;
-	@XStreamAlias("serviceDayFlag")
+	@JsonProperty(ServiceDate.SERVICEDAYFLAG)
+	@XStreamAlias(ServiceDate.SERVICEDAYFLAG)
 	private int serviceDayFlag = 0;
+	@JsonProperty(ServiceDate.SERVICE)
 	@XStreamOmitField
 	private ServiceDays service = ServiceDays.ALL_WEEK;
 	
@@ -140,30 +144,7 @@ public class ServiceDateImpl extends TransitDateImpl implements ServiceDate{
 	public boolean isSaturday() {
 		return hasService( ServiceDate.WeekDay.SATURDAY);
 	}
-	
-
-	@Override
-	public Map<String, Object> toDocument() {
-		Map<String,Object> rtn = new HashMap<String,Object>();
 		
-		rtn.put(IDocument.CLASS, ServiceDateImpl.class.getName());
-		rtn.put(IDocument.ID, this.getUUID());
-		rtn.put(ServiceDate.STARTDATE, getStartDate().getTime());
-		rtn.put(ServiceDate.ENDDATE, getEndDate().getTime());
-		rtn.put(ServiceDate.SERVICE, this.getService().name());
-		
-		StringBuffer buffer = new StringBuffer();
-		
-		for (WeekDay day : ServiceDate.WeekDay.values()) {
-			if ( this.hasService(day) ) {
-				if ( buffer.length() > 0) { buffer.append(" "); }
-				buffer.append(day.name());
-			}
-		}
-		rtn.put(ServiceDate.SERVICEDAYFLAG, buffer);
-		return rtn;
-	}
-	
 	@Override
 	public boolean equals(Object obj) {
 		
@@ -192,23 +173,6 @@ public class ServiceDateImpl extends TransitDateImpl implements ServiceDate{
 			}
 		}
 		return rtn;
-	}
-	
-	/**
-	 * 
-	 */
-	@Override
-	public void handleEnum(String key, Object value)
-	{
-		if ( key.equals(ServiceDate.SERVICE) ) {
-			this.setService( ServiceDate.ServiceDays.valueOf(value.toString()));
-		} else if ( key.equals( ServiceDate.SERVICEDAYFLAG ) ) {
-			
-			String [] data = value.toString().split(" ");
-			for ( String day : data) {
-				this.addServiceData( ServiceDate.WeekDay.valueOf(day.trim() ));
-			}
-		}
 	}
 	
 	/**

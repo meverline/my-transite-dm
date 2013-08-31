@@ -1,9 +1,5 @@
 package me.transit.database.impl;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import me.transit.dao.mongo.IDocument;
 import me.transit.database.Agency;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
@@ -162,18 +158,6 @@ public class AgencyImpl implements Agency {
 	public String toString() {
 		return this.getName();
 	}
-
-	@Override
-	public Map<String, Object> toDocument() {
-		Map<String,Object> rtn = new HashMap<String,Object>();
-		
-		rtn.put(IDocument.CLASS, AgencyImpl.class.getName());
-		rtn.put("name", this.getName());
-		rtn.put("url", this.getUrl());
-		rtn.put(IDocument.ID, this.getName());
-		rtn.put("phone", this.getPhone());
-		return rtn;
-	}
 	
 	@Override
 	public boolean equals(Object obj) {
@@ -195,9 +179,4 @@ public class AgencyImpl implements Agency {
 		return rtn;
 	}
 	
-	@Override
-	public void handleEnum(String key, Object value)
-	{
-	}
-
 }
