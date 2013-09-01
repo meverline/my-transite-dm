@@ -19,11 +19,10 @@ package me.transit.dao.query.tuple;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.transit.dao.mongo.JongoQueryBuilder;
-
 import org.hibernate.Criteria;
 import org.hibernate.spatial.criterion.SpatialRestrictions;
 
+import com.mongodb.BasicDBObject;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.Point;
@@ -102,24 +101,23 @@ public class PolygonBoxTuple extends AbstractQueryTuple {
 		
 	}
 	
-	public void getDoucmentQuery(JongoQueryBuilder query) {
+	public void getDoucmentQuery(BasicDBObject query) {
 				
+        
 		List<Double[]> list = new ArrayList<Double[]>();
 		
 		for ( Point pt : this.pointLine) {
-			Double [] data = new Double[2];
-			data[0] = pt.getCoordinate().x;
-			data[1] = pt.getCoordinate().y;
-			list.add(data);
+		  Double [] data = new Double[2];
+		  data[0] = pt.getCoordinate().x;
+		  data[1] = pt.getCoordinate().y;
+		  list.add(data);
 		}
 		
 		Double [] data = new Double[2];
 		data[0] = this.pointLine.get(0).getCoordinate().x;
 		data[1] = this.pointLine.get(0).getCoordinate().y;
 		
-		query.start(getField());
-		query.within(list);
-		query.end();
+		query.put(getField(), new BasicDBObject("$geoWithin", list));
 
 	}
 

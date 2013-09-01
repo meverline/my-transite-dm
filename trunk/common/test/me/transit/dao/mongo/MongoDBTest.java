@@ -12,7 +12,6 @@ import me.transit.dao.query.tuple.IQueryTuple;
 import me.transit.dao.query.tuple.StringTuple;
 import me.transit.database.Agency;
 import me.transit.database.Route;
-import me.transit.database.RouteDocument;
 import me.transit.database.StopTime;
 import me.transit.database.Trip;
 
@@ -74,7 +73,7 @@ public class MongoDBTest {
 		DocumentDao dao;
 		try {
 			dao = DocumentDao.instance();
-			List<RouteDocument> routes = dao.find(query);
+			List<Route> routes = dao.find(query);
 			
 			assertNotNull(routes);
 			assertEquals(5, routes.size());
@@ -104,7 +103,7 @@ public class MongoDBTest {
 		DocumentDao dao;
 		try {
 			dao = DocumentDao.instance();
-			List<RouteDocument> routes = dao.find(query);
+			List<Route> routes = dao.find(query);
 			
 			assertNotNull(routes);
 			assertEquals(1, routes.size());
@@ -130,7 +129,7 @@ public class MongoDBTest {
 		DocumentDao dao;
 		try {
 			dao = DocumentDao.instance();
-			List<RouteDocument> routes = dao.find(query);
+			List<Route> routes = dao.find(query);
 			
 			assertNotNull(routes);
 			assertEquals(dao.size(), routes.size());

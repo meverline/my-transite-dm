@@ -1,137 +1,108 @@
 package me.transit.dao.query.tuple;
 
-import me.transit.dao.mongo.JongoQueryBuilder;
-
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.QueryOperators;
 
 public class NumberTuple extends AbstractQueryTuple {
 	
 	public enum LOGIC { 
 		EQ {
-			public void restriction(Criteria crit, Number value, String field) {
-				crit.add( Restrictions.eq(field, value));
-			}
-			
-			public void docuument(JongoQueryBuilder query, Number value, String field) {
-				query.start(field);
-				query.is(value);
-				query.end();
-			}
+            public void restriction(Criteria crit, Number value, String field) {
+                    crit.add( Restrictions.eq(field, value));
+            }
+            
+            public void docuument(BasicDBObject query, Number value, String field) {
+                    query.put(field, value);
+            }
 
-		},
-		NEQ {
-			public void restriction(Criteria crit, Number value, String field) {
-				crit.add( Restrictions.not(Restrictions.eq(field, value)));
-			}
-			
-			public void docuument(JongoQueryBuilder query, Number value, String field) {
-				query.start(field);
-				  query.addOpperand(QueryOperators.NE, value);
-				query.end();
-			}
-		},
-		GT{
-			public void restriction(Criteria crit, Number value, String field) {
-				crit.add( Restrictions.gt(field, value));
-			}
-			
-			public void docuument(JongoQueryBuilder query,  Number value, String field) {
-				query.start(field);
-				  query.addOpperand(QueryOperators.GT, value);
-				query.end();
-			}
-		},
-		GEQ{
-			public void restriction(Criteria crit, Number value, String field) {
-				crit.add( Restrictions.ge(field, value));
-			}
-			
-			public void docuument(JongoQueryBuilder query,  Number value, String field) {
-				query.start(field);
-				  query.addOpperand(QueryOperators.GTE, value);
-				query.end();
-			}
-		},
-		NGT{
-			public void restriction(Criteria crit, Number value, String field) {
-				crit.add( Restrictions.not(Restrictions.gt(field, value)));
-			}
-			
-			public void docuument(JongoQueryBuilder query, Number value, String field) {
-				query.start(field);
-					query.start(JongoQueryBuilder.NOT);
-					  query.addOpperand(QueryOperators.GT, value);
-					query.end();
-				query.end();
-			}
-		},
-		NGEQ{
-			public void restriction(Criteria crit, Number value, String field) {
-				crit.add( Restrictions.not(Restrictions.gt(field, value)));
-			}
-			
-			public void docuument(JongoQueryBuilder query, Number value, String field) {
-				query.start(field);
-					query.start(JongoQueryBuilder.NOT);
-					  query.addOpperand(QueryOperators.GTE, value);
-					query.end();
-				query.end();
-			}
-		},
-		LT{
-			public void restriction(Criteria crit, Number value, String field) {
-				crit.add( Restrictions.lt(field, value));
-			}
-			
-			public void docuument(JongoQueryBuilder query,  Number value, String field) {
-				query.start(field);
-				  query.addOpperand(QueryOperators.LT, value);
-				query.end();
-			}
-		},
-		LEQ{
-			public void restriction(Criteria crit, Number value, String field) {
-				crit.add( Restrictions.le(field, value));
-			}
-			
-			public void docuument(JongoQueryBuilder query, Number value, String field) {
-				query.start(field);
-				  query.addOpperand(QueryOperators.LTE, value);
-				query.end();
-			}
-		},
-		NLT{
-			public void restriction(Criteria crit, Number value, String field) {
-				crit.add( Restrictions.not(Restrictions.lt(field, value)));
-			}
-			
-			public void docuument(JongoQueryBuilder query, Number value, String field) {			
-				query.start(field);
-					query.start(JongoQueryBuilder.NOT);
-					  query.addOpperand(QueryOperators.LT, value);
-					query.end();
-				query.end();
-			}
-		},
-		NLEQ{
-			public void restriction(Criteria crit, Number value, String field) {
-				crit.add( Restrictions.not(Restrictions.le(field, value)));
-			}
-			
-			public void docuument(JongoQueryBuilder query, Number value, String field) {
-				query.start(field);
-				query.start(JongoQueryBuilder.NOT);
-				  query.addOpperand(QueryOperators.LTE, value);
-				query.end();
-			query.end();
-			}
+    },
+    NEQ {
+            public void restriction(Criteria crit, Number value, String field) {
+                    crit.add( Restrictions.not(Restrictions.eq(field, value)));
+            }
+            
+            public void docuument(BasicDBObject query, Number value, String field) {
+                    query.put(field, new BasicDBObject( QueryOperators.NE, value));
+            }
+    },
+    GT{
+            public void restriction(Criteria crit, Number value, String field) {
+                    crit.add( Restrictions.gt(field, value));
+            }
+            
+            public void docuument(BasicDBObject query,  Number value, String field) {
+                    query.put(field, new BasicDBObject( QueryOperators.GT, value));
+            }
+    },
+    GEQ{
+            public void restriction(Criteria crit, Number value, String field) {
+                    crit.add( Restrictions.ge(field, value));
+            }
+            
+            public void docuument(BasicDBObject query,  Number value, String field) {
+                    query.put(field, new BasicDBObject( QueryOperators.GTE, value));
+            }
+    },
+    NGT{
+            public void restriction(Criteria crit, Number value, String field) {
+                    crit.add( Restrictions.not(Restrictions.gt(field, value)));
+            }
+            
+            public void docuument(BasicDBObject query, Number value, String field) {
+                    query.put(field, new BasicDBObject("$not", new BasicDBObject( QueryOperators.GT, value)));
+            }
+    },
+    NGEQ{
+            public void restriction(Criteria crit, Number value, String field) {
+                    crit.add( Restrictions.not(Restrictions.gt(field, value)));
+            }
+            
+            public void docuument(BasicDBObject query, Number value, String field) {
+                    query.put(field, new BasicDBObject("$not", new BasicDBObject( QueryOperators.GTE, value)));
+            }
+    },
+    LT{
+            public void restriction(Criteria crit, Number value, String field) {
+                    crit.add( Restrictions.lt(field, value));
+            }
+            
+            public void docuument(BasicDBObject query,  Number value, String field) {
+                    query.put(field, new BasicDBObject( QueryOperators.LT, value));
+            }
+    },
+    LEQ{
+            public void restriction(Criteria crit, Number value, String field) {
+                    crit.add( Restrictions.le(field, value));
+            }
+            
+            public void docuument(BasicDBObject query, Number value, String field) {
+                    query.put(field, new BasicDBObject( QueryOperators.LTE, value));
+            }
+    },
+    NLT{
+            public void restriction(Criteria crit, Number value, String field) {
+                    crit.add( Restrictions.not(Restrictions.lt(field, value)));
+            }
+            
+            public void docuument(BasicDBObject query, Number value, String field) {
+                    query.put(field, new BasicDBObject("$not", new BasicDBObject( QueryOperators.LT, value)));
+            }
+    },
+    NLEQ{
+            public void restriction(Criteria crit, Number value, String field) {
+                    crit.add( Restrictions.not(Restrictions.le(field, value)));
+            }
+            
+            public void docuument(BasicDBObject query, Number value, String field) {
+                    query.put(field, new BasicDBObject("$not", new BasicDBObject( QueryOperators.LTE, value)));
+            }
 		};
 		
 		public abstract void restriction(Criteria crit, Number value, String field);
-		public abstract void docuument(JongoQueryBuilder query, Number value, String field);
+		public abstract void docuument(BasicDBObject query, Number value, String field);
 		
 	}
 	
@@ -253,7 +224,7 @@ public class NumberTuple extends AbstractQueryTuple {
 		}
 	}
 	
-	public void getDoucmentQuery(JongoQueryBuilder query) {
+	public void getDoucmentQuery(BasicDBObject query) {
 		
 		if ( getLo() == null ) {
 			getLogic().docuument(query, hi, getField());

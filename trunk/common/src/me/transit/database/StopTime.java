@@ -3,11 +3,12 @@ package me.transit.database;
 import java.util.List;
 
 import me.database.CSVFieldType;
+import me.transit.dao.mongo.IDocument;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("StopTime")
-public interface StopTime extends CSVFieldType {
+public interface StopTime extends CSVFieldType, IDocument {
 	
 	public static final String STOPID = "stopId";
 	public static final String STOPNAME = "stopName";

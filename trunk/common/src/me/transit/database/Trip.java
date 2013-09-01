@@ -2,10 +2,12 @@ package me.transit.database;
 
 import java.util.List;
 
+import me.transit.dao.mongo.IDocument;
+
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("Trip")
-public interface Trip extends TransitData {
+public interface Trip extends TransitData, IDocument {
 
 	public static final String ID = "id";
 	public static final String SERVICE = "service";

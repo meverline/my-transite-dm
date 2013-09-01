@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.output.KmlFormatter;
-import me.transit.dao.mongo.JongoQueryBuilder;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -28,6 +27,7 @@ import org.hibernate.Criteria;
 import org.hibernate.spatial.Circle;
 import org.hibernate.spatial.criterion.SpatialRestrictions;
 
+import com.mongodb.BasicDBObject;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.Point;
@@ -139,16 +139,11 @@ public class CircleTuple extends AbstractQueryTuple {
 		
 	}
 	
-	public void getDoucmentQuery(JongoQueryBuilder query) {
+	public void getDoucmentQuery(BasicDBObject query) {
 				
-		Double [] point = new Double[2];
-		
-		point[0] = this.center_.getCoordinate().x;
-		point[1] = this.center_.getCoordinate().y;
-		
-		query.start(getField());
-		query.within(point, this.distanceInMeters_);
-		query.end();
+        Coordinate coord = this.center_.getCoordinate();                
+        query.append(getField(), new BasicDBObject("$geoWithin", 
+                                                           new Object[]{ new Double[]{ coord.x , coord.y } , this.distanceInMeters_  }));
 	}
 
 

@@ -19,11 +19,12 @@ package me.crime.database.tuple;
 import java.util.List;
 
 import me.crime.database.URCCatagories;
-import me.transit.dao.mongo.JongoQueryBuilder;
 import me.transit.dao.query.tuple.AbstractQueryTuple;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
+
+import com.mongodb.BasicDBObject;
 
 public class CatagoryTuple extends AbstractQueryTuple {
 
@@ -54,7 +55,7 @@ public class CatagoryTuple extends AbstractQueryTuple {
 	}
 	
 	@Override
-	public void getDoucmentQuery(JongoQueryBuilder query) {
+	public void getDoucmentQuery(BasicDBObject query) {
 		throw new UnsupportedOperationException();
 	}
 

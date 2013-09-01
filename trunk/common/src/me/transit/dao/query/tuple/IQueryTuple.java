@@ -16,9 +16,9 @@
 
 package me.transit.dao.query.tuple;
 
-import me.transit.dao.mongo.JongoQueryBuilder;
-
 import org.hibernate.Criteria;
+
+import com.mongodb.BasicDBObject;
 
 public interface IQueryTuple {
 	
@@ -34,6 +34,6 @@ public interface IQueryTuple {
 	 * 
 	 * @param query
 	 */
-	public abstract void getDoucmentQuery(JongoQueryBuilder query); 
+	public abstract void getDoucmentQuery(BasicDBObject query); 
 
 }

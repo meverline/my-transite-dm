@@ -14,7 +14,6 @@ import me.transit.dao.neo4j.GraphDatabaseDAO;
 import me.transit.dao.query.tuple.IQueryTuple;
 import me.transit.dao.query.tuple.StringTuple;
 import me.transit.database.Route;
-import me.transit.database.RouteDocument;
 import me.transit.database.RouteStopData;
 import me.transit.database.TransitStop;
 import me.transit.database.Trip;
@@ -194,7 +193,7 @@ public abstract class AbstractSpatialSampleData extends SpatialGridData implemen
 					                  route.getShortName(), 
 					                  StringTuple.MATCH.EXACT ));
 			
-			List<RouteDocument> data = dao.find(list);
+			List<Route> data = dao.find(list);
 			
 			rtn = Route.class.cast( data.get(0)).getTripList();
 		} catch (UnknownHostException e) {

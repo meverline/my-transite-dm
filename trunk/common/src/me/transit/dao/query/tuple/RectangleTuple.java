@@ -3,11 +3,10 @@ package me.transit.dao.query.tuple;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.transit.dao.mongo.JongoQueryBuilder;
-
 import org.hibernate.Criteria;
 import org.hibernate.spatial.criterion.SpatialRestrictions;
 
+import com.mongodb.BasicDBObject;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.Point;
@@ -101,25 +100,19 @@ public class RectangleTuple extends AbstractQueryTuple {
 		
 	}
 	
-	public void getDoucmentQuery(JongoQueryBuilder query) {
+	public void getDoucmentQuery(BasicDBObject query) {
 				
-		Double [] ulc = new Double[2];
-		
-		List<Double[]> points = new ArrayList<Double[]>();
-		
-		ulc[0] = ul.getCoordinate().x;
-		ulc[1] = lr.getCoordinate().y;
-		points.add(ulc);
+        Double [] ulc = new Double[2];
+        
+        ulc[0] = ul.getCoordinate().x;
+        ulc[1] = lr.getCoordinate().y;
 
-		Double [] urc = new Double[2];
-	    urc[0] = lr.getCoordinate().x;
-	    urc[1] = ul.getCoordinate().y;
-	    points.add(urc);
-		
-	    query.start(getField());
-	    query.within(points);
-	    query.end();
-		
+        Double [] urc = new Double[2];
+        urc[0] = lr.getCoordinate().x;
+        urc[1] = ul.getCoordinate().y;
+        
+        query.put(getField(), new BasicDBObject("$geoWithin", new Object[] { ulc, urc } ));
+        
 	}
 	
 }

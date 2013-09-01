@@ -1,10 +1,13 @@
 package me.transit.database.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import me.transit.dao.mongo.IDocument;
+import me.transit.database.Agency;
 import me.transit.database.Route;
-import me.transit.database.RouteDocument;
 import me.transit.database.Trip;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
@@ -174,20 +177,29 @@ public class RouteImpl extends TransitDateImpl implements Route {
 		return true;
 	}
 	
-	/**
-	 * 
-	 */
-	public RouteDocument toRouteDocument()  {
-		RouteDocument rtn = new RouteDocument();
-		
-		rtn.setAgency(this.getAgency().getName());
-		rtn.setDesc(this.getDesc());
-		rtn.setLongName(this.getLongName());
-		rtn.setShortName(this.getShortName());
-		rtn.setType(this.getType());
-		rtn.setUUID(this.getUUID());
-		
-		return rtn;
-	}
+    @Override
+    public Map<String, Object> toDocument() {
+            
+            Map<String,Object> rtn = new HashMap<String,Object>();
+
+            rtn.put(IDocument.CLASS, RouteImpl.class.getName());
+            rtn.put(IDocument.ID, this.getShortName() + ": " + this.getAgency().getName());
+            
+            rtn.put( Agency.AGENCY, this.getAgency().getName());
+            rtn.put( Agency.UUID, this.getUUID());
+            rtn.put( Route.SHORTNAME, this.getShortName());
+            rtn.put( Route.LONGNAME, this.getLongName());
+            rtn.put( Route.DESC, this.getDesc());
+            rtn.put( Route.TYPE, this.getType().name());
+            return rtn;
+    }
+    
+    @Override
+    public void handleEnum(String key, Object value)
+    {
+            if ( key.equals(Route.TYPE) ) {
+                    this.setType( Route.RouteType.valueOf(value.toString()));
+            }
+    }
 	
 }
