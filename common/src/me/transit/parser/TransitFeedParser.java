@@ -30,7 +30,6 @@ import me.transit.dao.neo4j.GraphDatabaseDAO;
 import me.transit.database.Agency;
 import me.transit.database.CalendarDate;
 import me.transit.database.Route;
-import me.transit.database.RouteDocument;
 import me.transit.database.RouteGeometry;
 import me.transit.database.ServiceDate;
 import me.transit.database.StopTime;
@@ -982,11 +981,11 @@ public class TransitFeedParser {
 					graphdb.createRelationShip(route, stopInfo);
 				}
 				
-				DocumentDao docDao = DocumentDao.instance();
-				RouteDocument data = route.toRouteDocument();
-				data.setTrips(entry.getValue());				
-				docDao.add(data);
-
+                DocumentDao docDao = DocumentDao.instance();
+                Map<String,Object> data = route.toDocument();
+                data.put( Route.TRIPLIST, entry.getValue());
+                docDao.add(data);
+                
 			}
 			
 		} catch (Exception e) {

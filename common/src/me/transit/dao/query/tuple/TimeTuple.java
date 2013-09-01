@@ -3,11 +3,10 @@ package me.transit.dao.query.tuple;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import me.transit.dao.mongo.JongoQueryBuilder;
-
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.QueryOperators;
 
 public class TimeTuple extends AbstractQueryTuple {
@@ -63,20 +62,12 @@ public class TimeTuple extends AbstractQueryTuple {
 	}
 	
 	@Override
-	public void getDoucmentQuery(JongoQueryBuilder query) {
-		SimpleDateFormat sdf = new SimpleDateFormat( TimeTuple.SDF_DATE_FORMAT);
-		
-		String start = sdf.format(startTime.getTime());
-		String end = sdf.format(endTime.getTime());
-		
-		query.start(JongoQueryBuilder.AND);
-		  query.start(getField());
-		     query.addOpperand(QueryOperators.GTE, start);
-		  query.end();
-		  query.start(getField());
-		     query.addOpperand(QueryOperators.LTE, end);
-		  query.end();
-	    query.end();
+	public void getDoucmentQuery(BasicDBObject query) {
+        SimpleDateFormat sdf = new SimpleDateFormat( TimeTuple.SDF_DATE_FORMAT);
+        
+        String start = sdf.format(startTime.getTime());
+        String end = sdf.format(endTime.getTime());
+        query.put(getField(), new BasicDBObject(QueryOperators.GTE, start).append(QueryOperators.LTE, end) );
 	}
 
 }

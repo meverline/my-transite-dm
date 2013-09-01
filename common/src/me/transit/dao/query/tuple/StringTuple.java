@@ -1,9 +1,11 @@
 package me.transit.dao.query.tuple;
 
-import me.transit.dao.mongo.JongoQueryBuilder;
+import java.util.regex.Pattern;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
+
+import com.mongodb.BasicDBObject;
 
 public class StringTuple extends AbstractQueryTuple {
 	
@@ -107,14 +109,12 @@ public class StringTuple extends AbstractQueryTuple {
 	}
 	
 	@Override
-	public void getDoucmentQuery(JongoQueryBuilder query) {
-		
-		query.start(getField());
-		if ( matchType == MATCH.EXACT ) {
-			query.is(value);
+	public void getDoucmentQuery(BasicDBObject query) {
+
+		if ( matchType == MATCH.EXACT) {
+			query.put(getField(), value );
 		} else {
-			query.addOpperand("$regex", matchType.docuument(value));
+			query.put(getField(), Pattern.compile(matchType.docuument(value), Pattern.CASE_INSENSITIVE) );
 		}
-		query.end();
 	}
 }

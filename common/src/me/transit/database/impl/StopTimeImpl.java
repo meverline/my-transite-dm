@@ -1,21 +1,22 @@
 package me.transit.database.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import me.database.CSVFieldType;
 import me.factory.DaoBeanFactory;
 import me.transit.dao.TransiteStopDao;
+import me.transit.dao.mongo.IDocument;
 import me.transit.database.Agency;
 import me.transit.database.StopTime;
 import me.transit.database.TransitStop;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class StopTimeImpl implements StopTime {
 	
 	private static final String SEPERATOR = ";";
@@ -23,27 +24,20 @@ public class StopTimeImpl implements StopTime {
 	@XStreamOmitField
 	private static final long serialVersionUID = 1L;
 	@XStreamOmitField
-	@JsonProperty(StopTime.STOPID)
 	private String stopId = null;
-	@JsonProperty(StopTime.ARRIVALTIME)
 	@XStreamAlias(StopTime.ARRIVALTIME)
 	private List<Long> arrivalTime = new ArrayList<Long>();
-	@JsonProperty(StopTime.STOPHEADSIGN)
 	@XStreamAlias(StopTime.STOPHEADSIGN)
 	private String stopHeadSign = "";
-	@JsonProperty(StopTime.STOPNAME)
 	@XStreamAlias(StopTime.STOPNAME)
 	private String stopName = "";
-	@JsonProperty(StopTime.PICKUPTYPE)
 	@XStreamAlias(StopTime.PICKUPTYPE)
 	private PickupType pickupType = PickupType.UNKNOWN;
-	@JsonProperty(StopTime.DROPOFFTYPE)
 	@XStreamAlias(StopTime.DROPOFFTYPE)
 	private PickupType dropOffType = PickupType.UNKNOWN;
 	@XStreamOmitField
 	private String tripId = null;
 	@XStreamOmitField
-	@JsonProperty(StopTime.LOCATION)
 	private Double[] location = null;
 	
 	public StopTimeImpl()
@@ -244,5 +238,44 @@ public class StopTimeImpl implements StopTime {
 		
 		return builder.toString();
 	}
+	
+    @Override
+    public Map<String, Object> toDocument() {
+            Map<String,Object> rtn = new HashMap<String,Object>();
+
+            rtn.put(IDocument.CLASS, StopTimeImpl.class.getName());
+            if ( this.getStopId() != null ) {
+                    rtn.put( StopTime.STOPID, this.getStopId());
+            }
+            if ( this.getStopName() != null ) {
+                    rtn.put( StopTime.STOPNAME, this.getStopName());
+            }
+            if ( this.getStopHeadSign() != null ) {
+                    rtn.put( StopTime.STOPHEADSIGN, this.getStopHeadSign());
+            }
+                            
+            Collections.sort(this.getArrivalTime());
+            rtn.put( StopTime.ARRIVALTIME, this.getArrivalTime());
+            rtn.put( StopTime.DROPOFFTYPE, this.getDropOffType().name());
+            rtn.put( StopTime.PICKUPTYPE, this.getPickupType().name());
+            
+            if ( location != null ) {
+                rtn.put( StopTime.LOCATION, location);
+            }
+            return rtn;
+    }
+    
+    /**
+     * 
+     */
+    @Override
+    public void handleEnum(String key, Object value)
+    {
+            if ( key.equals(StopTime.PICKUPTYPE) ) {
+                    this.setPickupType( StopTime.PickupType.valueOf(value.toString()));
+            } else  if ( key.equals(StopTime.DROPOFFTYPE) ) {
+                    this.setDropOffType( StopTime.PickupType.valueOf(value.toString()));
+            }
+    }
 				
 }
