@@ -13,6 +13,7 @@ import me.openMap.OpenTransitMap;
 import me.openMap.models.query.result.RouteQueryResult;
 import me.openMap.models.query.result.TransitStopQueryResult;
 import me.openMap.utils.StopOverlay;
+import me.transit.dao.neo4j.GraphDatabaseDAO;
 import me.transit.database.RouteStopData;
 import me.transit.database.TransitStop;
 
@@ -58,9 +59,12 @@ public class TransitStopDataHandler implements DataDisplayHandler {
 		
 		HashMap<String,RouteQueryResult> routes = new HashMap<String,RouteQueryResult>();
 		
+		GraphDatabaseDAO db = GraphDatabaseDAO.instance();
+		
 		for ( TransitStop stops : this.getData()) {
-			if ( stops != null && stops.getRoutes() != null ) {
-				for ( RouteStopData info : stops.getRoutes()) 
+			if ( stops != null ) {
+				List<RouteStopData> list = db.findRoutes(stops);
+				for ( RouteStopData info : list) 
 				{
 					if ( ! routes.containsKey(info.getRouteShortName() ) ) {
 						String headSign =  info.getTripHeadSign();
