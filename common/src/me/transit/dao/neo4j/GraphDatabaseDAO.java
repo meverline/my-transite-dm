@@ -27,22 +27,35 @@ import org.neo4j.graphdb.factory.GraphDatabaseSettings;
 import org.neo4j.graphdb.index.ReadableIndex;
 import org.neo4j.graphdb.traversal.Evaluators;
 import org.neo4j.graphdb.traversal.TraversalDescription;
+import org.neo4j.kernel.CommonBranchOrdering;
 import org.neo4j.kernel.Traversal;
 
 public class GraphDatabaseDAO {
 	
 	public enum REL_TYPES implements RelationshipType
 	{
-	     HAS_STOP, AGENCY, LOCATION, HAS_A
+	     HAS_STOP, AGENCY, LOCATION, HAS_A, HEAD_SIGN
 	}
 	
 	public enum FIELD {
 		db_id(true), 
 		agency(true), 
 		stop(true),
-		trip(true) , 
+		trip(true),
+		trip_headSign(true) {
+			public String makeKey(TransitData data) {
+				Trip trip = Trip.class.cast(data);
+				
+				StringBuffer key = new StringBuffer();
+				key.append(trip.getHeadSign());
+				key.append("@");
+				key.append(data.getAgency().getName());
+				return key.toString();
+			}
+		},
 		db_name(true), 
 		className(false),
+		direction(false),
 		route(true) {
 			public String makeKey(TransitData data) {
 				Route route = Route.class.cast(data);
@@ -194,6 +207,11 @@ public class GraphDatabaseDAO {
 		return;
 	}
 	
+	/**
+	 * 
+	 * @param obj
+	 * @return
+	 */
 	private String getInterface(Object obj)
 	{
 		String className = obj.getClass().getSimpleName();
@@ -329,6 +347,8 @@ public class GraphDatabaseDAO {
 		ReadableIndex<Node> index = graphDb.index().getNodeAutoIndexer().getAutoIndex();
 		
 		Node node = index.get(FIELD.trip.name(), FIELD.trip.makeKey(trip)).getSingle();
+		Node hs = index.get(FIELD.trip_headSign.name(), FIELD.trip_headSign.makeKey(trip)).getSingle();
+
 		if ( node == null ) {
 			Transaction tx = beginTransaction();
 			try {
@@ -336,11 +356,19 @@ public class GraphDatabaseDAO {
 				node.setProperty(FIELD.trip.name(), FIELD.trip.makeKey(trip));
 				node.setProperty(FIELD.db_name.name(), trip.getHeadSign());
 				node.setProperty(FIELD.className.name(), this.getInterface(trip));
+				node.setProperty(FIELD.direction.name(), trip.getDirectionId().name());
 				
 				if (trip.getShortName() != null) {
 					node.setProperty(FIELD.db_id.name(), trip.getShortName());
 				}
 				createRelationShip(node, trip.getAgency());
+				
+				if ( hs == null ) {
+					hs = graphDb.createNode();
+					hs.setProperty(FIELD.trip_headSign.name(), FIELD.trip_headSign.makeKey(trip));
+					createRelationShip(hs, trip.getAgency());
+				}
+				
 				tx.success();
 			} catch (Exception ex) {
 				tx.failure();
@@ -362,16 +390,21 @@ public class GraphDatabaseDAO {
 		
 		ReadableIndex<Node> index = graphDb.index().getNodeAutoIndexer().getAutoIndex();
 		
-		Node from = index.get(FIELD.stop.name(), FIELD.stop.makeKey(toStop)).getSingle();
-		if ( from == null ) { 
-			from = this.addNode(toStop);
-		}
-		
-		Node to = index.get(FIELD.trip.name(), FIELD.trip.makeKey(fromTrip)).getSingle();
+		Node to = index.get(FIELD.stop.name(), FIELD.stop.makeKey(toStop)).getSingle();
 		if ( to == null ) { 
-			to = this.addNode(fromTrip);
+			to = this.addNode(toStop);
 		}
 		
+		Node from = index.get(FIELD.trip.name(), FIELD.trip.makeKey(fromTrip)).getSingle();
+		if ( from == null ) { 
+			from = this.addNode(fromTrip);
+		}
+		
+		if ( to == null || from == null ) {
+			log.warn("Warng adding relationsip trip to stop: nodes null: " + from  + " to "+ to);
+			return false;
+		}
+
 		Transaction tx = beginTransaction();
 		try {
 			Relationship relationship = from.createRelationshipTo(to, REL_TYPES.HAS_A);
@@ -406,6 +439,11 @@ public class GraphDatabaseDAO {
 			from = this.addNode(fromRoute);
 		}
 		
+		if ( to == null || from == null ) {
+			log.warn("Warng adding relationsip route to stop: nodes null: " + from  + " to "+ to);
+			return false;
+		}
+		
 		Transaction tx = beginTransaction();
 		try {
 		   Relationship relationship = from.createRelationshipTo( to, REL_TYPES.HAS_STOP );
@@ -430,20 +468,31 @@ public class GraphDatabaseDAO {
 		
 		ReadableIndex<Node> index = graphDb.index().getNodeAutoIndexer().getAutoIndex();
 		
-		Node from = index.get(FIELD.trip.name(), FIELD.trip.makeKey(toTrip)).getSingle();
-		if ( from == null ) { 
-			from = this.addNode(toTrip);
-		}
-		
-		Node to = index.get(FIELD.route.name(), FIELD.route.makeKey(fromRoute)).getSingle();
+		Node to = index.get(FIELD.trip.name(), FIELD.trip.makeKey(toTrip)).getSingle();
 		if ( to == null ) { 
-			to = this.addNode(fromRoute);
+			 to = this.addNode(toTrip);
+		} 
+		
+		Node from = index.get(FIELD.route.name(), FIELD.route.makeKey(fromRoute)).getSingle();
+		if ( from == null ) { 
+			from = this.addNode(fromRoute);
 		}
 		
+		Node tohs = index.get(FIELD.trip_headSign.name(), FIELD.trip_headSign.makeKey(toTrip)).getSingle();
+
+		if ( to == null || from == null ) {
+			log.warn("Warng adding relationsip route to trip: nodes null: " + from  + " to "+ to);
+			return false;
+		}
+				
 		Transaction tx = beginTransaction();
 		try {
 		   Relationship relationship = from.createRelationshipTo( to, REL_TYPES.HAS_A );
 		   relationship.setProperty( FIELD.className.name(), this.getInterface(fromRoute));
+
+		   relationship = from.createRelationshipTo( tohs, REL_TYPES.HEAD_SIGN );
+		   relationship.setProperty( FIELD.className.name(), this.getInterface(fromRoute));
+   
 		   tx.success();
 		} catch (Exception ex) {
 			tx.failure();
@@ -482,25 +531,24 @@ public class GraphDatabaseDAO {
 		ReadableIndex<Node> index = graphDb.index().getNodeAutoIndexer().getAutoIndex();
 		
 		Node stopNode = index.get(FIELD.stop.name(), FIELD.stop.makeKey(stop)).getSingle();
-		
+				
 		List<RouteStopData> rtn = new ArrayList<RouteStopData>();
 		if ( stopNode != null ) {
 			
 			TraversalDescription td = Traversal.description().
-												 depthFirst().
-												 relationships(REL_TYPES.HAS_A, Direction.OUTGOING).
+												 order(CommonBranchOrdering.POSTORDER_DEPTH_FIRST).
+												 relationships(REL_TYPES.HAS_A, Direction.INCOMING).
 												 evaluator( Evaluators.excludeStartPosition());
 			
 			org.neo4j.graphdb.traversal.Traverser routes = td.traverse(stopNode);
 			String currentRoute = null;
 			for ( Path path : routes) {
 				
-				Node node = path.endNode();				
+				Node node = path.endNode();		
+								
 				String className = node.getProperty(FIELD.className.name()).toString();
 				String name = node.getProperty(FIELD.db_name.name()).toString();
-				
-				System.out.println(className + " " + name + " path: " + path.toString());
-				
+								
 				if ( className.equals(Route.class.getSimpleName()) ) {
 					
 					if ( currentRoute == null ) {
@@ -522,15 +570,42 @@ public class GraphDatabaseDAO {
 		return rtn;
 	}
 	
+	protected String nodeToString(Node node)
+	{
+		StringBuilder item = new StringBuilder();
+		item.append("{");
+		for ( String prop : node.getPropertyKeys() )
+		{
+			item.append("[ " + prop + " " + node.getProperty(prop) + "]" );
+		}
+		item.append("}");
+		return item.toString();
+	}
+	
+	protected void showRelationships(Node rtn, String start) 
+	{
+		for ( Relationship rel : rtn.getRelationships()) {
+			
+			Node endNode = rel.getEndNode();
+			String cn = "";
+			if ( rel.hasProperty(FIELD.className.name())) {
+			   cn = rel.getProperty(FIELD.className.name()).toString();
+			}
+			
+			System.out.println(start + " " + rel.getType().name() + " "  + 
+										   cn + " : " + nodeToString(endNode) );
+		}
+	}
+	
 	/**
 	 * 
 	 * @return
 	 */
-	public Node findNodeByField(FIELD fld, String id, String agency) {
+	public Node findNodeByField(FIELD fld, String key) {
 		
 		ReadableIndex<Node> index = graphDb.index().getNodeAutoIndexer().getAutoIndex();
 		
-		Node rtn = index.get(FIELD.db_id.name(), id).getSingle();
+		Node rtn = index.get(fld.name(), key).getSingle();	
 		return rtn;
 	}
 	

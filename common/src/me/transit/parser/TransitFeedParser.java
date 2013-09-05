@@ -920,7 +920,7 @@ public class TransitFeedParser {
 			}
 			inStream.close();
 			
-			log.info("parseTrip:updateRoute ");
+			
 			
 			GraphDatabaseDAO graphdb = GraphDatabaseDAO.instance();
 			RouteDao dao = RouteDao.class.cast(DaoBeanFactory.create().getDaoBean(RouteDao.class));
@@ -934,6 +934,7 @@ public class TransitFeedParser {
 				for ( Trip entry : data.getValue() ) {
 					graphdb.createRelationShip(route, entry);
 				}
+				log.info("parseTrip:updateRoute " + route.getShortName() + " " + data.getValue().size());
 			}
 							
 		} catch (Exception e) {

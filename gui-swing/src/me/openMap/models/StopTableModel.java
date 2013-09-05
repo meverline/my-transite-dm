@@ -6,6 +6,7 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 import me.openMap.models.query.result.TransitStopQueryResult;
+import me.transit.dao.neo4j.GraphDatabaseDAO;
 import me.transit.database.RouteStopData;
 import me.transit.database.TransitStop;
 
@@ -65,7 +66,9 @@ public class StopTableModel extends AbstractTableModel {
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		
 		TransitStop row = this.getTableData().get(rowIndex).getStop();
-		
+		GraphDatabaseDAO db = GraphDatabaseDAO.instance();
+
+		List<RouteStopData> list = db.findRoutes(row);
 		switch(columnIndex)
 		{
 			case 0:
@@ -80,9 +83,9 @@ public class StopTableModel extends AbstractTableModel {
 				StringBuilder builder = new StringBuilder();
 				int ndx = 0;
 				
-				if ( row.getRoutes() != null ) {
+				if ( ! list.isEmpty() ) {
 					HashSet<String> map = new HashSet<String>();
-					for (RouteStopData r : row.getRoutes() ) {
+					for (RouteStopData r : list ) {
 						if ( ! map.contains(r.getRouteShortName()) ) {
 							if ( ndx != 0 ) { builder.append(", "); }
 							builder.append(r.getRouteShortName());
