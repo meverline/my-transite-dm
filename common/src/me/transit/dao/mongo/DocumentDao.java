@@ -310,13 +310,12 @@ public class DocumentDao {
                 for ( IQueryTuple tuple : tupleList) {
                         tuple.getDoucmentQuery(query);
                 }
-                
+                               
                 DBCursor results = _collection.find(query);
                                 
                 List<Route> rtn = new ArrayList<Route>( );
                 
-                System.out.println(query.toString() + " ---> " + results.count() + " " + _collection.count());
-                
+                log.info(query.toString() + " ---> " + results.count());
                 while ( results.hasNext()) {                    
                         @SuppressWarnings("unchecked")
                         Object obj = this.translateToDbObject((Map<String,Object>)results.next().toMap());

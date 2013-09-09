@@ -76,8 +76,8 @@ public class MongoDBTest {
 			List<Route> routes = dao.find(query);
 			
 			assertNotNull(routes);
-			assertEquals(5, routes.size());
-			
+			assertEquals(8, routes.size());
+					
 		} catch (UnknownHostException e) {
 			fail(e.getLocalizedMessage());
 			
