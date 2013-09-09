@@ -17,7 +17,7 @@ public class StringTuple extends AbstractQueryTuple {
 			}
 			
 			public String docuument( String value) {
-				return "/." +value + "/";
+				return "*." +value;
 			}
 		},
 		END {
@@ -27,7 +27,7 @@ public class StringTuple extends AbstractQueryTuple {
 			}
 			
 			public String docuument( String value) {
-				return "/" +value + "./";
+				return value + ".*";
 			}
 		},
 		CONTAINS {
@@ -37,7 +37,7 @@ public class StringTuple extends AbstractQueryTuple {
 			}
 			
 			public String docuument( String value) {
-				return "/." +value + "./";
+				return "*." +value + ".*";
 			}
 		},
 		EXACT {
