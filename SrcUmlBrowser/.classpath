@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/Users/markeverline/java/my-transite-dm/lib/jar/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="/Users/markeverline/java/my-transite-dm/lib/jar/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="/Users/markeverline/java/my-transite-dm/lib/jar/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="/Users/markeverline/java/my-transite-dm/lib/jar/stax-api-1.0.1.jar"/>
+	<classpathentry kind="lib" path="/Users/markeverline/java/my-transite-dm/lib/jar/xml-writer-0.2.jar"/>
+	<classpathentry kind="lib" path="/Users/markeverline/java/my-transite-dm/lib/jar/xpp3-1.1.4c.jar"/>
+	<classpathentry kind="lib" path="/Users/markeverline/java/my-transite-dm/lib/jar/xpp3_min-1.1.4c.jar"/>
+	<classpathentry kind="lib" path="/Users/markeverline/java/my-transite-dm/lib/jar/xstream-1.4.3.jar"/>
+	<classpathentry kind="lib" path="/Users/markeverline/java/my-transite-dm/lib/jar/asm-all-4.1.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
