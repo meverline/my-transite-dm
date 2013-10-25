@@ -1,8 +1,8 @@
 <project xmlns:ivy="antlib:org.apache.ivy.ant" name="SrcUmlBrowser" default="dist" basedir=".">
   
   <!-- set global properties for this build -->
-  <loadproperties srcFile="${basedir}/../config/properties/build.all.properties"/>
-  <loadproperties srcFile="${basedir}/../config/properties/build.${os.name}.properties"/>
+  <loadproperties srcFile="${basedir}/properties/build.all.properties"/>
+  <loadproperties srcFile="${basedir}/properties/build.${os.name}.properties"/>
 	
   <!-- targets for building the ecllipse project need to handle both windows and others -->
 	
@@ -11,7 +11,7 @@
 	
   <target name="libs" description="--> resolve external libs and fix class path">
 	<antcall target="utilities.resolve"/>
-  	<copy file="../jar-repository/asm-4.1.jar" todir="${lib}" />
+  	<copy file="../jar-repository/asm-all-4.1.jar" todir="${lib}" />
 	<antcall target="ecllipse.classPath">
 		<param name="${classpath.projectDepends.parm}" value="/config"/>
 		<param name="${classpath.includeSource.parm}" value="false"/>
