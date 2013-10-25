@@ -3,22 +3,17 @@ package me.transit.database.impl;
 import me.transit.database.Agency;
 import me.transit.database.TransitData;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class TransitDateImpl implements TransitData {
 	
 	@XStreamOmitField
 	private static final long serialVersionUID = 1L;
 	@XStreamAlias("id")
-	@JsonProperty("UUID")
 	private long uuid = -1;
 	private Agency agency = null;
 	@XStreamOmitField
-	@JsonProperty("Id")
 	private String id = null;
 	@XStreamAlias("version")
 	private String version = "0.5";
