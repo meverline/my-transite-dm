@@ -13,9 +13,9 @@ import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import browser.graph.Edge;
-import browser.graph.Graph;
-import browser.graph.Node;
+import browser.graph.GraphVizEdge;
+import browser.graph.GraphVizGraph;
+import browser.graph.GraphVizNode;
 import browser.gui.AppMainWindow;
 import browser.gui.dialog.GraphOptionsDialog;
 import browser.loader.ClassReflectionData;
@@ -51,28 +51,28 @@ public class InheritanceGraphCommand extends AbstractSearchActionCommand {
 	 * @param g
 	 * @param root
 	 */
-	private void addNodesToGraph(Collection<ClassReflectionData> set, int depth, Graph g, Node root, HashSet<String> visted, boolean invert)
+	private void addNodesToGraph(Collection<ClassReflectionData> set, int depth, GraphVizGraph g, GraphVizNode root, HashSet<String> visted, boolean invert)
 	{
 		if ( set == null ) { return; }
 		
 		ApplicationSettings settings = ApplicationSettings.instance();
 		AppMainWindow mainWin = getDialog().getMain();
-		Graph.DEPTH maxDepth = Graph.DEPTH.valueOf(settings.getSettings().getGraphDepth());
+		GraphVizGraph.DEPTH maxDepth = GraphVizGraph.DEPTH.valueOf(settings.getSettings().getGraphDepth());
 	
 		if ( depth > maxDepth.depth() ) { return; }
 		
 		for ( ClassReflectionData item : set ) {
 			if ( this.showClass(item.getName())) {
 				String name = getDialog().stripPackage(item.getName());
-				Node node = g.getNodeByName(name);
+				GraphVizNode node = g.getNodeByName(name);
 				if ( node == null ) {
-					node = new Node( name, Node.SHAPE.fromClass(item), depth);
+					node = new GraphVizNode( name, GraphVizNode.SHAPE.fromClass(item), depth);
 					g.add(node);
 				}
 				if ( invert ) {
-					node.addEdge( new Edge(root, Edge.TYPE.normal));
+					node.addEdge( new GraphVizEdge(root, GraphVizEdge.TYPE.normal));
 				} else {
-					node.addEdge( new Edge(root, Edge.TYPE.normal));
+					node.addEdge( new GraphVizEdge(root, GraphVizEdge.TYPE.normal));
 				}
 				if ( ! visted.contains(item.getName())) {
 					visted.add(item.getName());
@@ -91,16 +91,16 @@ public class InheritanceGraphCommand extends AbstractSearchActionCommand {
 		AppMainWindow mainWin = getDialog().getMain();
 		
 		HashSet<String> visted = new HashSet<String>();
-		Graph g = null;
+		GraphVizGraph g = null;
 		try {
 			ClassReflectionData theClass = mainWin.getLoader().load(selected);
 			
 			String item = getDialog().getSelected().get(0);
 			int ndx = item.lastIndexOf(".");
-			g = new Graph( item.substring(ndx+1));
+			g = new GraphVizGraph( item.substring(ndx+1));
 			
 			String name = getDialog().stripPackage(theClass.getName());
-			Node root = new Node( name, Node.SHAPE.fromClass(theClass), 0);
+			GraphVizNode root = new GraphVizNode( name, GraphVizNode.SHAPE.fromClass(theClass), 0);
 			g.add(root);
 					
 			int depth = 0;
@@ -114,12 +114,12 @@ public class InheritanceGraphCommand extends AbstractSearchActionCommand {
 			List<ClassReflectionData> aList = new ArrayList<ClassReflectionData>();
 			for (String itemCls : interfaces ) {
 				ClassReflectionData data = mainWin.getLoader().load(itemCls);
-				Node node = g.getNodeByName(itemCls);
+				GraphVizNode node = g.getNodeByName(itemCls);
 				if ( node == null ) {
-					node = new Node( itemCls, Node.SHAPE.fromClass(data), depth);
+					node = new GraphVizNode( itemCls, GraphVizNode.SHAPE.fromClass(data), depth);
 					g.add(node);
 				}
-				root.addEdge( new Edge(node, Edge.TYPE.normal));
+				root.addEdge( new GraphVizEdge(node, GraphVizEdge.TYPE.normal));
 				
 				aList.clear();
 				if ( data != null ) {
@@ -137,16 +137,16 @@ public class InheritanceGraphCommand extends AbstractSearchActionCommand {
 			if ( theClass.getSuperClass() != null ) {
 				ClassReflectionData data = mainWin.getLoader().load(theClass.getSuperClass());
 				name = getDialog().stripPackage(theClass.getSuperClass());
-				Node node = g.getNodeByName(name);
+				GraphVizNode node = g.getNodeByName(name);
 				if ( node == null && theClass.getSuperClass() != null) {
-					node = new Node( name, 
-							          Node.SHAPE.fromClass(data), 
+					node = new GraphVizNode( name, 
+							          GraphVizNode.SHAPE.fromClass(data), 
 							          depth);
 					g.add(node);
 
 				} 
 				if ( node != null ) {
-					root.addEdge( new Edge(node, Edge.TYPE.normal));
+					root.addEdge( new GraphVizEdge(node, GraphVizEdge.TYPE.normal));
 				}
 			}
 			

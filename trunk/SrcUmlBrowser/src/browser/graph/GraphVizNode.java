@@ -10,7 +10,7 @@ import browser.loader.ClassReflectionData;
 import browser.util.ApplicationSettings;
 
 
-public class Node {
+public class GraphVizNode {
 
 	public enum SHAPE { box, polygon, ellipse, circle, point, egg, oval,
 						diamond, trapezium, parallelogram, house, pentagon,
@@ -31,7 +31,7 @@ public class Node {
 	
 	private String name;
 	private SHAPE shape = SHAPE.box;
-	private Map<String, Edge> edge = new HashMap<String,Edge>();
+	private Map<String, GraphVizEdge> edge = new HashMap<String,GraphVizEdge>();
 	private int level = 0;
 	
 	/**
@@ -39,7 +39,7 @@ public class Node {
 	 * @param aName
 	 * @param aShape
 	 */
-	public Node(String aName, Node.SHAPE aShape)
+	public GraphVizNode(String aName, GraphVizNode.SHAPE aShape)
 	{
 		this.setName(aName);
 		this.setShape(aShape);
@@ -50,7 +50,7 @@ public class Node {
 	 * @param aName
 	 * @param aShape
 	 */
-	public Node(String aName, Node.SHAPE aShape, int level)
+	public GraphVizNode(String aName, GraphVizNode.SHAPE aShape, int level)
 	{
 		this.setName(aName);
 		this.setShape(aShape);
@@ -61,11 +61,11 @@ public class Node {
 	 * 
 	 * @param edge
 	 */
-	public void addEdge( Edge edge)
+	public void addEdge( GraphVizEdge edge)
 	{
 	    if ( edge != null && edge.getEdgeTo().getName().compareTo(getName()) != 0 ) {
 	    	if ( this.edge.containsKey(edge.getEdgeTo().getName()) ) {
-	    		Edge item = this.edge.get(edge.getEdgeTo().getName());
+	    		GraphVizEdge item = this.edge.get(edge.getEdgeTo().getName());
 	    		if ( edge.getEdgeType().ordinal() > item.getEdgeType().ordinal() ) {
 	    			item.setEdgeType( edge.getEdgeType());
 	    		}
@@ -106,16 +106,16 @@ public class Node {
 	/**
 	 * @return the edge
 	 */
-	public Collection<Edge> getEdge() {
+	public Collection<GraphVizEdge> getEdge() {
 		return edge.values();
 	}
 	
 	/**
 	 * @param edge the edge to set
 	 */
-	public void setEdge(List<Edge> edge) {
+	public void setEdge(List<GraphVizEdge> edge) {
 		this.edge.clear();
-		for ( Edge e : edge ) {
+		for ( GraphVizEdge e : edge ) {
 			this.edge.put(e.getEdgeTo().getName(), e);
 		}
 	}
@@ -174,7 +174,7 @@ public class Node {
 	 */
 	public void writeEdges(PrintWriter writer)
 	{
-		for ( Edge e : getEdge()) {
+		for ( GraphVizEdge e : getEdge()) {
 			writer.print("\t");
 			e.write(this, writer);
 		}

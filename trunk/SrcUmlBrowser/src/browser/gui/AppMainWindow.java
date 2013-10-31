@@ -31,6 +31,7 @@ import browser.gui.commands.NewProjectCommand;
 import browser.gui.commands.PackageGraphCommand;
 import browser.gui.commands.SearchActionCommand;
 import browser.gui.commands.SettingDialogCommand;
+import browser.gui.commands.SettingsProjectCommand;
 import browser.gui.commands.ShowClassCommand;
 import browser.gui.dialog.SearchDialog;
 import browser.gui.models.NodeData;
@@ -143,12 +144,16 @@ public class AppMainWindow extends JFrame {
 		menu = new JMenu("Project");
 		bar.add(menu);
 		
-		button = new JMenuItem("new...");
+		button = new JMenuItem("New...");
 		button.addActionListener( new NewProjectCommand(this));
 		menu.add(button);
 
-		button = new JMenuItem("load...");
+		button = new JMenuItem("Load...");
 		button.addActionListener( new LoadProjectCommand(this));
+		menu.add(button);
+		
+		button = new JMenuItem("Edit...");
+		button.addActionListener( new SettingsProjectCommand(this));
 		menu.add(button);
 
 		/////////////////////////////////////////////////////

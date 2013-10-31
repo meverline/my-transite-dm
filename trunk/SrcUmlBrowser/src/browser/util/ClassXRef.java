@@ -21,6 +21,8 @@ import browser.loader.ScannedClassLoader;
 
 public class ClassXRef {
 	
+	private static final String DUMPFILE = "/classXRef.txt";
+	
 	private Log log = LogFactory.getLog(ClassXRef.class);
 
 	private Map<String,Set<PackageAssociation>> packRef = new HashMap<String,Set<PackageAssociation>>();
@@ -105,8 +107,7 @@ public class ClassXRef {
 				e.printStackTrace();
 			}
 		}
-		
-		this.dump("c:/tmp/classXRef.txt");
+		this.dump(System.getProperty("java.io.tmpdir") + DUMPFILE);
 			
 	}
 	

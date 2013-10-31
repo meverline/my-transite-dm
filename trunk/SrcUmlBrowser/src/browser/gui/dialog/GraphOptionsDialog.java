@@ -27,7 +27,7 @@ import javax.swing.SpringLayout;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import browser.graph.Graph;
+import browser.graph.GraphVizGraph;
 import browser.gui.commands.CloseDialogAction;
 import browser.gui.layout.SpringLayoutUtilities;
 import browser.util.ApplicationSettings;
@@ -47,7 +47,7 @@ public class GraphOptionsDialog extends JDialog {
 	private JTextField fileNameField = null;
 	private JComboBox graphType = null;
 	private JComboBox graphCmd = null;
-	private Graph dataGraph = null;
+	private GraphVizGraph dataGraph = null;
 	private Component parent = null;
 	
 	
@@ -55,7 +55,7 @@ public class GraphOptionsDialog extends JDialog {
 	 * 
 	 * @param frame
 	 */
-	public GraphOptionsDialog(JFrame frame, Graph graph)
+	public GraphOptionsDialog(JFrame frame, GraphVizGraph graph)
 	{
 		super(frame);
 		parent = frame;
@@ -67,7 +67,7 @@ public class GraphOptionsDialog extends JDialog {
 	 * 
 	 * @param frame
 	 */
-	public GraphOptionsDialog(JDialog frame, Graph graph)
+	public GraphOptionsDialog(JDialog frame, GraphVizGraph graph)
 	{
 		super(frame);
 		parent = frame;
@@ -75,7 +75,7 @@ public class GraphOptionsDialog extends JDialog {
 	}
 	
 	
-	private void init(Graph graph)
+	private void init(GraphVizGraph graph)
 	{
 		dataGraph = graph;
 		build();
@@ -126,12 +126,12 @@ public class GraphOptionsDialog extends JDialog {
 		// 2 output.
 		graph.add( new JLabel("Output Format:"));
 		
-		graphType = new JComboBox( Graph.OUTPUT.values());
+		graphType = new JComboBox( GraphVizGraph.OUTPUT.values());
 		graph.add(graphType);
 		
 		if ( set.getSettings().getGraphOutput() != null ) {
 			String value = set.getSettings().getGraphOutput();
-			graphType.setSelectedItem( Graph.OUTPUT.valueOf(value));
+			graphType.setSelectedItem( GraphVizGraph.OUTPUT.valueOf(value));
 		}
 		
 		graph.add( new JLabel(""));
@@ -139,12 +139,12 @@ public class GraphOptionsDialog extends JDialog {
 		// 3 command.
 		graph.add( new JLabel("Command:"));
 		
-		graphCmd = new JComboBox( Graph.CMD.values());
+		graphCmd = new JComboBox( GraphVizGraph.CMD.values());
 		graph.add(graphCmd);
 		
 		if ( set.getSettings().getGraphProgram() != null ) {
 			String value = set.getSettings().getGraphProgram();
-			graphCmd.setSelectedItem( Graph.CMD.valueOf(value));
+			graphCmd.setSelectedItem( GraphVizGraph.CMD.valueOf(value));
 		}
 		
 		graph.add( new JLabel(""));
@@ -186,21 +186,21 @@ public class GraphOptionsDialog extends JDialog {
 	/**
 	 * @return the graphType
 	 */
-	public Graph.OUTPUT getGraphType() {
-		return (Graph.OUTPUT) graphType.getSelectedItem();
+	public GraphVizGraph.OUTPUT getGraphType() {
+		return (GraphVizGraph.OUTPUT) graphType.getSelectedItem();
 	}
 
 	/**
 	 * @return the graphCmd
 	 */
-	public Graph.CMD getGraphCmd() {
-		return (Graph.CMD) graphCmd.getSelectedItem();
+	public GraphVizGraph.CMD getGraphCmd() {
+		return (GraphVizGraph.CMD) graphCmd.getSelectedItem();
 	}
 
 	/**
 	 * @return the dataGraph
 	 */
-	public Graph getDataGraph() {
+	public GraphVizGraph getDataGraph() {
 		return dataGraph;
 	}
 	

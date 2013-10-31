@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import browser.gui.AppMainWindow;
-import browser.gui.dialog.NewProjectDialog;
+import browser.gui.dialog.EditProjectDialog;
 
 public class NewProjectCommand implements ActionListener {
 
@@ -17,7 +17,7 @@ public class NewProjectCommand implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		NewProjectDialog dialog = new NewProjectDialog(this.window);
+		EditProjectDialog dialog = new EditProjectDialog(this.window, null);
 		dialog.setVisible(true);
 	}
 
