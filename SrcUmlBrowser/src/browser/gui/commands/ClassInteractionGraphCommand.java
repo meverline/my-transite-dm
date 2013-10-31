@@ -10,9 +10,9 @@ import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import browser.graph.Edge;
-import browser.graph.Graph;
-import browser.graph.Node;
+import browser.graph.GraphVizEdge;
+import browser.graph.GraphVizGraph;
+import browser.graph.GraphVizNode;
 import browser.gui.AppMainWindow;
 import browser.gui.dialog.GraphOptionsDialog;
 import browser.loader.ClassReflectionData;
@@ -34,28 +34,28 @@ public class ClassInteractionGraphCommand extends AbstractSearchActionCommand {
 		super("Generate", "Class Interaction");
 	}
 	
-	private void addNodesToGraph(Set<ClassXRef.Association> set, int depth, Graph g, Node root, HashSet<String> visted)
+	private void addNodesToGraph(Set<ClassXRef.Association> set, int depth, GraphVizGraph g, GraphVizNode root, HashSet<String> visted)
 	{
 		if ( set == null ) { return; }
 		
 		ApplicationSettings settings = ApplicationSettings.instance();
 		AppMainWindow mainWin = getDialog().getMain();
-		Graph.DEPTH maxDepth = Graph.DEPTH.valueOf(settings.getSettings().getGraphDepth());
+		GraphVizGraph.DEPTH maxDepth = GraphVizGraph.DEPTH.valueOf(settings.getSettings().getGraphDepth());
 		
 		if ( depth > maxDepth.depth() ) { return; }
 		
 		for ( ClassXRef.Association item : set ) {
 			if ( this.showClass(item.toString() )) {
-				Node node = g.getNodeByName(item.toString());
+				GraphVizNode node = g.getNodeByName(item.toString());
 				if ( node == null ) {
-					node = new Node( item.toString(), Node.SHAPE.fromClass(item.getTheClass()), 0);
+					node = new GraphVizNode( item.toString(), GraphVizNode.SHAPE.fromClass(item.getTheClass()), 0);
 					g.add(node);
 				}
 				
 				if ( item.isField() ) {
-					root.addEdge( new Edge(node, Edge.TYPE.none));
+					root.addEdge( new GraphVizEdge(node, GraphVizEdge.TYPE.none));
 				} else {
-					root.addEdge( new Edge(node, Edge.TYPE.dot));
+					root.addEdge( new GraphVizEdge(node, GraphVizEdge.TYPE.dot));
 				}
 				if ( ! visted.contains(item.toString()) ) {
 					visted.add(item.toString());
@@ -76,7 +76,7 @@ public class ClassInteractionGraphCommand extends AbstractSearchActionCommand {
 		
 		AppMainWindow mainWin = getDialog().getMain();
 		
-		Graph g = null;
+		GraphVizGraph g = null;
 		try {
 			
 			int depth = 0;
@@ -84,24 +84,24 @@ public class ClassInteractionGraphCommand extends AbstractSearchActionCommand {
 			if ( ! getDialog().getSelected().isEmpty() ) {	
 				String item = getDialog().getSelected().get(0);
 				int ndx = item.lastIndexOf(".");
-				g = new Graph( item.substring(ndx+1));
+				g = new GraphVizGraph( item.substring(ndx+1));
 				for ( String selected : getDialog().getSelected()) {
 					ClassReflectionData theClass = mainWin.getLoader().load(selected);
 		
 					visted.add(theClass.getName());
-					Node root = new Node( theClass.getName(), Node.SHAPE.fromClass(theClass), 0);
+					GraphVizNode root = new GraphVizNode( theClass.getName(), GraphVizNode.SHAPE.fromClass(theClass), 0);
 					g.add(root);
 					this.addNodesToGraph(mainWin.getXref().getUsesClasstRef(theClass), depth+1, g, root, visted);
 				}
 				
 			} else {
 				
-				g = new Graph("ClassInteraction");
+				g = new GraphVizGraph("ClassInteraction");
 				for ( String item : this.getListItems() ) {
 					ClassReflectionData theClass = mainWin.getLoader().load(item);
 					
 					visted.add(theClass.getName());
-					Node root = new Node( theClass.getName(), Node.SHAPE.fromClass(theClass), 0);
+					GraphVizNode root = new GraphVizNode( theClass.getName(), GraphVizNode.SHAPE.fromClass(theClass), 0);
 					g.add(root);
 					this.addNodesToGraph(mainWin.getXref().getUsesClasstRef(theClass), depth+1, g, root, visted);
 				}

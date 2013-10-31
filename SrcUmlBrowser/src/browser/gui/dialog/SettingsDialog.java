@@ -31,7 +31,7 @@ import javax.swing.SpringLayout;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import browser.graph.Graph;
+import browser.graph.GraphVizGraph;
 import browser.gui.commands.CloseDialogAction;
 import browser.gui.commands.FileSelectionCommand;
 import browser.gui.layout.SpringLayoutUtilities;
@@ -163,10 +163,10 @@ public class SettingsDialog extends JDialog {
 			left.setLayout( new BorderLayout());
 			left.add( new JLabel("Font"), BorderLayout.NORTH);
 			
-			font = new JList( Graph.COLOR.values());
+			font = new JList( GraphVizGraph.COLOR.values());
 			left.add( new JScrollPane(font), BorderLayout.CENTER);
 			if ( set.getSettings().getGraphFontColor() != null) {
-				Graph.COLOR color = Graph.COLOR.valueOf(set.getSettings().getGraphFontColor());
+				GraphVizGraph.COLOR color = GraphVizGraph.COLOR.valueOf(set.getSettings().getGraphFontColor());
 				font.setSelectedValue(color, true);
 			}
 			
@@ -174,10 +174,10 @@ public class SettingsDialog extends JDialog {
 			right.setLayout( new BorderLayout());
 			right.add( new JLabel("Node"), BorderLayout.NORTH);
 			
-			node = new JList( Graph.COLOR.values());
+			node = new JList( GraphVizGraph.COLOR.values());
 			right.add( new JScrollPane(node), BorderLayout.CENTER);
 			if ( set.getSettings().getGraphNodeColor() != null) {
-				Graph.COLOR color = Graph.COLOR.valueOf(set.getSettings().getGraphNodeColor());
+				GraphVizGraph.COLOR color = GraphVizGraph.COLOR.valueOf(set.getSettings().getGraphNodeColor());
 				node.setSelectedValue(color, true);
 			}
 				
@@ -245,27 +245,27 @@ public class SettingsDialog extends JDialog {
 			panel.add(button);
 			
 			panel.add( new JLabel("Graph Viz Command"));
-			commandBox = new JComboBox( Graph.CMD.values());
+			commandBox = new JComboBox( GraphVizGraph.CMD.values());
 			if ( set.getSettings().getGraphProgram() != null) {
-				Graph.CMD cmd = Graph.CMD.valueOf(set.getSettings().getGraphProgram());
+				GraphVizGraph.CMD cmd = GraphVizGraph.CMD.valueOf(set.getSettings().getGraphProgram());
 				commandBox.setSelectedItem(cmd);
 			}
 			panel.add(commandBox);
 			panel.add( new JLabel(""));
 			
 			panel.add( new JLabel("Graph Viz Format"));
-			formatBox = new JComboBox( Graph.OUTPUT.values());
+			formatBox = new JComboBox( GraphVizGraph.OUTPUT.values());
 			if ( set.getSettings().getGraphOutput() != null) {
-				Graph.OUTPUT cmd = Graph.OUTPUT.valueOf(set.getSettings().getGraphOutput());
+				GraphVizGraph.OUTPUT cmd = GraphVizGraph.OUTPUT.valueOf(set.getSettings().getGraphOutput());
 				formatBox.setSelectedItem(cmd);
 			}
 			panel.add(formatBox);
 			panel.add( new JLabel(""));
 			
 			panel.add( new JLabel("Graph Depth"));
-			depthBox = new JComboBox( Graph.DEPTH.values());
+			depthBox = new JComboBox( GraphVizGraph.DEPTH.values());
 			if ( set.getSettings().getGraphDepth() != null) {
-				Graph.DEPTH cmd = Graph.DEPTH.valueOf(set.getSettings().getGraphDepth());
+				GraphVizGraph.DEPTH cmd = GraphVizGraph.DEPTH.valueOf(set.getSettings().getGraphDepth());
 				depthBox.setSelectedItem(cmd);
 			}
 			panel.add(depthBox);
@@ -280,7 +280,7 @@ public class SettingsDialog extends JDialog {
 			
 			set.getSettings().setGraphHome(homePath.getText());
 			set.getSettings().setGraphOutput(formatBox.getSelectedItem().toString());
-			set.getSettings().setGraphProgram( ((Graph.CMD)commandBox.getSelectedItem()).name() );
+			set.getSettings().setGraphProgram( ((GraphVizGraph.CMD)commandBox.getSelectedItem()).name() );
 			set.getSettings().setGraphDepth( depthBox.getSelectedItem().toString());	
 		}
 

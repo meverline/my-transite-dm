@@ -14,6 +14,7 @@
   	  <copy file="../jar-repository/swingx-ws-2008_10_12.jar" todir="${lib}" />
   	  <copy file="../jar-repository/swingx-2008_10_12.jar" todir="${lib}" />
   	  <copy file="../jar-repository/swingx-beaninfo-2008_10_12.jar" todir="${lib}" />
+      <copy file="../common/dist/lib/transite-common-1.0.jar" todir="${lib}" />
 	  <antcall target="ecllipse.classPath">
 		 <param name="${classpath.projectDepends.parm}" value="/config%/common"/>
 		 <param name="${classpath.includeSource.parm}" value="false"/>

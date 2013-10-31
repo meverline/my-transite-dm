@@ -6,7 +6,7 @@ import java.io.FileOutputStream;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import browser.graph.Graph;
+import browser.graph.GraphVizGraph;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.json.JettisonMappedXmlDriver;
@@ -202,11 +202,11 @@ public class ApplicationSettings {
 		private String classBuildPath = "build/classes;build;bin";
 		private String srcPath = "src;src/src";
 		private String graphHome = null;
-		private String graphProgram = Graph.CMD.dot.name();
-		private String graphOutput = Graph.OUTPUT.svg.name();
-		private String graphDepth = Graph.DEPTH.ALL.name();
-		private String graphNodeColor = Graph.COLOR.tan.name();
-		private String graphFontColor = Graph.COLOR.black.name();
+		private String graphProgram = GraphVizGraph.CMD.dot.name();
+		private String graphOutput = GraphVizGraph.OUTPUT.svg.name();
+		private String graphDepth = GraphVizGraph.DEPTH.ALL.name();
+		private String graphNodeColor = GraphVizGraph.COLOR.tan.name();
+		private String graphFontColor = GraphVizGraph.COLOR.black.name();
 		private String previewCommand = null;
 		private String currentProject = null;
 		private String graphOutputDir = null;

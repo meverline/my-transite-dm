@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Graph {
+public class GraphVizGraph {
 	
 	public enum DEPTH { 
 		ALL(Integer.MAX_VALUE), 
@@ -187,13 +187,13 @@ public class Graph {
     }
 
 	private String name = null;
-	private List<Node> nodeList = new ArrayList<Node>();
+	private List<GraphVizNode> nodeList = new ArrayList<GraphVizNode>();
 	
 	/**
 	 * 
 	 * @param name
 	 */
-	public Graph( String name) {
+	public GraphVizGraph( String name) {
 		setName(name);
 	}
 	
@@ -201,7 +201,7 @@ public class Graph {
 	 * 
 	 * @param aNode
 	 */
-	public void add(Node aNode) {
+	public void add(GraphVizNode aNode) {
 		if ( aNode != null)  {
 			nodeList.add(aNode);
 		}
@@ -224,14 +224,14 @@ public class Graph {
 	/**
 	 * @return the nodeList
 	 */
-	public List<Node> getNodeList() {
+	public List<GraphVizNode> getNodeList() {
 		return nodeList;
 	}
 
 	/**
 	 * @param nodeList the nodeList to set
 	 */
-	public void setNodeList(List<Node> nodeList) {
+	public void setNodeList(List<GraphVizNode> nodeList) {
 		this.nodeList = nodeList;
 	}
 	
@@ -240,9 +240,9 @@ public class Graph {
 	 * @param name
 	 * @return
 	 */
-	public Node getNodeByName(String name)
+	public GraphVizNode getNodeByName(String name)
 	{
-		for ( Node n : getNodeList() ) {
+		for ( GraphVizNode n : getNodeList() ) {
 			if ( n.getName().compareTo(name) == 0) {
 				return n;
 			}
@@ -261,7 +261,7 @@ public class Graph {
 		writer.println(" { ");
 		
 		writer.println();
-		for (Node n : getNodeList()) {
+		for (GraphVizNode n : getNodeList()) {
 			writer.print("\t");
 			n.write(writer);
 		}
@@ -272,7 +272,7 @@ public class Graph {
 		writer.println("////////////////////////////////////////////");
 		writer.println();
 		
-		for (Node n : getNodeList()) {
+		for (GraphVizNode n : getNodeList()) {
 			writer.println();
 			writer.println("////////////////////////////////////////////");
 			writer.print("// nodes edges: ");

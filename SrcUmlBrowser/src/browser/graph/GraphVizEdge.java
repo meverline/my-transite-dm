@@ -3,21 +3,21 @@ package browser.graph;
 
 import java.io.PrintWriter;
 
-public class Edge {
+public class GraphVizEdge {
 
 	public enum TYPE { none, normal, tee, vee, box, crow, diamond, dot, inv };
 	
 	private TYPE edgeType = TYPE.none;
-	private Node edgeTo = null;
-	private Graph.COLOR color = null;
+	private GraphVizNode edgeTo = null;
+	private GraphVizGraph.COLOR color = null;
 	
-	public Edge( Node to, Edge.TYPE type)
+	public GraphVizEdge( GraphVizNode to, GraphVizEdge.TYPE type)
 	{
 		this.setEdgeTo(to);
 		this.setEdgeType(type);
 	}
 	
-	public Edge( Node to, Edge.TYPE type, Graph.COLOR color)
+	public GraphVizEdge( GraphVizNode to, GraphVizEdge.TYPE type, GraphVizGraph.COLOR color)
 	{
 		this.setEdgeTo(to);
 		this.setEdgeType(type);
@@ -41,14 +41,14 @@ public class Edge {
 	/**
 	 * @return the edgeTo
 	 */
-	public Node getEdgeTo() {
+	public GraphVizNode getEdgeTo() {
 		return edgeTo;
 	}
 	
 	/**
 	 * @param edgeTo the edgeTo to set
 	 */
-	public void setEdgeTo(Node edgeTo) {
+	public void setEdgeTo(GraphVizNode edgeTo) {
 		this.edgeTo = edgeTo;
 	}
 	
@@ -57,7 +57,7 @@ public class Edge {
 	 * @param fromNode
 	 * @param writer
 	 */
-	public void write(Node fromNode, PrintWriter writer) {
+	public void write(GraphVizNode fromNode, PrintWriter writer) {
 		
 		String fromName = fromNode.getName().replace(".", "_").replace("$", "_");
 		String toName = getEdgeTo().getName().replace(".", "_").replace("$", "_");

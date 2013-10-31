@@ -8,9 +8,9 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import browser.graph.Edge;
-import browser.graph.Graph;
-import browser.graph.Node;
+import browser.graph.GraphVizEdge;
+import browser.graph.GraphVizGraph;
+import browser.graph.GraphVizNode;
 import browser.gui.AppMainWindow;
 import browser.gui.dialog.GraphOptionsDialog;
 import browser.util.ApplicationSettings;
@@ -60,32 +60,32 @@ public class PackageGraphCommand extends AbstractSearchActionCommand {
 	 * @param g
 	 * @param root
 	 */
-	private void addNodesToGraph(Set<ClassXRef.PackageAssociation> set, int depth, Graph g, Node root, HashSet<String> visted)
+	private void addNodesToGraph(Set<ClassXRef.PackageAssociation> set, int depth, GraphVizGraph g, GraphVizNode root, HashSet<String> visted)
 	{
 		if ( set == null ) { return; }
 		
 		ApplicationSettings setting = ApplicationSettings.instance();
 		AppMainWindow mainWin = getDialog().getMain();
-		Graph.DEPTH maxDepth = Graph.DEPTH.valueOf(setting.getSettings().getGraphDepth());
+		GraphVizGraph.DEPTH maxDepth = GraphVizGraph.DEPTH.valueOf(setting.getSettings().getGraphDepth());
 	
 		if ( depth > maxDepth.depth() ) { return; }
 		
 		for ( ClassXRef.PackageAssociation item : set ) {
 			String name = getDialog().stripPackage(item.getPackageName());
 			if ( this.showClass(item.getPackageName()) && ( ! getDialog().filter(item.getPackageName())) ) {
-				Node node = g.getNodeByName(name);
+				GraphVizNode node = g.getNodeByName(name);
 				if ( node == null ) {
-					node = new Node( name, Node.SHAPE.folder, depth);
+					node = new GraphVizNode( name, GraphVizNode.SHAPE.folder, depth);
 					g.add(node);
 				}
 				if ( item.isInheritance() && (! item.isRelation() ) ) {
-   				   root.addEdge( new Edge(node, Edge.TYPE.normal));
+   				   root.addEdge( new GraphVizEdge(node, GraphVizEdge.TYPE.normal));
 				} else if ((! item.isInheritance()) && item.isRelation() ) {
-				   node.addEdge(new Edge(root, Edge.TYPE.dot));
+				   node.addEdge(new GraphVizEdge(root, GraphVizEdge.TYPE.dot));
 				} else if ( (! item.isInheritance()) && (! item.isRelation()) ) {
-					root.addEdge( new Edge(node, Edge.TYPE.none));
+					root.addEdge( new GraphVizEdge(node, GraphVizEdge.TYPE.none));
 				} else {
-				   root.addEdge( new Edge(node, Edge.TYPE.normal, Graph.COLOR.red));
+				   root.addEdge( new GraphVizEdge(node, GraphVizEdge.TYPE.normal, GraphVizGraph.COLOR.red));
 				}
 				if ( ! visted.contains(name)) {
 					visted.add(name);
@@ -102,7 +102,7 @@ public class PackageGraphCommand extends AbstractSearchActionCommand {
 
 		AppMainWindow mainWin = getDialog().getMain();
 
-		Graph g = null;
+		GraphVizGraph g = null;
 		int depth = 0;
 		HashSet<String> visted = new HashSet<String>();
 		
@@ -110,23 +110,23 @@ public class PackageGraphCommand extends AbstractSearchActionCommand {
 
 			String item = getDialog().getSelected().get(0);
 			int ndx = item.lastIndexOf(".");
-			g = new Graph( item.substring(ndx+1));
+			g = new GraphVizGraph( item.substring(ndx+1));
 			
 			for (String selected : getDialog().getSelected()) {
 				String name = getDialog().stripPackage(selected);
 				if ( ! visted.contains(name) ) {
-				   Node root = new Node(name, Node.SHAPE.folder, 0);
+				   GraphVizNode root = new GraphVizNode(name, GraphVizNode.SHAPE.folder, 0);
 				   g.add(root);
 				   visted.add(name);
 				   this.addNodesToGraph(mainWin.getXref().getPackRef(selected), depth + 1, g, root, visted);
 				}
 			}
 		} else {
-			g = new Graph("Package");
+			g = new GraphVizGraph("Package");
 			for (String selected : this.getListItems() ) {
 				String name = getDialog().stripPackage(selected);
 				if ( ! getDialog().filter(selected) && ( ! visted.contains(name)) ) {
-			     	Node root = new Node(name, Node.SHAPE.folder, 0);
+			     	GraphVizNode root = new GraphVizNode(name, GraphVizNode.SHAPE.folder, 0);
 			    	g.add(root);
 				    visted.add(name);
 				    this.addNodesToGraph(mainWin.getXref().getPackRef(selected), depth + 1, g, root, visted);
