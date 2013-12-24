@@ -1,0 +1,6 @@
+1. Setup Instructions/Readme
+2. Map/Reduce Mongo for routes schedule
+3. Map/Reduce Hadoop for routes schedule
+4. Ecllipse Rich Client Platform - alternative gui
+5. Web Services Interface
+6. Threaded KDE
