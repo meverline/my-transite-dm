@@ -25,7 +25,7 @@
 			    	
         <dependency org="org.jfree" name="jfreechart" rev="1.0.13" />
         
- 	    <dependency org="org.hibernate" name="hibernate-core" rev="${ivy.hibernate.ver}" conf="default->runtime" >
+        	    <dependency org="org.hibernate" name="hibernate-core" rev="${ivy.hibernate.ver}" conf="default->runtime" >
            <exclude org="org.jboss.javaee" module="jboss-jacc-api_JDK4" />
            <exclude org="ant" />
            <exclude org="xerces" />
@@ -143,6 +143,4 @@
         <dependency org="org.neo4j" name="neo4j" rev="1.7.2" />
    
     </dependencies>
-    
-
 </ivy-module>

@@ -17,7 +17,7 @@ import javax.swing.SpringLayout;
 import javax.swing.text.NumberFormatter;
 
 import me.factory.DaoBeanFactory;
-import me.math.grid.SpatialGridPoint;
+import me.math.grid.AbstractSpatialGridPoint;
 import me.openMap.ApplicationSettings;
 import me.openMap.OpenTransitMap;
 import me.openMap.dialogs.SampleOptionsDialog;
@@ -290,11 +290,11 @@ public class DataMining extends AbstractSearchParameters
 		DataSample sample = DataSample.class.cast(this.sampleTypes.getSelectedItem());
 
 		DescriptiveStatistics stats = new DescriptiveStatistics();
-		List<SpatialGridPoint> data = sample.process(results, ur, ll, distanceInMeters, dmType);
+		List<AbstractSpatialGridPoint> data = sample.process(results, ur, ll, distanceInMeters, dmType);
 		
 		double [] array = new double[data.size()];
 		int ndx = 0;
-		for (SpatialGridPoint pt : data) {
+		for (AbstractSpatialGridPoint pt : data) {
 			double value = pt.getData().getInterpolationValue();
 			stats.addValue(value);
 			array[ndx++] = value;
@@ -305,9 +305,9 @@ public class DataMining extends AbstractSearchParameters
 		if ( percentile_.getSelectedIndex() != 0  ) {
 			Arrays.sort(array);					
 			int index = (int) Math.rint(array.length / 10.0) * percentile_.getSelectedIndex();
-			List<SpatialGridPoint> toDisplay = new ArrayList<SpatialGridPoint>();
+			List<AbstractSpatialGridPoint> toDisplay = new ArrayList<AbstractSpatialGridPoint>();
 
-			for (SpatialGridPoint pt : data) {
+			for (AbstractSpatialGridPoint pt : data) {
 				if ( pt.getData().getInterpolationValue() > array[index] ) {
 					toDisplay.add(pt);
 				}

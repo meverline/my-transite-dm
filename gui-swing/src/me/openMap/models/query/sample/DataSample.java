@@ -13,6 +13,7 @@ import me.datamining.sample.AbstractSpatialSampleData;
 import me.datamining.sample.DefaultSample;
 import me.factory.DaoBeanFactory;
 import me.math.Vertex;
+import me.math.grid.AbstractSpatialGridPoint;
 import me.math.grid.SpatialGridPoint;
 import me.math.grid.UniformSpatialGrid;
 import me.transit.database.TransitStop;
@@ -25,7 +26,7 @@ public abstract class DataSample {
 		 
 		 HEATMAP {
 			@Override
-			public List<SpatialGridPoint> process(UniformSpatialGrid grid,
+			public List<AbstractSpatialGridPoint> process(UniformSpatialGrid grid,
 												  List<SpatialSamplePoint> samples) {
 				
 				DensityEstimateAlgorithm kde = 
@@ -43,7 +44,7 @@ public abstract class DataSample {
 		}, 
 		CLUSTER {
 			@Override
-			public List<SpatialGridPoint> process(UniformSpatialGrid grid,
+			public List<AbstractSpatialGridPoint> process(UniformSpatialGrid grid,
 												  List<SpatialSamplePoint> samples) {
 				
 				ClusteringAlgorithm alog =
@@ -54,7 +55,7 @@ public abstract class DataSample {
 		};
 		 
 
-		public abstract List<SpatialGridPoint> process(UniformSpatialGrid grid, 
+		public abstract List<AbstractSpatialGridPoint> process(UniformSpatialGrid grid, 
 				 									   List<SpatialSamplePoint> samples);
      };
     
@@ -91,7 +92,7 @@ public abstract class DataSample {
       * @param type
       * @return
       */
-	public List<SpatialGridPoint> process(List<TransitStop> dataList,
+	public List<AbstractSpatialGridPoint> process(List<TransitStop> dataList,
 										  Point upperLeftPt,
 										  Point lowerRightPt, 
 										  double gridSpaceInMeters,
@@ -112,7 +113,7 @@ public abstract class DataSample {
       * @param type
       * @return
       */
-	public List<SpatialGridPoint> process(List<TransitStop> dataList,
+	public List<AbstractSpatialGridPoint> process(List<TransitStop> dataList,
 										  Vertex upperLeft,
 										  Vertex lowerRight, 
 										  double gridSpaceInMeters,
@@ -139,7 +140,7 @@ public abstract class DataSample {
 			}
 		}
 		
-		for ( SpatialGridPoint point : grid.getGridPoints() ) {
+		for ( AbstractSpatialGridPoint point : grid.getGridPoints() ) {
 			if ( point.getData() == null ) {
 				point.setData( new DefaultSample());
 			}
