@@ -20,6 +20,7 @@
           <property name="lang" column="LANG"  />
  		  <property name="phone" column="PHONE"  />
  		  <property name="version" column="VERSION"  />
+ 		  <property name="MBR" column="MBR" type="org.hibernate.spatial.GeometryType"  />
  		  
  		  <subclass name="me.transit.database.impl.AgencyImpl" discriminator-value="AngencyImpl"/>
                   
