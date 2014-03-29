@@ -91,4 +91,10 @@ public interface TransitStop extends TransitData {
 	 */
 	public void setParentStation(int parentStation);
 	
+	public void setStopTimezone(String value);
+	public String getStopTimezone();
+	
+	public boolean getWheelchairBoarding();
+	public void setWheelchairBoarding(boolean value);
+	
 }

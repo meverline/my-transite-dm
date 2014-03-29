@@ -25,26 +25,18 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import me.math.EarthConstants;
 import me.math.LocalDownFrame;
 import me.math.VectorMath;
 import me.math.Vertex;
+import me.math.kdtree.INode;
+import me.math.kdtree.INode.Direction;
+import me.math.kdtree.INodeCreator;
 
 import com.vividsolutions.jts.geom.Point;
 
-public class UniformSpatialGrid {
+public class UniformSpatialGrid extends AbstractSpatialGrid implements INodeCreator {
 	
 	protected SpatialGridPoint[][] grid_ = null;
-	private double gridSpacingMeters_ = 1000;
-	private int rows_ = 0;
-	private int cols_ = 0;
-	private Vertex upperLeft_ = null;
-	private Vertex lowerRight_ = null;
-	
-	private Log logger = LogFactory.getLog(UniformSpatialGrid.class);
 	
 	/**
 	 * 
@@ -85,95 +77,6 @@ public class UniformSpatialGrid {
 
 	/**
 	 * 
-	 * @param spacing
-	 */
-	protected void init(double spacingInMeters)
-	{
-		setGridSpacingMeters(spacingInMeters);
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public int getCols() {
-		return cols_;
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public int getRows() {
-		return rows_;
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public double getGridSpacingMeters() {
-		return gridSpacingMeters_;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public Vertex getLowerRight() {
-		return lowerRight_;
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public Vertex getUpperLeft() {
-		return upperLeft_;
-	}
-
-	/**
-	 * 
-	 * @param gridSpacingMeters_
-	 */
-	protected void setGridSpacingMeters(double gridSpacingMeters_) {
-		this.gridSpacingMeters_ = gridSpacingMeters_;
-	}
-
-	/**
-	 * 
-	 * @param rows_
-	 */
-	protected void setRows(int rows_) {
-		this.rows_ = rows_;
-	}
-
-	/**
-	 * 
-	 * @param cols_
-	 */
-	protected void setCols(int cols_) {
-		this.cols_ = cols_;
-	}
-
-	/**
-	 * 
-	 * @param upperLeft_
-	 */
-	protected void setUpperLeft(Vertex upperLeft_) {
-		this.upperLeft_ = upperLeft_;
-	}
-
-	/**
-	 * 
-	 * @param lowerRight_
-	 */
-	protected void setLowerRight(Vertex lowerRight_) {
-		this.lowerRight_ = lowerRight_;
-	}
-
-	/**
-	 * 
 	 * @param file
 	 * @throws FileNotFoundException
 	 */
@@ -193,28 +96,10 @@ public class UniformSpatialGrid {
 	
 	/**
 	 * 
-	 * @return
-	 */
-	public double getMaxLatitude()
-	{
-		return lowerRight_.getLatitudeDegress();
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public double getMaxLongitude()
-	{
-		return lowerRight_.getLongitudeDegress();
-	}
-
-	/**
-	 * 
 	 * @param gridPt
 	 * @return
 	 */
-	public SpatialGridPoint getNextGridPoint(SpatialGridPoint gridPt)
+	public AbstractSpatialGridPoint getNextGridPoint(AbstractSpatialGridPoint gridPt)
 	{
 		SpatialGridPoint next = null;
 
@@ -372,36 +257,28 @@ public class UniformSpatialGrid {
 	 * @param lowerRight
 	 */
 	protected void createGrid(Vertex upperLeft, Vertex lowerRight) {
-		Vertex upperRight = new Vertex(upperLeft.getLatitudeDegress(),
-									   lowerRight.getLongitudeDegress());
 
 		Vertex lowerLeft = new Vertex(lowerRight.getLatitudeDegress(),
 									  upperLeft.getLongitudeDegress());
 
-		double lonGroundRangeMeters = EarthConstants.distanceMeters(lowerLeft, lowerRight);
-		double latGroundRangeMeters = EarthConstants.distanceMeters(upperRight, lowerRight);
+		this.setCols(AbstractSpatialGrid.findNumberOfCols(upperLeft, lowerRight, getGridSpacingMeters()));
+		this.setRows(AbstractSpatialGrid.findNumberOfRows(upperLeft, lowerRight, getGridSpacingMeters()));
 
-		cols_ = (int) Math.floor((lonGroundRangeMeters / gridSpacingMeters_) + 0.5f) + 1;
-
-		rows_ = (int) Math.floor((latGroundRangeMeters / gridSpacingMeters_) + 0.5f) + 1;
-
-		createGrid(rows_, cols_);
+		createGrid(this.getRows(), this.getCols());
 		
-		logger.info("UniformSpatialGrid Rows: " + rows_ + " Cols: " + cols_);
-
 		LocalDownFrame southWestFrame = new LocalDownFrame(lowerLeft.getEcfFromLatLon());
 
-		for (int rowIndex = 0; rowIndex < rows_; rowIndex++) {
-			for (int colIndex = 0; colIndex < cols_; colIndex++) {
+		for (int rowIndex = 0; rowIndex < this.getRows(); rowIndex++) {
+			for (int colIndex = 0; colIndex < this.getCols(); colIndex++) {
 				initGridPoit(rowIndex, colIndex);
 			}
 		}
 
 		int number = 0;
-		for (int rowIndex = 0; rowIndex < rows_; rowIndex++) {
-			for (int colIndex = 0; colIndex < cols_; colIndex++) {
-				double northDistanceMeters = (double) rowIndex* gridSpacingMeters_;
-				double eastDistanceMeters = (double) colIndex* gridSpacingMeters_;
+		for (int rowIndex = 0; rowIndex < this.getRows(); rowIndex++) {
+			for (int colIndex = 0; colIndex < this.getCols(); colIndex++) {
+				double northDistanceMeters = (double) rowIndex* this.getGridSpacingMeters();
+				double eastDistanceMeters = (double) colIndex* this.getGridSpacingMeters();
 
 				VectorMath newPos = southWestFrame.getRelativePosition(
 															northDistanceMeters,
@@ -446,9 +323,9 @@ public class UniformSpatialGrid {
 	 * 
 	 * @return
 	 */
-	public List<SpatialGridPoint> getGridPoints()
+	public List<AbstractSpatialGridPoint> getGridPoints()
 	{
-		ArrayList<SpatialGridPoint> rtn = new ArrayList<SpatialGridPoint>();
+		ArrayList<AbstractSpatialGridPoint> rtn = new ArrayList<AbstractSpatialGridPoint>();
 
 		for ( int  r = 0; r < getRows(); r++) {
 			for ( int c = 0; c< getCols(); c++) {
@@ -456,6 +333,14 @@ public class UniformSpatialGrid {
 			}
 		}
 		return rtn;
+	}
+	
+	@Override
+	public INode create(AbstractSpatialGridPoint loc, Direction dir, INode parent, int depth) {
+		SpatialGridPoint gp = SpatialGridPoint.class.cast(loc);
+		gp.setParent(parent);
+		gp.initNode(dir, depth);
+		return loc;
 	}
 
 }

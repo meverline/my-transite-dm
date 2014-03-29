@@ -16,11 +16,12 @@ package me.math.kdtree;
 //along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import me.math.Vertex;
-import me.math.grid.SpatialGridPoint;
+import me.math.grid.AbstractSpatialGridPoint;
 
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.Point;
+import com.vividsolutions.jts.geom.Polygon;
 
 
 public class MinBoundingRectangle {
@@ -32,19 +33,46 @@ public class MinBoundingRectangle {
   private double leftlonDegress_ = 180.0;
   private double rightlonDegress_ = -180.0;
 
+  /**
+   * 
+   */
   public MinBoundingRectangle() {
   }
 
-
-  public MinBoundingRectangle(SpatialGridPoint s) {
+  /**
+   * 
+   * @param s
+   */
+  public MinBoundingRectangle(AbstractSpatialGridPoint s) {
           extend(s);
   }
 
+  /**
+   * 
+   * @param s
+   */
   public MinBoundingRectangle(Vertex s) {
           extend(s);
   }
+  
+  /**
+   * 
+   * @param s
+   */
+  public MinBoundingRectangle(Polygon s) {
+	  if ( s != null ) {
+		  for ( Coordinate coord : s.getCoordinates() ) {
+			  Vertex v = new Vertex(coord.x, coord.y);
+	          extend(v);
+		  }
+	  }
+  }
 
-  public void extend(SpatialGridPoint location) {
+  /**
+   * 
+   * @param location
+   */
+  public void extend(AbstractSpatialGridPoint location) {
           if (location != null) {
                   bottomlatDegress_ = Math.min(location.getVertex().getLatitudeDegress(), bottomlatDegress_);
                   toplatDegress_ = Math.max(location.getVertex().getLatitudeDegress(), toplatDegress_);
@@ -53,6 +81,10 @@ public class MinBoundingRectangle {
           }
   }
 
+  /**
+   * 
+   * @param location
+   */
   public void extend(Point location) {
           if (location != null) {
                   bottomlatDegress_ = Math.min(location.getX(), bottomlatDegress_);
@@ -63,6 +95,10 @@ public class MinBoundingRectangle {
           }
   }
 
+  /**
+   * 
+   * @param location
+   */
   public void extend(Vertex location) {
           if (location != null) {
                   bottomlatDegress_ = Math.min(location.getLatitudeDegress(), bottomlatDegress_);
@@ -73,7 +109,10 @@ public class MinBoundingRectangle {
           }
   }
 
-
+  /**
+   * 
+   * @param location
+   */
   public void extend(MinBoundingRectangle location) {
           if (location != null) {
                   bottomlatDegress_ = Math.min(location.getBottomLatDegress(), bottomlatDegress_);
@@ -84,14 +123,29 @@ public class MinBoundingRectangle {
           }
   }
 
-  public boolean contains(SpatialGridPoint location) {
+  /**
+   * 
+   * @param location
+   * @return
+   */
+  public boolean contains(AbstractSpatialGridPoint location) {
           return contains(location.getVertex());
   }
 
+  /**
+   * 
+   * @param location
+   * @return
+   */
   public boolean contains(Point location) {
           return contains(new Vertex( location.getX(), location.getY()));
   }
 
+  /**
+   * 
+   * @param center
+   * @return
+   */
   public boolean contains(Vertex center) {
           return (center.getLatitudeDegress() >= bottomlatDegress_
                           && center.getLatitudeDegress() <= toplatDegress_
@@ -99,6 +153,10 @@ public class MinBoundingRectangle {
                           && center.getLongitudeDegress() <= rightlonDegress_ );
   }
 
+  /**
+   * 
+   * @return
+   */
   public Vertex center()
   {
           double lat = toplatDegress_;
@@ -112,6 +170,10 @@ public class MinBoundingRectangle {
           return new Vertex(lat, lon);
   }
 
+  /**
+   * 
+   * @return
+   */
   public boolean isRectangle()
   {
           if ( bottomlatDegress_ == toplatDegress_ )  {
@@ -123,32 +185,92 @@ public class MinBoundingRectangle {
           return false;
   }
 
+  /**
+   * 
+   * @return
+   */
   public double getBottomLatDegress() {
           return bottomlatDegress_;
   }
 
+  /**
+   * 
+   * @return
+   */
   public double getTopLatDegress() {
           return toplatDegress_;
   }
 
+  /**
+   * 
+   * @return
+   */
   public double getLeftLonDegress() {
           return leftlonDegress_;
   }
 
+  /**
+   * 
+   * @return
+   */
   public double getRightLonDegress() {
           return rightlonDegress_;
   }
 
+  /**
+   * 
+   * @return
+   */
   public Point getUpperLeft()
   {
           Point pt = factory_.createPoint(new Coordinate(getTopLatDegress(),getLeftLonDegress() ));
           return pt;
   }
 
+  /**
+   * 
+   * @return
+   */
   public Point getLowerRight()
   {
           Point pt = factory_.createPoint(new Coordinate(getBottomLatDegress(),getRightLonDegress()));
           return pt;
   }
+  
+  /**
+   * 
+   * @return
+   */
+  public Polygon toPolygon()
+  {
+	   Coordinate coords[] = new Coordinate[5];
+	   
+	   coords[0] = new Coordinate(getTopLatDegress(),getLeftLonDegress() );
+	   coords[1] = new Coordinate(getTopLatDegress(),getRightLonDegress() );
+	   coords[2] = new Coordinate(getBottomLatDegress(),getRightLonDegress() );
+	   coords[3] = new Coordinate(getBottomLatDegress(),getLeftLonDegress() );
+	   coords[4] = coords[0];
+	   return factory_.createPolygon(factory_.createLinearRing(coords), null);
+  }
+
+/* (non-Javadoc)
+ * @see java.lang.Object#toString()
+ */
+@Override
+public String toString() {
+	StringBuilder buf = new StringBuilder();
+	
+	buf.append("MBR Top: ");
+	buf.append( getTopLatDegress());
+	buf.append(",");
+	buf.append(getLeftLonDegress());
+	buf.append(" Bottom: ");
+	buf.append( getBottomLatDegress());
+	buf.append(",");
+	buf.append(getRightLonDegress());
+	return buf.toString();
+}
+  
+  
 
 }

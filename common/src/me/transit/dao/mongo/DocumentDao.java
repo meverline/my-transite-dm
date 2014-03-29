@@ -85,7 +85,11 @@ public class DocumentDao {
         public void add(Map<String,Object> data)
         {
                 if ( data != null ) {
-                    _collection.insert( this.toMongoObject(data));
+                	try {
+                		_collection.insert( this.toMongoObject(data));
+                	} catch (Exception ex) {
+                		log.error(ex);
+                	}
                 }
         }
         

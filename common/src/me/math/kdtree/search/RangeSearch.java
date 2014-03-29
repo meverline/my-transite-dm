@@ -21,7 +21,7 @@ import java.util.List;
 
 import me.math.EarthConstants;
 import me.math.Vertex;
-import me.math.grid.SpatialGridPoint;
+import me.math.grid.AbstractSpatialGridPoint;
 import me.math.kdtree.IKDSearch;
 import me.math.kdtree.INode;
 
@@ -30,20 +30,20 @@ import com.vividsolutions.jts.geom.Point;
 
 public class RangeSearch implements IKDSearch {
 
-  private List<SpatialGridPoint> list_;
+  private List<AbstractSpatialGridPoint> list_;
   private double distanceInMeters_;
   private Vertex point_;
 
   public RangeSearch( Vertex point, double distanceInMeters)
   {
-          setList( new ArrayList<SpatialGridPoint>());
+          setList( new ArrayList<AbstractSpatialGridPoint>());
           setPoint( point);
           setDistanceInMeters(distanceInMeters);
   }
 
   public RangeSearch( Point pt, double distanceInMeters)
   {
-          setList( new ArrayList<SpatialGridPoint>());
+          setList( new ArrayList<AbstractSpatialGridPoint>());
           setPoint( new Vertex(pt.getX(), pt.getY()));
           setDistanceInMeters(distanceInMeters);
   }
@@ -56,7 +56,7 @@ public class RangeSearch implements IKDSearch {
           }
   }
 
-  public List<SpatialGridPoint> getResults()
+  public List<AbstractSpatialGridPoint> getResults()
   {
        return getList();
   }
@@ -77,11 +77,11 @@ public class RangeSearch implements IKDSearch {
           this.distanceInMeters_ = distanceInMeters_;
   }
 
-  protected List<SpatialGridPoint> getList() {
+  protected List<AbstractSpatialGridPoint> getList() {
           return list_;
   }
 
-  protected void setList(List<SpatialGridPoint> list_) {
+  protected void setList(List<AbstractSpatialGridPoint> list_) {
           this.list_ = list_;
   }
 

@@ -9,6 +9,7 @@ import me.datamining.bandwidth.IBandwidth;
 import me.datamining.sample.DefaultSample;
 import me.math.EarthConstants;
 import me.math.Vertex;
+import me.math.grid.AbstractSpatialGridPoint;
 import me.math.grid.SpatialGridPoint;
 import me.math.grid.UniformSpatialGrid;
 import me.math.kdtree.INode;
@@ -47,13 +48,13 @@ public class AdaptiveKDE extends AbstractDensityEstimateAlgorithm {
      * @param ystats
      * @return
      */
-    private double findLocalBandWidth(List<SpatialGridPoint> list, DescriptiveStatistics xstats, DescriptiveStatistics ystats)
+    private double findLocalBandWidth(List<AbstractSpatialGridPoint> list, DescriptiveStatistics xstats, DescriptiveStatistics ystats)
     {
             double totalAvgLon = 0.0;
             double totalAvgLat = 0.0;
             
             int number = 0;
-            for ( SpatialGridPoint point : list ) {
+            for ( AbstractSpatialGridPoint point : list ) {
                 totalAvgLat += point.getVertex().getLatitudeDegress();
                 totalAvgLon += point.getVertex().getLongitudeDegress();
                 number++;
@@ -67,7 +68,7 @@ public class AdaptiveKDE extends AbstractDensityEstimateAlgorithm {
             double d_latitude = 0.0;
             double d_longitude = 0.0;
 
-            for ( SpatialGridPoint pt : list ) {
+            for ( AbstractSpatialGridPoint pt : list ) {
                  d_latitude += pt.getVertex().getLatitudeDegress() - totalAvgLat;
                  d_longitude += pt.getVertex().getLongitudeDegress() - totalAvgLat;
                         
@@ -93,9 +94,9 @@ public class AdaptiveKDE extends AbstractDensityEstimateAlgorithm {
         for (int r = 0; r < this.getGrid().getRows(); r++) {
            for (int c = 0; c < this.getGrid().getCols(); c++) {
                 double estitmate = 0.0;
-                SpatialGridPoint gridPt = this.getGrid().get(r,c);
+                AbstractSpatialGridPoint gridPt = this.getGrid().get(r,c);
                 
-                List<SpatialGridPoint> list = 
+                List<AbstractSpatialGridPoint> list = 
                 		tree_.search(new AdaptiveRangeSearch(gridPt.getVertex(),
                 											this.getGrid().getGridSpacingMeters()*32));
                                                         
@@ -108,7 +109,7 @@ public class AdaptiveKDE extends AbstractDensityEstimateAlgorithm {
                 
                 if (xlocalStats.getVariance() > 0 &&  crossCovariance > 0) {
                         
-                    for (SpatialGridPoint pt : list) {
+                    for (AbstractSpatialGridPoint pt : list) {
                             for (SpatialSamplePoint cnt : this.getSampleValues()) {
                             	double t = 0;
                         	    if ( pt.getData() != null ) {
@@ -152,7 +153,7 @@ public class AdaptiveKDE extends AbstractDensityEstimateAlgorithm {
                     double distance = EarthConstants.distanceMeters(getPoint(), point.getPointVertex());
                     if ( distance <= getDistanceInMeters()  ) {
                             if (point.getPoint() instanceof SpatialGridPoint) {
-                            	SpatialGridPoint ip = SpatialGridPoint.class.cast(point.getPoint());
+                            	AbstractSpatialGridPoint ip = AbstractSpatialGridPoint.class.cast(point.getPoint());
                                     if  ( ip.getData() != null ) {
                                        getList().add(point.getPoint());
                                     }
