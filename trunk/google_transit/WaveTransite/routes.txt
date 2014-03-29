@@ -1,0 +1,15 @@
+route_id,route_short_name,route_long_name,route_type,route_url
+1,101,Princess Place,3,http://www.wavetransit.com/Portals/0/pdfMaps/new101.pdf
+3,103,Oleander East,3,http://www.wavetransit.com/Portals/0/pdfMaps/new103.pdf
+4,104,Northeast,3,http://www.wavetransit.com/Portals/0/pdfMaps/new104.pdf
+5,105,Medical Center,3,http://www.wavetransit.com/Portals/0/pdfMaps/new105.pdf
+6,106,Shipyard Blvd,3,http://www.wavetransit.com/Portals/0/pdfMaps/new106.pdf
+7,107,College Rd,3,http://www.wavetransit.com/Portals/0/pdfMaps/new107.pdf
+8,108,Market Street,3,http://www.wavetransit.com/Portals/0/pdfMaps/new108.pdf
+21,201,Carolina Beach Rd,3,http://www.wavetransit.com/Portals/0/pdfMaps/new201.pdf
+22,202,Oleander West,3,http://www.wavetransit.com/Portals/0/pdfMaps/new202.pdf
+24,204,Brunswick Connector,3,http://www.wavetransit.com/Portals/0/pdfMaps/new204.pdf
+25,205,Long Leaf Park,3,http://www.wavetransit.com/Portals/0/pdfMaps/new205.pdf
+27,207,North,3,http://www.wavetransit.com/Portals/0/pdfMaps/new207.pdf
+29,209,Independence,3,http://www.wavetransit.com/Portals/0/pdfMaps/new209.pdf
+31,301,Pleasure Island,3,http://www.wavetransit.com/Portals/0/pdfMaps/new301.pdf

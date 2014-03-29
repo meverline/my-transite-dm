@@ -1,0 +1,80 @@
+route_id,agency_id,route_short_name,route_long_name,route_desc,route_type,route_url,route_color,route_text_color
+1300,MCRO,  1,Route 1,Route 1 operates Monday-Sunday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route001.asp,808000,FFFFFF
+1301,MCRO,  2,Route 2,Route 2 operates Monday-Sunday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route002.asp,C0DCC0,FFFFFF
+1302,MCRO,  3,Route 3,Route 3 operates Monday-Friday peak,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route003.asp,800080,FFFFFF
+1303,MCRO,  4,Route 4,Route 4 operates Monday-Friday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route004.asp,00FF00,FFFFFF
+1304,MCRO,  5,Route 5,Route 5 operates Monday-Sunday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route005.asp,FFFF00,FFFFFF
+1305,MCRO,  6,Route 6,Route 6 operates Monday-Friday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route006.asp,00FFFF,FFFFFF
+1306,MCRO,  7,Route 7,Route 7 operates Monday-Friday - Peak hours only,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route007.asp,FF00FF,FFFFFF
+1307,MCRO,  8,Route 8,Route 8 operates Monday-Saturday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route008.asp,800080,FFFFFF
+1308,MCRO,  9,Route 9,Route 9 operates Monday-Sunday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route009.asp,00FFFF,FFFFFF
+1309,MCRO, 10,Route 10,Route 10 operates Monday-Sunday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route010.asp,00FFFF,FFFFFF
+1310,MCRO, 11,Route 11,Route 11 operates only from Silver Spring to Friendship Heights in the morning and from Friendship Heights to Silver Spring in the afternoon weekdays only.,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route011.asp,DF0070,FFFFFF
+1311,MCRO, 12,Route 12,Route 12 operates Monday-Sunday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route012.asp,FF80C0,FFFFFF
+1312,MCRO, 13,Route 13,Route 13 operates Monday-Friday peak hours only,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route013.asp,0000FF,FFFFFF
+1313,MCRO, 14,Route 14,Route 14 operates Monday-Saturday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route014.asp,0000FF,FFFFFF
+1314,MCRO, 15,Route 15,Route 15 operates Monday-Sunday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route015.asp,0000FF,FFFFFF
+1315,MCRO, 16,Route 16,Route 16 operates Monday-Sunday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route016.asp,0000FF,FFFFFF
+1316,MCRO, 17,Route 17,Route 17 operates Monday-Sunday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route017.asp,0000FF,FFFFFF
+1317,MCRO, 18,Route 18,Route 18 operates Monday-Saturday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route018.asp,0000FF,FFFFFF
+1318,MCRO, 19,Route 19,Route 19 operates Monday-Friday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route019.asp,0000FF,FFFFFF
+1319,MCRO, 20,Route 20,Route 20 operates Monday-Sunday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route020.asp,0000FF,FFFFFF
+1320,MCRO, 21,Route 21,Route 21 operates Weekdays Only,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route021.asp,0000FF,FFFFFF
+1321,MCRO, 22,Route 22,Route 22 operates Monday-Friday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route022.asp,0000FF,FFFFFF
+1322,MCRO, 23,Route 23,Route 23 operates Monday-Saturday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route023.asp,0000FF,FFFFFF
+1323,MCRO, 24,Route 24,Route 24 operates Monday-Friday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route024.asp,0000FF,FFFFFF
+1324,MCRO, 25,Route 25,Route 25 operates Monday-Friday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route025.asp,0000FF,FFFFFF
+1325,MCRO, 26,Route 26,Route 26 operates Monday-Sunday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route026.asp,0000FF,FFFFFF
+1326,MCRO, 28,Route 28,Route 28 operates Monday-Friday - FREE Service,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route028.asp,0000FF,FFFFFF
+1327,MCRO, 29,Route 29,Route 29 operates Monday-Sunday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route029.asp,0000FF,FFFFFF
+1328,MCRO, 30,Route 30,Route 30 operates Monday-Friday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route030.asp,0000FF,FFFFFF
+1329,MCRO, 31,Route 31,Route 31 operates Monday-Friday - Peak hours only,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route031.asp,0000FF,FFFFFF
+1330,MCRO, 32,Route 32,Route 32 operates Monday-Friday - Peak hours only,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route032.asp,0000FF,FFFFFF
+1331,MCRO, 33,Route 33,Route 33 operates Monday-Friday - Peak hours only,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route033.asp,8A6F91,FFFFFF
+1332,MCRO, 34,Route 34,Route 34 operates Monday-Sunday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route034.asp,0000FF,FFFFFF
+1333,MCRO, 36,Route 36,Route 36 operates Monday-Friday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route036.asp,0000FF,FFFFFF
+1334,MCRO, 37,Route 37,Route 37 operates Monday-Friday - Peak hours only,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route037.asp,1D9260,FFFFFF
+1335,MCRO, 38,Route 38,Route 38 operates Monday-Sunday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route038.asp,636F11,FFFFFF
+1336,MCRO, 39,Route 39,Route 39 operates Monday-Friday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route039.asp,800000,FFFFFF
+1337,MCRO, 41,Route 41,Route 41 operates Monday-Sunday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route041.asp,0000FF,FFFFFF
+1338,MCRO, 43,Route 43,Route 43 operates Monday-Saturday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route043.asp,800080,FFFFFF
+1339,MCRO, 44,Route 44,Route 44 operates Monday-Friday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route044.asp,0000FF,FFFFFF
+1340,MCRO, 45,Route 45,Route 45 operates Monday-Saturday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route045.asp,800040,FFFFFF
+1341,MCRO, 46,Route 46,Route 46 operates Monday-Sunday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route046.asp,AE92E4,FFFFFF
+1342,MCRO, 47,Route 47,Route 47 operates Monday-Sunday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route047.asp,008080,FFFFFF
+1343,MCRO, 48,Route 48,Route 48 operates Monday-Sunday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route048.asp,800080,FFFFFF
+1344,MCRO, 49,Route 49,Route 49 operates Monday-Sunday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route049.asp,00009F,FFFFFF
+1345,MCRO, 51,Route 51,Route 51 operates Monday-Friday - Peak hours only,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route051.asp,A6DF7B,FFFFFF
+1346,MCRO, 52,Route 52,Route 52 operates Monday-Friday - Peak hours only,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route052.asp,8080C0,FFFFFF
+1347,MCRO, 53,Route 53,Route 53 operates Monday-Friday - Peak hours only,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route053.asp,FFFF80,FFFFFF
+1348,MCRO, 54,Route 54,Route 54 operates Monday-Sunday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route054.asp,FFFF00,FFFFFF
+1349,MCRO, 55,Route 55,Route 55 operates Monday-Sunday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route055.asp,FF4FA7,FFFFFF
+1350,MCRO, 56,Route 56,Route 56 operates Monday-Sunday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route056.asp,FFBD9D,FFFFFF
+1351,MCRO, 57,Route 57,Route 57 operates Monday-Sunday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route057.asp,FF8000,FFFFFF
+1352,MCRO, 58,Route 58,Route 58 operates Monday-Sunday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route058.asp,804000,FFFFFF
+1353,MCRO, 59,Route 59,Route 59 operates Monday-Sunday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route059.asp,008000,FFFFFF
+1354,MCRO, 60,Route 60,Route 60 operates only from Montgomery Village to Shady Grove in the morning and from Shady Grove to Montgomery Village in the afternoon weekdays only.,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route060.asp,004000,FFFFFF
+1355,MCRO, 61,Rotue 61,Route 61 operates Monday-Sunday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route061.asp,000080,FFFFFF
+1356,MCRO, 63,Route 63,Route 63 operates Monday-Friday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route063.asp,FF0000,FFFFFF
+1357,MCRO, 64,Route 64,Route 64 operates Monday-Sunday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route064.asp,008080,FFFFFF
+1358,MCRO, 65,Route 65,Route 65 operates only from Montgomery Village to Shady Grove in the morning and from Shady Grove to Montgomery Village in the afternoon weekdays only.,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route065.asp,800080,FFFFFF
+1359,MCRO, 66,Route 66,Route 66 operates only from Shady Grove Station to Shady Grove Hospital/Traville Transit Center in the morning and from Traville Transit Center/Shady Grove Hospital to Shady Grove Station in the afternoon weekdays only.,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route066.asp,8080C0,FFFFFF
+1360,MCRO, 67,Route 67,Route 67 operates only from Traville Transit Center/Dufief Mill Rd to Shady Grove in the morning and from Shady Grove to Dufief Mill Rd/Traville Transit Center in the afternoon weekdays only.,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route067.asp,008040,FFFFFF
+1361,MCRO, 70,Route 70,Route 70 operates Monday-Friday - Peak hours only,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route070.asp,800080,FFFFFF
+1362,MCRO, 71,Route 71,Route 71 operates only from Kingsview Park and Ride to Shady Grove in the morning and from Shady Grove to Kingsview Park and Ride in the afternoon weekdays only.,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route071.asp,408080,FFFFFF
+1363,MCRO, 74,Route 74,Route 74 operates Monday-Friday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route074.asp,8000FF,FFFFFF
+1364,MCRO, 75,Route 75,Route 75 operates Monday-Friday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route075.asp,FFC4E1,FFFFFF
+1365,MCRO, 76,Route 76,Route 76 operates Monday-Friday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route076.asp,804040,FFFFFF
+1366,MCRO, 78,Route 78,Route 78 operates only from Kingsview Park and Ride to Shady Grove in the morning and from Shady Grove to Kingsview Park and Ride in the afternoon weekdays only.,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route078.asp,FF8080,FFFFFF
+1367,MCRO, 79,Route 79,Route 79 operates only from Milestone Center to Shady Grove in the morning and from Shady Grove to Milestone Center in the afternoon weekdays only.,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route079.asp,808000,FFFFFF
+1368,MCRO, 81,Route 81,Route 81 operates Monday-Friday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route081.asp,FF8000,FFFFFF
+1369,MCRO, 83,Route 83,Route 83 operates Monday-Sunday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route083.asp,54621E,FFFFFF
+1370,MCRO, 90,Route 90,Route 90 operates Monday-Friday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route090.asp,A6CAF0,FFFFFF
+1371,MCRO, 93,Route 93,Route 93 operates Monday-Friday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route093.asp,808000,FFFFFF
+1372,MCRO, 96,Route 96,Route 96 operates Monday-Friday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route096.asp,DCB8B8,FFFFFF
+1373,MCRO, 97,Route 97,Route 97 operates Monday-Sunday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route097.asp,400040,FFFFFF
+1374,MCRO, 98,Route 98,Route 98 operates Monday-Saturday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route098.asp,8080FF,FFFFFF
+1375,MCRO,100,Route 100,Route 100 operates Monday-Sunday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/route100.asp,008080,FFFFFF
+1392,MCRO,401,L8,Route L8 operates Monday-Sunday - This is a Metrobus route - Ride On operates this route on Saturday and Sunday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/routel8.asp,C0C0C0,FFFFFF
+1393,MCRO,402,T2,Route T2 operates Monday-Sunday - This is a Metrobus route - Ride On operates this route on Saturday and Sunday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/routet2.asp,C0C0C0,FFFFFF
+1394,MCRO,403,Z2,Route Z2 operates Monday-Saturday - This is a Metrobus route - Ride On operates this route on Saturday,3,http://www.montgomerycountymd.gov/content/dot/transit/routesandschedules/allroutes/routez2.asp,C0C0C0,FFFFFF
