@@ -5,7 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
 import java.util.HashSet;
 
-import me.math.grid.SpatialGridPoint;
+import me.math.grid.AbstractSpatialGridPoint;
 import me.openMap.ApplicationSettings;
 import me.openMap.mapUtils.AbstractMapOverlay;
 import me.transit.database.Agency;
@@ -16,10 +16,10 @@ import org.jdesktop.swingx.mapviewer.GeoPosition;
 
 public class SpatialPointOverlay extends AbstractMapOverlay {
 	
-	private SpatialGridPoint gp_ = null;
+	private AbstractSpatialGridPoint gp_ = null;
 	
 
-	public SpatialPointOverlay(SpatialGridPoint gp, double spacingMeters)
+	public SpatialPointOverlay(AbstractSpatialGridPoint gp, double spacingMeters)
 	{
 		super( gp.getVertex().getLatitudeDegress(), gp.getVertex().getLongitudeDegress());
 		gp_ = gp;
@@ -32,7 +32,8 @@ public class SpatialPointOverlay extends AbstractMapOverlay {
 	 */
 	public int getPointSize(JXMapViewer map)
 	{
-		SpatialGridPoint pt = gp_.Grid().getNextGridPoint(gp_);
+		
+		AbstractSpatialGridPoint pt = gp_.Grid().getNextGridPoint(gp_);
 		GeoPosition aPoint = new GeoPosition(pt.getVertex().getLatitudeDegress(),
 											 pt.getVertex().getLongitudeDegress());
 

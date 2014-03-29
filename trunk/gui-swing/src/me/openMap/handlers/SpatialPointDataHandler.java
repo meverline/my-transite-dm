@@ -2,15 +2,15 @@ package me.openMap.handlers;
 
 import java.util.List;
 
-import me.math.grid.SpatialGridPoint;
+import me.math.grid.AbstractSpatialGridPoint;
 import me.openMap.OpenTransitMap;
 import me.openMap.utils.SpatialPointOverlay;
 
 public class SpatialPointDataHandler implements DataDisplayHandler {
 
-	List<SpatialGridPoint> data = null;
+	List<AbstractSpatialGridPoint> data = null;
 	
-	public SpatialPointDataHandler(List<SpatialGridPoint>  results)
+	public SpatialPointDataHandler(List<AbstractSpatialGridPoint>  results)
 	{
 		data = results;
 	}
@@ -18,21 +18,21 @@ public class SpatialPointDataHandler implements DataDisplayHandler {
 	/**
 	 * @return the data
 	 */
-	public List<SpatialGridPoint> getData() {
+	public List<AbstractSpatialGridPoint> getData() {
 		return data;
 	}
 
 	/**
 	 * @param data the data to set
 	 */
-	public void setData(List<SpatialGridPoint> data) {
+	public void setData(List<AbstractSpatialGridPoint> data) {
 		this.data = data;
 	}
 
 	@Override
 	public void processDataToGui(OpenTransitMap gui) {
 		
-		for ( SpatialGridPoint gp : data) {
+		for ( AbstractSpatialGridPoint gp : data) {
 			gui.getMap().addOverlay( new SpatialPointOverlay(gp, gp.Grid().getGridSpacingMeters()));
 		}
 	}
