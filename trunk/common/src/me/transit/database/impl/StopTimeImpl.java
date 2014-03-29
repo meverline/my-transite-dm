@@ -32,9 +32,9 @@ public class StopTimeImpl implements StopTime {
 	@XStreamAlias(StopTime.STOPNAME)
 	private String stopName = "";
 	@XStreamAlias(StopTime.PICKUPTYPE)
-	private PickupType pickupType = PickupType.UNKNOWN;
+	private PickupType pickupType = PickupType.REGULAR;
 	@XStreamAlias(StopTime.DROPOFFTYPE)
-	private PickupType dropOffType = PickupType.UNKNOWN;
+	private PickupType dropOffType = PickupType.REGULAR;
 	@XStreamOmitField
 	private String tripId = null;
 	@XStreamOmitField

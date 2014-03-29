@@ -19,6 +19,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import me.factory.DaoBeanFactory;
+import me.math.kdtree.MinBoundingRectangle;
 import me.transit.dao.AgencyDao;
 import me.transit.dao.CalendarDateDao;
 import me.transit.dao.RouteDao;
@@ -73,6 +74,7 @@ public class TransitFeedParser {
 
 	private static GeometryFactory factory = new GeometryFactory();
 	private Agency agency = null;
+	private MinBoundingRectangle mbr = null;
 	private Properties properties = new Properties();
 	private HashMap<String,RouteGeometry> shaps = new HashMap<String,RouteGeometry>();
 	private HashMap<String,ServiceDate> service = new HashMap<String,ServiceDate>();
@@ -147,6 +149,11 @@ public class TransitFeedParser {
 	public Agency getAgency() {
 		return this.agency;
 	}
+	
+	public MinBoundingRectangle getMBR()
+	{
+		return this.mbr;
+	}
 
 	public RouteGeometry getShape(long id)
 	{
@@ -186,6 +193,7 @@ public class TransitFeedParser {
 		this.service = new HashMap<String,ServiceDate>();
 		this.shaps = new HashMap<String,RouteGeometry>();
 		this.agency = null;
+		this.mbr = new MinBoundingRectangle();
 		
 		for ( String dataFile : files ) {	
 			log.info("parse: " + dataFile + " " + diretory);
@@ -204,6 +212,14 @@ public class TransitFeedParser {
 			else {
 				parse(filePath(diretory,dataFile), dataFile);
 			}
+		}
+		
+		this.getAgency().setMBR( this.getMBR().toPolygon());
+		log.info(this.getMBR().toString());
+		try {
+			this.save(this.getAgency());
+		} catch (SQLException e) {
+			log.error(e);
 		}
 		log.info("done processing: " + diretory);
 	}
@@ -395,18 +411,27 @@ public class TransitFeedParser {
 		GraphDatabaseDAO graph = GraphDatabaseDAO.instance();
 		
 		if ( obj instanceof Agency ) {
+			Agency current = Agency.class.cast(obj);
 			AgencyDao dao = 
 					 AgencyDao.class.cast(DaoBeanFactory.create().getDaoBean( AgencyDao.class));
 			
-			Agency agency = Agency.class.cast(obj);
-			dao.save( agency);
-		    graph.addNode(agency);
+			Agency saved = dao.findByName(current.getName());
+			if ( saved != null ) {
+				this.mbr = new MinBoundingRectangle(saved.getMBR());
+				this.setAgency(saved);
+			} else {
+				dao.save( current);
+				graph.addNode(current);
+				this.setAgency(current);
+			}
 		    
 		} else	if ( obj instanceof  TransitStop ) {
 			TransiteStopDao dao = 
 					TransiteStopDao.class.cast(DaoBeanFactory.create().getDaoBean( TransiteStopDao.class));
 			
 			TransitStop stop = TransitStop.class.cast(obj);
+			
+			this.getMBR().extend(stop.getLocation());
 			
 			if ( stop.getDesc().isEmpty() ) {
 				stop.setDesc(stop.getName());
@@ -497,12 +522,7 @@ public class TransitFeedParser {
 						}
 						fldNdx++;
 					}
-					
-					if ( obj instanceof Agency ) {
-						Agency rec = Agency.class.cast(obj);
-						this.setAgency(rec);
-					}
-					
+										
 					boolean valid = true;
 					if ( TransitData.class.isAssignableFrom(obj.getClass()) ) {
 						TransitData td = TransitData.class.cast(obj);
@@ -646,18 +666,19 @@ public class TransitFeedParser {
 		try {
 			Coordinate array[] = new Coordinate[coords.size()];
 			coords.toArray(array);
+			if ( array.length > 1 ) {
+				LineString poly =  factory.createLineString(array);
 			
-			LineString poly =  factory.createLineString(array);
-		
-			RouteGeometry db = new RouteGeometryImpl();
-			db.setAgency(getAgency());
-			db.setId(id);
-			db.setShape(poly);
-
-			RouteGeometryDao dao = 
-				RouteGeometryDao.class.cast(DaoBeanFactory.create().getDaoBean(RouteGeometryDao.class));
-			dao.save(db);
-			this.shaps.put(id, db);
+				RouteGeometry db = new RouteGeometryImpl();
+				db.setAgency(getAgency());
+				db.setId(id);
+				db.setShape(poly);
+	
+				RouteGeometryDao dao = 
+					RouteGeometryDao.class.cast(DaoBeanFactory.create().getDaoBean(RouteGeometryDao.class));
+				dao.save(db);
+				this.shaps.put(id, db);
+			}
 		} catch (Exception e) {
 			log.error("ID: " + id + " : coords size " + coords.size() + "\n" + e.getLocalizedMessage()  , e);
 		}
@@ -934,7 +955,6 @@ public class TransitFeedParser {
 				for ( Trip entry : data.getValue() ) {
 					graphdb.createRelationShip(route, entry);
 				}
-				log.info("parseTrip:updateRoute " + route.getShortName() + " " + data.getValue().size());
 			}
 							
 		} catch (Exception e) {
@@ -1059,13 +1079,21 @@ public class TransitFeedParser {
 					
 					if ( ! newStop ) {
 						if ( indexMap.containsKey("DropOffType") ) {
-						  int ndx = Integer.parseInt(data[indexMap.get("DropOffType")].replace('"', ' ').trim());
-						  stopTime.setDropOffType(StopTime.PickupType.values()[ndx]);
+						  try {
+							  int ndx = Integer.parseInt(data[indexMap.get("DropOffType")].replace('"', ' ').trim());
+							  stopTime.setDropOffType(StopTime.PickupType.values()[ndx]);
+						  } catch (Exception ex) {
+							 log.error("Unknown Dropoff Type: "); 
+						  }
 						} 
 						
 						if ( indexMap.containsKey("PickupType") ) {
-						   int ndx = Integer.parseInt(data[indexMap.get("PickupType")].replace('"', ' ').trim());
-						   stopTime.setPickupType(StopTime.PickupType.values()[ndx]);
+						   try {
+						       int ndx = Integer.parseInt(data[indexMap.get("PickupType")].replace('"', ' ').trim());
+							   stopTime.setPickupType(StopTime.PickupType.values()[ndx]);
+						   } catch (Exception ex) {
+							   log.error("Unknown Pickup Type: "); 
+						   }
 						} 
 						
 						if ( indexMap.containsKey("StopHeadSign") ) {
@@ -1123,24 +1151,17 @@ public class TransitFeedParser {
 
 		TransitFeedParser feedParser = new TransitFeedParser(path);
 		
-		String dir = path + "/google_transit";
-		String orginization[] = { "ChapelHill", 
-								  "C-Tran", 
-								  "Data", 
-								  "CAT",
-								  "TriangleTransit",
-								  "TriangleTransit-Express",
-								  "FairfaxConnector",
-								  "ART",
-								  "metro",
-								  "DC_Circulator"
-								  };
+		File fp = new File(path, "google_transit");
 		
 		long start = System.currentTimeMillis();
-		for ( String agency : orginization ) {
-			TransitFeedParser.log.info(dir + " " +  agency);
-			feedParser.parse(feedParser.filePath(dir, agency));
+		for ( File dir : fp.listFiles()) {
+			File check = new File(dir, "agency.txt");
+			if ( check.exists() ) {
+			  TransitFeedParser.log.info( dir.getAbsolutePath() + " ... " );
+			  feedParser.parse( dir.getAbsolutePath());
+			}
 		}
+
 		long end = System.currentTimeMillis();
 		
 		long diff = end - start;

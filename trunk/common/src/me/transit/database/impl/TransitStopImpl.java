@@ -163,6 +163,23 @@ public class TransitStopImpl extends TransitDateImpl implements TransitStop {
 		return builder.toString();
 	}
 	
+	public void setStopTimezone(String value) {
+		
+	}
+	
+	public String getStopTimezone() {
+		return "EST";
+	}
+	
+	public boolean getWheelchairBoarding() {
+		return false;
+	}
+	
+	public void setWheelchairBoarding(boolean value)
+	{
+		
+	}
+	
 	public boolean valid() 
 	{
 		if ( this.getName() == null || this.getName().length() < 0 ) {

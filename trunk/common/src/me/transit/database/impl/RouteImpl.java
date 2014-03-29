@@ -183,7 +183,11 @@ public class RouteImpl extends TransitDateImpl implements Route {
             Map<String,Object> rtn = new HashMap<String,Object>();
 
             rtn.put(IDocument.CLASS, RouteImpl.class.getName());
-            rtn.put(IDocument.ID, this.getShortName() + ": " + this.getAgency().getName());
+            if ( this.getShortName().isEmpty()) {
+            	rtn.put(IDocument.ID, this.getLongName() + ": " + this.getAgency().getName());
+            } else {
+            	rtn.put(IDocument.ID, this.getShortName() + ": " + this.getAgency().getName());
+            }
             
             rtn.put( Agency.AGENCY, this.getAgency().getName());
             rtn.put( Agency.UUID, this.getUUID());

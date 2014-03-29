@@ -26,232 +26,257 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import me.math.Vertex;
-import me.math.grid.SpatialGridPoint;
+import me.math.grid.AbstractSpatialGridPoint;
 
 public class KDTree {
 
-  private INode root_ = null;
-  private GridComparator comparator_ = null;
-  private Log log = LogFactory.getLog(KDTree.class);
+	private INode root_ = null;
+	private GridComparator comparator_ = null;
+	private Log log = LogFactory.getLog(KDTree.class);
 
-  /**
-   * 
-   * @param aList
-   */
-  public KDTree(List<SpatialGridPoint> aList) {
+	/**
+	 * 
+	 * @param aList
+	 */
+	public KDTree(List<AbstractSpatialGridPoint> aList, INodeCreator creator) {
+		comparator_ = new GridComparator(INode.Direction.XLAT);
+		Collections.sort(aList, comparator_);
 
-          comparator_ = new GridComparator(INode.Direction.XLAT);
-          Collections.sort(aList, comparator_);
+		root_ = insertNode(aList, INode.Direction.XLAT, root_, 0, creator);
+	}
 
-          root_ = insertNode( aList, INode.Direction.XLAT, root_, 0);
-  }
+	public final INode getRootNode() {
+		return this.root_;
+	}
 
-  /**
-   * 
-   * @param aList
-   * @param direction
-   * @param parent
-   * @param depth
-   * @return
-   */
-  private INode insertNode(List<SpatialGridPoint> aList,
-                                                   INode.Direction direction,
-                                                   INode parent, int depth) {
+	/**
+	 * 
+	 * @param aList
+	 */
+	public KDTree(INode root) {
+		comparator_ = new GridComparator(INode.Direction.XLAT);
+		root_ = root;
+	}
 
-          if (aList.isEmpty()) {
-                  return null;
-          }
+	/**
+	 * 
+	 * @param aList
+	 * @param direction
+	 * @param parent
+	 * @param depth
+	 * @return
+	 */
+	private INode insertNode(List<AbstractSpatialGridPoint> aList,
+							 INode.Direction direction, 
+							 INode parent, 
+							 int depth, 
+							 INodeCreator creator) {
 
-          int midpoint = (int) Math.floor((aList.size() / 2) + 0.5f);
+		if (aList.isEmpty()) {
+			return null;
+		}
 
-          SpatialGridPoint pt = aList.get(midpoint);
-          INode node = new KDNode(pt, direction, parent, depth);
+		int midpoint = (int) Math.floor((aList.size() / 2) + 0.5f);
 
-          INode.Direction change = direction;
-          if ( direction == INode.Direction.XLAT ) {
-                  change = INode.Direction.YLON;
-          } else {
-                  change = INode.Direction.XLAT;
-          }
+		AbstractSpatialGridPoint pt = aList.get(midpoint);
+		INode node = creator.create(pt, direction, parent, depth);
+		
+		INode.Direction change = direction;
+		if (direction == INode.Direction.XLAT) {
+			change = INode.Direction.YLON;
+		} else {
+			change = INode.Direction.XLAT;
+		}
 
-          List<SpatialGridPoint> leftList = new ArrayList<SpatialGridPoint>();
+		List<AbstractSpatialGridPoint> leftList = new ArrayList<AbstractSpatialGridPoint>();
 
-          for (int n = 0; n < midpoint; n++) {
-                  leftList.add(aList.get(n));
-          }
-          comparator_.setDirection(change);
-          Collections.sort(leftList, comparator_);
-          node.setLeft(insertNode(leftList, change, node, depth+1));
-          if ( node.getLeft() != null ) {
-          node.getMBR().extend(node.getLeft().getMBR());
-          }
+		for (int n = 0; n < midpoint; n++) {
+			leftList.add(aList.get(n));
+		}
+		
+		comparator_.setDirection(change);
+		Collections.sort(leftList, comparator_);
+		node.setLeft(insertNode(leftList, change, node, depth+1, creator));
+		if (node.getLeft() != null) {
+			node.getMBR().extend(node.getLeft().getMBR());
+		}
 
-          List<SpatialGridPoint> rightList = new ArrayList<SpatialGridPoint>();
+		List<AbstractSpatialGridPoint> rightList = new ArrayList<AbstractSpatialGridPoint>();
 
-          for (int n = midpoint + 1; n < aList.size(); n++) {
-                  rightList.add(aList.get(n));
-          }
-          comparator_.setDirection(change);
-          Collections.sort(rightList, comparator_);
-          node.setRight(insertNode(rightList, change, node, depth+1));
-          if ( node.getRight() != null ) {
-             node.getMBR().extend(node.getRight().getMBR());
-          }
+		for (int n = midpoint + 1; n < aList.size(); n++) {
+			rightList.add(aList.get(n));
+		}
+		
+		comparator_.setDirection(change);
+		Collections.sort(rightList, comparator_);
+		node.setRight(insertNode(rightList, change, node, depth + 1, creator));
+		if (node.getRight() != null) {
+			node.getMBR().extend(node.getRight().getMBR());
+		}
 
-          return node;
-  }
+		return node;
+	}
 
-  /**
-   * 
-   * @param node
-   * @param file
-   * @param depth
-   */
-  protected void dump(INode node, java.io.PrintWriter file, int depth)
-  {
-          if ( node == null ) { return; }
+	/**
+	 * 
+	 * @param node
+	 * @param file
+	 * @param depth
+	 */
+	protected void dump(INode node, java.io.PrintWriter file, int depth) {
+		if (node == null) {
+			return;
+		}
 
-          for ( int ndx = 0; ndx < depth; ndx++) {
-            file.print(" ");
-          }
-          file.println( node.toString());
-          dump( node.getLeft(), file, depth+3);
-          dump( node.getRight(), file, depth+3);
-  }
+		for (int ndx = 0; ndx < depth; ndx++) {
+			file.print(" ");
+		}
+		file.println(node.toString());
+		dump(node.getLeft(), file, depth + 3);
+		dump(node.getRight(), file, depth + 3);
+	}
 
-  /**
-   * 
-   * @param file
-   */
-  public void dump(java.io.PrintWriter file)
-  {
-          dump(root_, file, 0);
-  }
+	/**
+	 * 
+	 * @param file
+	 */
+	public void dump(java.io.PrintWriter file) {
+		dump(root_, file, 0);
+	}
 
-  /**
-   * 
-   * @param file
-   */
-  public void dump(String file) {
-          try {
-                  PrintWriter ps = new PrintWriter(new FileOutputStream(file));
-                  dump(root_, ps, 0);
-          } catch (java.lang.Exception ex) {
-        	  	  log.error(ex);
-          }
-  }
+	/**
+	 * 
+	 * @param file
+	 */
+	public void dump(String file) {
+		PrintWriter ps = null;
+		try {
+		    ps = new PrintWriter(new FileOutputStream(file));
+			dump(root_, ps, 0);
+		} catch (java.lang.Exception ex) {
+			ex.printStackTrace();
+			log.error(ex);
+		}
+		if ( ps != null ) {
+			ps.close();
+		}
+	}
 
-  /**
-   * 
-   * @param node
-   * @param search
-   */
-  protected void find(INode node, IKDSearch search)
-  {
-          if ( node == null ) { return; }
+	/**
+	 * 
+	 * @param node
+	 * @param search
+	 */
+	protected void find(INode node, IKDSearch search) {
+		if (node == null) {
+			return;
+		}
 
-          if (node.contains(search.getVertex())) {
+		if (node.contains(search.getVertex())) {
 
-                  search.compare(node);
-                  if ( search.endSearch(node) ) { return; }
+			search.compare(node);
+			if (search.endSearch(node)) {
+				return;
+			}
 
-                  Vertex vertex = search.getVertex();
-                  if (node.getDirection() == INode.Direction.XLAT) {
-                          if (vertex.getLatitudeDegress() < node.getPointVertex().getLatitudeDegress()) {
-                                  find(node.getLeft(), search);
-                          } else {
-                                  find(node.getRight(), search);
-                          }
-                  } else {
-                          if (vertex.getLongitudeDegress() < node.getPointVertex().getLongitudeDegress() ) {
-                                  find(node.getLeft(), search);
-                          } else {
-                                  find(node.getRight(), search);
-                          }
-                  }
-          }
+			Vertex vertex = search.getVertex();
+			if (node.getDirection() == INode.Direction.XLAT) {
+				if (vertex.getLatitudeDegress() < node.getPointVertex()
+						.getLatitudeDegress()) {
+					find(node.getLeft(), search);
+				} else {
+					find(node.getRight(), search);
+				}
+			} else {
+				if (vertex.getLongitudeDegress() < node.getPointVertex()
+						.getLongitudeDegress()) {
+					find(node.getLeft(), search);
+				} else {
+					find(node.getRight(), search);
+				}
+			}
+		}
 
-  }
-  
-  /**
-   * 
-   * @param node
-   * @param nodeSearch
-   */
-  protected void search(INode node, IKDSearch nodeSearch)
-  {
-          if ( node == null ) { return; }
+	}
 
-          if (node.contains(nodeSearch.getVertex())) {
-                  nodeSearch.compare(node);
-                  if ( nodeSearch.endSearch(node) ) { return; }
-                  search(node.getLeft(), nodeSearch);
-                  search(node.getRight(), nodeSearch);
-          }
-  }
+	/**
+	 * 
+	 * @param node
+	 * @param nodeSearch
+	 */
+	protected void search(INode node, IKDSearch nodeSearch) {
+		if (node == null) {
+			return;
+		}
 
-  /**
-   * 
-   * @param node
-   * @param search
-   */
-  protected void searchStats(INode node, IKDSearch search)
-  {
-          if (node == null) {
-                  return;
-          }
+		if (node.contains(nodeSearch.getVertex())) {
+			nodeSearch.compare(node);
+			if (nodeSearch.endSearch(node)) {
+				return;
+			}
+			search(node.getLeft(), nodeSearch);
+			search(node.getRight(), nodeSearch);
+		}
+	}
 
-          search.compare(node);
-          if (search.endSearch(node)) {
-                  return;
-          }
+	/**
+	 * 
+	 * @param node
+	 * @param search
+	 */
+	protected void searchStats(INode node, IKDSearch search) {
+		if (node == null) {
+			return;
+		}
 
-          searchStats(node.getLeft(), search);
-          searchStats(node.getRight(), search);
+		search.compare(node);
+		if (search.endSearch(node)) {
+			return;
+		}
 
-  }
-  
-  /**
-   * 
-   * @param nodeSearch
-   * @return
-   */
-  public List<SpatialGridPoint> search(IKDSearch nodeSearch)
-  {
-          if ( root_.contains(nodeSearch.getVertex())) {
-                  search(root_, nodeSearch);
-          }
-          return nodeSearch.getResults();
-  }
+		searchStats(node.getLeft(), search);
+		searchStats(node.getRight(), search);
 
-  /**
-   * 
-   * @param search
-   * @return
-   */
-  public List<SpatialGridPoint> find(IKDSearch search)
-  {
-          if ( root_.contains(search.getVertex())) {
-                  find(root_, search);
-          }
-          return search.getResults();
-  }
+	}
 
-  /**
-   * 
-   * @param search
-   * @return
-   */
-  public List<SpatialGridPoint> searchStats(IKDSearch search)
-  {
-          searchStats(root_, search);
-          return search.getResults();
-  }
+	/**
+	 * 
+	 * @param nodeSearch
+	 * @return
+	 */
+	public List<AbstractSpatialGridPoint> search(IKDSearch nodeSearch) {
+		if (root_.contains(nodeSearch.getVertex())) {
+			search(root_, nodeSearch);
+		}
+		return nodeSearch.getResults();
+	}
+
+	/**
+	 * 
+	 * @param search
+	 * @return
+	 */
+	public List<AbstractSpatialGridPoint> find(IKDSearch search) {
+		if (root_.contains(search.getVertex())) {
+			find(root_, search);
+		}
+		return search.getResults();
+	}
+
+	/**
+	 * 
+	 * @param search
+	 * @return
+	 */
+	public List<AbstractSpatialGridPoint> searchStats(IKDSearch search) {
+		searchStats(root_, search);
+		return search.getResults();
+	}
 
   ///////////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////////
 
-  public class GridComparator implements Comparator<SpatialGridPoint> {
+  public class GridComparator implements Comparator<AbstractSpatialGridPoint> {
 
           private INode.Direction direction_;
 
@@ -286,7 +311,7 @@ public class KDTree {
                   return 0;
           }
 
-          public int compare(SpatialGridPoint o1, SpatialGridPoint o2)
+          public int compare(AbstractSpatialGridPoint o1, AbstractSpatialGridPoint o2)
           {
                   Vertex left = o1.getVertex();
                   Vertex right = o2.getVertex();

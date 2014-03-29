@@ -3,6 +3,7 @@ package me.transit.database;
 import java.io.Serializable;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.vividsolutions.jts.geom.Polygon;
 
 @XStreamAlias("Agency")
 public interface Agency extends Serializable {
@@ -90,5 +91,20 @@ public interface Agency extends Serializable {
 	 * @param id the id to set
 	 */
 	public void setId(String id);
+	
+	/**
+	 * 
+	 * @return the mbr or agency
+	 */
+	public Polygon getMBR();
+	
+	/**
+	 * 
+	 * @param mbr
+	 */
+	public void setMBR(Polygon mbr);
+	
+	public void setFareUrl(String url);
+	public String getFareUrl();
 	
 }

@@ -4,6 +4,7 @@ import me.transit.database.Agency;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import com.vividsolutions.jts.geom.Polygon;
 
 public class AgencyImpl implements Agency {
 	
@@ -31,6 +32,8 @@ public class AgencyImpl implements Agency {
 	private String id = "";
 	@XStreamAlias("version")
 	private String version = "0.5";
+	@XStreamAlias("mbr")
+	private Polygon mbr = null;
 	
 	public AgencyImpl()
 	{
@@ -153,6 +156,22 @@ public class AgencyImpl implements Agency {
 	public void setId(String id) {
 		this.id = id;
 	}
+	
+	/* (non-Javadoc)
+	 * @see me.transit.database.Agency#getMBR()
+	 */
+	@Override
+	public Polygon getMBR() {
+		return this.mbr;
+	}
+
+	/* (non-Javadoc)
+	 * @see me.transit.database.Agency#setMBR(com.vividsolutions.jts.geom.Polygon)
+	 */
+	@Override
+	public void setMBR(Polygon mbr) {
+		this.mbr = mbr;
+	}
 
 	@Override
 	public String toString() {
@@ -177,6 +196,14 @@ public class AgencyImpl implements Agency {
 			}	
 		}
 		return rtn;
+	}
+	
+	public void setFareUrl(String url) {
+		
+	}
+	
+	public String getFareUrl() {
+		return "http://";
 	}
 	
 }

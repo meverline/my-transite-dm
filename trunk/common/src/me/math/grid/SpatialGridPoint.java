@@ -17,25 +17,26 @@
 package me.math.grid;
 
 import me.math.Vertex;
+import me.math.kdtree.INode;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
-@XStreamAlias("SpatialGridPoint")
-public class SpatialGridPoint {
+@XStreamAlias("UniformSpatialGridPoint")
+public class SpatialGridPoint extends AbstractSpatialGridPoint{
 
-	@XStreamAlias("row")
-	private int row_ = -1;
-	@XStreamAlias("col")
-	private int col_ = -1;
 	@XStreamAlias("corner")
 	private Vertex corner_ = null;
-	@XStreamOmitField
-	private int index_ = -1;
 	@XStreamOmitField
 	private UniformSpatialGrid grid_ = null;
 	@XStreamAlias("Data")
 	private SpatialGridData data_ = null;
+	@XStreamOmitField
+	private INode left_ = null;
+	@XStreamOmitField
+	private INode right_ = null;
+	@XStreamOmitField
+	private INode parent_ = null;
 	
 	/**
 	 * 
@@ -47,10 +48,10 @@ public class SpatialGridPoint {
 	 */
 	public SpatialGridPoint(int row, int col, Vertex corner, int index, UniformSpatialGrid grid) {
 
-		row_ = row;
-		col_ = col;
-		corner_ = corner;
-		index_ = index;
+		this.setRow(row);
+		this.setCol(col);
+		this.setCorner(corner);
+		this.setIndex(index);
 		grid_ = grid;
 	}
 
@@ -62,28 +63,21 @@ public class SpatialGridPoint {
 	{
 		return grid_;
 	}
-
+	
 	/**
 	 * 
 	 * @return
 	 */
-	public int getRow() {
-		return row_;
+	public Vertex getVertex()
+	{
+		return new Vertex(corner_);
 	}
-
+	
 	/**
-	 * 
+	 * @param corner_ the corner_ to set
 	 */
-	public int getCol() {
-		return col_;
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public int getIndex() {
-		return index_;
+	protected void setCorner(Vertex corner_) {
+		this.corner_ = corner_;
 	}
 
 	/**
@@ -98,15 +92,6 @@ public class SpatialGridPoint {
 	}
 
 	/**
-	 * 
-	 * @return
-	 */
-	public Vertex getVertex()
-	{
-		return new Vertex(corner_);
-	}
-
-	/**
 	 * @return the data_
 	 */
 	public SpatialGridData getData() {
@@ -118,6 +103,59 @@ public class SpatialGridPoint {
 	 */
 	public void setData(SpatialGridData data_) {
 		this.data_ = data_;
+	}
+
+	/* (non-Javadoc)
+	 * @see me.math.kdtree.INode#getLeft()
+	 */
+	@Override
+	public INode getLeft() {
+		return this.left_;
+	}
+
+	/* (non-Javadoc)
+	 * @see me.math.kdtree.INode#setLeft(me.math.kdtree.INode)
+	 */
+	@Override
+	public void setLeft(INode left) {
+		this.left_ = left;
+	}
+
+	/* (non-Javadoc)
+	 * @see me.math.kdtree.INode#getRight()
+	 */
+	@Override
+	public INode getRight() {
+		return this.right_;
+	}
+
+	/* (non-Javadoc)
+	 * @see me.math.kdtree.INode#setRight(me.math.kdtree.INode)
+	 */
+	@Override
+	public void setRight(INode right) {
+		this.right_ = right;
+	}
+
+	/* (non-Javadoc)
+	 * @see me.math.kdtree.INode#getParent()
+	 */
+	@Override
+	public INode getParent() {
+		return this.parent_;
+	}
+	
+	public void setParent(INode index) 
+	{
+		this.parent_ = index;
+	}
+
+	/* (non-Javadoc)
+	 * @see me.math.kdtree.INode#getPoint()
+	 */
+	@Override
+	public AbstractSpatialGridPoint getPoint() {
+		return this;
 	}
 	
 	

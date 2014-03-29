@@ -17,12 +17,12 @@
 package me.math.kdtree;
 
 import me.math.Vertex;
-import me.math.grid.SpatialGridPoint;
+import me.math.grid.AbstractSpatialGridPoint;
 
 public interface INode {
 
   public enum Direction {
-          XLAT, YLON
+          XLAT, YLON, UNKOWN
   };
 
   /**
@@ -96,6 +96,6 @@ public interface INode {
    * 
    * @return
    */
-  public SpatialGridPoint getPoint() ;
+  public AbstractSpatialGridPoint getPoint() ;
 
 }

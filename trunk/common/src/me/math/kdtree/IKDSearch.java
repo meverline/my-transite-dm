@@ -18,7 +18,7 @@ package me.math.kdtree;
 import java.util.List;
 
 import me.math.Vertex;
-import me.math.grid.SpatialGridPoint;
+import me.math.grid.AbstractSpatialGridPoint;
 
 public interface IKDSearch {
 
@@ -45,6 +45,6 @@ public interface IKDSearch {
 	 * 
 	 * @return
 	 */
-	public List<SpatialGridPoint> getResults();
+	public List<AbstractSpatialGridPoint> getResults();
 
 }

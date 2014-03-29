@@ -54,6 +54,12 @@ public class DataSaver {
 				return new Double(data);
 			}
 		},
+		BOOLEAN {
+			@Override
+			protected Object convert( String data) {
+				return new Boolean(data);
+			}
+		},
 		STRING {
 			@Override
 			protected Object convert( String data) {
@@ -224,6 +230,8 @@ public class DataSaver {
 				setType(DataType.INT);
 			} else if  (getMethod.getReturnType() == Double.TYPE ) {
 				setType(DataType.DOUBLE);
+			} else if  (getMethod.getReturnType() == Boolean.TYPE ) {
+				setType(DataType.BOOLEAN);
 			} else {
 				throw new NoSuchMethodException("Unkown type: " + getMethod.getReturnType());
 			}

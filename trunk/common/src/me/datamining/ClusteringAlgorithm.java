@@ -2,7 +2,7 @@ package me.datamining;
 
 import java.util.List;
 
-import me.math.grid.SpatialGridPoint;
+import me.math.grid.AbstractSpatialGridPoint;
 import me.math.grid.UniformSpatialGrid;
 
 public interface ClusteringAlgorithm {
@@ -30,12 +30,12 @@ public interface ClusteringAlgorithm {
 	 * @param aGrid
 	 * @return
 	 */
-	public List<SpatialGridPoint> findClusters(UniformSpatialGrid aGrid);
+	public List<AbstractSpatialGridPoint> findClusters(UniformSpatialGrid aGrid);
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public abstract List<SpatialGridPoint> findClusters();
+	public abstract List<AbstractSpatialGridPoint> findClusters();
 
 }
