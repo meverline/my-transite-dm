@@ -19,7 +19,7 @@
 		  <property name="id" column="ID" not-null="true" />
 		  <property name="shortName" column="SHORT_NAME" not-null="true" />
 		  <property name="longName" column="LONG_NAME" not-null="true" />
-		  <property name="desc" column="DESCRIPTION"  />
+		  <property name="desc" column="DESCRIPTION" type="text" />
 		  <property name="type" column="TYPE" type ="RouteTypeUserType" not-null="true" />
 		  <property name="url" column="URL"  />
 		  <property name="color" column="COLOR" />
