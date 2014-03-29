@@ -1,0 +1,76 @@
+route_id,route_short_name,route_long_name,route_desc,route_type
+001,1,GRANBY ST, Downtown Norfolk/Ocean View/Pembroke East ,3
+002,2,HAMPTON BLVD, Naval Station Norfolk/Downtown Norfolk ,3
+003,3,CHESAPEAKE BLVD, Downtown Norfolk/Naval Station Norfolk ,3
+004,4,CHURCH ST, ODU/Downtown Norfolk ,3
+005,5,WILLOUGHBY, Willoughby/Evelyn T Butts ,3
+006,6,SOUTH NORFOLK, Downtown Norfolk/South Norfolk/Robert Hall Boulevard ,3
+008,8,TIDEWATER DRIVE, Downtown Norfolk/Evelyn Butts ,3
+009,9,SEWELLS POINT ROAD, Downtown Norfolk/Sewells Point ,3
+011,11,COLONIAL AVE, Downtown Norfolk/Colonial Place ,3
+012,12,INDIAN RIVER ROAD, South Norfolk/TCC Virginia Beach  ,3
+013,13,CAMPOSTELLA, Downtown Norfolk/Robert Hall Boulevard/Chesapeake Crossing ,3
+014,14,BATTLEFIELD BLVD, Robert Hall/TCC Chesapeake/Community Service Board ,3
+015,15,MILITARY HWY, Evelyn Butts/Robert Hall Boulevard ,3
+016,16,COLLEY AVENUE, Fort Norfolk/EVMC Station/ODU ,3
+017,17,NET, Downtown Norfolk ,3
+018,18,BALLENTINE BLVD, Downtown Norfolk/Ballentine Boulevard ,3
+020,20,VIRGINIA BEACH BLVD, Downtown Norfolk/Virginia Beach Oceanfront ,3
+021,21,LITTLE CREEK ROAD, Naval Station Norfolk/Joint Expeditionary Base Little Creek ,3
+022,22,HAYGOOD, Haygood ,3
+023,23,PRINCESS ANNE RD, Norfolk General Hospital/Military Circle/JANAF ,3
+025,25,NEWTOWN RD, Newtown Road Station/Princess Anne/Virginia Beach Municipal Center ,3
+026,26,LYNNHAVEN MALL, Lynnhaven Parkway/TCC Virginia Beach ,3
+027,27,NORTHAMPTON BLVD, Pleasure House Rd./Newtown Rd Station ,3
+028,28,VIRGINIA BEACH LIMITED, Virginia Beach Blvd. Limited ,3
+029,29,LYNNHAVEN PKWY, Great Neck/Pleasure House Rd/TCC Virginia Beach,3
+030,30,ATLANTIC AVENUE SHUTTLE, Seasonal Service,3
+031,31,MUSEUM SHUTTLE, Seasonal Service,3
+032,32,SHOPPERS SHUTTLE, Seasonal Service,3
+033,33,GENERAL BOOTH BLVD, North Seashore/Virginia Beach Municipal Center ,3
+036,36,HOLLAND ROAD, Pembroke East/TCC Virginia Beach ,3
+041,41,CRADOCK, Downtown Portsmouth/Victory Crossing ,3
+043,43,PARKVIEW,Downtown County Street/Bart Street ,3
+044,44,MIDTOWN, Norfolk General Hospital/Midtown Portsmouth ,3
+045,45,PORTSMOUTH BLVD, Downtown Norfolk/Downtown Portsmouth/Victory Crossing ,3
+047,47,HIGH ST, Downtown Portsmouth/Churchland ,3
+050,50,ACADEMY PARK, Academy Park/Victory Crossing ,3
+057,57,DEEP CREEK, Robert Hall Boulevard/Cavalier ,3
+058,58,BAINBRIDGE BLVD, South Norfolk/Bainbridge Boulevard ,3
+064,64,SMITHFIELD,Smithfield/Gwaltney/Newport News Shipbuilding,3
+090,90,ELIZABETH RIVER FERRY, ,4
+101,101,KECOUGHTAN ROAD, Downtown Newport News/Downtown Hampton ,3
+102,102,QUEEN STREET, Peninsula Town Center/Downtown Hampton ,3
+103,103,SHELL RD, Downtown Newport News/Downtown Hampton ,3
+104,104,NEWSOME PARK, Marshall Avenue/Downtown Newport News/Newmarket ,3
+105,105,BRIARFIELD ROAD, Maple Avenue & 27th Stree/Peninsula Town Center ,3
+106,106,WARWICK BOULEVARD, Newport News/Fort Eustis,3
+107,107,WARWICK/DENBIGH BOULEVARD, Newport News/Warwick Boulevard/Riverside Convalescent Center ,3
+108,108,WARWICK/LEE HALL, Lee Hall/Patrick Henry Mall ,3
+109,109,BUCKROE, Pembroke Avenue/Downtown Hampton/Buckroe ,3
+110,110,THOMAS NELSON COMMUNITY COLLEGE, Downtown Hampton/Thomas Nelson ,3
+111,111,JEFFERSON/RIVERSIDE, Thomas Nelson/Riverside/Denbigh ,3
+112,112,JEFFERSON AVENUE, Downtown Newport News/Riverside Hospital ,3
+114,114,WEAVER ROAD, Newmarket/Downtown Hampton ,3
+115,115,FOX HILL ROAD, Buckroe/Willow Oaks/Downtown Hampton ,3
+116,116,JEFFERSON/LEE HALL, Lee Hall/Patrick Henry Mall ,3
+117,117,PHOEBUS, Hampton University/V.A. Hospital ,3
+118,118,ARMISTEAD AVENUE, Langley/Semple Farm Road ,3
+119,119,OYSTER POINT, Patrick Henry Mall/Thimble Shoals Blvd ,3
+120,120,MALLORY STREET, Downtown Hampton/Mallory/Buckroe ,3
+121,121,WILLIAMSBURG, Newport News Transit Center/Williamsburg Transit Center, 3
+403,403,BUCKROE SHOPPING CENTER - NEWPORT NEWS SHIPYARD, ,3
+405,405,BUCKROE/WILLOW OAKS/COLISEUM MALL - NEWPORT NEWS SHIPYARD, ,3
+412,412,ALGONQUIN/THE ARK, ,3
+414,414,NEWPORT NEWS TRANSIT CENTER - OAKLAND INDUSTRIAL, ,3
+415,415,DENBIGH PARK AND RIDE - NEWPORT NEWS SHIPYARD, ,3
+427,427,NEWPORT NEWS SHIPYARD - DENBIGH PARK AND RIDE, ,3
+430,430,DENBIGH PARK AND RIDE - NEWPORT NEWS SHIPYARD, ,3
+800,800,LRT TIDE MAIN LINE, EVMC/Fort Norfolk/Newtown Road ,0
+918,918,MAX SILVERLEAF-NSA/JOINT FORCE STAFF COLLEGE/LAFAYETTE RIVER ANNEX, Virginia Beach to NSA/Joint Force Staff College/Lafayette River Annex ,3
+919,919,MAX SILVERLEAF/NAVAL STATION NORFOLK, Virginia Beach to Naval Station Norfolk ,3
+922,922,MAX GREENBRIAR/INDIAN RIVER/NAVAL STATION NORFOLK, Chesapeake/Virginia Beach to Naval Station Norfolk ,3
+960,960,MAX VIRGINIA BEACH-NORFOLK EXPRESS, Virginia Beach to Norfolk ,3
+961,961,MAX NEWPORT NEWS/HAMPTON/NORFOLK, Newport News/Hampton to Norfolk ,3
+965,965,MAX PATRICK HENRY/PENINSULA TOWN CENTER/NAVAL STATION NORFOLK, Patrick Henry/Peninsula Town Center/Naval Station Norfolk ,3
+967,967,MAX VIRGINIA BEACH-NEWPORT NEWS EXPRESS, Virginia Beach/Chesapeake/Norfolk/Newport News ,3
