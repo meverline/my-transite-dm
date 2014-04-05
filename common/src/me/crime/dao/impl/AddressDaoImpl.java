@@ -11,7 +11,7 @@ import org.hibernate.Session;
 
 import me.crime.dao.AddressDao;
 import me.crime.database.Address;
-import me.transit.dao.hibernate.AbstractHibernateDao;
+import me.database.hibernate.AbstractHibernateDao;
 
 public class AddressDaoImpl extends AbstractHibernateDao<Address> implements
 		AddressDao {

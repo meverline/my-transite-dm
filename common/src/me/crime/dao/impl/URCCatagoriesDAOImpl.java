@@ -13,7 +13,7 @@ import org.hibernate.Session;
 
 import me.crime.dao.URCCatagoriesDAO;
 import me.crime.database.URCCatagories;
-import me.transit.dao.hibernate.AbstractHibernateDao;
+import me.database.hibernate.AbstractHibernateDao;
 
 public class URCCatagoriesDAOImpl extends AbstractHibernateDao<URCCatagories> implements
 		URCCatagoriesDAO {

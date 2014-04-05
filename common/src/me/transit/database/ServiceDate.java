@@ -2,7 +2,7 @@ package me.transit.database;
 
 import java.util.Calendar;
 
-import me.transit.dao.mongo.IDocument;
+import me.database.mongo.IDocument;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 

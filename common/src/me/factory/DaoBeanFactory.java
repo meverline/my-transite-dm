@@ -1,6 +1,6 @@
 package me.factory;
 
-import me.transit.dao.hibernate.HibernateDao;
+import me.database.hibernate.HibernateDao;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;

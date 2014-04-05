@@ -3,7 +3,7 @@ package me.crime.dao;
 import java.util.List;
 
 import me.crime.database.Crime;
-import me.transit.dao.hibernate.HibernateDao;
+import me.database.hibernate.HibernateDao;
 import me.transit.dao.query.tuple.IQueryTuple;
 
 public interface CrimeDao extends HibernateDao<Crime> {

@@ -25,30 +25,19 @@ import me.math.EarthConstants;
 import me.math.Vertex;
 
 public abstract class AbstractSpatialGrid {
+	
+	public static final String ROWS = "rows";
+	public static final String COLS = "cols";
 
-	@XStreamAlias("SpacingMeters")
-	private double gridSpacingMeters_ = 1000;
-	@XStreamAlias("Row")
+	@XStreamAlias(AbstractSpatialGrid.ROWS)
 	private int rows_ = 0;
-	@XStreamAlias("Cols")
+	@XStreamAlias(AbstractSpatialGrid.COLS)
 	private int cols_ = 0;
-	@XStreamAlias("ULV")
-	private Vertex upperLeft_ = null;
-	@XStreamAlias("LRV")
-	private Vertex lowerRight_ = null;
 		
 	protected AbstractSpatialGrid()
 	{
 	}
 	
-	/**
-	 * 
-	 * @param spacing
-	 */
-	protected void init(double spacingInMeters)
-	{
-		setGridSpacingMeters(spacingInMeters);
-	}
 
 	/**
 	 * 
@@ -68,38 +57,6 @@ public abstract class AbstractSpatialGrid {
 
 	/**
 	 * 
-	 * @return
-	 */
-	public double getGridSpacingMeters() {
-		return gridSpacingMeters_;
-	}
-	
-	/**
-	 * 
-	 * @param gridSpacingMeters_
-	 */
-	protected void setGridSpacingMeters(double gridSpacingMeters_) {
-		this.gridSpacingMeters_ = gridSpacingMeters_;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public Vertex getLowerRight() {
-		return lowerRight_;
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public Vertex getUpperLeft() {
-		return upperLeft_;
-	}
-
-	/**
-	 * 
 	 * @param rows_
 	 */
 	protected void setRows(int rows_) {
@@ -115,38 +72,7 @@ public abstract class AbstractSpatialGrid {
 	}
 
 	/**
-	 * 
-	 * @param upperLeft_
-	 */
-	protected void setUpperLeft(Vertex upperLeft_) {
-		this.upperLeft_ = upperLeft_;
-	}
 
-	/**
-	 * 
-	 * @param lowerRight_
-	 */
-	protected void setLowerRight(Vertex lowerRight_) {
-		this.lowerRight_ = lowerRight_;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public double getMaxLatitude()
-	{
-		return lowerRight_.getLatitudeDegress();
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public double getMaxLongitude()
-	{
-		return lowerRight_.getLongitudeDegress();
-	}
 	
 	/**
 	 * 

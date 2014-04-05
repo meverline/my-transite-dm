@@ -24,7 +24,7 @@ import me.datamining.ClusteringAlgorithm;
 import me.datamining.SpatialSamplePoint;
 import me.math.Vertex;
 import me.math.grid.AbstractSpatialGridPoint;
-import me.math.grid.UniformSpatialGrid;
+import me.math.grid.array.UniformSpatialGrid;
 import me.math.kdtree.IKDSearch;
 import me.math.kdtree.INode;
 import me.math.kdtree.KDTree;

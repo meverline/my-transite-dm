@@ -18,6 +18,7 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import me.database.mongo.DocumentDao;
 import me.factory.DaoBeanFactory;
 import me.math.kdtree.MinBoundingRectangle;
 import me.transit.dao.AgencyDao;
@@ -26,7 +27,6 @@ import me.transit.dao.RouteDao;
 import me.transit.dao.RouteGeometryDao;
 import me.transit.dao.ServiceDateDao;
 import me.transit.dao.TransiteStopDao;
-import me.transit.dao.mongo.DocumentDao;
 import me.transit.dao.neo4j.GraphDatabaseDAO;
 import me.transit.database.Agency;
 import me.transit.database.CalendarDate;

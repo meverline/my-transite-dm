@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import java.util.List;
 
 import me.math.Vertex;
+import me.math.grid.array.SpatialGridPoint;
+import me.math.grid.array.UniformSpatialGrid;
 import me.math.kdtree.INode;
 import me.math.kdtree.KDTree;
 import me.math.kdtree.search.RangeSearch;

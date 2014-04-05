@@ -7,9 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import me.database.mongo.DocumentDao;
 import me.datamining.SpatialSamplePoint;
 import me.math.grid.SpatialGridData;
-import me.transit.dao.mongo.DocumentDao;
 import me.transit.dao.neo4j.GraphDatabaseDAO;
 import me.transit.dao.query.tuple.IQueryTuple;
 import me.transit.dao.query.tuple.StringTuple;

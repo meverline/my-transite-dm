@@ -5,7 +5,7 @@ import java.util.List;
 
 import me.datamining.Kernel.IDensityKernel;
 import me.datamining.bandwidth.IBandwidth;
-import me.math.grid.UniformSpatialGrid;
+import me.math.grid.array.UniformSpatialGrid;
 
 public interface DensityEstimateAlgorithm {
 	

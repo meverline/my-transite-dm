@@ -9,7 +9,7 @@ import java.util.List;
 
 import me.crime.dao.CrimeDao;
 import me.crime.database.Crime;
-import me.transit.dao.hibernate.AbstractHibernateDao;
+import me.database.hibernate.AbstractHibernateDao;
 import me.transit.dao.query.tuple.IQueryTuple;
 
 import org.hibernate.Criteria;

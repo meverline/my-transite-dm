@@ -17,7 +17,7 @@
 //    Based Upon C# code by Frank Levine and Paul Greene
 //    Adapted to Java by Mark Everline
 
-package me.math.grid;
+package me.math.grid.array;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -28,13 +28,16 @@ import java.util.List;
 import me.math.LocalDownFrame;
 import me.math.VectorMath;
 import me.math.Vertex;
+import me.math.grid.AbstractSpatialGrid;
+import me.math.grid.AbstractSpatialGridOverlay;
+import me.math.grid.AbstractSpatialGridPoint;
 import me.math.kdtree.INode;
 import me.math.kdtree.INode.Direction;
 import me.math.kdtree.INodeCreator;
 
 import com.vividsolutions.jts.geom.Point;
 
-public class UniformSpatialGrid extends AbstractSpatialGrid implements INodeCreator {
+public class UniformSpatialGrid extends AbstractSpatialGridOverlay implements INodeCreator {
 	
 	protected SpatialGridPoint[][] grid_ = null;
 	

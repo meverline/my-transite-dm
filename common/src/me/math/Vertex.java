@@ -135,5 +135,5 @@ public class Vertex {
 				.toDegress(lonRad));
 
 	}
-
+	
 }

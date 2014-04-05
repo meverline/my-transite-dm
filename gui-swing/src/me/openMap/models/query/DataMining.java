@@ -290,11 +290,11 @@ public class DataMining extends AbstractSearchParameters
 		DataSample sample = DataSample.class.cast(this.sampleTypes.getSelectedItem());
 
 		DescriptiveStatistics stats = new DescriptiveStatistics();
-		List<AbstractSpatialGridPoint> data = sample.process(results, ur, ll, distanceInMeters, dmType);
+		DataSample.DataResults data = sample.process(results, ur, ll, distanceInMeters, dmType);
 		
-		double [] array = new double[data.size()];
+		double [] array = new double[data.results.size()];
 		int ndx = 0;
-		for (AbstractSpatialGridPoint pt : data) {
+		for (AbstractSpatialGridPoint pt : data.results) {
 			double value = pt.getData().getInterpolationValue();
 			stats.addValue(value);
 			array[ndx++] = value;
@@ -307,15 +307,15 @@ public class DataMining extends AbstractSearchParameters
 			int index = (int) Math.rint(array.length / 10.0) * percentile_.getSelectedIndex();
 			List<AbstractSpatialGridPoint> toDisplay = new ArrayList<AbstractSpatialGridPoint>();
 
-			for (AbstractSpatialGridPoint pt : data) {
+			for (AbstractSpatialGridPoint pt : data.results) {
 				if ( pt.getData().getInterpolationValue() > array[index] ) {
 					toDisplay.add(pt);
 				}
 			}
-			data = toDisplay;		
+			data.results = toDisplay;		
 		}
 
-		rtn.add(new SpatialPointDataHandler(data));
+		rtn.add(new SpatialPointDataHandler(data.results, data.grid));
 		rtn.add(new TransitStopDataHandler(results));
 		return rtn;
 

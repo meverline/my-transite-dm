@@ -3,6 +3,8 @@ package me.math.grid;
 import static org.junit.Assert.*;
 import me.datamining.sample.DefaultSample;
 import me.math.Vertex;
+import me.math.grid.array.SpatialGridPoint;
+import me.math.grid.array.UniformSpatialGrid;
 import me.math.kdtree.INode;
 import me.math.kdtree.MinBoundingRectangle;
 

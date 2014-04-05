@@ -4,7 +4,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import me.transit.dao.mongo.IDocument;
+import me.database.mongo.IDocument;
 import me.transit.database.ServiceDate;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;

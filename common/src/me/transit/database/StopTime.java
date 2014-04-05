@@ -3,7 +3,7 @@ package me.transit.database;
 import java.util.List;
 
 import me.database.CSVFieldType;
-import me.transit.dao.mongo.IDocument;
+import me.database.mongo.IDocument;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 

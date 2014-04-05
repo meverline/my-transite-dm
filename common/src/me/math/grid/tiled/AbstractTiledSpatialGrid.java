@@ -1,12 +1,10 @@
-package me.math.grid;
-
-import java.io.IOException;
-import java.io.Writer;
-import java.util.ArrayList;
-import java.util.List;
+package me.math.grid.tiled;
 
 import me.math.LocalDownFrame;
 import me.math.Vertex;
+import me.math.grid.AbstractSpatialGrid;
+import me.math.grid.AbstractSpatialGridOverlay;
+import me.math.grid.AbstractSpatialGridPoint;
 import me.math.kdtree.INode;
 import me.math.kdtree.INode.Direction;
 import me.math.kdtree.INodeCreator;
@@ -17,56 +15,38 @@ import org.apache.commons.logging.LogFactory;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
-import com.vividsolutions.jts.geom.Point;
 
-@XStreamAlias("TiledDatabaseGrid")
-public class TiledSpatialGrid extends AbstractSpatialGrid implements INodeCreator {
-
+public abstract class AbstractTiledSpatialGrid extends AbstractSpatialGridOverlay implements INodeCreator {
+	
 	@XStreamOmitField()
 	private Log logger = LogFactory.getLog(TiledSpatialGrid.class);
 
-	@XStreamAlias("grid")
-	private List<SpatialTile> grid_ = new ArrayList<SpatialTile>();
 	@XStreamAlias("tileSize")
 	private int tileSize = 32;
 	
 	/**
 	 * 
-	 * @param spacing
+	 * @param index
+	 * @param row
+	 * @param col
+	 * @return
 	 */
-	public TiledSpatialGrid( double spacingInMeters)
-	{
-		init(spacingInMeters);
-	}
+	public abstract TiledSpatialGridPoint get(int index, int row, int col);
 
 	/**
-	 *
-	 * @param ul
-	 * @param lr
-	 * @param spacing
+	 * 
+	 * @param index
+	 * @param gridIndex
+	 * @return
 	 */
-	public TiledSpatialGrid(Point ul, Point lr, double spacingInMeters) {
-		init(spacingInMeters);
-		setUpperLeft( new Vertex(ul.getX(), ul.getY()));
-		setLowerRight( new Vertex(lr.getX(), lr.getY()));
+	public abstract TiledSpatialGridPoint get(int index, int gridIndex);
 
-		createGrid(getUpperLeft(), getLowerRight());
-	}
-	
 	/**
-	 *
-	 * @param ul
-	 * @param lr
-	 * @param spacing
+	 * 
+	 * @param tile
 	 */
-	public TiledSpatialGrid(Vertex ul, Vertex lr, double spacingInMeters) {
-		init(spacingInMeters);
-		setUpperLeft( ul);
-		setLowerRight( lr );
+	protected abstract void addTile(SpatialTile tile) ;
 
-		createGrid(getUpperLeft(), getLowerRight());
-	}
-	
 	/**
 	 * 
 	 * @param row
@@ -76,8 +56,8 @@ public class TiledSpatialGrid extends AbstractSpatialGrid implements INodeCreato
 	public TiledSpatialGridPoint getEntry(int row, int column) {
 		int colWidth = (this.getCols() / this.getTileSize()) +1;
 		int index = ((row / this.getTileSize()) * colWidth) + (column / this.getTileSize());
-		
-		return this.grid_.get(index).getEntry( row, column);
+		return get(index, row, column);
+		//return this.grid_.get(index).getEntry( row, column);
 	}
 		
 	/**
@@ -86,10 +66,11 @@ public class TiledSpatialGrid extends AbstractSpatialGrid implements INodeCreato
 	 * @return
 	 */
     public TiledSpatialGridPoint getEntry(int index) {
-    	int size = (this.getTileSize() * this.getTileSize()); 	
-		return grid_.get(index/size).getEntry(index);
+    	int size = (this.getTileSize() * this.getTileSize()); 
+    	return this.get(index/size, index);
+		//return grid_.get(index/size).getEntry(index);
 	}
-    
+
 	/**
 	 * Create a uniform lat/lon grid.
 	 * @param upperLeft
@@ -107,20 +88,16 @@ public class TiledSpatialGrid extends AbstractSpatialGrid implements INodeCreato
 
 		int index = 0;
 		int tileIndex = 0;
+		LocalDownFrame southWestFrame = new LocalDownFrame(lowerLeft.getEcfFromLatLon());
+		
 		for (int rowIndex = 0; rowIndex < this.getRows(); rowIndex += this.tileSize) {
 			for (int colIndex = 0; colIndex < this.getCols(); colIndex += this.tileSize ) {
 				SpatialTile tile = new SpatialTile(rowIndex, colIndex, index, tileIndex++);
-				this.grid_.add(tile);
+				tile.createGrid(tileSize, tileSize, southWestFrame, this.getGridSpacingMeters());
+				this.addTile(tile);
 				index += this.tileSize * this.tileSize;
 			}
-			// may need to account for ... missing cols and rows.
 		}
-		
-		LocalDownFrame southWestFrame = new LocalDownFrame(lowerLeft.getEcfFromLatLon());
-		for (SpatialTile tile : this.grid_ )  {
-			tile.createGrid(tileSize, tileSize, southWestFrame);
-		}
-	
 	}
 
 	@Override 
@@ -134,16 +111,7 @@ public class TiledSpatialGrid extends AbstractSpatialGrid implements INodeCreato
 		}
 		return rtn;
 	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public List<SpatialTile> getTiles()
-	{
-		return this.grid_;
-	}
-	
+		
 	/**
 	 * 
 	 * @return
@@ -151,6 +119,11 @@ public class TiledSpatialGrid extends AbstractSpatialGrid implements INodeCreato
 	public int getTileSize()
 	{
 		return this.tileSize;
+	}
+	
+	protected void setTileSize(int value)
+	{
+		this.tileSize = value;
 	}
 	
 	/**
@@ -167,26 +140,4 @@ public class TiledSpatialGrid extends AbstractSpatialGrid implements INodeCreato
 		throw new UnsupportedOperationException();
 	}
 	
-	public void dump(Writer out) {
-		
-		StringBuilder buf = new StringBuilder();
-
-		buf.append("Rows ");
-		buf.append(this.getRows());
-		buf.append(" Cols ");
-		buf.append(this.getCols());
-		buf.append("\n");
-		
-		try {
-			out.write(buf.toString());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		for ( SpatialTile tile : this.grid_) {
-			tile.dump(out, this.getTileSize(), "     ");
-		}
-		
-	}
-
 }
