@@ -1,13 +1,21 @@
 package me.math.grid.tiled;
 
 import java.io.Serializable;
+import java.net.UnknownHostException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import me.database.mongo.DocumentDao;
+import me.factory.DaoBeanFactory;
 import me.math.Vertex;
+import me.math.grid.tiled.dao.DbTiledSpatialGridDao;
+import me.math.grid.tiled.dao.TileFragmentDao;
+import me.transit.dao.query.tuple.IQueryTuple;
+import me.transit.dao.query.tuple.NumberTuple;
 
 import com.vividsolutions.jts.geom.Point;
 
@@ -19,6 +27,31 @@ public class DbTiledSpatialGrid extends AbstractTiledSpatialGrid implements Seri
 	private int cacheSize_ = 5;
 	private Map<Integer,CachedTile> cache = new HashMap<Integer,CachedTile>();
 	private List<CachedTile> accessTime_ = new ArrayList<CachedTile>();
+	
+	/**
+	 * Constructor for the database.
+	 * @param spacing
+	 */
+	public DbTiledSpatialGrid()
+	{
+	}
+	
+	/**
+	 *
+	 * @param ul
+	 * @param lr
+	 * @param spacing
+	 * @throws SQLException 
+	 * @throws UnknownHostException 
+	 */
+	public DbTiledSpatialGrid(Point ul, Point lr, double spacingInMeters) throws SQLException, UnknownHostException {
+		init(spacingInMeters);
+		setUpperLeft( new Vertex(ul.getX(), ul.getY()));
+		setLowerRight( new Vertex(lr.getX(), lr.getY()));
+
+		this.save();
+		createGrid(getUpperLeft(), getLowerRight());
+	}
 	
 	/**
 	 * @return the uuid_
@@ -95,17 +128,17 @@ public class DbTiledSpatialGrid extends AbstractTiledSpatialGrid implements Seri
 	}
 
 	@Override
-	public TiledSpatialGridPoint get(int index, int row, int col) {
+	public TiledSpatialGridPoint get(int index, int row, int col) throws UnknownHostException {
 		return this.getTileFromCache(index).getEntry(row, col);
 	}
 	
 	@Override
-	public TiledSpatialGridPoint get(int index, int gridIndex) {
+	public TiledSpatialGridPoint get(int index, int gridIndex) throws UnknownHostException {
 		return this.getTileFromCache(index).getEntry(gridIndex);
 	}
 
 	@Override
-	protected void addTile(SpatialTile tile) {
+	protected void addTile(SpatialTile tile) throws UnknownHostException, SQLException {
 		this.save(tile);
 	}
 	
@@ -113,8 +146,9 @@ public class DbTiledSpatialGrid extends AbstractTiledSpatialGrid implements Seri
 	 * 
 	 * @param index
 	 * @return
+	 * @throws UnknownHostException 
 	 */
-	protected SpatialTile getTileFromCache(int index) {
+	protected SpatialTile getTileFromCache(int index) throws UnknownHostException {
 		CachedTile entry = null;
 		
 		if ( ! cache.containsKey(index)) {
@@ -142,18 +176,40 @@ public class DbTiledSpatialGrid extends AbstractTiledSpatialGrid implements Seri
 	 * @param index
 	 * @return
 	 */
-	protected SpatialTile load(int index)
+	protected SpatialTile load(int index) throws UnknownHostException
 	{
+		DocumentDao docDao = DocumentDao.instance();
+		
+		List<IQueryTuple> list = new ArrayList<IQueryTuple>();
+		
+		list.add( new NumberTuple( SpatialTile.INDEX, new Integer(index), NumberTuple.LOGIC.EQ));
+		docDao.find(list, this.getHeatMapName());
 		return null;
 	}
 	
 	/**
 	 * 
 	 * @param tile
+	 * @throws UnknownHostException 
 	 */
-	protected void save(SpatialTile tile)
+	protected void save(SpatialTile tile) throws SQLException,UnknownHostException
 	{
+		DocumentDao docDao = DocumentDao.instance();
+        docDao.add(tile, this.getHeatMapName());
+        
+        TileFragmentDao dao = 
+        		TileFragmentDao.class.cast(DaoBeanFactory.create().getDaoBean( TileFragmentDao.class));
+        
+        dao.save(new TileFragament( tile, this));
+
+	}
+	
+	protected void save() throws SQLException
+	{
+		DbTiledSpatialGridDao dao = 
+				DbTiledSpatialGridDao.class.cast(DaoBeanFactory.create().getDaoBean( DbTiledSpatialGridDao.class));
 		
+		dao.save(this);
 	}
 	
 	//////////////////////////////////////////////////////////////////////////

@@ -1,5 +1,8 @@
 package me.math.grid.tiled;
 
+import java.net.UnknownHostException;
+import java.sql.SQLException;
+
 import me.math.LocalDownFrame;
 import me.math.Vertex;
 import me.math.grid.AbstractSpatialGrid;
@@ -31,7 +34,7 @@ public abstract class AbstractTiledSpatialGrid extends AbstractSpatialGridOverla
 	 * @param col
 	 * @return
 	 */
-	public abstract TiledSpatialGridPoint get(int index, int row, int col);
+	public abstract TiledSpatialGridPoint get(int index, int row, int col) throws UnknownHostException;
 
 	/**
 	 * 
@@ -39,21 +42,22 @@ public abstract class AbstractTiledSpatialGrid extends AbstractSpatialGridOverla
 	 * @param gridIndex
 	 * @return
 	 */
-	public abstract TiledSpatialGridPoint get(int index, int gridIndex);
+	public abstract TiledSpatialGridPoint get(int index, int gridIndex) throws UnknownHostException;
 
 	/**
 	 * 
 	 * @param tile
 	 */
-	protected abstract void addTile(SpatialTile tile) ;
+	protected abstract void addTile(SpatialTile tile) throws UnknownHostException, SQLException;
 
 	/**
 	 * 
 	 * @param row
 	 * @param column
 	 * @return
+	 * @throws UnknownHostException 
 	 */
-	public TiledSpatialGridPoint getEntry(int row, int column) {
+	public TiledSpatialGridPoint getEntry(int row, int column) throws UnknownHostException {
 		int colWidth = (this.getCols() / this.getTileSize()) +1;
 		int index = ((row / this.getTileSize()) * colWidth) + (column / this.getTileSize());
 		return get(index, row, column);
@@ -64,8 +68,9 @@ public abstract class AbstractTiledSpatialGrid extends AbstractSpatialGridOverla
 	 * 
 	 * @param index
 	 * @return
+	 * @throws UnknownHostException 
 	 */
-    public TiledSpatialGridPoint getEntry(int index) {
+    public TiledSpatialGridPoint getEntry(int index) throws UnknownHostException {
     	int size = (this.getTileSize() * this.getTileSize()); 
     	return this.get(index/size, index);
 		//return grid_.get(index/size).getEntry(index);
@@ -75,8 +80,10 @@ public abstract class AbstractTiledSpatialGrid extends AbstractSpatialGridOverla
 	 * Create a uniform lat/lon grid.
 	 * @param upperLeft
 	 * @param lowerRight
+	 * @throws UnknownHostException 
+	 * @throws SQLException 
 	 */
-	protected void createGrid(Vertex upperLeft, Vertex lowerRight) {
+	protected void createGrid(Vertex upperLeft, Vertex lowerRight) throws UnknownHostException, SQLException {
 
 		Vertex lowerLeft = new Vertex(lowerRight.getLatitudeDegress(),
 									  upperLeft.getLongitudeDegress());

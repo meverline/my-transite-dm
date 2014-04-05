@@ -193,7 +193,7 @@ public abstract class AbstractSpatialSampleData extends SpatialGridData implemen
 					                  route.getShortName(), 
 					                  StringTuple.MATCH.EXACT ));
 			
-			List<Route> data = dao.find(list);
+			List<Object> data = dao.find(list);
 			
 			rtn = Route.class.cast( data.get(0)).getTripList();
 		} catch (UnknownHostException e) {
