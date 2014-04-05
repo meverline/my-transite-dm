@@ -10,7 +10,7 @@ import me.datamining.Kernel.IDensityKernel;
 import me.datamining.bandwidth.IBandwidth;
 import me.datamining.bandwidth.SlivermanRule;
 import me.math.Vertex;
-import me.math.grid.UniformSpatialGrid;
+import me.math.grid.array.UniformSpatialGrid;
 
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 

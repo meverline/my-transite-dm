@@ -3,7 +3,7 @@ package me.datamining;
 import java.util.List;
 
 import me.math.grid.AbstractSpatialGridPoint;
-import me.math.grid.UniformSpatialGrid;
+import me.math.grid.array.UniformSpatialGrid;
 
 public interface ClusteringAlgorithm {
 

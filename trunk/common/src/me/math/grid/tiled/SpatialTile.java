@@ -1,13 +1,18 @@
-package me.math.grid;
+package me.math.grid.tiled;
 
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import me.database.mongo.IDocument;
 import me.math.LocalDownFrame;
 import me.math.VectorMath;
 import me.math.Vertex;
+import me.math.grid.AbstractSpatialGrid;
+import me.math.grid.AbstractSpatialGridPoint;
 import me.math.kdtree.INode;
 import me.math.kdtree.INode.Direction;
 import me.math.kdtree.INodeCreator;
@@ -16,23 +21,27 @@ import me.math.kdtree.MinBoundingRectangle;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
+import com.vividsolutions.jts.geom.Polygon;
 
 @XStreamAlias("SpatialTile")
-public class SpatialTile extends AbstractSpatialGrid implements INodeCreator {
-
-	@XStreamAlias("tileIndex")
+public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, IGridDocument {
+	
+	public static final String ROW_OFFSET = "rowOffset";
+	public static final String COL_OFFSET = "colOffset";
+	
+	@XStreamAlias(IGridDocument.TILE_INDEX)
 	private int tileIndex = -1;
-	@XStreamAlias("mbr")
+	@XStreamAlias(IGridDocument.MBR)
 	private MinBoundingRectangle  mbr_ = null;
-	@XStreamAlias("index")
+	@XStreamAlias(IGridDocument.INDEX)
 	private int index_ = 0;
 	@XStreamAlias("root")
 	private int root_ = -1;
-	@XStreamAlias("rowOffset")
+	@XStreamAlias(SpatialTile.ROW_OFFSET)
 	private int rowOffset_ = 0;
-	@XStreamAlias("colOffest")
+	@XStreamAlias(SpatialTile.COL_OFFSET)
 	private int colOffSet_ = 0;
-	@XStreamImplicit(itemFieldName="grid")
+	@XStreamImplicit(itemFieldName=IGridDocument.GRID)
 	private List<TiledSpatialGridPoint> grid_ = new ArrayList<TiledSpatialGridPoint>();
 	
 	/**
@@ -62,15 +71,17 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator {
 	 * @param cols
 	 * @param southWestFrame
 	 */
-	public void createGrid(int rows, int cols, LocalDownFrame southWestFrame)
+	public void createGrid(int rows, int cols, LocalDownFrame southWestFrame, double spacingInMeters)
 	{
 		this.setRows(rows);
 		this.setCols(cols);
 		int startIndex = this.getIndex();
+		
+		this.setMbr(new MinBoundingRectangle());
 		for (int rowIndex = 0; rowIndex < rows; rowIndex++) {
 			for (int colIndex = 0; colIndex < cols; colIndex++) {
-				double northDistanceMeters = (double) (rowIndex + this.getRowOffset())* this.getGridSpacingMeters();
-				double eastDistanceMeters = (double) (colIndex + this.getColOffSet())* this.getGridSpacingMeters();
+				double northDistanceMeters = (double) (rowIndex + this.getRowOffset())* spacingInMeters;
+				double eastDistanceMeters = (double) (colIndex + this.getColOffSet())* spacingInMeters;
 
 				VectorMath newPos = southWestFrame.getRelativePosition(
 															northDistanceMeters,
@@ -81,6 +92,7 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator {
 																     colIndex + this.getColOffSet(), 
 																     Vertex.getLatLonFromEcf(newPos),
 																     startIndex++, this.tileIndex);
+				this.getMbr().extend(pt);
 				this.grid_.add(pt);
 				this.mbr_.extend(pt);
 				pt.setGrid(this);
@@ -214,6 +226,34 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator {
 	public void setIndex(int index_) {
 		this.index_ = index_;
 	}
+	
+	/**
+	 * @return the tileIndex
+	 */
+	public int getTileIndex() {
+		return tileIndex;
+	}
+
+	/**
+	 * @param tileIndex the tileIndex to set
+	 */
+	public void setTileIndex(int tileIndex) {
+		this.tileIndex = tileIndex;
+	}
+
+	/**
+	 * @return the mbr_
+	 */
+	public MinBoundingRectangle getMbr() {
+		return mbr_;
+	}
+
+	/**
+	 * @param mbr_ the mbr_ to set
+	 */
+	public void setMbr(MinBoundingRectangle mbr_) {
+		this.mbr_ = mbr_;
+	}
 
 	@Override
 	public AbstractSpatialGridPoint getNextGridPoint(
@@ -255,6 +295,49 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * 
+	 * @param node
+	 */
+	public void setRootNode(int node) {
+		this.root_ = node;
+	}
+
+	@Override
+	public Map<String, Object> toDocument() {
+		Map<String,Object> rtn = new HashMap<String,Object>();
+		
+		rtn.put(IDocument.CLASS, SpatialTile.class.getName());
+		rtn.put(SpatialTile.ROW_OFFSET, this.getRowOffset());
+		rtn.put(SpatialTile.COL_OFFSET, this.getColOffSet());
+		rtn.put(IGridDocument.INDEX, this.getIndex());
+		rtn.put(IGridDocument.TILE_INDEX, this.tileIndex);
+		rtn.put(AbstractSpatialGrid.ROWS, this.getRows());
+		rtn.put(AbstractSpatialGrid.COLS, this.getCols());
+		
+		rtn.put("rootNode", this.root_);
+		rtn.put(IGridDocument.MBR, this.getMbr());
+		rtn.put(IGridDocument.GRID, this.getGridPoints());
+		return rtn;
+	}
+
+	@Override
+	public void handleEnum(String key, Object value) {		
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public Polygon getBoundingBox()
+	{
+		return this.getMbr().toPolygon();
+	}
+
+	public void setBoundingBox(Polygon box) {
+		this.setMbr( new MinBoundingRectangle(box));
 	}
 	
 }

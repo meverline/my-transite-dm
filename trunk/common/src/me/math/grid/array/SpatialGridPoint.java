@@ -14,9 +14,11 @@
 //    You should have received a copy of the GNU General Public License
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-package me.math.grid;
+package me.math.grid.array;
 
 import me.math.Vertex;
+import me.math.grid.AbstractSpatialGridPoint;
+import me.math.grid.SpatialGridData;
 import me.math.kdtree.INode;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;

@@ -14,8 +14,8 @@ import me.datamining.sample.DefaultSample;
 import me.factory.DaoBeanFactory;
 import me.math.Vertex;
 import me.math.grid.AbstractSpatialGridPoint;
-import me.math.grid.SpatialGridPoint;
-import me.math.grid.UniformSpatialGrid;
+import me.math.grid.array.SpatialGridPoint;
+import me.math.grid.array.UniformSpatialGrid;
 import me.transit.database.TransitStop;
 
 import com.vividsolutions.jts.geom.Point;
@@ -92,7 +92,7 @@ public abstract class DataSample {
       * @param type
       * @return
       */
-	public List<AbstractSpatialGridPoint> process(List<TransitStop> dataList,
+	public DataResults process(List<TransitStop> dataList,
 										  Point upperLeftPt,
 										  Point lowerRightPt, 
 										  double gridSpaceInMeters,
@@ -113,7 +113,7 @@ public abstract class DataSample {
       * @param type
       * @return
       */
-	public List<AbstractSpatialGridPoint> process(List<TransitStop> dataList,
+	public DataResults process(List<TransitStop> dataList,
 										  Vertex upperLeft,
 										  Vertex lowerRight, 
 										  double gridSpaceInMeters,
@@ -146,7 +146,22 @@ public abstract class DataSample {
 			}
 		}
 		
-		return type.process(grid, samples);
+		return new DataResults(grid, type.process(grid, samples));
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////
+
+	public class DataResults {
+		
+		public UniformSpatialGrid grid = null;
+		public List<AbstractSpatialGridPoint> results = null;
+		
+		public DataResults(UniformSpatialGrid aGrid, List<AbstractSpatialGridPoint> list) {
+			grid = aGrid;
+			results = list;
+		}
 	}
 
 }

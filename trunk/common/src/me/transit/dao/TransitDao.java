@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
 
-import me.transit.dao.hibernate.HibernateDao;
+import me.database.hibernate.HibernateDao;
 import me.transit.database.Agency;
 
 public interface TransitDao<T extends Serializable> extends HibernateDao<T> {

@@ -3,6 +3,7 @@ package me.math.grid;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 import me.math.Vertex;
+import me.math.grid.array.SpatialGridPoint;
 
 @XStreamAlias("SpatialGridData")
 public abstract class SpatialGridData {

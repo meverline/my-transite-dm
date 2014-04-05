@@ -7,8 +7,8 @@ import me.datamining.SpatialSamplePoint;
 import me.datamining.Kernel.IDensityKernel;
 import me.datamining.bandwidth.IBandwidth;
 import me.datamining.sample.DefaultSample;
-import me.math.grid.SpatialGridPoint;
-import me.math.grid.UniformSpatialGrid;
+import me.math.grid.array.SpatialGridPoint;
+import me.math.grid.array.UniformSpatialGrid;
 
 public class NonAdaptiveKDE extends AbstractDensityEstimateAlgorithm {
 	

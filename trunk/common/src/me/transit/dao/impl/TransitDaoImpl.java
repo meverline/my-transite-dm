@@ -5,8 +5,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.database.hibernate.AbstractHibernateDao;
 import me.transit.dao.TransitDao;
-import me.transit.dao.hibernate.AbstractHibernateDao;
 import me.transit.database.Agency;
 
 import org.hibernate.Criteria;

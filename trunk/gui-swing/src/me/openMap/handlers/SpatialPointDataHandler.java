@@ -2,6 +2,7 @@ package me.openMap.handlers;
 
 import java.util.List;
 
+import me.math.grid.AbstractSpatialGridOverlay;
 import me.math.grid.AbstractSpatialGridPoint;
 import me.openMap.OpenTransitMap;
 import me.openMap.utils.SpatialPointOverlay;
@@ -9,14 +10,14 @@ import me.openMap.utils.SpatialPointOverlay;
 public class SpatialPointDataHandler implements DataDisplayHandler {
 
 	List<AbstractSpatialGridPoint> data = null;
+	AbstractSpatialGridOverlay grid = null;
 	
-	public SpatialPointDataHandler(List<AbstractSpatialGridPoint>  results)
+	public SpatialPointDataHandler(List<AbstractSpatialGridPoint>  results, AbstractSpatialGridOverlay grid)
 	{
 		data = results;
 	}
 	
 	/**
-	 * @return the data
 	 */
 	public List<AbstractSpatialGridPoint> getData() {
 		return data;
@@ -33,7 +34,7 @@ public class SpatialPointDataHandler implements DataDisplayHandler {
 	public void processDataToGui(OpenTransitMap gui) {
 		
 		for ( AbstractSpatialGridPoint gp : data) {
-			gui.getMap().addOverlay( new SpatialPointOverlay(gp, gp.Grid().getGridSpacingMeters()));
+			gui.getMap().addOverlay( new SpatialPointOverlay(gp, grid.getGridSpacingMeters(), grid));
 		}
 	}
 	

@@ -3,7 +3,7 @@ package me.crime.dao;
 import java.util.List;
 
 import me.crime.database.Address;
-import me.transit.dao.hibernate.HibernateDao;
+import me.database.hibernate.HibernateDao;
 
 public interface AddressDao extends HibernateDao<Address> {
 

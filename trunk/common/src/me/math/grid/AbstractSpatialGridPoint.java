@@ -17,6 +17,7 @@ package me.math.grid;
 //along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import me.math.Vertex;
+import me.math.grid.tiled.IGridDocument;
 import me.math.kdtree.INode;
 import me.math.kdtree.MinBoundingRectangle;
 
@@ -25,20 +26,28 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 @XStreamAlias("SpatialGridPoint")
 public abstract class AbstractSpatialGridPoint implements INode {
+	
+	public static final String ROW = "row";
+	public static final String COL = "col";
+	public static final String INDEX = "index";
+	public static final String DATA = "data";
+	public static final String DIRECTION = "direction";
+	public static final String MBR = "MBR";
+	public static final String DEPTH = "depth";
 
-	@XStreamAlias("row")
+	@XStreamAlias(AbstractSpatialGridPoint.ROW)
 	private int row_ = -1;
-	@XStreamAlias("col")
+	@XStreamAlias(AbstractSpatialGridPoint.COL)
 	private int col_ = -1;
 	@XStreamOmitField
 	private int index_ = -1;
-	@XStreamAlias("Data")
+	@XStreamAlias(AbstractSpatialGridPoint.DATA)
 	private SpatialGridData data_ = null;
-	@XStreamAlias("Direction")
+	@XStreamAlias(AbstractSpatialGridPoint.DIRECTION)
 	private INode.Direction direction_ = INode.Direction.UNKOWN;
-	@XStreamAlias("MBR")
+	@XStreamAlias(IGridDocument.MBR)
 	private MinBoundingRectangle mbr_ = null;
-	@XStreamAlias("Depth")
+	@XStreamAlias(AbstractSpatialGridPoint.DEPTH)
 	private int depth_ = 0;
 	
 	
@@ -201,9 +210,4 @@ public abstract class AbstractSpatialGridPoint implements INode {
        return buf.toString();
 	}
 	
-	/**
-	 * 
-	 * @return
-	 */
-	public abstract AbstractSpatialGrid Grid();
 }

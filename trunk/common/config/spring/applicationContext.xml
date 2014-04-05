@@ -33,6 +33,8 @@
 				<value>config/hibernate/Crime.hbm.xml</value>
 				<value>config/hibernate/Address.hbm.xml</value>
 				<value>config/hibernate/URCCatagories.hbm.xml</value>
+				<value>config/hibernate/TileFragament.hbm.xml</value>
+				<value>config/hibernate/DbTiledSpatialGrid.hbm.xml</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -43,11 +45,11 @@
         </property>
     </bean>
        
-    <bean id="hibernateConnection" class="me.transit.dao.hibernate.SpringHibernateConnection" >
+    <bean id="hibernateConnection" class="me.database.hibernate.SpringHibernateConnection" >
     	<property name="sessionFactory" ref="sessionFactory"/>
     </bean>
     
-    <bean id="AbstractHibernateDAO" abstract="true" class="me.transit.dao.hibernate.AbstractHibernateDAO"/>
+    <bean id="AbstractHibernateDAO" abstract="true" class="me.database.hibernate.AbstractHibernateDAO"/>
     
 	<!-- Database access i.e. DAO's  -->		 
 	<bean id="agencyDao" class="me.transit.dao.impl.AgencyDaoImpl" parent="AbstractHibernateDAO" >
@@ -87,6 +89,14 @@
 	</bean>
 	
 	<bean id="uRCCatagoriesDAO" class="me.crime.dao.impl.URCCatagoriesDAOImpl" parent="AbstractHibernateDAO" >
+		<property name="connection" ref="hibernateConnection"/>
+	</bean>
+	
+	<bean id="dbTiledSpatialGridDao" class="me.math.grid.tiled.dao.DbTiledSpatialGridDao" parent="AbstractHibernateDAO" >
+		<property name="connection" ref="hibernateConnection"/>
+	</bean>
+	
+	<bean id="tileFragmentDao" class="me.math.grid.tiled.dao.TileFragmentDao" parent="AbstractHibernateDAO" >
 		<property name="connection" ref="hibernateConnection"/>
 	</bean>
 	

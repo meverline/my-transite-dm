@@ -2,7 +2,7 @@ package me.transit.dao;
 
 import java.util.List;
 
-import me.transit.dao.hibernate.HibernateDao;
+import me.database.hibernate.HibernateDao;
 import me.transit.database.Agency;
 
 public interface AgencyDao extends HibernateDao<Agency> {

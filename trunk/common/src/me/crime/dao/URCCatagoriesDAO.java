@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import me.crime.database.URCCatagories;
-import me.transit.dao.hibernate.HibernateDao;
+import me.database.hibernate.HibernateDao;
 
 public interface URCCatagoriesDAO extends HibernateDao<URCCatagories> {
 

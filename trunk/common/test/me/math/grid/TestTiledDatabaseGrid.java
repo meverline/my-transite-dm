@@ -8,6 +8,9 @@ import static org.junit.Assert.assertTrue;
 import java.util.List;
 
 import me.math.Vertex;
+import me.math.grid.tiled.SpatialTile;
+import me.math.grid.tiled.TiledSpatialGrid;
+import me.math.grid.tiled.TiledSpatialGridPoint;
 import me.math.kdtree.KDTree;
 import me.math.kdtree.search.RangeSearch;
 import me.utils.TransiteEnums;

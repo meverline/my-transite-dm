@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import me.database.hibernate.AbstractHibernateDao;
 import me.transit.dao.AgencyDao;
-import me.transit.dao.hibernate.AbstractHibernateDao;
 import me.transit.database.Agency;
 
 import org.hibernate.Criteria;

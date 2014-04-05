@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Map;
 
 import me.database.CSVFieldType;
+import me.database.mongo.IDocument;
 import me.factory.DaoBeanFactory;
 import me.transit.dao.TransiteStopDao;
-import me.transit.dao.mongo.IDocument;
 import me.transit.database.Agency;
 import me.transit.database.StopTime;
 import me.transit.database.TransitStop;

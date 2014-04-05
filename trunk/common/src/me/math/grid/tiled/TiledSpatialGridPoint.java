@@ -1,13 +1,20 @@
-package me.math.grid;
+package me.math.grid.tiled;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import me.database.mongo.IDocument;
 import me.math.Vertex;
+import me.math.grid.AbstractSpatialGridPoint;
 import me.math.kdtree.INode;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 @XStreamAlias("TiledSpatialGridPoint")
-public class TiledSpatialGridPoint extends AbstractSpatialGridPoint implements INode {
+public class TiledSpatialGridPoint extends AbstractSpatialGridPoint implements INode, IGridDocument {
 
 	@XStreamAlias("tileIndex")
 	private int tileIndex_;
@@ -101,14 +108,6 @@ public class TiledSpatialGridPoint extends AbstractSpatialGridPoint implements I
 			this.parent_ = node.getIndex();
 		}
 	}
-
-	/* (non-Javadoc)
-	 * @see me.math.grid.AbstractSpatialGridPoint#Grid()
-	 */
-	@Override
-	public AbstractSpatialGrid Grid() {
-		return this.grid_;
-	}
 	
 	public void setGrid(SpatialTile aGrid) {
 	    this.grid_ = aGrid;
@@ -117,15 +116,69 @@ public class TiledSpatialGridPoint extends AbstractSpatialGridPoint implements I
 	/**
 	 * @return the tileIndex
 	 */
-	protected int getTileIndex() {
+	public int getTileIndex() {
 		return tileIndex_;
 	}
 
 	/**
 	 * @param tileIndex the tileIndex to set
 	 */
-	protected void setTileIndex(int tileIndex) {
+	public void setTileIndex(int tileIndex) {
 		this.tileIndex_ = tileIndex;
+	}
+	
+	/**
+	 * 
+	 * @param node
+	 */
+	public void setLeftNode(int node) {
+		this.left_ = node;
+	}
+	
+	/**
+	 * 
+	 * @param node
+	 */
+	public void setRightNode(int node) {
+		this.right_ = node;
+	}
+	
+	/**
+	 * 
+	 * @param node
+	 */
+	public void setParentNode(int node) {
+		this.parent_ = node;
+	}
+
+	@Override
+	public Map<String, Object> toDocument() {
+		Map<String,Object> rtn = new HashMap<String,Object>();
+		
+		rtn.put(IDocument.CLASS, TiledSpatialGridPoint.class.getName());
+		rtn.put(AbstractSpatialGridPoint.ROW, this.getRow());
+		rtn.put(AbstractSpatialGridPoint.COL, this.getCol());
+		rtn.put(AbstractSpatialGridPoint.DEPTH, this.getDepth());
+		rtn.put(IGridDocument.INDEX, this.getIndex());
+		rtn.put(AbstractSpatialGridPoint.DIRECTION, this.getDirection().name());
+		rtn.put("leftNode", this.left_);
+		rtn.put("rightNode", this.right_);
+		rtn.put("parentNode", this.parent_);
+		rtn.put(IGridDocument.TILE_INDEX, this.getTileIndex());
+		rtn.put(IGridDocument.MBR, this.getMBR());
+		
+		List<Double> data = new ArrayList<Double>();
+		data.add( this.getVertex().getLatitudeDegress());
+		data.add( this.getVertex().getLongitudeDegress());
+		rtn.put(IGridDocument.CORNER, data);
+		return rtn;
+	}
+
+	@Override
+	public void handleEnum(String key, Object value) {
+        if ( key.equals( "Direction" ) ) {
+            this.setDirection( INode.Direction.valueOf(value.toString()));
+        }
 	}
 		
 }
