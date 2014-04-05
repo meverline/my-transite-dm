@@ -74,7 +74,7 @@ public class MongoDBTest {
 		DocumentDao dao;
 		try {
 			dao = DocumentDao.instance();
-			List<Route> routes = dao.find(query);
+			List<Object> routes = dao.find(query);
 			
 			assertNotNull(routes);
 			assertEquals(8, routes.size());
@@ -104,7 +104,7 @@ public class MongoDBTest {
 		DocumentDao dao;
 		try {
 			dao = DocumentDao.instance();
-			List<Route> routes = dao.find(query);
+			List<Object> routes = dao.find(query);
 			
 			assertNotNull(routes);
 			assertEquals(1, routes.size());
@@ -130,7 +130,7 @@ public class MongoDBTest {
 		DocumentDao dao;
 		try {
 			dao = DocumentDao.instance();
-			List<Route> routes = dao.find(query);
+			List<Object> routes = dao.find(query);
 			
 			assertNotNull(routes);
 			assertEquals(dao.size(), routes.size());

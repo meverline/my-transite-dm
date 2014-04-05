@@ -2,6 +2,8 @@ package me.math.grid.tiled;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.net.UnknownHostException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,8 +39,10 @@ public class TiledSpatialGrid extends AbstractTiledSpatialGrid {
 	 * @param ul
 	 * @param lr
 	 * @param spacing
+	 * @throws UnknownHostException 
+	 * @throws SQLException 
 	 */
-	public TiledSpatialGrid(Point ul, Point lr, double spacingInMeters) {
+	public TiledSpatialGrid(Point ul, Point lr, double spacingInMeters) throws UnknownHostException, SQLException {
 		init(spacingInMeters);
 		setUpperLeft( new Vertex(ul.getX(), ul.getY()));
 		setLowerRight( new Vertex(lr.getX(), lr.getY()));
@@ -51,8 +55,10 @@ public class TiledSpatialGrid extends AbstractTiledSpatialGrid {
 	 * @param ul
 	 * @param lr
 	 * @param spacing
+	 * @throws UnknownHostException 
+	 * @throws SQLException 
 	 */
-	public TiledSpatialGrid(Vertex ul, Vertex lr, double spacingInMeters) {
+	public TiledSpatialGrid(Vertex ul, Vertex lr, double spacingInMeters) throws UnknownHostException, SQLException {
 		init(spacingInMeters);
 		setUpperLeft( ul);
 		setLowerRight( lr );
