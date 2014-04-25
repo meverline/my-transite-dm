@@ -10,7 +10,7 @@ import me.datamining.Kernel.IDensityKernel;
 import me.datamining.bandwidth.IBandwidth;
 import me.datamining.bandwidth.SlivermanRule;
 import me.math.Vertex;
-import me.math.grid.array.UniformSpatialGrid;
+import me.math.grid.AbstractSpatialGridOverlay;
 
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
@@ -21,7 +21,7 @@ public abstract class AbstractDensityEstimateAlgorithm implements DensityEstimat
 	private  IBandwidth yBandWidth = new SlivermanRule();
     private  DescriptiveStatistics xstats_ = new DescriptiveStatistics();
     private  DescriptiveStatistics ystats_ = new DescriptiveStatistics();
-	private  UniformSpatialGrid grid = null;
+	private  AbstractSpatialGridOverlay grid = null;
 	private  List<SpatialSamplePoint> sampleValues = null;
 	private  double crossCovariance = 0.0;
 
@@ -77,14 +77,14 @@ public abstract class AbstractDensityEstimateAlgorithm implements DensityEstimat
 	/**
 	 * @return the theGrid
 	 */
-	public UniformSpatialGrid getGrid() {
+	public AbstractSpatialGridOverlay getGrid() {
 		return grid;
 	}
 	
 	/**
 	 * @param theGrid the theGrid to set
 	 */
-	public void setGrid(UniformSpatialGrid theGrid) {
+	public void setGrid(AbstractSpatialGridOverlay theGrid) {
 		this.grid = theGrid;
 	}
 
@@ -153,8 +153,7 @@ public abstract class AbstractDensityEstimateAlgorithm implements DensityEstimat
 	 * @see me.datamining.DensityEstimateAlgorithm#init(me.math.grid.UniformSpatialGrid, java.util.List)
 	 */
 	@Override
-	public void init(UniformSpatialGrid theGrid, List<SpatialSamplePoint> sampleValues) {
-		this.setSampleValues(sampleValues);
+	public void init(AbstractSpatialGridOverlay theGrid) {
 		this.setGrid(theGrid);
 		setCrossCovariance(this.crossCovariance(getSampleValues()));
 	}
@@ -164,8 +163,8 @@ public abstract class AbstractDensityEstimateAlgorithm implements DensityEstimat
 	 * @see me.datamining.DensityEstimateAlgorithm#kernalDensityEstimate(me.math.grid.UniformSpatialGrid, java.util.List)
 	 */
 	@Override
-	public void kernalDensityEstimate(UniformSpatialGrid theGrid, List<SpatialSamplePoint> sampleValues) {
-		this.init(theGrid, sampleValues);
+	public void kernalDensityEstimate(AbstractSpatialGridOverlay theGrid) {
+		this.init(theGrid);
 		this.kernalDensityEstimate(getDenstiyKernel(), getXBandWidth(), getYBandWidth());
 	}
 	
@@ -187,8 +186,8 @@ public abstract class AbstractDensityEstimateAlgorithm implements DensityEstimat
             double totalAvgLat = 0.0;
             
             for (SpatialSamplePoint data : samples) {
-                    totalAvgLat += data.getLatitudeDegress();
-                    totalAvgLon += data.getLongitudeDegress();
+                    totalAvgLat += data.getGridPoint().getPointVertex().getLatitudeDegress();
+                    totalAvgLon += data.getGridPoint().getPointVertex().getLongitudeDegress();
             }
 
             totalAvgLat = totalAvgLat / samples.size();
@@ -200,11 +199,11 @@ public abstract class AbstractDensityEstimateAlgorithm implements DensityEstimat
             double d_longitude = 0.0;
 
             for (SpatialSamplePoint data : samples)  {
-                    d_latitude += data.getLatitudeDegress() - totalAvgLat;
-                    d_longitude += data.getLongitudeDegress() - totalAvgLat;
+                    d_latitude += data.getGridPoint().getPointVertex().getLatitudeDegress() - totalAvgLat;
+                    d_longitude += data.getGridPoint().getPointVertex().getLongitudeDegress() - totalAvgLat;
                     
                     getXstats().addValue(data.getValue());
-                    getYstats().addValue( averagePoint.distanceFrom(data.toVertex()));
+                    getYstats().addValue( averagePoint.distanceFrom(data.getGridPoint().getPointVertex()));
             }
 
             d_latitude = d_latitude / ( samples.size() - 1.0);

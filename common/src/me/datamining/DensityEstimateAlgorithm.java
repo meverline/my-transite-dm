@@ -1,11 +1,10 @@
 package me.datamining;
 
 import java.io.FileNotFoundException;
-import java.util.List;
 
 import me.datamining.Kernel.IDensityKernel;
 import me.datamining.bandwidth.IBandwidth;
-import me.math.grid.array.UniformSpatialGrid;
+import me.math.grid.AbstractSpatialGridOverlay;
 
 public interface DensityEstimateAlgorithm {
 	
@@ -40,15 +39,14 @@ public interface DensityEstimateAlgorithm {
 	 * @param theGrid
 	 * @param sampleValues
 	 */
-	public void init(UniformSpatialGrid theGrid, List<SpatialSamplePoint> sampleValues);
+	public void init(AbstractSpatialGridOverlay theGrid);
 	
 	/**
 	 * 
 	 * @param kernel
 	 * @param smothParm
 	 */
-	public void kernalDensityEstimate(UniformSpatialGrid theGrid, 
-											   List<SpatialSamplePoint> sampleValues);
+	public void kernalDensityEstimate(AbstractSpatialGridOverlay theGrid);
 
 	/**
 	 * 

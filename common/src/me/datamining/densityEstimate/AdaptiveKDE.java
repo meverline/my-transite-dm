@@ -6,12 +6,12 @@ import me.datamining.AbstractDensityEstimateAlgorithm;
 import me.datamining.SpatialSamplePoint;
 import me.datamining.Kernel.IDensityKernel;
 import me.datamining.bandwidth.IBandwidth;
-import me.datamining.sample.DefaultSample;
 import me.math.EarthConstants;
 import me.math.Vertex;
 import me.math.grid.AbstractSpatialGridPoint;
 import me.math.grid.array.SpatialGridPoint;
 import me.math.grid.array.UniformSpatialGrid;
+import me.math.grid.data.DensityEstimateDataSample;
 import me.math.kdtree.INode;
 import me.math.kdtree.KDTree;
 import me.math.kdtree.search.RangeSearch;
@@ -36,9 +36,9 @@ public class AdaptiveKDE extends AbstractDensityEstimateAlgorithm {
 	 * @param samples
 	 * @param grid
 	 */
-	public AdaptiveKDE(List<SpatialSamplePoint> samples, UniformSpatialGrid grid)
+	public AdaptiveKDE(UniformSpatialGrid grid)
 	{
-		this.init(grid, samples);
+		this.init(grid);
 	}
 
     /**
@@ -115,12 +115,12 @@ public class AdaptiveKDE extends AbstractDensityEstimateAlgorithm {
                         	    if ( pt.getData() != null ) {
                         	    	t = pt.getData().getValue() - cnt.getValue();
                         	    } else {
-                        	    	pt.setData( new DefaultSample());
+                        	    	pt.setData( new DensityEstimateDataSample());
                         	    }
                                
                                 double X = (1.0 / hparm)* kernel.kernelValue(t / hparm);
 
-                                double dist = gridPt.getVertex().distanceFrom(cnt.toVertex());
+                                double dist = gridPt.getVertex().distanceFrom(cnt.getGridPoint().getPointVertex());
                                 double Y = (1.0 / hGeoParm) * kernel.kernelValue(dist / hGeoParm);
 
                                 estitmate += (Math.sqrt(Math.abs(Math.pow(X, 2))

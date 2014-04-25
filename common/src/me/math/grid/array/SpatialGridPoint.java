@@ -18,7 +18,6 @@ package me.math.grid.array;
 
 import me.math.Vertex;
 import me.math.grid.AbstractSpatialGridPoint;
-import me.math.grid.SpatialGridData;
 import me.math.kdtree.INode;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
@@ -31,8 +30,6 @@ public class SpatialGridPoint extends AbstractSpatialGridPoint{
 	private Vertex corner_ = null;
 	@XStreamOmitField
 	private UniformSpatialGrid grid_ = null;
-	@XStreamAlias("Data")
-	private SpatialGridData data_ = null;
 	@XStreamOmitField
 	private INode left_ = null;
 	@XStreamOmitField
@@ -91,20 +88,6 @@ public class SpatialGridPoint extends AbstractSpatialGridPoint{
 
 		buffer.append("\t[" + this.getRow() + ", " + this.getCol() + "]");
 		return buffer.toString();
-	}
-
-	/**
-	 * @return the data_
-	 */
-	public SpatialGridData getData() {
-		return data_;
-	}
-
-	/**
-	 * @param data_ the data_ to set
-	 */
-	public void setData(SpatialGridData data_) {
-		this.data_ = data_;
 	}
 
 	/* (non-Javadoc)

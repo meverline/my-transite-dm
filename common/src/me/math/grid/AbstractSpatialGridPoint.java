@@ -17,6 +17,7 @@ package me.math.grid;
 //along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import me.math.Vertex;
+import me.math.grid.data.AbstractDataSample;
 import me.math.grid.tiled.IGridDocument;
 import me.math.kdtree.INode;
 import me.math.kdtree.MinBoundingRectangle;
@@ -42,7 +43,7 @@ public abstract class AbstractSpatialGridPoint implements INode {
 	@XStreamOmitField
 	private int index_ = -1;
 	@XStreamAlias(AbstractSpatialGridPoint.DATA)
-	private SpatialGridData data_ = null;
+	private AbstractDataSample data_ = null;
 	@XStreamAlias(AbstractSpatialGridPoint.DIRECTION)
 	private INode.Direction direction_ = INode.Direction.UNKOWN;
 	@XStreamAlias(IGridDocument.MBR)
@@ -134,14 +135,14 @@ public abstract class AbstractSpatialGridPoint implements INode {
 	/**
 	 * @return the data_
 	 */
-	public SpatialGridData getData() {
+	public AbstractDataSample getData() {
 		return data_;
 	}
 
 	/**
 	 * @param data_ the data_ to set
 	 */
-	public void setData(SpatialGridData data_) {
+	public void setData(AbstractDataSample data_) {
 		this.data_ = data_;
 	}
 	

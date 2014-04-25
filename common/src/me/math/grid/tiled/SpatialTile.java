@@ -71,7 +71,10 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, IG
 	 * @param cols
 	 * @param southWestFrame
 	 */
-	public void createGrid(int rows, int cols, LocalDownFrame southWestFrame, double spacingInMeters)
+	public void createGrid(int rows, int cols, 
+						   LocalDownFrame southWestFrame, 
+						   double spacingInMeters, 
+						   AbstractTiledSpatialGrid.CrossCovData data)
 	{
 		this.setRows(rows);
 		this.setCols(cols);
@@ -88,9 +91,12 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, IG
 															eastDistanceMeters,
 															LocalDownFrame.RelativePositionOrder.NORTH_THEN_EAST);
 
+				Vertex crPt = Vertex.getLatLonFromEcf(newPos);
+				data.addPoint(crPt);
+				
 				TiledSpatialGridPoint pt = new TiledSpatialGridPoint(rowIndex + this.getRowOffset(), 
 																     colIndex + this.getColOffSet(), 
-																     Vertex.getLatLonFromEcf(newPos),
+																     crPt,
 																     startIndex++, this.tileIndex);
 				this.getMbr().extend(pt);
 				this.grid_.add(pt);
