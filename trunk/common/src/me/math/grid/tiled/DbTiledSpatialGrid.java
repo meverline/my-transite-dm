@@ -12,8 +12,10 @@ import java.util.Map;
 import me.database.mongo.DocumentDao;
 import me.factory.DaoBeanFactory;
 import me.math.Vertex;
+import me.math.grid.AbstractSpatialGridPoint;
 import me.math.grid.tiled.dao.DbTiledSpatialGridDao;
 import me.math.grid.tiled.dao.TileFragmentDao;
+import me.math.kdtree.KDTree;
 import me.transit.dao.query.tuple.IQueryTuple;
 import me.transit.dao.query.tuple.NumberTuple;
 
@@ -48,6 +50,23 @@ public class DbTiledSpatialGrid extends AbstractTiledSpatialGrid implements Seri
 		init(spacingInMeters);
 		setUpperLeft( new Vertex(ul.getX(), ul.getY()));
 		setLowerRight( new Vertex(lr.getX(), lr.getY()));
+
+		this.save();
+		createGrid(getUpperLeft(), getLowerRight());
+	}
+	
+	/**
+	 * 
+	 * @param ul
+	 * @param lr
+	 * @param spacingInMeters
+	 * @throws SQLException
+	 * @throws UnknownHostException
+	 */
+	public DbTiledSpatialGrid(Vertex ul, Vertex lr, double spacingInMeters) throws SQLException, UnknownHostException {
+		init(spacingInMeters);
+		setUpperLeft(ul);
+		setLowerRight(lr);
 
 		this.save();
 		createGrid(getUpperLeft(), getLowerRight());
@@ -133,12 +152,20 @@ public class DbTiledSpatialGrid extends AbstractTiledSpatialGrid implements Seri
 	}
 	
 	@Override
-	public TiledSpatialGridPoint get(int index, int gridIndex) throws UnknownHostException {
-		return this.getTileFromCache(index).getEntry(gridIndex);
+	public AbstractSpatialGridPoint get(int index, int gridIndex) {
+		AbstractSpatialGridPoint pt =  null;
+		try {
+			pt = this.getTileFromCache(index).getEntry(gridIndex);
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		}
+		return pt;
 	}
 
 	@Override
 	protected void addTile(SpatialTile tile) throws UnknownHostException, SQLException {
+		@SuppressWarnings("unused")
+		KDTree tree = tile.getTree();
 		this.save(tile);
 	}
 	
@@ -194,6 +221,7 @@ public class DbTiledSpatialGrid extends AbstractTiledSpatialGrid implements Seri
 	 */
 	protected void save(SpatialTile tile) throws SQLException,UnknownHostException
 	{
+		
 		DocumentDao docDao = DocumentDao.instance();
         docDao.add(tile, this.getHeatMapName());
         
@@ -204,12 +232,32 @@ public class DbTiledSpatialGrid extends AbstractTiledSpatialGrid implements Seri
 
 	}
 	
-	protected void save() throws SQLException
+	/**
+	 * 
+	 * @throws SQLException
+	 */
+	public void save() throws SQLException
 	{
 		DbTiledSpatialGridDao dao = 
 				DbTiledSpatialGridDao.class.cast(DaoBeanFactory.create().getDaoBean( DbTiledSpatialGridDao.class));
 		
+		DbTiledSpatialGrid grid = dao.loadByName(this.getHeatMapName());
+		if ( grid != null ) {
+			this.setUUID(grid.getUUID());
+		}
 		dao.save(this);
+	}
+	
+	/**
+	 * 
+	 * @throws SQLException
+	 */
+	public static DbTiledSpatialGrid load(String name) throws SQLException
+	{
+		DbTiledSpatialGridDao dao = 
+				DbTiledSpatialGridDao.class.cast(DaoBeanFactory.create().getDaoBean( DbTiledSpatialGridDao.class));
+		
+		return dao.loadByName(name);
 	}
 	
 	//////////////////////////////////////////////////////////////////////////

@@ -30,67 +30,121 @@ import com.vividsolutions.jts.geom.Point;
 
 public class RangeSearch implements IKDSearch {
 
-  private List<AbstractSpatialGridPoint> list_;
-  private double distanceInMeters_;
-  private Vertex point_;
+	private List<AbstractSpatialGridPoint> list_;
+	private double distanceInMeters_;
+	private Vertex point_;
 
-  public RangeSearch( Vertex point, double distanceInMeters)
-  {
-          setList( new ArrayList<AbstractSpatialGridPoint>());
-          setPoint( point);
-          setDistanceInMeters(distanceInMeters);
-  }
+	/**
+	 * 
+	 * @param point
+	 * @param distanceInMeters
+	 */
+	public RangeSearch(Vertex point, double distanceInMeters) {
+		setList(new ArrayList<AbstractSpatialGridPoint>());
+		setPoint(point);
+		setDistanceInMeters(distanceInMeters);
+	}
 
-  public RangeSearch( Point pt, double distanceInMeters)
-  {
-          setList( new ArrayList<AbstractSpatialGridPoint>());
-          setPoint( new Vertex(pt.getX(), pt.getY()));
-          setDistanceInMeters(distanceInMeters);
-  }
+	/**
+	 * 
+	 * @param pt
+	 * @param distanceInMeters
+	 */
+	public RangeSearch(Point pt, double distanceInMeters) {
+		setList(new ArrayList<AbstractSpatialGridPoint>());
+		setPoint(new Vertex(pt.getX(), pt.getY()));
+		setDistanceInMeters(distanceInMeters);
+	}
 
-  public void compare(INode point)
-  {
-          double distance = EarthConstants.distanceMeters(getPoint(), point.getPointVertex());
-          if ( distance <= getDistanceInMeters()  ) {
-                  getList().add(point.getPoint());
-          }
-  }
+	/**
+   * 
+   */
+	public void reset() {
+		setList(new ArrayList<AbstractSpatialGridPoint>());
+	}
 
-  public List<AbstractSpatialGridPoint> getResults()
-  {
-       return getList();
-  }
+	/**
+   * 
+   */
+	public void compare(INode point) {
+		double distance = EarthConstants.distanceMeters(getPoint(),
+														point.getPointVertex());
+		if (distance <= getDistanceInMeters()) {
+			getList().add(point.getPoint());
+		}
+	}
 
-  public boolean endSearch(INode node) {
-          return false;
-  }
+	/**
+   * 
+   */
+	public List<AbstractSpatialGridPoint> getResults() {
+		return getList();
+	}
 
-  public Vertex getVertex() {
-          return getPoint();
-  }
+	/**
+   * 
+   */
+	public boolean endSearch(INode node) {
+		return false;
+	}
 
-  protected double getDistanceInMeters() {
-          return distanceInMeters_;
-  }
+	/**
+   * 
+   */
+	public Vertex getVertex() {
+		return getPoint();
+	}
 
-  protected void setDistanceInMeters(double distanceInMeters_) {
-          this.distanceInMeters_ = distanceInMeters_;
-  }
+	/**
+	 * 
+	 * @return
+	 */
+	protected double getDistanceInMeters() {
+		return distanceInMeters_;
+	}
 
-  protected List<AbstractSpatialGridPoint> getList() {
-          return list_;
-  }
+	/**
+	 * 
+	 * @param distanceInMeters_
+	 */
+	public void setDistanceInMeters(double distanceInMeters_) {
+		this.distanceInMeters_ = distanceInMeters_;
+	}
 
-  protected void setList(List<AbstractSpatialGridPoint> list_) {
-          this.list_ = list_;
-  }
+	/**
+	 * 
+	 * @return
+	 */
+	protected List<AbstractSpatialGridPoint> getList() {
+		return list_;
+	}
 
-  protected Vertex getPoint() {
-          return point_;
-  }
+	/**
+	 * 
+	 * @param list_
+	 */
+	protected void setList(List<AbstractSpatialGridPoint> list_) {
+		this.list_ = list_;
+	}
 
-  protected void setPoint(Vertex point_) {
-          this.point_ = point_;
-  }
+	/**
+	 * 
+	 * @return
+	 */
+	protected Vertex getPoint() {
+		return point_;
+	}
+
+	/**
+	 * 
+	 * @param point_
+	 */
+	public void setPoint(Vertex point_) {
+		this.point_ = point_;
+	}
+	
+	public void setPoint(Point pt) {
+		this.point_ = new Vertex(pt.getX(), pt.getY());
+	}
 
 }

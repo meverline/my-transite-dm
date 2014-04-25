@@ -1,21 +1,10 @@
 package me.datamining;
 
-import me.math.Vertex;
+import me.math.grid.AbstractSpatialGridPoint;
+
 
 public interface SpatialSamplePoint {
-	
-	/**
-	 * The latitude in Degress of Point.
-	 * @return
-	 */
-	public double getLatitudeDegress();
-
-	/**
-	 * The longitude in Degress of Point.
-	 * @return
-	 */
-	public double getLongitudeDegress();
-	
+		
 	/**
 	 * The Value which represtents a give sample
 	 * value at a give point. 	
@@ -28,13 +17,7 @@ public interface SpatialSamplePoint {
 	 * @return
 	 */
 	public double getValue();
-	
-	/**
-	 * Convert point to math vertext type.
-	 * @return
-	 */
-	public Vertex toVertex();
-	
+		
 	/**
 	 * Return the min value of the data point.
 	 * @return
@@ -83,5 +66,8 @@ public interface SpatialSamplePoint {
 	 * @param flag
 	 */
 	public void addSampleData(Object data);
+	
+	public AbstractSpatialGridPoint getGridPoint();
+	public void setGridPoint(AbstractSpatialGridPoint aPoint);
 
 }

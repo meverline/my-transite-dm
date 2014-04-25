@@ -23,6 +23,7 @@ import java.util.List;
 import me.datamining.ClusteringAlgorithm;
 import me.datamining.SpatialSamplePoint;
 import me.math.Vertex;
+import me.math.grid.AbstractSpatialGridOverlay;
 import me.math.grid.AbstractSpatialGridPoint;
 import me.math.grid.array.UniformSpatialGrid;
 import me.math.kdtree.IKDSearch;
@@ -41,7 +42,7 @@ import com.vividsolutions.jts.geom.Point;
 
 public class STING implements ClusteringAlgorithm {
 
-	private UniformSpatialGrid grid_ = null;
+	private AbstractSpatialGridOverlay grid_ = null;
 	private int rangeHi = Integer.MAX_VALUE;
 	private int rangeLow = 0;
 	private double confidence = 0.5;
@@ -77,10 +78,10 @@ public class STING implements ClusteringAlgorithm {
 	 * 
 	 * @param aGrid
 	 */
-	public void init(UniformSpatialGrid aGrid)
+	public void init(AbstractSpatialGridOverlay aGrid)
 	{
 		grid_ = aGrid;
-		tree_ = new KDTree(aGrid.getGridPoints(), aGrid);
+		tree_ = aGrid.getTree();
 	}
 
 	/**
@@ -209,7 +210,7 @@ public class STING implements ClusteringAlgorithm {
 	 * @see me.datamining.ClusteringAlgorithm#findClusters()
 	 */
 	@Override
-	public List<AbstractSpatialGridPoint> findClusters(UniformSpatialGrid aGrid) {
+	public List<AbstractSpatialGridPoint> findClusters(AbstractSpatialGridOverlay aGrid) {
 		this.init(aGrid);
 		return this.findClusters();
 	}

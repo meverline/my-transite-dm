@@ -32,6 +32,7 @@ import me.math.grid.AbstractSpatialGrid;
 import me.math.grid.AbstractSpatialGridOverlay;
 import me.math.grid.AbstractSpatialGridPoint;
 import me.math.kdtree.INode;
+import me.math.kdtree.KDTree;
 import me.math.kdtree.INode.Direction;
 import me.math.kdtree.INodeCreator;
 
@@ -104,7 +105,7 @@ public class UniformSpatialGrid extends AbstractSpatialGridOverlay implements IN
 	 */
 	public AbstractSpatialGridPoint getNextGridPoint(AbstractSpatialGridPoint gridPt)
 	{
-		SpatialGridPoint next = null;
+		AbstractSpatialGridPoint next = null;
 
 		if (gridPt.getRow() == 0 ) {
 			next = get(gridPt.getRow()+1, gridPt.getCol());
@@ -135,8 +136,8 @@ public class UniformSpatialGrid extends AbstractSpatialGridOverlay implements IN
 
 		try {
 
-			SpatialGridPoint pt = this.get(row, midpoint);
-			SpatialGridPoint lower = this.get(row, midpoint + 1);
+			AbstractSpatialGridPoint pt = this.get(row, midpoint);
+			AbstractSpatialGridPoint lower = this.get(row, midpoint + 1);
 
 			if (pt == null || lower == null  ) {
 				return -1;
@@ -172,8 +173,8 @@ public class UniformSpatialGrid extends AbstractSpatialGridOverlay implements IN
 		
 		try {
 
-			SpatialGridPoint pt = this.get(midpoint, 0);
-			SpatialGridPoint lower = this.get(midpoint + 1, 0);
+			AbstractSpatialGridPoint pt = this.get(midpoint, 0);
+			AbstractSpatialGridPoint lower = this.get(midpoint + 1, 0);
 
 			if (pt == null || lower == null ) {
 				return -1;
@@ -202,7 +203,7 @@ public class UniformSpatialGrid extends AbstractSpatialGridOverlay implements IN
 	 * @param apoint
 	 * @return
 	 */
-    public SpatialGridPoint findGridPont(Point apoint) {
+    public AbstractSpatialGridPoint findGridPont(Point apoint) {
         Vertex location = new Vertex(apoint.getY(), apoint.getX());
         
         int row = this.findLatitude(location, 0, this.getRows());
@@ -252,8 +253,7 @@ public class UniformSpatialGrid extends AbstractSpatialGridOverlay implements IN
 	{
 		grid_[row][col] = new SpatialGridPoint(row, col, point, index, this);
 	}
-
-
+	
 	/**
 	 * Create a uniform lat/lon grid.
 	 * @param upperLeft
@@ -277,6 +277,9 @@ public class UniformSpatialGrid extends AbstractSpatialGridOverlay implements IN
 			}
 		}
 
+        double d_latitude = 0.0;
+        double d_longitude = 0.0;
+        Vertex avgPoint = findAverageLatLon(upperLeft, lowerRight);
 		int number = 0;
 		for (int rowIndex = 0; rowIndex < this.getRows(); rowIndex++) {
 			for (int colIndex = 0; colIndex < this.getCols(); colIndex++) {
@@ -288,9 +291,18 @@ public class UniformSpatialGrid extends AbstractSpatialGridOverlay implements IN
 															eastDistanceMeters,
 															LocalDownFrame.RelativePositionOrder.NORTH_THEN_EAST);
 
-				addGridPoint(rowIndex, colIndex, Vertex.getLatLonFromEcf(newPos), number++);
+				Vertex pt = Vertex.getLatLonFromEcf(newPos); 
+				addGridPoint(rowIndex, colIndex, pt, number++);
+				
+	            d_latitude += pt.getLatitudeDegress() - avgPoint.getLatitudeDegress();
+	            d_longitude += pt.getLongitudeDegress() - avgPoint.getLongitudeDegress();
 			}
 		}
+		
+        d_latitude = d_latitude / ( number - 1.0);
+        d_longitude = d_longitude / ( number - 1.0);
+
+       this.setCrossCovariance(Math.abs((d_latitude * d_longitude) / ( number - 1.0)));
 	}
 	
 	/**
@@ -299,13 +311,13 @@ public class UniformSpatialGrid extends AbstractSpatialGridOverlay implements IN
 	 * @param c
 	 * @return
 	 */
-	public SpatialGridPoint get(int r, int c) {
+	public AbstractSpatialGridPoint get(int r, int c) {
 		if (r < getRows() && c < getCols()) {
 			return grid_[r][c];
 		}
 		return null;
 	}
-
+	
 	/**
 	 * 
 	 * @return
@@ -344,6 +356,14 @@ public class UniformSpatialGrid extends AbstractSpatialGridOverlay implements IN
 		gp.setParent(parent);
 		gp.initNode(dir, depth);
 		return loc;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public KDTree getTree() {
+		return new KDTree(this.getGridPoints(), this);
 	}
 
 }
