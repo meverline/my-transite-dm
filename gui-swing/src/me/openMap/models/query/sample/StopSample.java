@@ -1,7 +1,7 @@
 package me.openMap.models.query.sample;
 
-import me.datamining.sample.AbstractSpatialSampleData;
-import me.datamining.sample.TransitStopSpatialSample;
+import me.datamining.metric.AbstractSpatialMetric;
+import me.datamining.metric.TransitStopSpatialSample;
 
 public class StopSample extends DataSample {
 
@@ -19,7 +19,7 @@ public class StopSample extends DataSample {
 	 * @see me.openMap.models.query.sample.DataSample#getSampleType()
 	 */
 	@Override
-	public AbstractSpatialSampleData getSampleType() {
+	public AbstractSpatialMetric getSampleType() {
 		return new TransitStopSpatialSample();
 	}
 	

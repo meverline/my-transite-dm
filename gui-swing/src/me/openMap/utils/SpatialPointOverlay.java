@@ -5,7 +5,9 @@ import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
 import java.util.HashSet;
 
-import me.math.grid.AbstractSpatialGridOverlay;
+import me.math.LocalDownFrame;
+import me.math.VectorMath;
+import me.math.Vertex;
 import me.math.grid.AbstractSpatialGridPoint;
 import me.openMap.ApplicationSettings;
 import me.openMap.mapUtils.AbstractMapOverlay;
@@ -18,12 +20,13 @@ import org.jdesktop.swingx.mapviewer.GeoPosition;
 public class SpatialPointOverlay extends AbstractMapOverlay {
 	
 	private AbstractSpatialGridPoint gp_ = null;
-	private AbstractSpatialGridOverlay grid_ = null;
+	private double distanceInMeters = 1;
 
-	public SpatialPointOverlay(AbstractSpatialGridPoint gp, double spacingMeters, AbstractSpatialGridOverlay grid)
+	public SpatialPointOverlay(AbstractSpatialGridPoint gp, double spacingMeters)
 	{
 		super( gp.getVertex().getLatitudeDegress(), gp.getVertex().getLongitudeDegress());
 		gp_ = gp;
+		distanceInMeters = spacingMeters;
 	}
 
 	/**
@@ -33,10 +36,14 @@ public class SpatialPointOverlay extends AbstractMapOverlay {
 	 */
 	public int getPointSize(JXMapViewer map)
 	{
+		LocalDownFrame frame = new LocalDownFrame(gp_.getVertex());
 		
-		AbstractSpatialGridPoint pt = grid_.getNextGridPoint(gp_);
-		GeoPosition aPoint = new GeoPosition(pt.getVertex().getLatitudeDegress(),
-											 pt.getVertex().getLongitudeDegress());
+		VectorMath newPos = frame.getRelativePosition(distanceInMeters,
+													  distanceInMeters,
+													  LocalDownFrame.RelativePositionOrder.NORTH_THEN_EAST);
+		Vertex pt = Vertex.getLatLonFromEcf(newPos); 
+		
+		GeoPosition aPoint = new GeoPosition(pt.getLatitudeDegress(), pt.getLongitudeDegress());
 
 		Point2D start = map.convertGeoPositionToPoint(this);
 		Point2D end = map.convertGeoPositionToPoint(aPoint);

@@ -1,69 +1,57 @@
 package me.openMap.models.query.sample;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JPanel;
 
-import me.datamining.ClusteringAlgorithm;
-import me.datamining.DensityEstimateAlgorithm;
-import me.datamining.SpatialSamplePoint;
-import me.datamining.sample.AbstractSpatialSampleData;
-import me.datamining.sample.DefaultSample;
-import me.factory.DaoBeanFactory;
+import me.datamining.AbstractDMJob;
+import me.datamining.jobs.ClusteringLocalJob;
+import me.datamining.jobs.DensityEstimateLocalJob;
+import me.datamining.metric.AbstractSpatialMetric;
 import me.math.Vertex;
 import me.math.grid.AbstractSpatialGridPoint;
-import me.math.grid.array.SpatialGridPoint;
-import me.math.grid.array.UniformSpatialGrid;
 import me.transit.database.TransitStop;
 
 import com.vividsolutions.jts.geom.Point;
 
 public abstract class DataSample {
 	
-	 public enum DataMiningType { 
-		 
+	public enum DataMiningType {
+
 		 HEATMAP {
 			@Override
-			public List<AbstractSpatialGridPoint> process(UniformSpatialGrid grid,
-												  List<SpatialSamplePoint> samples) {
-				
-				DensityEstimateAlgorithm kde = 
-					DensityEstimateAlgorithm.class.cast(DaoBeanFactory.create().getBean(DensityEstimateAlgorithm.class));
-				
-				kde.kernalDensityEstimate(grid, samples);
-				try {
-					kde.saveGird("HEATMAP.csv", "C:/tmp");
-				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				return grid.getGridPoints();
+			public AbstractDMJob getJob() {
+				return new DensityEstimateLocalJob();
+			}
+			
+			
+		}, 
+		HADOOP_HEATMAP {
+			@Override
+			public AbstractDMJob getJob() {
+				return new DensityEstimateLocalJob();
 			}
 		}, 
 		CLUSTER {
 			@Override
-			public List<AbstractSpatialGridPoint> process(UniformSpatialGrid grid,
-												  List<SpatialSamplePoint> samples) {
-				
-				ClusteringAlgorithm alog =
-					ClusteringAlgorithm.class.cast(DaoBeanFactory.create().getBean(ClusteringAlgorithm.class));
-				return alog.findClusters(grid);
+			public AbstractDMJob getJob() {
+				return new ClusteringLocalJob();
 			}
 			
 		};
 		 
 
-		public abstract List<AbstractSpatialGridPoint> process(UniformSpatialGrid grid, 
-				 									   List<SpatialSamplePoint> samples);
-     };
-    
+		public abstract AbstractDMJob getJob();
+			
+	}
+	
      /**
       * Provide the proper type of data handler for the sampling of points.
       * @return
       */
-     public abstract AbstractSpatialSampleData getSampleType();
+     public abstract AbstractSpatialMetric getSampleType();
          
 	 /**
 	  * The Data Sample has user inputs.
@@ -96,7 +84,7 @@ public abstract class DataSample {
 										  Point upperLeftPt,
 										  Point lowerRightPt, 
 										  double gridSpaceInMeters,
-										  DataSample.DataMiningType type) 
+										  DataMiningType type) 
 	{
 		Vertex upperLeft = new Vertex( upperLeftPt.getY(), upperLeftPt.getX());
 		Vertex lowerRight = new Vertex( lowerRightPt.getY(), lowerRightPt.getX());
@@ -117,36 +105,22 @@ public abstract class DataSample {
 										  Vertex upperLeft,
 										  Vertex lowerRight, 
 										  double gridSpaceInMeters,
-										  DataSample.DataMiningType type) 
+										  DataMiningType type) 
 	{
-		UniformSpatialGrid grid = new UniformSpatialGrid(upperLeft, 
-														 lowerRight,
-														 gridSpaceInMeters);
-
-		List<SpatialSamplePoint> samples = new ArrayList<SpatialSamplePoint>();
-		for (TransitStop stop : dataList) {
-			SpatialGridPoint point = grid.findGridPont(stop.getLocation());
-			if (point != null) {
-				AbstractSpatialSampleData sample;
-				if (point.getData() == null) {
-					sample = getSampleType();
-					point.setData(sample);
-					sample.setGridPointReferenece(point);
-					samples.add(sample);
-				}
-				
-				sample = AbstractSpatialSampleData.class.cast(point.getData());
-				sample.addSampleData(stop);
-			}
-		}
+		List<AbstractSpatialGridPoint> rtn = new ArrayList<AbstractSpatialGridPoint>();
+		AbstractDMJob job = type.getJob();
 		
-		for ( AbstractSpatialGridPoint point : grid.getGridPoints() ) {
-			if ( point.getData() == null ) {
-				point.setData( new DefaultSample());
+		job.init(upperLeft, lowerRight, gridSpaceInMeters);
+		if ( job.process(dataList.iterator(), getSampleType()) ) {
+			
+			
+			Iterator<AbstractSpatialGridPoint> results = job.getResults(0);
+			while ( results.hasNext() ) {
+				rtn.add(results.next());
 			}
+			
 		}
-		
-		return new DataResults(grid, type.process(grid, samples));
+		return new DataResults(rtn);
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////
@@ -155,11 +129,9 @@ public abstract class DataSample {
 
 	public class DataResults {
 		
-		public UniformSpatialGrid grid = null;
 		public List<AbstractSpatialGridPoint> results = null;
 		
-		public DataResults(UniformSpatialGrid aGrid, List<AbstractSpatialGridPoint> list) {
-			grid = aGrid;
+		public DataResults(List<AbstractSpatialGridPoint> list) {
 			results = list;
 		}
 	}

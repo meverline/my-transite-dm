@@ -14,8 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 
-import me.datamining.sample.AbstractSpatialSampleData;
-import me.datamining.sample.ServiceFrequnceAtStop;
+import me.datamining.metric.AbstractSpatialMetric;
+import me.datamining.metric.ServiceFrequnceAtStop;
 import me.openMap.models.layout.SpringLayoutUtilities;
 import me.transit.database.ServiceDate;
 
@@ -38,7 +38,7 @@ public class FrequanceOfService extends DataSample {
 	 * @see me.openMap.models.query.sample.DataSample#getSampleType()
 	 */
 	@Override
-	public AbstractSpatialSampleData getSampleType() {
+	public AbstractSpatialMetric getSampleType() {
 		
 		ServiceFrequnceAtStop sample = new ServiceFrequnceAtStop();
 		if ( startHour != null ) {
