@@ -11,8 +11,8 @@ import java.util.Set;
 
 import javax.swing.JPanel;
 
-import me.datamining.sample.AbstractSpatialSampleData;
-import me.datamining.sample.ServiceDateSample;
+import me.datamining.metric.AbstractSpatialMetric;
+import me.datamining.metric.ServiceDateSample;
 import me.transit.database.ServiceDate;
 
 /**
@@ -36,7 +36,7 @@ public class ServiceSample extends DataSample {
 	 * @see me.openMap.models.query.sample.DataSample#getSampleType()
 	 */
 	@Override
-	public AbstractSpatialSampleData getSampleType() {
+	public AbstractSpatialMetric getSampleType() {
 		ServiceDateSample sample = new ServiceDateSample();
 		
 		Set<ServiceDate.WeekDay> dayList = new HashSet<ServiceDate.WeekDay>();

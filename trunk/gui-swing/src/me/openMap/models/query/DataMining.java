@@ -27,6 +27,7 @@ import me.openMap.handlers.TransitStopDataHandler;
 import me.openMap.mapUtils.RegionSelector;
 import me.openMap.models.layout.SpringLayoutUtilities;
 import me.openMap.models.query.sample.DataSample;
+import me.openMap.models.query.sample.DataSample.DataMiningType;
 import me.transit.dao.TransiteStopDao;
 import me.transit.dao.query.StopQueryConstraint;
 import me.transit.database.Agency;
@@ -106,7 +107,7 @@ public class DataMining extends AbstractSearchParameters
 		
 		// 1. What to produce
 		fields.add(new JLabel("Show"));
-		produceBox = new JComboBox( DataSample.DataMiningType.values());
+		produceBox = new JComboBox( DataMiningType.values());
 		fields.add(produceBox);
 
 		// 2. Type of Sampleing Panel
@@ -281,17 +282,14 @@ public class DataMining extends AbstractSearchParameters
 
 		TransiteEnums.DistanceUnitType unit = TransiteEnums.DistanceUnitType.class.cast(this.units.getSelectedItem());
 
-		double distanceInMeters = 
-					unit.toMeters(Double.class.cast(gridSize_.getValue()).doubleValue());
-		
-		DataSample.DataMiningType dmType =
-						DataSample.DataMiningType.class.cast(this.produceBox.getSelectedItem());
+		double         distanceInMeters = unit.toMeters(Double.class.cast(gridSize_.getValue()).doubleValue());
+		DataMiningType dmType           = DataMiningType.class.cast(this.produceBox.getSelectedItem());
+		DataSample     sample           = DataSample.class.cast(this.sampleTypes.getSelectedItem());
 
-		DataSample sample = DataSample.class.cast(this.sampleTypes.getSelectedItem());
-
-		DescriptiveStatistics stats = new DescriptiveStatistics();
 		DataSample.DataResults data = sample.process(results, ur, ll, distanceInMeters, dmType);
 		
+		DescriptiveStatistics stats = new DescriptiveStatistics();
+
 		double [] array = new double[data.results.size()];
 		int ndx = 0;
 		for (AbstractSpatialGridPoint pt : data.results) {
@@ -315,7 +313,7 @@ public class DataMining extends AbstractSearchParameters
 			data.results = toDisplay;		
 		}
 
-		rtn.add(new SpatialPointDataHandler(data.results, data.grid));
+		rtn.add(new SpatialPointDataHandler(data.results, distanceInMeters));
 		rtn.add(new TransitStopDataHandler(results));
 		return rtn;
 
