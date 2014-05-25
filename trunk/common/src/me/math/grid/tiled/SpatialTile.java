@@ -41,6 +41,8 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, IG
 	private int rowOffset_ = 0;
 	@XStreamAlias(SpatialTile.COL_OFFSET)
 	private int colOffSet_ = 0;
+	@XStreamAlias("gridSizeInMeters")
+	private double gridSizeInMeters_ = 0;
 	@XStreamImplicit(itemFieldName=IGridDocument.GRID)
 	private List<TiledSpatialGridPoint> grid_ = new ArrayList<TiledSpatialGridPoint>();
 	
@@ -79,7 +81,7 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, IG
 		this.setRows(rows);
 		this.setCols(cols);
 		int startIndex = this.getIndex();
-		
+		gridSizeInMeters_ = spacingInMeters;
 		this.setMbr(new MinBoundingRectangle());
 		for (int rowIndex = 0; rowIndex < rows; rowIndex++) {
 			for (int colIndex = 0; colIndex < cols; colIndex++) {
@@ -342,8 +344,19 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, IG
 		return this.getMbr().toPolygon();
 	}
 
+	/**
+	 * 
+	 * @param box
+	 */
 	public void setBoundingBox(Polygon box) {
 		this.setMbr( new MinBoundingRectangle(box));
+	}
+
+	/**
+	 * @return the gridSizeInMeters_
+	 */
+	public double getGridSizeInMeters() {
+		return gridSizeInMeters_;
 	}
 	
 }

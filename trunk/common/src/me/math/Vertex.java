@@ -31,6 +31,10 @@ public class Vertex {
 	@XStreamAlias("Longitude")
 	private double lon_;
 
+	public Vertex()
+	{
+	}
+	
 	public Vertex(double lat, double lon) {
 		lat_ = lat;
 		lon_ = lon;
@@ -64,6 +68,15 @@ public class Vertex {
 		return lon_;
 	}
 
+	public void setLatitudeDegress(double value) {
+		lat_ = value;
+	}
+
+	public void setLongitudeDegress(double value) {
+		lon_ = value;
+	}
+
+	
 	public String toString() {
 		return "(" + lat_ + ", " + lon_ + ") ";
 	}
