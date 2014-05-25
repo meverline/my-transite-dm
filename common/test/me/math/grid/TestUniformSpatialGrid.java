@@ -4,20 +4,30 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
+import me.datamining.jobs.DensityEstimateLocalJob;
+import me.datamining.metric.TransitStopSpatialSample;
+import me.factory.DaoBeanFactory;
 import me.math.Vertex;
 import me.math.grid.array.SpatialGridPoint;
 import me.math.grid.array.UniformSpatialGrid;
 import me.math.kdtree.INode;
 import me.math.kdtree.KDTree;
 import me.math.kdtree.search.RangeSearch;
+import me.transit.dao.TransiteStopDao;
+import me.transit.dao.query.StopQueryConstraint;
+import me.transit.database.TransitStop;
 import me.utils.TransiteEnums;
 
 import org.junit.Test;
 
+import com.vividsolutions.jts.geom.Coordinate;
+import com.vividsolutions.jts.geom.GeometryFactory;
+import com.vividsolutions.jts.geom.Point;
+
 public class TestUniformSpatialGrid {
 
 	@Test
-	public void test() {
+	public void testGrid() {
 		
 		Vertex ul = new Vertex(38.941, -77.286);
 		Vertex lr = new Vertex(38.827, -77.078);
@@ -52,8 +62,31 @@ public class TestUniformSpatialGrid {
 			assertFalse( search.getResults().isEmpty());
 			assertEquals( 1, search.getResults().size());
 		}
+	
+	}
+	
+	@Test
+	public void testDatabaseGrid() {
 		
+		TransiteStopDao dao =
+				TransiteStopDao.class.cast(DaoBeanFactory.create().getDaoBean(TransiteStopDao.class));
+			
+		GeometryFactory factory = new GeometryFactory();
+		StopQueryConstraint query = new StopQueryConstraint();
 		
+		Vertex ul = new Vertex(38.941, -77.286);
+		Vertex lr = new Vertex(38.827, -77.078);
+			
+		Point ur = factory.createPoint( new Coordinate(38.827, -77.286));
+		Point ll = factory.createPoint( new Coordinate(38.941, -77.078));
+			
+	    query.addRectangleConstraint(ur, ll);
+	    List<TransitStop> stops = dao.query(query);
+	    
+	    DensityEstimateLocalJob job = new DensityEstimateLocalJob();
+	    job.init(ul, lr, 500);
+	    job.process(stops.iterator(), new TransitStopSpatialSample());
+	    
 	}
 
 }

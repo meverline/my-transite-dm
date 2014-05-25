@@ -1,10 +1,14 @@
 package me.math.grid;
 
-import static org.junit.Assert.*;
-import me.datamining.sample.DefaultSample;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import me.math.Vertex;
 import me.math.grid.array.SpatialGridPoint;
 import me.math.grid.array.UniformSpatialGrid;
+import me.math.grid.data.AbstractDataSample;
+import me.math.grid.data.DensityEstimateDataSample;
 import me.math.kdtree.INode;
 import me.math.kdtree.MinBoundingRectangle;
 
@@ -77,7 +81,7 @@ public class TestSpatialGridPoint {
 		assertNotNull(obj.getParent());
 		assertEquals(obj, obj.getParent());
 		
-		SpatialGridData data = new DefaultSample();
+		AbstractDataSample data = new DensityEstimateDataSample();
 		obj.setData(data);
 		assertNotNull(obj.getData());
 		assertEquals(obj.getData(), data);
