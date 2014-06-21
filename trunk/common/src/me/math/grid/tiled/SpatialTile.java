@@ -1,7 +1,9 @@
 package me.math.grid.tiled;
 
 import java.io.IOException;
+import java.io.PrintStream;
 import java.io.Writer;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -357,6 +359,31 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, IG
 	 */
 	public double getGridSizeInMeters() {
 		return gridSizeInMeters_;
+	}
+	
+	/**
+	 * 
+	 * @param out
+	 * @param iterpolationValue
+	 * @throws UnknownHostException
+	 */
+	public void toCSV(PrintStream out, boolean iterpolationValue ) throws UnknownHostException {
+		
+		int col = 0;
+		for ( TiledSpatialGridPoint pt : this.getGrid()) {
+			if ( col != 0 ) { out.print(","); }
+			if ( iterpolationValue ) {
+				out.print(pt.getData().getInterpolationValue());
+			} else {
+				out.print(pt.getData().getValue());
+			}
+			col++;
+			if ( col > this.getCols() ) {
+				out.println();
+				col = 0;
+			}
+		}
+		
 	}
 	
 }

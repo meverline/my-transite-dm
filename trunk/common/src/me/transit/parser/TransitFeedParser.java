@@ -445,6 +445,9 @@ public class TransitFeedParser {
 					RouteDao.class.cast(DaoBeanFactory.create().getDaoBean( RouteDao.class));
 			
 			Route route = Route.class.cast(obj);
+			if (route.getShortName() == null || route.getShortName().isEmpty()) {
+				route.setShortName(route.getLongName());
+			}
 			dao.save( route);
 			graph.addNode( route );
 			
@@ -721,7 +724,7 @@ public class TransitFeedParser {
 				
 				double lat = Double.parseDouble( data[indexMap.get("PtLat")]);
 				double lon = Double.parseDouble( data[indexMap.get("PtLon")]);				
-				coords.add(new Coordinate(lon, lat));
+				coords.add(new Coordinate(lat, lon));
 			}
 			saveShape(current, coords);
 			inStream.close();
@@ -940,8 +943,6 @@ public class TransitFeedParser {
 				tripMap.put(trip.getId(), new RouteTripPair(routeId, tripToUse) );
 			}
 			inStream.close();
-			
-			
 			
 			GraphDatabaseDAO graphdb = GraphDatabaseDAO.instance();
 			RouteDao dao = RouteDao.class.cast(DaoBeanFactory.create().getDaoBean(RouteDao.class));

@@ -70,4 +70,11 @@ public class MesureOfSpread implements IBandwidth {
 							* Math.pow(data.getN(), -(1.0 / 5.0));
 	}
 
+	@Override
+	public double bandWidth(double variance, int dimensions, long number) {
+		throw new java.lang.UnsupportedOperationException();
+	}
+	
+	
+
 }

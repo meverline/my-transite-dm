@@ -30,6 +30,13 @@ public class DataResult {
 		metric = value;
 	}
 	
+	
+	public DataResult(DataResult copy)
+	{
+		point = copy.getPoint();
+		metric = copy.getMetric();
+	}
+	
 	/**
 	 * @return the point
 	 */

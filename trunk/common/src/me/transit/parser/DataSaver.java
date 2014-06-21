@@ -125,8 +125,8 @@ public class DataSaver {
 				String world[] = data.split(",");
 				double lat = Double.parseDouble(world[0]);
 				double lon = Double.parseDouble(world[1]);
-				
-				return factory.createPoint( new Coordinate(lon, lat));
+				// TODO: Switch
+				return factory.createPoint( new Coordinate(lat, lon));
 			}
 		},
 		GEOMETRY {

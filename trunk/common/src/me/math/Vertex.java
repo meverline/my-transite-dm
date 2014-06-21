@@ -17,13 +17,16 @@
 package me.math;
 
 
+import java.io.Serializable;
+
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.Point;
 
+@SuppressWarnings("serial")
 @XStreamAlias("Coordinate")
-public class Vertex {
+public class Vertex implements Serializable {
 
 	@XStreamAlias("Latitude")
 	private double lat_;
@@ -38,6 +41,11 @@ public class Vertex {
 	public Vertex(double lat, double lon) {
 		lat_ = lat;
 		lon_ = lon;
+	}
+	
+	public Vertex(Point pt) {
+		lat_ = pt.getCoordinate().x;
+		lon_ = pt.getCoordinate().y;
 	}
 
 	public Vertex(Vertex copy)
@@ -84,8 +92,13 @@ public class Vertex {
 	public Point toPoint()
 	{
 		GeometryFactory factory_  = new GeometryFactory();
-		return factory_.createPoint(new Coordinate(getLongitudeDegress(),
-												   getLatitudeDegress()));
+		return factory_.createPoint(new Coordinate(getLatitudeDegress(), getLongitudeDegress() ));
+	}
+	
+	public void formPoint(Point pt)
+	{
+		lat_ = pt.getCoordinate().x;
+		lon_ = pt.getCoordinate().y;
 	}
 
 	public boolean equals(Object obj)
