@@ -150,6 +150,13 @@ public class GraphDatabaseDAO {
 	    } );
 	}
 	
+	protected void finalize()
+	{
+		if ( graphDb != null ) {
+			graphDb.shutdown();
+		}
+	}
+	
 	/**
 	 * 
 	 * @return

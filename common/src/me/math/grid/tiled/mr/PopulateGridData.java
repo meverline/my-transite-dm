@@ -22,7 +22,6 @@ public class PopulateGridData {
 			Configuration conf = context.getConfiguration();
 			String param = conf.get(PopulateGridData.QUERY_FILE);
 			
-		
 		}
 		
 	}

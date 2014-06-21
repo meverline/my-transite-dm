@@ -1,6 +1,7 @@
 package me.math.grid.tiled;
 
 import java.io.IOException;
+import java.io.PrintStream;
 import java.io.Writer;
 import java.net.UnknownHostException;
 import java.sql.SQLException;
@@ -115,7 +116,27 @@ public class TiledSpatialGrid extends AbstractTiledSpatialGrid {
 		}
 		
 	}
-
-
-
+	
+	/**
+	 * 
+	 * @param out
+	 * @throws UnknownHostException
+	 */
+	public void toCSV(PrintStream out, boolean iterpolationValue ) throws UnknownHostException {
+		
+		for (int row = 0; row < this.getRows(); row++ ) {
+			for (int col = 0; col < this.getCols(); col++ ) {
+				TiledSpatialGridPoint pt = this.getEntry(row, col);
+				if ( col != 0 ) { out.print(","); }
+				if ( iterpolationValue ) {
+					out.print(pt.getData().getInterpolationValue());
+				} else {
+					out.print(pt.getData().getValue());
+				}
+			}
+			out.println();
+		}
+		
+	}
+	
 }

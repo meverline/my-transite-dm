@@ -96,8 +96,7 @@ public class AddressToCoordinate {
 		if ( ! response.isEmpty() ) {
 			parser.parse(response);
 			if ( parser.getReturnCode() == 0 ) {
-				rtn = factory_.createPoint( new Coordinate( parser.getLon(), 
-															parser.getLat()));
+				rtn = factory_.createPoint( new Coordinate( parser.getLat(), parser.getLon() ));
 			}
 		}
 		

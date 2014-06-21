@@ -62,7 +62,6 @@ public abstract class AbstractTiledSpatialGrid extends AbstractSpatialGridOverla
 		int colWidth = (this.getCols() / this.getTileSize()) +1;
 		int index = ((row / this.getTileSize()) * colWidth) + (column / this.getTileSize());
 		return get(index, row, column);
-		//return this.grid_.get(index).getEntry( row, column);
 	}
 		
 	/**
@@ -91,7 +90,6 @@ public abstract class AbstractTiledSpatialGrid extends AbstractSpatialGridOverla
 		this.setCols(AbstractSpatialGrid.findNumberOfCols(upperLeft, lowerRight, getGridSpacingMeters()));
 		this.setRows(AbstractSpatialGrid.findNumberOfRows(upperLeft, lowerRight, getGridSpacingMeters()));
 		
-		logger.info(getClass().getSimpleName() + " Rows: " + this.getRows() + " Cols: " + this.getCols());
 		
 		// find number of tiles
 		int totalColTiles = 0;
@@ -106,6 +104,11 @@ public abstract class AbstractTiledSpatialGrid extends AbstractSpatialGridOverla
 		
 		int tilesCols = totalColTiles * this.tileSize;
 		int tilesRows = totalRowTiles * this.tileSize;
+		
+		logger.info(getClass().getSimpleName() + " Rows: " +  this.getRows() 
+											   + " Cols: " + this.getCols()
+											   + " Tile Cols " + tilesCols + " Tile Row "+ tilesRows);
+
 		
 		double northDistanceMeters = (double) tilesRows* this.getGridSpacingMeters();
 		double eastDistanceMeters = (double) tilesCols* this.getGridSpacingMeters();

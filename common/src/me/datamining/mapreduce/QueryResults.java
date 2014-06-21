@@ -10,6 +10,7 @@ import me.math.Vertex;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -22,7 +23,9 @@ public class QueryResults {
 	private static final String LAT = "lat";
 	private static final String LON = "lon";
 	private static final String VALUE = "value";
-	private static final String METRIC = "metric";
+	
+	private StringBuffer buffer_ = new StringBuffer();
+	private DescriptiveStatistics xstats_ = new DescriptiveStatistics();
 
 	/**
 	 * 
@@ -30,6 +33,8 @@ public class QueryResults {
 	 */
 	public void startWrite(PrintStream stream)
 	{
+		stream.println("<?xml version='1.0' encoding='UTF-8'?>");
+		stream.println();
 		stream.println("<QueryResults>");
 	}
 	
@@ -50,11 +55,43 @@ public class QueryResults {
 	 */
 	public void write(PrintStream stream, Vertex pt, double value)
 	{
-		stream.println("   <" + DataResult.class.getSimpleName() + ">");
-		stream.print("        <" + Vertex.class.getSimpleName() + " " + QueryResults.LAT + "='" + pt.getLatitudeDegress());
-		stream.println("' " + QueryResults.LON + "='" + pt.getLongitudeDegress() + "' />");
-		stream.println("      <" + QueryResults.METRIC + " " + QueryResults.VALUE + "='" + value  + "' />");
-		stream.println("   </" + DataResult.class.getSimpleName() + ">");
+		xstats_.addValue(value);
+		buffer_.delete(0, buffer_.length());
+		buffer_.append("   <");
+		buffer_.append(DataResult.class.getSimpleName());
+		buffer_.append(" ");
+		buffer_.append(QueryResults.LAT);
+		buffer_.append("='");
+		buffer_.append(pt.getLatitudeDegress());
+		buffer_.append("' ");
+		buffer_.append(QueryResults.LON);
+		buffer_.append("='");
+		buffer_.append(pt.getLongitudeDegress());
+		buffer_.append("' ");
+		buffer_.append(QueryResults.VALUE);
+		buffer_.append("='");
+		buffer_.append(value);
+		buffer_.append("' />");
+		
+		stream.println(buffer_.toString());
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public double getVariance()
+	{
+		return xstats_.getVariance();
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public long getN()
+	{
+		return xstats_.getN();
 	}
 	
 	/**
@@ -91,38 +128,24 @@ public class QueryResults {
 		}
 
 		/* (non-Javadoc)
-		 * @see org.xml.sax.helpers.DefaultHandler#endElement(java.lang.String, java.lang.String, java.lang.String)
-		 */
-		@Override
-		public void endElement(String uri, String localName, String qName)
-				throws SAXException {
-			
-			if ( qName.equals( DataResult.class.getSimpleName() )) {
-				
-				this.callback_.handleResult(current_);
-				current_.reset();
-			}
-		}
-
-		/* (non-Javadoc)
 		 * @see org.xml.sax.helpers.DefaultHandler#startElement(java.lang.String, java.lang.String, java.lang.String, org.xml.sax.Attributes)
 		 */
 		@Override
 		public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
 			
-			if ( qName.equals( Vertex.class.getSimpleName() )) {
+			if ( qName.equals( DataResult.class.getSimpleName() )) {
 				
 				double latDeg = Double.parseDouble(attributes.getValue(QueryResults.LAT));
 				double lonDeg = Double.parseDouble(attributes.getValue(QueryResults.LON));
+				double value = Double.parseDouble(attributes.getValue(QueryResults.VALUE));
 				
 				point_.setLatitudeDegress(latDeg);
 				point_.setLongitudeDegress(lonDeg);
 				current_.setPoint(point_);
-				
-			} else if ( qName.equals( QueryResults.METRIC )) {
-				
-				double value = Double.parseDouble(attributes.getValue(QueryResults.VALUE));
 				current_.setMetric(value);
+				
+				this.callback_.handleResult(current_);
+				current_.reset();
 			}
 			
 		}

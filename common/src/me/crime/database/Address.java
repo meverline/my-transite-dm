@@ -243,8 +243,8 @@ public class Address implements Serializable, XmlReadable {
 		if ( obj instanceof GeoPoint ) {
 			GeoPoint pt = GeoPoint.class.cast(obj);
 
-			// Yahoo points are flooped in the data.
-			if ( this.service_.toLowerCase().compareTo("yahoo") == 0) {
+			// Everything other then yahoo points are flooped in the data.
+			if ( this.service_.toLowerCase().compareTo("yahoo") != 0) {
 				// but only some are flipped
 				if ( pt.getLonY() > 1 ) {
 					double tmp = pt.getLatX();

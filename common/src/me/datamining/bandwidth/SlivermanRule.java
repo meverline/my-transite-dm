@@ -23,8 +23,20 @@ public class SlivermanRule  implements IBandwidth {
 	 * (non-Javadoc)
 	 * @see me.datamining.bandwidth.IBandwidth#bandWidth(double, int, org.apache.commons.math.stat.descriptive.DescriptiveStatistics)
 	 */
+	@Override
     public double bandWidth(double variance, int dimensions, DescriptiveStatistics data) {
-        return 1.06 * Math.pow( variance * data.getN(), -1.0/5.0);
+		return this.bandWidth(variance, dimensions, data.getN());
     }
+
+	/*
+	 * (non-Javadoc)
+	 * @see me.datamining.bandwidth.IBandwidth#bandWidth(double, int, int)
+	 */
+	@Override
+	public double bandWidth(double variance, int dimensions, long number) {
+		return 1.06 * Math.pow( variance * number, -1.0/5.0);
+	}
+    
+    
 
 }

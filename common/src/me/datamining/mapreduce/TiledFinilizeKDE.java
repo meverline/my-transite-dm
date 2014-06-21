@@ -31,13 +31,14 @@ public class TiledFinilizeKDE {
 	 	int index = 0;
     	for ( TiledSpatialGridPoint cnt : zeroTile.getGrid()) {    	   
      	   AbstractDataSample sample = cnt.getData();
-     	   double total = sample.getInterpolationValue();
+     	   double total = 0;
        	   for ( SpatialTile tile : aList ) {
                TiledSpatialGridPoint gridPt = tile.getGrid().get(index);
                
                total += gridPt.getData().getInterpolationValue();
        	   }   
        	   sample.setInterpolationValue( (1.0 / getNumSamples())* total);
+       	   index++;
     	}
 	}
 

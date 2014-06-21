@@ -6,13 +6,16 @@ package me.datamining.mapreduce;
 import java.io.InputStream;
 import java.util.List;
 
-import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
-
 import me.math.grid.AbstractSpatialGridPoint;
 import me.math.grid.data.AbstractDataSample;
 import me.math.grid.tiled.SpatialTile;
 import me.math.kdtree.KDTree;
 import me.math.kdtree.search.RangeSearch;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 /**
  * @author markeverline
@@ -20,11 +23,13 @@ import me.math.kdtree.search.RangeSearch;
  */
 public class PopulateGrid implements ResultsHandler {
 
+	@XStreamOmitField()
+	private Log logger = LogFactory.getLog(PopulateGrid.class);
+	
 	private SpatialTile tile_ = null;
 	private KDTree tree_ = null;
 	private RangeSearch search_ = null;
 	private Class<?> sampleClass_ = null;
-	private DescriptiveStatistics xstats_ = new DescriptiveStatistics();
 	
 	/**
 	 * 
@@ -36,14 +41,7 @@ public class PopulateGrid implements ResultsHandler {
 		sampleClass_ = sampleClass;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 */
-	public double getVariance()
-	{
-		return xstats_.getVariance();
-	}
+
 	
 	/* (non-Javadoc)
 	 * @see me.datamining.mapreduce.ResultsHandler#handleResult(me.datamining.mapreduce.DataResult)
@@ -51,28 +49,22 @@ public class PopulateGrid implements ResultsHandler {
 	@Override
 	public void handleResult(DataResult result) {
 		
-		xstats_.addValue(result.getMetric());
 		if ( search_ == null ) {
 			search_ = new RangeSearch(result.getPoint(), tile_.getGridSizeInMeters());
 		}
-		search_.reset();
-		search_.setPoint(result.getPoint());
-		search_.setDistanceInMeters(tile_.getGridSizeInMeters());
 		
-	    tree_.find(search_);
-	    List<AbstractSpatialGridPoint> results = search_.getResults();
-	    
-	    for ( AbstractSpatialGridPoint pt : results) {
-	    	if ( pt.getData() == null ) {
-	    		try {
-					AbstractDataSample data = (AbstractDataSample) sampleClass_.newInstance();
-					pt.setData(data);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-	 	    }
-	    	pt.getData().addValue(result.getMetric());
-	    }
+		if ( this.tile_.getMbr().contains(result.getPoint()) ) {
+			search_.reset();
+			search_.setPoint(result.getPoint());
+			search_.setDistanceInMeters(tile_.getGridSizeInMeters());
+			
+		    tree_.find(search_);
+		    List<AbstractSpatialGridPoint> results = search_.getResults();
+		    
+		    for ( AbstractSpatialGridPoint pt : results) {
+		    	pt.getData().addValue(result.getMetric());
+		    }
+		} 
 	}
 	
 	/**
@@ -85,6 +77,15 @@ public class PopulateGrid implements ResultsHandler {
 	{
 		if ( gridTile == null ) { throw new IllegalArgumentException("gridTile can't be null"); }
 		if ( dataStream == null ) { throw new IllegalArgumentException("dataStream can't be null"); }
+		
+		for (AbstractSpatialGridPoint pt : gridTile.getGrid()) {
+			try {
+				AbstractDataSample data = (AbstractDataSample) sampleClass_.newInstance();
+				pt.setData(data);
+			} catch (Exception e) {
+				logger.error(e.getMessage(), e);
+			}
+		}
 		
 		QueryResults qr = new QueryResults();
 		tile_ = gridTile;

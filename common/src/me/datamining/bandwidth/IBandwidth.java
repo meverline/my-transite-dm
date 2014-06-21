@@ -27,5 +27,14 @@ public interface IBandwidth {
    * @return
    */
   public double bandWidth(double variance, int dimensions, DescriptiveStatistics data);
+  
+  /**
+   * 
+   * @param variance
+   * @param dimensions
+   * @param number
+   * @return
+   */
+  public double bandWidth(double variance, int dimensions, long number);
 
 }

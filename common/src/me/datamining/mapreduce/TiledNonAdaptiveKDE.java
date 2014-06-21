@@ -1,5 +1,7 @@
 package me.datamining.mapreduce;
 
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import me.datamining.Kernel.Epanechnikov;
@@ -9,15 +11,20 @@ import me.datamining.bandwidth.SlivermanRule;
 import me.math.grid.tiled.SpatialTile;
 import me.math.grid.tiled.TiledSpatialGridPoint;
 
-import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
-public class TiledNonAdaptiveKDE {
+public class TiledNonAdaptiveKDE implements ResultsHandler {
+
+	public static Log log = LogFactory.getLog(TiledNonAdaptiveKDE.class);
 
 	private  IDensityKernel denstiyKernel = new Epanechnikov();
 	private  IBandwidth xBandWidth = new SlivermanRule();
 	private  IBandwidth yBandWidth = new SlivermanRule();
 	private  double crossCovariance_ = 0.0;
 	private  double variance_ = 0.0;
+	private  long number_ = 0;
+	private  List<DataResult> dataPoints_ = new ArrayList<DataResult>();
 	
 	public TiledNonAdaptiveKDE(double crossCov, double var)
 	{
@@ -100,36 +107,57 @@ public class TiledNonAdaptiveKDE {
 	}
 	
 	/**
+	 * @return the crossCovariance
+	 */
+	public long getN() {
+		return number_;
+	}
+
+	/**
+	 * @param crossCovariance the crossCovariance to set
+	 */
+	public void setN(long value) {
+		this.number_ = value;
+	}
+	
+	public void handleResult(DataResult result) {
+		if (result != null ) {
+			this.dataPoints_.add( new DataResult(result));
+		}
+	}
+	
+	/**
 	 * 
 	 * @param gridTile
 	 * @param aList
 	 */
-    public void kernalDensityEstimate(SpatialTile gridTile, List<SpatialTile> aList)
+    public void kernalDensityEstimate(SpatialTile gridTile, InputStream dataStream)
     {
-    	DescriptiveStatistics data = new DescriptiveStatistics();
-    	double hparm = getXBandWidth().bandWidth(this.getVariance(), 2, data);
-    	double hGeoParm = getYBandWidth().bandWidth( this.getCrossCovariance(), 2, data);
-           
+    	
+    	QueryResults qr = new QueryResults();
+    	qr.read(dataStream, this);
+    	
+    	double hparm = getXBandWidth().bandWidth(this.getVariance(), 2, this.getN());
+    	double hGeoParm = getYBandWidth().bandWidth( this.getCrossCovariance(), 2, this.getN());
+         
     	for ( TiledSpatialGridPoint cnt : gridTile.getGrid()) {
     	   double estitmate = 0.0;
-    	   for ( SpatialTile tile : aList ) {
-                for (TiledSpatialGridPoint gridPt : tile.getGrid() ) {
-                	    double t = 0;
-                	    if ( gridPt.getData() != null ) {
-                	    	t = gridPt.getData().getValue() - cnt.getData().getValue();
-                	    } 
-                        double X = (1.0 / hparm)* getDenstiyKernel().kernelValue(t / hparm);
+    	   for ( DataResult data : this.dataPoints_) {
+        	    double t = 0;
+        	    if ( cnt.getData() != null ) {
+        	    	t = cnt.getData().getValue() - data.getMetric();
+        	    } 
+                double X = (1.0 / hparm)* getDenstiyKernel().kernelValue(t / hparm);
 
-                        double dist = gridPt.getVertex().distanceFrom(cnt.getPoint().getPointVertex());
-                        double Y = (1.0 / hGeoParm) * getDenstiyKernel().kernelValue(dist / hGeoParm);
+                double dist = cnt.getVertex().distanceFrom(data.getPoint());
+                double Y = (1.0 / hGeoParm) * getDenstiyKernel().kernelValue(dist / hGeoParm);
 
-                        estitmate += (Math.sqrt(Math.abs(Math.pow(X, 2)) + Math.abs(Math.pow(Y, 2))));
-                }
+                estitmate += (Math.sqrt(Math.abs(Math.pow(X, 2)) + Math.abs(Math.pow(Y, 2))));
             }
     	   
     	    cnt.getData().setInterpolationValue(estitmate);
         }
-
+    	
         return;
     }
 	

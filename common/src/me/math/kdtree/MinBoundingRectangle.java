@@ -15,6 +15,7 @@ package me.math.kdtree;
 //You should have received a copy of the GNU General Public License
 //along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,7 +31,8 @@ import com.vividsolutions.jts.geom.Point;
 import com.vividsolutions.jts.geom.Polygon;
 
 
-public class MinBoundingRectangle implements IDocument {
+@SuppressWarnings("serial")
+public class MinBoundingRectangle implements IDocument, Serializable {
 
 	protected static GeometryFactory factory_ = new GeometryFactory();
 
