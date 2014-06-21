@@ -68,6 +68,7 @@ public class TestUniformSpatialGrid {
 	@Test
 	public void testDatabaseGrid() {
 		
+		DaoBeanFactory.initilize();
 		TransiteStopDao dao =
 				TransiteStopDao.class.cast(DaoBeanFactory.create().getDaoBean(TransiteStopDao.class));
 			
