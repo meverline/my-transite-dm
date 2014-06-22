@@ -107,6 +107,7 @@ public abstract class AbstractTiledSpatialGrid extends AbstractSpatialGridOverla
 		
 		logger.info(getClass().getSimpleName() + " Rows: " +  this.getRows() 
 											   + " Cols: " + this.getCols()
+											   + " Num Cells " + (this.getRows() * this.getCols())
 											   + " Tile Cols " + tilesCols + " Tile Row "+ tilesRows);
 
 		
