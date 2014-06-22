@@ -24,6 +24,7 @@ public class QueryResults {
 	private static final String LON = "lon";
 	private static final String VALUE = "value";
 	
+	private int maxNumber = 550;
 	private StringBuffer buffer_ = new StringBuffer();
 	private DescriptiveStatistics xstats_ = new DescriptiveStatistics();
 
@@ -36,6 +37,11 @@ public class QueryResults {
 		stream.println("<?xml version='1.0' encoding='UTF-8'?>");
 		stream.println();
 		stream.println("<QueryResults>");
+	}
+	
+	public int getMaxNumber()
+	{
+		return maxNumber;
 	}
 	
 	/**
