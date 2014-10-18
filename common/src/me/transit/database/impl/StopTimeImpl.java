@@ -8,8 +8,6 @@ import java.util.Map;
 
 import me.database.CSVFieldType;
 import me.database.mongo.IDocument;
-import me.factory.DaoBeanFactory;
-import me.transit.dao.TransiteStopDao;
 import me.transit.database.Agency;
 import me.transit.database.StopTime;
 import me.transit.database.TransitStop;
@@ -95,11 +93,9 @@ public class StopTimeImpl implements StopTime {
 	/**
 	 * @return the stopId
 	 */
-	public TransitStop getStop(Agency agency) {
-		TransiteStopDao dao = 
-			TransiteStopDao.class.cast(DaoBeanFactory.create().getDaoBean(TransiteStopDao.class));
-		return TransitStop.class.cast(dao.loadById(getStopId(), agency.getName()));
-	}
+	//public TransitStop getStop(Agency agency) {
+	//	return LoadUtils.getStop(agency, getStopId());
+	//}
 
 	/**
 	 * @return the stopId

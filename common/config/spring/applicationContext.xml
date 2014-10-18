@@ -15,7 +15,7 @@
         	<value>postgres</value>
         </property>
         <property name="password">
-        		<value>Postgres</value>
+        		<value>postgres</value>
         </property>
     </bean>
 	
