@@ -4,8 +4,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({me.transit.TransitSuite.class,
-	                 me.crime.CrimeDatabaseTestSuite.class})
+@Suite.SuiteClasses({})
 public class RootSuit {
 
 }

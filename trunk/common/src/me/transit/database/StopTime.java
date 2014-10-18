@@ -49,7 +49,7 @@ public interface StopTime extends CSVFieldType, IDocument {
 	/**
 	 * @return the stopId
 	 */
-	public TransitStop getStop(Agency agency);
+	//public TransitStop getStop(Agency agency);
 
 	/**
 	 * @return the stopId
