@@ -1,5 +1,5 @@
 //	  CIRAS: Crime Information Retrieval and Analysis System
-//    Copyright © 2009 by Russ Brasser, Mark Everline and Eric Franklin
+//    Copyright 2009 by Russ Brasser, Mark Everline and Eric Franklin
 //
 //    This program is free software: you can redistribute it and/or modify
 //    it under the terms of the GNU General Public License as published by
