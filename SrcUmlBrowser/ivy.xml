@@ -23,6 +23,8 @@
 
 	<dependencies>
         
+        <dependency org="org.ow2.asm" name="asm" rev="5.0.4" />
+        
         <dependency org="org.apache.commons" name="commons-logging" rev="1.1.1" >
       	    <artifact name="commons-logging" type="jar" />
         </dependency>

@@ -9,11 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.lang.reflect.GenericArrayType;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.lang.reflect.TypeVariable;
-import java.lang.reflect.WildcardType;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -49,6 +44,8 @@ import browser.loader.FieldData;
 import browser.loader.MethodData;
 import browser.loader.ParamaterData;
 import browser.util.ClassXRef;
+
+import browser.gui.dialog.DataTypeInfo;
 
 /**
  * @author markeverline
@@ -206,61 +203,7 @@ public class DisplayClassDialog extends JDialog {
 		JList list = new JList(getDisplayClass().getInterfaces().toArray());
 		tabpane.addTab("Inherit", new JScrollPane(list));		
 	}
-	
-	/**
-	 * Code to find the class's which are a passed/used as part of the generic
-	 * arguments. 
-	 * @param type
-	 * @return
-	 */
-	protected String discoverGenericTypes(Type type)
-	{
-		StringBuilder buidler = new StringBuilder();
 		
-		if ( type instanceof WildcardType) {
-			
-			WildcardType item = WildcardType.class.cast(type);
-
-			buidler.append("<");
-			for ( Type args : item.getUpperBounds()) {
-				buidler.append(this.discoverGenericTypes(args));
-			}
-			
-			for ( Type args : item.getLowerBounds()) {
-				buidler.append(this.discoverGenericTypes(args));
-			}
-			buidler.append(">");
-			
-		} else if ( type instanceof ParameterizedType) {
-			
-			ParameterizedType item = ParameterizedType.class.cast(type);
-			
-			buidler.append(this.discoverGenericTypes(item.getRawType()));
-			buidler.append("<");
-			for (Type args : item.getActualTypeArguments()) {
-				buidler.append(this.discoverGenericTypes(args));
-			}
-			buidler.append(">");
-		
-		} else if ( type instanceof TypeVariable<?>) {
-			
-			TypeVariable<?> item = TypeVariable.class.cast(type);
-			for (Type args : item.getBounds()) {
-				buidler.append(this.discoverGenericTypes(args));
-			}
-							
-		} else if ( type instanceof GenericArrayType) {
-			
-			GenericArrayType item = GenericArrayType.class.cast(type);
-			
-			buidler.append(this.discoverGenericTypes(item.getGenericComponentType()));
-			
-		} else {
-			buidler.append( ((Class<?>)type).getSimpleName() );
-		}
-		return buidler.toString();
-	}
-	
 	private String removeJavaLang(String name) {
 		String rtn = name;
 		if ( name.startsWith("java.lang") || name.startsWith("java.util") ) {
