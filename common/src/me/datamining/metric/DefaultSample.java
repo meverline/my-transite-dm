@@ -3,7 +3,7 @@
  */
 package me.datamining.metric;
 
-import me.transit.database.TransitStop;
+import me.datamining.metric.IDataProvider;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
@@ -14,7 +14,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 @XStreamAlias("SpatialData")
 public class DefaultSample extends AbstractSpatialMetric {
 	
-	public double getMetric(TransitStop stop)
+	public double getMetric(IDataProvider stop)
 	{
 		return 0;
 	}

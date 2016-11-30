@@ -1,22 +1,10 @@
 package me.datamining.metric;
 
-import java.net.UnknownHostException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import me.database.mongo.DocumentDao;
-import me.transit.dao.neo4j.GraphDatabaseDAO;
-import me.transit.dao.query.tuple.IQueryTuple;
-import me.transit.dao.query.tuple.StringTuple;
-import me.transit.database.Route;
-import me.transit.database.RouteStopData;
-import me.transit.database.TransitStop;
-import me.transit.database.Trip;
-import me.transit.parser.TransitFeedParser;
-
+import me.datamining.metric.IDataProvider;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -25,11 +13,11 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 public abstract class AbstractSpatialMetric {
 
 	@XStreamOmitField
-	public static Log log = LogFactory.getLog(TransitFeedParser.class);
+	public static Log log = LogFactory.getLog(AbstractSpatialMetric.class);
 	@XStreamOmitField
-	private Map<Long, TransitStop> dataList = new HashMap<Long,TransitStop>();
+	private Map<Long, IDataProvider> dataList = new HashMap<Long,IDataProvider>();
 	
-	public abstract double getMetric(TransitStop stop);
+	public abstract double getMetric(IDataProvider stop);
 		
 	/*
 	 * (non-Javadoc)
@@ -42,7 +30,7 @@ public abstract class AbstractSpatialMetric {
 	/**
 	 * @return the dataList
 	 */
-	protected Collection<TransitStop> getDataList() {
+	protected Collection<IDataProvider> getDataList() {
 		return dataList.values();
 	}
 	
@@ -60,8 +48,8 @@ public abstract class AbstractSpatialMetric {
 	 * @see me.datamining.SpatialSamplePoint#addSampleData(java.lang.Object)
 	 */
 	public void addSampleData(Object data) {
-		if ( data instanceof TransitStop) {
-			TransitStop stop = TransitStop.class.cast(data);
+		if ( data instanceof IDataProvider) {
+			IDataProvider stop = IDataProvider.class.cast(data);
 			
 			if ( ! this.dataList.containsKey( stop.getUUID() )) {
 				this.dataList.put(stop.getUUID(), stop);
@@ -69,45 +57,7 @@ public abstract class AbstractSpatialMetric {
 		}
 	}
 	
-	/**
-	 * 
-	 * @param stop
-	 * @return
-	 */
-	public List<RouteStopData> getRoutes(TransitStop stop) {
-		GraphDatabaseDAO db = GraphDatabaseDAO.instance();
-		return db.findRoutes(stop);
-	}
-	
-	/**
-	 * 
-	 * @param route
-	 * @return
-	 */
-	public List<Trip> getTrips(Route route) {
-		
-		List<Trip> rtn = null;
-		try {
-			DocumentDao dao = DocumentDao.instance();
-			
-			List<String> fields = new ArrayList<String>();
-			fields.add( Route.SHORTNAME);
-			
-			List<IQueryTuple> list = new ArrayList<IQueryTuple>();
-			
-			list.add( new StringTuple(DocumentDao.toDocField(fields), 
-					                  route.getShortName(), 
-					                  StringTuple.MATCH.EXACT ));
-			
-			List<Object> data = dao.find(list);
-			
-			rtn = Route.class.cast( data.get(0)).getTripList();
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return rtn;
-	}
+
 
 	
 }
