@@ -25,6 +25,18 @@
 			
 		</plugins>
 		
+		<resources>
+		
+			<resource>
+				<directory>config/</directory>
+				<targetPath>${project.target_directory}/classess/config</targetPath>
+				<includes>
+          			<include>**/**</include>
+        		</includes>
+			</resource>
+			
+		</resources>
+		
 	</build>
 	
 		<dependencies>

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!-- 
+	  CIRAS: Crime Information Retrieval and Analysis System
+    Copyright © 2009 by Russ Brasser, Mark Everline and Eric Franklin
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ -->
+ 
+ <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="me.crime.database" >
+
+     <class name="Address"  table="crm_Address" >
+
+         <id name="id" unsaved-value="0">
+  			<column name="ADDRESS_ID" not-null="true"/>
+			<generator class="native"/>
+		 </id>
+
+		 <property name="location" column="LOCATION" not-null="true" />
+		 <property name="city" column="CITY" not-null="true" />
+		 <property name="state" column="STATE" not-null="true" />
+		 <property name="zipCode" column="ZIPCODE" not-null="true" />
+		 <property name="service" column="SERVICE" not-null="true" />
+		 <property name="accuracy" column="ACCURACY" />
+		 <property name="point" type="org.hibernate.spatial.GeometryType" column="COORDINATE" not-null="true" />
+
+      </class>
+      
+</hibernate-mapping>

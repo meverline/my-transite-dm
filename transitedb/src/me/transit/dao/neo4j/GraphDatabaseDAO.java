@@ -1,5 +1,6 @@
 package me.transit.dao.neo4j;
 
+import java.io.File;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
@@ -27,8 +28,6 @@ import org.neo4j.graphdb.factory.GraphDatabaseSettings;
 import org.neo4j.graphdb.index.ReadableIndex;
 import org.neo4j.graphdb.traversal.Evaluators;
 import org.neo4j.graphdb.traversal.TraversalDescription;
-import org.neo4j.kernel.CommonBranchOrdering;
-import org.neo4j.kernel.Traversal;
 
 public class GraphDatabaseDAO {
 	
@@ -121,7 +120,7 @@ public class GraphDatabaseDAO {
 		    rel_types.append(rel.name());
 		}
 	    
-		graphDb = new GraphDatabaseFactory().newEmbeddedDatabaseBuilder( DB_PATH ).
+		graphDb = new GraphDatabaseFactory().newEmbeddedDatabaseBuilder( new File(DB_PATH )).
 											 setConfig( GraphDatabaseSettings.node_keys_indexable, field_types.toString() ).
 											 setConfig( GraphDatabaseSettings.relationship_keys_indexable, rel_types.toString() ).
 											 setConfig( GraphDatabaseSettings.node_auto_indexing, "true" ).
@@ -261,7 +260,7 @@ public class GraphDatabaseDAO {
 			   tx.failure();
 			   logException("Error adding: " + agency.getName(), ex );
 			} finally {
-				tx.finish();
+				tx.close();
 			}
 		}
         return node;
@@ -306,7 +305,7 @@ public class GraphDatabaseDAO {
 				tx.failure();
 				logException("Error adding route: " + FIELD.stop.makeKey(stop), ex );
 			} finally {
-				tx.finish();
+				tx.close();
 			}
 		}
         return node;
@@ -338,7 +337,7 @@ public class GraphDatabaseDAO {
 				tx.failure();
 				logException("Error adding route: " + FIELD.route.makeKey(route), ex );
 			} finally {
-				tx.finish();
+				tx.close();
 			}
 		}
         return node;
@@ -381,7 +380,7 @@ public class GraphDatabaseDAO {
 				tx.failure();
 				logException("Error adding trip: " + FIELD.trip.makeKey(trip), ex );
 			} finally {
-				tx.finish();
+				tx.close();
 			}
 		}
 		return node;
@@ -421,7 +420,7 @@ public class GraphDatabaseDAO {
 			tx.failure();
 			logException("Error adding relationsip trip to stop: ", ex );
 		} finally {
-			tx.finish();
+			tx.close();
 		}
 		return true;
 	}
@@ -460,7 +459,7 @@ public class GraphDatabaseDAO {
 			tx.failure();
 			logException("Error adding relationsip route to stop: ", ex );
 		} finally {
-			tx.finish();
+			tx.close();
 		}
 		return true;
 	}
@@ -505,7 +504,7 @@ public class GraphDatabaseDAO {
 			tx.failure();
 			logException("Error adding relationsip route to trip: ", ex );
 		} finally {
-			tx.finish();
+			tx.close();
 		}
 		return true;
 	}
@@ -542,8 +541,7 @@ public class GraphDatabaseDAO {
 		List<RouteStopData> rtn = new ArrayList<RouteStopData>();
 		if ( stopNode != null ) {
 			
-			TraversalDescription td = Traversal.description().
-												 order(CommonBranchOrdering.POSTORDER_DEPTH_FIRST).
+			TraversalDescription td = graphDb.traversalDescription().depthFirst().
 												 relationships(REL_TYPES.HAS_A, Direction.INCOMING).
 												 evaluator( Evaluators.excludeStartPosition());
 			

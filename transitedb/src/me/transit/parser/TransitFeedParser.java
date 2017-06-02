@@ -2,9 +2,8 @@ package me.transit.parser;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileReader;
-import java.io.FilenameFilter;
+//import java.io.FilenameFilter;
 import java.lang.reflect.Method;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -44,11 +43,11 @@ import me.transit.database.impl.TripImpl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.nocrala.tools.gis.data.esri.shapefile.ShapeFileReader;
-import org.nocrala.tools.gis.data.esri.shapefile.ValidationPreferences;
-import org.nocrala.tools.gis.data.esri.shapefile.shape.AbstractShape;
-import org.nocrala.tools.gis.data.esri.shapefile.shape.PointData;
-import org.nocrala.tools.gis.data.esri.shapefile.shape.shapes.PolylineShape;
+//import org.nocrala.tools.gis.data.esri.shapefile.ShapeFileReader;
+//import org.nocrala.tools.gis.data.esri.shapefile.ValidationPreferences;
+//import org.nocrala.tools.gis.data.esri.shapefile.shape.AbstractShape;
+//import org.nocrala.tools.gis.data.esri.shapefile.shape.PointData;
+//import org.nocrala.tools.gis.data.esri.shapefile.shape.shapes.PolylineShape;
 
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;
@@ -739,111 +738,111 @@ public class TransitFeedParser {
 	 * Parse the shape file.
 	 * @param shapeFile
 	 */
-	@SuppressWarnings("unused")
-	private HashMap<Long,RouteTripPair> readRouteShapeFile(String shapeFile ) 
-	{
-		HashMap<Long,RouteTripPair> tripMap = new HashMap<Long,RouteTripPair>();
-		File fp = new File(shapeFile);
-		
-		String [] files = fp.list( new ShapeFileFilter());
-		for ( String name : files ) {
-			try {
-				FileInputStream inStream = new FileInputStream(name);
-				
-				ValidationPreferences prefs = new ValidationPreferences();
-			    prefs.setMaxNumberOfPointsPerShape(16650);
-			    ShapeFileReader r = new ShapeFileReader(inStream, prefs);
-			    
-			    AbstractShape s;
-			    while ((s = r.next()) != null) {
-				    	switch (s.getShapeType()) {
-						case NULL:
-							break;
-						case POINT:
-							break;
-						case POLYGON:
-							break;
-						case POLYLINE:
-							PolylineShape aPolyline = (PolylineShape) s;
-					        System.out.println("I read a Polyline with "
-					            + aPolyline.getNumberOfParts() + " parts and "
-					            + aPolyline.getNumberOfPoints() + " points");
-					        List<Coordinate> coords = new ArrayList<Coordinate>();
-					        for (int i = 0; i < aPolyline.getNumberOfParts(); i++) {
-					          PointData[] points = aPolyline.getPointsOfPart(i);
-					          coords.add(new Coordinate(points[i].getY(), points[i].getX()));
-					          //saveShape(current, coords);
-					        }
-							break;
-						default:
-							break;
-				    }
-				    	
-				    inStream.close();
-				
-			    }
-				
-			} catch (Exception e) {
-				log.error(e.getLocalizedMessage(), e);
-			}
-			
-		}
-		return tripMap;
-	}
+//	@SuppressWarnings("unused")
+//	private HashMap<Long,RouteTripPair> readRouteShapeFile(String shapeFile ) 
+//	{
+//		HashMap<Long,RouteTripPair> tripMap = new HashMap<Long,RouteTripPair>();
+//		File fp = new File(shapeFile);
+//		
+//		String [] files = fp.list( new ShapeFileFilter());
+//		for ( String name : files ) {
+//			try {
+//				FileInputStream inStream = new FileInputStream(name);
+//				
+//				ValidationPreferences prefs = new ValidationPreferences();
+//			    prefs.setMaxNumberOfPointsPerShape(16650);
+//			    ShapeFileReader r = new ShapeFileReader(inStream, prefs);
+//			    
+//			    AbstractShape s;
+//			    while ((s = r.next()) != null) {
+//				    	switch (s.getShapeType()) {
+//						case NULL:
+//							break;
+//						case POINT:
+//							break;
+//						case POLYGON:
+//							break;
+//						case POLYLINE:
+//							PolylineShape aPolyline = (PolylineShape) s;
+//					        System.out.println("I read a Polyline with "
+//					            + aPolyline.getNumberOfParts() + " parts and "
+//					            + aPolyline.getNumberOfPoints() + " points");
+//					        List<Coordinate> coords = new ArrayList<Coordinate>();
+//					        for (int i = 0; i < aPolyline.getNumberOfParts(); i++) {
+//					          PointData[] points = aPolyline.getPointsOfPart(i);
+//					          coords.add(new Coordinate(points[i].getY(), points[i].getX()));
+//					          //saveShape(current, coords);
+//					        }
+//							break;
+//						default:
+//							break;
+//				    }
+//				    	
+//				    inStream.close();
+//				
+//			    }
+//				
+//			} catch (Exception e) {
+//				log.error(e.getLocalizedMessage(), e);
+//			}
+//			
+//		}
+//		return tripMap;
+//	}
 	
 	/**
 	 * Parse the shape file.
 	 * @param shapeFile
 	 */
-	@SuppressWarnings("unused")
-	private void readStopShapeFile(String shapeFile, HashMap<Long,RouteTripPair> tripMap) 
-	{	
-		File fp = new File(shapeFile);
-		
-		String [] files = fp.list( new ShapeFileFilter());
-		for ( String name : files ) {
-			try {
-				FileInputStream inStream = new FileInputStream(name);
-				
-				ValidationPreferences prefs = new ValidationPreferences();
-			    prefs.setMaxNumberOfPointsPerShape(16650);
-			    ShapeFileReader r = new ShapeFileReader(inStream, prefs);
-			    
-			    AbstractShape s;
-			    while ((s = r.next()) != null) {
-				    	switch (s.getShapeType()) {
-						case NULL:
-							break;
-						case POINT:
-							break;
-						case POLYGON:
-							break;
-						case POLYLINE:
-							PolylineShape aPolyline = (PolylineShape) s;
-					        System.out.println("I read a Polyline with "
-					            + aPolyline.getNumberOfParts() + " parts and "
-					            + aPolyline.getNumberOfPoints() + " points");
-					        List<Coordinate> coords = new ArrayList<Coordinate>();
-					        for (int i = 0; i < aPolyline.getNumberOfParts(); i++) {
-					          PointData[] points = aPolyline.getPointsOfPart(i);
-					          coords.add(new Coordinate(points[i].getY(), points[i].getX()));
-					          //saveShape(current, coords);
-					        }
-							break;
-						default:
-							break;
-				    }
-				    	
-				    inStream.close();
-				
-			    }
-				
-			} catch (Exception e) {
-				log.error(e.getLocalizedMessage(), e);
-			}
-		}	
-		return;
-	}
+//	@SuppressWarnings("unused")
+//	private void readStopShapeFile(String shapeFile, HashMap<Long,RouteTripPair> tripMap) 
+//	{	
+//		File fp = new File(shapeFile);
+//		
+//		String [] files = fp.list( new ShapeFileFilter());
+//		for ( String name : files ) {
+//			try {
+//				FileInputStream inStream = new FileInputStream(name);
+//				
+//				ValidationPreferences prefs = new ValidationPreferences();
+//			    prefs.setMaxNumberOfPointsPerShape(16650);
+//			    ShapeFileReader r = new ShapeFileReader(inStream, prefs);
+//			    
+//			    AbstractShape s;
+//			    while ((s = r.next()) != null) {
+//				    	switch (s.getShapeType()) {
+//						case NULL:
+//							break;
+//						case POINT:
+//							break;
+//						case POLYGON:
+//							break;
+//						case POLYLINE:
+//							PolylineShape aPolyline = (PolylineShape) s;
+//					        System.out.println("I read a Polyline with "
+//					            + aPolyline.getNumberOfParts() + " parts and "
+//					            + aPolyline.getNumberOfPoints() + " points");
+//					        List<Coordinate> coords = new ArrayList<Coordinate>();
+//					        for (int i = 0; i < aPolyline.getNumberOfParts(); i++) {
+//					          PointData[] points = aPolyline.getPointsOfPart(i);
+//					          coords.add(new Coordinate(points[i].getY(), points[i].getX()));
+//					          //saveShape(current, coords);
+//					        }
+//							break;
+//						default:
+//							break;
+//				    }
+//				    	
+//				    inStream.close();
+//				
+//			    }
+//				
+//			} catch (Exception e) {
+//				log.error(e.getLocalizedMessage(), e);
+//			}
+//		}	
+//		return;
+//	}
 	
 	/**
 	 * Parse the shape file.
@@ -1206,16 +1205,16 @@ public class TransitFeedParser {
 	//////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////
 
-	private class ShapeFileFilter implements FilenameFilter {
-
-		@Override
-		public boolean accept(File arg0, String arg1) {
-			if ( arg0.getName().endsWith("shp") ) {
-				return true;
-			}
-			return false;
-		}
-		
-	}
+//	private class ShapeFileFilter implements FilenameFilter {
+//
+//		@Override
+//		public boolean accept(File arg0, String arg1) {
+//			if ( arg0.getName().endsWith("shp") ) {
+//				return true;
+//			}
+//			return false;
+//		}
+//		
+//	}
 		
 }

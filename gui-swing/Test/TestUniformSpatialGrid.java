@@ -1,5 +1,3 @@
-package me.math.grid;
-
 import static org.junit.Assert.*;
 
 import java.util.List;
@@ -8,6 +6,7 @@ import me.datamining.jobs.DensityEstimateLocalJob;
 import me.datamining.metric.TransitStopSpatialSample;
 import me.factory.DaoBeanFactory;
 import me.math.Vertex;
+import me.math.grid.AbstractSpatialGridPoint;
 import me.math.grid.array.SpatialGridPoint;
 import me.math.grid.array.UniformSpatialGrid;
 import me.math.kdtree.INode;
@@ -84,9 +83,9 @@ public class TestUniformSpatialGrid {
 	    query.addRectangleConstraint(ur, ll);
 	    List<TransitStop> stops = dao.query(query);
 	    
-	    DensityEstimateLocalJob job = new DensityEstimateLocalJob();
+	    DensityEstimateLocalJob job = new DensityEstimateLocalJob(null);
 	    job.init(ul, lr, 500);
-	    job.process(stops.iterator(), new TransitStopSpatialSample());
+	    //job.process(stops.iterator(), new TransitStopSpatialSample());
 	    
 	}
 

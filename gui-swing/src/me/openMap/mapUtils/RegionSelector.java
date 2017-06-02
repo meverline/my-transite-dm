@@ -108,7 +108,7 @@ public class RegionSelector implements MouseListener, MouseMotionListener {
 
 	private void drawRect()
 	{
-		RectanglePainter<JXMapKit> rectPainter = new RectanglePainter<JXMapKit>(topY,
+		RectanglePainter rectPainter = new RectanglePainter(topY,
 																				leftX,
 																				(int)viewRect.getHeight() - botY,
 																				(int)viewRect.getWidth() - rightX,

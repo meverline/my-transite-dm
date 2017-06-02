@@ -13,6 +13,7 @@ import me.database.CSVFieldType;
 
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SessionImplementor;
+import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.usertype.ParameterizedType;
 import org.hibernate.usertype.UserType;
 
@@ -26,7 +27,6 @@ public class CSVClobUsetDataType implements UserType, ParameterizedType {
 	/**
 	 * 
 	 */
-	@Override
 	public void setParameterValues(Properties parameters) {
 
 		String enumClassName = parameters.getProperty(DEFAULT_CLASS_NAME);
@@ -62,7 +62,6 @@ public class CSVClobUsetDataType implements UserType, ParameterizedType {
 	/**
 	 * 
 	 */
-	@Override
 	public Object nullSafeGet(ResultSet rs, String[] names,
 			SessionImplementor arg2, Object owner) throws HibernateException,
 			SQLException {
@@ -82,7 +81,6 @@ public class CSVClobUsetDataType implements UserType, ParameterizedType {
 	/**
 	 * 
 	 */
-	@Override
 	public void nullSafeSet(PreparedStatement st, Object value, int index,
 							SessionImplementor arg3) throws HibernateException, SQLException {
 		if ( value == null ) {
@@ -100,7 +98,6 @@ public class CSVClobUsetDataType implements UserType, ParameterizedType {
 	 * 
 	 */
 	@SuppressWarnings("rawtypes")
-	@Override
 	public Class returnedClass() {
 		return csvClass;
 	}
@@ -220,6 +217,18 @@ public class CSVClobUsetDataType implements UserType, ParameterizedType {
 	public int[] sqlTypes() {
 		int types[] = { Types.CLOB };
 		return types;
+	}
+
+	public Object nullSafeGet(ResultSet arg0, String[] arg1, SharedSessionContractImplementor arg2, Object arg3)
+			throws HibernateException, SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void nullSafeSet(PreparedStatement arg0, Object arg1, int arg2, SharedSessionContractImplementor arg3)
+			throws HibernateException, SQLException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

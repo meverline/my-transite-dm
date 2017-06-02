@@ -14,7 +14,6 @@ public class PopulateGridData {
 	public static final String QUERY_FILE = "queryFile";
 	public static class Map extends Mapper<LongWritable, Text, Text, LongWritable> {
 
-		@Override
 		public void map(LongWritable tileIndex, 
 						Text tileFile, 
 						Context context) throws IOException {
@@ -26,8 +25,6 @@ public class PopulateGridData {
 		
 	}
 	
-	
-	 
 	public static class Reduce extends Reducer<Text, LongWritable, Text, LongWritable> {
 		
 	    public void reduce(Text key, 

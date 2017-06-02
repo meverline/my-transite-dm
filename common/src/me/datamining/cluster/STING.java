@@ -96,7 +96,6 @@ public class STING implements ClusteringAlgorithm {
 	 * (non-Javadoc)
 	 * @see me.datamining.ClusteringAlgorithm#setRangeHi(int)
 	 */
-	@Override
 	public void setRangeHi(int rangeHi_) {
 		this.rangeHi = rangeHi_;
 	}
@@ -113,7 +112,6 @@ public class STING implements ClusteringAlgorithm {
 	 * (non-Javadoc)
 	 * @see me.datamining.ClusteringAlgorithm#setRangeLow(int)
 	 */
-	@Override
 	public void setRangeLow(int rangeLow_) {
 		this.rangeLow = rangeLow_;
 	}
@@ -209,7 +207,6 @@ public class STING implements ClusteringAlgorithm {
 	/* (non-Javadoc)
 	 * @see me.datamining.ClusteringAlgorithm#findClusters()
 	 */
-	@Override
 	public List<AbstractSpatialGridPoint> findClusters(AbstractSpatialGridOverlay aGrid) {
 		this.init(aGrid);
 		return this.findClusters();
@@ -218,7 +215,6 @@ public class STING implements ClusteringAlgorithm {
 	/* (non-Javadoc)
 	 * @see me.datamining.ClusteringAlgorithm#findClusters()
 	 */
-	@Override
 	public List<AbstractSpatialGridPoint> findClusters() {
 
 		findReleventNodes nodeFinder = new findReleventNodes(

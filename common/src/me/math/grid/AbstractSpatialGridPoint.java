@@ -1,7 +1,7 @@
 package me.math.grid;
 
 //CIRAS: Crime Information Retrieval and Analysis System
-//Copyright © 2009 by Russ Brasser, Mark Everline and Eric Franklin
+//Copyright ï¿½ 2009 by Russ Brasser, Mark Everline and Eric Franklin
 //
 //This program is free software: you can redistribute it and/or modify
 //it under the terms of the GNU General Public License as published by
@@ -146,12 +146,10 @@ public abstract class AbstractSpatialGridPoint implements INode {
 		this.data_ = data_;
 	}
 	
-	@Override
 	public Vertex getPointVertex() {
 		return this.getVertex();
 	}
 	
-	@Override
 	public int getDepth() {
 		return this.depth_;
 	}
@@ -160,7 +158,6 @@ public abstract class AbstractSpatialGridPoint implements INode {
 		this.depth_ = depth;
 	}
 	
-	@Override
 	public Direction getDirection() {
 		return this.direction_;
 	}
@@ -169,7 +166,6 @@ public abstract class AbstractSpatialGridPoint implements INode {
 		this.direction_ = dir;
 	}
 
-	@Override
 	public MinBoundingRectangle getMBR() {
 		return this.mbr_;
 	}
@@ -178,7 +174,6 @@ public abstract class AbstractSpatialGridPoint implements INode {
 		this.mbr_ = mbr;
 	}
 
-	@Override
 	public boolean contains(Vertex pt) {
 		return getMBR().contains(pt);
 	}

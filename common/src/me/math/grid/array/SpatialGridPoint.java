@@ -1,5 +1,5 @@
 //	  CIRAS: Crime Information Retrieval and Analysis System
-//    Copyright © 2009 by Russ Brasser, Mark Everline and Eric Franklin
+//    Copyright ï¿½ 2009 by Russ Brasser, Mark Everline and Eric Franklin
 //
 //    This program is free software: you can redistribute it and/or modify
 //    it under the terms of the GNU General Public License as published by
@@ -93,7 +93,6 @@ public class SpatialGridPoint extends AbstractSpatialGridPoint{
 	/* (non-Javadoc)
 	 * @see me.math.kdtree.INode#getLeft()
 	 */
-	@Override
 	public INode getLeft() {
 		return this.left_;
 	}
@@ -101,7 +100,6 @@ public class SpatialGridPoint extends AbstractSpatialGridPoint{
 	/* (non-Javadoc)
 	 * @see me.math.kdtree.INode#setLeft(me.math.kdtree.INode)
 	 */
-	@Override
 	public void setLeft(INode left) {
 		this.left_ = left;
 	}
@@ -109,7 +107,6 @@ public class SpatialGridPoint extends AbstractSpatialGridPoint{
 	/* (non-Javadoc)
 	 * @see me.math.kdtree.INode#getRight()
 	 */
-	@Override
 	public INode getRight() {
 		return this.right_;
 	}
@@ -117,7 +114,6 @@ public class SpatialGridPoint extends AbstractSpatialGridPoint{
 	/* (non-Javadoc)
 	 * @see me.math.kdtree.INode#setRight(me.math.kdtree.INode)
 	 */
-	@Override
 	public void setRight(INode right) {
 		this.right_ = right;
 	}
@@ -125,7 +121,6 @@ public class SpatialGridPoint extends AbstractSpatialGridPoint{
 	/* (non-Javadoc)
 	 * @see me.math.kdtree.INode#getParent()
 	 */
-	@Override
 	public INode getParent() {
 		return this.parent_;
 	}
@@ -138,7 +133,6 @@ public class SpatialGridPoint extends AbstractSpatialGridPoint{
 	/* (non-Javadoc)
 	 * @see me.math.kdtree.INode#getPoint()
 	 */
-	@Override
 	public AbstractSpatialGridPoint getPoint() {
 		return this;
 	}

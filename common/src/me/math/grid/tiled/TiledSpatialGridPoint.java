@@ -58,8 +58,6 @@ public class TiledSpatialGridPoint extends AbstractSpatialGridPoint implements I
 		this.corner_ = corner;
 	}
 	
-	
-	@Override
 	public INode getLeft() {
 		if ( left_ != -1 )
 			return this.grid_.getEntry(left_);
@@ -67,7 +65,6 @@ public class TiledSpatialGridPoint extends AbstractSpatialGridPoint implements I
 			return null;
 	}
 
-	@Override
 	public void setLeft(INode left) {
 		if ( left instanceof TiledSpatialGridPoint) {
 			TiledSpatialGridPoint node = TiledSpatialGridPoint.class.cast(left);
@@ -76,7 +73,6 @@ public class TiledSpatialGridPoint extends AbstractSpatialGridPoint implements I
 
 	}
 
-	@Override
 	public INode getRight() {
 		if ( right_ != -1 ) 
 			return this.grid_.getEntry(right_);
@@ -84,7 +80,6 @@ public class TiledSpatialGridPoint extends AbstractSpatialGridPoint implements I
 			return null;
 	}
 
-	@Override
 	public void setRight(INode right) {
 		if ( right instanceof TiledSpatialGridPoint) {
 			TiledSpatialGridPoint node = TiledSpatialGridPoint.class.cast(right);
@@ -92,12 +87,10 @@ public class TiledSpatialGridPoint extends AbstractSpatialGridPoint implements I
 		}
 	}
 
-	@Override
 	public INode getParent() {
 		return this.grid_.getEntry(this.parent_);
 	}
 
-	@Override
 	public AbstractSpatialGridPoint getPoint() {
 		return this;
 	}
@@ -151,7 +144,6 @@ public class TiledSpatialGridPoint extends AbstractSpatialGridPoint implements I
 		this.parent_ = node;
 	}
 
-	@Override
 	public Map<String, Object> toDocument() {
 		Map<String,Object> rtn = new HashMap<String,Object>();
 		
@@ -174,7 +166,6 @@ public class TiledSpatialGridPoint extends AbstractSpatialGridPoint implements I
 		return rtn;
 	}
 
-	@Override
 	public void handleEnum(String key, Object value) {
         if ( key.equals( "Direction" ) ) {
             this.setDirection( INode.Direction.valueOf(value.toString()));

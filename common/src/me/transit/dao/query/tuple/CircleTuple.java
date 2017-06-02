@@ -1,5 +1,5 @@
 //	  CIRAS: Crime Information Retrieval and Analysis System
-//    Copyright © 2009 by Russ Brasser, Mark Everline and Eric Franklin
+//    Copyright ï¿½ 2009 by Russ Brasser, Mark Everline and Eric Franklin
 //
 //    This program is free software: you can redistribute it and/or modify
 //    it under the terms of the GNU General Public License as published by
@@ -24,7 +24,6 @@ import me.output.KmlFormatter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
-import org.hibernate.spatial.Circle;
 import org.hibernate.spatial.criterion.SpatialRestrictions;
 
 import com.mongodb.BasicDBObject;
@@ -32,6 +31,7 @@ import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.Point;
 import com.vividsolutions.jts.geom.Polygon;
+import com.vividsolutions.jts.util.GeometricShapeFactory;
 
 public class CircleTuple extends AbstractQueryTuple {
 
@@ -89,14 +89,18 @@ public class CircleTuple extends AbstractQueryTuple {
 	 * @param distance
 	 * @return
 	 */
-	private Polygon makeCircle( Point location, double radiusMeters ) {
+	private Polygon  makeCircle( Point location, double radiusMeters) {
 
-		double distance = radiusMeters / CircleTuple.equatorialRadiusInMeters();
-		Circle circle = new Circle(location.getCoordinate(), distance);
-		
+		double distance = radiusMeters / CircleTuple.equatorialRadiusInMeters() * 2;
+	    GeometricShapeFactory shapeFactory = new GeometricShapeFactory();
+	    shapeFactory.setNumPoints(32);
+	    shapeFactory.setCentre(new Coordinate(location.getX(), location.getY()));
+	    shapeFactory.setSize(radiusMeters / CircleTuple.equatorialRadiusInMeters() * 2);
+	    Polygon circle = shapeFactory.createCircle();
+	    	
 		List<Coordinate> coords = new ArrayList<Coordinate>();
-		for ( int ndx = 0; ndx < 360; ndx += 5 ) {		
-			coords.add( circle.getPoint(Math.toRadians(ndx)));
+		for ( Coordinate coord : circle.getCoordinates()) {	
+			coords.add( coord );
 		}
 		
 		coords.add(coords.get(0));
@@ -143,7 +147,8 @@ public class CircleTuple extends AbstractQueryTuple {
 				
         Coordinate coord = this.center_.getCoordinate();                
         query.append(getField(), new BasicDBObject("$geoWithin", 
-                                                           new Object[]{ new Double[]{ coord.x , coord.y } , this.distanceInMeters_  }));
+                                                   new Object[]{ new Double[]{ coord.x , coord.y }, 
+                                                   this.distanceInMeters_  }));
 	}
 
 

@@ -68,17 +68,14 @@ public class ClusteringLocalJob extends AbstractDMJob {
 			}
 		}
 
-		@Override
 		public boolean hasNext() {
 			return pointsWithValues.isEmpty();
 		}
 
-		@Override
 		public AbstractSpatialGridPoint next() {
 			return pointsWithValues.remove(0);
 		}
 
-		@Override
 		public void remove() {
 		}
 		

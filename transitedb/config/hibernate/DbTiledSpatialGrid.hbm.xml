@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="me.math.grid.tiled" >
+
+	  <class name="me.math.grid.tiled.DbTiledSpatialGrid"  table="hmt_SpatialGrid" >
+	  
+	      <id name="UUID" unsaved-value="-1">
+  			<column name="GRID_UUID" not-null="true"/>
+			<generator class="native"/>
+		  </id>
+		  		 
+		  <property name="heatMapName" column="heatMapName" />
+		  <property name="rows" column="numRows" />
+		  <property name="cols" column="numColumns" />
+		  <property name="tileSize" column="tileSize" />
+		  <property name="gridSpacingMeters" column="gridSpacingMeters" />
+		  <property name="crossCovariance" column="crossCovariance" />
+		  <property name="upperLeftCorner" column="upperLeft" type="org.hibernate.spatial.GeometryType"  />
+ 		  <property name="lowerRightCorner" column="lowerRight" type="org.hibernate.spatial.GeometryType"  />
+ 
+	  </class>
+</hibernate-mapping>

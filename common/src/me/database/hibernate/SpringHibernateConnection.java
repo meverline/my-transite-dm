@@ -23,7 +23,6 @@ public class SpringHibernateConnection implements HibernateConnection {
 	/* (non-Javadoc)
 	 * @see me.transit.dao.hibernate.HibernateConnection#getSessionFactory()
 	 */
-	@Override
 	public SessionFactory getSessionFactory() {
 		return this.sessionFactory;
 	}
@@ -38,7 +37,6 @@ public class SpringHibernateConnection implements HibernateConnection {
 	/* (non-Javadoc)
 	 * @see me.transit.dao.hibernate.HibernateDao#save(java.lang.Object)
 	 */
-	@Override
 	public synchronized void save(Object item) throws SQLException {
 		
 		Session session = null;

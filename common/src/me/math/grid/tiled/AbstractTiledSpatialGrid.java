@@ -137,7 +137,6 @@ public abstract class AbstractTiledSpatialGrid extends AbstractSpatialGridOverla
 		this.setCrossCovariance(data.crossCovariance());
 	}
 
-	@Override 
 	public INode create(AbstractSpatialGridPoint loc, Direction dir, INode parent, int depth) {
 		TiledSpatialGridPoint rtn = null;
 		if ( loc instanceof TiledSpatialGridPoint ) {

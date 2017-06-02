@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SessionImplementor;
+import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.usertype.UserType;
 
 public class ListToClobUserDataType implements UserType {
@@ -17,7 +18,6 @@ public class ListToClobUserDataType implements UserType {
 	/**
 	 * 
 	 */
-	@Override
 	public Object nullSafeGet(ResultSet rs, String[] names,
 			SessionImplementor arg2, Object owner) throws HibernateException,
 			SQLException {
@@ -37,7 +37,6 @@ public class ListToClobUserDataType implements UserType {
 	/**
 	 * 
 	 */
-	@Override
 	public void nullSafeSet(PreparedStatement st, Object value, int index,
 			SessionImplementor arg3) throws HibernateException, SQLException {
 		if ( value == null ) {
@@ -164,6 +163,20 @@ public class ListToClobUserDataType implements UserType {
 	public int[] sqlTypes() {
 		int types[] = { Types.CLOB };
 		return types;
+	}
+
+	@Override
+	public Object nullSafeGet(ResultSet arg0, String[] arg1, SharedSessionContractImplementor arg2, Object arg3)
+			throws HibernateException, SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void nullSafeSet(PreparedStatement arg0, Object arg1, int arg2, SharedSessionContractImplementor arg3)
+			throws HibernateException, SQLException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

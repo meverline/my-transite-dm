@@ -1,5 +1,3 @@
-package me.math.grid;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -26,6 +24,7 @@ import me.datamining.mapreduce.TiledNonAdaptiveKDE;
 import me.datamining.metric.TransitStopSpatialSample;
 import me.factory.DaoBeanFactory;
 import me.math.Vertex;
+import me.math.grid.AbstractSpatialGridPoint;
 import me.math.grid.data.DensityEstimateDataSample;
 import me.math.grid.tiled.SpatialTile;
 import me.math.grid.tiled.TiledSpatialGrid;

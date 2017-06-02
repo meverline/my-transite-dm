@@ -23,7 +23,6 @@ public class ScottsRule implements IBandwidth {
 	 * (non-Javadoc)
 	 * @see me.datamining.bandwidth.IBandwidth#bandWidth(double, int, org.apache.commons.math.stat.descriptive.DescriptiveStatistics)
 	 */
-	@Override
 	public double bandWidth(double variance, int dimensions, DescriptiveStatistics data) {
 		return this.bandWidth(variance, dimensions, data.getN());
 	}
@@ -32,7 +31,6 @@ public class ScottsRule implements IBandwidth {
 	 * (non-Javadoc)
 	 * @see me.datamining.bandwidth.IBandwidth#bandWidth(double, int, long)
 	 */
-	@Override
 	public double bandWidth(double variance, int dimensions, long number) {
 		double pow = -1.0 / (dimensions + 4);
 		return variance * Math.pow(number, pow);

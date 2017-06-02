@@ -11,9 +11,9 @@ import org.hibernate.MappingException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
 
 public class ManualHibernateConnection implements HibernateConnection {
 
@@ -35,7 +35,7 @@ public class ManualHibernateConnection implements HibernateConnection {
 			cfg = new Configuration().configure();
 			openConnection(cfg);
 			cfg.setProperties(System.getProperties());
-		    serviceRegistry = new ServiceRegistryBuilder().applySettings(cfg.getProperties()).buildServiceRegistry();        
+		    serviceRegistry = new StandardServiceRegistryBuilder().applySettings(cfg.getProperties()).build();        
 		    fact = cfg.buildSessionFactory(serviceRegistry);
 		    
 		} catch (MappingException e) {
@@ -109,7 +109,6 @@ public class ManualHibernateConnection implements HibernateConnection {
 	/* (non-Javadoc)
 	 * @see me.transit.dao.hibernate.HibernateConnection#getSessionFactory()
 	 */
-	@Override
 	public SessionFactory getSessionFactory() {
 		return fact;
 	}

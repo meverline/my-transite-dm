@@ -169,7 +169,6 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, IG
 		return rtn;
 	}
 	
-	@Override 
 	public INode create(AbstractSpatialGridPoint loc, Direction dir, INode parent, int depth) {
 		TiledSpatialGridPoint rtn = null;
 		if ( loc instanceof TiledSpatialGridPoint ) {
@@ -315,7 +314,6 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, IG
 		this.root_ = node;
 	}
 
-	@Override
 	public Map<String, Object> toDocument() {
 		Map<String,Object> rtn = new HashMap<String,Object>();
 		
@@ -333,7 +331,6 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, IG
 		return rtn;
 	}
 
-	@Override
 	public void handleEnum(String key, Object value) {		
 	}
 	

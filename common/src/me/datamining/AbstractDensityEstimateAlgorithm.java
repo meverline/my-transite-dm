@@ -37,7 +37,6 @@ public abstract class AbstractDensityEstimateAlgorithm implements DensityEstimat
 	 * (non-Javadoc)
 	 * @see me.datamining.DensityEstimateAlgorithm#setDenstiyKernel(me.datamining.Kernel.IDensityKernel)
 	 */
-	@Override
 	public void setDenstiyKernel(IDensityKernel denstiyKernel) {
 		this.denstiyKernel = denstiyKernel;
 	}
@@ -53,7 +52,6 @@ public abstract class AbstractDensityEstimateAlgorithm implements DensityEstimat
 	 * (non-Javadoc)
 	 * @see me.datamining.DensityEstimateAlgorithm#setXBandWidth(me.datamining.bandwidth.IBandwidth)
 	 */
-	@Override
 	public void setXBandWidth(IBandwidth xBandWidth) {
 		this.xBandWidth = xBandWidth;
 	}
@@ -69,7 +67,6 @@ public abstract class AbstractDensityEstimateAlgorithm implements DensityEstimat
 	 * (non-Javadoc)
 	 * @see me.datamining.DensityEstimateAlgorithm#setYBandWidth(me.datamining.bandwidth.IBandwidth)
 	 */
-	@Override
 	public void setYBandWidth(IBandwidth yBandWidth) {
 		this.yBandWidth = yBandWidth;
 	}
@@ -138,7 +135,6 @@ public abstract class AbstractDensityEstimateAlgorithm implements DensityEstimat
 	 * (non-Javadoc)
 	 * @see me.datamining.DensityEstimateAlgorithm#saveGird(java.lang.String, java.lang.String)
 	 */
-	@Override
     public void saveGird(String fileName, String dir) throws FileNotFoundException
     {
         //if (dir == null) {
@@ -152,7 +148,6 @@ public abstract class AbstractDensityEstimateAlgorithm implements DensityEstimat
 	 * (non-Javadoc)
 	 * @see me.datamining.DensityEstimateAlgorithm#init(me.math.grid.UniformSpatialGrid, java.util.List)
 	 */
-	@Override
 	public void init(AbstractSpatialGridOverlay theGrid) {
 		this.setGrid(theGrid);
 		setCrossCovariance(this.crossCovariance(getSampleValues()));
@@ -162,7 +157,6 @@ public abstract class AbstractDensityEstimateAlgorithm implements DensityEstimat
 	 * (non-Javadoc)
 	 * @see me.datamining.DensityEstimateAlgorithm#kernalDensityEstimate(me.math.grid.UniformSpatialGrid, java.util.List)
 	 */
-	@Override
 	public void kernalDensityEstimate(AbstractSpatialGridOverlay theGrid) {
 		this.init(theGrid);
 		this.kernalDensityEstimate(getDenstiyKernel(), getXBandWidth(), getYBandWidth());

@@ -18,6 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -97,8 +98,7 @@ public class AppMainWindow extends JFrame {
 			   root = new DefaultMutableTreeNode("classes");
 			   buildNodeList(root);
 			}
-			
-			classList = new JTree(root);
+			((DefaultTreeModel) classList.getModel()).setRoot(root);
 			classList.addTreeSelectionListener( new ClassSelection(classList, this));
 			
 			top.removeAll();

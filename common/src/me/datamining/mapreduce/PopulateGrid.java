@@ -46,7 +46,6 @@ public class PopulateGrid implements ResultsHandler {
 	/* (non-Javadoc)
 	 * @see me.datamining.mapreduce.ResultsHandler#handleResult(me.datamining.mapreduce.DataResult)
 	 */
-	@Override
 	public void handleResult(DataResult result) {
 		
 		if ( search_ == null ) {

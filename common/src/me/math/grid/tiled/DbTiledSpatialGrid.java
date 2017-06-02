@@ -268,7 +268,6 @@ public class DbTiledSpatialGrid extends AbstractTiledSpatialGrid implements Seri
 		public SpatialTile tile = null;
 		public long access = -1;
 		
-		@Override
 		public int compareTo(CachedTile value) {
 			if ( value.access < this.access ) {
 				return 1;

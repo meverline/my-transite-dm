@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="me.transit.database" >
+
+	  <typedef name="DirectionTypeUserType" class="org.hibernate.type.EnumType" >
+          <param name="enumClass">me.transit.database.Trip$DirectionType</param>
+          <param name="type">12</param>
+	  </typedef>
+	  	  
+     <class name="Trip"  table="tran_trip" >
+
+          <id name="UUID" unsaved-value="-1">
+  			<column name="TRIP_UUID" not-null="true"/>
+			<generator class="native"/>
+		  </id>
+		  <discriminator column="TRIP_TYPE" type="string"/>
+		  <property name="headSign" column="HEAD_SIGN"  /> 
+	      <property name="shortName" column="NAME" />
+		  <property name="directionId" column="DIRECTION" not-null="true" type="DirectionTypeUserType" />
+		       
+		  <many-to-one name="shape"  
+		  			   class="RouteGeometry" 
+		  			   outer-join="true"/>
+		  					  			   
+		  <many-to-one name="service"  
+		               class="ServiceDate" 
+		               column="SERVICE_DATE_UUID" 
+		               not-null="true" 
+		               outer-join="true" />
+		 
+		  <property name="version" column="VERSION"  />
+		      
+ 		  <subclass name="me.transit.database.impl.TripImpl" discriminator-value="TripImpl"/>		          
+                		  		   
+	  </class>	  
+	      
+</hibernate-mapping>
