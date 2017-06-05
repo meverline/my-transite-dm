@@ -4,9 +4,9 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({transit.database.impl.AgencyImpleTest.class,
-	                 transit.database.impl.CalendarDateImplTest.class,
-	                 transit.database.impl.RouteGeometryImplTest.class,
+@Suite.SuiteClasses({AgencyImpleTest.class,
+	                 CalendarDateImplTest.class,
+	                 RouteGeometryImplTest.class,
 	                 transit.database.impl.RouteImplTest.class,
 	                 transit.database.impl.RouteStopDataImplTest.class,
 	                 transit.database.impl.ServiceDateImplTest.class,

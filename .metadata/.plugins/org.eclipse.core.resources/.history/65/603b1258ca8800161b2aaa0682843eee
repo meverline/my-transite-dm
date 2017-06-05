@@ -1,0 +1,13 @@
+package me.route.finding;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class RouteSpec {
+
+	
+	private String origin;
+	private String destination;
+	private List<List<Double>> waypoints = new ArrayList<List<Double>>();
+	
+}

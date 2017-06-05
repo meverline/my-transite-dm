@@ -73,8 +73,7 @@ public class AppMainWindow extends JFrame {
 		
 		this.pack();
 		setSize(400, 600);
-		this.setLocation(50, 50);
-		
+		setLocationRelativeTo(null);
 	}
 	
 	public void loadProject(Project newProject) {

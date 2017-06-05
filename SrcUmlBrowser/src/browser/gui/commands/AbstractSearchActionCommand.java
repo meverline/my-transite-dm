@@ -5,6 +5,9 @@ package browser.gui.commands;
 
 import java.util.Collection;
 
+import javax.swing.JCheckBox;
+import javax.swing.JComponent;
+
 import browser.gui.dialog.SearchDialog;
 import browser.util.Project;
 
@@ -19,6 +22,7 @@ public abstract class AbstractSearchActionCommand implements
 	private SearchDialog dialog = null;
 	private String title = null;
 	private Project project = null;
+	private JCheckBox keepPackageName;
 	
 	protected AbstractSearchActionCommand(String buttonLabel, String dialogTitle)
 	{
@@ -31,6 +35,15 @@ public abstract class AbstractSearchActionCommand implements
 	 */
 	public void setCurrentProject(Project project) {
 		this.project = project;
+	}
+	
+	/**
+	 * 
+	 * @param project
+	 * @return
+	 */
+	protected Project getCurrentProject() {
+		return this.project;
 	}
 	
 	/* (non-Javadoc)
@@ -100,23 +113,25 @@ public abstract class AbstractSearchActionCommand implements
 		return true;
 	}
 	
-	protected boolean showClass(String name)
-	{		
-		if (project.getPackageRoot() == null  ) {
-			if ( name.startsWith("java") || name.startsWith("javax") ) {
-				return false;
-			}
-			return true;
-		}
-		
-		String allowed[] = project.getPackageRoot().split(";");
-		
-		for ( String packageRoot : allowed) {
-			if ( name.startsWith(packageRoot) ) {
-				return true;
-			}
-		}
-		return false;
+	/**
+	 * 
+	 * @param keepPackageName
+	 */
+	public boolean getKeepPackageName() {
+		return this.keepPackageName.isSelected();
+	}
+	
+	/**
+	 * 
+	 */
+	public JComponent getUI() {
+		keepPackageName = new JCheckBox("Keep Package");
+		keepPackageName.setSelected(true);
+		return keepPackageName;
+	}
+	
+	public int getWidth() {
+		return 650;
 	}
 	
 }

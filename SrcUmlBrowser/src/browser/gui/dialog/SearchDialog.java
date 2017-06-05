@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -27,6 +25,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import browser.graph.GraphBuilder;
 import browser.gui.AppMainWindow;
 import browser.gui.commands.CloseDialogAction;
 import browser.gui.commands.SearchActionCommand;
@@ -36,29 +35,6 @@ import browser.gui.commands.SearchActionCommand;
  *
  */
 public class SearchDialog extends JDialog {
-
-	
-	public enum TEXT { 
-		   CONTAINS {
-			   public  boolean matchs(String name, String text) {
-				   return name.contains(text);
-			   } 
-		   },
-		   REGEXP {
-			   public  boolean matchs(String name, String text) {
-				   Pattern p = Pattern.compile(text);
-				   Matcher m = p.matcher(name);
-				   return m.matches();
-			   } 
-		   },
-		   STARTS_WITH {
-			   public  boolean matchs(String name, String text) {
-				   return name.startsWith(text);
-			   }
-		   };
-		   
-		   public abstract boolean matchs(String lhs, String rhs);
-    };
     
 	public enum CLASSNAME { 
 		   FULLNAME {
@@ -82,14 +58,13 @@ public class SearchDialog extends JDialog {
 	private static final long serialVersionUID = 5011439039769348845L;
 	
 	private AppMainWindow main = null;
-	private JComboBox typeText = null;
-	private JComboBox typeName = null;
+	private JComboBox<GraphBuilder.TEXT> typeText = null;
+	private JComboBox<CLASSNAME> typeName = null;
 	private JTextField searchText = null;
-	private JList classList = null;
+	private JList<String> classList = null;
 	private JButton applyButton = null;
 	private JCheckBox filterBySearch = null;
-	private JCheckBox keepPackageName = null;
-	private DefaultListModel model = null;
+	private DefaultListModel<String> model = null;
 	private Map<String, List<String>> map = new HashMap<String, List<String>>();
 	/**
 	 * 
@@ -114,12 +89,25 @@ public class SearchDialog extends JDialog {
 		}
 				
 		build(command);
-		setSize(400,300);
+		setSize(command.getWidth(), 300);
 		setTitle(command.title());
 		this.setLocationByPlatform(true);
 		this.setVisible(true);
+		setLocationRelativeTo(frame);
 	}
 	
+	public void setTypeText(JComboBox<GraphBuilder.TEXT> typeText) {
+		this.typeText = typeText;
+	}
+
+	public String getSearchText() {
+		return this.searchText.getText();
+	}
+	
+	public GraphBuilder.TEXT getMatchType() {
+		return (GraphBuilder.TEXT) this.typeText.getSelectedItem();
+	}
+
 	/**
 	 * 
 	 */
@@ -133,18 +121,16 @@ public class SearchDialog extends JDialog {
 		
 		JPanel combo = new JPanel();
 		
-		typeName = new JComboBox( CLASSNAME.values());
+		typeName = new JComboBox<CLASSNAME>( CLASSNAME.values());
 		combo.add(typeName);
 		
-		typeText = new JComboBox( TEXT.values());
+		typeText = new JComboBox<GraphBuilder.TEXT>( GraphBuilder.TEXT.values());
 		combo.add(typeText);
 		
 		filterBySearch = new JCheckBox("Filter By Search");
 		combo.add(filterBySearch);
 		
-		keepPackageName = new JCheckBox("Keep Package");
-		keepPackageName.setSelected(true);
-		combo.add(keepPackageName);
+		combo.add(command.getUI());
 
 		textPanel.add(combo, BorderLayout.SOUTH);
 		
@@ -156,12 +142,12 @@ public class SearchDialog extends JDialog {
 		
 		panel.add(textPanel, BorderLayout.NORTH);
 		
-		model = new DefaultListModel();
+		model = new DefaultListModel<String>();
 		
 		for (String name : command.getListItems()) {
 			model.addElement(name);
 		}
-		classList = new JList(model);
+		classList = new JList<String>(model);
 		if ( command.isMultiSelect() ) {
 			classList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		} else {
@@ -202,39 +188,34 @@ public class SearchDialog extends JDialog {
 	 */
 	public List<String> getSelected()
 	{
-		List<String> rtn = new ArrayList<String>();
-		
-		for ( Object obj : classList.getSelectedValues()) {
-			rtn.add( String.class.cast(obj));
-		}
-		return rtn;
+		return classList.getSelectedValuesList();
 	}
 	
 	/**
 	 * @return the typeText
 	 */
-	public JComboBox getTypeText() {
+	public JComboBox<GraphBuilder.TEXT> getTypeText() {
 		return typeText;
 	}
 
 	/**
 	 * @return the typeName
 	 */
-	public JComboBox getTypeName() {
+	public JComboBox<CLASSNAME> getTypeName() {
 		return typeName;
 	}
 
 	/**
 	 * @return the searchText
 	 */
-	public JTextField getSearchText() {
+	public JTextField getSearchTextField() {
 		return searchText;
 	}
 
 	/**
 	 * @return the model
 	 */
-	public DefaultListModel getModel() {
+	public DefaultListModel<String> getModel() {
 		return model;
 	}
 
@@ -259,8 +240,8 @@ public class SearchDialog extends JDialog {
 	 */
 	public boolean filter(String className) 
 	{
-		String matchString = getSearchText().getText();
-		TEXT matchType = (TEXT) getTypeText().getSelectedItem();
+		String matchString = getSearchText();
+		GraphBuilder.TEXT matchType = (GraphBuilder.TEXT) getTypeText().getSelectedItem();
 		
 		boolean rtn = false;
 		if ( this.filterBySearchText() ) {
@@ -273,18 +254,7 @@ public class SearchDialog extends JDialog {
 		}
 		return rtn;
 	}
-	
-	public String stripPackage(String className) {
-		String matchString = getSearchText().getText();
-		String rtn = className;
 		
-		if ( ! this.keepPackageName.isSelected()  && className.startsWith(matchString)) {
-			matchString = matchString.substring(0, matchString.lastIndexOf("."));
-			rtn = className.substring(matchString.length()+1);
-		}
-		return rtn;
-	}
-	
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
@@ -293,7 +263,7 @@ public class SearchDialog extends JDialog {
 
 		public void valueChanged(ListSelectionEvent arg0) {
 			
-			if ( classList.getSelectedValues().length > 0 ) {
+			if ( ! classList.getSelectedValuesList().isEmpty() ) {
 				applyButton.setEnabled(true);
 			} else {
 				applyButton.setEnabled(false);
@@ -318,8 +288,8 @@ public class SearchDialog extends JDialog {
 		
 		private void updateListBox()
 		{
-			String matchString = getSearchText().getText();
-			TEXT matchType = (TEXT) getTypeText().getSelectedItem();
+			String matchString = getSearchText();
+			GraphBuilder.TEXT matchType = (GraphBuilder.TEXT) getTypeText().getSelectedItem();
 			CLASSNAME clsType =(CLASSNAME) getTypeName().getSelectedItem();
 			
 			getModel().clear();
@@ -330,7 +300,7 @@ public class SearchDialog extends JDialog {
 					}
 				}
 			}
-			else if ( matchType == TEXT.STARTS_WITH && (!matchString.isEmpty()) ) {
+			else if ( matchType == GraphBuilder.TEXT.STARTS_WITH && (!matchString.isEmpty()) ) {
 				String firstLetter = matchString.substring(0,1).toLowerCase();
 				if ( getMap().containsKey(firstLetter) ) {
 					for ( String name :  getMap().get(firstLetter) ) {

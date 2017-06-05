@@ -59,10 +59,11 @@ public class SettingsDialog extends JDialog {
 	{
 		super(frame);
 		build();
-		setSize(700,300);
+		setSize(750,300);
 		setTitle("Application Settings");
 		this.setLocationByPlatform(true);
 		this.setVisible(true);
+		setLocationRelativeTo(frame);
 	}
 	
 	/**
@@ -146,8 +147,8 @@ public class SettingsDialog extends JDialog {
 		 * 
 		 */
 		private static final long serialVersionUID = 1L;
-		private JList font = null;
-		private JList node = null;
+		private JList<GraphVizGraph.COLOR> font = null;
+		private JList<GraphVizGraph.COLOR> node = null;
 		
 		public GraphColors(JDialog dialog)
 		{
@@ -163,7 +164,7 @@ public class SettingsDialog extends JDialog {
 			left.setLayout( new BorderLayout());
 			left.add( new JLabel("Font"), BorderLayout.NORTH);
 			
-			font = new JList( GraphVizGraph.COLOR.values());
+			font = new JList<GraphVizGraph.COLOR>( GraphVizGraph.COLOR.values());
 			left.add( new JScrollPane(font), BorderLayout.CENTER);
 			if ( set.getSettings().getGraphFontColor() != null) {
 				GraphVizGraph.COLOR color = GraphVizGraph.COLOR.valueOf(set.getSettings().getGraphFontColor());
@@ -174,7 +175,7 @@ public class SettingsDialog extends JDialog {
 			right.setLayout( new BorderLayout());
 			right.add( new JLabel("Node"), BorderLayout.NORTH);
 			
-			node = new JList( GraphVizGraph.COLOR.values());
+			node = new JList<GraphVizGraph.COLOR>( GraphVizGraph.COLOR.values());
 			right.add( new JScrollPane(node), BorderLayout.CENTER);
 			if ( set.getSettings().getGraphNodeColor() != null) {
 				GraphVizGraph.COLOR color = GraphVizGraph.COLOR.valueOf(set.getSettings().getGraphNodeColor());
@@ -205,9 +206,9 @@ public class SettingsDialog extends JDialog {
 	private class GraphVizSettings extends JPanel implements SettingsTab {
 		
 		private static final long serialVersionUID = 1395083596310938199L;
-		private JComboBox formatBox = null;
-		private JComboBox commandBox = null;
-		private JComboBox depthBox = null;
+		private JComboBox<GraphVizGraph.OUTPUT> formatBox = null;
+		private JComboBox<GraphVizGraph.CMD> commandBox = null;
+		private JComboBox<GraphVizGraph.DEPTH> depthBox = null;
 		private JTextField homePath = null;
 		
 		public GraphVizSettings(JDialog dialog)
@@ -245,7 +246,7 @@ public class SettingsDialog extends JDialog {
 			panel.add(button);
 			
 			panel.add( new JLabel("Graph Viz Command"));
-			commandBox = new JComboBox( GraphVizGraph.CMD.values());
+			commandBox = new JComboBox<GraphVizGraph.CMD>( GraphVizGraph.CMD.values());
 			if ( set.getSettings().getGraphProgram() != null) {
 				GraphVizGraph.CMD cmd = GraphVizGraph.CMD.valueOf(set.getSettings().getGraphProgram());
 				commandBox.setSelectedItem(cmd);
@@ -254,7 +255,7 @@ public class SettingsDialog extends JDialog {
 			panel.add( new JLabel(""));
 			
 			panel.add( new JLabel("Graph Viz Format"));
-			formatBox = new JComboBox( GraphVizGraph.OUTPUT.values());
+			formatBox = new JComboBox<GraphVizGraph.OUTPUT>( GraphVizGraph.OUTPUT.values());
 			if ( set.getSettings().getGraphOutput() != null) {
 				GraphVizGraph.OUTPUT cmd = GraphVizGraph.OUTPUT.valueOf(set.getSettings().getGraphOutput());
 				formatBox.setSelectedItem(cmd);
@@ -263,7 +264,7 @@ public class SettingsDialog extends JDialog {
 			panel.add( new JLabel(""));
 			
 			panel.add( new JLabel("Graph Depth"));
-			depthBox = new JComboBox( GraphVizGraph.DEPTH.values());
+			depthBox = new JComboBox<GraphVizGraph.DEPTH>( GraphVizGraph.DEPTH.values());
 			if ( set.getSettings().getGraphDepth() != null) {
 				GraphVizGraph.DEPTH cmd = GraphVizGraph.DEPTH.valueOf(set.getSettings().getGraphDepth());
 				depthBox.setSelectedItem(cmd);

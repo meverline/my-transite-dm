@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move 2 elements to &apos;gui-swing&apos;&#x0A;- Original project: &apos;transitedb&apos;&#x0A;- Destination element: &apos;gui-swing&apos;&#x0A;- Original elements:&#x0A;     grid.TestTiledDatabaseGrid.java&#x0A;     grid.TestUniformSpatialGrid.java&#x0A;- Update references to refactored element" description="Move compilation units" destination="=gui-swing" element1="/test&lt;grid{TestTiledDatabaseGrid.java" element2="/test&lt;grid{TestUniformSpatialGrid.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" patterns="*" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1475429668970" units="2" version="1.0"/>
+</session>

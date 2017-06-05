@@ -35,7 +35,7 @@ public class ExceptionDialog extends JDialog {
 		build(e, message);
 		setTitle("Error");
 		setVisible(true);
-		
+		setLocationRelativeTo(frame);
 	}
 	
 	public ExceptionDialog(JDialog frame, Exception e, String message)

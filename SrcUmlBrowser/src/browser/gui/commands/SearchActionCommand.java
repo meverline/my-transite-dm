@@ -6,6 +6,8 @@ package browser.gui.commands;
 import java.awt.event.ActionListener;
 import java.util.Collection;
 
+import javax.swing.JComponent;
+
 import browser.gui.dialog.SearchDialog;
 import browser.util.Project;
 
@@ -51,5 +53,18 @@ public interface SearchActionCommand extends ActionListener {
 	 * @return
 	 */
 	public boolean isMultiSelect();
+	
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public JComponent getUI();
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public int getWidth();
 
 }

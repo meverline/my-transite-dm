@@ -45,8 +45,8 @@ public class GraphOptionsDialog extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private JTextField textField = null;
 	private JTextField fileNameField = null;
-	private JComboBox graphType = null;
-	private JComboBox graphCmd = null;
+	private JComboBox<GraphVizGraph.OUTPUT> graphType = null;
+	private JComboBox<GraphVizGraph.CMD> graphCmd = null;
 	private GraphVizGraph dataGraph = null;
 	private Component parent = null;
 	
@@ -60,6 +60,7 @@ public class GraphOptionsDialog extends JDialog {
 		super(frame);
 		parent = frame;
 		init(graph);
+		setLocationRelativeTo(frame);
 	}
 	
 	
@@ -126,7 +127,7 @@ public class GraphOptionsDialog extends JDialog {
 		// 2 output.
 		graph.add( new JLabel("Output Format:"));
 		
-		graphType = new JComboBox( GraphVizGraph.OUTPUT.values());
+		graphType = new JComboBox<GraphVizGraph.OUTPUT>( GraphVizGraph.OUTPUT.values());
 		graph.add(graphType);
 		
 		if ( set.getSettings().getGraphOutput() != null ) {
@@ -139,7 +140,7 @@ public class GraphOptionsDialog extends JDialog {
 		// 3 command.
 		graph.add( new JLabel("Command:"));
 		
-		graphCmd = new JComboBox( GraphVizGraph.CMD.values());
+		graphCmd = new JComboBox<GraphVizGraph.CMD>( GraphVizGraph.CMD.values());
 		graph.add(graphCmd);
 		
 		if ( set.getSettings().getGraphProgram() != null ) {

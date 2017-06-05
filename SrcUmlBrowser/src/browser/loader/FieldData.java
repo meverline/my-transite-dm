@@ -1,7 +1,5 @@
 package browser.loader;
 
-import com.sun.xml.internal.ws.org.objectweb.asm.Opcodes;
-
 public class FieldData extends ParamaterData {
 	
 	private int accessFlags = 0;

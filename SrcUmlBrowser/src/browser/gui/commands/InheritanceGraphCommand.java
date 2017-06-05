@@ -5,7 +5,6 @@ package browser.gui.commands;
 
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -13,13 +12,13 @@ import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import browser.graph.GraphBuilder;
 import browser.graph.GraphVizEdge;
 import browser.graph.GraphVizGraph;
 import browser.graph.GraphVizNode;
 import browser.gui.AppMainWindow;
 import browser.gui.dialog.GraphOptionsDialog;
 import browser.loader.ClassReflectionData;
-import browser.util.ApplicationSettings;
 
 /**
  * @author markeverline
@@ -44,44 +43,6 @@ public class InheritanceGraphCommand extends AbstractSearchActionCommand {
 		return false;
 	}
 
-	/**
-	 * 
-	 * @param set
-	 * @param depth
-	 * @param g
-	 * @param root
-	 */
-	private void addNodesToGraph(Collection<ClassReflectionData> set, int depth, GraphVizGraph g, GraphVizNode root, HashSet<String> visted, boolean invert)
-	{
-		if ( set == null ) { return; }
-		
-		ApplicationSettings settings = ApplicationSettings.instance();
-		AppMainWindow mainWin = getDialog().getMain();
-		GraphVizGraph.DEPTH maxDepth = GraphVizGraph.DEPTH.valueOf(settings.getSettings().getGraphDepth());
-	
-		if ( depth > maxDepth.depth() ) { return; }
-		
-		for ( ClassReflectionData item : set ) {
-			if ( this.showClass(item.getName())) {
-				String name = getDialog().stripPackage(item.getName());
-				GraphVizNode node = g.getNodeByName(name);
-				if ( node == null ) {
-					node = new GraphVizNode( name, GraphVizNode.SHAPE.fromClass(item), depth);
-					g.add(node);
-				}
-				if ( invert ) {
-					node.addEdge( new GraphVizEdge(root, GraphVizEdge.TYPE.normal));
-				} else {
-					node.addEdge( new GraphVizEdge(root, GraphVizEdge.TYPE.normal));
-				}
-				if ( ! visted.contains(item.getName())) {
-					visted.add(item.getName());
-			       this.addNodesToGraph(mainWin.getXref().getInheritRef(item), depth+1, g, node, visted, invert);
-				}
-			}
-		}
-	}
-	
 	/* (non-Javadoc)
 	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
@@ -92,19 +53,22 @@ public class InheritanceGraphCommand extends AbstractSearchActionCommand {
 		
 		HashSet<String> visted = new HashSet<String>();
 		GraphVizGraph g = null;
+		GraphBuilder builder = new GraphBuilder(this.getCurrentProject(), mainWin.getXref(), this.getDialog());
+		builder.setKeepPackageName(this.getKeepPackageName());
+		
 		try {
 			ClassReflectionData theClass = mainWin.getLoader().load(selected);
 			
 			String item = getDialog().getSelected().get(0);
 			int ndx = item.lastIndexOf(".");
-			g = new GraphVizGraph( item.substring(ndx+1));
+			g = new GraphVizGraph( builder.getGraphName(item.substring(ndx+1)));
 			
-			String name = getDialog().stripPackage(theClass.getName());
+			String name = builder.stripPackage(theClass.getName());
 			GraphVizNode root = new GraphVizNode( name, GraphVizNode.SHAPE.fromClass(theClass), 0);
 			g.add(root);
 					
 			int depth = 0;
-			this.addNodesToGraph(mainWin.getXref().getInheritRef(theClass), depth+1, g, root, visted, false);
+			builder.addToInheritanceGraph(mainWin.getXref().getInheritRef(theClass), depth+1, g, root, visted, false);
 			
 			Set<String> interfaces = new HashSet<String>(); 
 			for ( String cls : theClass.getInterfaces()) {
@@ -129,14 +93,14 @@ public class InheritanceGraphCommand extends AbstractSearchActionCommand {
 						     aList.add(crd);
 						}
 					}
-					this.addNodesToGraph(aList, depth+1, g, root, visted, true);	
+					builder.addToInheritanceGraph(aList, depth+1, g, root, visted, true);	
 				}
 
 			}
 			
 			if ( theClass.getSuperClass() != null ) {
 				ClassReflectionData data = mainWin.getLoader().load(theClass.getSuperClass());
-				name = getDialog().stripPackage(theClass.getSuperClass());
+				name = builder.stripPackage(theClass.getSuperClass());
 				GraphVizNode node = g.getNodeByName(name);
 				if ( node == null && theClass.getSuperClass() != null) {
 					node = new GraphVizNode( name, 

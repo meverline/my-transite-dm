@@ -3,8 +3,6 @@ package browser.loader;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sun.xml.internal.ws.org.objectweb.asm.Opcodes;
-
 public class MethodData {
 
 	private int accessFlags = 0;

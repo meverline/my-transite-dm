@@ -9,6 +9,7 @@ import me.transit.database.ServiceDate;
 import me.transit.database.StopTime;
 import me.transit.database.Trip;
 import me.transit.database.impl.AgencyImpl;
+import me.transit.database.impl.RouteGeometryImpl;
 import me.transit.database.impl.TripImpl;
 
 import org.junit.Test;

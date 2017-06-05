@@ -29,7 +29,7 @@
 		
 			<resource>
 				<directory>config/</directory>
-				<targetPath>${project.target_directory}/classess/config</targetPath>
+				<targetPath>${project.build.outputDirectory}/config</targetPath>
 				<includes>
           			<include>**/**</include>
         		</includes>

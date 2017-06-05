@@ -4,14 +4,10 @@
 package browser.gui.dialog;
 
 import java.awt.BorderLayout;
-import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -31,10 +27,8 @@ import org.apache.commons.logging.LogFactory;
 import org.syntax.jedit.JEditTextArea;
 import org.syntax.jedit.tokenmarker.JavaTokenMarker;
 
-import prefuse.data.Edge;
-import prefuse.data.Graph;
-import prefuse.data.Node;
-import browser.graph.GraphVizEdge;
+import browser.graph.GraphBuilder;
+import browser.graph.GraphVizGraph;
 import browser.graph.GraphVizNode;
 import browser.gui.AppMainWindow;
 import browser.gui.commands.CloseDialogAction;
@@ -44,8 +38,6 @@ import browser.loader.FieldData;
 import browser.loader.MethodData;
 import browser.loader.ParamaterData;
 import browser.util.ClassXRef;
-
-import browser.gui.dialog.DataTypeInfo;
 
 /**
  * @author markeverline
@@ -75,6 +67,7 @@ public class DisplayClassDialog extends JDialog {
 		right.setDividerLocation(0.5);
 
 		this.setVisible(true);
+		setLocationRelativeTo(frame);
 	}
 
 	/**
@@ -133,11 +126,11 @@ public class DisplayClassDialog extends JDialog {
 		JPanel buttonBox = new JPanel();
 						
 	    JButton close = new JButton("Interaction Graph");
-		close.addActionListener( new InteractionCommand(this));
+		close.addActionListener( new InteractionCommand());
 		buttonBox.add(close);
 		
 	    close = new JButton("Inherit Graph");
-		close.addActionListener( new InheritCommand(this));
+		close.addActionListener( new InheritCommand());
 		buttonBox.add(close);
 		
 		close = new JButton("Close");
@@ -157,16 +150,16 @@ public class DisplayClassDialog extends JDialog {
 	{
 		Set<ClassXRef.Association> set = main.getXref().getUsesClasstRef(getDisplayClass());
 		
-		JList list = null;
+		JList<ClassReflectionData> list = null;
 		if (set != null) {
 			ClassReflectionData array[] = new ClassReflectionData[set.size()];
 			int ndx = 0;
 			for (ClassXRef.Association cls : set) {
 				array[ndx++] = cls.getTheClass();
 			}
-			list = new JList(array);
+			list = new JList<ClassReflectionData>(array);
 		} else {
-			list = new JList();
+			list = new JList<ClassReflectionData>();
 		}
 		
 		tabpane.addTab("Use Classes", new JScrollPane(list));	
@@ -180,16 +173,16 @@ public class DisplayClassDialog extends JDialog {
 	{
 		Set<ClassReflectionData> set = main.getXref().getInheritRef(getDisplayClass());
 		
-		JList list;
+		JList<ClassReflectionData> list;
 		if (set != null) {
 			ClassReflectionData array[] = new ClassReflectionData[set.size()];
 			int ndx = 0;
 			for (ClassReflectionData cls : set) {
 				array[ndx++] = cls;
 			}
-			list = new JList(array);
+			list = new JList<ClassReflectionData>(array);
 		} else {
-			list = new JList();
+			list = new JList<ClassReflectionData>();
 		}
 		tabpane.addTab("SubClasses", new JScrollPane(list));		
 	}
@@ -200,7 +193,11 @@ public class DisplayClassDialog extends JDialog {
 	 */
 	private void createInheritPanel(JTabbedPane tabpane)
 	{
-		JList list = new JList(getDisplayClass().getInterfaces().toArray());
+		List<String> inf = getDisplayClass().getInterfaces();
+		String data[] = new String[inf.size()];
+		inf.toArray(data);
+		
+		JList<String> list = new JList<String>(data);
 		tabpane.addTab("Inherit", new JScrollPane(list));		
 	}
 		
@@ -358,27 +355,27 @@ public class DisplayClassDialog extends JDialog {
         
         top.add( new JLabel("Fields"), BorderLayout.NORTH);
         
-        Object objs[]  = new Object[getDisplayClass().getFields().size()];
+        String objs[]  = new String[getDisplayClass().getFields().size()];
         int ndx = 0;
         for ( FieldData cons : getDisplayClass().getFields() ) {
         	objs[ndx++] = fieldToString(cons);
         }
         
-        JList fldList = new JList(objs);
+        JList<String> fldList = new JList<String>(objs);
         top.add(new JScrollPane(fldList), BorderLayout.CENTER);
         
         JPanel bottom = new JPanel();
         bottom.setLayout( new BorderLayout());
         bottom.add( new JLabel("Methods"), BorderLayout.NORTH);
         
-        Object array[] = new Object[getDisplayClass().getMethods().size() ];
+        String array[] = new String[getDisplayClass().getMethods().size() ];
                
         ndx = 0;
         for ( MethodData cons : getDisplayClass().getMethods()) {
         	array[ndx++] = methodToString(cons);
         }
         
-        JList methList = new JList(array);
+        JList<String> methList = new JList<String>(array);
         bottom.add(new JScrollPane(methList), BorderLayout.CENTER);
         
         right.setTopComponent(top);
@@ -455,293 +452,67 @@ public class DisplayClassDialog extends JDialog {
 		return numberRows;
 	}
 	
-	//////////////////////////////////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////////////////////////
-	
-	protected abstract class GraphCommand implements ActionListener {
-		
-		protected final static String ROOT_NODE = "__ROOT_NODE__";
-		protected final static String SHAPE = "shape";
-		protected final static String NAME = "name";
-		protected final static String DATA = "data";
-		protected final static String TYPE = "type";
 
-		private JDialog dialog = null;
-		
-		protected GraphCommand(JDialog parent) {
-			dialog = parent;
-		}
-		
-		protected void createGraph(Graph g, String title ) {
-			
-			Cursor current = getCursor();
-			setCursor( new Cursor(Cursor.WAIT_CURSOR));
-			try {
-				
-				ImageDialog dg = new ImageDialog(dialog, g, title + ": " + displayClass.getShortName());
-				dg.setVisible(true);
-				
-			} catch (Exception e) {
-				log.error(e);
-				@SuppressWarnings("unused")
-				ExceptionDialog ed = new ExceptionDialog(dialog, e);
-			}
-			setCursor( current);
-
-		}
-		
-		/**
-		 * 
-		 * @param ppath
-		 * @param name
-		 * @return
-		 */
-		protected String getShortsName(String ppath, String name)
-		{
-			StringBuffer rtn = new StringBuffer();
-			
-			String [] pdata = ppath.split("\\.");
-			String [] cdata = name.split("\\.");
-			
-			int length = Math.min(pdata.length, cdata.length);
-			
-			for ( int ndx = 0; ndx < length; ndx++ ) {
-				if ( ! pdata[ndx].equals(cdata[ndx]) ) {
-					if ( rtn.length() > 0 ) { rtn.append("."); }
-					rtn.append(cdata[ndx]);
-				}
-			}
-			
-			if ( cdata.length > length ) {
-				for ( int ndx = length; ndx < cdata.length; ndx++ ) {
-					if ( rtn.length() > 0 ) { rtn.append("."); }
-					rtn.append(cdata[ndx]);
-				}
-			}
-			return rtn.toString();
-		}
-		
-		/**
-		 * 
-		 * @param g
-		 * @param aClass
-		 * @return
-		 */
-		protected Node createNode(Graph g, ClassReflectionData aClass, HashMap<String, Node> map, String name)
-		{
-			Node root = g.addNode();
-			root.set(SHAPE, new Integer(GraphVizNode.SHAPE.fromClass(aClass).ordinal()));
-			root.set(NAME, name);
-			root.set(DATA, aClass);
-			map.put(name, root);
-			return root;
-		}
-		
-		
-		protected Graph createGraph()
-		{
-			Graph g = new Graph();
-			g.addColumn(SHAPE, Integer.class);
-			g.addColumn(NAME, String.class);
-			g.addColumn(DATA, ClassReflectionData.class);
-			g.addColumn(TYPE, Integer.class);
-			return g;
-		}
-		
-	}
 		
 		
 	//////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////
 	
-	protected class InteractionCommand  extends GraphCommand {
-				
-		public InteractionCommand(JDialog parent) {
-			super(parent);
-		}
-		
+	protected class InteractionCommand implements ActionListener {
+			
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 	
-			HashMap<String, Node> map = new HashMap<String, Node>();
-			Graph g = this.createGraph();
-			
-			this.addSupperClasstoGraph(g, map, displayClass, 0, displayClass.getPackagePath());
-			this.createGraph(g, "Interaction");
-		}
-		
-		/**
-		 * 
-		 * @param g
-		 * @param aClass
-		 * @param shortName
-		 * @param depth
-		 * @return
-		 */
-		private Node addSupperClasstoGraph(Graph g, HashMap<String, Node> map, ClassReflectionData aClass, int depth, String ppath)
-		{
-			String name = aClass.getName();
-			if ( aClass.getPackagePath().equals(ppath) ) {
-				name = aClass.getShortName();
-			} else {
-				name = this.getShortsName(ppath, aClass.getName());
-			}
-					
-			Node root = this.createNode(g, aClass, map, name);
-			
-			this.addNodesToGraph(main.getXref().getUsesClasstRef(aClass), map, g, root, ppath);
-			
-			if ( aClass.getSuperClass() != null ) {
-				ClassReflectionData data = main.getLoader().load(aClass.getSuperClass());
-				if ( data != null) {
-					Node node = this.addSupperClasstoGraph(g, map, data, depth++, ppath);
-					Edge edge = g.addEdge(root, node);
-					edge.set(TYPE, GraphVizEdge.TYPE.normal.ordinal());
-				}  
-			}
-			return root;
-		}
-		
-		/**
-		 * 
-		 * @param set
-		 * @param g
-		 * @param root
-		 */
-		private void addNodesToGraph(Set<ClassXRef.Association> set, HashMap<String, Node> map, Graph g, Node root, String ppath)
-		{
-			for ( ClassXRef.Association item : set ) {
-				Node node = map.get(item.toString());
-				
-				if ( node == null ) {
-					String name = this.getShortsName(ppath, item.toString());
-					node = this.createNode(g, item.getTheClass(), map, name);					
-				}
-				
-				Edge edge = g.addEdge(root,  node);
-				if ( item.isField() ) {
-					edge.set(TYPE, GraphVizEdge.TYPE.none.ordinal());
-				} else {
-					edge.set(TYPE, GraphVizEdge.TYPE.dot.ordinal());
-				}
-				
-			}
-		}
-	}
-	
-	//////////////////////////////////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////////////////////////
-	
-	protected class InheritCommand extends GraphCommand {
-		
-		public InheritCommand(JDialog parent) {
-			super(parent);
-		}
-		
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-	
-			Graph g = this.createGraph();
-			
 			HashSet<String> visted = new HashSet<String>();
-			HashMap<String, Node> map = new HashMap<String, Node>();
-			
-			this.addClassToGraph(g, map, displayClass, displayClass.getPackagePath(), visted, 0, true);
-			this.createGraph(g, "Inherit");
+			GraphVizGraph g = null;
+			GraphBuilder builder = new GraphBuilder( main.getProject(), main.getXref());
+			builder.setKeepPackageName(true);
 						
+			int ndx = displayClass.getName().lastIndexOf(".");
+			g = new GraphVizGraph( builder.getGraphName(displayClass.getName().substring(ndx+1)));
+			
+			String name = builder.stripPackage(displayClass.getName());
+			GraphVizNode root = new GraphVizNode( name, GraphVizNode.SHAPE.fromClass(displayClass), 0);
+			g.add(root);
+			
+			builder.addToClassInteractionGraph(main.getXref().getUsesClasstRef(displayClass), 1, g, root, visted);
+			
+			GraphOptionsDialog dialog = new GraphOptionsDialog(DisplayClassDialog.this, g);
+			dialog.setVisible(true);
+
 		}
 		
-		private Node addClassToGraph(Graph g, HashMap<String, Node> map, ClassReflectionData classRoot, String packagePath, HashSet<String> visted, int depth, boolean showSubClass)
-		{
-			String name = this.getShortsName(packagePath, classRoot.getName());
+	}
+	
+	//////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////
+	
+	protected class InheritCommand implements ActionListener {
+		
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+	
+			HashSet<String> visted = new HashSet<String>();
+			GraphVizGraph g = null;
+			GraphBuilder builder = new GraphBuilder( main.getProject(), main.getXref());
+			builder.setKeepPackageName(true);
+						
+			int ndx = displayClass.getName().lastIndexOf(".");
+			g = new GraphVizGraph( builder.getGraphName(displayClass.getName().substring(ndx+1)));
 			
-		    Node root = this.createNode(g, classRoot, map, name);
+			String name = builder.stripPackage(displayClass.getName());
+			GraphVizNode root = new GraphVizNode( name, GraphVizNode.SHAPE.fromClass(displayClass), 0);
+			g.add(root);
 			
-			if ( classRoot.getPackagePath().contains(packagePath) ) 
-			{
-				this.addNodesToGraph(main.getXref().getInheritRef(classRoot), map, depth+1, g, root, visted, packagePath);
-			}
-			
-			List<ClassReflectionData> aList = new ArrayList<ClassReflectionData>();
-			for ( String itemCls : classRoot.getInterfaces()) {
-				if ( this.showClass(itemCls)) {
-					ClassReflectionData data = main.getLoader().load(itemCls);
-					Node node = map.get(itemCls);
-					if ( node == null ) {
-						node = this.createNode(g, data, map, itemCls);
-					}
-					Edge edge = g.addEdge(root, node);
-					edge.set(TYPE, GraphVizEdge.TYPE.normal.ordinal());
-					
-					aList.clear();
-					if ( data != null ) {
-						for ( String cls : data.getInterfaces()) {
-							ClassReflectionData crd = main.getLoader().load(cls);
-							if ( crd != null ) {
-							     aList.add(crd);
-							}
-						}
-						this.addNodesToGraph(aList, map, depth+1, g, root, visted, packagePath);	
-					}
-				}
-			}
-			
-			if ( classRoot.getSuperClass() != null && this.showClass(classRoot.getSuperClass()) ) {
-			   ClassReflectionData data = main.getLoader().load(classRoot.getSuperClass());
-			   Node parent = this.addClassToGraph(g, map, data, packagePath, visted, depth+1, false);
-			   
-			   if ( parent != null ) {
-				   Edge edge = g.addEdge(root, parent);
-				   edge.set(TYPE, GraphVizEdge.TYPE.normal.ordinal());
-			   }
-			}
-			return root;
+			int depth = 0;
+			builder.addToInheritanceGraph(main.getXref().getInheritRef(displayClass), depth+1, g, root, visted, false);
+
+			GraphOptionsDialog dialog = new GraphOptionsDialog(DisplayClassDialog.this, g);
+			dialog.setVisible(true);			
 		}
 		
-		protected boolean showClass(String name)
-		{		
-			if ( name.startsWith("java") || name.startsWith("javax") ) {
-				if ( name.contains("servlet") ) {
-					return true;
-				}
-				return false;
-			}
-			return true;
-		}
-		
-		
-		private void addNodesToGraph(Collection<ClassReflectionData> set, HashMap<String, Node> map, int depth, Graph g, Node root, HashSet<String> visted, String ppath)
-		{
-			if ( set == null ) { return; }
-			
-			for ( ClassReflectionData item : set ) {
-				if ( this.showClass(item.getName())) {
-					String name = this.getShortsName(displayClass.getPackagePath(), item.getName());
-					Node node =  map.get(name);
-					if ( node == null ) {
-						node = this.createNode(g, item, map, name);
-					}
-					
-					Edge edge = g.addEdge(root, node);
-					edge.set(TYPE, GraphVizEdge.TYPE.normal.ordinal());
-					
-					if ( ! visted.contains(item.getName())) {
-					   visted.add(item.getName());
-					   if ( item.getPackagePath().contains(ppath)) {
-						   this.addNodesToGraph(main.getXref().getInheritRef(item), map,
-								   				depth+1, 
-								   				g, 
-								   				node, 
-								   				visted, 
-								   				ppath);
-					   }
-					}
-				}
-			}
-		}
 	}
 	
 }

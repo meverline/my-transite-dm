@@ -10,3 +10,7 @@ common/\.settings/
 RemoteSystemsTempFiles/
 
 RouteFinding/
+
+\.recommenders/
+
+\.metadata/
