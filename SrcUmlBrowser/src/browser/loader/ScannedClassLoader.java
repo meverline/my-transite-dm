@@ -3,7 +3,6 @@
  */
 package browser.loader;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,14 +26,17 @@ public class ScannedClassLoader  {
 
 	private Map<String,String> classMap = new HashMap<String,String>();
 	private Map<String,ClassReflectionData> loaded = new HashMap<String,ClassReflectionData>();
+	private Map<String, String> srcFilesIndex = new HashMap<String, String>();
+
 
 	/**
 	 * 
 	 * @param scanPath
 	 * @param classFiles
 	 */
-	public ScannedClassLoader(List<String> classFiles, String loadPath) {
+	public ScannedClassLoader(List<String> classFiles, String loadPath, Map<String, String> srcFiles) {
 		init(classFiles, loadPath);
+		this.srcFilesIndex = srcFiles;
 	}
 	
 	public List<String> getClassList()
@@ -68,47 +70,17 @@ public class ScannedClassLoader  {
 	 * @return
 	 */
 	public String getClassFilename(ClassReflectionData cls)
-	{		
-		String srcPath = ApplicationSettings.instance().getSettings().getSrcPath();
-		String pathSep[] = srcPath.split(";");
-		
-		String buildPath = ApplicationSettings.instance().getSettings().getClassBuildPath();
-		String path[] = buildPath.split(";");
-		
-		String root = getClassMap().get(cls.getName());
-		
-		for ( String part : path ) {
-			if ( root.contains(part)) {
-				
-				int start = root.indexOf(part);
-				root = root.substring(0, start-1);
-			}
-		}
-
-		StringBuilder builder = new StringBuilder();
-		String srcFile = cls.getName().replace(".", "/");
+	{				
+		String srcFile = cls.getName();
 		if ( srcFile.contains("$") ) {
 			int ndx = srcFile.lastIndexOf("$");
 			srcFile = srcFile.substring(0, ndx);
 		}
-		
-		for ( String item : pathSep ) {
 			
-			builder.append(root);
-			builder.append(File.separator);
-			builder.append(item);
-			builder.append(File.separator);
-			builder.append(srcFile);
-			builder.append(".java");
-			
-			File fp = new File( builder.toString());
-	
-			if ( fp.exists() ) {
-				return builder.toString();
-			}
-			builder.delete(0, builder.length());
-			
+		if ( srcFilesIndex.containsKey(srcFile)) {
+			return srcFilesIndex.get(srcFile);
 		}
+		
 		return null;
 	}
 	
@@ -119,9 +91,8 @@ public class ScannedClassLoader  {
 	 */
 	private String stripBuildPath(String className)
 	{
-		String buildPath = ApplicationSettings.instance().getSettings().getClassBuildPath(); 
-		String path[] = buildPath.split(";");
-		
+		String path[] = ApplicationSettings.instance().getSettings().getClassBuildPath(); 
+
 		for ( String part : path ) {
 			if ( className.contains(part)) {
 				int start = className.indexOf(part);

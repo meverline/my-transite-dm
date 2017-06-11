@@ -1,6 +1,7 @@
 package browser.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -9,7 +10,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -18,6 +21,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 
 import org.apache.commons.logging.Log;
@@ -53,6 +57,7 @@ public class AppMainWindow extends JFrame {
 	private ClassXRef xref = null;
 	private Project project = null;
 	private JPanel top = null;
+	private DefaultMutableTreeNode root = new DefaultMutableTreeNode("classes");
 	
 	/**
 	 * 
@@ -65,10 +70,7 @@ public class AppMainWindow extends JFrame {
 		this.getContentPane().add(top);
 		
 		if ( settings.getSettings().getCurrentProject() != null ) {
-			Project newProject = settings.loadCurrentProject();
-			if ( newProject != null ) {
-			   loadProject(newProject);
-			}
+			loadProject(settings.getSettings().getCurrentProject());
 		}
 		
 		this.pack();
@@ -76,10 +78,14 @@ public class AppMainWindow extends JFrame {
 		setLocationRelativeTo(null);
 	}
 	
+	/**
+	 * 
+	 * @param newProject
+	 */
 	public void loadProject(Project newProject) {
 		
 		this.project = newProject;
-		ApplicationSettings.instance().getSettings().setCurrentProject(newProject.getName());
+		ApplicationSettings.instance().getSettings().setCurrentProject(newProject);
 
 		try {
 			
@@ -88,22 +94,13 @@ public class AppMainWindow extends JFrame {
 			
 			System.out.println("Class Scanner found: " + cs.getFiles().size());
 			
-			setLoader(new ScannedClassLoader(cs.getFiles(),  newProject.getLoadPath()));
+			setLoader(new ScannedClassLoader(cs.getFiles(),  newProject.getLoadPath(), cs.getSrcFiles()));
 			setXref(new ClassXRef(loader));
 			
-			DefaultMutableTreeNode root = null;
+			root.removeAllChildren();
 			if ( this.getLoader() != null && ! this.getLoader().getClassList().isEmpty()  ) {
-			   
-			   root = new DefaultMutableTreeNode("classes");
 			   buildNodeList(root);
 			}
-			((DefaultTreeModel) classList.getModel()).setRoot(root);
-			classList.addTreeSelectionListener( new ClassSelection(classList, this));
-			
-			top.removeAll();
-			top.add( new JScrollPane(classList), BorderLayout.CENTER);
-			top.doLayout();
-			this.doLayout();
 			
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage());
@@ -179,13 +176,15 @@ public class AppMainWindow extends JFrame {
 		
 		JPanel panel = new JPanel();	
 		panel.setLayout( new BorderLayout());
-				
-		DefaultMutableTreeNode root = null;
-		
+						
 		classList = new JTree(root);
+		((DefaultTreeModel) classList.getModel()).setRoot(root);
+		classList.addTreeSelectionListener( new ClassSelection(classList, this));
+		classList.setCellRenderer(new TreeCellRenderer());
+
 		panel.add( new JScrollPane(classList), BorderLayout.CENTER);
-		
 		createMenuBar();
+		this.doLayout();
 				
 		return panel;
 	}
@@ -225,18 +224,7 @@ public class AppMainWindow extends JFrame {
 					
 					StringBuilder label = new StringBuilder();
 					label.append( component);
-					if ( builder.toString().compareTo(name) == 0) {
-						if ( cls != null ) {
-							if ( cls.isInterface() ) {
-								label.append("  [I]");
-							} else if ( cls.isEnum() ) {
-								label.append("  [E]");
-							} else  {
-								label.append("  [C]");
-							}
-						}
-					}
-					child.setUserObject(new NodeData(builder.toString(), label.toString()));
+					child.setUserObject(new NodeData(builder.toString(), label.toString(), cls));
 					node.add(child);
 					nodeMap.put(builder.toString(), child);
 					node = child;
@@ -325,4 +313,38 @@ public class AppMainWindow extends JFrame {
 		}
 		
 	}
+	
+	//////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////
+
+	 public class TreeCellRenderer extends DefaultTreeCellRenderer {
+
+		@Override
+		public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel, 
+													  boolean expanded, boolean leaf, int row, 
+													  boolean hasFocus) {
+
+			JLabel label = JLabel.class.cast(super.getTreeCellRendererComponent(tree, value, 
+																				sel, expanded, 
+																				leaf, row, 
+																				hasFocus));
+			DefaultMutableTreeNode node = (DefaultMutableTreeNode) value;
+			ImageIcon icon = null;
+			
+			if ( node.isLeaf() && (!(node.getUserObject() instanceof String)) ) {
+				ClassReflectionData data = ((NodeData) node.getUserObject()).getCls();	
+				icon = IconLoader.instance().getIcon(data);
+			} else {
+				icon = IconLoader.instance().getIcon("P");
+				
+			}
+			if ( icon != null ) {
+				label.setIcon(icon);
+			}
+			return label;
+		}
+		 
+		 
+	 }
 }

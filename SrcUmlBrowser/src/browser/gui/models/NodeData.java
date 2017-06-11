@@ -1,12 +1,16 @@
 package browser.gui.models;
 
+import browser.loader.ClassReflectionData;
+
 public class NodeData {
 	String path = null;
 	String label = null;
+	ClassReflectionData cls = null;
 	
-	public NodeData(String aPath, String label) {
+	public NodeData(String aPath, String label, ClassReflectionData cls) {
 		this.path = aPath;
 		this.label = label;
+		this.cls = cls;
 	}
 
 	/**
@@ -29,6 +33,14 @@ public class NodeData {
 	@Override
 	public String toString() {
 		return this.getLabel();
+	}
+
+	public ClassReflectionData getCls() {
+		return cls;
+	}
+
+	public void setCls(ClassReflectionData cls) {
+		this.cls = cls;
 	}
 	
 }

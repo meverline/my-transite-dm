@@ -1,4 +1,4 @@
-package me.math.grid;
+package test.me.math.grid;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;

@@ -1,19 +1,18 @@
 package browser.util;
 
+import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.PrintWriter;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import browser.graph.GraphVizGraph;
 
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.json.JettisonMappedXmlDriver;
-
 public class ApplicationSettings {
 	
-	public static final String PROJECT_EXT = ".prj";
+	public static final String PROJECT_LAST = ".lastopened";
 	
 	private static ApplicationSettings self = null;
 	
@@ -25,65 +24,39 @@ public class ApplicationSettings {
 	 */
 	private ApplicationSettings() {	
 		this.settings = new Settings();
-		load();
+		this.loadCurrentProject();
 	}
-		
+	
 	/**
 	 * 
 	 * @return
 	 */
-	public String getFilepath()
-	{
+	public String getDir() {
 		StringBuilder path = new StringBuilder();
 		path.append(System.getProperty("user.home"));
 		path.append(File.separator);
 		path.append(".browser");
 		return path.toString();
 	}
-	
+		
 	/**
 	 * 
 	 * @return
 	 */
-	protected String getFilename(String name)
+	public String getFilename()
 	{
-		StringBuilder path = new StringBuilder();
-		path.append(getFilepath());
+		StringBuilder path = new StringBuilder(this.getDir());
 		path.append(File.separator);
-		if ( name == null ) {
-	 	   path.append(this.getClass().getName());
-		   path.append(".settings"); 
-		} else {
-		   path.append(name);
-		   path.append(ApplicationSettings.PROJECT_EXT); 			
-		}
+		path.append(ApplicationSettings.PROJECT_LAST);
 		return path.toString();
 	}
-	
-	/**
-	 * 
-	 */
-	protected void load()
-	{
-		File dir = new File(getFilename(null));
-		if ( dir.exists()) {
-			try {				
-				XStream xstream = new XStream(new JettisonMappedXmlDriver());
-				
-				this.settings = Settings.class.cast(xstream.fromXML(dir));
-			} catch (Exception e) {
-				log.error(this.getClass().getName(), e);
-			}
-		}
-
-	}
-	
+			
 	/**
 	 * 
 	 * @return
 	 */
 	public Project loadCurrentProject() {
-		return this.loadProject(this.getSettings().getCurrentProject());
+		return this.loadProject(this.getFilename());
 	}
 	
 	/**
@@ -94,29 +67,25 @@ public class ApplicationSettings {
 	public Project loadProject(String name)
 	{
 		Project rtn = null;
-		File dir = new File(getFilename(name));
-		if ( dir.exists()) {
-			try {				
-				XStream xstream = new XStream(new JettisonMappedXmlDriver());
+		if ( name != null ) {
+			File dir = new File(name);
+			if ( dir.exists()) {
+				try {				
+					FileReader reader = new FileReader(dir);
+					BufferedReader lineReader = new BufferedReader(reader);
+					
+					String line = lineReader.readLine();
+					lineReader.close();
+					if ( line.endsWith("\n")) {
+						line = line.substring(0, line.length()-1);
+					}
+					
+					rtn = new Project(line);
+					this.settings.setCurrentProject(rtn);
 				
-				rtn = Project.class.cast(xstream.fromXML(dir));
-			} catch (Exception e) {
-				log.error(this.getClass().getName(), e);
-			}
-		}
-		return rtn;
-	}
-	
-	public Project loadProject(File file)
-	{
-		Project rtn = null;
-		if ( file.exists()) {
-			try {				
-				XStream xstream = new XStream(new JettisonMappedXmlDriver());
-				
-				rtn = Project.class.cast(xstream.fromXML(file));
-			} catch (Exception e) {
-				log.error(this.getClass().getName(), e);
+				} catch (Exception e) {
+					log.error(this.getClass().getName(), e);
+				}
 			}
 		}
 		return rtn;
@@ -124,24 +93,23 @@ public class ApplicationSettings {
 	
 	/**
 	 * 
+	 * @param file
+	 * @return
 	 */
-	public void save()
+	public Project loadProject(File file)
 	{
-		File dir = new File(getFilepath());
-		
-		if ( ! dir.exists()) {
-			dir.mkdirs();
+		Project rtn = null;
+		if ( file.exists()) {
+			try {
+				
+				rtn = new Project(file);
+				this.saveProject(rtn);
+				
+			} catch (Exception e) {
+				log.error(this.getClass().getName(), e);
+			}
 		}
-		dir = new File(getFilename(null));
-		try {
-			FileOutputStream stream = new FileOutputStream( dir );
-
-			XStream xstream = new XStream(new JettisonMappedXmlDriver());
-			xstream.toXML(this.getSettings(), stream);
-			stream.close();
-		} catch (Exception e) {
-			log.error(e);
-		}
+		return rtn;
 	}
 	
 	/**
@@ -150,17 +118,17 @@ public class ApplicationSettings {
 	 */
 	public void saveProject(Project project)
 	{
-		File dir = new File(getFilepath());
+		File dir = new File(this.getDir());
 		
 		if ( ! dir.exists()) {
 			dir.mkdirs();
 		}
-		dir = new File(getFilename(project.getName()));
+		
 		try {
-			FileOutputStream stream = new FileOutputStream( dir );
+			File fname = new File(this.getFilename());
+			PrintWriter stream = new PrintWriter( fname );
 
-			XStream xstream = new XStream(new JettisonMappedXmlDriver());
-			xstream.toXML(project, stream);
+			stream.print(project.getLoadPath());
 			stream.close();
 		} catch (Exception e) {
 			log.error(e);
@@ -199,8 +167,8 @@ public class ApplicationSettings {
 	
 	public static class Settings {
 		
-		private String classBuildPath = "build/classes;build;bin";
-		private String srcPath = "src;src/src";
+		private String classBuildPath = "build/classes;build;bin;target/classes";
+		private String srcPath = "src/java;src;src/src";
 		private String graphHome = null;
 		private String graphProgram = GraphVizGraph.CMD.dot.name();
 		private String graphOutput = GraphVizGraph.OUTPUT.svg.name();
@@ -208,7 +176,7 @@ public class ApplicationSettings {
 		private String graphNodeColor = GraphVizGraph.COLOR.tan.name();
 		private String graphFontColor = GraphVizGraph.COLOR.black.name();
 		private String previewCommand = null;
-		private String currentProject = null;
+		private Project currentProject = null;
 		private String graphOutputDir = null;
 		
 		public Settings()
@@ -223,6 +191,9 @@ public class ApplicationSettings {
 			if ( os.compareTo("Mac OS X") == 0) {
 				this.graphHome = "/usr/local/bin";
 				this.previewCommand = "open";
+			} else {
+				this.graphHome = "C:/Program Files (x86)/Internet Explorer/iexplore.exe";
+				this.previewCommand = "";
 			}
 			
 			graphOutputDir = System.getProperty("user.home");
@@ -231,31 +202,40 @@ public class ApplicationSettings {
 		/**
 		 * @return the classBuildPath
 		 */
-		public String getClassBuildPath() {
-			return classBuildPath;
+		public String[] getClassBuildPath() {
+			return classBuildPath.split(";");
 		}
 	
 		/**
 		 * @param classBuildPath the classBuildPath to set
 		 */
-		public void setClassBuildPath(String classBuildPath) {
-			this.classBuildPath = classBuildPath;
-			ApplicationSettings.instance().save();
+		public void setClassBuildPath(String[] classBuildPath) {
+			StringBuilder bld = new StringBuilder();
+			for (int ndx=0; ndx < classBuildPath.length; ndx++) {
+				if ( ndx != 0) { bld.append(";"); }
+				bld.append(classBuildPath[ndx]);
+			}
+			this.classBuildPath = bld.toString();
 		}
 	
 		/**
 		 * @return the srcPath
 		 */
-		public String getSrcPath() {
-			return srcPath;
+		public String[] getSrcPath() {
+			return srcPath.split(";");
 		}
 	
 		/**
 		 * @param srcPath the srcPath to set
 		 */
-		public void setSrcPath(String srcPath) {
-			this.srcPath = srcPath;
-			ApplicationSettings.instance().save();
+		public void setSrcPath(String[] srcPath) {
+			
+			StringBuilder bld = new StringBuilder();
+			for (int ndx=0; ndx < srcPath.length; ndx++) {
+				if ( ndx != 0) { bld.append(";"); }
+				bld.append(srcPath[ndx]);
+			}
+			this.srcPath = bld.toString();
 		}
 	
 		/**
@@ -270,7 +250,7 @@ public class ApplicationSettings {
 		 */
 		public void setGraphHome(String graphHome) {
 			this.graphHome = graphHome;
-			ApplicationSettings.instance().save();
+			
 		}
 	
 		/**
@@ -285,7 +265,7 @@ public class ApplicationSettings {
 		 */
 		public void setGraphProgram(String graphProgram) {
 			this.graphProgram = graphProgram;
-			ApplicationSettings.instance().save();
+			
 		}
 	
 		/**
@@ -300,7 +280,7 @@ public class ApplicationSettings {
 		 */
 		public void setGraphOutput(String graphOutput) {
 			this.graphOutput = graphOutput;
-			ApplicationSettings.instance().save();
+			
 		}
 	
 		/**
@@ -315,7 +295,7 @@ public class ApplicationSettings {
 		 */
 		public void setGraphDepth(String graphDepth) {
 			this.graphDepth = graphDepth;
-			ApplicationSettings.instance().save();
+			
 		}
 	
 		/**
@@ -330,7 +310,7 @@ public class ApplicationSettings {
 		 */
 		public void setGraphNodeColor(String graphNodeColor) {
 			this.graphNodeColor = graphNodeColor;
-			ApplicationSettings.instance().save();
+			
 		}
 	
 		/**
@@ -345,7 +325,7 @@ public class ApplicationSettings {
 		 */
 		public void setGraphFontColor(String graphFontColor) {
 			this.graphFontColor = graphFontColor;
-			ApplicationSettings.instance().save();
+			
 		}
 	
 		/**
@@ -360,22 +340,22 @@ public class ApplicationSettings {
 		 */
 		public void setPreviewCommand(String previewCommand) {
 			this.previewCommand = previewCommand;
-			ApplicationSettings.instance().save();
+			
 		}
 	
 		/**
 		 * @return the currentProject
 		 */
-		public String getCurrentProject() {
+		public Project getCurrentProject() {
 			return currentProject;
 		}
 	
 		/**
 		 * @param currentProject the currentProject to set
 		 */
-		public void setCurrentProject(String currentProject) {
+		public void setCurrentProject(Project currentProject) {
 			this.currentProject = currentProject;
-			ApplicationSettings.instance().save();
+			
 		}
 
 		/**
@@ -390,7 +370,7 @@ public class ApplicationSettings {
 		 */
 		public void setGraphOutputDir(String graphOutputDir) {
 			this.graphOutputDir = graphOutputDir;
-			ApplicationSettings.instance().save();
+			
 		}
 		
 	}

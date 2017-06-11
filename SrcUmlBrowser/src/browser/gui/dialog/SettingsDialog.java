@@ -113,7 +113,6 @@ public class SettingsDialog extends JDialog {
 		for ( SettingsTab tab : aList) {
 			tab.save();
 		}
-		ApplicationSettings.instance().save();
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -323,7 +322,13 @@ public class SettingsDialog extends JDialog {
 			srcBuildPath.setColumns(40);
 			if ( set.getSettings().getSrcPath() != null)
 			{
-				srcBuildPath.setText(set.getSettings().getSrcPath());
+				String path[] = set.getSettings().getSrcPath();
+				StringBuilder bld = new StringBuilder();
+				for (int ndx=0; ndx < path.length; ndx++) {
+					if ( ndx != 0) { bld.append(";"); }
+					bld.append(path[ndx]);
+				}
+				srcBuildPath.setText(bld.toString());
 			}
 			panel.add( srcBuildPath );
 			panel.add( new JLabel() );
@@ -333,7 +338,13 @@ public class SettingsDialog extends JDialog {
 			classBuildPath.setColumns(40);
 			if ( set.getSettings().getClassBuildPath() != null)
 			{
-				classBuildPath.setText(set.getSettings().getClassBuildPath());
+				String path[] = set.getSettings().getClassBuildPath();
+				StringBuilder bld = new StringBuilder();
+				for (int ndx=0; ndx < path.length; ndx++) {
+					if ( ndx != 0) { bld.append(";"); }
+					bld.append(path[ndx]);
+				}
+				classBuildPath.setText(bld.toString());
 			}
 			panel.add( classBuildPath );
 			panel.add( new JLabel() );
@@ -345,8 +356,8 @@ public class SettingsDialog extends JDialog {
 		public void save() {
 			ApplicationSettings set = ApplicationSettings.instance();
 			
-			set.getSettings().setClassBuildPath(classBuildPath.getText());
-			set.getSettings().setSrcPath(srcBuildPath.getText());
+			set.getSettings().setClassBuildPath(classBuildPath.getText().split(";"));
+			set.getSettings().setSrcPath(srcBuildPath.getText().split(";"));
 		}
 
 		public String getLabel() {

@@ -1,5 +1,7 @@
 package browser.util;
 
+import java.io.File;
+
 public class Project {
 		
 	private String name = null;
@@ -7,6 +9,24 @@ public class Project {
 	private String loadPath = null;
 	private String scanClassPath = null;
 	private String scanJarPath = null;
+	
+	/**
+	 * 
+	 * @param fp
+	 */
+	public Project(File fp) {
+		this.setLoadPath(fp.getAbsolutePath());
+		this.setScanClassPath(this.getLoadPath());
+	}
+	
+	/**
+	 * 
+	 * @param fp
+	 */
+	public Project(String fp) {
+		this.setLoadPath(fp);
+		this.setScanClassPath(fp);
+	}
 	
 	/**
 	 * @return the name

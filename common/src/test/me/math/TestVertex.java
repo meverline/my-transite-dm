@@ -1,8 +1,10 @@
-package me.math;
+package test.me.math;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import me.math.Vertex;
 
 public class TestVertex {
 

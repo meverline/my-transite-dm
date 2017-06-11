@@ -3,6 +3,8 @@
  */
 package browser.gui.commands;
 
+import java.util.Enumeration;
+
 import javax.swing.JTree;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
@@ -60,15 +62,18 @@ public class ClassSelection implements TreeSelectionListener {
 		if ( getTree().getModel().isLeaf(path.getLastPathComponent() )) {
 			DefaultMutableTreeNode node = 
 				 DefaultMutableTreeNode.class.cast(path.getLastPathComponent());
-			NodeData data = NodeData.class.cast(node.getUserObject());
-			try {
-				DisplayClassDialog dialog = 
-					new DisplayClassDialog(mainWin,mainWin.getLoader().load(data.getPath()));
-				dialog.setVisible(true);
-			} catch (Exception e) {
-				@SuppressWarnings("unused")
-				ExceptionDialog ed = new ExceptionDialog(mainWin, e);
-				log.error(e);
+			
+			if ( node.getChildCount() == 0 &&  (! node.isRoot()))  {
+				NodeData data = NodeData.class.cast(node.getUserObject());
+				try {
+					DisplayClassDialog dialog = 
+						new DisplayClassDialog(mainWin,mainWin.getLoader().load(data.getPath()));
+					dialog.setVisible(true);
+				} catch (Exception e) {
+					@SuppressWarnings("unused")
+					ExceptionDialog ed = new ExceptionDialog(mainWin, e);
+					log.error(e);
+				}
 			}
 
 		}

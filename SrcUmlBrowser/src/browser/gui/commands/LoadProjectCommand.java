@@ -22,9 +22,9 @@ public class LoadProjectCommand implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		ApplicationSettings settings = ApplicationSettings.instance();
-		JFileChooser chooser = new JFileChooser( settings.getFilepath());
+		JFileChooser chooser = new JFileChooser( settings.getDir());
 		
-		chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		
 		int result = chooser.showOpenDialog(this.window);
 	    if(result == JFileChooser.APPROVE_OPTION ) {

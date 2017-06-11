@@ -3884,3 +3884,815 @@ Caused by: org.apache.maven.model.building.ModelBuildingException: 1 problem was
 2017-06-05 19:03:14,526 [Worker-422] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 3 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
 2017-06-05 19:03:14,526 [Worker-422] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
 2017-06-05 19:03:14,526 [Worker-422] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 20:10:15,274 [Worker-503] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 20:10:15,276 [Worker-503] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 3 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 20:10:15,277 [Worker-503] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 20:10:15,277 [Worker-503] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 20:10:16,290 [Worker-496] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 20:10:16,291 [Worker-496] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 3 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 20:10:16,291 [Worker-496] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 20:10:16,292 [Worker-496] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 20:10:22,859 [Worker-496] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 20:10:22,860 [Worker-496] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 3 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 20:10:22,861 [Worker-496] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 20:10:22,861 [Worker-496] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 20:10:23,993 [Worker-502] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 20:10:23,994 [Worker-502] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 3 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 20:10:23,994 [Worker-502] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 20:10:23,994 [Worker-502] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 20:12:55,262 [Worker-501] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 20:12:55,263 [Worker-501] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 3 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 20:12:55,263 [Worker-501] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 20:12:55,264 [Worker-501] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 20:13:10,949 [Worker-496] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 20:13:10,950 [Worker-496] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 3 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 20:13:10,950 [Worker-496] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 20:13:10,950 [Worker-496] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 20:13:45,311 [Worker-501] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 20:13:45,312 [Worker-501] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 3 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 20:13:45,312 [Worker-501] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 20:13:45,312 [Worker-501] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 20:39:09,844 [Worker-511] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 20:39:09,845 [Worker-511] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 20:39:09,860 [Worker-511] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 20:39:09,861 [Worker-511] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 20:39:46,087 [Worker-511] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 20:39:46,089 [Worker-511] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 20:39:46,089 [Worker-511] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 20:39:46,089 [Worker-511] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 20:40:36,163 [Worker-511] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 20:40:36,164 [Worker-511] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 20:40:36,165 [Worker-511] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 20:40:36,165 [Worker-511] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 20:40:55,179 [Worker-521] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 20:40:55,180 [Worker-521] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 20:40:55,181 [Worker-521] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 20:40:55,181 [Worker-521] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 20:41:13,161 [Worker-513] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 20:41:13,162 [Worker-513] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 20:41:13,163 [Worker-513] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 20:41:13,163 [Worker-513] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 20:43:11,001 [Worker-521] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 20:43:11,002 [Worker-521] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 20:43:11,003 [Worker-521] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 20:43:11,003 [Worker-521] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 20:43:34,637 [Worker-524] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 20:43:34,638 [Worker-524] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 20:43:34,639 [Worker-524] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 20:43:34,639 [Worker-524] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 20:43:39,019 [Worker-520] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 20:43:39,020 [Worker-520] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 20:43:39,020 [Worker-520] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 20:43:39,021 [Worker-520] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 20:43:45,285 [Worker-524] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 20:43:45,286 [Worker-524] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 20:43:45,288 [Worker-524] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 20:43:45,288 [Worker-524] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 20:44:24,542 [Worker-522] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 20:44:24,543 [Worker-522] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 20:44:24,544 [Worker-522] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 20:44:24,544 [Worker-522] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 20:47:14,606 [Worker-529] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 20:47:14,608 [Worker-529] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 20:47:14,609 [Worker-529] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 20:47:14,609 [Worker-529] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 20:47:21,728 [Worker-530] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 20:47:21,729 [Worker-530] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 20:47:21,730 [Worker-530] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 20:47:21,730 [Worker-530] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 21:00:02,976 [Worker-528] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:00:02,978 [Worker-528] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 21:00:02,979 [Worker-528] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:00:02,979 [Worker-528] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 21:01:04,455 [Worker-531] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:01:04,456 [Worker-531] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 21:01:04,457 [Worker-531] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:01:04,457 [Worker-531] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 21:01:47,076 [Worker-533] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:01:47,077 [Worker-533] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 21:01:47,078 [Worker-533] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:01:47,078 [Worker-533] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 21:02:26,615 [Worker-534] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:02:26,616 [Worker-534] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 21:02:26,616 [Worker-534] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:02:26,617 [Worker-534] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 21:02:41,561 [Worker-533] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:02:41,562 [Worker-533] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 21:02:41,562 [Worker-533] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:02:41,562 [Worker-533] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 21:09:53,116 [Worker-541] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:09:53,117 [Worker-541] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 21:09:53,118 [Worker-541] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:09:53,119 [Worker-541] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 21:10:20,813 [Worker-546] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:10:20,814 [Worker-546] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 21:10:20,815 [Worker-546] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:10:20,815 [Worker-546] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 21:10:39,992 [Worker-538] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:10:39,993 [Worker-538] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 21:10:39,995 [Worker-538] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:10:39,995 [Worker-538] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 21:11:50,176 [Worker-542] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:11:50,177 [Worker-542] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 21:11:50,177 [Worker-542] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:11:50,178 [Worker-542] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 21:13:03,105 [Worker-546] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:13:03,107 [Worker-546] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 21:13:03,107 [Worker-546] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:13:03,108 [Worker-546] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 21:14:42,714 [Worker-541] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:14:42,715 [Worker-541] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 21:14:42,715 [Worker-541] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:14:42,716 [Worker-541] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 21:15:08,656 [Worker-541] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:15:08,657 [Worker-541] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 21:15:08,658 [Worker-541] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:15:08,658 [Worker-541] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 21:15:36,197 [Worker-538] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:15:36,199 [Worker-538] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 21:15:36,200 [Worker-538] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:15:36,200 [Worker-538] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 21:17:06,898 [Worker-546] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:17:06,899 [Worker-546] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 21:17:06,899 [Worker-546] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:17:06,900 [Worker-546] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 21:17:18,992 [Worker-542] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:17:18,994 [Worker-542] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 21:17:18,996 [Worker-542] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:17:18,998 [Worker-542] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 21:20:31,119 [Worker-547] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:20:31,120 [Worker-547] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 21:20:31,122 [Worker-547] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:20:31,122 [Worker-547] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 21:23:06,875 [Worker-543] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:23:06,876 [Worker-543] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 21:23:06,877 [Worker-543] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:23:06,877 [Worker-543] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 21:23:23,357 [Worker-552] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:23:23,358 [Worker-552] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 21:23:23,358 [Worker-552] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:23:23,358 [Worker-552] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 21:23:36,155 [Worker-551] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:23:36,156 [Worker-551] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 21:23:36,157 [Worker-551] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:23:36,157 [Worker-551] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 21:23:58,271 [Worker-554] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:23:58,272 [Worker-554] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 21:23:58,273 [Worker-554] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:23:58,273 [Worker-554] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 21:24:01,464 [Worker-552] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:24:01,464 [Worker-552] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 21:24:01,465 [Worker-552] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:24:01,465 [Worker-552] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 21:24:08,694 [Worker-555] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:24:08,695 [Worker-555] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 21:24:08,695 [Worker-555] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:24:08,695 [Worker-555] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 21:24:48,972 [Worker-551] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:24:48,973 [Worker-551] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 21:24:48,974 [Worker-551] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:24:48,974 [Worker-551] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 21:26:20,713 [Worker-553] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:26:20,713 [Worker-553] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 21:26:20,714 [Worker-553] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:26:20,714 [Worker-553] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 21:28:28,264 [Worker-557] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:28:28,265 [Worker-557] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 21:28:28,266 [Worker-557] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:28:28,266 [Worker-557] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 21:28:42,248 [Worker-559] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:28:42,249 [Worker-559] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 21:28:42,249 [Worker-559] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:28:42,249 [Worker-559] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 21:28:53,600 [Worker-557] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:28:53,601 [Worker-557] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 21:28:53,602 [Worker-557] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:28:53,602 [Worker-557] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 21:29:25,311 [Worker-557] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:29:25,312 [Worker-557] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 21:29:25,312 [Worker-557] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:29:25,312 [Worker-557] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 21:29:38,910 [Worker-562] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:29:38,911 [Worker-562] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 21:29:38,911 [Worker-562] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:29:38,912 [Worker-562] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 21:31:22,009 [Worker-557] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:31:22,010 [Worker-557] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 21:31:22,011 [Worker-557] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:31:22,011 [Worker-557] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 21:31:44,177 [Worker-564] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:31:44,178 [Worker-564] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 21:31:44,179 [Worker-564] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:31:44,180 [Worker-564] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 21:31:48,929 [Worker-559] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:31:48,930 [Worker-559] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 21:31:48,930 [Worker-559] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:31:48,931 [Worker-559] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 21:33:52,868 [Worker-565] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:33:52,869 [Worker-565] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 21:33:52,870 [Worker-565] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:33:52,871 [Worker-565] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 21:34:44,664 [Worker-559] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:34:44,665 [Worker-559] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 21:34:44,666 [Worker-559] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:34:44,666 [Worker-559] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-06 21:34:50,255 [Worker-567] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:34:50,256 [Worker-567] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-06 21:34:50,256 [Worker-567] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:34:50,256 [Worker-567] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 19:19:15,383 [Worker-613] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 19:19:15,386 [Worker-613] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 19:19:15,390 [Worker-613] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 19:19:15,390 [Worker-613] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 19:26:18,438 [Worker-622] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 19:26:18,440 [Worker-622] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 19:26:18,440 [Worker-622] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 19:26:18,440 [Worker-622] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 19:31:35,815 [Worker-625] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 19:31:35,817 [Worker-625] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 19:31:35,819 [Worker-625] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 19:31:35,819 [Worker-625] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 19:32:03,253 [Worker-622] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 19:32:03,254 [Worker-622] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 19:32:03,255 [Worker-622] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 19:32:03,255 [Worker-622] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 19:32:20,811 [Worker-626] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 19:32:20,811 [Worker-626] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 19:32:20,812 [Worker-626] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 19:32:20,812 [Worker-626] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 20:02:51,263 [Worker-642] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:02:51,264 [Worker-642] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 20:02:51,265 [Worker-642] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:02:51,266 [Worker-642] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 20:03:10,507 [Worker-642] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:03:10,508 [Worker-642] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 20:03:10,509 [Worker-642] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:03:10,509 [Worker-642] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 20:03:38,811 [Worker-639] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:03:38,812 [Worker-639] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 20:03:38,813 [Worker-639] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:03:38,813 [Worker-639] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 20:08:32,302 [Worker-649] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:08:32,304 [Worker-649] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 20:08:32,305 [Worker-649] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:08:32,305 [Worker-649] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 20:08:41,520 [Worker-650] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:08:41,521 [Worker-650] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 20:08:41,522 [Worker-650] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:08:41,522 [Worker-650] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 20:09:36,373 [Worker-650] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:09:36,374 [Worker-650] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 20:09:36,375 [Worker-650] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:09:36,375 [Worker-650] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 20:10:32,588 [Worker-648] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:10:32,588 [Worker-648] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 20:10:32,589 [Worker-648] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:10:32,589 [Worker-648] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 20:10:44,184 [Worker-649] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:10:44,185 [Worker-649] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 20:10:44,187 [Worker-649] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:10:44,187 [Worker-649] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 20:10:50,989 [Worker-651] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:10:50,990 [Worker-651] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 20:10:50,991 [Worker-651] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:10:50,991 [Worker-651] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 20:11:54,695 [Worker-653] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:11:54,695 [Worker-653] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 20:11:54,696 [Worker-653] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:11:54,696 [Worker-653] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 20:12:24,090 [Worker-651] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:12:24,091 [Worker-651] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 20:12:24,092 [Worker-651] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:12:24,092 [Worker-651] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 20:12:52,162 [Worker-648] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:12:52,163 [Worker-648] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 20:12:52,164 [Worker-648] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:12:52,164 [Worker-648] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 20:17:21,074 [Worker-652] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:17:21,075 [Worker-652] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 20:17:21,076 [Worker-652] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:17:21,077 [Worker-652] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 20:18:32,585 [Worker-655] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:18:32,586 [Worker-655] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 20:18:32,586 [Worker-655] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:18:32,586 [Worker-655] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 20:18:45,388 [Worker-652] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:18:45,389 [Worker-652] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 20:18:45,389 [Worker-652] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:18:45,390 [Worker-652] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 20:20:07,957 [Worker-658] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:20:07,958 [Worker-658] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 20:20:07,959 [Worker-658] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:20:07,959 [Worker-658] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 20:20:51,536 [Worker-655] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:20:51,536 [Worker-655] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 20:20:51,537 [Worker-655] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:20:51,537 [Worker-655] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 20:20:55,157 [Worker-655] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:20:55,157 [Worker-655] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 20:20:55,158 [Worker-655] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:20:55,158 [Worker-655] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 20:21:15,655 [Worker-659] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:21:15,656 [Worker-659] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 20:21:15,656 [Worker-659] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:21:15,656 [Worker-659] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 20:22:04,465 [Worker-657] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:22:04,466 [Worker-657] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 20:22:04,467 [Worker-657] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:22:04,467 [Worker-657] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 20:22:48,616 [Worker-656] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:22:48,617 [Worker-656] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 20:22:48,617 [Worker-656] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:22:48,618 [Worker-656] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 20:23:40,563 [Worker-657] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:23:40,564 [Worker-657] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 20:23:40,564 [Worker-657] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:23:40,564 [Worker-657] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 20:24:18,446 [Worker-657] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:24:18,447 [Worker-657] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 20:24:18,448 [Worker-657] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:24:18,448 [Worker-657] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 20:24:31,692 [Worker-652] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:24:31,693 [Worker-652] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 20:24:31,693 [Worker-652] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:24:31,693 [Worker-652] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 20:25:14,171 [Worker-656] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:25:14,172 [Worker-656] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 20:25:14,172 [Worker-656] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:25:14,172 [Worker-656] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 20:25:52,196 [Worker-657] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:25:52,196 [Worker-657] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 20:25:52,197 [Worker-657] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:25:52,197 [Worker-657] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 20:26:12,095 [Worker-660] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:26:12,096 [Worker-660] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 20:26:12,097 [Worker-660] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:26:12,097 [Worker-660] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 20:27:06,239 [Worker-655] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:27:06,240 [Worker-655] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 20:27:06,240 [Worker-655] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:27:06,241 [Worker-655] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 20:39:24,153 [Worker-667] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:39:24,156 [Worker-667] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 20:39:24,156 [Worker-667] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:39:24,156 [Worker-667] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 20:39:59,272 [Worker-662] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:39:59,272 [Worker-662] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 20:39:59,273 [Worker-662] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:39:59,273 [Worker-662] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 20:40:31,029 [Worker-668] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:40:31,031 [Worker-668] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 20:40:31,032 [Worker-668] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:40:31,032 [Worker-668] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 20:44:02,789 [Worker-671] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:44:02,789 [Worker-671] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 20:44:02,790 [Worker-671] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:44:02,790 [Worker-671] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 20:45:24,704 [Worker-671] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:45:24,705 [Worker-671] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 20:45:24,706 [Worker-671] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:45:24,706 [Worker-671] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 20:53:23,099 [Worker-680] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:53:23,100 [Worker-680] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 20:53:23,100 [Worker-680] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:53:23,101 [Worker-680] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 20:55:32,023 [Worker-668] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:55:32,024 [Worker-668] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 20:55:32,025 [Worker-668] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:55:32,025 [Worker-668] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 20:55:47,820 [Worker-676] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:55:47,821 [Worker-676] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 20:55:47,824 [Worker-676] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:55:47,825 [Worker-676] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 20:59:39,204 [Worker-669] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:59:39,206 [Worker-669] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 20:59:39,214 [Worker-669] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:59:39,214 [Worker-669] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 21:05:43,053 [Worker-686] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 21:05:43,054 [Worker-686] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 21:05:43,055 [Worker-686] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 21:05:43,055 [Worker-686] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 21:07:15,907 [Worker-682] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 21:07:15,908 [Worker-682] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 21:07:15,909 [Worker-682] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 21:07:15,909 [Worker-682] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 21:09:44,282 [Worker-692] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 21:09:44,283 [Worker-692] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 21:09:44,284 [Worker-692] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 21:09:44,284 [Worker-692] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 21:10:03,856 [Worker-692] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 21:10:03,857 [Worker-692] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 21:10:03,858 [Worker-692] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 21:10:03,858 [Worker-692] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 21:10:49,079 [Worker-692] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 21:10:49,080 [Worker-692] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 21:10:49,081 [Worker-692] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 21:10:49,081 [Worker-692] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 21:11:21,372 [Worker-689] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 21:11:21,373 [Worker-689] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 21:11:21,374 [Worker-689] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 21:11:21,374 [Worker-689] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 21:11:39,115 [Worker-689] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 21:11:39,116 [Worker-689] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 21:11:39,118 [Worker-689] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 21:11:39,118 [Worker-689] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 21:19:47,582 [Worker-703] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 21:19:47,583 [Worker-703] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 21:19:47,584 [Worker-703] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 21:19:47,584 [Worker-703] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 21:20:15,227 [Worker-623] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 21:20:15,228 [Worker-623] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 21:20:15,228 [Worker-623] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 21:20:15,228 [Worker-623] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 21:20:54,484 [Worker-692] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 21:20:54,485 [Worker-692] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 21:20:54,486 [Worker-692] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 21:20:54,486 [Worker-692] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 21:21:53,098 [Worker-703] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 21:21:53,099 [Worker-703] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 21:21:53,100 [Worker-703] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 21:21:53,100 [Worker-703] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 21:22:30,167 [Worker-701] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 21:22:30,168 [Worker-701] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 21:22:30,169 [Worker-701] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 21:22:30,169 [Worker-701] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 21:22:38,830 [Worker-697] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 21:22:38,831 [Worker-697] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 21:22:38,832 [Worker-697] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 21:22:38,832 [Worker-697] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 21:26:52,928 [Worker-708] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 21:26:52,930 [Worker-708] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 21:26:52,931 [Worker-708] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 21:26:52,931 [Worker-708] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 21:27:07,432 [Worker-707] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 21:27:07,433 [Worker-707] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 21:27:07,434 [Worker-707] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 21:27:07,434 [Worker-707] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 21:29:26,732 [Worker-705] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 21:29:26,733 [Worker-705] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 21:29:26,734 [Worker-705] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 21:29:26,734 [Worker-705] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 21:31:29,839 [Worker-709] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 21:31:29,842 [Worker-709] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 21:31:29,843 [Worker-709] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 21:31:29,844 [Worker-709] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-07 21:32:35,763 [Worker-709] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 21:32:35,764 [Worker-709] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-07 21:32:35,765 [Worker-709] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 21:32:35,765 [Worker-709] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-08 20:47:41,417 [Worker-759] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 20:47:41,422 [Worker-759] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-08 20:47:41,425 [Worker-759] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 20:47:41,425 [Worker-759] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-08 20:47:47,989 [Worker-760] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 20:47:47,990 [Worker-760] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-08 20:47:47,991 [Worker-760] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 20:47:47,991 [Worker-760] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-08 20:47:51,916 [Worker-761] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 20:47:51,917 [Worker-761] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-08 20:47:51,919 [Worker-761] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 20:47:51,919 [Worker-761] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-08 20:49:23,274 [Worker-759] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 20:49:23,275 [Worker-759] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-08 20:49:23,275 [Worker-759] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 20:49:23,276 [Worker-759] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-08 20:50:50,303 [Worker-762] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 20:50:50,304 [Worker-762] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-08 20:50:50,305 [Worker-762] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 20:50:50,305 [Worker-762] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-08 20:50:58,049 [Worker-762] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 20:50:58,050 [Worker-762] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-08 20:50:58,051 [Worker-762] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 20:50:58,051 [Worker-762] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-08 20:53:36,204 [Worker-765] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 20:53:36,205 [Worker-765] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-08 20:53:36,206 [Worker-765] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 20:53:36,206 [Worker-765] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-08 20:54:42,330 [Worker-769] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 20:54:42,331 [Worker-769] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-08 20:54:42,333 [Worker-769] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 20:54:42,333 [Worker-769] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-08 20:55:03,890 [Worker-768] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 20:55:03,891 [Worker-768] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-08 20:55:03,892 [Worker-768] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 20:55:03,892 [Worker-768] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-08 20:55:30,774 [Worker-768] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 20:55:30,775 [Worker-768] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-08 20:55:30,776 [Worker-768] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 20:55:30,776 [Worker-768] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-08 20:56:42,058 [Worker-771] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 20:56:42,065 [Worker-771] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-08 20:56:42,066 [Worker-771] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 20:56:42,066 [Worker-771] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-08 20:57:40,529 [Worker-769] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 20:57:40,530 [Worker-769] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-08 20:57:40,531 [Worker-769] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 20:57:40,531 [Worker-769] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-08 21:12:16,070 [Worker-782] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 21:12:16,071 [Worker-782] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-08 21:12:16,072 [Worker-782] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 21:12:16,072 [Worker-782] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-08 21:13:14,374 [Worker-782] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 21:13:14,375 [Worker-782] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-08 21:13:14,376 [Worker-782] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 21:13:14,376 [Worker-782] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-08 21:18:02,238 [Worker-784] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 21:18:02,240 [Worker-784] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-08 21:18:02,241 [Worker-784] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 21:18:02,241 [Worker-784] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-08 21:18:05,290 [Worker-784] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 21:18:05,290 [Worker-784] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-08 21:18:05,292 [Worker-784] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 21:18:05,292 [Worker-784] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-08 21:22:06,117 [Worker-790] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 21:22:06,119 [Worker-790] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-08 21:22:06,120 [Worker-790] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 21:22:06,121 [Worker-790] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-08 21:24:07,245 [Worker-789] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 21:24:07,246 [Worker-789] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-08 21:24:07,247 [Worker-789] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 21:24:07,247 [Worker-789] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-08 21:48:07,813 [Worker-806] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 21:48:07,817 [Worker-806] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-08 21:48:07,819 [Worker-806] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 21:48:07,819 [Worker-806] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-08 21:49:35,573 [Worker-799] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 21:49:35,574 [Worker-799] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-08 21:49:35,575 [Worker-799] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 21:49:35,575 [Worker-799] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-08 21:50:26,057 [Worker-804] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 21:50:26,058 [Worker-804] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-08 21:50:26,059 [Worker-804] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 21:50:26,060 [Worker-804] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-08 22:19:14,710 [Worker-820] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 22:19:14,712 [Worker-820] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-08 22:19:14,715 [Worker-820] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 22:19:14,715 [Worker-820] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-08 22:19:20,259 [Worker-819] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 22:19:20,260 [Worker-819] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-08 22:19:20,261 [Worker-819] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 22:19:20,261 [Worker-819] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-09 21:32:18,918 [Worker-875] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-09 21:32:18,927 [Worker-875] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-09 21:32:18,931 [Worker-875] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-09 21:32:18,931 [Worker-875] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-09 21:32:23,857 [Worker-877] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-09 21:32:23,857 [Worker-877] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-09 21:32:23,858 [Worker-877] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-09 21:32:23,858 [Worker-877] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-09 21:32:57,016 [Worker-873] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-09 21:32:57,016 [Worker-873] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-09 21:32:57,018 [Worker-873] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-09 21:32:57,018 [Worker-873] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-09 22:23:10,920 [Worker-913] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-09 22:23:10,923 [Worker-913] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-09 22:23:10,925 [Worker-913] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-09 22:23:10,925 [Worker-913] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 07:26:37,530 [Worker-943] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:26:37,531 [Worker-943] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 07:26:37,534 [Worker-943] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:26:37,534 [Worker-943] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 07:34:26,551 [Worker-946] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:34:26,553 [Worker-946] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 07:34:26,553 [Worker-946] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:34:26,553 [Worker-946] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 07:35:39,585 [Worker-945] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:35:39,586 [Worker-945] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 07:35:39,586 [Worker-945] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:35:39,587 [Worker-945] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 07:35:46,529 [Worker-947] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:35:46,530 [Worker-947] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 07:35:46,531 [Worker-947] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:35:46,532 [Worker-947] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 07:36:53,715 [Worker-948] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:36:53,716 [Worker-948] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 07:36:53,716 [Worker-948] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:36:53,717 [Worker-948] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 07:37:11,076 [Worker-945] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:37:11,076 [Worker-945] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 07:37:11,077 [Worker-945] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:37:11,077 [Worker-945] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 07:38:58,955 [Worker-949] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:38:58,956 [Worker-949] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 07:38:58,956 [Worker-949] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:38:58,956 [Worker-949] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 07:39:06,103 [Worker-949] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:39:06,104 [Worker-949] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 07:39:06,105 [Worker-949] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:39:06,105 [Worker-949] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 07:39:42,055 [Worker-951] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:39:42,056 [Worker-951] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 07:39:42,058 [Worker-951] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:39:42,058 [Worker-951] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 07:41:22,765 [Worker-947] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:41:22,766 [Worker-947] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 07:41:22,767 [Worker-947] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:41:22,767 [Worker-947] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 07:41:26,550 [Worker-949] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:41:26,551 [Worker-949] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 07:41:26,551 [Worker-949] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:41:26,552 [Worker-949] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 07:41:33,772 [Worker-945] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:41:33,773 [Worker-945] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 07:41:33,773 [Worker-945] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:41:33,774 [Worker-945] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 07:41:41,646 [Worker-947] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:41:41,647 [Worker-947] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 07:41:41,648 [Worker-947] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:41:41,648 [Worker-947] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 07:42:44,291 [Worker-946] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:42:44,292 [Worker-946] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 07:42:44,293 [Worker-946] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:42:44,294 [Worker-946] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 07:42:53,297 [Worker-947] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:42:53,298 [Worker-947] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 07:42:53,299 [Worker-947] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:42:53,299 [Worker-947] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 07:43:15,543 [Worker-947] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:43:15,544 [Worker-947] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 07:43:15,545 [Worker-947] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:43:15,546 [Worker-947] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 07:43:35,935 [Worker-946] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:43:35,936 [Worker-946] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 07:43:35,938 [Worker-946] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:43:35,938 [Worker-946] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 07:43:55,603 [Worker-950] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:43:55,604 [Worker-950] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 07:43:55,605 [Worker-950] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:43:55,605 [Worker-950] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 07:45:37,555 [Worker-950] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:45:37,556 [Worker-950] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 07:45:37,556 [Worker-950] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:45:37,556 [Worker-950] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 07:46:10,168 [Worker-950] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:46:10,170 [Worker-950] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 07:46:10,170 [Worker-950] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:46:10,170 [Worker-950] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 07:46:39,016 [Worker-951] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:46:39,018 [Worker-951] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 07:46:39,018 [Worker-951] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:46:39,019 [Worker-951] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 07:46:56,540 [Worker-950] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:46:56,541 [Worker-950] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 07:46:56,542 [Worker-950] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:46:56,542 [Worker-950] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 07:47:44,596 [Worker-951] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:47:44,596 [Worker-951] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 07:47:44,597 [Worker-951] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:47:44,597 [Worker-951] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 07:48:16,656 [Worker-947] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:48:16,657 [Worker-947] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 07:48:16,658 [Worker-947] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:48:16,658 [Worker-947] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 07:49:24,249 [Worker-948] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:49:24,250 [Worker-948] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 07:49:24,251 [Worker-948] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:49:24,251 [Worker-948] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 07:51:18,673 [Worker-948] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:51:18,674 [Worker-948] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 07:51:18,675 [Worker-948] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:51:18,675 [Worker-948] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 07:51:25,137 [Worker-952] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:51:25,137 [Worker-952] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 07:51:25,138 [Worker-952] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:51:25,138 [Worker-952] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 07:52:55,981 [Worker-949] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:52:55,982 [Worker-949] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 07:52:55,983 [Worker-949] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:52:55,983 [Worker-949] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 07:53:22,776 [Worker-951] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:53:22,777 [Worker-951] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 07:53:22,777 [Worker-951] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:53:22,777 [Worker-951] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 07:53:29,630 [Worker-950] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:53:29,630 [Worker-950] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 07:53:29,631 [Worker-950] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:53:29,631 [Worker-950] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 07:53:53,051 [Worker-945] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:53:53,052 [Worker-945] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 07:53:53,052 [Worker-945] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:53:53,053 [Worker-945] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 07:54:05,820 [Worker-951] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:54:05,821 [Worker-951] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 07:54:05,822 [Worker-951] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:54:05,822 [Worker-951] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 07:54:36,171 [Worker-948] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:54:36,172 [Worker-948] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 07:54:36,173 [Worker-948] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:54:36,173 [Worker-948] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 07:55:24,042 [Worker-950] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:55:24,043 [Worker-950] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 07:55:24,044 [Worker-950] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:55:24,044 [Worker-950] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 07:57:40,139 [Worker-949] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:57:40,140 [Worker-949] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 07:57:40,140 [Worker-949] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:57:40,140 [Worker-949] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 07:57:58,656 [Worker-947] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:57:58,656 [Worker-947] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 07:57:58,657 [Worker-947] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:57:58,657 [Worker-947] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 07:58:16,374 [Worker-951] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:58:16,376 [Worker-951] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 07:58:16,376 [Worker-951] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:58:16,377 [Worker-951] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 07:58:33,379 [Worker-949] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:58:33,380 [Worker-949] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 07:58:33,381 [Worker-949] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:58:33,381 [Worker-949] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 07:59:56,354 [Worker-949] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:59:56,355 [Worker-949] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 07:59:56,355 [Worker-949] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:59:56,356 [Worker-949] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 08:00:00,548 [Worker-947] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 08:00:00,549 [Worker-947] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 08:00:00,549 [Worker-947] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 08:00:00,549 [Worker-947] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 08:00:40,139 [Worker-945] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 08:00:40,140 [Worker-945] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 08:00:40,141 [Worker-945] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 08:00:40,141 [Worker-945] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 08:01:30,502 [Worker-950] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 08:01:30,503 [Worker-950] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 08:01:30,504 [Worker-950] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 08:01:30,504 [Worker-950] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 08:01:37,761 [Worker-946] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 08:01:37,761 [Worker-946] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 08:01:37,762 [Worker-946] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 08:01:37,762 [Worker-946] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 08:02:15,449 [Worker-945] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 08:02:15,450 [Worker-945] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 08:02:15,451 [Worker-945] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 08:02:15,451 [Worker-945] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 08:02:28,238 [Worker-954] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 08:02:28,239 [Worker-954] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 08:02:28,239 [Worker-954] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 08:02:28,239 [Worker-954] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 08:02:32,817 [Worker-950] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 08:02:32,818 [Worker-950] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 08:02:32,818 [Worker-950] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 08:02:32,818 [Worker-950] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 08:02:37,959 [Worker-949] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 08:02:37,959 [Worker-949] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 08:02:37,960 [Worker-949] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 08:02:37,960 [Worker-949] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 08:03:27,076 [Worker-945] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 08:03:27,077 [Worker-945] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 08:03:27,078 [Worker-945] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 08:03:27,079 [Worker-945] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 20:24:09,137 [Worker-1016] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 20:24:09,142 [Worker-1016] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 20:24:09,144 [Worker-1016] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 20:24:09,144 [Worker-1016] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 20:26:16,926 [Worker-1009] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 20:26:16,927 [Worker-1009] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 20:26:16,928 [Worker-1009] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 20:26:16,928 [Worker-1009] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 20:30:27,640 [Worker-1016] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 20:30:27,641 [Worker-1016] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 20:30:27,642 [Worker-1016] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 20:30:27,642 [Worker-1016] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 20:30:38,445 [Worker-1016] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 20:30:38,446 [Worker-1016] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 20:30:38,447 [Worker-1016] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 20:30:38,447 [Worker-1016] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 20:33:36,118 [Worker-1025] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 20:33:36,119 [Worker-1025] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 20:33:36,120 [Worker-1025] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 20:33:36,120 [Worker-1025] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 20:51:32,119 [Worker-1033] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 20:51:32,120 [Worker-1033] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 20:51:32,122 [Worker-1033] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 20:51:32,122 [Worker-1033] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 20:52:07,875 [Worker-1033] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 20:52:07,876 [Worker-1033] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 20:52:07,876 [Worker-1033] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 20:52:07,877 [Worker-1033] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 20:52:23,026 [Worker-1036] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 20:52:23,026 [Worker-1036] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 20:52:23,027 [Worker-1036] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 20:52:23,028 [Worker-1036] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 20:52:39,483 [Worker-1036] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 20:52:39,484 [Worker-1036] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 20:52:39,485 [Worker-1036] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 20:52:39,485 [Worker-1036] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 20:53:09,868 [Worker-1037] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 20:53:09,869 [Worker-1037] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 20:53:09,869 [Worker-1037] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 20:53:09,869 [Worker-1037] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 20:54:21,883 [Worker-1034] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 20:54:21,885 [Worker-1034] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 20:54:21,886 [Worker-1034] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 20:54:21,886 [Worker-1034] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 20:54:50,081 [Worker-1032] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 20:54:50,081 [Worker-1032] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 20:54:50,082 [Worker-1032] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 20:54:50,082 [Worker-1032] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 20:57:17,032 [Worker-1030] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 20:57:17,033 [Worker-1030] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 20:57:17,035 [Worker-1030] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 20:57:17,036 [Worker-1030] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
+2017-06-10 21:11:03,100 [Worker-1032] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 21:11:03,101 [Worker-1032] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 21 resources to /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/target/classes
+2017-06-10 21:11:03,102 [Worker-1032] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 21:11:03,102 [Worker-1032] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/markeverline/java/my-transite-dm/SrcUmlBrowser/src/test/resources
