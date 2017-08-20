@@ -13,6 +13,7 @@ import browser.graph.GraphVizGraph;
 public class ApplicationSettings {
 	
 	public static final String PROJECT_LAST = ".lastopened";
+	public static final String BROWSER = ".browser";
 	
 	private static ApplicationSettings self = null;
 	
@@ -196,7 +197,11 @@ public class ApplicationSettings {
 				this.previewCommand = "";
 			}
 			
-			graphOutputDir = System.getProperty("user.home");
+			StringBuilder builder = new StringBuilder(System.getProperty("user.home"));
+			builder.append("/");
+			builder.append(ApplicationSettings.BROWSER);
+			
+			graphOutputDir = System.getProperty(builder.toString());
 		}
 		
 		/**

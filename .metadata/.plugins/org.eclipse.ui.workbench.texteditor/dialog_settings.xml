@@ -2,18 +2,24 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="tx.fin" key="selection"/>
+		<item value="rangeBox_" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="rangeBox_"/>
+			<item value="transit.database.impl."/>
+			<item value="));"/>
+			<item value="new ImageIcon("/>
+			<item value="ApplicationSettings.instance().save();"/>
 			<item value="tx.fin"/>
 			<item value="tx.final"/>
 			<item value="tx.ter"/>
-			<item value="readRouteShapeFile"/>
 		</list>
 		<list key="replacehistory">
+			<item value=""/>
+			<item value=");"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
