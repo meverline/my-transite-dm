@@ -1,12 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="java.io.FilePermission"/>
-<fullyQualifiedTypeName name="java.io.FileReader"/>
 <fullyQualifiedTypeName name="java.io.FileInputStream"/>
 <fullyQualifiedTypeName name="java.io.InputStream"/>
 <fullyQualifiedTypeName name="java.io.BufferedReader"/>
 <fullyQualifiedTypeName name="com.vividsolutions.jts.util.GeometricShapeFactory"/>
 <fullyQualifiedTypeName name="org.hibernate.boot.registry.StandardServiceRegistryBuilder"/>
-<fullyQualifiedTypeName name="java.io.File"/>
+<fullyQualifiedTypeName name="transit.database.impl.AgencyImpleTest"/>
+<fullyQualifiedTypeName name="transit.database.impl.CalendarDateImplTest"/>
+<fullyQualifiedTypeName name="me.math.Vertex"/>
 <fullyQualifiedTypeName name="me.math.grid.AbstractSpatialGridPoint"/>
+<fullyQualifiedTypeName name="me.transit.dao.TransiteStopDao"/>
+<fullyQualifiedTypeName name="me.datamining.metric.TransitStopSpatialSample"/>
+<fullyQualifiedTypeName name="me.transit.dao.query.StopQueryConstraint"/>
+<fullyQualifiedTypeName name="me.transit.database.TransitStop"/>
+<fullyQualifiedTypeName name="browser.util.Project"/>
+<fullyQualifiedTypeName name="browser.graph.GraphBuilder"/>
+<fullyQualifiedTypeName name="browser.graph.GraphBuilder.TEXT"/>
+<fullyQualifiedTypeName name="javax.swing.JTextField"/>
+<fullyQualifiedTypeName name="javax.swing.JPanel"/>
+<fullyQualifiedTypeName name="browser.gui.dialog.SearchDialog"/>
+<fullyQualifiedTypeName name="javax.swing.JComboBox"/>
+<fullyQualifiedTypeName name="javax.swing.tree.DefaultTreeCellRenderer"/>
+<fullyQualifiedTypeName name="javax.swing.JLabel"/>
+<fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
+<fullyQualifiedTypeName name="java.io.File"/>
+<fullyQualifiedTypeName name="java.io.FileReader"/>
+<fullyQualifiedTypeName name="java.net.URL"/>
+<fullyQualifiedTypeName name="java.util.Enumeration"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="browser.util.ApplicationSettings"/>
+<fullyQualifiedTypeName name="browser.util.ApplicationSettings.Settings"/>
+<fullyQualifiedTypeName name="crime.database.URCCatagoriesTest"/>
+<fullyQualifiedTypeName name="transit.database.impl.RouteGeometryImplTest"/>
+<fullyQualifiedTypeName name="me.crime.database.URCCatagoriesTest"/>
+<fullyQualifiedTypeName name="me.datamining.metric.IDataProvider"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
 </qualifiedTypeNameHistroy>

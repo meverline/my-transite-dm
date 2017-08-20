@@ -3,8 +3,6 @@
  */
 package browser.gui.commands;
 
-import java.util.Enumeration;
-
 import javax.swing.JTree;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
