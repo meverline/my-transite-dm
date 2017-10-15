@@ -28,8 +28,11 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+<<<<<<< HEAD
 	<classpathentry combineaccessrules="false" kind="src" path="/me.transite.crimedb"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/me.transite.transitedb"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/transite-common"/>
+=======
+>>>>>>> master
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

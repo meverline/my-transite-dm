@@ -139,6 +139,18 @@
 			<version>2.2.1</version>
 		</dependency>
 
+<<<<<<< HEAD
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.1.1.jre7</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.vividsolutions</groupId>
+			<artifactId>jts</artifactId>
+			<version>1.13</version>
+=======
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
@@ -155,39 +167,71 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
 			<version>4.3.8.RELEASE</version>
+>>>>>>> master
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
+<<<<<<< HEAD
+			<artifactId>spring-core</artifactId>
+=======
 			<artifactId>spring-expression</artifactId>
+>>>>>>> master
 			<version>4.3.8.RELEASE</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
+<<<<<<< HEAD
+			<artifactId>spring-expression</artifactId>
+=======
 			<artifactId>spring-beans</artifactId>
+>>>>>>> master
 			<version>4.3.8.RELEASE</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
+<<<<<<< HEAD
+			<artifactId>spring-beans</artifactId>
+=======
 			<artifactId>spring-context</artifactId>
+>>>>>>> master
 			<version>4.3.8.RELEASE</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
+<<<<<<< HEAD
+			<artifactId>spring-context</artifactId>
+=======
 			<artifactId>spring-jdbc</artifactId>
+>>>>>>> master
 			<version>4.3.8.RELEASE</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
+<<<<<<< HEAD
+			<artifactId>spring-jdbc</artifactId>
+=======
 			<artifactId>spring-orm</artifactId>
+>>>>>>> master
 			<version>4.3.8.RELEASE</version>
 		</dependency>
 
 		<dependency>
+			<groupId>org.springframework</groupId>
+<<<<<<< HEAD
+			<artifactId>spring-orm</artifactId>
+=======
+			<artifactId>spring-tx</artifactId>
+>>>>>>> master
+			<version>4.3.8.RELEASE</version>
+		</dependency>
+
+		<dependency>
+<<<<<<< HEAD
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-tx</artifactId>
 			<version>4.3.8.RELEASE</version>
@@ -228,13 +272,49 @@
 			<artifactId>junit</artifactId>
 			<version>4.11</version>
 			<scope>test</scope>
+=======
+			<groupId>com.thoughtworks.xstream</groupId>
+			<artifactId>xstream</artifactId>
+			<version>1.4.10</version>
 		</dependency>
-		
+
 		<dependency>
+			<groupId>xml-apis</groupId>
+			<artifactId>xml-apis</artifactId>
+			<version>2.0.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.megginson.sax</groupId>
+			<artifactId>xml-writer</artifactId>
+			<version>0.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-asm</artifactId>
+			<version>3.1.4.RELEASE</version>
+>>>>>>> master
+		</dependency>
+
+		<dependency>
+<<<<<<< HEAD
 		    <groupId>org.meanbean</groupId>
 		    <artifactId>meanbean</artifactId>
 		    <version>2.0.3</version>
 		    <scope>test</scope>
+=======
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+>>>>>>> master
 		</dependency>
 
 	</dependencies>
