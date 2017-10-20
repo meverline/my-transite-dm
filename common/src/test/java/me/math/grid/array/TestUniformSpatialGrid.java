@@ -140,6 +140,7 @@ public class TestUniformSpatialGrid {
 		double distance = TransiteEnums.DistanceUnitType.MI.toMeters(0.1);
 		UniformSpatialGrid grid = new UniformSpatialGrid(ul, lr, distance);
 				
+		@SuppressWarnings("unused")
 		KDTree tree = grid.getTree();
 	}
 

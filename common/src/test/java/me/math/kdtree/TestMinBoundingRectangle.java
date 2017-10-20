@@ -10,8 +10,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.vividsolutions.jts.geom.Point;
+import com.vividsolutions.jts.geom.Polygon;
 
 import me.math.Vertex;
+import me.math.grid.AbstractSpatialGridPoint;
 import me.math.grid.array.UniformSpatialGrid;
 import me.utils.TransiteEnums;
 
@@ -65,8 +67,11 @@ public class TestMinBoundingRectangle {
 		obj.extend((Point)null);
 		obj.extend(grid.get(20, 20));
 		obj.extend((Vertex)null);
-		obj.extend(lr.toPoint());	
-
+		obj.extend(lr.toPoint());
+		obj.extend((AbstractSpatialGridPoint)null);
+		obj.extend((MinBoundingRectangle)null);
+		
+		obj = new MinBoundingRectangle((Polygon)null);
 	}
 	
 	@Test

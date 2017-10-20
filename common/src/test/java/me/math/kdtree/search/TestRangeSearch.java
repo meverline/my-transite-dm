@@ -5,6 +5,10 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import me.math.Vertex;
+import me.math.grid.AbstractSpatialGridPoint;
+import me.math.grid.array.UniformSpatialGrid;
+import me.math.kdtree.INode;
+import me.math.kdtree.KDNode;
 import me.utils.TransiteEnums;
 
 public class TestRangeSearch {
@@ -33,6 +37,28 @@ public class TestRangeSearch {
 		assertEquals(lr.getLatitudeDegress(), obj.getVertex().getLatitudeDegress(), 0.001);
 		assertEquals(lr.getLongitudeDegress(), obj.getVertex().getLongitudeDegress(), 0.001);
 
+		assertTrue(obj.getList().isEmpty());
+		
+	}
+	
+	@Test
+	public void testCompare() {
+		
+		double distance = TransiteEnums.DistanceUnitType.MI.toMeters(0.1);
+		UniformSpatialGrid grid = new UniformSpatialGrid(ul, lr, distance);
+				
+		RangeSearch obj = new RangeSearch(grid.get(10, 10).getPointVertex(), TransiteEnums.DistanceUnitType.MI.toMeters(0.2));
+		
+		assertTrue(obj.getList().isEmpty());
+		for ( AbstractSpatialGridPoint gp : grid.getGridPoints()) {
+			KDNode node = new KDNode(gp, INode.Direction.XLAT, null, 0);
+			
+			obj.compare(node);
+			obj.endSearch(node);
+		}
+		
+		assertTrue(! obj.getResults().isEmpty());
+		obj.reset();
 		assertTrue(obj.getList().isEmpty());
 		
 	}
