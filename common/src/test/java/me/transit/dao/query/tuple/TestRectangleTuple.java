@@ -1,6 +1,7 @@
 package me.transit.dao.query.tuple;
 
 import static org.easymock.EasyMock.expect;
+import static org.junit.Assert.*;
 
 import org.easymock.EasyMock;
 import org.easymock.EasyMockRule;
@@ -11,32 +12,32 @@ import org.junit.Test;
 
 import com.mongodb.BasicDBObject;
 
-public class TestStringTuple extends EasyMockSupport {
+import me.math.Vertex;
+import me.utils.TransiteEnums;
+
+public class TestRectangleTuple extends EasyMockSupport {
 
     @Rule
     public EasyMockRule rule = new EasyMockRule(this);
+    private Vertex lr = new Vertex(38.827, -77.078);   
+    private Vertex ul = new Vertex(38.941, -77.286);
     	
 	@Test
 	public void testConstructor() {
 		@SuppressWarnings("unused")
-		StringTuple obj = new StringTuple("field", "value", StringTuple.MATCH.CONTAINS);		
-		obj = new StringTuple(String.class, "field", "value", StringTuple.MATCH.CONTAINS);
-	
-		for ( StringTuple.MATCH logic : StringTuple.MATCH.values()) {
-			obj = new StringTuple( "field", "value", logic);
-		}
+		RectangleTuple obj = new RectangleTuple("field", ul.toPoint(), lr.toPoint());		
+		obj = new RectangleTuple(String.class, "field", ul.toPoint(), lr.toPoint());
 		
+		assertTrue(obj.hasMultipleCriterion());
+			
 	}
 	
 	@Test
 	public void testGetDoucmentQuery() {
 		
 		BasicDBObject mongo = new BasicDBObject();
-		for ( StringTuple.MATCH logic : StringTuple.MATCH.values()) {
-			StringTuple obj = new StringTuple( "field", "value", logic);
-			obj.getDoucmentQuery(mongo);
-		}
-				
+		RectangleTuple obj = new RectangleTuple("field", ul.toPoint(), lr.toPoint());
+		obj.getDoucmentQuery(mongo);			
 	}
 	
 	@Test
@@ -47,16 +48,15 @@ public class TestStringTuple extends EasyMockSupport {
 		expect(mongo.add(EasyMock.anyObject())).andReturn(mongo).anyTimes();
 		expect(mongo.createAlias(EasyMock.anyString(), EasyMock.anyString())).andReturn(mongo).anyTimes();
 		replayAll();
-	
-		for ( StringTuple.MATCH logic : StringTuple.MATCH.values()) {
-			StringTuple obj = new StringTuple( String.class, "field", "value", logic);
-			
-			obj.getCriterion(mongo);
-		}
-	
-		StringTuple obj = new StringTuple( "field", "100", StringTuple.MATCH.CONTAINS);
+		
+		RectangleTuple obj = new RectangleTuple("field", ul.toPoint(), lr.toPoint());
 		obj.getCriterion(mongo);
-	  
+		
+		obj = new RectangleTuple(String.class, "field", ul.toPoint(), lr.toPoint());
+		obj.getCriterion(mongo);
+		
+		obj.getMultipeRestriction(mongo);
+		obj.getCriterion(mongo);
 	}
 
 }
