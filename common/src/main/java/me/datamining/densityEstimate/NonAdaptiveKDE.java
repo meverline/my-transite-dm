@@ -5,7 +5,6 @@ import me.datamining.SpatialSamplePoint;
 import me.datamining.Kernel.IDensityKernel;
 import me.datamining.bandwidth.IBandwidth;
 import me.math.grid.AbstractSpatialGridPoint;
-import me.math.grid.array.UniformSpatialGrid;
 import me.math.grid.data.DensityEstimateDataSample;
 
 public class NonAdaptiveKDE extends AbstractDensityEstimateAlgorithm {
@@ -16,17 +15,7 @@ public class NonAdaptiveKDE extends AbstractDensityEstimateAlgorithm {
 	public NonAdaptiveKDE()
 	{
 	}
-	
-	/**
-	 * 
-	 * @param samples
-	 * @param grid
-	 */
-	public NonAdaptiveKDE(UniformSpatialGrid grid)
-	{
-		this.init(grid);
-	}
-	
+		
 	/**
 	 * 
 	 * @param kernel

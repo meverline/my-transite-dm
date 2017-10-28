@@ -144,6 +144,7 @@ public class NumberTuple extends AbstractQueryTuple {
 	public NumberTuple(String aField, Number hiValue, LOGIC logic) {
 		super(null, aField);
 		setHi(hiValue);
+		setLogic(logic);
 	}
 	
 	/**
@@ -153,8 +154,9 @@ public class NumberTuple extends AbstractQueryTuple {
 	 * @param type
 	 */
 	public NumberTuple(Class<?> aClass, String aField, Number hiValue, LOGIC logic) {
-		super(null, aField);
+		super(aClass, aField);
 		setHi(hiValue);
+		setLogic(logic);
 	}
 	
 	/**

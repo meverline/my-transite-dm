@@ -39,7 +39,7 @@ public abstract class AbstractSpatialGridOverlay extends AbstractSpatialGrid {
 	 * 
 	 * @param gridSpacingMeters_
 	 */
-	protected void setGridSpacingMeters(double gridSpacingMeters_) {
+	public void setGridSpacingMeters(double gridSpacingMeters_) {
 		this.gridSpacingMeters_ = gridSpacingMeters_;
 	}
 	

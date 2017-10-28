@@ -183,7 +183,7 @@ public abstract class AbstractTiledSpatialGrid extends AbstractSpatialGridOverla
 	///////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////
 	
-	public class CrossCovData {
+	public static class CrossCovData {
 		
 	   private double d_latitude = 0.0;
 	   private double d_longitude = 0.0;

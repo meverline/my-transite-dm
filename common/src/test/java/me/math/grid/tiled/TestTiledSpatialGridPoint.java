@@ -2,6 +2,12 @@ package me.math.grid.tiled;
 
 import static org.junit.Assert.*;
 
+import org.easymock.EasyMock;
+import org.easymock.EasyMockRule;
+import org.easymock.EasyMockSupport;
+import org.easymock.Mock;
+import org.easymock.MockType;
+import org.junit.Rule;
 import org.junit.Test;
 import org.meanbean.lang.Factory;
 import org.meanbean.test.BeanTester;
@@ -14,11 +20,22 @@ import com.vividsolutions.jts.geom.Polygon;
 
 import me.math.Vertex;
 import me.math.grid.AbstractSpatialGridPoint;
-import me.math.grid.tiled.TestTileFragament.PoloygonFactory;
+import static org.easymock.EasyMock.expect;
+
 import me.math.kdtree.INode;
 import me.math.kdtree.MinBoundingRectangle;
+import static org.easymock.EasyMock.expect;
 
-public class TestTiledSpatialGridPoint {
+public class TestTiledSpatialGridPoint extends EasyMockSupport {
+
+    @Rule
+    public EasyMockRule rule = new EasyMockRule(this);
+    
+    @Mock(type=MockType.NICE)
+    public SpatialTile sptile;
+    
+    @Mock
+    private TiledSpatialGridPoint point;
 
 	@Test
 	public void testBean() {
@@ -47,6 +64,59 @@ public class TestTiledSpatialGridPoint {
 	    obj.setParentNode(10);
 	    obj.setCorner(v);
 	    obj.setGrid(new SpatialTile());
+	}
+	
+	@Test
+	public void testNodeGridMethods() {
+		NodeMock mock = new NodeMock();
+		Vertex v = new Vertex(-77.286, 38.941);
+		TiledSpatialGridPoint obj = new TiledSpatialGridPoint(10, 10, v, 20, 20);
+		
+		expect(sptile.getEntry(EasyMock.anyInt())).andReturn(point).anyTimes();
+		expect(point.getIndex()).andReturn(10).anyTimes();
+		replayAll();
+		
+		obj.setGrid(sptile);
+		assertNull(obj.getLeft());
+        obj.setLeft(point);	
+        assertNotNull(obj.getLeft());
+        obj.setLeft(mock);
+        assertNull(obj.getRight());
+        obj.setRight(point);
+        assertNotNull(obj.getRight());
+        obj.setRight(mock);
+        obj.setParent(point);
+        assertNotNull(obj.getParent());
+        obj.setParent(mock);
+        
+        obj.handleEnum("Direction", INode.Direction.XLAT.toString());
+        obj.handleEnum("self", INode.Direction.XLAT.toString());
+        
+        verifyAll();
+        resetAll();
+	}
+	
+	@Test
+	public void testToDocument() {
+		
+		Vertex v = new Vertex(-77.286, 38.941);
+		TiledSpatialGridPoint obj = new TiledSpatialGridPoint(10, 10, v, 20, 20);
+		
+		expect(sptile.getEntry(EasyMock.anyInt())).andReturn(point).anyTimes();
+		expect(point.getIndex()).andReturn(10).anyTimes();
+		replayAll();
+		
+		obj.setDirection(INode.Direction.XLAT);
+		obj.setGrid(sptile);
+        obj.setLeft(point);	
+        obj.setRight(point);
+        obj.setParent(point);
+        
+        assertNotNull(obj.toDocument());
+        verifyAll();
+        resetAll();
+        
+        
 	}
 
 	////////////////////////////////////////////////////////////////////////////

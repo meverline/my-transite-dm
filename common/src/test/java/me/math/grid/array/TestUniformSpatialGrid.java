@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import me.math.Vertex;
@@ -82,6 +83,7 @@ public class TestUniformSpatialGrid {
 		assertNull(grid.get(-1, -1));
 	}
 	
+	@Ignore
 	@Test
 	public void testFindGridPont() throws IOException {
 		Vertex ul = new Vertex(38.941, -77.286);
@@ -92,7 +94,7 @@ public class TestUniformSpatialGrid {
 		
 		Vertex pt = new Vertex(38.750, -77.125);
 		
-		//assertNotNull( grid.findGridPont(pt.toPoint()));
+		assertNotNull( grid.findGridPont(pt.toPoint()));
 	}
 	
 	@Test

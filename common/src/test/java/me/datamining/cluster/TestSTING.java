@@ -1,12 +1,19 @@
 package me.datamining.cluster;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 import org.meanbean.test.BeanTester;
 
+import me.datamining.SpatialSamplePoint;
 import me.math.Vertex;
+import me.math.grid.AbstractSpatialGridPoint;
 import me.math.grid.array.UniformSpatialGrid;
+import me.math.grid.data.STINGDataSample;
 import me.utils.TransiteEnums;
 
 public class TestSTING {
@@ -49,5 +56,26 @@ public class TestSTING {
 		assertEquals(0, STING.pissonPDF(50.0, 0), 0.01);
 		assertEquals(7.8860905E-31, STING.binomialPDF(50, 25.0, 0.25), 0.01);
 	}
-
+	
+	@Test
+	public void testFindClusters() {
+				
+		for (AbstractSpatialGridPoint pt  : grid.getGridPoints()) {
+			double value = Math.random()*10;
+			if ( (int) value % 2 == 0) {
+				pt.setData( new STINGDataSample());
+				pt.getData().addValue(Math.random()*10);
+				
+				double cnt = Math.random()*10;
+				for ( int ndx = 0; ndx < cnt; ndx++) {
+					pt.getData().addValue(Math.random()*25);
+				}
+			}
+		}
+		
+		STING testSubject = new STING();
+		
+		assertNotNull(testSubject.findClusters(grid));
+	}
+	
 }

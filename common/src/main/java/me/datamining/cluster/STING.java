@@ -20,17 +20,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-import me.datamining.ClusteringAlgorithm;
-import me.datamining.SpatialSamplePoint;
-import me.math.Vertex;
-import me.math.grid.AbstractSpatialGridOverlay;
-import me.math.grid.AbstractSpatialGridPoint;
-import me.math.grid.array.UniformSpatialGrid;
-import me.math.kdtree.IKDSearch;
-import me.math.kdtree.INode;
-import me.math.kdtree.KDTree;
-import me.math.kdtree.search.RangeSearch;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.math3.distribution.BinomialDistribution;
@@ -39,6 +28,17 @@ import org.apache.commons.math3.distribution.PoissonDistribution;
 import org.apache.commons.math3.exception.NumberIsTooLargeException;
 
 import com.vividsolutions.jts.geom.Point;
+
+import me.datamining.ClusteringAlgorithm;
+import me.math.Vertex;
+import me.math.grid.AbstractSpatialGridOverlay;
+import me.math.grid.AbstractSpatialGridPoint;
+import me.math.grid.array.UniformSpatialGrid;
+import me.math.grid.data.STINGDataSample;
+import me.math.kdtree.IKDSearch;
+import me.math.kdtree.INode;
+import me.math.kdtree.KDTree;
+import me.math.kdtree.search.RangeSearch;
 
 public class STING implements ClusteringAlgorithm {
 
@@ -256,13 +256,13 @@ public class STING implements ClusteringAlgorithm {
 				check = tree_.find(new RangeSearch(pt.getVertex(), distance));
 			
 				for (AbstractSpatialGridPoint n : check) {
-					if (n.getData() instanceof SpatialSamplePoint) {
-						SpatialSamplePoint sample = SpatialSamplePoint.class.cast(n);
+					if (n.getData() instanceof STINGDataSample) {
+						STINGDataSample sample = STINGDataSample.class.cast(n);
 						if (!sample.isChecked()) {
 							sample.setChecked(true);
 							if (evaluator.isRelevent(sample.average(),
 													 sample.standardDeviation(), 
-													 sample.getNumber())) {
+													 sample.getSampleNumber())) {
 								possiableNodes.add(n);
 							}
 						}
@@ -406,11 +406,11 @@ public class STING implements ClusteringAlgorithm {
 		public void compare(INode node) {
 
 			AbstractSpatialGridPoint pt = node.getPoint();
-			if (pt.getData() instanceof SpatialSamplePoint) {
-				SpatialSamplePoint data = SpatialSamplePoint.class.cast(pt.getData());
+			if (pt.getData() != null ) {
+				STINGDataSample data = STINGDataSample.class.cast(pt.getData());
 				if (evaluator_.isRelevent(data.average(),
 										  data.standardDeviation(), 
-										  data.getNumber())) {
+										  data.getSampleNumber())) {
 					data.setChecked(true);
 					relevent_.add(node.getPoint());
 				}

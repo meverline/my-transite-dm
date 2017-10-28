@@ -143,7 +143,9 @@ public abstract class AbstractDensityEstimateAlgorithm implements DensityEstimat
 		for ( int  r = 0; r < grid.getRows(); r++) {
 			for ( int c = 0; c< grid.getCols(); c++) {
 				if ( c != 0 ) { ps.print(","); }
-				ps.print( grid.get(r,c).getData().getInterpolationValue());
+				if ( grid.get(r,c).getData() != null ) {
+					ps.print( grid.get(r,c).getData().getInterpolationValue());
+				}
 			}
 			ps.println();
 		}
@@ -187,7 +189,7 @@ public abstract class AbstractDensityEstimateAlgorithm implements DensityEstimat
 	 */
     public void kernalDensityEstimate(IDensityKernel kernel, IBandwidth smothParm)
     {
-    	kernalDensityEstimate(kernel, smothParm, new SlivermanRule() );
+    		kernalDensityEstimate(kernel, smothParm, new SlivermanRule() );
     }
     
     /**

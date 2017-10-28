@@ -20,9 +20,6 @@ public class STINGDataSample extends AbstractDataSample {
 	{
 		if ( stats == null) {
 			stats = new DescriptiveStatistics();
-			for ( double entry : values) {
-				stats.addValue(entry);
-			}
 		}
 	}
 	/**
@@ -59,10 +56,8 @@ public class STINGDataSample extends AbstractDataSample {
 
 	@Override
 	public void addValue(double value) {
+		init();
 		this.values.add(value);
-		if ( stats == null ) {
-			stats = new DescriptiveStatistics();
-		}
 		stats.addValue(value);
 	}
 	

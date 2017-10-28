@@ -128,10 +128,12 @@ public class TiledSpatialGrid extends AbstractTiledSpatialGrid {
 			for (int col = 0; col < this.getCols(); col++ ) {
 				TiledSpatialGridPoint pt = this.getEntry(row, col);
 				if ( col != 0 ) { out.print(","); }
-				if ( iterpolationValue ) {
-					out.print(pt.getData().getInterpolationValue());
-				} else {
-					out.print(pt.getData().getValue());
+				if ( pt.getData() != null ) {
+					if ( iterpolationValue ) {
+						out.print(pt.getData().getInterpolationValue());
+					} else {
+						out.print(pt.getData().getValue());
+					}
 				}
 			}
 			out.println();

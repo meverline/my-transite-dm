@@ -12,9 +12,23 @@ public class TestSpatialGridData {
 		BeanTester tester = new BeanTester();
 		
 		tester.testBean(SpatialGridDataMock.class);
+		
+		SpatialGridDataMock test = new SpatialGridDataMock(100);
 	}
 
+	/////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////
+	
 	private static  class SpatialGridDataMock extends SpatialGridData {
+		
+		public SpatialGridDataMock() {
+			
+		}
+		
+		public SpatialGridDataMock(long gridPointIndex) {
+			super(gridPointIndex);
+		}
 
 		@Override
 		public double getValue() {

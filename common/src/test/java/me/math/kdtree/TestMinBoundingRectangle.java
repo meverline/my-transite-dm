@@ -22,7 +22,7 @@ public class TestMinBoundingRectangle {
 	private Vertex ul = new Vertex(38.941, -77.286);
 	private Vertex lr = new Vertex(38.827, -77.078);
 	private double distance = TransiteEnums.DistanceUnitType.MI.toMeters(0.1);
-	UniformSpatialGrid grid;
+	private UniformSpatialGrid grid;
 	
 	@Before
 	public void setUp()

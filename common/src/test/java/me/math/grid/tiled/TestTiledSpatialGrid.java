@@ -28,6 +28,7 @@ public class TestTiledSpatialGrid {
 		assertEquals(ul, obj.getUpperLeft());
 		assertEquals(lr, obj.getLowerRight());
 		
+		
 		obj = new TiledSpatialGrid(distance);
 		assertEquals(distance, obj.getGridSpacingMeters(), 0.01);
 
@@ -46,6 +47,22 @@ public class TestTiledSpatialGrid {
 		PrintStream stream = new PrintStream(tmp);
 		obj.toCSV(stream, false);
 		stream.close();
+		
+		assertNotNull(obj.getEntry(1));
+		
+		try {
+			obj.getTree();
+			fail("whoops");
+		} catch( Exception ex) {
+			assertTrue(true);
+		}
+		
+		try {
+			obj.getNextGridPoint(obj.get(1, 1, 1));
+			fail("whoops");
+		} catch( Exception ex) {
+			assertTrue(true);
+		}
 		
 		
 	}

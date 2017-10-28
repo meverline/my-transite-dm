@@ -126,7 +126,7 @@ public class GradientParameters {
      * 
      * @param steps
      */
-	private void setSteps_(int steps) {
+	public void setSteps_(int steps) {
 		this.steps = steps;
 	}
 
@@ -142,7 +142,7 @@ public class GradientParameters {
 	 * 
 	 * @param startColor
 	 */
-	private void setStartColor(Color startColor) {
+	public void setStartColor(Color startColor) {
 		this.startColor = startColor;
 	}
 
@@ -158,7 +158,7 @@ public class GradientParameters {
 	 * 
 	 * @param endColor
 	 */
-	private void setEndColor(Color endColor) {
+	public void setEndColor(Color endColor) {
 		this.endColor = endColor;
 	}
 
@@ -174,7 +174,7 @@ public class GradientParameters {
 	 * 
 	 * @param startPercential
 	 */
-	private void setStartPercential(double startPercential) {
+	public void setStartPercential(double startPercential) {
 		this.startPercential = startPercential;
 	}
 
@@ -190,7 +190,7 @@ public class GradientParameters {
 	 * 
 	 * @param range
 	 */
-	private void setRange(double range) {
+	public void setRange(double range) {
 		this.range = range;
 	}
 

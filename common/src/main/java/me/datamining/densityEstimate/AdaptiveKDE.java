@@ -13,7 +13,10 @@ import me.math.grid.array.SpatialGridPoint;
 import me.math.grid.array.UniformSpatialGrid;
 import me.math.grid.data.DensityEstimateDataSample;
 import me.math.kdtree.INode;
+import me.math.kdtree.INodeCreator;
+import me.math.kdtree.KDNode;
 import me.math.kdtree.KDTree;
+import me.math.kdtree.INode.Direction;
 import me.math.kdtree.search.RangeSearch;
 
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
@@ -88,8 +91,10 @@ public class AdaptiveKDE extends AbstractDensityEstimateAlgorithm {
      */
     public void kernalDensityEstimate(IDensityKernel kernel, IBandwidth xsmothParm, IBandwidth ysmothParm )
     {
-    	DescriptiveStatistics xlocalStats = new DescriptiveStatistics();
+     	DescriptiveStatistics xlocalStats = new DescriptiveStatistics();
         DescriptiveStatistics ylocalStats = new DescriptiveStatistics();
+        
+        this.tree_ = this.getGrid().getTree();
         
         for (int r = 0; r < this.getGrid().getRows(); r++) {
            for (int c = 0; c < this.getGrid().getCols(); c++) {
@@ -113,9 +118,9 @@ public class AdaptiveKDE extends AbstractDensityEstimateAlgorithm {
                             for (SpatialSamplePoint cnt : this.getSampleValues()) {
                             	double t = 0;
                         	    if ( pt.getData() != null ) {
-                        	    	t = pt.getData().getValue() - cnt.getValue();
+                        	    		t = pt.getData().getValue() - cnt.getValue();
                         	    } else {
-                        	    	pt.setData( new DensityEstimateDataSample());
+                        	    		pt.setData( new DensityEstimateDataSample());
                         	    }
                                
                                 double X = (1.0 / hparm)* kernel.kernelValue(t / hparm);
@@ -129,6 +134,9 @@ public class AdaptiveKDE extends AbstractDensityEstimateAlgorithm {
                     }
                 }
 
+                if ( gridPt.getData() == null ) {
+                		gridPt.setData( new DensityEstimateDataSample());
+                }
                 gridPt.getData().setInterpolationValue( (1.0 / xlocalStats.getN())* estitmate);
             }
         }
@@ -163,5 +171,5 @@ public class AdaptiveKDE extends AbstractDensityEstimateAlgorithm {
                     
     }
 
-    
+
 }

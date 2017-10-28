@@ -52,7 +52,7 @@ public class PolygonBoxTuple extends AbstractQueryTuple {
 	 */
 	public PolygonBoxTuple(Class<?> alias, String field, List<Point> aList )
 	{
-		super(null, field);
+		super(alias, field);
 		pointLine = aList;
 	}
 

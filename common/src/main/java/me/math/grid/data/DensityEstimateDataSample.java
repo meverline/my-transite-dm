@@ -14,7 +14,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 public class DensityEstimateDataSample extends AbstractDataSample {
 
 	@XStreamAlias("Value")
-	private double value;
+	private double value = 0;
 	
 	/* (non-Javadoc)
 	 * @see me.math.grid.data.AbstractDataSample#getValue()

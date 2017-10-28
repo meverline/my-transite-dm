@@ -40,7 +40,7 @@ public class RectangleTuple extends AbstractQueryTuple {
 	 */
 	public RectangleTuple(Class<?> alias, String field, Point ul, Point lr )
 	{
-		super(null, field);
+		super(alias, field);
 		this.ul = ul;
 		this.lr = lr;
 	}

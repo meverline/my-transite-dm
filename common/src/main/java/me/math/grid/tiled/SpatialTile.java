@@ -82,6 +82,7 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, IG
 	{
 		this.setRows(rows);
 		this.setCols(cols);
+		
 		int startIndex = this.getIndex();
 		gridSizeInMeters_ = spacingInMeters;
 		this.setMbr(new MinBoundingRectangle());
