@@ -21,6 +21,7 @@ import me.transit.dao.query.StopQueryConstraint;
 import me.transit.database.TransitStop;
 import me.utils.TransiteEnums;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.vividsolutions.jts.geom.Coordinate;
@@ -68,6 +69,7 @@ public class TestUniformSpatialGrid {
 	
 	}
 	
+	@Ignore
 	@Test
 	public void testDatabaseGrid() {
 		

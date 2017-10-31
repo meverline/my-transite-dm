@@ -66,31 +66,5 @@ public class StopQueryConstraint extends SpatialQuery {
 			add ( new StringTuple( Agency.class, "name", who.getName(), StringTuple.MATCH.EXACT ));
 		}
 	}
-	
-	
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		Log log = LogFactory.getLog(StopQueryConstraint.class);
 		
-		TransiteStopDao dao =
-			TransiteStopDao.class.cast(DaoBeanFactory.create().getDaoBean(TransiteStopDao.class));
-		
-		GeometryFactory factory = new GeometryFactory();
-		StopQueryConstraint query = new StopQueryConstraint();
-		
-		Point ur = factory.createPoint( new Coordinate(-77.095, 38.89));
-		Point ll = factory.createPoint( new Coordinate(-77.078, 38.871));
-		
-		 query.addRectangleConstraint(ur, ll);
-		 List<TransitStop> stops = dao.query(query);
-		 
-		 for ( TransitStop st : stops) {
-			 log.info(st.getId() + " " + st.getName());			 
-		 }
-		 log.info("done query");
-	
-	}
-	
 }

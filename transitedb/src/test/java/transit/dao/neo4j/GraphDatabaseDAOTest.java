@@ -13,11 +13,13 @@ import me.transit.database.impl.AgencyImpl;
 import me.transit.database.impl.RouteImpl;
 import me.transit.database.impl.TransitStopImpl;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.neo4j.graphdb.Node;
 
 public class GraphDatabaseDAOTest {
 
+	@Ignore
 	@Test
 	public void testfindRoutes() {
 		
@@ -48,6 +50,7 @@ public class GraphDatabaseDAOTest {
 		
 	}
 	
+	@Ignore
 	@Test
 	public void testFind() {
 		

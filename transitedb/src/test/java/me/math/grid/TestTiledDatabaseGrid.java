@@ -148,6 +148,7 @@ public class TestTiledDatabaseGrid {
 	    csvStream.close();
 	}
 	
+	@Ignore
 	@Test
 	public void testDatabaseGrid() {
 		
