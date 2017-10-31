@@ -47,6 +47,16 @@ public class KmlFormatter {
 		}
 	}
 	
+	public static void format(StringBuilder kmlFile, Geometry item, String name)
+	{
+		if ( item instanceof Point ) {
+			KmlFormatter.format(kmlFile, item.getCoordinate(), name);
+		}
+		else  {
+			KmlFormatter.format(kmlFile, item.getCoordinates(), name);
+		}
+	}
+	
 	public static void format(StringBuilder kmlFile, Coordinate item, String name)
 	{
 		kmlFile.append("  <Placemark>\n");

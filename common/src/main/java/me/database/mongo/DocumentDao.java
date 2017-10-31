@@ -274,8 +274,7 @@ public class DocumentDao {
             }
             
         } catch (Exception e) {
-            e.printStackTrace();
-            this.log.error( mth.getName() + " "+ obj.getClass().getName() + " " + e);
+            this.log.error(getClass().getName() + ".setValue: " + mth.getName() + ": "+ obj.getClass().getName() + " " + e + " " + value.toString() + " " + value.getClass());
             rtn = false;
         }
         return rtn;
