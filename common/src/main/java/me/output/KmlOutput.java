@@ -1,4 +1,4 @@
-package me.transit.output;
+package me.output;
 
 import java.io.IOException;
 import java.io.PrintStream;
