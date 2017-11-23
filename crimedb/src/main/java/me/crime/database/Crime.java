@@ -166,7 +166,7 @@ public class Crime extends XmlReadable implements Serializable {
 		this.description_ = scrub(description_);
 	}
 
-	private String scrub( String str)
+	protected String scrub( String str)
 	{
 		StringBuffer rtn = new StringBuffer();
 
@@ -306,7 +306,7 @@ public class Crime extends XmlReadable implements Serializable {
 	 * @param aState
 	 * @return
 	 */
-	private boolean isValidState(String aState)
+	protected boolean isValidState(String aState)
 	{
 		String [] state = { "va", "md", "dc", "district of columbia" };
 		

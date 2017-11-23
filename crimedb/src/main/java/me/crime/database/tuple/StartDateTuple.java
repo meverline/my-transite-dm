@@ -34,7 +34,7 @@ public class StartDateTuple extends AbstractQueryTuple {
 	public StartDateTuple(Calendar start)
 	{
 		super(Crime.class, "startDate");
-		startDate_ = start;
+		setStartDate(start);
 	}
 
 	public void setStartDate(Calendar startDate)
