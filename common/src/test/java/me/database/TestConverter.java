@@ -11,7 +11,6 @@ import org.easymock.Mock;
 import org.easymock.MockType;
 import org.junit.Rule;
 import org.junit.Test;
-import org.neo4j.kernel.impl.storemigration.legacystore.LegacyStoreVersionCheck;
 
 import com.thoughtworks.xstream.converters.MarshallingContext;
 import com.thoughtworks.xstream.converters.UnmarshallingContext;

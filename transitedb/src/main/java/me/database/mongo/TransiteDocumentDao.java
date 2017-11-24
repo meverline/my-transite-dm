@@ -11,7 +11,7 @@ public class TransiteDocumentDao extends DocumentDao {
 	
 	TransiteDocumentDao() throws UnknownHostException
 	{
-		super();
+		super(null);
 		this.addSkipField(StopTime.LOCATION);
 	}
 	
@@ -22,7 +22,7 @@ public class TransiteDocumentDao extends DocumentDao {
      */
     public static synchronized DocumentDao instance() throws UnknownHostException {
             if ( _theOne == null ) {
-                    _theOne = new DocumentDao();
+                    _theOne = new DocumentDao(null);
             }
             return _theOne;
     }
