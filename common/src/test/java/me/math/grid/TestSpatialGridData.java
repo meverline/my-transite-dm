@@ -1,7 +1,5 @@
 package me.math.grid;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 import org.meanbean.test.BeanTester;
 
@@ -13,6 +11,7 @@ public class TestSpatialGridData {
 		
 		tester.testBean(SpatialGridDataMock.class);
 		
+		@SuppressWarnings("unused")
 		SpatialGridDataMock test = new SpatialGridDataMock(100);
 	}
 
@@ -22,6 +21,7 @@ public class TestSpatialGridData {
 	
 	private static  class SpatialGridDataMock extends SpatialGridData {
 		
+		@SuppressWarnings("unused")
 		public SpatialGridDataMock() {
 			
 		}

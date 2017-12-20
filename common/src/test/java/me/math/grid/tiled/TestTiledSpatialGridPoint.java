@@ -1,6 +1,8 @@
 package me.math.grid.tiled;
 
-import static org.junit.Assert.*;
+import static org.easymock.EasyMock.expect;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import org.easymock.EasyMock;
 import org.easymock.EasyMockRule;
@@ -14,17 +16,10 @@ import org.meanbean.test.BeanTester;
 import org.meanbean.test.Configuration;
 import org.meanbean.test.ConfigurationBuilder;
 
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.Polygon;
-
 import me.math.Vertex;
 import me.math.grid.AbstractSpatialGridPoint;
-import static org.easymock.EasyMock.expect;
-
 import me.math.kdtree.INode;
 import me.math.kdtree.MinBoundingRectangle;
-import static org.easymock.EasyMock.expect;
 
 public class TestTiledSpatialGridPoint extends EasyMockSupport {
 

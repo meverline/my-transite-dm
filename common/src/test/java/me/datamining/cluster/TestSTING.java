@@ -3,13 +3,9 @@ package me.datamining.cluster;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
 import org.meanbean.test.BeanTester;
 
-import me.datamining.SpatialSamplePoint;
 import me.math.Vertex;
 import me.math.grid.AbstractSpatialGridPoint;
 import me.math.grid.array.UniformSpatialGrid;

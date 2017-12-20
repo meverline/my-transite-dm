@@ -1,12 +1,12 @@
 package me.utils;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.awt.Color;
-import java.util.Calendar;
 
 import org.junit.Test;
-import org.meanbean.lang.Factory;
 
 public class TestColorGradient {
 

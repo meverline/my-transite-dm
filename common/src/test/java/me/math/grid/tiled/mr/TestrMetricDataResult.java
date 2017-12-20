@@ -1,29 +1,26 @@
 package me.math.grid.tiled.mr;
 
 import static org.easymock.EasyMock.expect;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.io.LongWritable;
-import org.apache.hadoop.mapreduce.Mapper.Context;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Mapper;
+import org.apache.hadoop.mapreduce.Reducer;
 import org.easymock.EasyMock;
 import org.easymock.EasyMockRule;
 import org.easymock.EasyMockSupport;
 import org.easymock.Mock;
-import org.easymock.TestSubject;
 import org.junit.Rule;
 import org.junit.Test;
-import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.io.LongWritable;
-import org.apache.hadoop.io.Text;
 
 import me.math.Vertex;
 import me.math.grid.AbstractSpatialGridPoint;
-import org.apache.hadoop.mapreduce.Mapper;
-import org.apache.hadoop.mapreduce.Reducer;
 
 public class TestrMetricDataResult extends EasyMockSupport {
 
@@ -68,6 +65,7 @@ public class TestrMetricDataResult extends EasyMockSupport {
 	}
 	
 	
+	@SuppressWarnings("unused")
 	@Test
 	public void testPopulateGridDataMap() throws IOException {
 		

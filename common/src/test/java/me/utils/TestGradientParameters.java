@@ -1,9 +1,6 @@
 package me.utils;
 
-import static org.junit.Assert.*;
-
 import java.awt.Color;
-import java.util.Calendar;
 
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 import org.junit.Test;
@@ -11,8 +8,6 @@ import org.meanbean.lang.Factory;
 import org.meanbean.test.BeanTester;
 import org.meanbean.test.Configuration;
 import org.meanbean.test.ConfigurationBuilder;
-
-import org.meanbean.test.BeanTester;import org.meanbean.test.BeanTester;
 
 public class TestGradientParameters {
 

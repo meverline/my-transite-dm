@@ -1,7 +1,5 @@
 package me.math.grid.tiled;
 
-import static org.junit.Assert.*;
-
 import java.net.UnknownHostException;
 import java.sql.SQLException;
 
@@ -17,7 +15,6 @@ import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.Point;
 
 import me.math.Vertex;
-import me.math.grid.tiled.TestTileFragament.PoloygonFactory;
 import me.utils.TransiteEnums;
 
 public class TestDbTiledSpatialGrid {

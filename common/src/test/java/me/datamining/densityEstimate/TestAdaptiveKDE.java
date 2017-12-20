@@ -1,6 +1,7 @@
 package me.datamining.densityEstimate;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,20 +11,14 @@ import java.util.List;
 import org.junit.Test;
 
 import me.datamining.SpatialSamplePoint;
-import me.datamining.Kernel.Epanechnikov;
 import me.datamining.Kernel.Gaussian;
 import me.datamining.Kernel.IDensityKernel;
 import me.datamining.bandwidth.IBandwidth;
 import me.datamining.bandwidth.ScottsRule;
-import me.datamining.bandwidth.SlivermanRule;
 import me.math.Vertex;
 import me.math.grid.AbstractSpatialGridPoint;
 import me.math.grid.array.UniformSpatialGrid;
 import me.math.grid.data.DensityEstimateDataSample;
-import me.math.kdtree.INode;
-import me.math.kdtree.INodeCreator;
-import me.math.kdtree.KDNode;
-import me.math.kdtree.INode.Direction;
 import me.utils.TransiteEnums;
 
 public class TestAdaptiveKDE {
