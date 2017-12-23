@@ -75,6 +75,7 @@ public class TestSpatialTile {
 		
 		assertNotNull(obj.toDocument());
 		
+		@SuppressWarnings("unused")
 		List<TiledSpatialGridPoint> points = obj.getGrid();
 		for (TiledSpatialGridPoint pt :  obj.getGrid()) {
 			pt.setData( new TestData());

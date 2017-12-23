@@ -20,7 +20,7 @@ import org.hibernate.usertype.UserType;
 
 public class CSVClobUsetDataType implements UserType, ParameterizedType {
 
-	private static final String DEFAULT_CLASS_NAME = "csvClass";
+	protected static final String DEFAULT_CLASS_NAME = "csvClass";
 
 	private Class<? extends CSVFieldType> csvClass;
 	
@@ -85,12 +85,13 @@ public class CSVClobUsetDataType implements UserType, ParameterizedType {
 							SessionImplementor arg3) throws HibernateException, SQLException {
 		if ( value == null ) {
 			st.setNull(index, Types.VARCHAR);
+		} else {
+			if (! List.class.isAssignableFrom(value.getClass())) {
+				throw new HibernateException("CSVFieldType::nullSafeSet unable translate");
+			}
+			String str = toCSV( List.class.cast(value));
+			st.setString(index, str);
 		}
-		if (! List.class.isAssignableFrom(value.getClass())) {
-			throw new HibernateException("CSVFieldType::nullSafeSet unable translate");
-		}
-		String str = toCSV( List.class.cast(value));
-		st.setString(index, str);
 		return;
 	}
 
@@ -169,7 +170,7 @@ public class CSVClobUsetDataType implements UserType, ParameterizedType {
 	 */
 	public Serializable disassemble(Object value) throws HibernateException {
 		
-		if ( List.class.isAssignableFrom(value.getClass())) {
+		if (!  List.class.isAssignableFrom(value.getClass())) {
 			return null;
 		}
 		return toCSV( List.class.cast(value));

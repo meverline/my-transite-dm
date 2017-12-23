@@ -1,11 +1,11 @@
 package me.datamining.cluster;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 import org.meanbean.test.BeanTester;
 
+import me.datamining.cluster.STING.ClusterNodeEvaluation;
 import me.math.Vertex;
 import me.math.grid.AbstractSpatialGridPoint;
 import me.math.grid.array.UniformSpatialGrid;
@@ -24,6 +24,22 @@ public class TestSTING {
 		BeanTester tester = new BeanTester();
 		
 		tester.testBean(STING.class);
+	}
+	
+	@Test
+	public void testClusterNodeEvaluation() {
+		
+		ClusterNodeEvaluation testSubject = new ClusterNodeEvaluation(0, 100, 0.01);
+		
+		assertEquals(0, testSubject.getMin(), 0.01);
+		assertEquals(100, testSubject.getMax(), 0.01);
+		assertEquals(0.01, testSubject.getConfThresshold(), 0.01);
+		
+		assertEquals(0, testSubject.probablit(0.05, 5.0, 0), 0.01);
+		assertEquals(2.5, testSubject.probablit(0.05, 5.0, 2), 0.01);
+		
+		assertFalse(testSubject.isRelevent(0.0, 0.0, 0.0));
+		testSubject.isRelevent(0.5, 5.0, 20.0);
 	}
 	
 	@Test

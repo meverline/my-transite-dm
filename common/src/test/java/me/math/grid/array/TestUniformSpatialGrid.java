@@ -1,12 +1,13 @@
 package me.math.grid.array;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import me.math.Vertex;
@@ -82,21 +83,7 @@ public class TestUniformSpatialGrid {
 		assertNull(grid.get(85, 200));
 		assertNull(grid.get(-1, -1));
 	}
-	
-	@Ignore
-	@Test
-	public void testFindGridPont() throws IOException {
-		Vertex ul = new Vertex(38.941, -77.286);
-		Vertex lr = new Vertex(38.827, -77.078);
 		
-		double distance = TransiteEnums.DistanceUnitType.MI.toMeters(0.1);
-		UniformSpatialGrid grid = new UniformSpatialGrid(ul, lr, distance);
-		
-		Vertex pt = new Vertex(38.750, -77.125);
-		
-		assertNotNull( grid.findGridPont(pt.toPoint()));
-	}
-	
 	@Test
 	public void testGetNextGridPoint() throws IOException {
 		Vertex ul = new Vertex(38.941, -77.286);

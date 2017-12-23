@@ -41,12 +41,13 @@ public class ListToClobUserDataType implements UserType {
 			SessionImplementor arg3) throws HibernateException, SQLException {
 		if ( value == null ) {
 			st.setNull(index, Types.VARCHAR);
+		} else { 
+			if (! HashSet.class.isAssignableFrom(value.getClass())) {
+				throw new HibernateException("CSVFieldType::nullSafeSet unable translate");
+			}
+			String str = toCSV( HashSet.class.cast(value));
+			st.setString(index, str);
 		}
-		if (! HashSet.class.isAssignableFrom(value.getClass())) {
-			throw new HibernateException("CSVFieldType::nullSafeSet unable translate");
-		}
-		String str = toCSV( HashSet.class.cast(value));
-		st.setString(index, str);
 		return;
 	}
 
@@ -82,7 +83,7 @@ public class ListToClobUserDataType implements UserType {
 	 */
 	public Object assemble(Serializable cached, Object owner) throws HibernateException {
 		
-		if ( String.class.isAssignableFrom(cached.getClass())) {
+		if ( ! String.class.isAssignableFrom(cached.getClass())) {
 			return null;
 		}	
 		HashSet<Object> aList = null;
@@ -115,7 +116,7 @@ public class ListToClobUserDataType implements UserType {
 	 */
 	public Serializable disassemble(Object value) throws HibernateException {
 		
-		if ( List.class.isAssignableFrom(value.getClass())) {
+		if ( ! HashSet.class.isAssignableFrom(value.getClass())) {
 			return null;
 		}
 		return toCSV( HashSet.class.cast(value));
