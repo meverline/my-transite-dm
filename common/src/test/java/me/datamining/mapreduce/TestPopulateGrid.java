@@ -54,6 +54,7 @@ public class TestPopulateGrid  extends AbstractMapReduceTest{
 		
 	}
 	
+	@SuppressWarnings("unused")
 	@Test
 	public void testBad() {
 		
