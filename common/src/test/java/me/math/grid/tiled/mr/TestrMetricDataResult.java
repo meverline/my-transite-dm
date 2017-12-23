@@ -65,12 +65,13 @@ public class TestrMetricDataResult extends EasyMockSupport {
 	}
 	
 	
-	@SuppressWarnings("unused")
+	@SuppressWarnings({ "unused", "unchecked" })
 	@Test
 	public void testPopulateGridDataMap() throws IOException {
 		
 		PopulateGridData x = new PopulateGridData();
 		
+		@SuppressWarnings("rawtypes")
 		Mapper.Context cmock = this.createMock(Mapper.Context.class);
 		DensityEstimateMetricDataResult testSubject = new DensityEstimateMetricDataResult(ul);
 		
@@ -83,9 +84,11 @@ public class TestrMetricDataResult extends EasyMockSupport {
 		
 	}
 	
+	@SuppressWarnings("unchecked")	
 	@Test
 	public void testPopulateGridDataReduce() throws IOException {
 		
+		@SuppressWarnings("rawtypes")
 		Reducer.Context cmock = this.createMock(Reducer.Context.class);
 				
 		PopulateGridData.Reduce reduce = new PopulateGridData.Reduce();

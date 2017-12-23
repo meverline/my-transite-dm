@@ -41,10 +41,8 @@ public class TestNonAdaptiveKDE {
 		
 		kernel = new Gaussian();
 		bw = new ScottsRule();
-		
-		Vertex ul = new Vertex(38.941, -77.286);
-		Vertex lr = new Vertex(38.827, -77.078);
-		
+				
+		@SuppressWarnings("unused")
 		double distance = TransiteEnums.DistanceUnitType.MI.toMeters(0.1);
 	}
 	

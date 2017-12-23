@@ -1,13 +1,9 @@
 package me.output;
 
-import static org.junit.Assert.*;
-
 import java.io.File;
 import java.io.IOException;
 
 import org.junit.Test;
-
-import com.mongodb.client.model.geojson.Geometry;
 
 import me.math.Vertex;
 import me.math.kdtree.MinBoundingRectangle;

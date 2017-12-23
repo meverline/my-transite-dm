@@ -1,7 +1,6 @@
 package me.transit.dao.query.tuple;
 
 import static org.easymock.EasyMock.expect;
-import static org.junit.Assert.*;
 
 import java.util.Calendar;
 

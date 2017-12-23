@@ -1,7 +1,7 @@
 package me.transit.dao.query.tuple;
 
 import static org.easymock.EasyMock.expect;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import org.easymock.EasyMock;
 import org.easymock.EasyMockRule;
@@ -13,7 +13,6 @@ import org.junit.Test;
 import com.mongodb.BasicDBObject;
 
 import me.math.Vertex;
-import me.utils.TransiteEnums;
 
 public class TestRectangleTuple extends EasyMockSupport {
 
@@ -24,7 +23,7 @@ public class TestRectangleTuple extends EasyMockSupport {
     	
 	@Test
 	public void testConstructor() {
-		@SuppressWarnings("unused")
+		
 		RectangleTuple obj = new RectangleTuple("field", ul.toPoint(), lr.toPoint());		
 		obj = new RectangleTuple(String.class, "field", ul.toPoint(), lr.toPoint());
 		

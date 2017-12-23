@@ -47,6 +47,7 @@ public class TestSpatialQuery extends EasyMockSupport {
 	
 	private static final GeometryFactory factory_  = new GeometryFactory();
 	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void test() {
 	

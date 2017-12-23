@@ -1,9 +1,7 @@
 package me.transit.dao.query.tuple;
 
 import static org.easymock.EasyMock.expect;
-import static org.junit.Assert.*;
-
-import java.util.Calendar;
+import static org.junit.Assert.assertTrue;
 
 import org.easymock.EasyMock;
 import org.easymock.EasyMockRule;
@@ -27,7 +25,7 @@ public class TestCircleTuple extends EasyMockSupport {
     	
 	@Test
 	public void testConstructor() {
-		@SuppressWarnings("unused")
+		
 		CircleTuple obj = new CircleTuple("field", ul.toPoint(), this.distance);		
 		obj = new CircleTuple(String.class, "field", ul.toPoint(), this.distance);
 		

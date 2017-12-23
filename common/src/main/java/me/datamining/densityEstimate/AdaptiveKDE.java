@@ -2,6 +2,8 @@ package me.datamining.densityEstimate;
 
 import java.util.List;
 
+import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
+
 import me.datamining.AbstractDensityEstimateAlgorithm;
 import me.datamining.SpatialSamplePoint;
 import me.datamining.Kernel.IDensityKernel;
@@ -13,13 +15,8 @@ import me.math.grid.array.SpatialGridPoint;
 import me.math.grid.array.UniformSpatialGrid;
 import me.math.grid.data.DensityEstimateDataSample;
 import me.math.kdtree.INode;
-import me.math.kdtree.INodeCreator;
-import me.math.kdtree.KDNode;
 import me.math.kdtree.KDTree;
-import me.math.kdtree.INode.Direction;
 import me.math.kdtree.search.RangeSearch;
-
-import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
 public class AdaptiveKDE extends AbstractDensityEstimateAlgorithm {
 

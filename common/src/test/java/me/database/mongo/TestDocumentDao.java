@@ -141,6 +141,7 @@ public class TestDocumentDao extends EasyMockSupport{
 		
 		doc.add(objct.toDocument());
 		
+		@SuppressWarnings("unused")
 		Object obj = doc.translateToDbObject(objct.toDocument());
 		
 		verifyAll();
@@ -157,7 +158,6 @@ public class TestDocumentDao extends EasyMockSupport{
 		private String name = "Name";
 		private String array[] = { "a", "b", "c", "d" };
 		private List<String> data = Arrays.asList(array);
-		private String item;
 
 		@Override
 		public Map<String, Object> toDocument() {
