@@ -50,6 +50,7 @@ public class TestVertex {
 		
 	}
 	
+	@SuppressWarnings("unlikely-arg-type")
 	@Test
 	public void testEquals() {
 		Vertex obj = new Vertex(38.941, -77.286);

@@ -49,7 +49,6 @@
  	 <search>
  	 
  	 	<tab value="me.openMap.models.query.RegionalMapSearch" />
- 	 	<tab value="me.openMap.models.query.KNNSearch" />
  	 	<tab value="me.openMap.models.query.DataMining" >
  	 	   <sample value="me.openMap.models.query.sample.StopSample" />
  	 	   <sample value="me.openMap.models.query.sample.ServiceSample" />

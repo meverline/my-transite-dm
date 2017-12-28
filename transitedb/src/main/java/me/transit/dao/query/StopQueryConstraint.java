@@ -2,18 +2,11 @@ package me.transit.dao.query;
 
 import java.util.List;
 
-import me.factory.DaoBeanFactory;
-import me.transit.dao.TransiteStopDao;
+import com.vividsolutions.jts.geom.Point;
+
 import me.transit.dao.query.tuple.StringTuple;
 import me.transit.database.Agency;
 import me.transit.database.TransitStop;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.Point;
 
 
 public class StopQueryConstraint extends SpatialQuery {

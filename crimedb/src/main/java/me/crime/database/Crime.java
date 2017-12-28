@@ -21,103 +21,131 @@ import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.TimeZone;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
+import javax.persistence.Table;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.hibernate.annotations.Type;
+
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+
 import me.crime.dao.AddressDao;
 import me.crime.dao.CrimeDao;
 import me.crime.dao.URCCatagoriesDAO;
 import me.factory.DaoBeanFactory;
 import me.math.Vertex;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-
+@Entity
+@Table(name = "crm_CRIME")
 @XStreamAlias("crime")
 public class Crime extends XmlReadable implements Serializable {
 
 	public static final long serialVersionUID = 1;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "CRIME_ID", nullable = true, unique = true)
 	@XStreamAlias("id")
-	private long   id_ = 0;
+	private long id_ = 0;
 
+	@Column(name = "CRIME_NUMBER", nullable = false)
+	@XStreamAlias("crimenumber")
+	private String crimeNumber_ = "";
+
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@MapsId
+	@JoinColumn(name = "URC_ID")
 	@XStreamAlias("urccategory")
 	private URCCatagories urccrime_ = null;
-	
-	@XStreamAlias("category")
-	private String   catagory_ = null;
-	
-	@XStreamAlias("name")
-	private String   bussiness_ = "";
-	
+
+	@Column(name = "START_DATE", nullable = false)
+	@Type(type = "java.util.Calendar")
 	@XStreamAlias("startdate")
 	private Calendar startDate_ = null;
-	
+
+	@Column(name = "CRIMECATAGORY", nullable = false)
+	@XStreamAlias("category")
+	private String catagory_ = null;
+
+	@Column(name = "BUSSINESS", nullable = false)
+	@XStreamAlias("name")
+	private String bussiness_ = "";
+
+	@Column(name = "DESCRIPTION", nullable = true)
 	@XStreamAlias("description")
-	private String   description_ = "";
-	
+	private String description_ = "";
+
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@MapsId()
+	@JoinColumn(name = "ADDRESS_ID")
 	@XStreamAlias("address")
-	private Address  address_ = null;
-	
+	private Address address_ = null;
+
+	@Column(name = "FILE", nullable = false)
 	@XStreamAlias("file")
-	private String   file_ = "";
-	
+	private String file_ = "";
+
+	@Column(name = "COUNTY", nullable = false)
 	@XStreamAlias("county")
-	private String   county_ = "";
-	
-	@XStreamAlias("crimenumber")
-	private String      crimeNumber_ = "";
-	
+	private String county_ = "";
+
 	@XStreamAlias("rank")
-	private double	rank_ = 0.0;
-	
+	private double rank_ = 0.0;
+
+	@Column(name = "TIME_ORDINAL", nullable = false)
 	@XStreamAlias("time")
 	private double time_ = 0.0;
-	
+
 	protected static Log log_ = LogFactory.getLog(Crime.class);
 
-	public Crime()
-	{
+	public Crime() {
 		init("");
 	}
 
-	public Crime(String cc)
-	{
-        init(cc);
+	public Crime(String cc) {
+		init(cc);
 	}
 
-	private void init(String cc)
-	{
-	      StringBuffer buff = new StringBuffer();
+	private void init(String cc) {
+		StringBuffer buff = new StringBuffer();
 
-	        Calendar now = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
+		Calendar now = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
 
-	        buff.append( String.format("%02d", now.get(Calendar.MONTH)+1) );
-		    buff.append( String.format("%02d", now.get(Calendar.DAY_OF_MONTH)) );
-		    buff.append( now.get(Calendar.YEAR) + ".");
-		    buff.append( String.format("%02d", now.get(Calendar.HOUR_OF_DAY)) );
-		    buff.append( String.format("%02d", now.get(Calendar.MINUTE)) );
-		    buff.append( String.format("%02d", now.get(Calendar.SECOND)) + "." );
-		    buff.append( String.format("%03d",now.get(Calendar.MILLISECOND)) + "." + cc);
+		buff.append(String.format("%02d", now.get(Calendar.MONTH) + 1));
+		buff.append(String.format("%02d", now.get(Calendar.DAY_OF_MONTH)));
+		buff.append(now.get(Calendar.YEAR) + ".");
+		buff.append(String.format("%02d", now.get(Calendar.HOUR_OF_DAY)));
+		buff.append(String.format("%02d", now.get(Calendar.MINUTE)));
+		buff.append(String.format("%02d", now.get(Calendar.SECOND)) + ".");
+		buff.append(String.format("%03d", now.get(Calendar.MILLISECOND)) + "." + cc);
 
-		    crimeNumber_ = buff.toString();
+		crimeNumber_ = buff.toString();
 	}
 
 	public long getId() {
 		return id_;
 	}
 
-	public String getCrimeNumber()
-	{
+	public void setId(long ndx) {
+		id_ = ndx;
+	}
+
+	public String getCrimeNumber() {
 		return crimeNumber_;
 	}
 
-	public void setCrimeNumber( String caseNumber)
-	{
+	public void setCrimeNumber(String caseNumber) {
 		crimeNumber_ = caseNumber;
-	}
-
-	public void setId( long ndx) {
-		id_ = ndx;
 	}
 
 	public URCCatagories getCodes() {
@@ -125,7 +153,7 @@ public class Crime extends XmlReadable implements Serializable {
 	}
 
 	public void setCodes(URCCatagories list) {
-		 urccrime_ = list;
+		urccrime_ = list;
 	}
 
 	public Calendar getStartDate() {
@@ -133,16 +161,16 @@ public class Crime extends XmlReadable implements Serializable {
 	}
 
 	public String getDate() {
-		if  ( startDate_ != null ) {
+		if (startDate_ != null) {
 			return startDate_.getTime().toString();
 		}
 		return "";
 	}
 
 	public String getDateOnly() {
-		String [] month = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+		String[] month = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
 
-		if  ( startDate_ != null ) {
+		if (startDate_ != null) {
 			StringBuffer buf = new StringBuffer();
 
 			buf.append(month[startDate_.get(Calendar.MONTH)] + " ");
@@ -157,7 +185,6 @@ public class Crime extends XmlReadable implements Serializable {
 		this.startDate_ = startDate_;
 	}
 
-
 	public String getDescription() {
 		return description_;
 	}
@@ -166,12 +193,11 @@ public class Crime extends XmlReadable implements Serializable {
 		this.description_ = scrub(description_);
 	}
 
-	protected String scrub( String str)
-	{
+	protected String scrub(String str) {
 		StringBuffer rtn = new StringBuffer();
 
-		for ( int ndx = 0; ndx < str.length(); ndx++ ) {
-			switch ( str.charAt(ndx) ) {
+		for (int ndx = 0; ndx < str.length(); ndx++) {
+			switch (str.charAt(ndx)) {
 			case '"':
 				rtn.append("");
 				break;
@@ -186,12 +212,12 @@ public class Crime extends XmlReadable implements Serializable {
 				break;
 			case '�':
 				rtn.append("");
-		    default:
-		    	if (Character.isSpaceChar( str.charAt(ndx))) {
-		    		rtn.append(' ');
-		    	} else {
-		    	   rtn.append(str.charAt(ndx));
-		    	}
+			default:
+				if (Character.isSpaceChar(str.charAt(ndx))) {
+					rtn.append(' ');
+				} else {
+					rtn.append(str.charAt(ndx));
+				}
 			}
 		}
 
@@ -210,15 +236,15 @@ public class Crime extends XmlReadable implements Serializable {
 		return bussiness_;
 	}
 
-    public void setBussiness(String name_) {
-        String bussiness = name_;
-        if  ( name_.length() > 254 ) {
-            bussiness = name_.substring(0, 254);
-        }
-        this.bussiness_ = bussiness;
-    }
+	public void setBussiness(String name_) {
+		String bussiness = name_;
+		if (name_.length() > 254) {
+			bussiness = name_.substring(0, 254);
+		}
+		this.bussiness_ = bussiness;
+	}
 
-    public String getFile() {
+	public String getFile() {
 		return file_;
 	}
 
@@ -226,25 +252,25 @@ public class Crime extends XmlReadable implements Serializable {
 		this.file_ = file_;
 	}
 
-	public String getCounty()
-	{
+	public String getCounty() {
 		return county_;
 	}
 
-	public void setCounty(String value)
-	{
+	public void setCounty(String value) {
 		county_ = value;
 	}
 
 	/**
 	 * @return the catagory_
 	 */
+
 	public String getCatagory() {
 		return catagory_;
 	}
 
 	/**
-	 * @param catagory_ the catagory_ to set
+	 * @param catagory_
+	 *            the catagory_ to set
 	 */
 	public void setCatagory(String catagory_) {
 		this.catagory_ = catagory_;
@@ -254,6 +280,7 @@ public class Crime extends XmlReadable implements Serializable {
 	 * 
 	 * @return
 	 */
+
 	public double getTime() {
 		return time_;
 	}
@@ -267,17 +294,17 @@ public class Crime extends XmlReadable implements Serializable {
 	}
 
 	/**
-	 * @throws SQLException 
+	 * @throws SQLException
 	 * 
 	 */
 	public void handleObject(Object obj) throws SQLException {
 
-		if ( obj instanceof Address ) {
+		if (obj instanceof Address) {
 			Address addr = Address.class.cast(obj);
 			Address locatoin;
-			
+
 			AddressDao dao = AddressDao.class.cast(DaoBeanFactory.create().getDaoBean(AddressDao.class));
-			
+
 			locatoin = dao.loadAddress(addr.getLocation());
 			if (locatoin == null) {
 				this.setAddress(addr);
@@ -285,36 +312,37 @@ public class Crime extends XmlReadable implements Serializable {
 				this.setAddress(locatoin);
 			}
 
-		} else if ( obj instanceof URCCatagories ) {
-			
-			URCCatagoriesDAO dao = 
-					URCCatagoriesDAO.class.cast(DaoBeanFactory.create().getDaoBean(URCCatagoriesDAO.class));
-			
+		} else if (obj instanceof URCCatagories) {
+
+			URCCatagoriesDAO dao = URCCatagoriesDAO.class
+					.cast(DaoBeanFactory.create().getDaoBean(URCCatagoriesDAO.class));
+
 			URCCatagories cat = URCCatagories.class.cast(obj);
 			URCCatagories dbcat = dao.findURCbyCatagory(cat.getCatagorie());
-			if ( dbcat == null ) {
+			if (dbcat == null) {
 				dao.save(cat);
 				dbcat = dao.findURCbyCatagory(cat.getCatagorie());
 			}
 			setCodes(dbcat);
 
-		} 
+		}
 	}
-	
+
 	/**
 	 * 
 	 * @param aState
 	 * @return
 	 */
-	protected boolean isValidState(String aState)
-	{
-		String [] state = { "va", "md", "dc", "district of columbia" };
-		
-		for ( String s : state) {
-			if ( aState.toLowerCase().compareTo(s) == 0) { return true; }
+	protected boolean isValidState(String aState) {
+		String[] state = { "va", "md", "dc", "district of columbia" };
+
+		for (String s : state) {
+			if (aState.toLowerCase().compareTo(s) == 0) {
+				return true;
+			}
 		}
-		
-		if  ( this.getCounty().toLowerCase().compareTo("dc") == 0) {
+
+		if (this.getCounty().toLowerCase().compareTo("dc") == 0) {
 			return true;
 		}
 		return false;
@@ -323,19 +351,18 @@ public class Crime extends XmlReadable implements Serializable {
 	/**
 	 * 
 	 */
-	public void save()
-	{
+	public void save() {
 		CrimeDao dao = CrimeDao.class.cast(DaoBeanFactory.create().getDaoBean(CrimeDao.class));
-		
+
 		try {
-			
-			if ( this.getStartDate() == null && this.getCounty().compareTo("Vienna") == 0) {
+
+			if (this.getStartDate() == null && this.getCounty().compareTo("Vienna") == 0) {
 				String name = this.getFile().substring(0, this.getFile().indexOf('.'));
 
-				String [] date = name.split("-");
-				
+				String[] date = name.split("-");
+
 				Calendar cal = Calendar.getInstance();
-				
+
 				cal.set(Calendar.MONTH, Integer.parseInt(date[0]));
 				cal.set(Calendar.DAY_OF_MONTH, Integer.parseInt(date[1]));
 				cal.set(Calendar.YEAR, Integer.parseInt(date[2]));
@@ -346,40 +373,35 @@ public class Crime extends XmlReadable implements Serializable {
 				cal.set(Calendar.AM_PM, 0);
 
 				this.setStartDate(cal);
-			}
-			else if ( this.getStartDate() == null )
-			{
+			} else if (this.getStartDate() == null) {
 				this.setStartDate(Calendar.getInstance());
-			}
-			else if ( this.getStartDate().get(Calendar.YEAR) < 1999) 
-			{
+			} else if (this.getStartDate().get(Calendar.YEAR) < 1999) {
 				this.getStartDate().set(Calendar.YEAR, 1999);
-			}
-			else if ( this.getStartDate().get(Calendar.YEAR) > 2009) 
-			{
+			} else if (this.getStartDate().get(Calendar.YEAR) > 2009) {
 				this.getStartDate().set(Calendar.YEAR, 2009);
 			}
-			
-			if ( isValidState( this.getAddress().getState() ) ) {
-				
-				double dts = this.getStartDate().getTimeInMillis() / 86400000.0; //divide milliseconds per day to get days.fraction_of_day
-				double dayOrd = Math.floor(dts); //truncate to get whole days
+
+			if (isValidState(this.getAddress().getState())) {
+
+				double dts = this.getStartDate().getTimeInMillis() / 86400000.0; // divide milliseconds per day to get
+																					// days.fraction_of_day
+				double dayOrd = Math.floor(dts); // truncate to get whole days
 				double timeOrd = (dts - dayOrd) * 24; // track time as hour.fraction_of_hour
-				
-				this.setTime( timeOrd );
-				
+
+				this.setTime(timeOrd);
+
 				AddressDao locDao = AddressDao.class.cast(DaoBeanFactory.create().getDaoBean(AddressDao.class));
-				
-				Address location = locDao.loadAddress( this.getAddress().getLocation() );
-			    if ( location != null ) {
-					 this.setAddress(location);
-			    } else {
-			    	 locDao.save(this.getAddress());
+
+				Address location = locDao.loadAddress(this.getAddress().getLocation());
+				if (location != null) {
+					this.setAddress(location);
+				} else {
+					locDao.save(this.getAddress());
 				}
-				
+
 				dao.save(this);
 			}
-			
+
 		} catch (SQLException e) {
 
 			log_.warn("Unable to save crime: " + this.getCrimeNumber() + "removing arrested");
@@ -391,23 +413,22 @@ public class Crime extends XmlReadable implements Serializable {
 
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @return
 	 */
-	public Vertex toTemporalPoint()
-	{	
-		return new Vertex( getTime(), getStartDate().get(Calendar.WEEK_OF_YEAR));
+	public Vertex toTemporalPoint() {
+		return new Vertex(getTime(), getStartDate().get(Calendar.WEEK_OF_YEAR));
 	}
 
 	/**
 	 * 
 	 * @return
 	 */
-	public String toDetailedString()
-	{
-		return getDate() + "\n" + getCodes().toString() + "\nBusiness:\n    " + getBussiness() + "\nAddress:\n    " + getAddress() + "\n\n" + getDescription();
+	public String toDetailedString() {
+		return getDate() + "\n" + getCodes().toString() + "\nBusiness:\n    " + getBussiness() + "\nAddress:\n    "
+				+ getAddress() + "\n\n" + getDescription();
 	}
 
 	/**
@@ -425,6 +446,5 @@ public class Crime extends XmlReadable implements Serializable {
 	public void setRank(double rank_) {
 		this.rank_ = rank_;
 	}
-
 
 }

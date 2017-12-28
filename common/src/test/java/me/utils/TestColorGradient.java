@@ -8,6 +8,8 @@ import java.awt.Color;
 
 import org.junit.Test;
 
+import me.utils.ColorGradient.MapColor;
+
 public class TestColorGradient {
 
 	@Test
@@ -29,6 +31,17 @@ public class TestColorGradient {
 		
 		obj.createColorGradiant(20, Color.red, Color.gray);
 	}
+	
+	@Test
+	public void testAnother() {
+		MapColor obj = new MapColor();
+		obj = new MapColor("blue", 20);
+		
+		assertEquals(20, obj.getCount());
+		
+		obj = new MapColor("my nice blue", 20);
+	}
+
 	
 
 }

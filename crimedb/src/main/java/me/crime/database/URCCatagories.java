@@ -19,32 +19,64 @@ package me.crime.database;
 import java.io.Serializable;
 import java.sql.SQLException;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import me.crime.dao.URCCatagoriesDAO;
 import me.factory.DaoBeanFactory;
 
 // Uniform Crime Reports
+@Entity
+@Table(name = "crm_URCCatagories")
 public class URCCatagories extends XmlReadable implements Serializable {
 
 	public static final long serialVersionUID = 1;
 	public static final String CAT_DEFAULT = "ALL OTHER OFFENSES";
 	public static final String GROUP_DEFAULT = "B";
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "URC_ID", nullable = true, unique = true)
 	private long id_ = 0;
+
+	@Column(name = "CATAGORIE", nullable = true, unique = true)
 	private String catagorie_ = URCCatagories.CAT_DEFAULT;
+
+	@Column(name = "CRIMEGROUP", nullable = true, unique = true)
 	private String group = URCCatagories.GROUP_DEFAULT;
 
+	/**
+	 * 
+	 * @return
+	 */
 	public long getId() {
 		return id_;
 	}
 
+	/**
+	 * 
+	 * @param id_
+	 */
 	public void setId(long id_) {
 		this.id_ = id_;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getCatagorie() {
 		return catagorie_;
 	}
 
+	/**
+	 * 
+	 * @param catagorie_
+	 */
 	public void setCatagorie(String catagorie_) {
 		this.catagorie_ = catagorie_;
 	}
@@ -57,30 +89,39 @@ public class URCCatagories extends XmlReadable implements Serializable {
 	}
 
 	/**
-	 * @param group the group to set
+	 * @param group
+	 *            the group to set
 	 */
 	public void setCrimeGroup(String group) {
 		this.group = group;
 	}
 
-	public String asString()
-	{
-		return "URC: id=" + getId() + " Catagorie=" +  getCatagorie() + " Group=" + getCrimeGroup();
-	}
-
-
 	/**
 	 * 
+	 * @return
+	 */
+	public String asString() {
+		return "URC: id=" + getId() + " Catagorie=" + getCatagorie() + " Group=" + getCrimeGroup();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see me.crime.database.XmlReadable#handleObject(java.lang.Object)
 	 */
 	public void handleObject(Object obj) {
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see me.crime.database.XmlReadable#save()
+	 */
 	public void save() throws SQLException {
-		URCCatagoriesDAO dao = 
-				URCCatagoriesDAO.class.cast(DaoBeanFactory.create().getDaoBean(URCCatagoriesDAO.class));
+		URCCatagoriesDAO dao = URCCatagoriesDAO.class.cast(DaoBeanFactory.create().getDaoBean(URCCatagoriesDAO.class));
 		URCCatagories cat;
 		cat = dao.findURCbyCatagory(this.catagorie_);
-		if (cat == null ) {
+		if (cat == null) {
 			dao.save(this);
 		}
 	}

@@ -50,7 +50,6 @@ public class TestPolygonBoxTuple extends EasyMockSupport {
     	
 	@Test
 	public void testConstructor() {
-		@SuppressWarnings("unused")
 		PolygonBoxTuple obj = new PolygonBoxTuple("field", box);		
 		obj = new PolygonBoxTuple(String.class, "field", box);
 		

@@ -1,6 +1,7 @@
 package me.utils;
 
 import java.awt.Color;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 public class ColorGradient {
@@ -166,7 +167,7 @@ public class ColorGradient {
 	/////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////
 	
-	public class MapColor {
+	public static class MapColor {
 
 		private Color primary_ = Color.BLACK;
 		private String primName_ = "black";
@@ -212,12 +213,11 @@ public class ColorGradient {
 			Color rtn = old;
 
 			if (getPrimaryName().length() > 0) {
-				rtn = Color.getColor(name);
-				if (rtn == null) {
-					rtn = Color.decode(name);
-				}
-
-				if (rtn == null) {
+				Field field;
+				try {
+					field = Color.class.getField(name);
+					rtn = (Color) field.get(null);
+				} catch (Exception e) {
 					rtn = Color.BLACK;
 				}
 			}

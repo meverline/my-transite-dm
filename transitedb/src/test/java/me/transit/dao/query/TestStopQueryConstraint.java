@@ -1,6 +1,6 @@
 package me.transit.dao.query;
 
-import static org.junit.Assert.*;
+import static org.easymock.EasyMock.expect;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +17,6 @@ import com.vividsolutions.jts.geom.Point;
 
 import me.transit.database.Agency;
 import me.utils.TransiteEnums;
-
-import static org.easymock.EasyMock.expect;
 
 public class TestStopQueryConstraint extends EasyMockSupport {
 
