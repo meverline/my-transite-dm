@@ -27,6 +27,7 @@ public abstract class AbstractTiledSpatialGrid extends AbstractSpatialGridOverla
 	@XStreamOmitField()
 	private Log logger = LogFactory.getLog(TiledSpatialGrid.class);
 
+	@Column(name="tileSize" )
 	@XStreamAlias("tileSize")
 	private int tileSize = 32;
 	

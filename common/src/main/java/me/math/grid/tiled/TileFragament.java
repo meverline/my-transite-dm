@@ -9,28 +9,36 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Type;
-
 import com.vividsolutions.jts.geom.Polygon;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name="hmt_tileFragment")
+@Table(name = "hmt_tileFragment")
 public class TileFragament implements Serializable {
 
+	@Id
+	@Column(name = "FRAGMENT_UUID", nullable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long uuid = -1;
+
+	@Column(name = "MBR", columnDefinition = "Geometry")
 	private Polygon boundingBox = null;
+
+	@Column(name = "tileIndex")
 	private long index = -1;
+
+	@Column(name = "heatMapName")
 	private String heatMapName = null;
+
+	@Column(name = "heatMapUUID")
 	private long heatMapUUID = -1;
-	
+
 	/**
 	 * 
 	 */
-	public TileFragament()
-	{
+	public TileFragament() {
 	}
-	
+
 	/**
 	 * 
 	 * @param tile
@@ -42,44 +50,47 @@ public class TileFragament implements Serializable {
 		this.setHeatMapName(grid.getHeatMapName());
 		this.setHeatMapUUID(grid.getUUID());
 	}
+
 	/**
 	 * @return the uuid
 	 */
-	@Id
-	@Column(name="FRAGMENT_UUID", nullable=false)
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	public long getUUID() {
 		return uuid;
 	}
+
 	/**
-	 * @param uuid the uuid to set
+	 * @param uuid
+	 *            the uuid to set
 	 */
 	public void setUUID(long uuid) {
 		this.uuid = uuid;
 	}
+
 	/**
 	 * @return the boundingBox
 	 */
-	@Column(name="MBR", columnDefinition = "Geometry")
-	@Type(type = "org.hibernate.spatial.GeometryType")
 	public Polygon getBoundingBox() {
 		return boundingBox;
 	}
+
 	/**
-	 * @param boundingBox the boundingBox to set
+	 * @param boundingBox
+	 *            the boundingBox to set
 	 */
 	public void setBoundingBox(Polygon boundingBox) {
 		this.boundingBox = boundingBox;
 	}
+
 	/**
 	 * @return the index
 	 */
-	@Column(name="tileIndex")
 	public long getIndex() {
 		return index;
 	}
+
 	/**
-	 * @param index the index to set
+	 * @param index
+	 *            the index to set
 	 */
 	public void setIndex(long index) {
 		this.index = index;
@@ -88,13 +99,13 @@ public class TileFragament implements Serializable {
 	/**
 	 * @return the heatMapName
 	 */
-	@Column(name="heatMapName")
 	public String getHeatMapName() {
 		return heatMapName;
 	}
 
 	/**
-	 * @param heatMapName the heatMapName to set
+	 * @param heatMapName
+	 *            the heatMapName to set
 	 */
 	public void setHeatMapName(String heatMapName) {
 		this.heatMapName = heatMapName;
@@ -103,16 +114,16 @@ public class TileFragament implements Serializable {
 	/**
 	 * @return the heatMapUUID
 	 */
-	@Column(name="heatMapUUID")
 	public long getHeatMapUUID() {
 		return heatMapUUID;
 	}
 
 	/**
-	 * @param heatMapUUID the heatMapUUID to set
+	 * @param heatMapUUID
+	 *            the heatMapUUID to set
 	 */
 	public void setHeatMapUUID(long heatMapUUID) {
 		this.heatMapUUID = heatMapUUID;
 	}
-	
+
 }

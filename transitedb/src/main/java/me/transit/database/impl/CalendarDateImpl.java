@@ -18,14 +18,18 @@ public class CalendarDateImpl extends TransitDateImpl implements CalendarDate {
 
 	private static final long serialVersionUID = 1L;
 	
+	@Column(name="DATE")
+	@Type(type = "java.util.Calendar")
 	private Calendar date = Calendar.getInstance();
+	
+	@Column(name="EXCCEPTOIN_TYPE")
+	@Enumerated(EnumType.STRING) 
 	private ExceptionType  exceptionType = ExceptionType.UNKNOWN;
 	
 	/**
 	 * @return the date
 	 */
-	@Column(name="DATE")
-	@Type(type = "java.util.Calendar")
+
 	public Calendar getDate() {
 		return date;
 	}
@@ -40,8 +44,7 @@ public class CalendarDateImpl extends TransitDateImpl implements CalendarDate {
 	/**
 	 * @return the exceptionType
 	 */
-	@Column(name="EXCCEPTOIN_TYPE")
-	@Enumerated(EnumType.STRING) 
+	
 	public ExceptionType getExceptionType() {
 		return exceptionType;
 	}

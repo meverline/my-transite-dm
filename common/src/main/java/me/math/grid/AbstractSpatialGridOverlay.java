@@ -3,18 +3,27 @@ package me.math.grid;
 import me.math.Vertex;
 import me.math.kdtree.KDTree;
 
+import javax.persistence.Column;
+
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 public abstract class AbstractSpatialGridOverlay extends AbstractSpatialGrid {
 
 	public static final String CROSSSCOVARIANCE = "crossCovariance";
 
+	@Column(name="gridSpacingMeters" )
 	@XStreamAlias("SpacingMeters")
 	private double gridSpacingMeters_ = 1000;
+	
+	@Column(name="upperLeft", columnDefinition = "Geometry")
 	@XStreamAlias("ULV")
 	private Vertex upperLeft_ = null;
+	
+	@Column(name="lowerRight", columnDefinition = "Geometry")
 	@XStreamAlias("LRV")
 	private Vertex lowerRight_ = null;
+	
+	@Column(name="crossCovariance" )
 	@XStreamAlias(AbstractSpatialGridOverlay.CROSSSCOVARIANCE)
 	private double crossCovariance_ = 0;
 

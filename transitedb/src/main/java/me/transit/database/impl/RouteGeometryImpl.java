@@ -6,8 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Type;
-
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
@@ -22,13 +20,13 @@ public class RouteGeometryImpl extends TransitDateImpl implements RouteGeometry 
 	
 	@XStreamAlias("shape")
 	@XStreamConverter(me.database.LineStringConverter.class)
+	@Column(name="SHAPE", columnDefinition = "Geometry")
 	private Geometry shape = null;
 
 	/**
 	 * @return the shape
 	 */
-	@Column(name="SHAPE", columnDefinition = "Geometry")
-	@Type(type = "org.hibernate.spatial.GeometryType")
+	
 	public Geometry getShape() {
 		return shape;
 	}

@@ -26,14 +26,20 @@ public class ServiceDateImpl extends TransitDateImpl implements ServiceDate{
 	@XStreamOmitField
 	private static final long serialVersionUID = 1L;
 	
+	@Column(name="START_DATE")
+	@Type(type = "java.util.Calendar")
 	@XStreamAlias(ServiceDate.STARTDATE)
 	@XStreamConverter(me.database.SingleValueCalendarConverter.class)
 	private Calendar startDate = null;
 	
+	@Column(name="END_DATE")
+	@Type(type = "java.util.Calendar")
 	@XStreamAlias(ServiceDate.ENDDATE)
 	@XStreamConverter(me.database.SingleValueCalendarConverter.class)
 	private Calendar endDate = null;
 	
+	@Column(name="SERVICE_TYPE")
+	@Enumerated(EnumType.STRING) 
 	@XStreamAlias(ServiceDate.SERVICEDAYFLAG)
 	private int serviceDayFlag = 0;
 	
@@ -43,8 +49,7 @@ public class ServiceDateImpl extends TransitDateImpl implements ServiceDate{
 	/**
 	 * @return the startDate
 	 */
-	@Column(name="START_DATE")
-	@Type(type = "java.util.Calendar")
+
 	public Calendar getStartDate() {
 		return startDate;
 	}
@@ -59,8 +64,6 @@ public class ServiceDateImpl extends TransitDateImpl implements ServiceDate{
 	/**
 	 * @return the endDate
 	 */
-	@Column(name="END_DATE")
-	@Type(type = "java.util.Calendar")
 	public Calendar getEndDate() {
 		return endDate;
 	}
@@ -90,8 +93,6 @@ public class ServiceDateImpl extends TransitDateImpl implements ServiceDate{
 	/**
 	 * @return the service
 	 */
-	@Column(name="SERVICE_TYPE")
-	@Enumerated(EnumType.STRING) 
 	public ServiceDays getService() {
 		return service;
 	}
@@ -103,11 +104,20 @@ public class ServiceDateImpl extends TransitDateImpl implements ServiceDate{
 		this.service = service;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see me.transit.database.ServiceDate#hasService(me.transit.database.ServiceDate.WeekDay)
+	 */
+	@Override
 	public boolean hasService(ServiceDate.WeekDay day)
 	{
 		return ((this.serviceDayFlag & day.getBit()) == day.getBit());
 	}
 	
+	/**
+	 * 
+	 * @param day
+	 */
 	public void addServiceData(ServiceDate.WeekDay day)
 	{
 		this.serviceDayFlag = this.serviceDayFlag | day.getBit();
@@ -162,6 +172,10 @@ public class ServiceDateImpl extends TransitDateImpl implements ServiceDate{
 		return hasService( ServiceDate.WeekDay.SATURDAY);
 	}
 		
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		
@@ -192,6 +206,10 @@ public class ServiceDateImpl extends TransitDateImpl implements ServiceDate{
 		return rtn;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see me.database.mongo.IDocument#toDocument()
+	 */
     @Override
     public Map<String, Object> toDocument() {
             Map<String,Object> rtn = new HashMap<String,Object>();
@@ -214,8 +232,9 @@ public class ServiceDateImpl extends TransitDateImpl implements ServiceDate{
             return rtn;
     }
     
-    /**
-     * 
+    /*
+     * (non-Javadoc)
+     * @see me.database.mongo.IDocument#handleEnum(java.lang.String, java.lang.Object)
      */
     @Override
     public void handleEnum(String key, Object value)
@@ -231,9 +250,11 @@ public class ServiceDateImpl extends TransitDateImpl implements ServiceDate{
             }
     }
 	
-	/**
-	 * 
+	/*
+	 * (non-Javadoc)
+	 * @see me.transit.database.TransitData#valid()
 	 */
+    @Override
 	public boolean valid() 
 	{
 		return true;

@@ -13,20 +13,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import org.hibernate.annotations.Type;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamConverter;
+import com.thoughtworks.xstream.annotations.XStreamImplicit;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import me.database.mongo.IDocument;
 import me.transit.database.RouteGeometry;
 import me.transit.database.ServiceDate;
 import me.transit.database.StopTime;
 import me.transit.database.Trip;
-
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamConverter;
-import com.thoughtworks.xstream.annotations.XStreamImplicit;
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 @Entity
 @Table(name="tran_trip")
@@ -35,18 +31,25 @@ public class TripImpl extends TransitDateImpl implements Trip {
 	@XStreamOmitField
 	private static final long serialVersionUID = 1L;
 	
+	@ManyToOne()
+	@JoinColumn(name="SERVICE_DATE_UUID", nullable=false, updatable=false)
 	@XStreamAlias(Trip.SERVICE)
 	private ServiceDate service = null;
 	
+	@Column(name="HEAD_SIGN")  
 	@XStreamAlias(Trip.HEADSIGN)
 	private String headSign = "";
 	
+	@Column(name="NAME")  
 	@XStreamAlias(Trip.SHORTNAME)
 	private String shortName = "";
 	
+	@Column(name="DIRECTION")
+	@Enumerated(EnumType.STRING) 
 	@XStreamAlias(Trip.DIRECTIONID)
 	private DirectionType directionId = DirectionType.UNKOWN;
 	
+	@Column(name="SHAPE", columnDefinition = "Geometry")
 	@XStreamAlias("shapeId")
 	@XStreamConverter(me.database.ShapeConverter.class)
 	private RouteGeometry shape = null;
@@ -57,10 +60,6 @@ public class TripImpl extends TransitDateImpl implements Trip {
 	/**
 	 * @return the service
 	 */
-	@Column(name="SERVICE_DATE_UUID")
-	@ManyToOne()
-	@Fetch(FetchMode.SELECT)
-	@JoinColumn(name="SERVICE_DATE_UUID", nullable=false, updatable=false)
 	public ServiceDate getService() {
 		return service;
 	}
@@ -75,7 +74,6 @@ public class TripImpl extends TransitDateImpl implements Trip {
 	/**
 	 * @return the headSign
 	 */
-	@Column(name="HEAD_SIGN")  
 	public String getHeadSign() {
 		return headSign;
 	}
@@ -90,7 +88,6 @@ public class TripImpl extends TransitDateImpl implements Trip {
 	/**
 	 * @return the shortName
 	 */
-	@Column(name="NAME")  
 	public String getShortName() {
 		return shortName;
 	}
@@ -105,8 +102,6 @@ public class TripImpl extends TransitDateImpl implements Trip {
 	/**
 	 * @return the directionId
 	 */
-	@Column(name="DIRECTION")
-	@Enumerated(EnumType.STRING) 
 	public DirectionType getDirectionId() {
 		return directionId;
 	}
@@ -121,8 +116,6 @@ public class TripImpl extends TransitDateImpl implements Trip {
 	/**
 	 * @return the shape
 	 */
-	@Column(name="SHAPE", columnDefinition = "Geometry")
-	@Type(type = "org.hibernate.spatial.GeometryType")
 	public RouteGeometry getShape() {
 		return shape;
 	}
@@ -173,8 +166,9 @@ public class TripImpl extends TransitDateImpl implements Trip {
 		return null;
 	}
 	
-	/**
-	 * 
+	/*
+	 * (non-Javadoc)
+	 * @see me.transit.database.impl.TransitDateImpl#toString()
 	 */
 	@Override
 	public String toString() {
@@ -192,7 +186,10 @@ public class TripImpl extends TransitDateImpl implements Trip {
 		return builder.toString();
 	}
 	
-	
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		
@@ -221,7 +218,10 @@ public class TripImpl extends TransitDateImpl implements Trip {
 		return rtn;
 	}
 	
-	
+	/*
+	 * (non-Javadoc)
+	 * @see me.transit.database.TransitData#valid()
+	 */
 	public boolean valid() 
 	{
 		if ( this.getService() == null || this.getStopTimes().size() < 1 )
@@ -231,8 +231,9 @@ public class TripImpl extends TransitDateImpl implements Trip {
 		return true;
 	}
 	
-    /**
-     * 
+    /*
+     * (non-Javadoc)
+     * @see me.database.mongo.IDocument#toDocument()
      */
     @Override
     public Map<String, Object> toDocument() {
@@ -255,6 +256,10 @@ public class TripImpl extends TransitDateImpl implements Trip {
             return rtn;
     }
     
+    /*
+     * (non-Javadoc)
+     * @see me.database.mongo.IDocument#handleEnum(java.lang.String, java.lang.Object)
+     */
     @Override
     public void handleEnum(String key, Object value)
     {

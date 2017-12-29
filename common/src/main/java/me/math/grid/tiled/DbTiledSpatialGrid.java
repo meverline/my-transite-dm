@@ -16,7 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Type;
+import com.vividsolutions.jts.geom.Point;
 
 import me.database.mongo.DocumentDao;
 import me.factory.DaoBeanFactory;
@@ -28,16 +28,21 @@ import me.math.kdtree.KDTree;
 import me.transit.dao.query.tuple.IQueryTuple;
 import me.transit.dao.query.tuple.NumberTuple;
 
-import com.vividsolutions.jts.geom.Point;
-
 @SuppressWarnings("serial")
 @Entity
 @Table(name="hmt_SpatialGrid")
 public class DbTiledSpatialGrid extends AbstractTiledSpatialGrid implements Serializable {
 	
+	@Id
+	@Column(name="GRID_UUID", nullable=false)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long uuid_ = -1;
+	
+	@Column(name="heatMapName")
 	private String heatMapName_ = null;
+	
 	private int cacheSize_ = 5;
+	
 	private Map<Integer,CachedTile> cache = new HashMap<Integer,CachedTile>();
 	private List<CachedTile> accessTime_ = new ArrayList<CachedTile>();
 	
@@ -86,9 +91,7 @@ public class DbTiledSpatialGrid extends AbstractTiledSpatialGrid implements Seri
 	/**
 	 * @return the uuid_
 	 */
-	@Id
-	@Column(name="GRID_UUID", nullable=false)
-	@GeneratedValue(strategy=GenerationType.AUTO)
+
 	public long getUUID() {
 		return uuid_;
 	}
@@ -103,7 +106,6 @@ public class DbTiledSpatialGrid extends AbstractTiledSpatialGrid implements Seri
 	/**
 	 * @return the heatMapName_
 	 */
-	@Column(name="heatMapName")
 	public String getHeatMapName() {
 		return heatMapName_;
 	}
@@ -119,8 +121,6 @@ public class DbTiledSpatialGrid extends AbstractTiledSpatialGrid implements Seri
 	 * 
 	 * @return
 	 */
-	@Column(name="upperLeft", columnDefinition = "Geometry")
-	@Type(type = "org.hibernate.spatial.GeometryType")
 	public Point getUpperLeftCorner() {
 		return this.getUpperLeft().toPoint();
 	}
@@ -137,8 +137,6 @@ public class DbTiledSpatialGrid extends AbstractTiledSpatialGrid implements Seri
 	 * 
 	 * @return
 	 */
-	@Column(name="lowerRight", columnDefinition = "Geometry")
-	@Type(type = "org.hibernate.spatial.GeometryType")
 	public Point getLowerRightCorner() {
 		return this.getLowerRight().toPoint();
 	}
