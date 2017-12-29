@@ -127,7 +127,6 @@ public class TestAdaptiveKDE {
 
 		@Override
 		public double average() {
-			// TODO Auto-generated method stub
 			return 0;
 		}
 

@@ -149,67 +149,54 @@ public class TestTiledSpatialGridPoint extends EasyMockSupport {
 
 		@Override
 		public int getDepth() {
-			// TODO Auto-generated method stub
 			return 0;
 		}
 
 		@Override
 		public Vertex getPointVertex() {
-			// TODO Auto-generated method stub
 			return null;
 		}
 
 		@Override
 		public Direction getDirection() {
-			// TODO Auto-generated method stub
 			return null;
 		}
 
 		@Override
 		public MinBoundingRectangle getMBR() {
-			// TODO Auto-generated method stub
 			return null;
 		}
 
 		@Override
 		public boolean contains(Vertex pt) {
-			// TODO Auto-generated method stub
 			return false;
 		}
 
 		@Override
 		public INode getLeft() {
-			// TODO Auto-generated method stub
 			return null;
 		}
 
 		@Override
-		public void setLeft(INode left_) {
-			// TODO Auto-generated method stub
-			
+		public void setLeft(INode left_) {			
 		}
 
 		@Override
 		public INode getRight() {
-			// TODO Auto-generated method stub
 			return null;
 		}
 
 		@Override
-		public void setRight(INode right_) {
-			// TODO Auto-generated method stub
-			
+		public void setRight(INode right_) {			
 		}
 
 		@Override
 		public INode getParent() {
-			// TODO Auto-generated method stub
 			return null;
 		}
 
 		@Override
 		public AbstractSpatialGridPoint getPoint() {
-			// TODO Auto-generated method stub
 			return null;
 		}
     	

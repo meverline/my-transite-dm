@@ -74,7 +74,6 @@ public class TestKDTree {
 
 		@Override
 		public INode create(AbstractSpatialGridPoint loc, Direction dir, INode parent, int depth) {
-			// TODO Auto-generated method stub
 			return new KDNode(loc, dir, parent, depth);
 		}
 		

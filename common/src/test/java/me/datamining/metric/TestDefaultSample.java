@@ -57,7 +57,6 @@ public class TestDefaultSample extends EasyMockSupport {
 		
 		@Override
 		public long getUUID() {
-			// TODO Auto-generated method stub
 			return this.id;
 		}
 		

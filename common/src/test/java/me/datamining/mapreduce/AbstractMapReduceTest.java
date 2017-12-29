@@ -46,7 +46,6 @@ public class AbstractMapReduceTest {
 		
 		@Override
 		public double getValue() {
-			// TODO Auto-generated method stub
 			return value;
 		}
 

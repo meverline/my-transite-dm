@@ -97,14 +97,11 @@ public class TestSpatialTile {
 
 		@Override
 		public double getValue() {
-			// TODO Auto-generated method stub
 			return 0;
 		}
 
 		@Override
-		public void addValue(double value) {
-			// TODO Auto-generated method stub
-			
+		public void addValue(double value) {			
 		}
 		
 	}

@@ -163,7 +163,6 @@ public class TestCSVClobUsetDataType extends EasyMockSupport {
 
 		@Override
 		public void fromCSVLine(String line) {
-			// TODO Auto-generated method stub
 		}
 		
 	}

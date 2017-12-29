@@ -32,7 +32,6 @@ public class TestSpatialGridData {
 
 		@Override
 		public double getValue() {
-			// TODO Auto-generated method stub
 			return 10;
 		}
 		
