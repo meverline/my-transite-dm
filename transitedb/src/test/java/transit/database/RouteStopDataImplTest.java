@@ -1,10 +1,11 @@
-package transit.database.impl;
+package transit.database;
 
-import static org.junit.Assert.*;
-import me.transit.database.RouteStopData;
-import me.transit.database.impl.RouteStopDataImpl;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
+
+import me.transit.database.RouteStopData;
 
 public class RouteStopDataImplTest {
 
@@ -13,7 +14,7 @@ public class RouteStopDataImplTest {
 	 */
 	@Test
 	public void testConstructor() {
-		RouteStopData obj = new RouteStopDataImpl();
+		RouteStopData obj = new RouteStopData();
 		
 		assertNull(obj.getRouteShortName());
 		assertNull(obj.getTripHeadSign());
@@ -24,7 +25,7 @@ public class RouteStopDataImplTest {
 	 */
 	@Test
 	public void testGetAndSet() {
-		RouteStopData obj = new RouteStopDataImpl();
+		RouteStopData obj = new RouteStopData();
 		
 		obj.setRouteShortName("ShortName");
 		obj.setTripHeadSign("HeadSign");
@@ -37,13 +38,13 @@ public class RouteStopDataImplTest {
 	 */
 	@Test
 	public void testCsv() {
-		RouteStopData lhs = new RouteStopDataImpl();
+		RouteStopData lhs = new RouteStopData();
 		
 		lhs.setRouteShortName("ShortName");
 		lhs.setTripHeadSign("HeadSign");
 		
 		String csv = lhs.toCSVLine();
-		RouteStopData rhs = new RouteStopDataImpl();
+		RouteStopData rhs = new RouteStopData();
 		
 		rhs.fromCSVLine(csv);
 		

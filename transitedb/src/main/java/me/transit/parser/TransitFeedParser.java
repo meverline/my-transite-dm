@@ -17,6 +17,18 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+//import org.nocrala.tools.gis.data.esri.shapefile.ShapeFileReader;
+//import org.nocrala.tools.gis.data.esri.shapefile.ValidationPreferences;
+//import org.nocrala.tools.gis.data.esri.shapefile.shape.AbstractShape;
+//import org.nocrala.tools.gis.data.esri.shapefile.shape.PointData;
+//import org.nocrala.tools.gis.data.esri.shapefile.shape.shapes.PolylineShape;
+
+import com.vividsolutions.jts.geom.Coordinate;
+import com.vividsolutions.jts.geom.GeometryFactory;
+import com.vividsolutions.jts.geom.LineString;
+
 import me.database.mongo.DocumentDao;
 import me.factory.DaoBeanFactory;
 import me.math.kdtree.MinBoundingRectangle;
@@ -36,22 +48,6 @@ import me.transit.database.StopTime;
 import me.transit.database.TransitData;
 import me.transit.database.TransitStop;
 import me.transit.database.Trip;
-import me.transit.database.impl.RouteGeometryImpl;
-import me.transit.database.impl.ServiceDateImpl;
-import me.transit.database.impl.StopTimeImpl;
-import me.transit.database.impl.TripImpl;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-//import org.nocrala.tools.gis.data.esri.shapefile.ShapeFileReader;
-//import org.nocrala.tools.gis.data.esri.shapefile.ValidationPreferences;
-//import org.nocrala.tools.gis.data.esri.shapefile.shape.AbstractShape;
-//import org.nocrala.tools.gis.data.esri.shapefile.shape.PointData;
-//import org.nocrala.tools.gis.data.esri.shapefile.shape.shapes.PolylineShape;
-
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.LineString;
 
 /**
  * 
@@ -595,7 +591,7 @@ public class TransitFeedParser {
 						}
 					}
 					
-					ServiceDate sd = new ServiceDateImpl();
+					ServiceDate sd = new ServiceDate();
 					
 					sd.setId(id.trim());
 					sd.setStartDate( this.convertDate(data[indexMap.get("StartDate")].replace('"', ' ').trim()));
@@ -671,7 +667,7 @@ public class TransitFeedParser {
 			if ( array.length > 1 ) {
 				LineString poly =  factory.createLineString(array);
 			
-				RouteGeometry db = new RouteGeometryImpl();
+				RouteGeometry db = new RouteGeometry();
 				db.setAgency(getAgency());
 				db.setId(id);
 				db.setShape(poly);
@@ -875,7 +871,7 @@ public class TransitFeedParser {
 				String line = inStream.readLine();
 				String data[] = line.split(",");
 				
-				Trip trip = new TripImpl();
+				Trip trip = new Trip();
 				
 				trip.setAgency(this.getAgency());
 							
@@ -1056,7 +1052,7 @@ public class TransitFeedParser {
 						String stopId = data[indexMap.get("StopId")].replace('"', ' ').trim();
 						stopTime = trip.getTrip().findStopTimeById(stopId);
 						if ( stopTime == null ) {
-							stopTime = new StopTimeImpl();
+							stopTime = new StopTime();
 							stopTime.setStopId(stopId);
 							newStop = true;
 							trip.getTrip().addStopTime(stopTime);

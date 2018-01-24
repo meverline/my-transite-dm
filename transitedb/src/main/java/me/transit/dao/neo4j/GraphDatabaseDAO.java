@@ -12,7 +12,6 @@ import me.transit.database.RouteStopData;
 import me.transit.database.TransitData;
 import me.transit.database.TransitStop;
 import me.transit.database.Trip;
-import me.transit.database.impl.RouteStopDataImpl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -573,7 +572,7 @@ public class GraphDatabaseDAO {
 					}
 					
 				} else if ( className.equals(Trip.class.getSimpleName()) ) {
-					RouteStopDataImpl item = new RouteStopDataImpl();
+					RouteStopData item = new RouteStopData();
 
 					item.setRouteShortName( currentRoute );
 					item.setTripHeadSign( name );

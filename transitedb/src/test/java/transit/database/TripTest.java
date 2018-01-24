@@ -1,4 +1,4 @@
-package transit.database.impl;
+package transit.database;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -15,15 +15,12 @@ import me.transit.database.RouteGeometry;
 import me.transit.database.ServiceDate;
 import me.transit.database.StopTime;
 import me.transit.database.Trip;
-import me.transit.database.impl.AgencyImpl;
-import me.transit.database.impl.RouteGeometryImpl;
-import me.transit.database.impl.TripImpl;
 
-public class TripImplTest {
+public class TripTest {
 
 	@Test
 	public void testConstructor() {
-		Trip trip = new TripImpl();
+		Trip trip = new Trip();
 		
 		assertNull(trip.getAgency());
 		assertNull(trip.getId());
@@ -43,8 +40,8 @@ public class TripImplTest {
 	public static RouteGeometry createGeometry()
 	{
 		GeometryFactory factory = new GeometryFactory();
-		Agency agency = new AgencyImpl();
-		RouteGeometry geo = new RouteGeometryImpl();
+		Agency agency = new Agency();
+		RouteGeometry geo = new RouteGeometry();
 		
 		geo.setAgency(agency);
 		geo.setId("id");
@@ -66,10 +63,10 @@ public class TripImplTest {
 	 */
 	public static Trip createTrip()
 	{
-		Agency agency = new AgencyImpl("name");
-		Trip trip = new TripImpl();
-		RouteGeometry geo = TripImplTest.createGeometry();
-		ServiceDate service = ServiceDateImplTest.createServiceDate();
+		Agency agency = new Agency("name");
+		Trip trip = new Trip();
+		RouteGeometry geo = TripTest.createGeometry();
+		ServiceDate service = ServiceDateTest.createServiceDate();
 		
 		trip.setAgency(agency);
 		trip.setId("Id");
@@ -82,7 +79,7 @@ public class TripImplTest {
 		trip.setService(service);
 		
 		for ( int ndx = 0; ndx < 5; ndx++ ) {
-			StopTime st = StopTimeImplTest.createStopTime();
+			StopTime st = StopTimeTest.createStopTime();
 			trip.addStopTime(st);
 		}
 		return trip;
@@ -93,10 +90,10 @@ public class TripImplTest {
 	 */
 	@Test
 	public void testGetAndSet() {
-		Agency agency = new AgencyImpl("name");
-		Trip trip = new TripImpl();
-		RouteGeometry geo = TripImplTest.createGeometry();
-		ServiceDate service = ServiceDateImplTest.createServiceDate();
+		Agency agency = new Agency("name");
+		Trip trip = new Trip();
+		RouteGeometry geo = TripTest.createGeometry();
+		ServiceDate service = ServiceDateTest.createServiceDate();
 		
 		trip.setAgency(agency);
 		trip.setId("Id");
@@ -109,7 +106,7 @@ public class TripImplTest {
 		trip.setService(service);
 		
 		for ( int ndx = 0; ndx < 5; ndx++ ) {
-			StopTime st = StopTimeImplTest.createStopTime();
+			StopTime st = StopTimeTest.createStopTime();
 			trip.addStopTime(st);
 		}
 		
@@ -125,7 +122,7 @@ public class TripImplTest {
 		
 		assertEquals(5, trip.getStopTimes().size());
 		
-		StopTime tmp = StopTimeImplTest.createStopTime();
+		StopTime tmp = StopTimeTest.createStopTime();
 		for ( int ndx = 0; ndx < trip.getStopTimes().size(); ndx++ ) {
 			StopTime st = trip.getStopTimes().get(ndx);
 			

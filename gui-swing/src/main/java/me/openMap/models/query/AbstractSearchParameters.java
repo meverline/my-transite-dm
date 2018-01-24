@@ -34,7 +34,7 @@ import me.openMap.OpenTransitMap;
 import me.openMap.mapUtils.RegionSelector;
 import me.transit.dao.AgencyDao;
 import me.transit.database.Agency;
-import me.transit.database.impl.AgencyImpl;
+
 
 public abstract class AbstractSearchParameters extends JPanel implements ISearchParameters {
 
@@ -197,7 +197,7 @@ public abstract class AbstractSearchParameters extends JPanel implements ISearch
 		panel.add( new JLabel("Agencys"));
 		
 		List<Agency> aList = new ArrayList<Agency>();
-		aList.add(new AgencyImpl("None"));
+		aList.add(new Agency("None"));
 		
 		AgencyDao dao =
 			AgencyDao.class.cast(DaoBeanFactory.create().getDaoBean(AgencyDao.class));

@@ -14,13 +14,13 @@ import me.transit.dao.impl.AgencyDaoImpl;
 import me.transit.dao.impl.CalendarDateDaoImpl;
 import me.transit.dao.impl.RouteDaoImpl;
 import me.transit.dao.impl.RouteGeometryDaoImpl;
-import me.transit.database.impl.AgencyImpl;
-import me.transit.database.impl.CalendarDateImpl;
-import me.transit.database.impl.RouteGeometryImpl;
-import me.transit.database.impl.RouteImpl;
-import me.transit.database.impl.ServiceDateImpl;
-import me.transit.database.impl.TransitStopImpl;
-import me.transit.database.impl.TripImpl;
+import me.transit.database.Agency;
+import me.transit.database.CalendarDate;
+import me.transit.database.RouteGeometry;
+import me.transit.database.ServiceDate;
+import me.transit.database.TransitStop;
+import me.transit.database.Trip;
+import me.transit.database.Route;
 
 @Configuration
 public class TransitedAnotationConfig extends AnotationConfig {
@@ -33,13 +33,13 @@ public class TransitedAnotationConfig extends AnotationConfig {
 	protected LocalSessionFactoryBuilder sessionBuilder() {
 		LocalSessionFactoryBuilder local = super.sessionBuilder();
 	
-		local.addAnnotatedClasses(AgencyImpl.class);
-		local.addAnnotatedClasses(CalendarDateImpl.class);
-		local.addAnnotatedClasses(RouteImpl.class);
-		local.addAnnotatedClasses(RouteGeometryImpl.class);
-		local.addAnnotatedClasses(ServiceDateImpl.class);
-		local.addAnnotatedClasses(TransitStopImpl.class);
-		local.addAnnotatedClasses(TripImpl.class);
+		local.addAnnotatedClasses(Agency.class);
+		local.addAnnotatedClasses(CalendarDate.class);
+		local.addAnnotatedClasses(Route.class);
+		local.addAnnotatedClasses(RouteGeometry.class);
+		local.addAnnotatedClasses(ServiceDate.class);
+		local.addAnnotatedClasses(TransitStop.class);
+		local.addAnnotatedClasses(Trip.class);
 	    
 		return local;
 	}

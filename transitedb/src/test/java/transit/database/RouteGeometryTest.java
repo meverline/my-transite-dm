@@ -1,11 +1,7 @@
-package transit.database.impl;
+package transit.database;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
-import me.transit.database.Agency;
-import me.transit.database.RouteGeometry;
-import me.transit.database.impl.AgencyImpl;
-import me.transit.database.impl.RouteGeometryImpl;
 
 import org.junit.Test;
 
@@ -13,14 +9,17 @@ import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.LineString;
 
-public class RouteGeometryImplTest {
+import me.transit.database.Agency;
+import me.transit.database.RouteGeometry;
+
+public class RouteGeometryTest {
 
 	/**
 	 * 
 	 */
 	@Test
 	public void testConstructor() {
-		RouteGeometry geo = new RouteGeometryImpl();
+		RouteGeometry geo = new RouteGeometry();
 		
 		assertNull(geo.getAgency());
 		assertNull(geo.getId());
@@ -35,8 +34,8 @@ public class RouteGeometryImplTest {
 	public static RouteGeometry createGeometry()
 	{
 		GeometryFactory factory = new GeometryFactory();
-		Agency agency = new AgencyImpl();
-		RouteGeometry geo = new RouteGeometryImpl();
+		Agency agency = new Agency();
+		RouteGeometry geo = new RouteGeometry();
 		
 		geo.setAgency(agency);
 		geo.setId("id");
@@ -58,8 +57,8 @@ public class RouteGeometryImplTest {
 	@Test
 	public void testGetAndSets() {
 		GeometryFactory factory = new GeometryFactory();
-		Agency agency = new AgencyImpl();
-		RouteGeometry geo = RouteGeometryImplTest.createGeometry();
+		Agency agency = new Agency();
+		RouteGeometry geo = RouteGeometryTest.createGeometry();
 				
 		geo.setAgency(agency);
 		geo.setId("id");

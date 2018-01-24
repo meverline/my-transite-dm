@@ -1,13 +1,12 @@
-package transit.database.impl;
+package transit.database;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import me.transit.database.Agency;
-import me.transit.database.impl.AgencyImpl;
 
 import org.junit.Test;
 
-public class AgencyImpleTest {
+public class AgencyTest {
 
 	/**
 	 * 
@@ -15,7 +14,7 @@ public class AgencyImpleTest {
 	@Test
 	public void constructor() {
 		
-		Agency obj = new AgencyImpl();
+		Agency obj = new Agency();
 		
 		assertNotNull(obj);
 		
@@ -29,7 +28,7 @@ public class AgencyImpleTest {
 		
 		assertEquals("0.5", obj.getVersion());
 		
-		obj = new AgencyImpl("name");
+		obj = new Agency("name");
 		
 		assertNotNull(obj);
 		
@@ -51,7 +50,7 @@ public class AgencyImpleTest {
 	@Test
 	public void getsAndSets() {
 		
-		Agency obj = new AgencyImpl("name");
+		Agency obj = new Agency("name");
 		
 		assertNotNull(obj);
 		

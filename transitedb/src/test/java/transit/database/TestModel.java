@@ -1,4 +1,4 @@
-package transit.database.impl;
+package transit.database;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -16,14 +16,13 @@ import com.vividsolutions.jts.geom.Point;
 import com.vividsolutions.jts.geom.Polygon;
 
 import me.transit.database.Agency;
+import me.transit.database.CalendarDate;
+import me.transit.database.RouteGeometry;
+import me.transit.database.RouteStopData;
+import me.transit.database.ServiceDate;
+import me.transit.database.TransitStop;
+import me.transit.database.Route;
 import me.transit.database.Trip;
-import me.transit.database.impl.AgencyImpl;
-import me.transit.database.impl.CalendarDateImpl;
-import me.transit.database.impl.RouteGeometryImpl;
-import me.transit.database.impl.RouteImpl;
-import me.transit.database.impl.RouteStopDataImpl;
-import me.transit.database.impl.ServiceDateImpl;
-import me.transit.database.impl.TransitStopImpl;
 
 public class TestModel {
 	
@@ -31,7 +30,7 @@ public class TestModel {
 	
 	@Test
 	public void testTrip() {
-		tester.testBean(TripImplTest.class);
+		tester.testBean(TripTest.class);
 	}
 	
 	@Test
@@ -42,7 +41,7 @@ public class TestModel {
 				overrideFactory("agency", new AgencyFactory()).
 				overrideFactory("location", new PointFactory()).build();
 
-		tester.testBean(TransitStopImpl.class, configuration);
+		tester.testBean(TransitStop.class, configuration);
 	}
 	
 	@Test
@@ -53,12 +52,12 @@ public class TestModel {
 				overrideFactory("startDate", new CalendarFactory()).
 				overrideFactory("agency", new AgencyFactory()).build();
 		
-		tester.testBean(ServiceDateImpl.class, configuration);
+		tester.testBean(ServiceDate.class, configuration);
 	}
 	
 	@Test
 	public void testRouteStopData() {
-		tester.testBean(RouteStopDataImpl.class);
+		tester.testBean(RouteStopData.class);
 	}
 	
 	@Test
@@ -69,7 +68,7 @@ public class TestModel {
 				overrideFactory("agency", new AgencyFactory()).
 				overrideFactory("location", new PointFactory()).build();
 
-		tester.testBean(RouteImpl.class, configuration);
+		tester.testBean(Route.class, configuration);
 	}
 	
 	@Test
@@ -80,7 +79,7 @@ public class TestModel {
 				overrideFactory("tripList", new TripListFactory()).
 				overrideFactory("shape", new PoloygonFactory()).build();
 
-		tester.testBean(RouteGeometryImpl.class, configuration);
+		tester.testBean(RouteGeometry.class, configuration);
 	}
 	
 	@Test
@@ -90,7 +89,7 @@ public class TestModel {
 				overrideFactory("agency", new AgencyFactory()).
 				overrideFactory("date", new CalendarFactory()).build();
 		
-		tester.testBean(CalendarDateImpl.class, configuration);
+		tester.testBean(CalendarDate.class, configuration);
 	}
 	
 	@Test
@@ -99,7 +98,7 @@ public class TestModel {
 		Configuration configuration = new ConfigurationBuilder().
 				overrideFactory("MBR", new PoloygonFactory()).build();
 		
-		tester.testBean(AgencyImpl.class, configuration);
+		tester.testBean(Agency.class, configuration);
 	}
 	
 	
@@ -144,7 +143,7 @@ public class TestModel {
 		
         @Override
         public Agency create() {
-        	    return new AgencyImpl();
+        	    return new Agency();
         }
     }
 	

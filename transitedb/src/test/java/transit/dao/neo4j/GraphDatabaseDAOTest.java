@@ -1,21 +1,20 @@
 package transit.dao.neo4j;
 
-import java.util.List;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
-import me.transit.dao.neo4j.GraphDatabaseDAO;
-import me.transit.database.Agency;
-import me.transit.database.RouteStopData;
-import me.transit.database.TransitStop;
-import me.transit.database.impl.AgencyImpl;
-import me.transit.database.impl.RouteImpl;
-import me.transit.database.impl.TransitStopImpl;
+
+import java.util.List;
 
 import org.junit.Ignore;
 import org.junit.Test;
 import org.neo4j.graphdb.Node;
+
+import me.transit.dao.neo4j.GraphDatabaseDAO;
+import me.transit.database.Agency;
+import me.transit.database.Route;
+import me.transit.database.RouteStopData;
+import me.transit.database.TransitStop;
 
 public class GraphDatabaseDAOTest {
 
@@ -24,8 +23,8 @@ public class GraphDatabaseDAOTest {
 	public void testfindRoutes() {
 		
 		String stopIds[] = { "12709", "12710", "9251" };
-		Agency metro = new AgencyImpl("METRO");
-		TransitStop stop = new TransitStopImpl();
+		Agency metro = new Agency("METRO");
+		TransitStop stop = new TransitStop();
 		
 		stop.setAgency(metro);
 		
@@ -55,8 +54,8 @@ public class GraphDatabaseDAOTest {
 	public void testFind() {
 		
 		String routeName[] = { "4B", "4E" };
-		Agency metro = new AgencyImpl("METRO");
-		RouteImpl route = new RouteImpl();
+		Agency metro = new Agency("METRO");
+		Route route = new Route();
 		
 		route.setAgency(metro);
 		

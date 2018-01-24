@@ -1,14 +1,14 @@
-package transit.database.impl;
+package transit.database;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-import me.transit.database.StopTime;
-import me.transit.database.impl.StopTimeImpl;
 
 import org.junit.Test;
 
-public class StopTimeImplTest {
+import me.transit.database.StopTime;
+
+public class StopTimeTest {
 
 	/**
 	 * 
@@ -16,7 +16,7 @@ public class StopTimeImplTest {
 	@Test
 	public void testConstructor() {
 		
-		StopTime st = new StopTimeImpl();
+		StopTime st = new StopTime();
 		
 		assertNotNull(st.getArrivalTime());
 		assertEquals(StopTime.PickupType.REGULAR, st.getPickupType());
@@ -32,7 +32,7 @@ public class StopTimeImplTest {
 	 */
 	public static StopTime createStopTime()
 	{
-		StopTime st = new StopTimeImpl();
+		StopTime st = new StopTime();
 		
 		st.setStopHeadSign("Head Sign");
 		st.setStopName("name");
@@ -53,7 +53,7 @@ public class StopTimeImplTest {
 	 */
 	@Test
 	public void testSetGets() {
-		StopTime st = StopTimeImplTest.createStopTime();
+		StopTime st = StopTimeTest.createStopTime();
 			
 		assertNotNull(st.getArrivalTime());
 		assertEquals(5, st.getArrivalTime().size());
@@ -72,10 +72,10 @@ public class StopTimeImplTest {
 	
 	@Test
 	public void testCSV() {
-		StopTime lhs = StopTimeImplTest.createStopTime();
+		StopTime lhs = StopTimeTest.createStopTime();
 		
 		String csv = lhs.toCSVLine();
-		StopTime rhs = new StopTimeImpl();
+		StopTime rhs = new StopTime();
 		rhs.fromCSVLine(csv);
 		
 		assertEquals( lhs.getPickupType(), rhs.getPickupType());

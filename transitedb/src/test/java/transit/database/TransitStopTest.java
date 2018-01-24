@@ -1,10 +1,7 @@
-package transit.database.impl;
+package transit.database;
 
-import static org.junit.Assert.*;
-import me.transit.database.Agency;
-import me.transit.database.TransitStop;
-import me.transit.database.impl.AgencyImpl;
-import me.transit.database.impl.TransitStopImpl;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
 
@@ -12,14 +9,17 @@ import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.Point;
 
-public class TransitStopImplTest {
+import me.transit.database.Agency;
+import me.transit.database.TransitStop;
+
+public class TransitStopTest {
 
 	/**
 	 * 
 	 */
 	@Test
 	public void testConstructor() {
-		TransitStop stop = new TransitStopImpl();
+		TransitStop stop = new TransitStop();
 		
 		assertNull(stop.getAgency());
 		assertEquals(-1, stop.getUUID());
@@ -41,8 +41,8 @@ public class TransitStopImplTest {
 	@Test
 	public void testGetAndSet() {
 		GeometryFactory factory = new GeometryFactory();
-		Agency agency = new AgencyImpl("name");
-		TransitStop stop = new TransitStopImpl();
+		Agency agency = new Agency("name");
+		TransitStop stop = new TransitStop();
 		
 		stop.setAgency(agency);
 		stop.setUUID(10);

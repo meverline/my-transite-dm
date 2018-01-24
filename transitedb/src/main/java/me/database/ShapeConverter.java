@@ -1,7 +1,7 @@
 package me.database;
 
 import me.transit.database.RouteGeometry;
-import me.transit.database.impl.RouteGeometryImpl;
+import me.transit.database.RouteGeometry;
 
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.MarshallingContext;
@@ -27,7 +27,7 @@ public class ShapeConverter implements Converter {
      */
     public Object unmarshal(HierarchicalStreamReader reader,
             UnmarshallingContext context) {
-    	RouteGeometry calendar = new RouteGeometryImpl();
+    	RouteGeometry calendar = new RouteGeometry();
         calendar.setUUID(Long.parseLong(reader.getValue()));
         return calendar;
     }

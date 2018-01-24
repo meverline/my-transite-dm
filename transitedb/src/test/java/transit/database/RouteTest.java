@@ -1,21 +1,20 @@
-package transit.database.impl;
+package transit.database;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-import me.transit.database.Agency;
-import me.transit.database.Route;
-import me.transit.database.Trip;
-import me.transit.database.impl.AgencyImpl;
-import me.transit.database.impl.RouteImpl;
 
 import org.junit.Test;
 
-public class RouteImplTest {
+import me.transit.database.Agency;
+import me.transit.database.Route;
+import me.transit.database.Trip;
+
+public class RouteTest {
 
 	@Test
 	public void testConstructor() {
-		Route route = new RouteImpl();
+		Route route = new Route();
 		
 		assertNull(route.getAgency());
 		assertNull(route.getId());
@@ -35,8 +34,8 @@ public class RouteImplTest {
 	
 	@Test
 	public void testGetAndSet() {
-		Agency agency = new AgencyImpl("name");
-		Route route = new RouteImpl();
+		Agency agency = new Agency("name");
+		Route route = new Route();
 		
 		route.setAgency(agency);
 		route.setId("Id");
@@ -52,7 +51,7 @@ public class RouteImplTest {
 		
 		
 		for ( int ndx = 0; ndx < 5; ndx++ ) {
-			Trip trip = TripImplTest.createTrip();
+			Trip trip = TripTest.createTrip();
 			route.getTripList().add(trip);
 		}
 		
@@ -72,7 +71,7 @@ public class RouteImplTest {
 		
 		assertEquals(5, route.getTripList().size());
 		
-		Trip tmp = TripImplTest.createTrip();
+		Trip tmp = TripTest.createTrip();
 		for ( int ndx=0; ndx < route.getTripList().size(); ndx++ ) {
 			Trip trip = route.getTripList().get(ndx);
 			

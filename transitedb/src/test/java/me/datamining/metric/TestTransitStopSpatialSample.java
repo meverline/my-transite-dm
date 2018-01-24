@@ -1,6 +1,7 @@
 package me.datamining.metric;
 
-import static org.junit.Assert.*;
+import static org.easymock.EasyMock.expect;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,10 +14,6 @@ import org.junit.Test;
 
 import me.transit.database.RouteStopData;
 import me.transit.database.TransitStop;
-import me.transit.database.impl.RouteStopDataImpl;
-import me.transit.database.impl.TransitStopImpl;
-
-import static org.easymock.EasyMock.expect;
 
 public class TestTransitStopSpatialSample extends EasyMockSupport {
 
@@ -30,11 +27,11 @@ public class TestTransitStopSpatialSample extends EasyMockSupport {
 		         .addMockedMethod("getRoutes") // tell EasyMock to mock foo() method
 		         .createMock(); 
 	
-		TransitStop stop = new TransitStopImpl();
+		TransitStop stop = new TransitStop();
 		List<RouteStopData> list = new ArrayList<RouteStopData>();
 		
 		for (int ndx = 0; ndx < 5; ndx++ ) {
-			list.add(new RouteStopDataImpl());			
+			list.add(new RouteStopData());			
 		}
 		
 		expect(testSubject.getRoutes(EasyMock.anyObject(TransitStop.class))).andReturn(list);

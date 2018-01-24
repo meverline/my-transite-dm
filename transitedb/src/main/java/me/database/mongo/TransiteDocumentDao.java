@@ -4,7 +4,6 @@ import java.net.UnknownHostException;
 
 import me.transit.database.Agency;
 import me.transit.database.StopTime;
-import me.transit.database.impl.AgencyImpl;
 
 public class TransiteDocumentDao extends DocumentDao {
 
@@ -31,7 +30,7 @@ public class TransiteDocumentDao extends DocumentDao {
     {
     	Object setValue = value;
         if ( key.equals(Agency.AGENCY) ) {
-                setValue = new AgencyImpl(value.toString());
+                setValue = new Agency(value.toString());
         } 
         super.translatePrimative(setValue, key, rtn);
     }

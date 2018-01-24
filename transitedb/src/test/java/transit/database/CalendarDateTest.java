@@ -1,24 +1,24 @@
-package transit.database.impl;
+package transit.database;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import java.util.Calendar;
 
-import me.transit.database.Agency;
-import me.transit.database.CalendarDate;
-import me.transit.database.impl.AgencyImpl;
-import me.transit.database.impl.CalendarDateImpl;
-
 import org.junit.Test;
 
-public class CalendarDateImplTest {
+import me.transit.database.Agency;
+import me.transit.database.CalendarDate;
+
+public class CalendarDateTest {
 
 	/**
 	 * 
 	 */
 	@Test
 	public void testConstructor() {
-		CalendarDate cal = new CalendarDateImpl();
+		CalendarDate cal = new CalendarDate();
 		
 		assertNull(cal.getAgency());
 		assertEquals(-1, cal.getUUID());
@@ -34,8 +34,8 @@ public class CalendarDateImplTest {
 	 */
 	@Test
 	public void testGetsAndSets() {
-		Agency agency = new AgencyImpl("test");
-		CalendarDate cal = new CalendarDateImpl();
+		Agency agency = new Agency("test");
+		CalendarDate cal = new CalendarDate();
 		
 		assertNull(cal.getAgency());
 		assertEquals(-1, cal.getUUID());
