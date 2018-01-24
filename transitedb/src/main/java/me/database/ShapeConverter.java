@@ -1,13 +1,12 @@
 package me.database;
 
-import me.transit.database.RouteGeometry;
-import me.transit.database.RouteGeometry;
-
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.MarshallingContext;
 import com.thoughtworks.xstream.converters.UnmarshallingContext;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
+
+import me.transit.database.RouteGeometry;
 
 public class ShapeConverter implements Converter {
 
