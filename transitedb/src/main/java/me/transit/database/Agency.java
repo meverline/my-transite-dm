@@ -70,7 +70,7 @@ public class Agency implements Serializable{
 	private String version = "0.5";
 
 	@Column(name = "MBR", columnDefinition = "Geometry")
-	@Type(type = "org.hibernate.spatial.GeometryType")
+	@Type(type="jts_geometry")
 	@XStreamAlias("mbr")
 	private Polygon mbr = null;
 

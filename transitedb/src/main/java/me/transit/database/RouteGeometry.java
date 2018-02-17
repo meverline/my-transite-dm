@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
@@ -50,7 +52,8 @@ public class RouteGeometry implements TransitData {
 	@XStreamAlias("version")
 	private String version = "0.5";
 	
-	@Column(name="SHAPE", columnDefinition = "geometry")
+	@Column(name="SHAPE", columnDefinition = "Geometry")
+	@Type(type="jts_geometry")
 	@XStreamAlias("shape")
 	@XStreamConverter(me.database.LineStringConverter.class)
 	private Geometry shape = null;

@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
@@ -70,7 +72,8 @@ public class TransitStop implements TransitData, IDataProvider {
 	@XStreamAlias("desc")
 	private String desc = "";
 
-	@Column(name = "LOCATION", columnDefinition = "geometry(Point,4326)")
+	@Column(name = "LOCATION", columnDefinition = "Geometry")
+	@Type(type="jts_geometry")
 	@XStreamAlias("location")
 	@XStreamConverter(me.database.PointConverter.class)
 	private Point location = null;

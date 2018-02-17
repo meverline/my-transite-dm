@@ -93,7 +93,8 @@ public class Route implements TransitData {
 	@XStreamAlias("textColor")
 	private String textColor = "";
 
-	@OneToMany(mappedBy = "Route", cascade={CascadeType.PERSIST})
+	@OneToMany(cascade={CascadeType.PERSIST}, fetch = FetchType.EAGER)
+	@JoinColumn(name = "ROUTE_UUID", nullable = false, updatable = false)
 	@OrderBy("TRIP_INDX")
 	@XStreamImplicit(itemFieldName = Route.TRIPLIST)
 	private List<Trip> trips = new ArrayList<Trip>();
