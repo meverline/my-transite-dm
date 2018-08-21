@@ -13,6 +13,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
@@ -23,15 +24,14 @@ import org.hibernate.annotations.Type;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
-import me.transit.database.CalendarDate;
-
 @Entity(name = "CalendarDate")
 @Table(name = "tran_calendar_date")
+@Inheritance
 @DiscriminatorColumn(name = "calendar_date_type")
 @DiscriminatorValue("CalendarDateImpl")
 @XStreamAlias("CalendarDate")
 public class CalendarDate implements TransitData {
-
+	
 	public enum ExceptionType { ADD_SERVICE, REMOVE_SERVICE, UNKNOWN };
 
 	@XStreamOmitField
@@ -64,98 +64,104 @@ public class CalendarDate implements TransitData {
 	@Enumerated(EnumType.STRING)
 	private ExceptionType exceptionType = ExceptionType.UNKNOWN;
 
-	/**
-	 * @return the date
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.CalendarDate#getDate()
 	 */
+
 	public Calendar getDate() {
 		return date;
 	}
 
-	/**
-	 * @return the uuid
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.CalendarDate#getUUID()
 	 */
+
 	public long getUUID() {
 		return uuid;
 	}
 
-	/**
-	 * @param uuid
-	 *            the uuid to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.CalendarDate#setUUID(long)
 	 */
+
 	public void setUUID(long uuid) {
 		this.uuid = uuid;
 	}
 
-	/**
-	 * @return the agency
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.CalendarDate#getAgency()
 	 */
+
 	public Agency getAgency() {
 		return agency;
 	}
 
-	/**
-	 * @param agency
-	 *            the agency to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.CalendarDate#setAgency(me.transit.database.impl.Agency)
 	 */
+
 	public void setAgency(Agency agency) {
 		this.agency = agency;
 	}
 
-	/**
-	 * @return the id
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.CalendarDate#getId()
 	 */
+
 	public String getId() {
 		return id;
 	}
 
-	/**
-	 * @param id
-	 *            the id to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.CalendarDate#setId(java.lang.String)
 	 */
+
 	public void setId(String id) {
 		this.id = id;
 	}
 
-	/**
-	 * @return the version
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.CalendarDate#getVersion()
 	 */
+
 	public String getVersion() {
 		return version;
 	}
 
-	/**
-	 * @param version
-	 *            the version to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.CalendarDate#setVersion(java.lang.String)
 	 */
+
 	public void setVersion(String version) {
 		this.version = version;
 	}
 
-	/**
-	 * @param date
-	 *            the date to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.CalendarDate#setDate(java.util.Calendar)
 	 */
+
 	public void setDate(Calendar date) {
 		this.date = date;
 	}
 
-	/**
-	 * @return the exceptionType
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.CalendarDate#getExceptionType()
 	 */
+
 
 	public ExceptionType getExceptionType() {
 		return exceptionType;
 	}
 
-	/**
-	 * @param exceptionType
-	 *            the exceptionType to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.CalendarDate#setExceptionType(me.transit.database.impl.CalendarDateImpl.ExceptionType)
 	 */
+
 	public void setExceptionType(ExceptionType exceptionType) {
 		this.exceptionType = exceptionType;
 	}
 
-	@Override
+
 	public String toString() {
 		StringBuilder builder = new StringBuilder("CalendarData: {" + super.toString() + "}");
 
@@ -166,9 +172,10 @@ public class CalendarDate implements TransitData {
 		return builder.toString();
 	}
 
-	/**
-	 * 
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.CalendarDate#valid()
 	 */
+
 	public boolean valid() {
 		return true;
 	}

@@ -14,6 +14,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
@@ -26,15 +27,15 @@ import com.thoughtworks.xstream.annotations.XStreamImplicit;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import me.database.mongo.IDocument;
-import me.transit.database.Route;
 
 @XStreamAlias("Route")
 @Entity
 @Table(name = "tran_route")
+@Inheritance
 @DiscriminatorColumn(name = "route_type")
 @DiscriminatorValue("TransitDateImpl")
 public class Route implements TransitData {
-
+	
 	public final static String TRIPLIST = "tripList";
 	public static final String SHORTNAME = "shortName";
 	public static final String LONGNAME = "longName";
@@ -42,6 +43,7 @@ public class Route implements TransitData {
 	public static final String TYPE = "type";
 	
 	public enum RouteType { TRAM, SUBWAY, RAIL, BUS, FERRY, CABLE_CAR, GONDOLA, FUNICULAR, UNKOWN };
+
 	
 	@XStreamOmitField
 	private static final long serialVersionUID = 1L;
@@ -99,178 +101,194 @@ public class Route implements TransitData {
 	@XStreamImplicit(itemFieldName = Route.TRIPLIST)
 	private List<Trip> trips = new ArrayList<Trip>();
 
-	/**
-	 * @return the uuid
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Route#getUUID()
 	 */
+
 	public long getUUID() {
 		return uuid;
 	}
 
-	/**
-	 * @param uuid the uuid to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Route#setUUID(long)
 	 */
+
 	public void setUUID(long uuid) {
 		this.uuid = uuid;
 	}
 
-	/**
-	 * @return the agency
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Route#getAgency()
 	 */
+
 	public Agency getAgency() {
 		return agency;
 	}
 
-	/**
-	 * @param agency the agency to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Route#setAgency(me.transit.database.impl.Agency)
 	 */
+
 	public void setAgency(Agency agency) {
 		this.agency = agency;
 	}
 
-	/**
-	 * @return the id
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Route#getId()
 	 */
+
 	public String getId() {
 		return id;
 	}
 
-	/**
-	 * @param id the id to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Route#setId(java.lang.String)
 	 */
+
 	public void setId(String id) {
 		this.id = id;
 	}
 
-	/**
-	 * @return the version
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Route#getVersion()
 	 */
+
 	public String getVersion() {
 		return version;
 	}
 
-	/**
-	 * @param version the version to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Route#setVersion(java.lang.String)
 	 */
+
 	public void setVersion(String version) {
 		this.version = version;
 	}
 
-	/**
-	 * @return the shortName
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Route#getShortName()
 	 */
+
 	public String getShortName() {
 		return shortName;
 	}
 
-	/**
-	 * @param shortName
-	 *            the shortName to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Route#setShortName(java.lang.String)
 	 */
+
 	public void setShortName(String shortName) {
 		this.shortName = shortName;
 	}
 
-	/**
-	 * @return the longName
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Route#getLongName()
 	 */
+
 	public String getLongName() {
 		return longName;
 	}
 
-	/**
-	 * @param longName
-	 *            the longName to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Route#setLongName(java.lang.String)
 	 */
+
 	public void setLongName(String longName) {
 		this.longName = longName;
 	}
 
-	/**
-	 * @return the desc
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Route#getDesc()
 	 */
+
 	public String getDesc() {
 		return desc;
 	}
 
-	/**
-	 * @param desc
-	 *            the desc to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Route#setDesc(java.lang.String)
 	 */
+
 	public void setDesc(String desc) {
 		this.desc = desc;
 	}
 
-	/**
-	 * @return the type
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Route#getType()
 	 */
+
 	public RouteType getType() {
 		return type;
 	}
 
-	/**
-	 * @param type
-	 *            the type to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Route#setType(me.transit.database.impl.RouteImpl.RouteType)
 	 */
+
 	public void setType(RouteType type) {
 		this.type = type;
 	}
 
-	/**
-	 * @return the url
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Route#getUrl()
 	 */
+
 	public String getUrl() {
 		return url;
 	}
 
-	/**
-	 * @param url
-	 *            the url to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Route#setUrl(java.lang.String)
 	 */
+
 	public void setUrl(String url) {
 		this.url = url;
 	}
 
-	/**
-	 * @return the color
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Route#getColor()
 	 */
+
 	public String getColor() {
 		return color;
 	}
 
-	/**
-	 * @param color
-	 *            the color to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Route#setColor(java.lang.String)
 	 */
+
 	public void setColor(String color) {
 		this.color = color;
 	}
 
-	/**
-	 * @return the textColor
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Route#getTextColor()
 	 */
+
 	public String getTextColor() {
 		return textColor;
 	}
 
-	/**
-	 * @param textColor
-	 *            the textColor to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Route#setTextColor(java.lang.String)
 	 */
+
 	public void setTextColor(String textColor) {
 		this.textColor = textColor;
 	}
 
-	/**
-	 * @return the textColor
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Route#getTripList()
 	 */
+
 	public List<Trip> getTripList() {
 		return this.trips;
 	}
 
-	/**
-	 * @param textColor
-	 *            the textColor to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Route#setTripList(java.util.List)
 	 */
+
 	public void setTripList(List<Trip> list) {
 		this.trips = list;
 	}
@@ -279,7 +297,7 @@ public class Route implements TransitData {
 	 * (non-Javadoc)
 	 * @see me.transit.database.impl.TransitDateImpl#toString()
 	 */
-	@Override
+
 	public String toString() {
 		StringBuilder builder = new StringBuilder("Route: {" + super.toString() + "}");
 
@@ -303,15 +321,18 @@ public class Route implements TransitData {
 	 * (non-Javadoc)
 	 * @see me.transit.database.TransitData#valid()
 	 */
-	@Override
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Route#valid()
+	 */
+
 	public boolean valid() {
 		return true;
 	}
 
-	/**
-	 * 
-	 * @return
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Route#toDocument()
 	 */
+
 	public Map<String, Object> toDocument() {
 
 		Map<String, Object> rtn = new HashMap<String, Object>();
@@ -332,9 +353,10 @@ public class Route implements TransitData {
 		return rtn;
 	}
 
-	/**
-	 * 
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Route#handleEnum(java.lang.String, java.lang.Object)
 	 */
+
 	public void handleEnum(String key, Object value) {
 		if (key.equals(Route.TYPE)) {
 			this.setType(Route.RouteType.valueOf(value.toString()));

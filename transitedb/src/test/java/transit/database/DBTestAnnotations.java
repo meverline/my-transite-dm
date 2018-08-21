@@ -39,7 +39,7 @@ public class DBTestAnnotations {
 	private SimpleDriverDataSource dataSource() {
 
 		return new SimpleDriverDataSource(new Driver(), "jdbc:postgresql://localhost:5432/Transit", "postgres",
-				"postgres");
+				"Postgres");
 	}
 
 	@Test

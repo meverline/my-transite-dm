@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
@@ -24,15 +25,15 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import com.vividsolutions.jts.geom.Point;
 
 import me.datamining.metric.IDataProvider;
-import me.transit.database.TransitStop;
 
 @Entity
 @Table(name = "tran_stop")
+@Inheritance
 @DiscriminatorColumn(name = "tran_stop_type")
 @DiscriminatorValue("TransitStopImpl")
 @XStreamAlias("TransitStop")
 public class TransitStop implements TransitData, IDataProvider {
-
+	
 	public static final String STOP_NAME = "name";
 	public static final String LOCATION = "location";
 
@@ -97,183 +98,195 @@ public class TransitStop implements TransitData, IDataProvider {
 
 	private boolean wheelchairBoarding;
 
-	/**
-	 * @return the uuid
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.TransitStop#getUUID()
 	 */
+
 	public long getUUID() {
 		return uuid;
 	}
 
-	/**
-	 * @param uuid
-	 *            the uuid to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.TransitStop#setUUID(long)
 	 */
+
 	public void setUUID(long uuid) {
 		this.uuid = uuid;
 	}
 
-	/**
-	 * @return the agency
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.TransitStop#getAgency()
 	 */
+
 	public Agency getAgency() {
 		return agency;
 	}
 
-	/**
-	 * @param agency
-	 *            the agency to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.TransitStop#setAgency(me.transit.database.impl.Agency)
 	 */
+
 	public void setAgency(Agency agency) {
 		this.agency = agency;
 	}
 
-	/**
-	 * @return the id
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.TransitStop#getId()
 	 */
+
 	public String getId() {
 		return id;
 	}
 
-	/**
-	 * @param id
-	 *            the id to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.TransitStop#setId(java.lang.String)
 	 */
+
 	public void setId(String id) {
 		this.id = id;
 	}
 
-	/**
-	 * @return the version
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.TransitStop#getVersion()
 	 */
+
 	public String getVersion() {
 		return version;
 	}
 
-	/**
-	 * @param version
-	 *            the version to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.TransitStop#setVersion(java.lang.String)
 	 */
+
 	public void setVersion(String version) {
 		this.version = version;
 	}
 
-	/**
-	 * @return the code
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.TransitStop#getCode()
 	 */
+
 	public String getCode() {
 		return code;
 	}
 
-	/**
-	 * @param code
-	 *            the code to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.TransitStop#setCode(java.lang.String)
 	 */
+
 	public void setCode(String code) {
 		this.code = code;
 	}
 
-	/**
-	 * @return the name
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.TransitStop#getName()
 	 */
+
 	public String getName() {
 		return name;
 	}
 
-	/**
-	 * @param name
-	 *            the name to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.TransitStop#setName(java.lang.String)
 	 */
+
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	/**
-	 * @return the desc
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.TransitStop#getDesc()
 	 */
+
 
 	public String getDesc() {
 		return desc;
 	}
 
-	/**
-	 * @param desc
-	 *            the desc to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.TransitStop#setDesc(java.lang.String)
 	 */
+
 	public void setDesc(String desc) {
 		this.desc = desc;
 	}
 
-	/**
-	 * @return the location
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.TransitStop#getLocation()
 	 */
+
 	public Point getLocation() {
 		return location;
 	}
 
-	/**
-	 * @param location
-	 *            the location to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.TransitStop#setLocation(com.vividsolutions.jts.geom.Point)
 	 */
+
 	public void setLocation(Point location) {
 		this.location = location;
 	}
 
-	/**
-	 * @return the zoneId
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.TransitStop#getZoneId()
 	 */
+
 	public String getZoneId() {
 		return zoneId;
 	}
 
-	/**
-	 * @param zoneId
-	 *            the zoneId to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.TransitStop#setZoneId(java.lang.String)
 	 */
+
 	public void setZoneId(String zoneId) {
 		this.zoneId = zoneId;
 	}
 
-	/**
-	 * @return the url
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.TransitStop#getUrl()
 	 */
+
 	public String getUrl() {
 		return url;
 	}
 
-	/**
-	 * @param url
-	 *            the url to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.TransitStop#setUrl(java.lang.String)
 	 */
+
 	public void setUrl(String url) {
 		this.url = url;
 	}
 
-	/**
-	 * @return the locationType
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.TransitStop#getLocationType()
 	 */
+
 	public LocationType getLocationType() {
 		return locationType;
 	}
 
-	/**
-	 * @param locationType
-	 *            the locationType to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.TransitStop#setLocationType(me.transit.database.impl.TransitStopImpl.LocationType)
 	 */
+
 	public void setLocationType(LocationType locationType) {
 		this.locationType = locationType;
 	}
 
-	/**
-	 * @return the parentStation
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.TransitStop#getParentStation()
 	 */
+
 	public int getParentStation() {
 		return parentStation;
 	}
 
-	/**
-	 * @param parentStation
-	 *            the parentStation to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.TransitStop#setParentStation(int)
 	 */
+
 	public void setParentStation(int parentStation) {
 		this.parentStation = parentStation;
 	}
@@ -283,7 +296,7 @@ public class TransitStop implements TransitData, IDataProvider {
 	 * 
 	 * @see me.transit.database.impl.TransitDateImpl#toString()
 	 */
-	@Override
+
 	public String toString() {
 		StringBuilder builder = new StringBuilder("TransiteStop: {" + super.toString() + "}");
 
@@ -310,6 +323,10 @@ public class TransitStop implements TransitData, IDataProvider {
 	 * 
 	 * @see me.transit.database.TransitStop#setStopTimezone(java.lang.String)
 	 */
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.TransitStop#setStopTimezone(java.lang.String)
+	 */
+
 	public void setStopTimezone(String value) {
 		this.getAgency().setTimezone(value);
 	}
@@ -319,6 +336,10 @@ public class TransitStop implements TransitData, IDataProvider {
 	 * 
 	 * @see me.transit.database.TransitStop#getStopTimezone()
 	 */
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.TransitStop#getStopTimezone()
+	 */
+
 	public String getStopTimezone() {
 		return this.getAgency().getTimezone();
 	}
@@ -328,6 +349,10 @@ public class TransitStop implements TransitData, IDataProvider {
 	 * 
 	 * @see me.transit.database.TransitStop#getWheelchairBoarding()
 	 */
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.TransitStop#getWheelchairBoarding()
+	 */
+
 	public boolean getWheelchairBoarding() {
 		return wheelchairBoarding;
 	}
@@ -337,6 +362,10 @@ public class TransitStop implements TransitData, IDataProvider {
 	 * 
 	 * @see me.transit.database.TransitStop#setWheelchairBoarding(boolean)
 	 */
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.TransitStop#setWheelchairBoarding(boolean)
+	 */
+
 	public void setWheelchairBoarding(boolean value) {
 		wheelchairBoarding = value;
 	}
@@ -346,6 +375,10 @@ public class TransitStop implements TransitData, IDataProvider {
 	 * 
 	 * @see me.transit.database.TransitData#valid()
 	 */
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.TransitStop#valid()
+	 */
+
 	public boolean valid() {
 		if (this.getName() == null || this.getName().length() < 0) {
 			return false;

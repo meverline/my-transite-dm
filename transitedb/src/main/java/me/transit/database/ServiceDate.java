@@ -15,6 +15,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
@@ -31,11 +32,12 @@ import me.transit.database.ServiceDate;
 
 @Entity
 @Table(name="tran_service_date")
+@Inheritance
 @DiscriminatorColumn(name = "serviceDate_type")
 @DiscriminatorValue("ServiceDateImpl")
 @XStreamAlias("ServiceDate")
-public class ServiceDate implements TransitData {
-
+public class ServiceDate implements TransitData, IDocument {
+	
 	public static final String STARTDATE = "startDate";
 	public static final String ENDDATE = "endDate";
 	public static final String SERVICE = "service";
@@ -110,183 +112,205 @@ public class ServiceDate implements TransitData {
 	@XStreamOmitField
 	private ServiceDays service = ServiceDays.ALL_WEEK;
 	
-	/**
-	 * @return the uuid
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.ServiceDate#getUUID()
 	 */
+
 	public long getUUID() {
 		return uuid;
 	}
 
-	/**
-	 * @param uuid the uuid to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.ServiceDate#setUUID(long)
 	 */
+
 	public void setUUID(long uuid) {
 		this.uuid = uuid;
 	}
 
-	/**
-	 * @return the agency
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.ServiceDate#getAgency()
 	 */
+
 	public Agency getAgency() {
 		return agency;
 	}
 
-	/**
-	 * @param agency the agency to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.ServiceDate#setAgency(me.transit.database.impl.Agency)
 	 */
+
 	public void setAgency(Agency agency) {
 		this.agency = agency;
 	}
 
-	/**
-	 * @return the id
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.ServiceDate#getId()
 	 */
+
 	public String getId() {
 		return id;
 	}
 
-	/**
-	 * @param id the id to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.ServiceDate#setId(java.lang.String)
 	 */
+
 	public void setId(String id) {
 		this.id = id;
 	}
 
-	/**
-	 * @return the version
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.ServiceDate#getVersion()
 	 */
+
 	public String getVersion() {
 		return version;
 	}
 
-	/**
-	 * @param version the version to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.ServiceDate#setVersion(java.lang.String)
 	 */
+
 	public void setVersion(String version) {
 		this.version = version;
 	}
 
-	/**
-	 * @return the startDate
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.ServiceDate#getStartDate()
 	 */
+
 	public Calendar getStartDate() {
 		return startDate;
 	}
 
-	/**
-	 * @param startDate the startDate to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.ServiceDate#setStartDate(java.util.Calendar)
 	 */
+
 	public void setStartDate(Calendar startDate) {
 		this.startDate = startDate;
 	}
 
-	/**
-	 * @return the endDate
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.ServiceDate#getEndDate()
 	 */
+
 	public Calendar getEndDate() {
 		return endDate;
 	}
 
-	/**
-	 * @param endDate the endDate to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.ServiceDate#setEndDate(java.util.Calendar)
 	 */
+
 	public void setEndDate(Calendar endDate) {
 		this.endDate = endDate;
 	}
 	
-	/**
-	 * @return the serviceDayFlag
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.ServiceDate#getServiceDayFlag()
 	 */
+
 	@Column(name="SERVICE_DAYS")
 	public int getServiceDayFlag() {
 		return serviceDayFlag;
 	}
 
-	/**
-	 * @param serviceDayFlag the serviceDayFlag to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.ServiceDate#setServiceDayFlag(int)
 	 */
+
 	public void setServiceDayFlag(int serviceDayFlag) {
 		this.serviceDayFlag = serviceDayFlag;
 	}
 
-	/**
-	 * @return the service
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.ServiceDate#getService()
 	 */
+
 	public ServiceDays getService() {
 		return service;
 	}
 
-	/**
-	 * @param service the service to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.ServiceDate#setService(me.transit.database.impl.ServiceDateImpl.ServiceDays)
 	 */
+
 	public void setService(ServiceDays service) {
 		this.service = service;
 	}
 	
-	/**
-	 * 
-	 * @param day
-	 * @return
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.ServiceDate#hasService(me.transit.database.ServiceDate.WeekDay)
 	 */
+
 	public boolean hasService(ServiceDate.WeekDay day)
 	{
 		return ((this.serviceDayFlag & day.getBit()) == day.getBit());
 	}
 	
-	/**
-	 * 
-	 * @param day
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.ServiceDate#addServiceData(me.transit.database.ServiceDate.WeekDay)
 	 */
+
 	public void addServiceData(ServiceDate.WeekDay day)
 	{
 		this.serviceDayFlag = this.serviceDayFlag | day.getBit();
 	}
 
-	/**
-	 * @return the sunday
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.ServiceDate#isSunday()
 	 */
+
 	public boolean isSunday() {
 		return hasService( ServiceDate.WeekDay.SUNDAY);
 	}
 
-	/**
-	 * @return the monday
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.ServiceDate#isMonday()
 	 */
+
 	public boolean isMonday() {
 		return hasService( ServiceDate.WeekDay.MONDAY);
 	}
 
-	/**
-	 * @return the tuesday
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.ServiceDate#isTuesday()
 	 */
+
 	public boolean isTuesday() {
 		return hasService( ServiceDate.WeekDay.TUESDAY);
 	}
 
-	/**
-	 * @return the wensday
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.ServiceDate#isWednesday()
 	 */
+
 	public boolean isWednesday() {
 		return hasService( ServiceDate.WeekDay.WENSDAY);
 	}
 
-	/**
-	 * @return the thursday
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.ServiceDate#isThursday()
 	 */
+
 	public boolean isThursday() {
 		return hasService( ServiceDate.WeekDay.THURSDAY);
 	}
 
-	/**
-	 * @return the friday
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.ServiceDate#isFriday()
 	 */
+
 	public boolean isFriday() {
 		return hasService( ServiceDate.WeekDay.FRIDAY);
 	}
 
-	/**
-	 * @return the saturday
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.ServiceDate#isSaturday()
 	 */
+
 	public boolean isSaturday() {
 		return hasService( ServiceDate.WeekDay.SATURDAY);
 	}
@@ -295,7 +319,7 @@ public class ServiceDate implements TransitData {
 	 * (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
-	@Override
+
 	public boolean equals(Object obj) {
 		
 		boolean rtn = false;
@@ -325,11 +349,11 @@ public class ServiceDate implements TransitData {
 		return rtn;
 	}
 	
-	/**
-	 * 
-	 * @return
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.ServiceDate#toDocument()
 	 */
-    public Map<String, Object> toDocument() {
+    @Override
+	public Map<String, Object> toDocument() {
             Map<String,Object> rtn = new HashMap<String,Object>();
             
             rtn.put(IDocument.CLASS, ServiceDate.class.getName());
@@ -350,12 +374,11 @@ public class ServiceDate implements TransitData {
             return rtn;
     }
     
-    /**
-     * 
-     * @param key
-     * @param value
-     */
-    public void handleEnum(String key, Object value)
+    /* (non-Javadoc)
+	 * @see me.transit.database.impl.ServiceDate#handleEnum(java.lang.String, java.lang.Object)
+	 */
+    @Override
+	public void handleEnum(String key, Object value)
     {
             if ( key.equals(ServiceDate.SERVICE) ) {
                     this.setService( ServiceDate.ServiceDays.valueOf(value.toString()));
@@ -371,6 +394,9 @@ public class ServiceDate implements TransitData {
 	/*
 	 * (non-Javadoc)
 	 * @see me.transit.database.TransitData#valid()
+	 */
+    /* (non-Javadoc)
+	 * @see me.transit.database.impl.ServiceDate#valid()
 	 */
     @Override
 	public boolean valid() 

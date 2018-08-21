@@ -19,11 +19,6 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-//import org.nocrala.tools.gis.data.esri.shapefile.ShapeFileReader;
-//import org.nocrala.tools.gis.data.esri.shapefile.ValidationPreferences;
-//import org.nocrala.tools.gis.data.esri.shapefile.shape.AbstractShape;
-//import org.nocrala.tools.gis.data.esri.shapefile.shape.PointData;
-//import org.nocrala.tools.gis.data.esri.shapefile.shape.shapes.PolylineShape;
 
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;

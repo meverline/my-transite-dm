@@ -17,11 +17,11 @@ import com.vividsolutions.jts.geom.Polygon;
 
 import me.transit.database.Agency;
 import me.transit.database.CalendarDate;
+import me.transit.database.Route;
 import me.transit.database.RouteGeometry;
 import me.transit.database.RouteStopData;
 import me.transit.database.ServiceDate;
 import me.transit.database.TransitStop;
-import me.transit.database.Route;
 import me.transit.database.Trip;
 
 public class TestModel {
@@ -30,7 +30,7 @@ public class TestModel {
 	
 	@Test
 	public void testTrip() {
-		tester.testBean(TripTest.class);
+		tester.testBean(Trip.class);
 	}
 	
 	@Test

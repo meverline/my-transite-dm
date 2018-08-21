@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
@@ -17,18 +18,17 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import com.vividsolutions.jts.geom.Polygon;
 
-import me.transit.database.Agency;
-
 @Entity
 @Table(name = "tran_agency")
+@Inheritance
 @DiscriminatorColumn(name = "angency_type")
 @DiscriminatorValue("AgencyImpl")
 @XStreamAlias("Agency")
-public class Agency implements Serializable{
+public class Agency implements Serializable {
 
 	public static final String AGENCY = "agency";
 	public static final String UUID = "uuid";
-
+	
 	/**
 	 * 
 	 */
@@ -85,152 +85,143 @@ public class Agency implements Serializable{
 	}
 
 	/**
-	 * @return the uuid
+	 * 
+	 * @return
 	 */
-
 	public long getUUID() {
 		return uuid;
 	}
 
 	/**
-	 * @return the uuid
+	 * 
+	 * @param id
 	 */
 	public void setUUID(long id) {
 		uuid = id;
 	}
 
-	/**
-	 * @return the version
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Agency#getVersion()
 	 */
 	public String getVersion() {
 		return version;
 	}
 
-	/**
-	 * @param version
-	 *            the version to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Agency#setVersion(java.lang.String)
 	 */
 	public void setVersion(String version) {
 		this.version = version;
 	}
 
-	/**
-	 * @return the name
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Agency#getName()
 	 */
-
 	public String getName() {
 		return name;
 	}
 
-	/**
-	 * @param name
-	 *            the name to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Agency#setName(java.lang.String)
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	/**
-	 * @return the url
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Agency#getUrl()
 	 */
-
 	public String getUrl() {
 		return url;
 	}
 
-	/**
-	 * @param url
-	 *            the url to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Agency#setUrl(java.lang.String)
 	 */
 	public void setUrl(String url) {
 		this.url = url;
 	}
 
-	/**
-	 * @return the timezone
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Agency#getTimezone()
 	 */
-
 	public String getTimezone() {
 		return timezone;
 	}
 
-	/**
-	 * @param timezone
-	 *            the timezone to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Agency#setTimezone(java.lang.String)
 	 */
 	public void setTimezone(String timezone) {
 		this.timezone = timezone;
 	}
 
-	/**
-	 * @return the lang
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Agency#getLang()
 	 */
-
 	public String getLang() {
 		return lang;
 	}
 
-	/**
-	 * @param lang
-	 *            the lang to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Agency#setLang(java.lang.String)
 	 */
 	public void setLang(String lang) {
 		this.lang = lang;
 	}
 
-	/**
-	 * @return the phone
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Agency#getPhone()
 	 */
-
 	public String getPhone() {
 		return phone;
 	}
 
-	/**
-	 * @param phone
-	 *            the phone to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Agency#setPhone(java.lang.String)
 	 */
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
-	/**
-	 * @return the id
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Agency#getId()
 	 */
 	public String getId() {
 		return id;
 	}
 
-	/**
-	 * @param id
-	 *            the id to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Agency#setId(java.lang.String)
 	 */
 	public void setId(String id) {
 		this.id = id;
 	}
 
-	/**
-	 * the mbr or agency
-	 * @return
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Agency#getMBR()
 	 */
 	public Polygon getMBR() {
 		return this.mbr;
 	}
 
-	/**
-	 * 
-	 * @param mbr
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Agency#setMBR(com.vividsolutions.jts.geom.Polygon)
 	 */
 	public void setMBR(Polygon mbr) {
 		this.mbr = mbr;
 	}
 
-	@Override
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Agency#toString()
+	 */
 	public String toString() {
 		return this.getName();
 	}
 
-	@Override
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Agency#equals(java.lang.Object)
+	 */
 	public boolean equals(Object obj) {
 
 		boolean rtn = false;
@@ -250,17 +241,22 @@ public class Agency implements Serializable{
 		return rtn;
 	}
 
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Agency#setFareUrl(java.lang.String)
+	 */
 	public void setFareUrl(String url) {
 		fareUrl = url;
 	}
 
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Agency#getFareUrl()
+	 */
 	public String getFareUrl() {
 		return fareUrl;
 	}
 	
-	/**
-	 * 
-	 * @return
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Agency#valid()
 	 */
 	public boolean valid() 
 	{

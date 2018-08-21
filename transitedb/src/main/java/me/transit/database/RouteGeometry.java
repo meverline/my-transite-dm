@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
@@ -25,6 +26,7 @@ import me.transit.database.RouteGeometry;
 
 @Entity
 @Table(name="tran_route_geometry")
+@Inheritance
 @XStreamAlias("RouteGeometry")
 @DiscriminatorColumn(name = "routeGeometry_type")
 @DiscriminatorValue("RouteGeometryImpl")
@@ -58,80 +60,91 @@ public class RouteGeometry implements TransitData {
 	@XStreamConverter(me.database.LineStringConverter.class)
 	private Geometry shape = null;
 
-	/**
-	 * @return the uuid
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.RouteGeometry#getUUID()
 	 */
+
 	public long getUUID() {
 		return uuid;
 	}
 
-	/**
-	 * @param uuid the uuid to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.RouteGeometry#setUUID(long)
 	 */
+
 	public void setUUID(long uuid) {
 		this.uuid = uuid;
 	}
 
-	/**
-	 * @return the agency
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.RouteGeometry#getAgency()
 	 */
+
 	public Agency getAgency() {
 		return agency;
 	}
 
-	/**
-	 * @param agency the agency to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.RouteGeometry#setAgency(me.transit.database.impl.Agency)
 	 */
+
 	public void setAgency(Agency agency) {
 		this.agency = agency;
 	}
 
-	/**
-	 * @return the id
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.RouteGeometry#getId()
 	 */
+
 	public String getId() {
 		return id;
 	}
 
-	/**
-	 * @param id the id to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.RouteGeometry#setId(java.lang.String)
 	 */
+
 	public void setId(String id) {
 		this.id = id;
 	}
 
-	/**
-	 * @return the version
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.RouteGeometry#getVersion()
 	 */
+
 	public String getVersion() {
 		return version;
 	}
 
-	/**
-	 * @param version the version to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.RouteGeometry#setVersion(java.lang.String)
 	 */
+
 	public void setVersion(String version) {
 		this.version = version;
 	}
 
-	/**
-	 * @return the shape
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.RouteGeometry#getShape()
 	 */
 	
+
 	public Geometry getShape() {
 		return shape;
 	}
 
-	/**
-	 * @param shape the shape to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.RouteGeometry#setShape(com.vividsolutions.jts.geom.Geometry)
 	 */
+
 	public void setShape(Geometry shape) {
 		this.shape = shape;
 	}
 	
-	/**
-	 * 
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.RouteGeometry#valid()
 	 */
+
 	public boolean valid() 
 	{
 		return true;

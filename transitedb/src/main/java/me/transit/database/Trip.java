@@ -16,6 +16,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
@@ -31,6 +32,7 @@ import me.transit.database.Trip;
 
 @Entity
 @Table(name="tran_trip")
+@Inheritance
 @DiscriminatorColumn(name = "trip_type")
 @DiscriminatorValue("TripImpl")
 @XStreamAlias("Trip")
@@ -44,7 +46,7 @@ public class Trip implements TransitData, IDocument {
 	public static final String STOPTIMES = "stopTimes";
 
 	public enum DirectionType { OUT_BOUND, IN_BOUND, UNKOWN };
-
+	
 	@XStreamOmitField
 	private static final long serialVersionUID = 1L;
 	
@@ -94,16 +96,18 @@ public class Trip implements TransitData, IDocument {
 	@XStreamImplicit(itemFieldName=Trip.STOPTIMES)
 	private List<StopTime> stopTimes = new ArrayList<StopTime>();
 	
-	/**
-	 * @return the uuid
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Trip#getUUID()
 	 */
+
 	public long getUUID() {
 		return uuid;
 	}
 
-	/**
-	 * @param uuid the uuid to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Trip#setUUID(long)
 	 */
+
 	public void setUUID(long uuid) {
 		this.uuid = uuid;
 	}
@@ -111,6 +115,7 @@ public class Trip implements TransitData, IDocument {
 	/**
 	 * @return the agency
 	 */
+
 	public Agency getAgency() {
 		return agency;
 	}
@@ -118,34 +123,39 @@ public class Trip implements TransitData, IDocument {
 	/**
 	 * @param agency the agency to set
 	 */
+
 	public void setAgency(Agency agency) {
 		this.agency = agency;
 	}
 
-	/**
-	 * @return the id
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Trip#getId()
 	 */
+
 	public String getId() {
 		return id;
 	}
 
-	/**
-	 * @param id the id to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Trip#setId(java.lang.String)
 	 */
+
 	public void setId(String id) {
 		this.id = id;
 	}
 
-	/**
-	 * @return the version
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Trip#getVersion()
 	 */
+
 	public String getVersion() {
 		return version;
 	}
 
-	/**
-	 * @param version the version to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Trip#setVersion(java.lang.String)
 	 */
+
 	public void setVersion(String version) {
 		this.version = version;
 	}
@@ -153,6 +163,7 @@ public class Trip implements TransitData, IDocument {
 	/**
 	 * @return the service
 	 */
+
 	public ServiceDate getService() {
 		return service;
 	}
@@ -160,48 +171,55 @@ public class Trip implements TransitData, IDocument {
 	/**
 	 * @param service the service to set
 	 */
+
 	public void setService(ServiceDate service) {
 		this.service = service;
 	}
 	
-	/**
-	 * @return the headSign
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Trip#getHeadSign()
 	 */
+
 	public String getHeadSign() {
 		return headSign;
 	}
 	
-	/**
-	 * @param headSign the headSign to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Trip#setHeadSign(java.lang.String)
 	 */
+
 	public void setHeadSign(String headSign) {
 		this.headSign = headSign;
 	}
 	
-	/**
-	 * @return the shortName
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Trip#getShortName()
 	 */
+
 	public String getShortName() {
 		return shortName;
 	}
 	
-	/**
-	 * @param shortName the shortName to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Trip#setShortName(java.lang.String)
 	 */
+
 	public void setShortName(String shortName) {
 		this.shortName = shortName;
 	}
 	
-	/**
-	 * @return the directionId
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Trip#getDirectionId()
 	 */
+
 	public DirectionType getDirectionId() {
 		return directionId;
 	}
 	
-	/**
-	 * @param directionId the directionId to set
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Trip#setDirectionId(me.transit.database.impl.TripImpl.DirectionType)
 	 */
+
 	public void setDirectionId(DirectionType directionId) {
 		this.directionId = directionId;
 	}
@@ -209,6 +227,7 @@ public class Trip implements TransitData, IDocument {
 	/**
 	 * @return the shape
 	 */
+
 	public RouteGeometry getShape() {
 		return shape;
 	}
@@ -216,6 +235,7 @@ public class Trip implements TransitData, IDocument {
 	/**
 	 * @param shape the shape to set
 	 */
+
 	public void setShape(RouteGeometry shape) {
 		this.shape = shape;
 	}
@@ -223,6 +243,7 @@ public class Trip implements TransitData, IDocument {
 	/**
 	 * @return the stopTimes
 	 */
+
 	public List<StopTime> getStopTimes() {
 		return stopTimes;
 	}
@@ -230,6 +251,7 @@ public class Trip implements TransitData, IDocument {
 	/**
 	 * @param stopTimes the stopTimes to set
 	 */
+
 	public void setStopTimes(List<StopTime> stopTimes) {
 		this.stopTimes = stopTimes;
 	}
@@ -238,6 +260,7 @@ public class Trip implements TransitData, IDocument {
 	 * 
 	 * @param stopTime
 	 */
+
 	public void addStopTime(StopTime stopTime) 
 	{
 		if ( stopTime != null) {
@@ -250,6 +273,7 @@ public class Trip implements TransitData, IDocument {
 	 * @param id
 	 * @return
 	 */
+
 	public StopTime findStopTimeById(String id) {
 		for ( StopTime item : this.getStopTimes() ) {
 			if ( item.getStopId().compareTo(id) == 0 ) {
@@ -263,7 +287,10 @@ public class Trip implements TransitData, IDocument {
 	 * (non-Javadoc)
 	 * @see me.transit.database.impl.TransitDateImpl#toString()
 	 */
-	@Override
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Trip#toString()
+	 */
+
 	public String toString() {
 		StringBuilder builder = new StringBuilder( "Trip: {" + super.toString() + "}");
 		
@@ -283,7 +310,10 @@ public class Trip implements TransitData, IDocument {
 	 * (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
-	@Override
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Trip#equals(java.lang.Object)
+	 */
+
 	public boolean equals(Object obj) {
 		
 		boolean rtn = false;
@@ -315,6 +345,10 @@ public class Trip implements TransitData, IDocument {
 	 * (non-Javadoc)
 	 * @see me.transit.database.TransitData#valid()
 	 */
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Trip#valid()
+	 */
+
 	public boolean valid() 
 	{
 		if ( this.getService() == null || this.getStopTimes().size() < 1 )
@@ -328,6 +362,9 @@ public class Trip implements TransitData, IDocument {
      * (non-Javadoc)
      * @see me.database.mongo.IDocument#toDocument()
      */
+    /* (non-Javadoc)
+	 * @see me.transit.database.impl.Trip#toDocument()
+	 */
     @Override
     public Map<String, Object> toDocument() {
             Map<String,Object> rtn = new HashMap<String,Object>();
@@ -353,6 +390,9 @@ public class Trip implements TransitData, IDocument {
      * (non-Javadoc)
      * @see me.database.mongo.IDocument#handleEnum(java.lang.String, java.lang.Object)
      */
+    /* (non-Javadoc)
+	 * @see me.transit.database.impl.Trip#handleEnum(java.lang.String, java.lang.Object)
+	 */
     @Override
     public void handleEnum(String key, Object value)
     {
