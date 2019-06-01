@@ -94,7 +94,7 @@ public class Trip implements TransitData, IDocument {
 	private RouteGeometry shape = null;
 	
 	@XStreamImplicit(itemFieldName=Trip.STOPTIMES)
-	private List<StopTime> stopTimes = new ArrayList<StopTime>();
+	private transient List<StopTime> stopTimes = new ArrayList<StopTime>();
 	
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Trip#getUUID()

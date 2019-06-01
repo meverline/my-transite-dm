@@ -10,7 +10,7 @@ public class WeekdayCheckBox extends JCheckBox {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private me.transit.database.WeekDay day = null;
+	private ServiceDate.WeekDay day = null;
 
 	/**
 	 * 
@@ -24,7 +24,7 @@ public class WeekdayCheckBox extends JCheckBox {
 	/**
 	 * @return the day
 	 */
-	public me.transit.database.WeekDay getDay() {
+	public ServiceDate.WeekDay getDay() {
 		return day;
 	}
 			

@@ -39,7 +39,7 @@ public class DBTestAnnotations {
 	private SimpleDriverDataSource dataSource() {
 
 		return new SimpleDriverDataSource(new Driver(), "jdbc:postgresql://localhost:5432/Transit", "postgres",
-				"Postgres");
+				"postgres");
 	}
 
 	@Test
@@ -50,13 +50,21 @@ public class DBTestAnnotations {
 
 			sessionBuilder.addProperties(getHibernateProperties());
 
+			System.out.println("start registering class");
 			sessionBuilder.addAnnotatedClasses(Agency.class);
+			System.out.println("done: " + Agency.class.getName());
 			sessionBuilder.addAnnotatedClasses(CalendarDate.class);
+			System.out.println("done: " + CalendarDate.class.getName());
 			sessionBuilder.addAnnotatedClasses(Route.class);
+			System.out.println("done: " + Route.class.getName());
 			sessionBuilder.addAnnotatedClasses(RouteGeometry.class);
+			System.out.println("done: " + RouteGeometry.class.getName());
 			sessionBuilder.addAnnotatedClasses(ServiceDate.class);
+			System.out.println("done: " + ServiceDate.class.getName());
 			sessionBuilder.addAnnotatedClasses(TransitStop.class);
+			System.out.println("done: " + TransitStop.class.getName());
 			sessionBuilder.addAnnotatedClasses(Trip.class);
+			System.out.println("done: " + Trip.class.getName());
 
 			@SuppressWarnings("unused")
 			SessionFactory sf = sessionBuilder.buildSessionFactory();

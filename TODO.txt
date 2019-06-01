@@ -1,3 +1,8 @@
+
+1.  Replace Mongo with Amazon DB
+2.  Replace Graph with Amazon Neptune
+3.  Postscript with Amazon RDS
+
 1. Setup Instructions/Readme
 2. Map/Reduce Mongo for routes schedule
 3. Map/Reduce Hadoop for routes schedule
