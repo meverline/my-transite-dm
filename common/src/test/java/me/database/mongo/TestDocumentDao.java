@@ -53,7 +53,7 @@ public class TestDocumentDao extends EasyMockSupport{
 		
 		this.setUpMock();
 
-		DocumentDao doc = DocumentDao.instance(writer);
+		IDocumentDao doc = DocumentDao.instance(writer);
 		assertNotNull(doc);
 		assertEquals(3, doc.size());
 		assertEquals(3, doc.size("unk"));
@@ -69,7 +69,7 @@ public class TestDocumentDao extends EasyMockSupport{
 	public void testPrimative() throws UnknownHostException {
 		
 		this.setUpMock();
-		DocumentDao doc = DocumentDao.instance(writer);
+		DocumentDao doc = DocumentDao.class.cast(DocumentDao.instance(writer));
 		
 		Class<?> info[] = {
 				String.class,
@@ -97,7 +97,7 @@ public class TestDocumentDao extends EasyMockSupport{
 	public void testSkip() throws UnknownHostException {
 		
 		this.setUpMock();
-		DocumentDao doc = DocumentDao.instance(writer);
+		DocumentDao doc = DocumentDao.class.cast(DocumentDao.instance(writer));
 		
 		String info[] = {
 				"_id",
@@ -133,7 +133,7 @@ public class TestDocumentDao extends EasyMockSupport{
 	public void testAdd() throws UnknownHostException {
 				
 		this.setUpMock();
-		DocumentDao doc = DocumentDao.instance(writer);
+		DocumentDao doc = DocumentDao.class.cast(DocumentDao.instance(writer));
 		
 		TestA objct = new TestA();
 		

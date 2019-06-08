@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.database.mongo.DocumentDao;
+import me.database.mongo.IDocument;
+import me.database.mongo.IDocumentDao;
 import me.transit.dao.query.tuple.IQueryTuple;
 import me.transit.dao.query.tuple.StringTuple;
 import me.transit.database.Agency;
@@ -44,7 +46,7 @@ public class MongoDBTest {
 	@Test
 	public void testCount() {
 		
-		DocumentDao dao;
+		IDocumentDao dao;
 		try {
 			dao = DocumentDao.instance();
 			
@@ -73,10 +75,10 @@ public class MongoDBTest {
 		
 		query.add(new StringTuple(tmp, "n barton", StringTuple.MATCH.END));
 		
-		DocumentDao dao;
+		IDocumentDao dao;
 		try {
 			dao = DocumentDao.instance();
-			List<Object> routes = dao.find(query);
+			List<IDocument> routes = dao.find(query);
 			
 			assertNotNull(routes);
 			assertEquals(8, routes.size());
@@ -103,10 +105,10 @@ public class MongoDBTest {
 		
 		query.add(new StringTuple(tmp, "4B", StringTuple.MATCH.EXACT));
 		
-		DocumentDao dao;
+		IDocumentDao dao;
 		try {
 			dao = DocumentDao.instance();
-			List<Object> routes = dao.find(query);
+			List<IDocument> routes = dao.find(query);
 			
 			assertNotNull(routes);
 			assertEquals(1, routes.size());
@@ -129,16 +131,16 @@ public class MongoDBTest {
 		
 		List<IQueryTuple> query = new ArrayList<IQueryTuple>();
 	
-		DocumentDao dao;
+		IDocumentDao dao;
 		try {
 			dao = DocumentDao.instance();
-			List<Object> routes = dao.find(query);
+			List<IDocument> routes = dao.find(query);
 			
 			assertNotNull(routes);
 			assertEquals(dao.size(), routes.size());
 			
 			int total = 0;
-			for ( Object obj : routes) {
+			for ( IDocument obj : routes) {
 				if ( obj instanceof Route) {
 					total++;
 				}

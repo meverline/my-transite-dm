@@ -23,11 +23,7 @@ import com.mongodb.DBCursor;
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 
-public class DocumentDao {
-
-	public final static String COLLECTION = "schedules";
-	public final static String TRANSITEDOC = "transiteDoc";
-	public final static String LOCALHOST = "localhost";
+public class DocumentDao implements IDocumentDao {
 
 	private Log log = LogFactory.getLog(DocumentDao.class);
 	private List<String> skipData = new ArrayList<String>();
@@ -62,7 +58,7 @@ public class DocumentDao {
 	 * @return
 	 * @throws UnknownHostException
 	 */
-	public static synchronized DocumentDao instance() throws UnknownHostException {
+	public static synchronized IDocumentDao instance() throws UnknownHostException {
 		if (_theOne == null) {
 			_theOne = new DocumentDao(null);
 		}
@@ -74,7 +70,7 @@ public class DocumentDao {
 	 * @return
 	 * @throws UnknownHostException
 	 */
-	public static synchronized DocumentDao instance(Mongo connection) throws UnknownHostException {
+	public static synchronized IDocumentDao instance(Mongo connection) throws UnknownHostException {
 		_theOne = new DocumentDao(connection);
 		return _theOne;
 	}
@@ -92,29 +88,37 @@ public class DocumentDao {
 		return collectionMap.get(collection);
 	}
 
-	/**
-	 * 
-	 * @param document
+	/* (non-Javadoc)
+	 * @see me.database.mongo.IDocumentDao#add(me.database.mongo.IDocument, java.lang.String)
 	 */
+	/* (non-Javadoc)
+	 * @see me.database.mongo.IDocumnetDao#add(me.database.mongo.IDocument, java.lang.String)
+	 */
+	@Override
 	public void add(IDocument document, String collection) {
 		if (document != null) {
 			getCollectoin(collection).insert(this.toMongoObject(document));
 		}
 	}
 
-	/**
-	 * 
-	 * @param document
+	/* (non-Javadoc)
+	 * @see me.database.mongo.IDocumentDao#add(me.database.mongo.IDocument)
 	 */
+	/* (non-Javadoc)
+	 * @see me.database.mongo.IDocumnetDao#add(me.database.mongo.IDocument)
+	 */
+	@Override
 	public void add(IDocument document) {
 		this.add(document, DocumentDao.COLLECTION);
 	}
 
-	/**
-	 * 
-	 * @param data
-	 * @param collectName
+	/* (non-Javadoc)
+	 * @see me.database.mongo.IDocumentDao#add(java.util.Map, java.lang.String)
 	 */
+	/* (non-Javadoc)
+	 * @see me.database.mongo.IDocumnetDao#add(java.util.Map, java.lang.String)
+	 */
+	@Override
 	public void add(Map<String, Object> data, String collection) {
 		if (data != null) {
 			try {
@@ -125,6 +129,13 @@ public class DocumentDao {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see me.database.mongo.IDocumentDao#add(java.util.Map)
+	 */
+	/* (non-Javadoc)
+	 * @see me.database.mongo.IDocumnetDao#add(java.util.Map)
+	 */
+	@Override
 	public void add(Map<String, Object> data) {
 		add(data, DocumentDao.COLLECTION);
 	}
@@ -326,12 +337,12 @@ public class DocumentDao {
 	 * @param item
 	 * @return
 	 */
-	protected Object translateToDbObject(Map<String, Object> item) {
-		Object rtn = null;
+	protected IDocument translateToDbObject(Map<String, Object> item) {
+		IDocument rtn = null;
 		String className = String.class.cast(item.get(IDocument.CLASS));
 
 		try {
-			rtn = this.getClass().getClassLoader().loadClass(className).newInstance();
+			rtn = IDocument.class.cast(this.getClass().getClassLoader().loadClass(className).newInstance());
 			for (String key : item.keySet()) {
 				Object value = item.get(key);
 
@@ -353,21 +364,25 @@ public class DocumentDao {
 		return rtn;
 	}
 
-	/**
-	 * 
-	 * @param data
-	 * @param collectName
+	/* (non-Javadoc)
+	 * @see me.database.mongo.IDocumentDao#find(java.util.List)
 	 */
-	public List<Object> find(List<IQueryTuple> tupleList) {
+	/* (non-Javadoc)
+	 * @see me.database.mongo.IDocumnetDao#find(java.util.List)
+	 */
+	@Override
+	public List<IDocument> find(List<IQueryTuple> tupleList) {
 		return find(tupleList, DocumentDao.COLLECTION);
 	}
 
-	/**
-	 * 
-	 * @param data
-	 * @param collectName
+	/* (non-Javadoc)
+	 * @see me.database.mongo.IDocumentDao#find(java.util.List, java.lang.String)
 	 */
-	public List<Object> find(List<IQueryTuple> tupleList, String collection) {
+	/* (non-Javadoc)
+	 * @see me.database.mongo.IDocumnetDao#find(java.util.List, java.lang.String)
+	 */
+	@Override
+	public List<IDocument> find(List<IQueryTuple> tupleList, String collection) {
 		BasicDBObject query = new BasicDBObject();
 
 		for (IQueryTuple tuple : tupleList) {
@@ -376,31 +391,36 @@ public class DocumentDao {
 
 		DBCursor results = getCollectoin(collection).find(query);
 
-		List<Object> rtn = new ArrayList<Object>();
+		List<IDocument> rtn = new ArrayList<IDocument>();
 
 		log.info(query.toString() + " ---> " + results.count());
 		while (results.hasNext()) {
 			@SuppressWarnings("unchecked")
-			Object obj = this.translateToDbObject((Map<String, Object>) results.next().toMap());
+			IDocument obj = this.translateToDbObject((Map<String, Object>) results.next().toMap());
 			rtn.add(obj);
 		}
 		results.close();
 		return rtn;
 	}
 
-	/**
-	 * 
-	 * @return
+	/* (non-Javadoc)
+	 * @see me.database.mongo.IDocumentDao#size()
 	 */
+	/* (non-Javadoc)
+	 * @see me.database.mongo.IDocumnetDao#size()
+	 */
+	@Override
 	public long size() {
 		return size(DocumentDao.COLLECTION);
 	}
 
-	/**
-	 * 
-	 * @param collection
-	 * @return
+	/* (non-Javadoc)
+	 * @see me.database.mongo.IDocumentDao#size(java.lang.String)
 	 */
+	/* (non-Javadoc)
+	 * @see me.database.mongo.IDocumnetDao#size(java.lang.String)
+	 */
+	@Override
 	public long size(String collection) {
 		return getCollectoin(collection).count();
 	}

@@ -3,7 +3,6 @@ package me.transit.parser;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-//import java.io.FilenameFilter;
 import java.lang.reflect.Method;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -25,6 +24,7 @@ import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.LineString;
 
 import me.database.mongo.DocumentDao;
+import me.database.mongo.IDocumentDao;
 import me.factory.DaoBeanFactory;
 import me.math.kdtree.MinBoundingRectangle;
 import me.transit.dao.AgencyDao;
@@ -993,7 +993,7 @@ public class TransitFeedParser {
 					graphdb.createRelationShip(route, stopInfo);
 				}
 				
-                DocumentDao docDao = DocumentDao.instance();
+				IDocumentDao docDao = DocumentDao.instance();
                 Map<String,Object> data = route.toDocument();
                 data.put( Route.TRIPLIST, entry.getValue());
                 docDao.add(data);

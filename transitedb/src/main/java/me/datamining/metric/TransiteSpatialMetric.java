@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.database.mongo.DocumentDao;
+import me.database.mongo.IDocument;
+import me.database.mongo.IDocumentDao;
 import me.datamining.metric.AbstractSpatialMetric;
 import me.datamining.metric.IDataProvider;
 import me.transit.dao.neo4j.GraphDatabaseDAO;
@@ -43,7 +45,7 @@ public class TransiteSpatialMetric extends AbstractSpatialMetric {
 		
 		List<Trip> rtn = null;
 		try {
-			DocumentDao dao = DocumentDao.instance();
+			IDocumentDao dao = DocumentDao.instance();
 			
 			List<String> fields = new ArrayList<String>();
 			fields.add( Route.SHORTNAME);
@@ -54,7 +56,7 @@ public class TransiteSpatialMetric extends AbstractSpatialMetric {
 					                  route.getShortName(), 
 					                  StringTuple.MATCH.EXACT ));
 			
-			List<Object> data = dao.find(list);
+			List<IDocument> data = dao.find(list);
 			
 			rtn = Route.class.cast( data.get(0)).getTripList();
 		} catch (UnknownHostException e) {

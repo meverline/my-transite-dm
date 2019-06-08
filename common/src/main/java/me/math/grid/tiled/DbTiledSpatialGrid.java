@@ -19,6 +19,7 @@ import javax.persistence.Table;
 import com.vividsolutions.jts.geom.Point;
 
 import me.database.mongo.DocumentDao;
+import me.database.mongo.IDocumentDao;
 import me.factory.DaoBeanFactory;
 import me.math.Vertex;
 import me.math.grid.AbstractSpatialGridPoint;
@@ -222,7 +223,7 @@ public class DbTiledSpatialGrid extends AbstractTiledSpatialGrid implements Seri
 	 */
 	protected SpatialTile load(int index) throws UnknownHostException
 	{
-		DocumentDao docDao = DocumentDao.instance();
+		IDocumentDao docDao = DocumentDao.instance();
 		
 		List<IQueryTuple> list = new ArrayList<IQueryTuple>();
 		
@@ -239,7 +240,7 @@ public class DbTiledSpatialGrid extends AbstractTiledSpatialGrid implements Seri
 	protected void save(SpatialTile tile) throws SQLException,UnknownHostException
 	{
 		
-		DocumentDao docDao = DocumentDao.instance();
+		IDocumentDao docDao = DocumentDao.instance();
         docDao.add(tile, this.getHeatMapName());
         
         TileFragmentDao dao = 

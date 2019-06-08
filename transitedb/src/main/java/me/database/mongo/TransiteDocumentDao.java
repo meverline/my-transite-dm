@@ -19,7 +19,7 @@ public class TransiteDocumentDao extends DocumentDao {
      * @return
      * @throws UnknownHostException
      */
-    public static synchronized DocumentDao instance() throws UnknownHostException {
+    public static synchronized IDocumentDao instance() throws UnknownHostException {
             if ( _theOne == null ) {
                     _theOne = new DocumentDao(null);
             }
