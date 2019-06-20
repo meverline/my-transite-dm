@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.neo4j.graphdb.Node;
 
 import me.transit.dao.neo4j.GraphDatabaseDAO;
+import me.transit.dao.neo4j.IGraphDatabaseDAO;
 import me.transit.database.Agency;
 import me.transit.database.Route;
 import me.transit.database.RouteStopData;
@@ -28,7 +29,7 @@ public class GraphDatabaseDAOTest {
 		
 		stop.setAgency(metro);
 		
-		GraphDatabaseDAO graph = GraphDatabaseDAO.instance();
+		IGraphDatabaseDAO graph = GraphDatabaseDAO.instance();
 		
 		for ( String id : stopIds ) {
 			
@@ -59,12 +60,12 @@ public class GraphDatabaseDAOTest {
 		
 		route.setAgency(metro);
 		
-		GraphDatabaseDAO graph = GraphDatabaseDAO.instance();
+		IGraphDatabaseDAO graph = GraphDatabaseDAO.instance();
 		
 		for ( String id : routeName ) {
 			
 			route.setShortName(id);
-			Node data = graph.findNodeByField(GraphDatabaseDAO.FIELD.route, GraphDatabaseDAO.FIELD.route.makeKey(route));
+			Node data = graph.findNodeByField(IGraphDatabaseDAO.FIELD.route, IGraphDatabaseDAO.FIELD.route.makeKey(route));
 			
 			assertNotNull(data);
 		}

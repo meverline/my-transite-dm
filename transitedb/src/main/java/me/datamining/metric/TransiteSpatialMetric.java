@@ -11,6 +11,7 @@ import me.database.mongo.IDocumentDao;
 import me.datamining.metric.AbstractSpatialMetric;
 import me.datamining.metric.IDataProvider;
 import me.transit.dao.neo4j.GraphDatabaseDAO;
+import me.transit.dao.neo4j.IGraphDatabaseDAO;
 import me.transit.dao.query.tuple.IQueryTuple;
 import me.transit.dao.query.tuple.StringTuple;
 import me.transit.database.Route;
@@ -32,7 +33,7 @@ public class TransiteSpatialMetric extends AbstractSpatialMetric {
 	 * @return
 	 */
 	public List<RouteStopData> getRoutes(TransitStop stop) {
-		GraphDatabaseDAO db = GraphDatabaseDAO.instance();
+		IGraphDatabaseDAO db = GraphDatabaseDAO.instance();
 		return db.findRoutes(stop);
 	}
 	

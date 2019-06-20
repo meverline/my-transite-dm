@@ -6,13 +6,6 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.transit.database.Agency;
-import me.transit.database.Route;
-import me.transit.database.RouteStopData;
-import me.transit.database.TransitData;
-import me.transit.database.TransitStop;
-import me.transit.database.Trip;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.neo4j.graphdb.Direction;
@@ -20,7 +13,6 @@ import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Path;
 import org.neo4j.graphdb.Relationship;
-import org.neo4j.graphdb.RelationshipType;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.neo4j.graphdb.factory.GraphDatabaseSettings;
@@ -28,71 +20,17 @@ import org.neo4j.graphdb.index.ReadableIndex;
 import org.neo4j.graphdb.traversal.Evaluators;
 import org.neo4j.graphdb.traversal.TraversalDescription;
 
-public class GraphDatabaseDAO {
-	
-	public enum REL_TYPES implements RelationshipType
-	{
-	     HAS_STOP, AGENCY, LOCATION, HAS_A, HEAD_SIGN
-	}
-	
-	public enum FIELD {
-		db_id(true), 
-		agency(true), 
-		stop(true),
-		trip(true),
-		trip_headSign(true) {
-			public String makeKey(TransitData data) {
-				Trip trip = Trip.class.cast(data);
-				
-				StringBuffer key = new StringBuffer();
-				key.append(trip.getHeadSign());
-				key.append("@");
-				key.append(data.getAgency().getName());
-				return key.toString();
-			}
-		},
-		db_name(true), 
-		className(false),
-		direction(false),
-		route(true) {
-			public String makeKey(TransitData data) {
-				Route route = Route.class.cast(data);
-				
-				StringBuffer key = new StringBuffer();
-				key.append(route.getShortName());
-				key.append("@");
-				key.append(data.getAgency().getName());
-				return key.toString();
-			}
-		}, 
-		coordinate(true) {
-			public String makeKey(TransitData data) {
-				TransitStop stop = TransitStop.class.cast(data);
-				
-				StringBuffer key = new StringBuffer();
-				key.append( stop.getLocation().getX() );
-				key.append(",");
-				key.append( stop.getLocation().getY() );
-				return key.toString();
-			}
-		};
-		
-		private boolean index;
-		FIELD(boolean toIndex) { this.index = toIndex; }
-		
-		public boolean isIndex() { return index; }
-		public String makeKey(TransitData data) {
-			StringBuffer key = new StringBuffer();
-			key.append(data.getId());
-			key.append("@");
-			key.append(data.getAgency().getName());
-			return key.toString();
-		}
-	}
+import me.transit.database.Agency;
+import me.transit.database.Route;
+import me.transit.database.RouteStopData;
+import me.transit.database.TransitStop;
+import me.transit.database.Trip;
 
+public class GraphDatabaseDAO implements IGraphDatabaseDAO {
+	
 	private final static String DB_PATH = "/data/graph";
 	
-	private static GraphDatabaseDAO theOne = null;
+	private static IGraphDatabaseDAO theOne = null;
 	private GraphDatabaseService graphDb = null;
 	private long foundCount = 0;
 	private long numLocations = 0;
@@ -160,7 +98,7 @@ public class GraphDatabaseDAO {
 	 * 
 	 * @return
 	 */
-	public static synchronized GraphDatabaseDAO instance() {
+	public static synchronized IGraphDatabaseDAO instance() {
 		if ( theOne == null ) {
 			theOne = new GraphDatabaseDAO();
 		}
@@ -176,19 +114,19 @@ public class GraphDatabaseDAO {
 		return graphDb.beginTx();
 	}
 		
-	/**
-	 * 
-	 * @return
+	/* (non-Javadoc)
+	 * @see me.transit.dao.neo4j.IGraphDatabaseDAO#getFoundCount()
 	 */
+	@Override
 	public long getFoundCount()
 	{
 		return this.foundCount;
 	}
 	
-	/**
-	 * 
-	 * @return
+	/* (non-Javadoc)
+	 * @see me.transit.dao.neo4j.IGraphDatabaseDAO#getNumLocations()
 	 */
+	@Override
 	public long getNumLocations()
 	{
 		return this.numLocations;
@@ -241,11 +179,10 @@ public class GraphDatabaseDAO {
         return node;
 	}
 	
-	/**
-	 * 
-	 * @param agency
-	 * @return
+	/* (non-Javadoc)
+	 * @see me.transit.dao.neo4j.IGraphDatabaseDAO#addNode(me.transit.database.Agency)
 	 */
+	@Override
 	@SuppressWarnings("deprecation")
 	public Node addNode(Agency agency) {
 		
@@ -267,11 +204,10 @@ public class GraphDatabaseDAO {
         return node;
 	}
 	
-	/**
-	 * 
-	 * @param stop
-	 * @return
+	/* (non-Javadoc)
+	 * @see me.transit.dao.neo4j.IGraphDatabaseDAO#addNode(me.transit.database.TransitStop)
 	 */
+	@Override
 	@SuppressWarnings("deprecation")
 	public Node addNode(TransitStop stop) {
 		
@@ -314,11 +250,10 @@ public class GraphDatabaseDAO {
 		
 	}
 	
-	/**
-	 * 
-	 * @param route
-	 * @return
+	/* (non-Javadoc)
+	 * @see me.transit.dao.neo4j.IGraphDatabaseDAO#addNode(me.transit.database.Route)
 	 */
+	@Override
 	@SuppressWarnings("deprecation")
 	public Node addNode(Route route) {
 		
@@ -346,11 +281,10 @@ public class GraphDatabaseDAO {
         return node;
 	}
 	
-	/**
-	 * 
-	 * @param route
-	 * @return
+	/* (non-Javadoc)
+	 * @see me.transit.dao.neo4j.IGraphDatabaseDAO#addNode(me.transit.database.Trip)
 	 */
+	@Override
 	@SuppressWarnings("deprecation")
 	public Node addNode(Trip trip) {
 		
@@ -390,12 +324,10 @@ public class GraphDatabaseDAO {
 		return node;
 	}
 	
-	/**
-	 * 
-	 * @param fromTrip
-	 * @param toStop
-	 * @return
+	/* (non-Javadoc)
+	 * @see me.transit.dao.neo4j.IGraphDatabaseDAO#createRelationShip(me.transit.database.Trip, me.transit.database.TransitStop)
 	 */
+	@Override
 	@SuppressWarnings("deprecation")
 	public boolean createRelationShip(Trip fromTrip, TransitStop toStop) {
 		
@@ -430,12 +362,10 @@ public class GraphDatabaseDAO {
 		return true;
 	}
 	
-	/**
-	 * 
-	 * @param fromTrip
-	 * @param toStop
-	 * @return
+	/* (non-Javadoc)
+	 * @see me.transit.dao.neo4j.IGraphDatabaseDAO#createRelationShip(me.transit.database.Route, me.transit.database.TransitStop)
 	 */
+	@Override
 	@SuppressWarnings("deprecation")
 	public boolean createRelationShip(Route fromRoute, TransitStop toStop) {
 		
@@ -470,12 +400,10 @@ public class GraphDatabaseDAO {
 		return true;
 	}
 	
-	/**
-	 * 
-	 * @param fromRoute
-	 * @param toTrip
-	 * @return
+	/* (non-Javadoc)
+	 * @see me.transit.dao.neo4j.IGraphDatabaseDAO#createRelationShip(me.transit.database.Route, me.transit.database.Trip)
 	 */
+	@Override
 	@SuppressWarnings("deprecation")
 	public boolean createRelationShip(Route fromRoute, Trip toTrip) {
 		
@@ -536,10 +464,10 @@ public class GraphDatabaseDAO {
 		return true;
 	}
 		
-	/**
-	 * 
-	 * @return
+	/* (non-Javadoc)
+	 * @see me.transit.dao.neo4j.IGraphDatabaseDAO#findRoutes(me.transit.database.TransitStop)
 	 */
+	@Override
 	@SuppressWarnings("deprecation")
 	public List<RouteStopData> findRoutes(TransitStop stop) {
 				
@@ -611,10 +539,10 @@ public class GraphDatabaseDAO {
 		}
 	}
 	
-	/**
-	 * 
-	 * @return
+	/* (non-Javadoc)
+	 * @see me.transit.dao.neo4j.IGraphDatabaseDAO#findNodeByField(me.transit.dao.neo4j.GraphDatabaseDAO.FIELD, java.lang.String)
 	 */
+	@Override
 	@SuppressWarnings("deprecation")
 	public Node findNodeByField(FIELD fld, String key) {
 		
@@ -624,10 +552,10 @@ public class GraphDatabaseDAO {
 		return rtn;
 	}
 	
-	/**
-	 * 
-	 * @return
+	/* (non-Javadoc)
+	 * @see me.transit.dao.neo4j.IGraphDatabaseDAO#allRelationships(me.transit.dao.neo4j.GraphDatabaseDAO.REL_TYPES, org.neo4j.graphdb.Node)
 	 */
+	@Override
 	public  List<Node> allRelationships(REL_TYPES type, Node node) {
 		return null;
 	}

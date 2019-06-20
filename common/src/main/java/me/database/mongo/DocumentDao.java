@@ -40,7 +40,7 @@ public class DocumentDao implements IDocumentDao {
 	 * @throws UnknownHostException
 	 */
 	@SuppressWarnings("deprecation")
-	protected DocumentDao(Mongo connection) throws UnknownHostException {
+	public DocumentDao(Mongo connection) throws UnknownHostException {
 		this.addSkipField("_id");
 		this.addSkipField("@class");
 		if (connection != null) {

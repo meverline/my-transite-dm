@@ -35,7 +35,7 @@ public class ManualHibernateConnection implements HibernateConnection {
 			cfg = new Configuration().configure();
 			openConnection(cfg);
 			cfg.setProperties(System.getProperties());
-		    serviceRegistry = new StandardServiceRegistryBuilder().applySettings(cfg.getProperties()).build();        
+		    serviceRegistry = new StandardServiceRegistryBuilder().applySettings(cfg.getProperties()).build();  
 		    fact = cfg.buildSessionFactory(serviceRegistry);
 		    
 		} catch (MappingException e) {

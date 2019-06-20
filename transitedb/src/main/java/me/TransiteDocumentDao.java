@@ -1,7 +1,9 @@
-package me.database.mongo;
+package me;
 
 import java.net.UnknownHostException;
 
+import me.database.mongo.DocumentDao;
+import me.database.mongo.IDocumentDao;
 import me.transit.database.Agency;
 import me.transit.database.StopTime;
 

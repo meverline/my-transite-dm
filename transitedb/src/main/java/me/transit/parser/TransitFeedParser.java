@@ -34,6 +34,7 @@ import me.transit.dao.RouteGeometryDao;
 import me.transit.dao.ServiceDateDao;
 import me.transit.dao.TransiteStopDao;
 import me.transit.dao.neo4j.GraphDatabaseDAO;
+import me.transit.dao.neo4j.IGraphDatabaseDAO;
 import me.transit.database.Agency;
 import me.transit.database.CalendarDate;
 import me.transit.database.Route;
@@ -398,7 +399,7 @@ public class TransitFeedParser {
 	 */
 	public void save(Object obj) throws SQLException
 	{
-		GraphDatabaseDAO graph = GraphDatabaseDAO.instance();
+		IGraphDatabaseDAO graph = GraphDatabaseDAO.instance();
 		
 		if ( obj instanceof Agency ) {
 			Agency current = Agency.class.cast(obj);
@@ -934,7 +935,7 @@ public class TransitFeedParser {
 			}
 			inStream.close();
 			
-			GraphDatabaseDAO graphdb = GraphDatabaseDAO.instance();
+			IGraphDatabaseDAO graphdb = GraphDatabaseDAO.instance();
 			RouteDao dao = RouteDao.class.cast(DaoBeanFactory.create().getDaoBean(RouteDao.class));
 			for ( Entry<String,List<Trip>> data : routeToTrips.entrySet()) {
 				
@@ -963,7 +964,7 @@ public class TransitFeedParser {
 	{		
 		RouteDao dao = RouteDao.class.cast(DaoBeanFactory.create().getDaoBean(RouteDao.class));
 		TransiteStopDao stopDao = TransiteStopDao.class.cast(DaoBeanFactory.create().getDaoBean(TransiteStopDao.class));
-		GraphDatabaseDAO graphdb = GraphDatabaseDAO.instance();
+		IGraphDatabaseDAO graphdb = GraphDatabaseDAO.instance();
 		
 		try {
 			

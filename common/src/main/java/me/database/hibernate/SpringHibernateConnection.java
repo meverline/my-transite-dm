@@ -11,6 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 
 /**
  * @author meverline
@@ -30,7 +31,7 @@ public class SpringHibernateConnection implements HibernateConnection {
 	public SpringHibernateConnection(SessionFactory aSessionFactory) {
 		this.setSessionFactory(aSessionFactory);
 	}
-	
+		
 	/* (non-Javadoc)
 	 * @see me.transit.dao.hibernate.HibernateConnection#getSessionFactory()
 	 */
