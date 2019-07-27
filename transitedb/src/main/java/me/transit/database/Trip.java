@@ -28,6 +28,8 @@ import com.thoughtworks.xstream.annotations.XStreamImplicit;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import me.database.mongo.IDocument;
+import me.database.neo4j.FIELD;
+import me.database.neo4j.AbstractGraphNode;
 import me.transit.database.Trip;
 
 @Entity
@@ -36,7 +38,7 @@ import me.transit.database.Trip;
 @DiscriminatorColumn(name = "trip_type")
 @DiscriminatorValue("TripImpl")
 @XStreamAlias("Trip")
-public class Trip implements TransitData, IDocument {
+public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	
 	public static final String ID = "id";
 	public static final String SERVICE = "service";
@@ -400,5 +402,32 @@ public class Trip implements TransitData, IDocument {
                     this.setDirectionId( Trip.DirectionType.valueOf(value.toString()));
             }
     }
+    
+    /*
+     * (non-Javadoc)
+     * @see me.database.neo4j.IGraphNode#getProperties()
+     */
+	@Override
+	public Map<String, String> getProperties() {
+		Map<String, String> node = new HashMap<>();
+		node.put(FIELD.trip.name(), makeKey());
+		node.put(FIELD.db_name.name(), this.getHeadSign());
+		node.put(FIELD.className.name(), this.getClass().getSimpleName());
+		node.put(FIELD.direction.name(), this.getDirectionId().name());
+		node.put(FIELD.trip_headSign.name(), this.makeHeadSignKey());
+		if (this.getShortName() != null) {
+			node.put(FIELD.db_id.name(), this.getShortName());
+		}
+		
+		return node;
+	}
+	
+	public String makeHeadSignKey() {		
+		StringBuffer key = new StringBuffer();
+		key.append(getHeadSign());
+		key.append("@");
+		key.append(getAgency().getName());
+		return key.toString();
+	}
 
 }

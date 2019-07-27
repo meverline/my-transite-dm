@@ -1,5 +1,8 @@
 package me.transit.database;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -24,6 +27,8 @@ import com.thoughtworks.xstream.annotations.XStreamConverter;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import com.vividsolutions.jts.geom.Point;
 
+import me.database.neo4j.FIELD;
+import me.database.neo4j.AbstractGraphNode;
 import me.datamining.metric.IDataProvider;
 
 @Entity
@@ -32,7 +37,7 @@ import me.datamining.metric.IDataProvider;
 @DiscriminatorColumn(name = "tran_stop_type")
 @DiscriminatorValue("TransitStopImpl")
 @XStreamAlias("TransitStop")
-public class TransitStop implements TransitData, IDataProvider {
+public class TransitStop extends AbstractGraphNode implements TransitData, IDataProvider  {
 	
 	public static final String STOP_NAME = "name";
 	public static final String LOCATION = "location";
@@ -384,6 +389,30 @@ public class TransitStop implements TransitData, IDataProvider {
 			return false;
 		}
 		return true;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see me.database.neo4j.IGraphNode#getProperties()
+	 */
+	@Override
+	public Map<String, String> getProperties() {
+		Map<String, String> node = new HashMap<>();
+		
+		node.put( FIELD.stop.name(), makeKey());
+        node.put( FIELD.db_name.name(), this.getName());
+        node.put( FIELD.db_id.name(), this.getId());
+        node.put(FIELD.className.name(), this.getClass().getSimpleName());
+        node.put(FIELD.coordinate.name(),this.makeCoordinateKey());
+        return node;
+	}
+	
+	public String makeCoordinateKey() {		
+		StringBuffer key = new StringBuffer();
+		key.append( getLocation().getX() );
+		key.append(",");
+		key.append( getLocation().getY() );
+		return key.toString();
 	}
 
 }

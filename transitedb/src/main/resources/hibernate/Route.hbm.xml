@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="me.transit.database" >
+
+	  <typedef name="RouteTypeUserType" class="org.hibernate.type.EnumType" >
+          <param name="enumClass">me.transit.database.Route$RouteType</param>
+          <param name="type">12</param>
+	  </typedef>
+	  
+      <class name="Route"  table="tran_route" >
+
+          <id name="UUID" unsaved-value="-1">
+  			<column name="ROUTE_UUID" not-null="true"/>
+			<generator class="native"/>
+		  </id>
+		  <discriminator column="ROUTE_TYPE" type="string"/>
+		  <property name="id" column="ID" not-null="true" />
+		  <property name="shortName" column="SHORT_NAME" not-null="true" />
+		  <property name="longName" column="LONG_NAME" not-null="true" />
+		  <property name="desc" column="DESCRIPTION" type="text" />
+		  <property name="type" column="TYPE" type ="RouteTypeUserType" not-null="true" />
+		  <property name="url" column="URL"  />
+		  <property name="color" column="COLOR" />
+		  <property name="textColor" column="TEXT_COLOR" />
+		  <property name="version" column="VERSION"  />
+		  
+		  <many-to-one name="agency"  
+		  			   class="Agency" 
+		  			   column="AGENCY_UUID" 
+		  			   not-null="true" 
+		  			   outer-join="true" />
+		  			   
+		  <list name="tripList" table="tran_trip" lazy="true" cascade="save-update" outer-join="true">
+              <key column="ROUTE_UUID"/>
+              <index column="TRIP_INDX"/>
+              <one-to-many class="Trip"/>
+          </list>
+		  
+		  <subclass name="me.transit.database.impl.RouteImpl" discriminator-value="RouteImpl"/>		 
+		  
+     </class>	
+    
+ </hibernate-mapping>

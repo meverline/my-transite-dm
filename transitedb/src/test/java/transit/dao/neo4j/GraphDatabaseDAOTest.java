@@ -10,8 +10,9 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.neo4j.graphdb.Node;
 
-import me.transit.dao.neo4j.GraphDatabaseDAO;
-import me.transit.dao.neo4j.IGraphDatabaseDAO;
+import me.database.neo4j.FIELD;
+import me.database.neo4j.GraphDatabaseDAO;
+import me.database.neo4j.IGraphDatabaseDAO;
 import me.transit.database.Agency;
 import me.transit.database.Route;
 import me.transit.database.RouteStopData;
@@ -65,7 +66,7 @@ public class GraphDatabaseDAOTest {
 		for ( String id : routeName ) {
 			
 			route.setShortName(id);
-			Node data = graph.findNodeByField(IGraphDatabaseDAO.FIELD.route, IGraphDatabaseDAO.FIELD.route.makeKey(route));
+			Node data = graph.findNodeByField(FIELD.route, route.makeKey());
 			
 			assertNotNull(data);
 		}

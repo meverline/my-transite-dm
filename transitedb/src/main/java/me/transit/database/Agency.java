@@ -1,6 +1,8 @@
 package me.transit.database;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -18,13 +20,16 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import com.vividsolutions.jts.geom.Polygon;
 
+import me.database.neo4j.FIELD;
+import me.database.neo4j.AbstractGraphNode;
+
 @Entity
 @Table(name = "tran_agency")
 @Inheritance
 @DiscriminatorColumn(name = "angency_type")
 @DiscriminatorValue("AgencyImpl")
 @XStreamAlias("Agency")
-public class Agency implements Serializable {
+public class Agency extends AbstractGraphNode implements Serializable {
 
 	public static final String AGENCY = "agency";
 	public static final String UUID = "uuid";
@@ -263,4 +268,13 @@ public class Agency implements Serializable {
 		return true;
 	}
 
+	@Override
+	public Map<String, String> getProperties() {
+		Map<String, String> node = new HashMap<>();
+	    node.put(FIELD.agency.name(), this.getName());
+	    node.put(FIELD.db_id.name(), this.getId());
+	    node.put(FIELD.className.name(), this.getClass().getName());		
+		return node;
+	}
+	
 }

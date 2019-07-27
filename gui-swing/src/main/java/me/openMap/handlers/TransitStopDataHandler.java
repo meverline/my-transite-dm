@@ -13,8 +13,9 @@ import me.openMap.OpenTransitMap;
 import me.openMap.models.query.result.RouteQueryResult;
 import me.openMap.models.query.result.TransitStopQueryResult;
 import me.openMap.utils.StopOverlay;
-import me.transit.dao.neo4j.GraphDatabaseDAO;
-import me.transit.dao.neo4j.IGraphDatabaseDAO;
+import me.database.neo4j.GraphDatabaseDAO;
+import me.database.neo4j.IGraphDatabaseDAO;
+import me.factory.DaoBeanFactory;
 import me.transit.database.RouteStopData;
 import me.transit.database.TransitStop;
 
@@ -60,7 +61,7 @@ public class TransitStopDataHandler implements DataDisplayHandler {
 		
 		HashMap<String,RouteQueryResult> routes = new HashMap<String,RouteQueryResult>();
 		
-		IGraphDatabaseDAO db = GraphDatabaseDAO.instance();
+		IGraphDatabaseDAO db =  IGraphDatabaseDAO.class.cast(DaoBeanFactory.create().getDaoBean( IGraphDatabaseDAO.class));
 		
 		for ( TransitStop stops : this.getData()) {
 			if ( stops != null ) {

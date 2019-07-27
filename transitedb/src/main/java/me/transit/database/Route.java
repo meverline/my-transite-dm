@@ -27,6 +27,8 @@ import com.thoughtworks.xstream.annotations.XStreamImplicit;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import me.database.mongo.IDocument;
+import me.database.neo4j.FIELD;
+import me.database.neo4j.AbstractGraphNode;
 
 @XStreamAlias("Route")
 @Entity
@@ -34,7 +36,7 @@ import me.database.mongo.IDocument;
 @Inheritance
 @DiscriminatorColumn(name = "route_type")
 @DiscriminatorValue("TransitDateImpl")
-public class Route implements TransitData {
+public class Route extends AbstractGraphNode implements TransitData {
 	
 	public final static String TRIPLIST = "tripList";
 	public static final String SHORTNAME = "shortName";
@@ -361,6 +363,33 @@ public class Route implements TransitData {
 		if (key.equals(Route.TYPE)) {
 			this.setType(Route.RouteType.valueOf(value.toString()));
 		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see me.database.neo4j.IGraphNode#getProperties()
+	 */
+	@Override
+	public Map<String, String> getProperties() {
+		Map<String, String> node = new HashMap<>();
+		node.put(FIELD.route.name(), makeKey());
+		node.put(FIELD.db_name.name(), this.getShortName());
+		node.put(FIELD.db_id.name(), this.getId());
+		node.put(FIELD.className.name(), this.getClass().getSimpleName());
+		return node;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see me.database.neo4j.AbstractGraphNode#makeKey(me.transit.database.TransitData)
+	 */
+	@Override
+	public String makeKey() {		
+		StringBuffer key = new StringBuffer();
+		key.append(getShortName());
+		key.append("@");
+		key.append(getAgency().getName());
+		return key.toString();
 	}
 
 }

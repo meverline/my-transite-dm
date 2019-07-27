@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="me.transit.database" >
+
+	  <class name="RouteGeometry"  table="tran_route_geometry" >
+
+          <id name="UUID" unsaved-value="-1">
+  			<column name="ROUTE_GEOMETRY_UUID" not-null="true"/>
+			<generator class="native"/>
+		  </id> 
+		  <discriminator column="ROUTE_GEOMETRY_TYPE" type="string"/>
+ 		  <property name="id" column="ID" not-null="true" /> 
+		  <property name="shape" column="ROUTE_GEOM" 
+		  			type="org.hibernate.spatial.GeometryType"  not-null="true" />
+		  <property name="version" column="VERSION"  />
+		  
+		  <many-to-one name="agency"  
+		  			   class="Agency" 
+		  			   column="AGENCY_UUID" 
+		  			   not-null="true" 
+		  			   outer-join="true" />
+		  			   
+		  <subclass name="me.transit.database.impl.RouteGeometryImpl" 
+		  			discriminator-value="RouteGeometryImpl"/>		 
+		   			   
+     </class>
+     
+</hibernate-mapping>

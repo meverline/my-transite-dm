@@ -1,17 +1,14 @@
 package me.datamining.metric;
 
 
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
 import me.database.mongo.DocumentDao;
 import me.database.mongo.IDocument;
 import me.database.mongo.IDocumentDao;
-import me.datamining.metric.AbstractSpatialMetric;
-import me.datamining.metric.IDataProvider;
-import me.transit.dao.neo4j.GraphDatabaseDAO;
-import me.transit.dao.neo4j.IGraphDatabaseDAO;
+import me.database.neo4j.IGraphDatabaseDAO;
+import me.factory.DaoBeanFactory;
 import me.transit.dao.query.tuple.IQueryTuple;
 import me.transit.dao.query.tuple.StringTuple;
 import me.transit.database.Route;
@@ -33,7 +30,7 @@ public class TransiteSpatialMetric extends AbstractSpatialMetric {
 	 * @return
 	 */
 	public List<RouteStopData> getRoutes(TransitStop stop) {
-		IGraphDatabaseDAO db = GraphDatabaseDAO.instance();
+		IGraphDatabaseDAO db = IGraphDatabaseDAO.class.cast(DaoBeanFactory.create().getDaoBean( IGraphDatabaseDAO.class));
 		return db.findRoutes(stop);
 	}
 	
@@ -45,24 +42,22 @@ public class TransiteSpatialMetric extends AbstractSpatialMetric {
 	public List<Trip> getTrips(Route route) {
 		
 		List<Trip> rtn = null;
-		try {
-			IDocumentDao dao = DocumentDao.instance();
-			
-			List<String> fields = new ArrayList<String>();
-			fields.add( Route.SHORTNAME);
-			
-			List<IQueryTuple> list = new ArrayList<IQueryTuple>();
-			
-			list.add( new StringTuple(DocumentDao.toDocField(fields), 
-					                  route.getShortName(), 
-					                  StringTuple.MATCH.EXACT ));
-			
-			List<IDocument> data = dao.find(list);
-			
-			rtn = Route.class.cast( data.get(0)).getTripList();
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		}
+
+		IDocumentDao dao = IDocumentDao.class.cast(DaoBeanFactory.create().getDaoBean( IDocumentDao.class));
+		
+		List<String> fields = new ArrayList<String>();
+		fields.add( Route.SHORTNAME);
+		
+		List<IQueryTuple> list = new ArrayList<IQueryTuple>();
+		
+		list.add( new StringTuple(DocumentDao.toDocField(fields), 
+				                  route.getShortName(), 
+				                  StringTuple.MATCH.EXACT ));
+		
+		List<IDocument> data = dao.find(list);
+		
+		rtn = Route.class.cast( data.get(0)).getTripList();
+	
 		return rtn;
 	}
 

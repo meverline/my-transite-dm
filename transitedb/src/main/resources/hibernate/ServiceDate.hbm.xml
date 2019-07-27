@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="me.transit.database" >
+
+	  <typedef name="ServiceDateUserType" class="org.hibernate.type.EnumType" >
+	       <param name="enumClass">me.transit.database.ServiceDate$ServiceDays</param>
+	       <param name="type">12</param>
+	  </typedef>
+ 	  
+     <class name="ServiceDate"  table="tran_service_date" >
+
+          <id name="UUID" unsaved-value="-1">
+  			<column name="SERVICE_DATE_UUID" not-null="true"/>
+			<generator class="native"/>
+		  </id>
+		  <discriminator column="SERVICE_DATE_TYPE" type="string"/>
+		  <property name="id" column="ID" not-null="true" /> 
+		  
+	      <property name="startDate" column="START_DATE" not-null="true" type="java.util.Calendar" />
+		  <property name="endDate" column="END_DATE" not-null="true" type="java.util.Calendar" />
+		  
+		  <property name="serviceDayFlag" column="SERVICE_DAYS" not-null="true" /> 
+		  
+		  <property name="service" column="SERVICE_TYPE"  
+		  			type="ServiceDateUserType" not-null="true" />
+		  <property name="version" column="VERSION"  />
+		  			
+		  <many-to-one name="agency"  
+		  			   class="Agency" 
+		  			   column="AGENCY_UUID" 
+		  			   not-null="true" 
+		  			   outer-join="true" />
+		  			   
+		  <subclass name="me.transit.database.impl.ServiceDateImpl" discriminator-value="ServiceDateImpl"/>
+		  
+	  </class>	
+	  
+</hibernate-mapping>
+	  

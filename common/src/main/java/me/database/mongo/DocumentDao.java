@@ -23,9 +23,9 @@ import com.mongodb.DBCursor;
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 
-public class DocumentDao implements IDocumentDao {
+public class DocumentDao extends IDocumentDao {
 
-	private Log log = LogFactory.getLog(DocumentDao.class);
+	private Log log = LogFactory.getLog(IDocumentDao.class);
 	private List<String> skipData = new ArrayList<String>();
 	protected static DocumentDao _theOne = null;
 	private static Mongo _connection = null;
@@ -46,10 +46,10 @@ public class DocumentDao implements IDocumentDao {
 		if (connection != null) {
 			_connection = connection;
 		} else if (_connection == null) {
-			_connection = new MongoClient(DocumentDao.LOCALHOST);
+			_connection = new MongoClient(IDocumentDao.LOCALHOST);
 		}
-		_transDoc = _connection.getDB(DocumentDao.TRANSITEDOC);
-		collectionMap.put(DocumentDao.COLLECTION, _transDoc.getCollection(DocumentDao.COLLECTION));
+		_transDoc = _connection.getDB(IDocumentDao.TRANSITEDOC);
+		collectionMap.put(IDocumentDao.COLLECTION, _transDoc.getCollection(IDocumentDao.COLLECTION));
 		
 	}
 

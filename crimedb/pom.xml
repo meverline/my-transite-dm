@@ -69,18 +69,6 @@
 
 		</plugins>
 
-		<resources>
-
-			<resource>
-				<directory>config/</directory>
-				<targetPath>${project.build.outputDirectory}/config</targetPath>
-				<includes>
-					<include>**/**</include>
-				</includes>
-			</resource>
-
-		</resources>
-
 	</build>
 
 	<dependencies>

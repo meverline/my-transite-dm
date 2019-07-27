@@ -1,9 +1,9 @@
 package me.factory;
 
-import me.database.hibernate.HibernateDao;
-
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import me.database.hibernate.HibernateDao;
 
 public class DaoBeanFactory {
 	
@@ -14,9 +14,9 @@ public class DaoBeanFactory {
 	 * 
 	 * @param beanXmlFile
 	 */
-	private DaoBeanFactory(String beanXmlFile)
+	private DaoBeanFactory(String[] configPackage)
 	{
-		context_ = new FileSystemXmlApplicationContext(beanXmlFile) ;
+		context_ = new AnnotationConfigApplicationContext(configPackage) ;
 	}
 	
 	/**
@@ -26,7 +26,8 @@ public class DaoBeanFactory {
 	public static synchronized DaoBeanFactory initilize() 
 	{
 		if (theOne == null) {
-		    theOne = new DaoBeanFactory("config/spring/applicationContext.xml");
+			String paths[] = {"me.config"};
+		    theOne = new DaoBeanFactory(paths);
 		}
 		return theOne;
 	}

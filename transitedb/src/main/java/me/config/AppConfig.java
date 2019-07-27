@@ -5,6 +5,11 @@ import java.sql.SQLException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import me.config.AppConfigBase;
+import me.database.neo4j.GraphDatabaseDAO;
+import me.database.neo4j.IGraphDatabaseDAO;
+import me.math.grid.tiled.dao.DbTiledSpatialGridDao;
+import me.math.grid.tiled.dao.TileFragmentDao;
 import me.transit.dao.AgencyDao;
 import me.transit.dao.CalendarDateDao;
 import me.transit.dao.RouteDao;
@@ -114,6 +119,36 @@ public class AppConfig extends AppConfigBase {
 	public TripDao tripDao() throws ClassNotFoundException, SQLException {
 		return new TripDaoImpl(this.hibernateConnection());
 	}
-
-
+	
+	/**
+	 * 
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
+	@Bean
+	public DbTiledSpatialGridDao dbTiledSpatialGridDao() throws ClassNotFoundException, SQLException {
+		return new DbTiledSpatialGridDao(this.hibernateConnection());
+	}
+	
+	/**
+	 * 
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
+	@Bean
+	public TileFragmentDao tileFragmentDao() throws ClassNotFoundException, SQLException {
+		return new TileFragmentDao(this.hibernateConnection());
+	}
+	
+	/**
+	 * The Graph Datbase
+	 * @return IGraphDatabaseDAO
+	 */
+	@Bean
+	public IGraphDatabaseDAO graphdatabase() {
+		return GraphDatabaseDAO.instance();
+	}
+	
 }

@@ -23,8 +23,8 @@ import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.LineString;
 
-import me.database.mongo.DocumentDao;
 import me.database.mongo.IDocumentDao;
+import me.database.neo4j.IGraphDatabaseDAO;
 import me.factory.DaoBeanFactory;
 import me.math.kdtree.MinBoundingRectangle;
 import me.transit.dao.AgencyDao;
@@ -33,8 +33,6 @@ import me.transit.dao.RouteDao;
 import me.transit.dao.RouteGeometryDao;
 import me.transit.dao.ServiceDateDao;
 import me.transit.dao.TransiteStopDao;
-import me.transit.dao.neo4j.GraphDatabaseDAO;
-import me.transit.dao.neo4j.IGraphDatabaseDAO;
 import me.transit.database.Agency;
 import me.transit.database.CalendarDate;
 import me.transit.database.Route;
@@ -399,7 +397,7 @@ public class TransitFeedParser {
 	 */
 	public void save(Object obj) throws SQLException
 	{
-		IGraphDatabaseDAO graph = GraphDatabaseDAO.instance();
+		IGraphDatabaseDAO graph = IGraphDatabaseDAO.class.cast(DaoBeanFactory.create().getDaoBean( IGraphDatabaseDAO.class));
 		
 		if ( obj instanceof Agency ) {
 			Agency current = Agency.class.cast(obj);
@@ -935,7 +933,9 @@ public class TransitFeedParser {
 			}
 			inStream.close();
 			
-			IGraphDatabaseDAO graphdb = GraphDatabaseDAO.instance();
+			IGraphDatabaseDAO graphdb = 
+					IGraphDatabaseDAO.class.cast(DaoBeanFactory.create().getDaoBean( IGraphDatabaseDAO.class));
+
 			RouteDao dao = RouteDao.class.cast(DaoBeanFactory.create().getDaoBean(RouteDao.class));
 			for ( Entry<String,List<Trip>> data : routeToTrips.entrySet()) {
 				
@@ -964,8 +964,8 @@ public class TransitFeedParser {
 	{		
 		RouteDao dao = RouteDao.class.cast(DaoBeanFactory.create().getDaoBean(RouteDao.class));
 		TransiteStopDao stopDao = TransiteStopDao.class.cast(DaoBeanFactory.create().getDaoBean(TransiteStopDao.class));
-		IGraphDatabaseDAO graphdb = GraphDatabaseDAO.instance();
-		
+		IGraphDatabaseDAO graphdb = IGraphDatabaseDAO.class.cast(DaoBeanFactory.create().getDaoBean( IGraphDatabaseDAO.class));
+
 		try {
 			
 			for ( Entry<String, List<Trip>> entry : tripMap.entrySet() ) {
@@ -994,7 +994,7 @@ public class TransitFeedParser {
 					graphdb.createRelationShip(route, stopInfo);
 				}
 				
-				IDocumentDao docDao = DocumentDao.instance();
+				IDocumentDao docDao = IDocumentDao.class.cast(DaoBeanFactory.create().getDaoBean( IDocumentDao.class));
                 Map<String,Object> data = route.toDocument();
                 data.put( Route.TRIPLIST, entry.getValue());
                 docDao.add(data);
@@ -1164,8 +1164,10 @@ public class TransitFeedParser {
 			    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(diff))
 			));
 		
-		System.out.println( "Num Coords: " + GraphDatabaseDAO.instance().getNumLocations());
-		System.out.println( "Num Found: " + GraphDatabaseDAO.instance().getFoundCount());
+		IGraphDatabaseDAO graph = IGraphDatabaseDAO.class.cast(DaoBeanFactory.create().getDaoBean( IGraphDatabaseDAO.class));
+
+		System.out.println( "Num Coords: " + graph.getNumLocations());
+		System.out.println( "Num Found: " + graph.getFoundCount());
 		System.out.println("Done");
 		
 	}

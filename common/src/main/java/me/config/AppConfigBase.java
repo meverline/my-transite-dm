@@ -1,23 +1,43 @@
 package me.config;
 
+import java.net.UnknownHostException;
 import java.util.Properties;
 
 import javax.sql.DataSource;
 
-import org.apache.commons.dbcp.BasicDataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 
 import me.database.hibernate.HibernateConnection;
 import me.database.hibernate.SpringHibernateConnection;
+import me.database.mongo.DocumentDao;
+import me.database.mongo.IDocumentDao;
 
-public abstract class AppConfigBase {
+
+@Configuration
+@PropertySource({ "classpath:persistence-${envTarget:dev}.properties" })
+public class AppConfigBase {
 	
+    @Autowired
+    private Environment env;
+    
 	/**
 	 * 
 	 * @return
 	 */
-	protected abstract String[] packageToScan();
+	protected String[] packageToScan() {
+		String [] data = {
+				"me.transit.database",
+				"me.crime.database"
+		};
+		
+		return data;
+	}
 
 	/**
 	 * 
@@ -38,11 +58,11 @@ public abstract class AppConfigBase {
 	 */
 	@Bean
 	public DataSource dataSource() {
-		BasicDataSource dataSource = new BasicDataSource();
-		dataSource.setDriverClassName("org.springframework.jdbc.datasource.DriverManagerDataSource");
-		dataSource.setUrl("jdbc:postgresql://localhost:5432/Transit");
-		dataSource.setUsername("postgres");
-		dataSource.setPassword("postgres");
+		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+		dataSource.setDriverClassName("org.postgresql.Driver");
+		dataSource.setUrl(env.getProperty("database.jdbc.connection"));
+		dataSource.setUsername(env.getProperty("database.username"));
+		dataSource.setPassword(env.getProperty("database.password"));
 
 		return dataSource;
 	}
@@ -62,11 +82,16 @@ public abstract class AppConfigBase {
 	 */
 	private final Properties hibernateProperties() {
 		Properties hibernateProperties = new Properties();
-		hibernateProperties.setProperty("hibernate.show_sql", "false");
-		hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "update");
-		hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.spatial.dialect.postgis.PostgisDialect");
+		hibernateProperties.setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
+		hibernateProperties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+		hibernateProperties.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
 
 		return hibernateProperties;
+	}
+	
+	@Bean
+	public IDocumentDao documentDatabase() throws UnknownHostException {
+		return DocumentDao.instance();
 	}
 
 }
