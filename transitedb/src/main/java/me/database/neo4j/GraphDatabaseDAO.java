@@ -36,7 +36,7 @@ public class GraphDatabaseDAO implements IGraphDatabaseDAO {
 	private GraphDatabaseService graphDb = null;
 	private long foundCount = 0;
 	private long numLocations = 0;
-	private String dbPath = "/data/graph";
+	private String dbPath = GraphDatabaseDAO.DB_PATH;
 	
 	public static Log log = LogFactory.getLog(IGraphDatabaseDAO.class);
 
