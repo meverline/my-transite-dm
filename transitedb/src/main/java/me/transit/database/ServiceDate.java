@@ -327,13 +327,13 @@ public class ServiceDate implements TransitData, IDocument {
 		if ( ServiceDate.class.isAssignableFrom(obj.getClass()) ) {
 			ServiceDate rhs = ServiceDate.class.cast(obj);
 			rtn = true;
-			if ( ! this.getAgency().equals(rhs.getAgency()) ) {
+			if (this.getAgency() != null && ! this.getAgency().equals(rhs.getAgency()) ) {
 				rtn = false;
 			}
-			if ( ! this.getEndDate().equals(rhs.getEndDate()) ) {
+			if ( this.getEndDate() != null && ! this.getEndDate().equals(rhs.getEndDate()) ) {
 				rtn = false;
 			}
-			if ( ! this.getStartDate().equals(rhs.getStartDate()) ) {
+			if ( this.getStartDate() != null && ! this.getStartDate().equals(rhs.getStartDate()) ) {
 				rtn = false;
 			}
 			if ( this.getService() != rhs.getService() ) {
@@ -342,7 +342,7 @@ public class ServiceDate implements TransitData, IDocument {
 			if ( this.getServiceDayFlag() != rhs.getServiceDayFlag()) {
 				rtn = false;
 			}
-			if ( ! this.getId().equals(rhs.getId()) ) {
+			if ( this.getId() != null && ! this.getId().equals(rhs.getId()) ) {
 				rtn = false;
 			}
 		}

@@ -17,42 +17,42 @@ import me.transit.database.TransitStop;
 
 public class TestTransitStopSpatialSample extends EasyMockSupport {
 
-    @Rule
-    public EasyMockRule rule = new EasyMockRule(this);
+	@Rule
+	public EasyMockRule rule = new EasyMockRule(this);
 
 	@Test
 	public void test() {
-		
-		TransitStopSpatialSample testSubject = partialMockBuilder(TransitStopSpatialSample.class) //create builder first
-		         .addMockedMethod("getRoutes") // tell EasyMock to mock foo() method
-		         .createMock(); 
-	
+
+		TransitStopSpatialSample testSubject = partialMockBuilder(TransitStopSpatialSample.class) // create builder
+																									// first
+				.addMockedMethod("getRoutes") // tell EasyMock to mock foo() method
+				.createMock();
+
 		TransitStop stop = new TransitStop();
 		List<RouteStopData> list = new ArrayList<RouteStopData>();
-		
-		for (int ndx = 0; ndx < 5; ndx++ ) {
-			list.add(new RouteStopData());			
+
+		for (int ndx = 0; ndx < 5; ndx++) {
+			list.add(new RouteStopData());
 		}
-		
+
 		expect(testSubject.getRoutes(EasyMock.anyObject(TransitStop.class))).andReturn(list);
-	    replayAll();
+		replayAll();
 		assertEquals(5.0, testSubject.getMetric(stop), 0.01);
 		verifyAll();
 		resetAll();
-		
+
 		expect(testSubject.getRoutes(EasyMock.anyObject(TransitStop.class))).andReturn(null);
-	    replayAll();
+		replayAll();
 		assertEquals(0.0, testSubject.getMetric(stop), 0.01);
 		verifyAll();
 		resetAll();
-		
+
 		expect(testSubject.getRoutes(EasyMock.anyObject(TransitStop.class))).andReturn(list);
-	    replayAll();
+		replayAll();
 		assertEquals(0.0, testSubject.getMetric(null), 0.01);
 		verifyAll();
 		resetAll();
-		
-		
+
 	}
 
 }

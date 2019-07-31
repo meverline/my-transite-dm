@@ -54,11 +54,11 @@ public class TestTiledDatabaseGrid {
 	@Ignore
 	@Test
 	public void test() {
-		
+
 		DaoBeanFactory.initilize();
 		Vertex ul = new Vertex(38.941, -77.286);
 		Vertex lr = new Vertex(38.827, -77.078);
-		
+
 		double distance = TransiteEnums.DistanceUnitType.MI.toMeters(0.1);
 		TiledSpatialGrid grid;
 		try {
@@ -67,55 +67,55 @@ public class TestTiledDatabaseGrid {
 			assertEquals(distance, grid.getGridSpacingMeters(), 0.01);
 			assertEquals(113, grid.getCols());
 			assertEquals(80, grid.getRows());
-			
-			assertNotNull( grid.getTiles());
+
+			assertNotNull(grid.getTiles());
 			List<SpatialTile> list = grid.getTiles();
 			assertEquals(list.size(), 12);
-			
+
 			int numCells = grid.getTileSize() * grid.getTileSize();
 			List<AbstractSpatialGridPoint> prev = null;
-			for ( SpatialTile tile : list ) {
+			for (SpatialTile tile : list) {
 				List<AbstractSpatialGridPoint> ptList = tile.getGridPoints();
 				assertNotNull(ptList);
 				assertEquals(numCells, ptList.size());
-				if ( prev != null ) {
-					int last = prev.get(ptList.size()-1).getIndex();
+				if (prev != null) {
+					int last = prev.get(ptList.size() - 1).getIndex();
 					int first = ptList.get(0).getIndex();
 					assertTrue(last + " " + first, last != first);
 				}
 				prev = ptList;
 			}
-			
+
 			int blockSize = grid.getTileSize() * grid.getTileSize();
-			for ( int row = 0; row < grid.getRows(); row++) {
-				for ( int col=0; col < grid.getCols(); col++ ) {
+			for (int row = 0; row < grid.getRows(); row++) {
+				for (int col = 0; col < grid.getCols(); col++) {
 					TiledSpatialGridPoint pt = grid.getEntry(row, col);
 					assertNotNull(pt);
-					assertEquals( row, pt.getRow());
-					assertEquals( col, pt.getCol());
-	
-					int tile = pt.getIndex()/blockSize;
+					assertEquals(row, pt.getRow());
+					assertEquals(col, pt.getCol());
+
+					int tile = pt.getIndex() / blockSize;
 					assertEquals(pt.getTileIndex(), tile);
 				}
 			}
-			
+
 			numCells = grid.getCols() * grid.getRows();
-			for ( int ndx = 0; ndx < numCells; ndx++ ) {
+			for (int ndx = 0; ndx < numCells; ndx++) {
 				AbstractSpatialGridPoint pt = grid.getEntry(ndx);
 				assertNotNull(pt);
 				assertEquals(pt.getIndex(), ndx);
 			}
-			
-			for ( SpatialTile tile : grid.getTiles()) {
+
+			for (SpatialTile tile : grid.getTiles()) {
 				KDTree tree = tile.getTree();
-				for ( TiledSpatialGridPoint pt : tile.getGrid()) {
+				for (TiledSpatialGridPoint pt : tile.getGrid()) {
 					RangeSearch search = new RangeSearch(pt.getPointVertex(), 10);
 					tree.search(search);
-					assertFalse( search.getResults().isEmpty());
-					assertEquals( 1, search.getResults().size());
-				}		
+					assertFalse(search.getResults().isEmpty());
+					assertEquals(1, search.getResults().size());
+				}
 			}
-		
+
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 			fail(e.getMessage());
@@ -123,105 +123,102 @@ public class TestTiledDatabaseGrid {
 			e.printStackTrace();
 			fail(e.getMessage());
 		}
-		
+
 	}
-	
+
 	/**
 	 * 
 	 * @param tile
 	 * @return
 	 */
-	private SpatialTile cloneTile(XStream xstream, SpatialTile tile)
-	{
-	    String str = xstream.toXML(tile);
-	    SpatialTile clone = (SpatialTile) xstream.fromXML(str);
+	private SpatialTile cloneTile(XStream xstream, SpatialTile tile) {
+		String str = xstream.toXML(tile);
+		SpatialTile clone = (SpatialTile) xstream.fromXML(str);
 		return clone;
 	}
-	
-	protected void dump(String prefix, File dir, boolean iv, SpatialTile tile) throws Exception
-	{
+
+	protected void dump(String prefix, File dir, boolean iv, SpatialTile tile) throws Exception {
 		String xls = prefix + getClass().getSimpleName() + "_" + tile.getIndex() + ".csv";
-	    File write = new File(dir, xls);
-	    
-	    PrintStream csvStream = new PrintStream(write);
-	    tile.toCSV(csvStream, iv);
-	    csvStream.close();
+		File write = new File(dir, xls);
+
+		PrintStream csvStream = new PrintStream(write);
+		tile.toCSV(csvStream, iv);
+		csvStream.close();
 	}
-	
+
 	@Ignore
 	@Test
 	public void testDatabaseGrid() {
-		
+
 		XStream xstream = new XStream();
-		
+
 		DaoBeanFactory.initilize();
-		TransiteStopDao dao =
-				TransiteStopDao.class.cast(DaoBeanFactory.create().getDaoBean(TransiteStopDao.class));
-			
+		TransiteStopDao dao = TransiteStopDao.class.cast(DaoBeanFactory.create().getDaoBean(TransiteStopDao.class));
+
 		GeometryFactory factory = new GeometryFactory();
-		
-		Point ur = factory.createPoint( new Coordinate(38.941, -77.286));
-		Point lr = factory.createPoint( new Coordinate(38.827, -77.078));
-			
+
+		Point ur = factory.createPoint(new Coordinate(38.941, -77.286));
+		Point lr = factory.createPoint(new Coordinate(38.827, -77.078));
+
 		StopQueryConstraint query = new StopQueryConstraint();
-	    query.addRectangleConstraint(lr, ur);
-	    List<TransitStop> stops = dao.query(query);
-	    
-	    log.info("Number of Stops: " +stops.size());
-	    
-	    TransitStopSpatialSample metric = new TransitStopSpatialSample();
-	    Vertex point = new Vertex();
-	    
-	    String fileName = getClass().getSimpleName() + ".xml";
-	    File dir = new File("/tmp");
-	    File write = new File(dir, fileName);
-	    
-	    long start = System.currentTimeMillis();
-	    
-	    QueryResults output = new QueryResults();
-	    
-	    try {
-	    	
-	    	log.info(write.toString());
+		query.addRectangleConstraint(lr, ur);
+		List<TransitStop> stops = dao.query(query);
+
+		log.info("Number of Stops: " + stops.size());
+
+		TransitStopSpatialSample metric = new TransitStopSpatialSample();
+		Vertex point = new Vertex();
+
+		String fileName = getClass().getSimpleName() + ".xml";
+		File dir = new File("/tmp");
+		File write = new File(dir, fileName);
+
+		long start = System.currentTimeMillis();
+
+		QueryResults output = new QueryResults();
+
+		try {
+
+			log.info(write.toString());
 			PrintStream stream = new PrintStream(write);
-			
+
 			output.startWrite(stream);
-		    for (TransitStop local : stops) {	    	
-		    	point.setLatitudeDegress(local.getLocation().getX());
-		    	point.setLongitudeDegress(local.getLocation().getY());
-		    
-		    	output.write(stream, point, metric.getMetric(local));
-		    }
-		    output.endWrite(stream);
-		    stream.close();
-		    
+			for (TransitStop local : stops) {
+				point.setLatitudeDegress(local.getLocation().getX());
+				point.setLongitudeDegress(local.getLocation().getY());
+
+				output.write(stream, point, metric.getMetric(local));
+			}
+			output.endWrite(stream);
+			stream.close();
+
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			fail(e.getMessage());
 		}
-	    
+
 		try {
-						
+
 			double distance = TransiteEnums.DistanceUnitType.MI.toMeters(0.1);
 			TiledSpatialGrid grid = new TiledSpatialGrid(ur, lr, distance);
 			PopulateGrid pg = new PopulateGrid(DensityEstimateDataSample.class);
-			
+
 			File read = new File(dir, fileName);
 			log.info(read.toString());
 			log.info("number of tiles: " + grid.getTiles().size());
 
-			for (SpatialTile tile : grid.getTiles() ) {
+			for (SpatialTile tile : grid.getTiles()) {
 				FileInputStream input = new FileInputStream(read);
 				pg.populate(tile, input);
 				input.close();
 			}
-			
+
 			log.info("N: " + output.getN());
 			log.info("Variance: " + output.getVariance());
 			log.info("crossCovar: " + grid.getCrossCovariance());
-		
+
 			List<List<SpatialTile>> resultsList = new ArrayList<List<SpatialTile>>();
-			
+
 			TiledNonAdaptiveKDE kde = new TiledNonAdaptiveKDE(grid.getCrossCovariance(), output.getVariance());
 			kde.setDenstiyKernel(new Epanechnikov());
 			IBandwidth band = new SlivermanRule();
@@ -230,43 +227,43 @@ public class TestTiledDatabaseGrid {
 			kde.setCrossCovariance(grid.getCrossCovariance());
 			kde.setVariance(output.getVariance());
 			kde.setN(output.getN());
-			
-	    	int ndx = 0;
-			for ( SpatialTile master : grid.getTiles()) {
-				
-		    	FileInputStream input = new FileInputStream(read);
-		    	
-		    	List<SpatialTile> subSum = new ArrayList<SpatialTile>();
-		    	SpatialTile clone = this.cloneTile(xstream, master);
+
+			int ndx = 0;
+			for (SpatialTile master : grid.getTiles()) {
+
+				FileInputStream input = new FileInputStream(read);
+
+				List<SpatialTile> subSum = new ArrayList<SpatialTile>();
+				SpatialTile clone = this.cloneTile(xstream, master);
 				kde.kernalDensityEstimate(clone, input);
 				input.close();
 				subSum.add(clone);
 				ndx++;
-				resultsList.add(subSum);		
+				resultsList.add(subSum);
 			}
-			
+
 			TiledFinilizeKDE subKde = new TiledFinilizeKDE();
-			
+
 			subKde.setNumSamples(stops.size());
 			ndx = 0;
-			for ( SpatialTile master : grid.getTiles()) {
+			for (SpatialTile master : grid.getTiles()) {
 				subKde.finishKDETile(master, resultsList.get(ndx++));
 			}
-			
-			String xls = "KDE" + getClass().getSimpleName()  + ".csv";
-		    write = new File(dir, xls);
-		    
-		    PrintStream csvStream = new PrintStream(write);
-		    grid.toCSV(csvStream, true);
-		    csvStream.close();
-			
-		    log.info("done " + (System.currentTimeMillis() - start)/1000);
-		    
+
+			String xls = "KDE" + getClass().getSimpleName() + ".csv";
+			write = new File(dir, xls);
+
+			PrintStream csvStream = new PrintStream(write);
+			grid.toCSV(csvStream, true);
+			csvStream.close();
+
+			log.info("done " + (System.currentTimeMillis() - start) / 1000);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail(e.getMessage());
 		}
-	    
+
 	}
 
 }

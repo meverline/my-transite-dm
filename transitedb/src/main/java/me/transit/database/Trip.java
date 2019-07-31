@@ -323,7 +323,7 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 		if ( Trip.class.isAssignableFrom(obj.getClass()) ) {
 			Trip rhs = Trip.class.cast(obj);
 			rtn = true;
-			if ( ! this.getAgency().equals(rhs.getAgency()) ) {
+			if ( this.getAgency() != null && ! this.getAgency().equals(rhs.getAgency()) ) {
 				rtn = false;
 			}
 			if ( this.getService() != null && (! this.getService().equals(rhs.getService()))) {

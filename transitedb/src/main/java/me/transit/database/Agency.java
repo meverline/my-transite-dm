@@ -233,13 +233,13 @@ public class Agency extends AbstractGraphNode implements Serializable {
 		if (Agency.class.isAssignableFrom(obj.getClass())) {
 			Agency rhs = Agency.class.cast(obj);
 			rtn = true;
-			if (!this.getName().equals(rhs.getName())) {
+			if (this.getName() != null && ! this.getName().equals(rhs.getName())) {
 				rtn = false;
 			}
-			if (!this.getUrl().equals(rhs.getUrl())) {
+			if (this.getUrl() != null && ! this.getUrl().equals(rhs.getUrl())) {
 				rtn = false;
 			}
-			if (!this.getPhone().equals(rhs.getPhone())) {
+			if (this.getPhone() != null && ! this.getPhone().equals(rhs.getPhone())) {
 				rtn = false;
 			}
 		}

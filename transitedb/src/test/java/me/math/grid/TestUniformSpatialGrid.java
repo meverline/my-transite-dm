@@ -32,70 +32,69 @@ public class TestUniformSpatialGrid {
 
 	@Test
 	public void testGrid() {
-		
+
 		Vertex ul = new Vertex(38.941, -77.286);
 		Vertex lr = new Vertex(38.827, -77.078);
-		
+
 		double distance = TransiteEnums.DistanceUnitType.MI.toMeters(0.1);
 		UniformSpatialGrid grid = new UniformSpatialGrid(ul, lr, distance);
-		
+
 		assertEquals(distance, grid.getGridSpacingMeters(), 0.01);
 		assertEquals(113, grid.getCols());
 		assertEquals(80, grid.getRows());
 		assertNotNull(grid.get(10, 10));
-		
+
 		List<AbstractSpatialGridPoint> list = grid.getGridPoints();
 		assertNotNull(list);
-		assertEquals(113*80, list.size());
-		
+		assertEquals(113 * 80, list.size());
+
 		List<SpatialGridPoint> temp = grid.toList();
 		assertNotNull(temp);
-		assertEquals(113*80, temp.size());
-		
-		assertNotNull(grid.getNextGridPoint( grid.get(10,10)) );
-		
-		INode node = grid.create(grid.get(10,10), INode.Direction.XLAT, grid.get(20,20), 0);
+		assertEquals(113 * 80, temp.size());
+
+		assertNotNull(grid.getNextGridPoint(grid.get(10, 10)));
+
+		INode node = grid.create(grid.get(10, 10), INode.Direction.XLAT, grid.get(20, 20), 0);
 		assertNotNull(node);
-		assertEquals(node, grid.get(10,10));
-		
+		assertEquals(node, grid.get(10, 10));
+
 		KDTree tree = new KDTree(grid.getGridPoints(), grid);
-		
-		for ( AbstractSpatialGridPoint pt : grid.getGridPoints()) {
+
+		for (AbstractSpatialGridPoint pt : grid.getGridPoints()) {
 			RangeSearch search = new RangeSearch(pt.getPointVertex(), 10);
 			tree.search(search);
-			assertFalse( search.getResults().isEmpty());
-			assertEquals( 1, search.getResults().size());
+			assertFalse(search.getResults().isEmpty());
+			assertEquals(1, search.getResults().size());
 		}
-	
+
 	}
-	
+
 	@Ignore
 	@Test
 	public void testDatabaseGrid() {
-		
+
 		DaoBeanFactory.initilize();
-		TransiteStopDao dao =
-				TransiteStopDao.class.cast(DaoBeanFactory.create().getDaoBean(TransiteStopDao.class));
-			
+		TransiteStopDao dao = TransiteStopDao.class.cast(DaoBeanFactory.create().getDaoBean(TransiteStopDao.class));
+
 		GeometryFactory factory = new GeometryFactory();
 		StopQueryConstraint query = new StopQueryConstraint();
-		
+
 		Vertex ul = new Vertex(38.941, -77.286);
 		Vertex lr = new Vertex(38.827, -77.078);
-			
-		Point ur = factory.createPoint( new Coordinate(38.827, -77.286));
-		Point ll = factory.createPoint( new Coordinate(38.941, -77.078));
-			
-	    query.addRectangleConstraint(ur, ll);
-	    List<TransitStop> stops = dao.query(query);
-	    List<IDataProvider> data = new ArrayList<IDataProvider>();
-	    
-	    data.addAll(stops);
-	    
-	    DensityEstimateLocalJob job = new DensityEstimateLocalJob(null);
-	    job.init(ul, lr, 500);
-	    job.process(data.iterator(), new TransitStopSpatialSample());
-	    
+
+		Point ur = factory.createPoint(new Coordinate(38.827, -77.286));
+		Point ll = factory.createPoint(new Coordinate(38.941, -77.078));
+
+		query.addRectangleConstraint(ur, ll);
+		List<TransitStop> stops = dao.query(query);
+		List<IDataProvider> data = new ArrayList<IDataProvider>();
+
+		data.addAll(stops);
+
+		DensityEstimateLocalJob job = new DensityEstimateLocalJob(null);
+		job.init(ul, lr, 500);
+		job.process(data.iterator(), new TransitStopSpatialSample());
+
 	}
 
 }

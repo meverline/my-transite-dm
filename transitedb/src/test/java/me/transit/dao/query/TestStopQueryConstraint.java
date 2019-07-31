@@ -20,41 +20,41 @@ import me.utils.TransiteEnums;
 
 public class TestStopQueryConstraint extends EasyMockSupport {
 
-    @Rule
-    public EasyMockRule rule = new EasyMockRule(this);
-    
-    @Mock
-    public Agency agency;
+	@Rule
+	public EasyMockRule rule = new EasyMockRule(this);
+
+	@Mock
+	public Agency agency;
 
 	@Test
 	public void test() {
-		
+
 		double distance = TransiteEnums.DistanceUnitType.MI.toMeters(1.1);
-		
+
 		GeometryFactory factory = new GeometryFactory();
-        StopQueryConstraint query = new StopQueryConstraint();
-        
-        Point ur = factory.createPoint( new Coordinate(-77.095, 38.89));
-        Point ll = factory.createPoint( new Coordinate(-77.078, 38.871));
-        
-        query.addRectangleConstraint(ur, ll);
-        query.addCircleConstriant(ll, distance);
-        
-        List<Point> ptList = new ArrayList<Point>();
-        ptList.add(ur);
-        ptList.add(ll);
-        
-        query.addPolygonConstraint(ptList);
-        
-        expect(agency.getUUID()).andReturn(100L);
-        expect(agency.getName()).andReturn("name");
-        replayAll();
-        
-        query.addAgency(agency);
-        
-        verifyAll();
-        resetAll();
-         
+		StopQueryConstraint query = new StopQueryConstraint();
+
+		Point ur = factory.createPoint(new Coordinate(-77.095, 38.89));
+		Point ll = factory.createPoint(new Coordinate(-77.078, 38.871));
+
+		query.addRectangleConstraint(ur, ll);
+		query.addCircleConstriant(ll, distance);
+
+		List<Point> ptList = new ArrayList<Point>();
+		ptList.add(ur);
+		ptList.add(ll);
+
+		query.addPolygonConstraint(ptList);
+
+		expect(agency.getUUID()).andReturn(100L);
+		expect(agency.getName()).andReturn("name");
+		replayAll();
+
+		query.addAgency(agency);
+
+		verifyAll();
+		resetAll();
+
 	}
 
 }
