@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Encapsulate field &apos;me.route.finding.RouteSpec.startTime&apos; in &apos;me.route.finding.RouteSpec&apos;&#x0A;- Original project: &apos;RouteFinding&apos;&#x0A;- Original element: &apos;me.route.finding.RouteSpec.startTime&apos;&#x0A;- Getter method name: &apos;getStartTime&apos;&#x0A;- Setter method name: &apos;setStartTime&apos;&#x0A;- Field visibility: &apos;public&apos;&#x0A;- Use getter and setter methods in declaring type" comments="false" declaring="true" description="Encapsulate field &apos;startTime&apos;" flags="589830" getter="getStartTime" id="org.eclipse.jdt.ui.self.encapsulate" input="/src&lt;me.route.finding{RouteSpec.java[RouteSpec^startTime" insertion="13" setter="setStartTime" stamp="1485224332835" version="1.0" visibility="1"/>
-</session>
