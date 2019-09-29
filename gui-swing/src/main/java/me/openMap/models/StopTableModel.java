@@ -5,10 +5,9 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import me.openMap.models.query.result.TransitStopQueryResult;
-import me.database.neo4j.GraphDatabaseDAO;
 import me.database.neo4j.IGraphDatabaseDAO;
 import me.factory.DaoBeanFactory;
+import me.openMap.models.query.result.TransitStopQueryResult;
 import me.transit.database.RouteStopData;
 import me.transit.database.TransitStop;
 

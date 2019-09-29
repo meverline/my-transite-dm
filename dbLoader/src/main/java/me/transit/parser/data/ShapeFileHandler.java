@@ -11,7 +11,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.LineString;
+import com.vividsolutions.jts.geom.GeometryFactory;
 
 import me.factory.DaoBeanFactory;
 import me.transit.dao.RouteGeometryDao;
@@ -20,6 +20,7 @@ import me.transit.database.RouteGeometry;
 public class ShapeFileHandler extends FileHandler {
 
 	private Log log = LogFactory.getLog(getClass().getName());
+	protected final GeometryFactory factory = new GeometryFactory();
 
 	/**
 	 * 
@@ -30,27 +31,36 @@ public class ShapeFileHandler extends FileHandler {
 	}
 
 	/**
+	 * @return the factory
+	 */
+	public GeometryFactory getFactory() {
+		return factory;
+	}
+
+	/**
 	 * 
 	 * @param id
 	 * @param coords
 	 */
 	private void saveShape(String id, List<Coordinate> coords) {
+
 		try {
+
 			Coordinate array[] = new Coordinate[coords.size()];
 			coords.toArray(array);
 			if (array.length > 1) {
-				LineString poly = factory.createLineString(array);
 
 				RouteGeometry db = new RouteGeometry();
 				db.setAgency(getBlackboard().getAgency());
 				db.setId(id);
-				db.setShape(poly);
+				db.setShape(getFactory().createLineString(array));
 
 				RouteGeometryDao dao = RouteGeometryDao.class
 						.cast(DaoBeanFactory.create().getDaoBean(RouteGeometryDao.class));
 				dao.save(db);
 				getBlackboard().getShaps().put(id, db);
 			}
+
 		} catch (Exception e) {
 			log.error("ID: " + id + " : coords size " + coords.size() + "\n" + e.getLocalizedMessage(), e);
 		}

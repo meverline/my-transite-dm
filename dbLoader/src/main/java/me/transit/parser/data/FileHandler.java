@@ -4,13 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.vividsolutions.jts.geom.GeometryFactory;
-
 public abstract class FileHandler {
 
 	protected static final String ID = "Id";
-
-	protected static GeometryFactory factory = new GeometryFactory();
 	private final Blackboard blackboard;
 
 	/**

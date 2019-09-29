@@ -9,13 +9,12 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
+import me.database.neo4j.IGraphDatabaseDAO;
+import me.factory.DaoBeanFactory;
 import me.openMap.OpenTransitMap;
 import me.openMap.models.query.result.RouteQueryResult;
 import me.openMap.models.query.result.TransitStopQueryResult;
 import me.openMap.utils.StopOverlay;
-import me.database.neo4j.GraphDatabaseDAO;
-import me.database.neo4j.IGraphDatabaseDAO;
-import me.factory.DaoBeanFactory;
 import me.transit.database.RouteStopData;
 import me.transit.database.TransitStop;
 
