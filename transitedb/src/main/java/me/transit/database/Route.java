@@ -28,6 +28,8 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import me.database.mongo.IDocument;
 import me.database.neo4j.FIELD;
+import me.transit.annotation.GTFSFileModel;
+import me.transit.annotation.GTFSSetter;
 import me.database.neo4j.AbstractGraphNode;
 
 @XStreamAlias("Route")
@@ -36,6 +38,7 @@ import me.database.neo4j.AbstractGraphNode;
 @Inheritance
 @DiscriminatorColumn(name = "route_type")
 @DiscriminatorValue("TransitDateImpl")
+@GTFSFileModel(filename="routes.txt")
 public class Route extends AbstractGraphNode implements TransitData {
 	
 	public final static String TRIPLIST = "tripList";
@@ -146,7 +149,7 @@ public class Route extends AbstractGraphNode implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Route#setId(java.lang.String)
 	 */
-
+	@GTFSSetter(column="id")
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -162,7 +165,7 @@ public class Route extends AbstractGraphNode implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Route#setVersion(java.lang.String)
 	 */
-
+	@GTFSSetter(column="version")
 	public void setVersion(String version) {
 		this.version = version;
 	}
@@ -178,7 +181,7 @@ public class Route extends AbstractGraphNode implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Route#setShortName(java.lang.String)
 	 */
-
+	@GTFSSetter(column="shortName")
 	public void setShortName(String shortName) {
 		this.shortName = shortName;
 	}
@@ -194,7 +197,7 @@ public class Route extends AbstractGraphNode implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Route#setLongName(java.lang.String)
 	 */
-
+	@GTFSSetter(column="longName")
 	public void setLongName(String longName) {
 		this.longName = longName;
 	}
@@ -210,7 +213,7 @@ public class Route extends AbstractGraphNode implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Route#setDesc(java.lang.String)
 	 */
-
+	@GTFSSetter(column="desc")
 	public void setDesc(String desc) {
 		this.desc = desc;
 	}
@@ -226,7 +229,7 @@ public class Route extends AbstractGraphNode implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Route#setType(me.transit.database.impl.RouteImpl.RouteType)
 	 */
-
+	@GTFSSetter(column="type")
 	public void setType(RouteType type) {
 		this.type = type;
 	}
@@ -242,7 +245,7 @@ public class Route extends AbstractGraphNode implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Route#setUrl(java.lang.String)
 	 */
-
+	@GTFSSetter(column="url")
 	public void setUrl(String url) {
 		this.url = url;
 	}
@@ -258,7 +261,7 @@ public class Route extends AbstractGraphNode implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Route#setColor(java.lang.String)
 	 */
-
+	@GTFSSetter(column="color")
 	public void setColor(String color) {
 		this.color = color;
 	}
@@ -274,7 +277,7 @@ public class Route extends AbstractGraphNode implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Route#setTextColor(java.lang.String)
 	 */
-
+	@GTFSSetter(column="textColor")
 	public void setTextColor(String textColor) {
 		this.textColor = textColor;
 	}

@@ -22,6 +22,7 @@ import com.thoughtworks.xstream.annotations.XStreamConverter;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import com.vividsolutions.jts.geom.Geometry;
 
+import me.transit.annotation.GTFSSetter;
 import me.transit.database.RouteGeometry;
 
 @Entity
@@ -87,19 +88,17 @@ public class RouteGeometry implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.RouteGeometry#setAgency(me.transit.database.impl.Agency)
 	 */
-
 	public void setAgency(Agency agency) {
 		this.agency = agency;
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.RouteGeometry#getId()
 	 */
-
 	public String getId() {
 		return id;
 	}
-
+	@GTFSSetter(column="id")
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.RouteGeometry#setId(java.lang.String)
 	 */
@@ -111,7 +110,6 @@ public class RouteGeometry implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.RouteGeometry#getVersion()
 	 */
-
 	public String getVersion() {
 		return version;
 	}
@@ -119,7 +117,7 @@ public class RouteGeometry implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.RouteGeometry#setVersion(java.lang.String)
 	 */
-
+	@GTFSSetter(column="version")
 	public void setVersion(String version) {
 		this.version = version;
 	}
@@ -127,8 +125,6 @@ public class RouteGeometry implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.RouteGeometry#getShape()
 	 */
-	
-
 	public Geometry getShape() {
 		return shape;
 	}
@@ -136,7 +132,7 @@ public class RouteGeometry implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.RouteGeometry#setShape(com.vividsolutions.jts.geom.Geometry)
 	 */
-
+	@GTFSSetter(column="shape")
 	public void setShape(Geometry shape) {
 		this.shape = shape;
 	}

@@ -30,6 +30,8 @@ import com.vividsolutions.jts.geom.Point;
 import me.database.neo4j.FIELD;
 import me.database.neo4j.AbstractGraphNode;
 import me.datamining.metric.IDataProvider;
+import me.transit.annotation.GTFSFileModel;
+import me.transit.annotation.GTFSSetter;
 
 @Entity
 @Table(name = "tran_stop")
@@ -37,6 +39,7 @@ import me.datamining.metric.IDataProvider;
 @DiscriminatorColumn(name = "tran_stop_type")
 @DiscriminatorValue("TransitStopImpl")
 @XStreamAlias("TransitStop")
+@GTFSFileModel(filename="stops.txt")
 public class TransitStop extends AbstractGraphNode implements TransitData, IDataProvider  {
 	
 	public static final String STOP_NAME = "name";
@@ -146,7 +149,7 @@ public class TransitStop extends AbstractGraphNode implements TransitData, IData
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.TransitStop#setId(java.lang.String)
 	 */
-
+	@GTFSSetter(column="id")
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -162,7 +165,7 @@ public class TransitStop extends AbstractGraphNode implements TransitData, IData
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.TransitStop#setVersion(java.lang.String)
 	 */
-
+	@GTFSSetter(column="version")
 	public void setVersion(String version) {
 		this.version = version;
 	}
@@ -178,7 +181,7 @@ public class TransitStop extends AbstractGraphNode implements TransitData, IData
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.TransitStop#setCode(java.lang.String)
 	 */
-
+	@GTFSSetter(column="code")
 	public void setCode(String code) {
 		this.code = code;
 	}
@@ -194,7 +197,7 @@ public class TransitStop extends AbstractGraphNode implements TransitData, IData
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.TransitStop#setName(java.lang.String)
 	 */
-
+	@GTFSSetter(column="name")
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -211,7 +214,7 @@ public class TransitStop extends AbstractGraphNode implements TransitData, IData
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.TransitStop#setDesc(java.lang.String)
 	 */
-
+	@GTFSSetter(column="desc")
 	public void setDesc(String desc) {
 		this.desc = desc;
 	}
@@ -227,7 +230,7 @@ public class TransitStop extends AbstractGraphNode implements TransitData, IData
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.TransitStop#setLocation(com.vividsolutions.jts.geom.Point)
 	 */
-
+	@GTFSSetter(column="location")
 	public void setLocation(Point location) {
 		this.location = location;
 	}
@@ -243,7 +246,7 @@ public class TransitStop extends AbstractGraphNode implements TransitData, IData
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.TransitStop#setZoneId(java.lang.String)
 	 */
-
+	@GTFSSetter(column="zoneId")
 	public void setZoneId(String zoneId) {
 		this.zoneId = zoneId;
 	}
@@ -259,7 +262,7 @@ public class TransitStop extends AbstractGraphNode implements TransitData, IData
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.TransitStop#setUrl(java.lang.String)
 	 */
-
+	@GTFSSetter(column="url")
 	public void setUrl(String url) {
 		this.url = url;
 	}
@@ -275,7 +278,7 @@ public class TransitStop extends AbstractGraphNode implements TransitData, IData
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.TransitStop#setLocationType(me.transit.database.impl.TransitStopImpl.LocationType)
 	 */
-
+	@GTFSSetter(column="locationType")
 	public void setLocationType(LocationType locationType) {
 		this.locationType = locationType;
 	}
@@ -291,7 +294,7 @@ public class TransitStop extends AbstractGraphNode implements TransitData, IData
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.TransitStop#setParentStation(int)
 	 */
-
+	@GTFSSetter(column="parentStation")
 	public void setParentStation(int parentStation) {
 		this.parentStation = parentStation;
 	}
@@ -331,7 +334,7 @@ public class TransitStop extends AbstractGraphNode implements TransitData, IData
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.TransitStop#setStopTimezone(java.lang.String)
 	 */
-
+	@GTFSSetter(column="stopTimezone")
 	public void setStopTimezone(String value) {
 		this.getAgency().setTimezone(value);
 	}
@@ -370,7 +373,7 @@ public class TransitStop extends AbstractGraphNode implements TransitData, IData
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.TransitStop#setWheelchairBoarding(boolean)
 	 */
-
+	@GTFSSetter(column="wheelchairBoarding")
 	public void setWheelchairBoarding(boolean value) {
 		wheelchairBoarding = value;
 	}

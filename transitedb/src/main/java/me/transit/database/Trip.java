@@ -30,6 +30,8 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import me.database.mongo.IDocument;
 import me.database.neo4j.FIELD;
 import me.database.neo4j.AbstractGraphNode;
+import me.transit.annotation.GTFSFileModel;
+import me.transit.annotation.GTFSSetter;
 import me.transit.database.Trip;
 
 @Entity
@@ -38,6 +40,7 @@ import me.transit.database.Trip;
 @DiscriminatorColumn(name = "trip_type")
 @DiscriminatorValue("TripImpl")
 @XStreamAlias("Trip")
+@GTFSFileModel(filename="trips.txt")
 public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	
 	public static final String ID = "id";
@@ -133,7 +136,7 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Trip#getId()
 	 */
-
+	@GTFSSetter(column="id")
 	public String getId() {
 		return id;
 	}
@@ -157,7 +160,7 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Trip#setVersion(java.lang.String)
 	 */
-
+	@GTFSSetter(column="version")
 	public void setVersion(String version) {
 		this.version = version;
 	}
@@ -173,7 +176,7 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	/**
 	 * @param service the service to set
 	 */
-
+	@GTFSSetter(column="service")
 	public void setService(ServiceDate service) {
 		this.service = service;
 	}
@@ -189,7 +192,7 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Trip#setHeadSign(java.lang.String)
 	 */
-
+	@GTFSSetter(column="headSign")
 	public void setHeadSign(String headSign) {
 		this.headSign = headSign;
 	}
@@ -205,7 +208,7 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Trip#setShortName(java.lang.String)
 	 */
-
+	@GTFSSetter(column="shortName")
 	public void setShortName(String shortName) {
 		this.shortName = shortName;
 	}
@@ -221,7 +224,7 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Trip#setDirectionId(me.transit.database.impl.TripImpl.DirectionType)
 	 */
-
+	@GTFSSetter(column="directionId")
 	public void setDirectionId(DirectionType directionId) {
 		this.directionId = directionId;
 	}
@@ -237,7 +240,7 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	/**
 	 * @param shape the shape to set
 	 */
-
+	@GTFSSetter(column="shape")
 	public void setShape(RouteGeometry shape) {
 		this.shape = shape;
 	}
@@ -262,7 +265,7 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	 * 
 	 * @param stopTime
 	 */
-
+	@GTFSSetter(column="stopTime")
 	public void addStopTime(StopTime stopTime) 
 	{
 		if ( stopTime != null) {

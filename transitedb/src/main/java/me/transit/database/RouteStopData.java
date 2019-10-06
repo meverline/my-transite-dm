@@ -1,6 +1,7 @@
 package me.transit.database;
 
 import me.database.CSVFieldType;
+import me.transit.annotation.GTFSSetter;
 import me.transit.database.RouteStopData;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
@@ -56,6 +57,7 @@ public class RouteStopData implements CSVFieldType {
 	/**
 	 * @param routeShortName the routeShortName to set
 	 */
+	@GTFSSetter(column="shortName")
 	public void setRouteShortName(String routeShortName) {
 		this.routeShortName = routeShortName;
 	}
@@ -70,6 +72,7 @@ public class RouteStopData implements CSVFieldType {
 	/**
 	 * @param tripHeadSign the tripHeadSign to set
 	 */
+	@GTFSSetter(column="headSign")
 	public void setTripHeadSign(String tripHeadSign) {
 		this.tripHeadSign = tripHeadSign;
 	}

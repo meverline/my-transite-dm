@@ -8,11 +8,13 @@ import java.util.Map;
 
 import me.database.CSVFieldType;
 import me.database.mongo.IDocument;
+import me.transit.annotation.GTFSFileModel;
 import me.transit.database.StopTime;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
+@GTFSFileModel(filename="stop_times.txt")
 public class StopTime implements CSVFieldType, IDocument {
 
 	public static final String STOPID = "stopId";

@@ -24,12 +24,16 @@ import org.hibernate.annotations.Type;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
+import me.transit.annotation.GTFSFileModel;
+import me.transit.annotation.GTFSSetter;
+
 @Entity(name = "CalendarDate")
 @Table(name = "tran_calendar_date")
 @Inheritance
 @DiscriminatorColumn(name = "calendar_date_type")
 @DiscriminatorValue("CalendarDateImpl")
 @XStreamAlias("CalendarDate")
+@GTFSFileModel(filename="calendar_dates.txt")
 public class CalendarDate implements TransitData {
 	
 	public enum ExceptionType { ADD_SERVICE, REMOVE_SERVICE, UNKNOWN };
@@ -64,13 +68,7 @@ public class CalendarDate implements TransitData {
 	@Enumerated(EnumType.STRING)
 	private ExceptionType exceptionType = ExceptionType.UNKNOWN;
 
-	/* (non-Javadoc)
-	 * @see me.transit.database.impl.CalendarDate#getDate()
-	 */
 
-	public Calendar getDate() {
-		return date;
-	}
 
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.CalendarDate#getUUID()
@@ -107,7 +105,7 @@ public class CalendarDate implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.CalendarDate#getId()
 	 */
-
+	@GTFSSetter(column="id")
 	public String getId() {
 		return id;
 	}
@@ -123,7 +121,6 @@ public class CalendarDate implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.CalendarDate#getVersion()
 	 */
-
 	public String getVersion() {
 		return version;
 	}
@@ -131,15 +128,22 @@ public class CalendarDate implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.CalendarDate#setVersion(java.lang.String)
 	 */
-
+	@GTFSSetter(column="version")
 	public void setVersion(String version) {
 		this.version = version;
+	}
+	
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.CalendarDate#getDate()
+	 */
+	public Calendar getDate() {
+		return date;
 	}
 
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.CalendarDate#setDate(java.util.Calendar)
 	 */
-
+	@GTFSSetter(column="date")
 	public void setDate(Calendar date) {
 		this.date = date;
 	}
@@ -147,8 +151,6 @@ public class CalendarDate implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.CalendarDate#getExceptionType()
 	 */
-
-
 	public ExceptionType getExceptionType() {
 		return exceptionType;
 	}
@@ -156,7 +158,7 @@ public class CalendarDate implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.CalendarDate#setExceptionType(me.transit.database.impl.CalendarDateImpl.ExceptionType)
 	 */
-
+	@GTFSSetter(column="exceptionType")
 	public void setExceptionType(ExceptionType exceptionType) {
 		this.exceptionType = exceptionType;
 	}

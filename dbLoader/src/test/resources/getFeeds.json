@@ -1,0 +1,201 @@
+{
+  "status": "OK",
+  "ts": 1570149807,
+  "results": {
+    "total": 21,
+    "limit": 10,
+    "page": 1,
+    "numPages": 3,
+    "feeds": [
+      {
+        "id": "charlottesville-area-transit/1051",
+        "ty": "gtfs",
+        "t": "Charlottesville Area Transit (CAT) GTFS",
+        "l": {
+          "id": 695,
+          "pid": 138,
+          "t": "Charlottesville, VA, USA",
+          "n": "Charlottesville",
+          "lat": 38.029306,
+          "lng": -78.476678
+        },
+        "u": {
+          "i": "http://www.charlottesville.org/transit",
+          "d": "http://avlweb.charlottesville.org/rtt/public/utility/GTFS.aspx"
+        }
+      },
+      {
+        "id": "fairfax-cue/1042",
+        "ty": "gtfs",
+        "t": "Fairfax CUE GTFS",
+        "l": {
+          "id": 213,
+          "pid": 138,
+          "t": "Fairfax, VA, USA",
+          "n": "Fairfax",
+          "lat": 38.846224,
+          "lng": -77.306373
+        },
+        "u": {
+          "i": "https://www.fairfaxva.gov/government/public-works/transportation-division/cue-bus-system/cue-bus-map-and-schedule",
+          "d": "http://www.fairfaxva.gov/Home/ShowDocument?id=6713"
+        },
+        "latest": {
+          "ts": 1552593806
+        }
+      },
+      {
+        "id": "wata/941",
+        "ty": "gtfs",
+        "t": "WATA GTFS",
+        "l": {
+          "id": 647,
+          "pid": 138,
+          "t": "Williamsburg, VA, USA",
+          "n": "Williamsburg",
+          "lat": 37.270702,
+          "lng": -76.707457
+        },
+        "u": {
+          "i": "http://www.gowata.org/193/Planning-Development"
+        },
+        "latest": {
+          "ts": 1555034366
+        }
+      },
+      {
+        "id": "greater-lynchburg-transit-co/673",
+        "ty": "gtfs",
+        "t": "Greater Lynchburg Transit Co. GTFS",
+        "l": {
+          "id": 494,
+          "pid": 138,
+          "t": "Lynchburg, VA, USA",
+          "n": "Lynchburg",
+          "lat": 37.413754,
+          "lng": -79.142246
+        },
+        "u": {
+          "d": "http://data.trilliumtransit.com/gtfs/gltc-lynchburg-va-us/gltc-lynchburg-va-us.zip"
+        },
+        "latest": {
+          "ts": 1545133647
+        }
+      },
+      {
+        "id": "harrisonburg-transit/589",
+        "ty": "gtfs",
+        "t": "HDPT GTFS",
+        "l": {
+          "id": 437,
+          "pid": 138,
+          "t": "Harrisonburg, VA, USA",
+          "n": "Harrisonburg",
+          "lat": 38.449569,
+          "lng": -78.868915
+        },
+        "u": {
+          "d": "https://www.harrisonburgva.gov/sites/default/files/Transit/files/gtfs/google_transit_Working.zip"
+        },
+        "latest": {
+          "ts": 1524513686
+        }
+      },
+      {
+        "id": "alexandria-transit-company/423",
+        "ty": "gtfs",
+        "t": "DASH Bus GTFS",
+        "l": {
+          "id": 324,
+          "pid": 138,
+          "t": "Alexandria, VA, USA",
+          "n": "Alexandria",
+          "lat": 38.804836,
+          "lng": -77.046921
+        },
+        "u": {
+          "d": "http://www.dashbus.com/google_transit.zip"
+        },
+        "latest": {
+          "ts": 1569642690
+        }
+      },
+      {
+        "id": "pulaski-area-transit/406",
+        "ty": "gtfs",
+        "t": "PAT GTFS",
+        "l": {
+          "id": 311,
+          "pid": 138,
+          "t": "Pulaski, VA, USA",
+          "n": "Pulaski",
+          "lat": 37.047898,
+          "lng": -80.779793
+        },
+        "u": {
+          "d": "http://data.trilliumtransit.com/gtfs/pulaski-va-us/pulaski-va-us.zip"
+        },
+        "latest": {
+          "ts": 1452651623
+        }
+      },
+      {
+        "id": "radford-transit/405",
+        "ty": "gtfs",
+        "t": "Radford Transit GTFS",
+        "l": {
+          "id": 310,
+          "pid": 138,
+          "t": "Radford, VA, USA",
+          "n": "Radford",
+          "lat": 37.131792,
+          "lng": -80.576448
+        },
+        "u": {
+          "d": "http://data.trilliumtransit.com/gtfs/radford-va-us/radford-va-us.zip"
+        },
+        "latest": {
+          "ts": 1445989516
+        }
+      },
+      {
+        "id": "valley-metro-roanoke/404",
+        "ty": "gtfs",
+        "t": "Valley Metro GTFS",
+        "l": {
+          "id": 309,
+          "pid": 138,
+          "t": "Roanoke, VA, USA",
+          "n": "Roanoke",
+          "lat": 37.27097,
+          "lng": -79.941427
+        },
+        "u": {
+          "d": "http://data.trilliumtransit.com/gtfs/roanoke-va-us/roanoke-va-us.zip"
+        },
+        "latest": {
+          "ts": 1444033127
+        }
+      },
+      {
+        "id": "blacksburg-transit/359",
+        "ty": "gtfs",
+        "t": "Blacksburg Transit GTFS",
+        "l": {
+          "id": 264,
+          "pid": 138,
+          "t": "Blacksburg, VA, USA",
+          "n": "Blacksburg",
+          "lat": 37.229573,
+          "lng": -80.413939
+        },
+        "u": {
+          "d": "https://www.bt4uclassic.org/gtfs/google_transit.zip"
+        },
+        "latest": {
+          "ts": 1567851507
+        }
+      }
+    ]
+  }
+ }

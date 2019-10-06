@@ -28,6 +28,7 @@ import com.thoughtworks.xstream.annotations.XStreamConverter;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import me.database.mongo.IDocument;
+import me.transit.annotation.GTFSSetter;
 import me.transit.database.ServiceDate;
 
 @Entity
@@ -155,7 +156,7 @@ public class ServiceDate implements TransitData, IDocument {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.ServiceDate#setId(java.lang.String)
 	 */
-
+	@GTFSSetter(column="id")
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -171,7 +172,7 @@ public class ServiceDate implements TransitData, IDocument {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.ServiceDate#setVersion(java.lang.String)
 	 */
-
+	@GTFSSetter(column="version")
 	public void setVersion(String version) {
 		this.version = version;
 	}
@@ -187,7 +188,7 @@ public class ServiceDate implements TransitData, IDocument {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.ServiceDate#setStartDate(java.util.Calendar)
 	 */
-
+	@GTFSSetter(column="startDate")
 	public void setStartDate(Calendar startDate) {
 		this.startDate = startDate;
 	}
@@ -203,7 +204,7 @@ public class ServiceDate implements TransitData, IDocument {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.ServiceDate#setEndDate(java.util.Calendar)
 	 */
-
+	@GTFSSetter(column="endDate")
 	public void setEndDate(Calendar endDate) {
 		this.endDate = endDate;
 	}
@@ -220,7 +221,7 @@ public class ServiceDate implements TransitData, IDocument {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.ServiceDate#setServiceDayFlag(int)
 	 */
-
+	@GTFSSetter(column="serviceDayFlag")
 	public void setServiceDayFlag(int serviceDayFlag) {
 		this.serviceDayFlag = serviceDayFlag;
 	}
@@ -236,7 +237,7 @@ public class ServiceDate implements TransitData, IDocument {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.ServiceDate#setService(me.transit.database.impl.ServiceDateImpl.ServiceDays)
 	 */
-
+	@GTFSSetter(column="sevice")
 	public void setService(ServiceDays service) {
 		this.service = service;
 	}

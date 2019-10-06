@@ -3,18 +3,24 @@ package me.transit.parser.data;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.reflections.Reflections;
 
 import me.database.neo4j.IGraphDatabaseDAO;
 import me.factory.DaoBeanFactory;
+import me.transit.annotation.GTFSFileModel;
+import me.transit.annotation.GTFSSetter;
 import me.transit.dao.AgencyDao;
 import me.transit.dao.CalendarDateDao;
 import me.transit.dao.RouteDao;
@@ -70,6 +76,31 @@ public class DefaultFileHandler extends FileHandler {
 		try {
 			inStream = new FileReader(path + "/common/config/ClassMap.properties");
 			getProperties().load(inStream);
+			
+			Reflections reflections = new Reflections("me.transit.database");
+			Set<Class<?>> annotated = reflections.getTypesAnnotatedWith(GTFSFileModel.class);
+			
+			for ( Class<?> cls : annotated ) {
+				for ( Annotation annoation : cls.getAnnotations()) {
+					if ( annoation.annotationType() == GTFSFileModel.class) {
+						GTFSFileModel model = GTFSFileModel.class.cast(annoation);
+						this.getProperties().put(model.filename(), cls);
+						Map<String, Method> clsmap = new HashMap<>();
+						for ( Method mth : cls.getDeclaredMethods()) {
+							for ( Annotation man : mth.getAnnotations()) {
+								if ( man.annotationType() == GTFSSetter.class) {
+									GTFSSetter setter = GTFSSetter.class.cast(man);
+									clsmap.put(setter.column(), mth);
+									
+								}
+							}
+						}
+						this.getProperties().put(cls.getName(), clsmap);
+					}
+				}
+				
+			}
+			
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage(), e);
 		}

@@ -3,6 +3,7 @@ package me.transit.database;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.transit.annotation.GTFSSetter;
 import me.transit.database.Route.RouteType;
 
 public class RouteDocument {
@@ -53,6 +54,7 @@ public class RouteDocument {
 	/**
 	 * @param shortName the shortName to set
 	 */
+	@GTFSSetter(column="shortName")
 	public void setShortName(String shortName) {
 		this.shortName = shortName;
 	}
@@ -67,6 +69,7 @@ public class RouteDocument {
 	/**
 	 * @param longName the longName to set
 	 */
+	@GTFSSetter(column="longName")
 	public void setLongName(String longName) {
 		this.longName = longName;
 	}
@@ -81,6 +84,7 @@ public class RouteDocument {
 	/**
 	 * @param desc the desc to set
 	 */
+	@GTFSSetter(column="desc")
 	public void setDesc(String desc) {
 		this.desc = desc;
 	}
@@ -95,6 +99,7 @@ public class RouteDocument {
 	/**
 	 * @param type the type to set
 	 */
+	@GTFSSetter(column="type")
 	public void setType(RouteType type) {
 		this.type = type;
 	}
