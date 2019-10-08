@@ -37,11 +37,10 @@ public class DefaultFileHandler extends FileHandler {
 	private static final String LATITUDE = "Latitude";
 	private static final String LONGITUDE = "Longitude";
 	private static final String AGENCYID = "AgencyId";
-	private static final String SET = "set";
-	private static final String GET = "get";
 
 	private Log log = LogFactory.getLog(getClass().getName());
-	private Properties properties = new Properties();
+	private final Properties properties = new Properties();
+	private final Map<String, Map<String, Method>> classMethodMap = new HashMap<>();
 
 	/**
 	 * 
@@ -60,11 +59,10 @@ public class DefaultFileHandler extends FileHandler {
 	}
 
 	/**
-	 * @param properties
-	 *            the properties to set
+	 * @return the classMethodMap
 	 */
-	public void setProperties(Properties properties) {
-		this.properties = properties;
+	public Map<String, Map<String, Method>> getClassMethodMap() {
+		return classMethodMap;
 	}
 
 	/**
@@ -76,31 +74,31 @@ public class DefaultFileHandler extends FileHandler {
 		try {
 			inStream = new FileReader(path + "/common/config/ClassMap.properties");
 			getProperties().load(inStream);
-			
+
 			Reflections reflections = new Reflections("me.transit.database");
 			Set<Class<?>> annotated = reflections.getTypesAnnotatedWith(GTFSFileModel.class);
-			
-			for ( Class<?> cls : annotated ) {
-				for ( Annotation annoation : cls.getAnnotations()) {
-					if ( annoation.annotationType() == GTFSFileModel.class) {
+
+			for (Class<?> cls : annotated) {
+				for (Annotation annoation : cls.getAnnotations()) {
+					if (annoation.annotationType() == GTFSFileModel.class) {
 						GTFSFileModel model = GTFSFileModel.class.cast(annoation);
 						this.getProperties().put(model.filename(), cls);
 						Map<String, Method> clsmap = new HashMap<>();
-						for ( Method mth : cls.getDeclaredMethods()) {
-							for ( Annotation man : mth.getAnnotations()) {
-								if ( man.annotationType() == GTFSSetter.class) {
+						for (Method mth : cls.getDeclaredMethods()) {
+							for (Annotation man : mth.getAnnotations()) {
+								if (man.annotationType() == GTFSSetter.class) {
 									GTFSSetter setter = GTFSSetter.class.cast(man);
 									clsmap.put(setter.column(), mth);
-									
+
 								}
 							}
 						}
-						this.getProperties().put(cls.getName(), clsmap);
+						getClassMethodMap().put(cls.getName(), clsmap);
 					}
 				}
-				
+
 			}
-			
+
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage(), e);
 		}
@@ -222,12 +220,7 @@ public class DefaultFileHandler extends FileHandler {
 	private List<DataSaver> mapMethods(String header, String type, Class<?> objClass) throws NoSuchMethodException {
 		List<DataSaver> rtn = new ArrayList<DataSaver>();
 
-		HashMap<String, Method> methodMap = new HashMap<String, Method>();
-		for (Method m : objClass.getMethods()) {
-			if (m.getName().startsWith(DefaultFileHandler.SET) || m.getName().startsWith(DefaultFileHandler.GET)) {
-				methodMap.put(m.getName(), m);
-			}
-		}
+		Map<String, Method> methodMap = getClassMethodMap().get(objClass.getName());
 
 		int ndx = type.indexOf(".");
 		List<String> order = new ArrayList<String>();
@@ -235,37 +228,16 @@ public class DefaultFileHandler extends FileHandler {
 
 		for (String name : order) {
 
-			String useName = name;
-			String altKey = objClass.getSimpleName() + "." + name;
-			if (getProperties().containsKey(name)) {
-				useName = this.getProperties().getProperty(name);
-			} else if (getProperties().containsKey(altKey)) {
-				useName = this.getProperties().getProperty(altKey);
+			String setMethodName = name;
+			if (name.compareTo(DefaultFileHandler.LATITUDE) == 0 || name.compareTo(DefaultFileHandler.LONGITUDE) == 0) {
+				setMethodName = DefaultFileHandler.LOCATION;
 			}
-
-			String setMethodName = DefaultFileHandler.SET + useName;
-			if (useName.compareTo(DefaultFileHandler.LATITUDE) == 0
-					|| useName.compareTo(DefaultFileHandler.LONGITUDE) == 0) {
-				setMethodName = DefaultFileHandler.SET + DefaultFileHandler.LOCATION;
-			}
+			
 			if (!methodMap.containsKey(setMethodName)) {
 				throw new NoSuchMethodException(setMethodName + " class: " + objClass.getName() + " " + name);
 			}
 
-			String getMethodName = DefaultFileHandler.GET + useName;
-			if (useName.compareTo(DefaultFileHandler.LATITUDE) == 0
-					|| useName.compareTo(DefaultFileHandler.LONGITUDE) == 0) {
-				getMethodName = DefaultFileHandler.GET + DefaultFileHandler.LOCATION;
-			}
-			if (!methodMap.containsKey(getMethodName)) {
-				log.info(useName + " " + DefaultFileHandler.LATITUDE + " "
-						+ useName.compareTo(DefaultFileHandler.LATITUDE));
-				log.info(useName + " " + DefaultFileHandler.LONGITUDE + " "
-						+ useName.compareTo(DefaultFileHandler.LONGITUDE));
-				throw new NoSuchMethodException(getMethodName + " class: " + objClass.getName() + " " + name);
-			}
-			rtn.add(new DataSaver(methodMap.get(getMethodName), methodMap.get(setMethodName), useName,
-					this.getBlackboard()));
+			rtn.add(new DataSaver(methodMap.get(setMethodName), setMethodName, this.getBlackboard()));
 
 		}
 		return rtn;

@@ -105,7 +105,7 @@ public class CalendarDate implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.CalendarDate#getId()
 	 */
-	@GTFSSetter(column="id")
+	@GTFSSetter(column="service_id")
 	public String getId() {
 		return id;
 	}
@@ -158,7 +158,7 @@ public class CalendarDate implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.CalendarDate#setExceptionType(me.transit.database.impl.CalendarDateImpl.ExceptionType)
 	 */
-	@GTFSSetter(column="exceptionType")
+	@GTFSSetter(column="exception_type")
 	public void setExceptionType(ExceptionType exceptionType) {
 		this.exceptionType = exceptionType;
 	}

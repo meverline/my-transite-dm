@@ -246,7 +246,7 @@ public class TransitStop extends AbstractGraphNode implements TransitData, IData
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.TransitStop#setZoneId(java.lang.String)
 	 */
-	@GTFSSetter(column="zoneId")
+	@GTFSSetter(column="zone_id")
 	public void setZoneId(String zoneId) {
 		this.zoneId = zoneId;
 	}
@@ -278,7 +278,7 @@ public class TransitStop extends AbstractGraphNode implements TransitData, IData
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.TransitStop#setLocationType(me.transit.database.impl.TransitStopImpl.LocationType)
 	 */
-	@GTFSSetter(column="locationType")
+	@GTFSSetter(column="location_type")
 	public void setLocationType(LocationType locationType) {
 		this.locationType = locationType;
 	}
@@ -294,7 +294,7 @@ public class TransitStop extends AbstractGraphNode implements TransitData, IData
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.TransitStop#setParentStation(int)
 	 */
-	@GTFSSetter(column="parentStation")
+	@GTFSSetter(column="parent_station")
 	public void setParentStation(int parentStation) {
 		this.parentStation = parentStation;
 	}

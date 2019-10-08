@@ -98,7 +98,7 @@ public class RouteGeometry implements TransitData {
 	public String getId() {
 		return id;
 	}
-	@GTFSSetter(column="id")
+	@GTFSSetter(column="route_id")
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.RouteGeometry#setId(java.lang.String)
 	 */

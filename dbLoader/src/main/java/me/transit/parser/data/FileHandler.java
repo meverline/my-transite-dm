@@ -42,26 +42,10 @@ public abstract class FileHandler {
 		Map<String, Integer> indexMap = new HashMap<String, Integer>();
 
 		int ndx = 0;
-		String mapTo = null;
 		for (String fld : fields) {
 			String item = fld.replace('"', ' ').trim();
-			if (item.indexOf('_') == -1) {
-				mapTo = item.substring(0, 1).toUpperCase() + item.substring(1);
-				order.add(mapTo);
-				indexMap.put(mapTo, ndx);
-			} else {
-				String data[] = item.toLowerCase().split("_");
-				StringBuilder fieldName = new StringBuilder();
-
-				for (String name : data) {
-					if (name.compareTo(strip) != 0) {
-						mapTo = name.substring(0, 1).toUpperCase() + name.substring(1);
-						fieldName.append(mapTo);
-					}
-				}
-				order.add(fieldName.toString());
-				indexMap.put(fieldName.toString(), ndx);
-			}
+			order.add(item);
+			indexMap.put(item, ndx);
 			ndx++;
 		}
 

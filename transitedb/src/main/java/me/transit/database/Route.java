@@ -149,7 +149,7 @@ public class Route extends AbstractGraphNode implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Route#setId(java.lang.String)
 	 */
-	@GTFSSetter(column="id")
+	@GTFSSetter(column="route_id")
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -181,7 +181,7 @@ public class Route extends AbstractGraphNode implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Route#setShortName(java.lang.String)
 	 */
-	@GTFSSetter(column="shortName")
+	@GTFSSetter(column="route_short_name")
 	public void setShortName(String shortName) {
 		this.shortName = shortName;
 	}
@@ -197,7 +197,7 @@ public class Route extends AbstractGraphNode implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Route#setLongName(java.lang.String)
 	 */
-	@GTFSSetter(column="longName")
+	@GTFSSetter(column="route_long_name")
 	public void setLongName(String longName) {
 		this.longName = longName;
 	}
@@ -229,7 +229,7 @@ public class Route extends AbstractGraphNode implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Route#setType(me.transit.database.impl.RouteImpl.RouteType)
 	 */
-	@GTFSSetter(column="type")
+	@GTFSSetter(column="route_type")
 	public void setType(RouteType type) {
 		this.type = type;
 	}
@@ -261,7 +261,7 @@ public class Route extends AbstractGraphNode implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Route#setColor(java.lang.String)
 	 */
-	@GTFSSetter(column="color")
+	@GTFSSetter(column="route_color")
 	public void setColor(String color) {
 		this.color = color;
 	}
@@ -277,7 +277,7 @@ public class Route extends AbstractGraphNode implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Route#setTextColor(java.lang.String)
 	 */
-	@GTFSSetter(column="textColor")
+	@GTFSSetter(column="route_text_color")
 	public void setTextColor(String textColor) {
 		this.textColor = textColor;
 	}

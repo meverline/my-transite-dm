@@ -2,6 +2,7 @@ package me.transit.parser.data;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.util.Calendar;
 
 import me.factory.DaoBeanFactory;
@@ -198,15 +199,15 @@ public class DataSaver {
 	 * @param method
 	 * @throws NoSuchMethodException
 	 */
-	public DataSaver(Method getMethod, Method setMethod, String field, Blackboard parser) throws NoSuchMethodException {
+	public DataSaver(Method setMethod, String field, Blackboard parser) throws NoSuchMethodException {
 		setMethod(setMethod);
 		fieldName = field;
 		setBlackboard(parser);
-		initilize(getMethod);
+		initilize(setMethod);
 	}
 
 	/**
-	 * 
+	 * setMethod
 	 * @return
 	 */
 	public String getField() {
@@ -217,43 +218,45 @@ public class DataSaver {
 	 * @throws NoSuchMethodException
 	 * 
 	 */
-	private void initilize(Method getMethod) throws NoSuchMethodException {
-
-		if (getMethod.getReturnType().isPrimitive()) {
-			if (getMethod.getReturnType() == Long.TYPE) {
+	private void initilize(Method setMethod) throws NoSuchMethodException {
+		
+		Parameter parm = (setMethod.getParameters())[0];
+	
+		if (parm.getType().isPrimitive()) {
+			if (setMethod.getReturnType() == Long.TYPE) {
 				setType(DataType.LONG);
-			} else if (getMethod.getReturnType() == Integer.TYPE) {
+			} else if (parm.getType() == Integer.TYPE) {
 				setType(DataType.INT);
-			} else if (getMethod.getReturnType() == Double.TYPE) {
+			} else if (parm.getType() == Double.TYPE) {
 				setType(DataType.DOUBLE);
-			} else if (getMethod.getReturnType() == Boolean.TYPE) {
+			} else if (parm.getType() == Boolean.TYPE) {
 				setType(DataType.BOOLEAN);
 			} else {
-				throw new NoSuchMethodException("Unkown type: " + getMethod.getReturnType());
+				throw new NoSuchMethodException("Unkown type: " + parm.getType());
 			}
-		} else if (getMethod.getReturnType() == String.class) {
+		} else if (parm.getType() == String.class) {
 			setType(DataType.STRING);
-		} else if (getMethod.getReturnType() == Calendar.class) {
+		} else if (parm.getType() == Calendar.class) {
 			setType(DataType.CALENDAR);
-		} else if (getMethod.getReturnType() == Point.class) {
+		} else if (parm.getType() == Point.class) {
 			setType(DataType.POINT);
-		} else if (getMethod.getReturnType() == RouteGeometry.class) {
+		} else if (parm.getType() == RouteGeometry.class) {
 			setType(DataType.GEOMETRY);
-		} else if (getMethod.getReturnType() == Route.class) {
+		} else if (parm.getType() == Route.class) {
 			setType(DataType.ROUTE);
-		} else if (getMethod.getReturnType() == Agency.class) {
+		} else if (parm.getType() == Agency.class) {
 			setType(DataType.AGENCY);
-		} else if (getMethod.getReturnType() == ServiceDate.class) {
+		} else if (parm.getType() == ServiceDate.class) {
 			setType(DataType.SERVICEDATE);
 		} else {
-			if (getMethod.getReturnType().isEnum()) {
+			if (parm.getType().isEnum()) {
 				setType(DataType.ENUM);
 			} else {
-				log.info("OBJECT: " + getMethod.getName() + " " + getMethod.getReturnType().getName());
+				log.info("OBJECT: " + parm.getType().getName() + " " + parm.getType().getName());
 				setType(DataType.OBJECT);
 			}
 		}
-		this.returnType = getMethod.getReturnType();
+		this.returnType = parm.getType();
 
 	}
 

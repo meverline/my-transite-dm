@@ -9,6 +9,7 @@ import java.util.Map;
 import me.database.CSVFieldType;
 import me.database.mongo.IDocument;
 import me.transit.annotation.GTFSFileModel;
+import me.transit.annotation.GTFSSetter;
 import me.transit.database.StopTime;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
@@ -73,6 +74,7 @@ public class StopTime implements CSVFieldType, IDocument {
 	/**
 	 * @param arrivalTime the TripId to set
 	 */
+	@GTFSSetter(column="trip_id")
 	public void setTripId(String id)
 	{
 		tripId = id;
@@ -88,6 +90,7 @@ public class StopTime implements CSVFieldType, IDocument {
 	/**
 	 * @param arrivalTime the arrivalTime to set
 	 */
+	@GTFSSetter(column="arrival_time")
 	public void setArrivalTime(List<Long> arrivalTime) {
 		this.arrivalTime = arrivalTime;
 	}
@@ -96,6 +99,7 @@ public class StopTime implements CSVFieldType, IDocument {
 	 * 
 	 * @param departureTime
 	 */
+	
 	public void addArrivalTime(long arrivalTime) {
 		this.arrivalTime.add(arrivalTime);
 	}
@@ -117,6 +121,7 @@ public class StopTime implements CSVFieldType, IDocument {
 	/**
 	 * @param stopId the stopId to set
 	 */
+	@GTFSSetter(column="stop_id")
 	public void setStopId(String stopId) {
 		this.stopId = stopId;
 	}
@@ -131,6 +136,7 @@ public class StopTime implements CSVFieldType, IDocument {
 	/**
 	 * @param stopId the stopId to set
 	 */
+	@GTFSSetter(column="location")
 	public void setLocation(Double[] stopId) {
 		this.location = stopId;
 	}
@@ -145,6 +151,7 @@ public class StopTime implements CSVFieldType, IDocument {
 	/**
 	 * @param stopId the stopId to set
 	 */
+	@GTFSSetter(column="stop_name")
 	public void setStopName(String name)
 	{
 		this.stopName = name;
@@ -160,6 +167,7 @@ public class StopTime implements CSVFieldType, IDocument {
 	/**
 	 * @param stopHeadSign the stopHeadSign to set
 	 */
+	@GTFSSetter(column="stop_head_sign")
 	public void setStopHeadSign(String stopHeadSign) {
 		this.stopHeadSign = stopHeadSign;
 	}
@@ -174,6 +182,7 @@ public class StopTime implements CSVFieldType, IDocument {
 	/**
 	 * @param pickupType the pickupType to set
 	 */
+	@GTFSSetter(column="pickup_type")
 	public void setPickupType(PickupType pickupType) {
 		this.pickupType = pickupType;
 	}
@@ -188,6 +197,7 @@ public class StopTime implements CSVFieldType, IDocument {
 	/**
 	 * @param dropOffType the dropOffType to set
 	 */
+	@GTFSSetter(column="drop_off_type")
 	public void setDropOffType(PickupType dropOffType) {
 		this.dropOffType = dropOffType;
 	}

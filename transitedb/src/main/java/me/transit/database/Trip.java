@@ -176,7 +176,7 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	/**
 	 * @param service the service to set
 	 */
-	@GTFSSetter(column="service")
+	@GTFSSetter(column="service_id")
 	public void setService(ServiceDate service) {
 		this.service = service;
 	}
@@ -192,7 +192,7 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Trip#setHeadSign(java.lang.String)
 	 */
-	@GTFSSetter(column="headSign")
+	@GTFSSetter(column="trip_headsign")
 	public void setHeadSign(String headSign) {
 		this.headSign = headSign;
 	}
@@ -208,7 +208,7 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Trip#setShortName(java.lang.String)
 	 */
-	@GTFSSetter(column="shortName")
+	@GTFSSetter(column="trip_shortname")
 	public void setShortName(String shortName) {
 		this.shortName = shortName;
 	}
@@ -224,7 +224,7 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Trip#setDirectionId(me.transit.database.impl.TripImpl.DirectionType)
 	 */
-	@GTFSSetter(column="directionId")
+	@GTFSSetter(column="direction_id")
 	public void setDirectionId(DirectionType directionId) {
 		this.directionId = directionId;
 	}
@@ -240,7 +240,7 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	/**
 	 * @param shape the shape to set
 	 */
-	@GTFSSetter(column="shape")
+	@GTFSSetter(column="shape_id")
 	public void setShape(RouteGeometry shape) {
 		this.shape = shape;
 	}
@@ -265,7 +265,6 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	 * 
 	 * @param stopTime
 	 */
-	@GTFSSetter(column="stopTime")
 	public void addStopTime(StopTime stopTime) 
 	{
 		if ( stopTime != null) {

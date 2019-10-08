@@ -134,7 +134,7 @@ public class Agency extends AbstractGraphNode implements Serializable {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Agency#setName(java.lang.String)
 	 */
-	@GTFSSetter(column="name")
+	@GTFSSetter(column="agency_name")
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -149,7 +149,7 @@ public class Agency extends AbstractGraphNode implements Serializable {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Agency#setUrl(java.lang.String)
 	 */
-	@GTFSSetter(column="url")
+	@GTFSSetter(column="agency_url")
 	public void setUrl(String url) {
 		this.url = url;
 	}
@@ -164,7 +164,7 @@ public class Agency extends AbstractGraphNode implements Serializable {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Agency#setTimezone(java.lang.String)
 	 */
-	@GTFSSetter(column="timezone")
+	@GTFSSetter(column="agency_timezone")
 	public void setTimezone(String timezone) {
 		this.timezone = timezone;
 	}
@@ -179,7 +179,7 @@ public class Agency extends AbstractGraphNode implements Serializable {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Agency#setLang(java.lang.String)
 	 */
-	@GTFSSetter(column="lang")
+	@GTFSSetter(column="agency_lang")
 	public void setLang(String lang) {
 		this.lang = lang;
 	}
@@ -194,7 +194,7 @@ public class Agency extends AbstractGraphNode implements Serializable {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Agency#setPhone(java.lang.String)
 	 */
-	@GTFSSetter(column="phone")
+	@GTFSSetter(column="agency_phone")
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
@@ -209,7 +209,7 @@ public class Agency extends AbstractGraphNode implements Serializable {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Agency#setId(java.lang.String)
 	 */
-	@GTFSSetter(column="id")
+	@GTFSSetter(column="agency_id")
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -260,7 +260,7 @@ public class Agency extends AbstractGraphNode implements Serializable {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Agency#setFareUrl(java.lang.String)
 	 */
-	@GTFSSetter(column="fareUrl")
+	@GTFSSetter(column="agency_fareUrl")
 	public void setFareUrl(String url) {
 		fareUrl = url;
 	}

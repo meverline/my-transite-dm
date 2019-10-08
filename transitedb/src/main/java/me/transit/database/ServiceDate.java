@@ -28,6 +28,7 @@ import com.thoughtworks.xstream.annotations.XStreamConverter;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import me.database.mongo.IDocument;
+import me.transit.annotation.GTFSFileModel;
 import me.transit.annotation.GTFSSetter;
 import me.transit.database.ServiceDate;
 
@@ -37,6 +38,7 @@ import me.transit.database.ServiceDate;
 @DiscriminatorColumn(name = "serviceDate_type")
 @DiscriminatorValue("ServiceDateImpl")
 @XStreamAlias("ServiceDate")
+@GTFSFileModel(filename="calendar.txt")
 public class ServiceDate implements TransitData, IDocument {
 	
 	public static final String STARTDATE = "startDate";
@@ -156,7 +158,7 @@ public class ServiceDate implements TransitData, IDocument {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.ServiceDate#setId(java.lang.String)
 	 */
-	@GTFSSetter(column="id")
+	@GTFSSetter(column="service_id")
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -188,7 +190,7 @@ public class ServiceDate implements TransitData, IDocument {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.ServiceDate#setStartDate(java.util.Calendar)
 	 */
-	@GTFSSetter(column="startDate")
+	@GTFSSetter(column="start_date")
 	public void setStartDate(Calendar startDate) {
 		this.startDate = startDate;
 	}
@@ -204,7 +206,7 @@ public class ServiceDate implements TransitData, IDocument {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.ServiceDate#setEndDate(java.util.Calendar)
 	 */
-	@GTFSSetter(column="endDate")
+	@GTFSSetter(column="end_date")
 	public void setEndDate(Calendar endDate) {
 		this.endDate = endDate;
 	}
@@ -221,7 +223,6 @@ public class ServiceDate implements TransitData, IDocument {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.ServiceDate#setServiceDayFlag(int)
 	 */
-	@GTFSSetter(column="serviceDayFlag")
 	public void setServiceDayFlag(int serviceDayFlag) {
 		this.serviceDayFlag = serviceDayFlag;
 	}
