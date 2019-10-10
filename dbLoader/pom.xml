@@ -114,11 +114,35 @@
 		    <artifactId>jackson-databind</artifactId>
 		    <version>2.4.4</version>
 		</dependency>
+		
+		<dependency>
+		    <groupId>com.amazonaws</groupId>
+		    <artifactId>aws-java-sdk-sns</artifactId>
+		    <version>1.11.648</version>
+		</dependency>
 
 		<dependency>
 		    <groupId>com.amazonaws</groupId>
-		    <artifactId>aws-java-sdk</artifactId>
-		    <version>1.11.563</version>
+		    <artifactId>aws-java-sdk-sqs</artifactId>
+		    <version>1.11.648</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.amazonaws</groupId>
+		    <artifactId>aws-java-sdk-dynamodb</artifactId>
+		    <version>1.11.648</version>
+		</dependency>
+	
+		<dependency>
+		    <groupId>com.amazonaws</groupId>
+		    <artifactId>aws-java-sdk-s3</artifactId>
+		    <version>1.11.648</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.amazonaws</groupId>
+		    <artifactId>aws-java-sdk-rds</artifactId>
+		    <version>1.11.648</version>
 		</dependency>
 
 		<dependency>

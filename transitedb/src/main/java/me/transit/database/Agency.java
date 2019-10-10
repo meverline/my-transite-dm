@@ -16,6 +16,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import com.vividsolutions.jts.geom.Polygon;
@@ -96,6 +98,7 @@ public class Agency extends AbstractGraphNode implements Serializable {
 	 * 
 	 * @return
 	 */
+	@JsonGetter("uuid")
 	public long getUUID() {
 		return uuid;
 	}
@@ -104,6 +107,7 @@ public class Agency extends AbstractGraphNode implements Serializable {
 	 * 
 	 * @param id
 	 */
+	@JsonSetter("uuid")
 	public void setUUID(long id) {
 		uuid = id;
 	}
@@ -111,7 +115,7 @@ public class Agency extends AbstractGraphNode implements Serializable {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Agency#getVersion()
 	 */
-	
+	@JsonGetter("version")
 	public String getVersion() {
 		return version;
 	}
@@ -120,6 +124,7 @@ public class Agency extends AbstractGraphNode implements Serializable {
 	 * @see me.transit.database.impl.Agency#setVersion(java.lang.String)
 	 */
 	@GTFSSetter(column="version")
+	@JsonSetter("version")
 	public void setVersion(String version) {
 		this.version = version;
 	}
@@ -127,6 +132,7 @@ public class Agency extends AbstractGraphNode implements Serializable {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Agency#getName()
 	 */
+	@JsonGetter("agency_name")
 	public String getName() {
 		return name;
 	}
@@ -135,6 +141,7 @@ public class Agency extends AbstractGraphNode implements Serializable {
 	 * @see me.transit.database.impl.Agency#setName(java.lang.String)
 	 */
 	@GTFSSetter(column="agency_name")
+	@JsonSetter("agency_name")
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -142,6 +149,7 @@ public class Agency extends AbstractGraphNode implements Serializable {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Agency#getUrl()
 	 */
+	@JsonGetter("agency_url")
 	public String getUrl() {
 		return url;
 	}
@@ -150,6 +158,7 @@ public class Agency extends AbstractGraphNode implements Serializable {
 	 * @see me.transit.database.impl.Agency#setUrl(java.lang.String)
 	 */
 	@GTFSSetter(column="agency_url")
+	@JsonSetter("agency_url")
 	public void setUrl(String url) {
 		this.url = url;
 	}
@@ -157,6 +166,7 @@ public class Agency extends AbstractGraphNode implements Serializable {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Agency#getTimezone()
 	 */
+	@JsonGetter("agency_timezone")
 	public String getTimezone() {
 		return timezone;
 	}
@@ -165,6 +175,7 @@ public class Agency extends AbstractGraphNode implements Serializable {
 	 * @see me.transit.database.impl.Agency#setTimezone(java.lang.String)
 	 */
 	@GTFSSetter(column="agency_timezone")
+	@JsonSetter("agency_timezone")
 	public void setTimezone(String timezone) {
 		this.timezone = timezone;
 	}
@@ -172,6 +183,7 @@ public class Agency extends AbstractGraphNode implements Serializable {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Agency#getLang()
 	 */
+	@JsonGetter("agency_lang")
 	public String getLang() {
 		return lang;
 	}
@@ -180,6 +192,7 @@ public class Agency extends AbstractGraphNode implements Serializable {
 	 * @see me.transit.database.impl.Agency#setLang(java.lang.String)
 	 */
 	@GTFSSetter(column="agency_lang")
+	@JsonSetter("agency_lang")
 	public void setLang(String lang) {
 		this.lang = lang;
 	}
@@ -187,6 +200,7 @@ public class Agency extends AbstractGraphNode implements Serializable {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Agency#getPhone()
 	 */
+	@JsonGetter("agency_phone")
 	public String getPhone() {
 		return phone;
 	}
@@ -195,6 +209,7 @@ public class Agency extends AbstractGraphNode implements Serializable {
 	 * @see me.transit.database.impl.Agency#setPhone(java.lang.String)
 	 */
 	@GTFSSetter(column="agency_phone")
+	@JsonSetter("agency_phone")
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
@@ -202,6 +217,7 @@ public class Agency extends AbstractGraphNode implements Serializable {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Agency#getId()
 	 */
+	@JsonGetter("agency_id")
 	public String getId() {
 		return id;
 	}
@@ -210,6 +226,7 @@ public class Agency extends AbstractGraphNode implements Serializable {
 	 * @see me.transit.database.impl.Agency#setId(java.lang.String)
 	 */
 	@GTFSSetter(column="agency_id")
+	@JsonSetter("agency_id")
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -261,6 +278,7 @@ public class Agency extends AbstractGraphNode implements Serializable {
 	 * @see me.transit.database.impl.Agency#setFareUrl(java.lang.String)
 	 */
 	@GTFSSetter(column="agency_fareUrl")
+	@JsonSetter("agency_fareUrl")
 	public void setFareUrl(String url) {
 		fareUrl = url;
 	}
@@ -268,6 +286,7 @@ public class Agency extends AbstractGraphNode implements Serializable {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Agency#getFareUrl()
 	 */
+	@JsonGetter("agency_fareUrl")
 	public String getFareUrl() {
 		return fareUrl;
 	}

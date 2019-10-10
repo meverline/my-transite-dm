@@ -22,6 +22,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
@@ -104,7 +106,7 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Trip#getUUID()
 	 */
-
+	@JsonGetter("uuid")
 	public long getUUID() {
 		return uuid;
 	}
@@ -112,7 +114,7 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Trip#setUUID(long)
 	 */
-
+	@JsonSetter("uuid")
 	public void setUUID(long uuid) {
 		this.uuid = uuid;
 	}
@@ -136,7 +138,7 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Trip#getId()
 	 */
-	@GTFSSetter(column="id")
+	@JsonGetter("trip_id")
 	public String getId() {
 		return id;
 	}
@@ -144,7 +146,8 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Trip#setId(java.lang.String)
 	 */
-
+	@GTFSSetter(column="id")
+	@JsonSetter("trip_id")
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -152,7 +155,7 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Trip#getVersion()
 	 */
-
+	@JsonGetter("version")
 	public String getVersion() {
 		return version;
 	}
@@ -161,6 +164,7 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	 * @see me.transit.database.impl.Trip#setVersion(java.lang.String)
 	 */
 	@GTFSSetter(column="version")
+	@JsonSetter("version")
 	public void setVersion(String version) {
 		this.version = version;
 	}
@@ -168,7 +172,7 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	/**
 	 * @return the service
 	 */
-
+	@JsonGetter("service_id")
 	public ServiceDate getService() {
 		return service;
 	}
@@ -177,6 +181,7 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	 * @param service the service to set
 	 */
 	@GTFSSetter(column="service_id")
+	@JsonSetter("service_id")
 	public void setService(ServiceDate service) {
 		this.service = service;
 	}
@@ -184,7 +189,7 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Trip#getHeadSign()
 	 */
-
+	@JsonGetter("trip_headsign")
 	public String getHeadSign() {
 		return headSign;
 	}
@@ -193,6 +198,7 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	 * @see me.transit.database.impl.Trip#setHeadSign(java.lang.String)
 	 */
 	@GTFSSetter(column="trip_headsign")
+	@JsonSetter("trip_headsign")
 	public void setHeadSign(String headSign) {
 		this.headSign = headSign;
 	}
@@ -200,7 +206,7 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Trip#getShortName()
 	 */
-
+	@JsonGetter("trip_shortname")
 	public String getShortName() {
 		return shortName;
 	}
@@ -209,6 +215,7 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	 * @see me.transit.database.impl.Trip#setShortName(java.lang.String)
 	 */
 	@GTFSSetter(column="trip_shortname")
+	@JsonSetter("trip_shortname")
 	public void setShortName(String shortName) {
 		this.shortName = shortName;
 	}
@@ -216,7 +223,7 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Trip#getDirectionId()
 	 */
-
+	@JsonGetter("direction_id")
 	public DirectionType getDirectionId() {
 		return directionId;
 	}
@@ -225,6 +232,7 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	 * @see me.transit.database.impl.Trip#setDirectionId(me.transit.database.impl.TripImpl.DirectionType)
 	 */
 	@GTFSSetter(column="direction_id")
+	@JsonSetter("direction_id")
 	public void setDirectionId(DirectionType directionId) {
 		this.directionId = directionId;
 	}
@@ -232,7 +240,7 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	/**
 	 * @return the shape
 	 */
-
+	@JsonSetter("shape_id")
 	public RouteGeometry getShape() {
 		return shape;
 	}
@@ -241,6 +249,7 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	 * @param shape the shape to set
 	 */
 	@GTFSSetter(column="shape_id")
+	@JsonSetter("shape_id")
 	public void setShape(RouteGeometry shape) {
 		this.shape = shape;
 	}
@@ -248,7 +257,7 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	/**
 	 * @return the stopTimes
 	 */
-
+	@JsonGetter("stop_times")
 	public List<StopTime> getStopTimes() {
 		return stopTimes;
 	}
@@ -256,7 +265,7 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	/**
 	 * @param stopTimes the stopTimes to set
 	 */
-
+	@JsonSetter("stop_times")
 	public void setStopTimes(List<StopTime> stopTimes) {
 		this.stopTimes = stopTimes;
 	}

@@ -12,6 +12,8 @@ import me.transit.annotation.GTFSFileModel;
 import me.transit.annotation.GTFSSetter;
 import me.transit.database.StopTime;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
@@ -66,6 +68,7 @@ public class StopTime implements CSVFieldType, IDocument {
 	/**
 	 * @return the TripId
 	 */
+	@JsonGetter("trip_id")
 	public String getTripId()
 	{
 		return tripId;
@@ -75,6 +78,7 @@ public class StopTime implements CSVFieldType, IDocument {
 	 * @param arrivalTime the TripId to set
 	 */
 	@GTFSSetter(column="trip_id")
+	@JsonSetter("trip_id")
 	public void setTripId(String id)
 	{
 		tripId = id;
@@ -83,6 +87,7 @@ public class StopTime implements CSVFieldType, IDocument {
 	/**
 	 * @return the arrivalTime
 	 */
+	@JsonGetter("arrival_time")
 	public List<Long> getArrivalTime() {
 		return arrivalTime;
 	}
@@ -91,6 +96,7 @@ public class StopTime implements CSVFieldType, IDocument {
 	 * @param arrivalTime the arrivalTime to set
 	 */
 	@GTFSSetter(column="arrival_time")
+	@JsonSetter("arrival_time")
 	public void setArrivalTime(List<Long> arrivalTime) {
 		this.arrivalTime = arrivalTime;
 	}
@@ -107,13 +113,7 @@ public class StopTime implements CSVFieldType, IDocument {
 	/**
 	 * @return the stopId
 	 */
-	//public TransitStop getStop(Agency agency) {
-	//	return LoadUtils.getStop(agency, getStopId());
-	//}
-
-	/**
-	 * @return the stopId
-	 */
+	@JsonGetter("stop_id")
 	public String getStopId() {
 		return stopId;
 	}
@@ -122,6 +122,7 @@ public class StopTime implements CSVFieldType, IDocument {
 	 * @param stopId the stopId to set
 	 */
 	@GTFSSetter(column="stop_id")
+	@JsonSetter("stop_id")
 	public void setStopId(String stopId) {
 		this.stopId = stopId;
 	}
@@ -129,6 +130,7 @@ public class StopTime implements CSVFieldType, IDocument {
 	/**
 	 * @return the stopId
 	 */
+	@JsonGetter("location")
 	public Double[] getLocation() {
 		return this.location;
 	}
@@ -137,6 +139,7 @@ public class StopTime implements CSVFieldType, IDocument {
 	 * @param stopId the stopId to set
 	 */
 	@GTFSSetter(column="location")
+	@JsonSetter("location")
 	public void setLocation(Double[] stopId) {
 		this.location = stopId;
 	}
@@ -144,6 +147,7 @@ public class StopTime implements CSVFieldType, IDocument {
 	/**
 	 * @return the stopId
 	 */
+	@JsonGetter("stop_name")
 	public String getStopName() {
 		return this.stopName;
 	}
@@ -152,6 +156,7 @@ public class StopTime implements CSVFieldType, IDocument {
 	 * @param stopId the stopId to set
 	 */
 	@GTFSSetter(column="stop_name")
+	@JsonSetter("stop_name")
 	public void setStopName(String name)
 	{
 		this.stopName = name;
@@ -160,6 +165,7 @@ public class StopTime implements CSVFieldType, IDocument {
 	/**
 	 * @return the stopHeadSign
 	 */
+	@JsonGetter("stop_head_sign")
 	public String getStopHeadSign() {
 		return stopHeadSign;
 	}
@@ -168,6 +174,7 @@ public class StopTime implements CSVFieldType, IDocument {
 	 * @param stopHeadSign the stopHeadSign to set
 	 */
 	@GTFSSetter(column="stop_head_sign")
+	@JsonSetter("stop_head_sign")
 	public void setStopHeadSign(String stopHeadSign) {
 		this.stopHeadSign = stopHeadSign;
 	}
@@ -175,6 +182,7 @@ public class StopTime implements CSVFieldType, IDocument {
 	/**
 	 * @return the pickupType
 	 */
+	@JsonGetter("pickup_type")
 	public PickupType getPickupType() {
 		return pickupType;
 	}
@@ -183,6 +191,7 @@ public class StopTime implements CSVFieldType, IDocument {
 	 * @param pickupType the pickupType to set
 	 */
 	@GTFSSetter(column="pickup_type")
+	@JsonSetter("pickup_type")
 	public void setPickupType(PickupType pickupType) {
 		this.pickupType = pickupType;
 	}
@@ -190,6 +199,7 @@ public class StopTime implements CSVFieldType, IDocument {
 	/**
 	 * @return the dropOffType
 	 */
+	@JsonGetter("drop_off_type")
 	public PickupType getDropOffType() {
 		return dropOffType;
 	}
@@ -198,6 +208,7 @@ public class StopTime implements CSVFieldType, IDocument {
 	 * @param dropOffType the dropOffType to set
 	 */
 	@GTFSSetter(column="drop_off_type")
+	@JsonSetter("drop_off_type")
 	public void setDropOffType(PickupType dropOffType) {
 		this.dropOffType = dropOffType;
 	}
