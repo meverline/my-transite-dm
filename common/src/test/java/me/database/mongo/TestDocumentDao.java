@@ -25,6 +25,7 @@ import com.mongodb.DBCollection;
 import com.mongodb.Mongo;
 
 
+@SuppressWarnings("deprecation")
 public class TestDocumentDao extends EasyMockSupport{
 
     @Rule
@@ -39,7 +40,7 @@ public class TestDocumentDao extends EasyMockSupport{
 	@Mock(type=MockType.NICE)
 	private DBCollection collection;
 	
-	@SuppressWarnings("deprecation")
+	
 	private void setUpMock() {
 		expect(writer.getDB(EasyMock.anyString())).andReturn(dbmock).anyTimes();
 		expect(dbmock.getCollection(EasyMock.anyString())).andReturn(collection).anyTimes();

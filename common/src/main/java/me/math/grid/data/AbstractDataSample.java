@@ -6,9 +6,9 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
-//@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
-//@JsonSubTypes({ @Type(value = DensityEstimateDataSample.class, name = "DensityEstimateDataSample"),
-//		@Type(value = STINGDataSample.class, name = "STINGDataSample") })
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
+@JsonSubTypes({ @Type(value = DensityEstimateDataSample.class, name = "DensityEstimateDataSample"),
+		@Type(value = STINGDataSample.class, name = "STINGDataSample") })
 public abstract class AbstractDataSample {
 
 	private double interpolationValue = 0.0;
