@@ -19,19 +19,18 @@ package me.math;
 
 import java.io.Serializable;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.Point;
 
+@JsonRootName(value="Vertex")
 @SuppressWarnings("serial")
-@XStreamAlias("Coordinate")
 public class Vertex implements Serializable {
 
-	@XStreamAlias("Latitude")
+
 	private double lat_;
-	
-	@XStreamAlias("Longitude")
 	private double lon_;
 
 	public Vertex()
@@ -68,18 +67,22 @@ public class Vertex implements Serializable {
 		return EarthConstants.toRadians(lon_);
 	}
 
+	@JsonGetter("latitude_degress")
 	public double getLatitudeDegress() {
 		return lat_;
 	}
 
+	@JsonGetter("longitude_degress")
 	public double getLongitudeDegress() {
 		return lon_;
 	}
 
+	@JsonGetter("latitude_degress")
 	public void setLatitudeDegress(double value) {
 		lat_ = value;
 	}
 
+	@JsonGetter("longitude_degress")
 	public void setLongitudeDegress(double value) {
 		lon_ = value;
 	}

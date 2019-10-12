@@ -3,27 +3,20 @@ package me.utils;
 import java.awt.Color;
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
-@XStreamAlias("GradientParameters")
+@JsonRootName(value = "GradientParameters")
 public class GradientParameters {
 	
-	@XStreamOmitField
 	private Color startColor = Color.WHITE;
-	@XStreamOmitField
 	private Color endColor = Color.BLACK;
-	@XStreamAlias("startColorString")
 	private String startColorString = "White";
-	@XStreamAlias("endColorString")
 	private String endColorString = "Black";
-	@XStreamAlias("startPercential")
 	private double startPercential = 0.1;
-	@XStreamAlias("range")
 	private double range = 99.9;
-	@XStreamAlias("steps")
 	private int steps = 10;
-	@XStreamAlias("alphaValue")
 	private int alphaValue = 85;
 	
 	
@@ -63,6 +56,7 @@ public class GradientParameters {
 	/**
 	 * @return the startColorString
 	 */
+	@JsonGetter("start_color")
 	public String getStartColorString() {
 		return startColorString;
 	}
@@ -70,6 +64,7 @@ public class GradientParameters {
 	/**
 	 * @param startColorString the startColorString to set
 	 */
+	@JsonSetter("start_color")
 	public void setStartColorString(String startColorString) {
 		this.startColorString = startColorString;
 		if ( startColorString.startsWith("#")) {
@@ -82,6 +77,7 @@ public class GradientParameters {
 	/**
 	 * @return the endColorString
 	 */
+	@JsonGetter("end_color")
 	public String getEndColorString() {
 		return endColorString;
 	}
@@ -89,6 +85,7 @@ public class GradientParameters {
 	/**
 	 * @param endColorString the endColorString to set
 	 */
+	@JsonSetter("end_color")
 	public void setEndColorString(String endColorString) {
 		this.endColorString = endColorString;
 		if ( endColorString.startsWith("#")) {
@@ -102,6 +99,7 @@ public class GradientParameters {
 	 * 
 	 * @return
 	 */
+	@JsonGetter("alpha_value")
 	public int getAlphaValue() {
 		return this.alphaValue;
 	}
@@ -110,6 +108,7 @@ public class GradientParameters {
 	 * 
 	 * @param alphaValue
 	 */
+	@JsonSetter("alpha_value")
 	public void setAlphaValue(int alphaValue) {
 		this.alphaValue = alphaValue;
 	}
@@ -118,6 +117,7 @@ public class GradientParameters {
 	 * 
 	 * @return
 	 */
+	@JsonGetter("steps")
 	public int getSteps_() {
 		return this.steps;
 	}
@@ -126,6 +126,7 @@ public class GradientParameters {
      * 
      * @param steps
      */
+	@JsonSetter("steps")
 	public void setSteps_(int steps) {
 		this.steps = steps;
 	}
@@ -166,6 +167,7 @@ public class GradientParameters {
 	 * 
 	 * @return
 	 */
+	@JsonGetter("start_percential")
 	public double getStartPercential() {
 		return this.startPercential;
 	}
@@ -174,6 +176,7 @@ public class GradientParameters {
 	 * 
 	 * @param startPercential
 	 */
+	@JsonSetter("start_percential")
 	public void setStartPercential(double startPercential) {
 		this.startPercential = startPercential;
 	}
@@ -182,6 +185,7 @@ public class GradientParameters {
 	 * 
 	 * @return
 	 */
+	@JsonGetter("range")
 	public double getRange() {
 		return this.range;
 	}
@@ -190,6 +194,7 @@ public class GradientParameters {
 	 * 
 	 * @param range
 	 */
+	@JsonSetter("range")
 	public void setRange(double range) {
 		this.range = range;
 	}

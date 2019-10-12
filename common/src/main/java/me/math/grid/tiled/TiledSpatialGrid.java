@@ -9,21 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.math.Vertex;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import com.vividsolutions.jts.geom.Point;
 
-@XStreamAlias("TiledDatabaseGrid")
+
 public class TiledSpatialGrid extends AbstractTiledSpatialGrid {
 
-	@XStreamOmitField()
-	private Log logger = LogFactory.getLog(TiledSpatialGrid.class);
-
-	@XStreamAlias("grid")
 	private List<SpatialTile> grid_ = new ArrayList<SpatialTile>();
 	
 	/**

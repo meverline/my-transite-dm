@@ -16,25 +16,19 @@
 
 package me.math.grid.array;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
+
 import me.math.Vertex;
 import me.math.grid.AbstractSpatialGridPoint;
 import me.math.kdtree.INode;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
-@XStreamAlias("UniformSpatialGridPoint")
 public class SpatialGridPoint extends AbstractSpatialGridPoint{
 
-	@XStreamAlias("corner")
 	private Vertex corner_ = null;
-	@XStreamOmitField
 	private UniformSpatialGrid grid_ = null;
-	@XStreamOmitField
 	private INode left_ = null;
-	@XStreamOmitField
 	private INode right_ = null;
-	@XStreamOmitField
 	private INode parent_ = null;
 	
 	/**
@@ -67,6 +61,7 @@ public class SpatialGridPoint extends AbstractSpatialGridPoint{
 	 * 
 	 * @return
 	 */
+	@JsonGetter("corner")
 	public Vertex getVertex()
 	{
 		return new Vertex(corner_);
@@ -75,6 +70,7 @@ public class SpatialGridPoint extends AbstractSpatialGridPoint{
 	/**
 	 * @param corner_ the corner_ to set
 	 */
+	@JsonSetter("corner")
 	protected void setCorner(Vertex corner_) {
 		this.corner_ = corner_;
 	}

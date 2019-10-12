@@ -1,15 +1,15 @@
 package me.datamining.mapreduce;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 import me.math.Vertex;
 
-@XStreamAlias("DataResult")
+
 public class DataResult {
 
-	@XStreamAlias("point")
+
 	private Vertex point = null;
-	@XStreamAlias("metric")
 	private double metric = 0;
 	
 	/**
@@ -40,6 +40,7 @@ public class DataResult {
 	/**
 	 * @return the point
 	 */
+	@JsonGetter("point")
 	public Vertex getPoint() {
 		return point;
 	}
@@ -47,6 +48,7 @@ public class DataResult {
 	/**
 	 * @param point the point to set
 	 */
+	@JsonSetter("point")
 	public void setPoint(Vertex point) {
 		this.point = point;
 	}
@@ -54,6 +56,7 @@ public class DataResult {
 	/**
 	 * @return the metric
 	 */
+	@JsonGetter("metric")
 	public double getMetric() {
 		return metric;
 	}
@@ -61,6 +64,7 @@ public class DataResult {
 	/**
 	 * @param metric the metric to set
 	 */
+	@JsonSetter("metric")
 	public void setMetric(double metric) {
 		this.metric = metric;
 	}

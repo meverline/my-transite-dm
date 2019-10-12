@@ -17,6 +17,14 @@ package me.datamining.bandwidth;
 
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
+@JsonSubTypes({ @Type(value = MesureOfSpread.class, name = "MesureOfSpread"),
+		@Type(value = ScottsRule.class, name = "ScottsRule"),
+		@Type(value = SlivermanRule.class, name = "SlivermanRule") })
 public interface IBandwidth {
 
   /**

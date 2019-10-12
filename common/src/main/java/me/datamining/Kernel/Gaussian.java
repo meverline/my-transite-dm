@@ -16,6 +16,9 @@
 
 package me.datamining.Kernel;
 
+import com.fasterxml.jackson.annotation.JsonRootName;
+
+@JsonRootName(value = "Gaussian")
 public class Gaussian implements IDensityKernel {
 	
 	/*

@@ -6,9 +6,11 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.PrintStream;
 import java.net.UnknownHostException;
 import java.sql.SQLException;
@@ -42,7 +44,7 @@ import org.apache.commons.logging.LogFactory;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.thoughtworks.xstream.XStream;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.Point;
@@ -51,6 +53,9 @@ public class TestTiledDatabaseGrid {
 
 	public static Log log = LogFactory.getLog(TestTiledDatabaseGrid.class);
 
+	/**
+	 * 
+	 */
 	@Ignore
 	@Test
 	public void test() {
@@ -128,15 +133,12 @@ public class TestTiledDatabaseGrid {
 
 	/**
 	 * 
+	 * @param prefix
+	 * @param dir
+	 * @param iv
 	 * @param tile
-	 * @return
+	 * @throws Exception
 	 */
-	private SpatialTile cloneTile(XStream xstream, SpatialTile tile) {
-		String str = xstream.toXML(tile);
-		SpatialTile clone = (SpatialTile) xstream.fromXML(str);
-		return clone;
-	}
-
 	protected void dump(String prefix, File dir, boolean iv, SpatialTile tile) throws Exception {
 		String xls = prefix + getClass().getSimpleName() + "_" + tile.getIndex() + ".csv";
 		File write = new File(dir, xls);
@@ -145,12 +147,44 @@ public class TestTiledDatabaseGrid {
 		tile.toCSV(csvStream, iv);
 		csvStream.close();
 	}
+	
+	/**
+	 * 
+	 * @param master
+	 * @param objectMapper
+	 * @return
+	 */
+	private SpatialTile cloneTile(SpatialTile master, ObjectMapper objectMapper)
+	{
+		SpatialTile rtn = null;
+		
+		try {
+			
+			File tempFile = File.createTempFile("master", "spatialTile");
+			
+			objectMapper.writeValue(tempFile, master);
+			
+			BufferedReader in = new BufferedReader(new FileReader(tempFile));
+			StringBuilder builder = new StringBuilder();
+			while(in.ready()) {
+				builder.append(in.readLine());
+			}
+			in.close();
 
+			rtn = objectMapper.readValue(builder.toString(), SpatialTile.class);  
+						
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return rtn;
+	}
+
+	/**
+	 * 
+	 */
 	@Ignore
 	@Test
 	public void testDatabaseGrid() {
-
-		XStream xstream = new XStream();
 
 		DaoBeanFactory.initilize();
 		TransiteStopDao dao = TransiteStopDao.class.cast(DaoBeanFactory.create().getDaoBean(TransiteStopDao.class));
@@ -229,12 +263,17 @@ public class TestTiledDatabaseGrid {
 			kde.setN(output.getN());
 
 			int ndx = 0;
+			
+			
+			ObjectMapper objectMapper = new ObjectMapper();
+			
+			
 			for (SpatialTile master : grid.getTiles()) {
 
 				FileInputStream input = new FileInputStream(read);
 
 				List<SpatialTile> subSum = new ArrayList<SpatialTile>();
-				SpatialTile clone = this.cloneTile(xstream, master);
+				SpatialTile clone = this.cloneTile(master, objectMapper);
 				kde.kernalDensityEstimate(clone, input);
 				input.close();
 				subSum.add(clone);

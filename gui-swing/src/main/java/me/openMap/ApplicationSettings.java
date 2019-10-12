@@ -19,55 +19,43 @@ package me.openMap;
 import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
+
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import me.datamining.Kernel.IDensityKernel;
 import me.datamining.bandwidth.IBandwidth;
 import me.utils.ColorGradient;
 import me.utils.GradientParameters;
 
-import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
-
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
-@XStreamAlias("ApplicationSettings")
+@JsonRootName(value = "ApplicationSettings")
 public class ApplicationSettings {
 	
-	@XStreamOmitField
+	
     private static ApplicationSettings theOne = null;
-
 	
 	private HashMap<String,Color> agencyColorMap = new HashMap<String,Color>();
     private List<GradientParameters> gradParms = new ArrayList<GradientParameters>();
  
-    @XStreamAlias("addRangeColor")
+   
     private Color addRangeColor = Color.blue;
-    @XStreamAlias("addAlphaValue")
     private int addAlphaValue = 20;
-    @XStreamAlias("clusterHiRange")
     private int clusterHiRange = Integer.MAX_VALUE;
-    @XStreamAlias("clusterLowRange")
     private int clusterLowRange = 0;
-    @XStreamAlias("clusterConfidence")
     private double clusterConfidence = 0.5;
-    @XStreamAlias("clusterDensity")
     private double clusterDensity = 1;
-    @XStreamAlias("xbandWidth")
     private IBandwidth xbandWidth = null;
-    @XStreamAlias("ybandWidth")
     private IBandwidth ybandWidth = null;
-    @XStreamAlias("denstiyKernal")
     private IDensityKernel denstiyKernal = null;
     
-	@XStreamOmitField
     private List<ColorGradient> gradients = new ArrayList<ColorGradient>();
     
     /**
@@ -150,6 +138,7 @@ public class ApplicationSettings {
 	/**
 	 * @return the gradParms
 	 */
+	@JsonGetter("gradient_parameters")
 	public List<GradientParameters> getGradParms() {
 		return gradParms;
 	}
@@ -157,6 +146,7 @@ public class ApplicationSettings {
 	/**
 	 * @param gradParms the gradParms to set
 	 */
+	@JsonSetter("gradient_parameters")
 	public void setGradParms(List<GradientParameters> gradParms) {
 		this.gradParms = gradParms;
 	}
@@ -164,6 +154,7 @@ public class ApplicationSettings {
 	/**
 	 * @return the addRangeColor
 	 */
+	@JsonGetter("ADD_range_color")
 	public Color getADDRangeColor() {
 		return addRangeColor;
 	}
@@ -171,6 +162,7 @@ public class ApplicationSettings {
 	/**
 	 * @param addRangeColor the addRangeColor to set
 	 */
+	@JsonSetter("ADD_range_color")
 	public void setADDRangeColor(Color addRangeColor) {
 		this.addRangeColor = addRangeColor;
 	}
@@ -178,6 +170,7 @@ public class ApplicationSettings {
 	/**
 	 * @return the addAlphaValue
 	 */
+	@JsonGetter("ADD_alpha_value")
 	public int getADDAlphaValue() {
 		return addAlphaValue;
 	}
@@ -185,6 +178,7 @@ public class ApplicationSettings {
 	/**
 	 * @param addAlphaValue the addAlphaValue to set
 	 */
+	@JsonSetter("ADD_alpha_value")
 	public void setADDAlphaValue(int addAlphaValue) {
 		this.addAlphaValue = addAlphaValue;
 	}
@@ -192,6 +186,7 @@ public class ApplicationSettings {
 	/**
 	 * @return the clusterHiRange
 	 */
+	@JsonGetter("cluster_hi_range")
 	public int getClusterHiRange() {
 		return clusterHiRange;
 	}
@@ -199,6 +194,7 @@ public class ApplicationSettings {
 	/**
 	 * @param clusterHiRange the clusterHiRange to set
 	 */
+	@JsonSetter("cluster_hi_range")
 	public void setClusterHiRange(int clusterHiRange) {
 		this.clusterHiRange = clusterHiRange;
 	}
@@ -206,6 +202,7 @@ public class ApplicationSettings {
 	/**
 	 * @return the clusterLowRange
 	 */
+	@JsonGetter("cluster_low_range")
 	public int getClusterLowRange() {
 		return clusterLowRange;
 	}
@@ -213,6 +210,7 @@ public class ApplicationSettings {
 	/**
 	 * @param clusterLowRange the clusterLowRange to set
 	 */
+	@JsonSetter("cluster_low_range")
 	public void setClusterLowRange(int clusterLowRange) {
 		this.clusterLowRange = clusterLowRange;
 	}
@@ -220,6 +218,7 @@ public class ApplicationSettings {
 	/**
 	 * @return the clusterConfidence
 	 */
+	@JsonGetter("cluster_confidence")
 	public double getClusterConfidence() {
 		return clusterConfidence;
 	}
@@ -227,6 +226,7 @@ public class ApplicationSettings {
 	/**
 	 * @param clusterConfidence the clusterConfidence to set
 	 */
+	@JsonSetter("cluster_confidence")
 	public void setClusterConfidence(double clusterConfidence) {
 		this.clusterConfidence = clusterConfidence;
 	}
@@ -234,6 +234,7 @@ public class ApplicationSettings {
 	/**
 	 * @return the clusterDensity
 	 */
+	@JsonGetter("cluster_density")
 	public double getClusterDensity() {
 		return clusterDensity;
 	}
@@ -241,6 +242,7 @@ public class ApplicationSettings {
 	/**
 	 * @param clusterDensity the clusterDensity to set
 	 */
+	@JsonSetter("cluster_density")
 	public void setClusterDensity(double clusterDensity) {
 		this.clusterDensity = clusterDensity;
 	}
@@ -248,6 +250,7 @@ public class ApplicationSettings {
 	/**
 	 * @return the xbandWidth
 	 */
+	@JsonGetter("x_band_width")
 	public IBandwidth getXbandWidth() {
 		return xbandWidth;
 	}
@@ -255,6 +258,7 @@ public class ApplicationSettings {
 	/**
 	 * @param xbandWidth the xbandWidth to set
 	 */
+	@JsonSetter("x_band_width")
 	public void setXbandWidth(IBandwidth xbandWidth) {
 		this.xbandWidth = xbandWidth;
 	}
@@ -262,6 +266,7 @@ public class ApplicationSettings {
 	/**
 	 * @return the ybandWidth
 	 */
+	@JsonGetter("y_band_width")
 	public IBandwidth getYbandWidth() {
 		return ybandWidth;
 	}
@@ -269,6 +274,7 @@ public class ApplicationSettings {
 	/**
 	 * @param ybandWidth the ybandWidth to set
 	 */
+	@JsonSetter("y_band_width")
 	public void setYbandWidth(IBandwidth ybandWidth) {
 		this.ybandWidth = ybandWidth;
 	}
@@ -276,6 +282,7 @@ public class ApplicationSettings {
 	/**
 	 * @return the denstiyKernal
 	 */
+	@JsonGetter("denstiy_kernal")
 	public IDensityKernel getDenstiyKernal() {
 		return denstiyKernal;
 	}
@@ -283,6 +290,7 @@ public class ApplicationSettings {
 	/**
 	 * @param denstiyKernal the denstiyKernal to set
 	 */
+	@JsonSetter("denstiy_kernal")
 	public void setDenstiyKernal(IDensityKernel denstiyKernal) {
 		this.denstiyKernal = denstiyKernal;
 	}
@@ -295,20 +303,15 @@ public class ApplicationSettings {
 		fileName.append(File.separator);
 		fileName.append(".");
 		fileName.append(getClass().getSimpleName());
-		fileName.append(".xml");
+		fileName.append(".json");
 		
 		System.out.println("write: " + fileName.toString());
 		try {
-			PrintStream ps = new PrintStream(new FileOutputStream(fileName.toString()));
-			XStream stream = new XStream();
 			
-			stream.processAnnotations(getClass());
-			stream.processAnnotations(GradientParameters.class);
+			ObjectMapper objectMapper = new ObjectMapper();
+			objectMapper.writeValue(new File(fileName.toString()), this);
 			
-			ps.println(stream.toXML(this));
-			ps.close();
-			
-		} catch (FileNotFoundException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -322,7 +325,7 @@ public class ApplicationSettings {
 		fileName.append(File.separator);
 		fileName.append(".");
 		fileName.append(ApplicationSettings.class.getSimpleName());
-		fileName.append(".xml");
+		fileName.append(".json");
 		
 		File fp = new File(fileName.toString());
 		if ( ! fp.exists() ) { return rtn; }
@@ -334,15 +337,10 @@ public class ApplicationSettings {
 				builder.append(in.readLine());
 			}
 			in.close();
-			XStream stream = new XStream();
-			
-			stream.processAnnotations(ApplicationSettings.class);
-			stream.processAnnotations(GradientParameters.class);
-			
-			Object obj = stream.fromXML(builder.toString());
-			
-			rtn = ApplicationSettings.class.cast(obj);
-			
+
+			ObjectMapper objectMapper = new ObjectMapper();
+			rtn = objectMapper.readValue(builder.toString(), ApplicationSettings.class);  
+						
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 

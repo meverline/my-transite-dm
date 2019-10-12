@@ -18,6 +18,10 @@ package me.datamining.bandwidth;
 
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
+
+
 public class MesureOfSpread implements IBandwidth {
 
 	private double q1_ = 25.0;
@@ -43,6 +47,7 @@ public class MesureOfSpread implements IBandwidth {
 	 * 
 	 * @param value
 	 */
+	@JsonSetter("quartile_low")
 	public void setQuartileLow(double value)
 	{
 		q1_ = value;
@@ -50,11 +55,28 @@ public class MesureOfSpread implements IBandwidth {
 	
 	/**
 	 * 
+	 */
+	@JsonGetter("quartile_low")
+	public double getQuartileLow() {
+		return q1_;
+	}
+	
+	/**
+	 * 
 	 * @param value
 	 */
+	@JsonSetter("quartile_high")
 	public void setQuartileHigh(double value)
 	{
 		q3_ = value;
+	}
+	
+	/**
+	 * 
+	 */
+	@JsonGetter("quartile_high")
+	public double getQuartileHigh() {
+		return q3_;
 	}
 
 	/*

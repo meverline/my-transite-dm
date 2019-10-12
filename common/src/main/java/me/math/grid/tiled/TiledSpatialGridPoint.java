@@ -5,28 +5,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
+
 import me.database.mongo.IDocument;
 import me.math.Vertex;
 import me.math.grid.AbstractSpatialGridPoint;
 import me.math.kdtree.INode;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
-@XStreamAlias("TiledSpatialGridPoint")
 public class TiledSpatialGridPoint extends AbstractSpatialGridPoint implements INode, IGridDocument {
 
-	@XStreamAlias("tileIndex")
 	private int tileIndex_;
-	@XStreamAlias("corner")
 	private Vertex corner_ = null;
-	@XStreamAlias("left")
 	private int left_ = -1;
-	@XStreamAlias("right")
 	private int right_ = -1;
-	@XStreamAlias("parent")
 	private int parent_ = -1;
-	@XStreamOmitField
 	private transient SpatialTile grid_ = null;
 	
 	public TiledSpatialGridPoint()
@@ -46,6 +40,7 @@ public class TiledSpatialGridPoint extends AbstractSpatialGridPoint implements I
 	 * 
 	 * @return
 	 */
+	@JsonGetter("vertex")
 	public Vertex getVertex()
 	{
 		return this.corner_;
@@ -54,7 +49,8 @@ public class TiledSpatialGridPoint extends AbstractSpatialGridPoint implements I
 	/**
 	 * @param corner_ the corner_ to set
 	 */
-	protected void setCorner(Vertex corner) {
+	@JsonSetter("vertex")
+	public void setCorner(Vertex corner) {
 		this.corner_ = corner;
 	}
 	
@@ -109,6 +105,7 @@ public class TiledSpatialGridPoint extends AbstractSpatialGridPoint implements I
 	/**
 	 * @return the tileIndex
 	 */
+	@JsonGetter("tile_index")
 	public int getTileIndex() {
 		return tileIndex_;
 	}
@@ -116,6 +113,7 @@ public class TiledSpatialGridPoint extends AbstractSpatialGridPoint implements I
 	/**
 	 * @param tileIndex the tileIndex to set
 	 */
+	@JsonSetter("tile_index")
 	public void setTileIndex(int tileIndex) {
 		this.tileIndex_ = tileIndex;
 	}
@@ -124,24 +122,46 @@ public class TiledSpatialGridPoint extends AbstractSpatialGridPoint implements I
 	 * 
 	 * @param node
 	 */
+	@JsonSetter("left_node")
 	public void setLeftNode(int node) {
 		this.left_ = node;
 	}
 	
-	/**
-	 * 
-	 * @param node
-	 */
-	public void setRightNode(int node) {
-		this.right_ = node;
+	@JsonGetter("left_node")
+	public int getLeftNode() {
+		return this.left_;
 	}
 	
 	/**
 	 * 
 	 * @param node
 	 */
+	@JsonSetter("right_node")
+	public void setRightNode(int node) {
+		this.right_ = node;
+	}
+	
+	@JsonGetter("right_node")
+	public int getRightNode() {
+		return this.right_;
+	}
+	
+	/**
+	 * 
+	 * @param node
+	 */
+	@JsonSetter("parent_node")
 	public void setParentNode(int node) {
 		this.parent_ = node;
+	}
+	
+	/**
+	 * 
+	 * @param node
+	 */
+	@JsonGetter("parent_node")
+	public int getParentNode() {
+		return this.parent_;
 	}
 
 	public Map<String, Object> toDocument() {

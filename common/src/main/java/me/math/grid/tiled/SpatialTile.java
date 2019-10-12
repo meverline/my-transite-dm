@@ -21,31 +21,23 @@ import me.math.kdtree.INodeCreator;
 import me.math.kdtree.KDTree;
 import me.math.kdtree.MinBoundingRectangle;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamImplicit;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import com.vividsolutions.jts.geom.Polygon;
 
-@XStreamAlias("SpatialTile")
 public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, IGridDocument {
 	
 	public static final String ROW_OFFSET = "rowOffset";
 	public static final String COL_OFFSET = "colOffset";
 	
-	@XStreamAlias(IGridDocument.TILE_INDEX)
+
 	private int tileIndex = -1;
-	@XStreamAlias(IGridDocument.MBR)
 	private MinBoundingRectangle  mbr_ = null;
-	@XStreamAlias(IGridDocument.INDEX)
 	private int index_ = 0;
-	@XStreamAlias("root")
 	private int root_ = -1;
-	@XStreamAlias(SpatialTile.ROW_OFFSET)
 	private int rowOffset_ = 0;
-	@XStreamAlias(SpatialTile.COL_OFFSET)
 	private int colOffSet_ = 0;
-	@XStreamAlias("gridSizeInMeters")
 	private double gridSizeInMeters_ = 0;
-	@XStreamImplicit(itemFieldName=IGridDocument.GRID)
 	private List<TiledSpatialGridPoint> grid_ = new ArrayList<TiledSpatialGridPoint>();
 	
 	/**
@@ -114,6 +106,7 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, IG
 	/**
 	 * @return the rowOffset_
 	 */
+	@JsonGetter("row_offset")
 	public int getRowOffset() {
 		return rowOffset_;
 	}
@@ -121,6 +114,7 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, IG
 	/**
 	 * @param rowOffset_ the rowOffset_ to set
 	 */
+	@JsonSetter("row_offset")
 	public void setRowOffset(int rowOffset) {
 		this.rowOffset_ = rowOffset;
 	}
@@ -128,6 +122,7 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, IG
 	/**
 	 * @return the colOffSet_
 	 */
+	@JsonGetter("col_offset")
 	public int getColOffSet() {
 		return colOffSet_;
 	}
@@ -135,6 +130,7 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, IG
 	/**
 	 * @param colOffSet_ the colOffSet_ to set
 	 */
+	@JsonSetter("col_offset")
 	public void setColOffSet(int colOffSet) {
 		this.colOffSet_ = colOffSet;
 	}
@@ -198,6 +194,7 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, IG
 	/**
 	 * @return the root_
 	 */
+	@JsonGetter("root")
 	public int getRoot() {
 		return root_;
 	}
@@ -205,6 +202,7 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, IG
 	/**
 	 * @param root_ the root_ to set
 	 */
+	@JsonSetter("root")
 	public void setRoot(int root) {
 		this.root_ = root;
 	}
@@ -212,6 +210,7 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, IG
 	/**
 	 * @return the grid_
 	 */
+	@JsonGetter("grid")
 	public List<TiledSpatialGridPoint> getGrid() {
 		return grid_;
 	}
@@ -226,6 +225,7 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, IG
 	/**
 	 * @return the index_
 	 */
+	@JsonGetter("index")
 	public int getIndex() {
 		return index_;
 	}
@@ -233,6 +233,7 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, IG
 	/**
 	 * @param index_ the index_ to set
 	 */
+	@JsonSetter("index")
 	public void setIndex(int index_) {
 		this.index_ = index_;
 	}
@@ -240,6 +241,7 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, IG
 	/**
 	 * @return the tileIndex
 	 */
+	@JsonGetter("tile_index")
 	public int getTileIndex() {
 		return tileIndex;
 	}
@@ -247,6 +249,7 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, IG
 	/**
 	 * @param tileIndex the tileIndex to set
 	 */
+	@JsonSetter("tile_index")
 	public void setTileIndex(int tileIndex) {
 		this.tileIndex = tileIndex;
 	}
@@ -254,6 +257,7 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, IG
 	/**
 	 * @return the mbr_
 	 */
+	@JsonGetter("min_bounding_rectangle")
 	public MinBoundingRectangle getMbr() {
 		return mbr_;
 	}
@@ -261,6 +265,7 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, IG
 	/**
 	 * @param mbr_ the mbr_ to set
 	 */
+	@JsonSetter("min_bounding_rectangle")
 	public void setMbr(MinBoundingRectangle mbr_) {
 		this.mbr_ = mbr_;
 	}
@@ -311,6 +316,7 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, IG
 	 * 
 	 * @param node
 	 */
+	@JsonGetter("root_node")
 	public void setRootNode(int node) {
 		this.root_ = node;
 	}
@@ -355,6 +361,7 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, IG
 	/**
 	 * @return the gridSizeInMeters_
 	 */
+	@JsonGetter("grid_size_in_meters")
 	public double getGridSizeInMeters() {
 		return gridSizeInMeters_;
 	}

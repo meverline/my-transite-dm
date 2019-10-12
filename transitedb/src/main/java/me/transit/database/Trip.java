@@ -24,24 +24,18 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamConverter;
-import com.thoughtworks.xstream.annotations.XStreamImplicit;
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import me.database.mongo.IDocument;
-import me.database.neo4j.FIELD;
 import me.database.neo4j.AbstractGraphNode;
+import me.database.neo4j.FIELD;
 import me.transit.annotation.GTFSFileModel;
 import me.transit.annotation.GTFSSetter;
-import me.transit.database.Trip;
 
 @Entity
 @Table(name="tran_trip")
 @Inheritance
 @DiscriminatorColumn(name = "trip_type")
 @DiscriminatorValue("TripImpl")
-@XStreamAlias("Trip")
 @GTFSFileModel(filename="trips.txt")
 public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	
@@ -54,13 +48,11 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 
 	public enum DirectionType { OUT_BOUND, IN_BOUND, UNKOWN };
 	
-	@XStreamOmitField
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@Column(name = "UUID", nullable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@XStreamAlias("id")
 	private long uuid = -1;
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -69,38 +61,29 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	private Agency agency = null;
 
 	@Column(name = "ID", nullable = false)
-	@XStreamOmitField
 	private String id = null;
 
 	@Column(name = "VERSION")
-	@XStreamAlias("version")
 	private String version = "0.5";
 	
 	@ManyToOne()
 	@JoinColumn(name="SERVICE_DATE_UUID", nullable=false, updatable=false)
-	@XStreamAlias(Trip.SERVICE)
 	private ServiceDate service = null;
 	
 	@Column(name="HEAD_SIGN")  
-	@XStreamAlias(Trip.HEADSIGN)
 	private String headSign = "";
 	
 	@Column(name="NAME")  
-	@XStreamAlias(Trip.SHORTNAME)
 	private String shortName = "";
 	
 	@Column(name="DIRECTION")
 	@Enumerated(EnumType.STRING) 
-	@XStreamAlias(Trip.DIRECTIONID)
 	private DirectionType directionId = DirectionType.UNKOWN;
 	
 	@ManyToOne()
 	@JoinColumn(name="ROUTE_GEOMETRY_UUID", nullable=false, updatable=false)
-	@XStreamAlias("shapeId")
-	@XStreamConverter(me.database.ShapeConverter.class)
 	private RouteGeometry shape = null;
 	
-	@XStreamImplicit(itemFieldName=Trip.STOPTIMES)
 	private transient List<StopTime> stopTimes = new ArrayList<StopTime>();
 	
 	/* (non-Javadoc)

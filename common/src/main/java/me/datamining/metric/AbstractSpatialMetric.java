@@ -8,13 +8,13 @@ import me.datamining.metric.IDataProvider;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public abstract class AbstractSpatialMetric {
 
-	@XStreamOmitField
+	@JsonIgnore
 	public static Log log = LogFactory.getLog(AbstractSpatialMetric.class);
-	@XStreamOmitField
+	@JsonIgnore
 	private Map<Long, IDataProvider> dataList = new HashMap<Long,IDataProvider>();
 	
 	public abstract double getMetric(IDataProvider stop);

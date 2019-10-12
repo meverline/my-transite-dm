@@ -23,6 +23,7 @@ import com.mongodb.DBCursor;
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 
+@SuppressWarnings("deprecation")
 public class DocumentDao extends IDocumentDao {
 
 	private Log log = LogFactory.getLog(IDocumentDao.class);
@@ -39,7 +40,6 @@ public class DocumentDao extends IDocumentDao {
 	 * @param connection
 	 * @throws UnknownHostException
 	 */
-	@SuppressWarnings("deprecation")
 	public DocumentDao(Mongo connection) throws UnknownHostException {
 		this.addSkipField("_id");
 		this.addSkipField("@class");

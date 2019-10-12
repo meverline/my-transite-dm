@@ -15,7 +15,7 @@ import me.math.kdtree.search.RangeSearch;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * @author markeverline
@@ -23,7 +23,7 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
  */
 public class PopulateGrid implements ResultsHandler {
 
-	@XStreamOmitField()
+	@JsonIgnore
 	private Log logger = LogFactory.getLog(PopulateGrid.class);
 	
 	private SpatialTile tile_ = null;

@@ -19,16 +19,20 @@ import me.math.kdtree.KDTree;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
+@JsonSubTypes({ @Type(value = DbTiledSpatialGrid.class, name = "DbTiledSpatialGrid"),
+		@Type(value = SpatialTile.class, name = "SpatialTile"),
+		@Type(value = TiledSpatialGrid.class, name = "TiledSpatialGrid")})
 public abstract class AbstractTiledSpatialGrid extends AbstractSpatialGridOverlay implements INodeCreator {
 	
-	@XStreamOmitField()
+
 	private Log logger = LogFactory.getLog(TiledSpatialGrid.class);
 
 	@Column(name="tileSize" )
-	@XStreamAlias("tileSize")
 	private int tileSize = 32;
 	
 	/**

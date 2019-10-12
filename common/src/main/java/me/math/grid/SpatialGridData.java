@@ -1,13 +1,11 @@
 package me.math.grid;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
-@XStreamAlias("SpatialGridData")
 public abstract class SpatialGridData {
 
 	private long gridPointReferenece = -1;
-	
-	@XStreamAlias("interpolationValue")
 	private double interpolationValue = 0.0;
 	
 	protected SpatialGridData() 
@@ -37,6 +35,7 @@ public abstract class SpatialGridData {
 	 * 
 	 * @param value
 	 */
+	@JsonSetter("interpolationValue")
 	public void setInterpolationValue(double value)
 	{
 		this.interpolationValue = value;
@@ -46,6 +45,7 @@ public abstract class SpatialGridData {
 	 * 
 	 * @return
 	 */
+	@JsonGetter("interpolationValue")
 	public double getInterpolationValue()
 	{
 		return this.interpolationValue;

@@ -5,14 +5,15 @@ import java.util.List;
 
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
-@XStreamAlias("STINGDataSample")
+@JsonRootName(value = "STINGDataSample")
 public class STINGDataSample extends AbstractDataSample {
 
-	@XStreamAlias("checked")
+
 	private boolean checked = false;
-	@XStreamAlias("values")
 	private List<Double> values = new ArrayList<Double>();
 	private transient  DescriptiveStatistics stats = null;
 	
@@ -35,6 +36,7 @@ public class STINGDataSample extends AbstractDataSample {
 	 * 
 	 * @return
 	 */
+	@JsonGetter("checked")
 	public boolean isChecked() {
 		return checked;
 	}
@@ -43,6 +45,7 @@ public class STINGDataSample extends AbstractDataSample {
 	 * 
 	 * @param flag
 	 */
+	@JsonSetter("checked")
 	public void setChecked(boolean flag) {
 		this.checked = flag;
 	}
@@ -59,6 +62,16 @@ public class STINGDataSample extends AbstractDataSample {
 		init();
 		this.values.add(value);
 		stats.addValue(value);
+	}
+	
+	@JsonGetter("values")
+	public List<Double> getValues() {
+		return values;
+	}
+	
+	@JsonSetter("values")
+	public void setValues(List<Double> values) {
+		this.values = values;
 	}
 	
 	public double getSampleNumber()

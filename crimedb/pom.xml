@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>me.transite.crimedb</artifactId>
-	
+
 	<parent>
-        <groupId>me.transite</groupId>
-        <artifactId>agregator</artifactId>
-        <version>0.0.5</version>
-        <relativePath>../pom.xml</relativePath>
-    </parent>
-	
+		<groupId>me.transite</groupId>
+		<artifactId>agregator</artifactId>
+		<version>0.0.5</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+
 	<build>
 
 		<plugins>
@@ -82,6 +83,12 @@
 			<groupId>me.transite</groupId>
 			<artifactId>transite-common</artifactId>
 			<version>0.0.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>xstream</groupId>
+			<artifactId>xstream</artifactId>
+			<version>1.2.2</version>
 		</dependency>
 
 	</dependencies>

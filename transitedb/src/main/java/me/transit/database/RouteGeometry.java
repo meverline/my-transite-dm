@@ -17,29 +17,22 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamConverter;
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import com.vividsolutions.jts.geom.Geometry;
 
 import me.transit.annotation.GTFSSetter;
-import me.transit.database.RouteGeometry;
 
 @Entity
 @Table(name="tran_route_geometry")
 @Inheritance
-@XStreamAlias("RouteGeometry")
 @DiscriminatorColumn(name = "routeGeometry_type")
 @DiscriminatorValue("RouteGeometryImpl")
 public class RouteGeometry implements TransitData {
 
-	@XStreamOmitField
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@Column(name = "UUID", nullable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@XStreamAlias("id")
 	private long uuid = -1;
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -48,17 +41,13 @@ public class RouteGeometry implements TransitData {
 	private Agency agency = null;
 
 	@Column(name = "ID", nullable = false)
-	@XStreamOmitField
 	private String id = null;
 
 	@Column(name = "VERSION")
-	@XStreamAlias("version")
 	private String version = "0.5";
 	
 	@Column(name="SHAPE", columnDefinition = "Geometry")
 	@Type(type="jts_geometry")
-	@XStreamAlias("shape")
-	@XStreamConverter(me.database.LineStringConverter.class)
 	private Geometry shape = null;
 
 	/* (non-Javadoc)

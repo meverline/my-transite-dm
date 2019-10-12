@@ -6,16 +6,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
+
 import me.database.CSVFieldType;
 import me.database.mongo.IDocument;
 import me.transit.annotation.GTFSFileModel;
 import me.transit.annotation.GTFSSetter;
-import me.transit.database.StopTime;
-
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonSetter;
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 @GTFSFileModel(filename="stop_times.txt")
 public class StopTime implements CSVFieldType, IDocument {
@@ -32,23 +29,17 @@ public class StopTime implements CSVFieldType, IDocument {
 	
 	private static final String SEPERATOR = ";";
 	
-	@XStreamOmitField
+	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
-	@XStreamOmitField
+	
 	private String stopId = null;
-	@XStreamAlias(StopTime.ARRIVALTIME)
 	private List<Long> arrivalTime = new ArrayList<Long>();
-	@XStreamAlias(StopTime.STOPHEADSIGN)
 	private String stopHeadSign = "";
-	@XStreamAlias(StopTime.STOPNAME)
 	private String stopName = "";
-	@XStreamAlias(StopTime.PICKUPTYPE)
 	private PickupType pickupType = PickupType.REGULAR;
-	@XStreamAlias(StopTime.DROPOFFTYPE)
 	private PickupType dropOffType = PickupType.REGULAR;
-	@XStreamOmitField
 	private String tripId = null;
-	@XStreamOmitField
+	
 	private Double[] location = null;
 	
 	public StopTime()

@@ -23,21 +23,15 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamConverter;
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
 import me.database.mongo.IDocument;
 import me.transit.annotation.GTFSFileModel;
 import me.transit.annotation.GTFSSetter;
-import me.transit.database.ServiceDate;
 
 @Entity
 @Table(name="tran_service_date")
 @Inheritance
 @DiscriminatorColumn(name = "serviceDate_type")
 @DiscriminatorValue("ServiceDateImpl")
-@XStreamAlias("ServiceDate")
 @GTFSFileModel(filename="calendar.txt")
 public class ServiceDate implements TransitData, IDocument {
 	
@@ -72,13 +66,11 @@ public class ServiceDate implements TransitData, IDocument {
 		public int getBit() { return bitFlag; }
 	}
 	
-	@XStreamOmitField
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@Column(name = "UUID", nullable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@XStreamAlias("id")
 	private long uuid = -1;
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -87,32 +79,24 @@ public class ServiceDate implements TransitData, IDocument {
 	private Agency agency = null;
 
 	@Column(name = "ID", nullable = false)
-	@XStreamOmitField
 	private String id = null;
 
 	@Column(name = "VERSION")
-	@XStreamAlias("version")
 	private String version = "0.5";
 	
 	@Column(name="START_DATE")
 	@Type(type = "java.util.Calendar")
-	@XStreamAlias(ServiceDate.STARTDATE)
-	@XStreamConverter(me.database.SingleValueCalendarConverter.class)
 	private Calendar startDate = null;
 	
 	@Column(name="END_DATE")
 	@Type(type = "java.util.Calendar")
-	@XStreamAlias(ServiceDate.ENDDATE)
-	@XStreamConverter(me.database.SingleValueCalendarConverter.class)
 	private Calendar endDate = null;
 	
 	@Column(name="SERVICE_DAYS")
-	@XStreamAlias(ServiceDate.SERVICEDAYFLAG)
 	private int serviceDayFlag = 0;
 	
 	@Column(name="SERVICE_TYPE")
 	@Enumerated(EnumType.STRING) 
-	@XStreamOmitField
 	private ServiceDays service = ServiceDays.ALL_WEEK;
 	
 	/* (non-Javadoc)

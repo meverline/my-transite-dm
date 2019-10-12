@@ -1,5 +1,12 @@
 package me.math.grid;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 //CIRAS: Crime Information Retrieval and Analysis System
 //Copyright 2009 by Russ Brasser, Mark Everline and Eric Franklin
 //
@@ -17,15 +24,15 @@ package me.math.grid;
 //along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import me.math.Vertex;
+import me.math.grid.array.SpatialGridPoint;
 import me.math.grid.data.AbstractDataSample;
-import me.math.grid.tiled.IGridDocument;
+import me.math.grid.tiled.TiledSpatialGridPoint;
 import me.math.kdtree.INode;
 import me.math.kdtree.MinBoundingRectangle;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
-@XStreamAlias("SpatialGridPoint")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
+@JsonSubTypes({ @Type(value = SpatialGridPoint.class, name = "SpatialGridPoint"),
+		@Type(value = TiledSpatialGridPoint.class, name = "TiledSpatialGridPoint")})
 public abstract class AbstractSpatialGridPoint implements INode {
 	
 	public static final String ROW = "row";
@@ -36,19 +43,12 @@ public abstract class AbstractSpatialGridPoint implements INode {
 	public static final String MBR = "MBR";
 	public static final String DEPTH = "depth";
 
-	@XStreamAlias(AbstractSpatialGridPoint.ROW)
 	private int row_ = -1;
-	@XStreamAlias(AbstractSpatialGridPoint.COL)
 	private int col_ = -1;
-	@XStreamOmitField
 	private int index_ = -1;
-	@XStreamAlias(AbstractSpatialGridPoint.DATA)
 	private AbstractDataSample data_ = null;
-	@XStreamAlias(AbstractSpatialGridPoint.DIRECTION)
 	private INode.Direction direction_ = INode.Direction.UNKOWN;
-	@XStreamAlias(IGridDocument.MBR)
 	private MinBoundingRectangle mbr_ = null;
-	@XStreamAlias(AbstractSpatialGridPoint.DEPTH)
 	private int depth_ = 0;
 	
 	
@@ -68,6 +68,7 @@ public abstract class AbstractSpatialGridPoint implements INode {
 	 * 
 	 * @return
 	 */
+	@JsonGetter("row")
 	public int getRow() {
 		return row_;
 	}
@@ -75,6 +76,7 @@ public abstract class AbstractSpatialGridPoint implements INode {
 	/**
 	 * 
 	 */
+	@JsonGetter("col")
 	public int getCol() {
 		return col_;
 	}
@@ -83,6 +85,7 @@ public abstract class AbstractSpatialGridPoint implements INode {
 	 * 
 	 * @return
 	 */
+	@JsonIgnore
 	public int getIndex() {
 		return index_;
 	}
@@ -112,6 +115,7 @@ public abstract class AbstractSpatialGridPoint implements INode {
 	/**
 	 * @param row_ the row_ to set
 	 */
+	@JsonSetter("row")
 	protected void setRow(int row_) {
 		this.row_ = row_;
 	}
@@ -119,15 +123,15 @@ public abstract class AbstractSpatialGridPoint implements INode {
 	/**
 	 * @param col_ the col_ to set
 	 */
+	@JsonSetter("col")
 	protected void setCol(int col_) {
 		this.col_ = col_;
 	}
 
-
-
 	/**
 	 * @param index_ the index_ to set
 	 */
+	@JsonIgnore
 	protected void setIndex(int index_) {
 		this.index_ = index_;
 	}
@@ -135,6 +139,7 @@ public abstract class AbstractSpatialGridPoint implements INode {
 	/**
 	 * @return the data_
 	 */
+	@JsonGetter("data")
 	public AbstractDataSample getData() {
 		return data_;
 	}
@@ -142,6 +147,7 @@ public abstract class AbstractSpatialGridPoint implements INode {
 	/**
 	 * @param data_ the data_ to set
 	 */
+	@JsonSetter("data")
 	public void setData(AbstractDataSample data_) {
 		this.data_ = data_;
 	}
@@ -150,26 +156,32 @@ public abstract class AbstractSpatialGridPoint implements INode {
 		return this.getVertex();
 	}
 	
+	@JsonGetter("depth")
 	public int getDepth() {
 		return this.depth_;
 	}
 	
+	@JsonSetter("depth")
 	public void setDepth(int depth) {
 		this.depth_ = depth;
 	}
 	
+	@JsonGetter("direction")
 	public Direction getDirection() {
 		return this.direction_;
 	}
 	
+	@JsonSetter("direction")
 	public void setDirection(Direction dir) {
 		this.direction_ = dir;
 	}
 
+	@JsonGetter("mbr")
 	public MinBoundingRectangle getMBR() {
 		return this.mbr_;
 	}
 	
+	@JsonSetter("mbr")
 	public void setMBR(MinBoundingRectangle mbr) {
 		this.mbr_ = mbr;
 	}

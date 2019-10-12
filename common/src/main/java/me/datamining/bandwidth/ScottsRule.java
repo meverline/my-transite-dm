@@ -17,6 +17,7 @@ package me.datamining.bandwidth;
 
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
+
 public class ScottsRule implements IBandwidth {
 
 	/*

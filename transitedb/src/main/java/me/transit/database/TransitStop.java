@@ -22,13 +22,10 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamConverter;
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import com.vividsolutions.jts.geom.Point;
 
-import me.database.neo4j.FIELD;
 import me.database.neo4j.AbstractGraphNode;
+import me.database.neo4j.FIELD;
 import me.datamining.metric.IDataProvider;
 import me.transit.annotation.GTFSFileModel;
 import me.transit.annotation.GTFSSetter;
@@ -38,7 +35,6 @@ import me.transit.annotation.GTFSSetter;
 @Inheritance
 @DiscriminatorColumn(name = "tran_stop_type")
 @DiscriminatorValue("TransitStopImpl")
-@XStreamAlias("TransitStop")
 @GTFSFileModel(filename="stops.txt")
 public class TransitStop extends AbstractGraphNode implements TransitData, IDataProvider  {
 	
@@ -47,13 +43,11 @@ public class TransitStop extends AbstractGraphNode implements TransitData, IData
 
 	public enum LocationType { STOP, STATION, UNKNOW };
 
-	@XStreamOmitField
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name = "UUID", nullable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@XStreamAlias("id")
 	private long uuid = -1;
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -62,46 +56,35 @@ public class TransitStop extends AbstractGraphNode implements TransitData, IData
 	private Agency agency = null;
 
 	@Column(name = "ID", nullable = false)
-	@XStreamOmitField
 	private String id = null;
 
 	@Column(name = "VERSION")
-	@XStreamAlias("version")
 	private String version = "0.5";
 
 	@Column(name = "CODE")
-	@XStreamAlias("code")
 	private String code = "";
 
 	@Column(name = "NAME", nullable = false)
-	@XStreamAlias("name")
 	private String name = null;
 
 	@Column(name = "DESCRIPTION")
-	@XStreamAlias("desc")
 	private String desc = "";
 
 	@Column(name = "LOCATION", columnDefinition = "Geometry")
 	@Type(type="jts_geometry")
-	@XStreamAlias("location")
-	@XStreamConverter(me.database.PointConverter.class)
 	private Point location = null;
 
 	@Column(name = "ZONE")
-	@XStreamAlias("zoneId")
 	private String zoneId = null;
 
 	@Column(name = "URL")
-	@XStreamAlias("url")
 	private String url = "";
 
 	@Column(name = "TYPE")
 	@Enumerated(EnumType.STRING)
-	@XStreamAlias("locationType")
 	private LocationType locationType = LocationType.UNKNOW;
 
 	@Column(name = "PARENT_STATION")
-	@XStreamAlias("parentStation")
 	private int parentStation = -1;
 
 	private boolean wheelchairBoarding;

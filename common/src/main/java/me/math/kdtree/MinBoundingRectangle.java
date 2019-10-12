@@ -25,6 +25,9 @@ import me.database.mongo.IDocument;
 import me.math.Vertex;
 import me.math.grid.AbstractSpatialGridPoint;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.Point;
@@ -32,6 +35,7 @@ import com.vividsolutions.jts.geom.Polygon;
 
 
 @SuppressWarnings("serial")
+@JsonRootName(value = "MinBoundingRectangle")
 public class MinBoundingRectangle implements IDocument, Serializable {
 
 	protected static GeometryFactory factory_ = new GeometryFactory();
@@ -194,6 +198,7 @@ public class MinBoundingRectangle implements IDocument, Serializable {
 	 * 
 	 * @return
 	 */
+	@JsonGetter("bottomlatDegress")
 	public double getBottomLatDegress() {
 		return bottomlatDegress_;
 	}
@@ -202,24 +207,72 @@ public class MinBoundingRectangle implements IDocument, Serializable {
 	 * 
 	 * @return
 	 */
+	@JsonGetter("toplatDegress")
 	public double getTopLatDegress() {
 		return toplatDegress_;
 	}
-
+	
 	/**
 	 * 
-	 * @return
+	 * @param toplatDegress_
 	 */
-	public double getLeftLonDegress() {
-		return leftlonDegress_;
+	@JsonSetter("toplatDegress")
+	public void setToplatDegress(double toplatDegress_) {
+		this.toplatDegress_ = toplatDegress_;
 	}
 
 	/**
 	 * 
 	 * @return
 	 */
+	@JsonGetter("leftlonDegress")
+	public double getLeftLonDegress() {
+		return leftlonDegress_;
+	}
+	
+	/**
+	 * 
+	 * @param leftlonDegress_
+	 */
+	@JsonSetter("leftlonDegress")
+	public void setLeftlonDegress(double leftlonDegress_) {
+		this.leftlonDegress_ = leftlonDegress_;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	@JsonGetter("rightlonDegress")
 	public double getRightLonDegress() {
 		return rightlonDegress_;
+	}
+	
+	/**
+	 * 
+	 * @param rightlonDegress_
+	 */
+	@JsonSetter("rightlonDegress")
+	public void setRightlonDegress(double rightlonDegress_) {
+		this.rightlonDegress_ = rightlonDegress_;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	@JsonSetter("bottomlatDegress")
+	public double getBottomlatDegress_() {
+		return bottomlatDegress_;
+	}
+
+	/**
+	 * 
+	 * @param bottomlatDegress
+	 */
+	@JsonSetter("bottomlatDegress")
+	public void setBottomlatDegress(double bottomlatDegress) {
+		this.bottomlatDegress_ = bottomlatDegress;
 	}
 
 	/**

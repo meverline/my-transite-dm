@@ -22,17 +22,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamImplicit;
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
 import me.database.mongo.IDocument;
+import me.database.neo4j.AbstractGraphNode;
 import me.database.neo4j.FIELD;
 import me.transit.annotation.GTFSFileModel;
 import me.transit.annotation.GTFSSetter;
-import me.database.neo4j.AbstractGraphNode;
 
-@XStreamAlias("Route")
 @Entity
 @Table(name = "tran_route")
 @Inheritance
@@ -49,14 +44,11 @@ public class Route extends AbstractGraphNode implements TransitData {
 	
 	public enum RouteType { TRAM, SUBWAY, RAIL, BUS, FERRY, CABLE_CAR, GONDOLA, FUNICULAR, UNKOWN };
 
-	
-	@XStreamOmitField
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@Column(name = "UUID", nullable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@XStreamAlias("id")
 	private long uuid = -1;
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -65,45 +57,35 @@ public class Route extends AbstractGraphNode implements TransitData {
 	private Agency agency = null;
 
 	@Column(name = "ID", nullable = false)
-	@XStreamOmitField
 	private String id = null;
 
 	@Column(name = "VERSION")
-	@XStreamAlias("version")
 	private String version = "0.5";
 
 	@Column(name = "SHORT_NAME", nullable = false)
-	@XStreamAlias(Route.SHORTNAME)
 	private String shortName = "";
 
 	@Column(name = "LONG_NAME", nullable = false)
-	@XStreamAlias(Route.LONGNAME)
 	private String longName = "";
 
 	@Column(name = "DESCRIPTION", columnDefinition = "text")
-	@XStreamAlias(Route.DESC)
 	private String desc = "";
 
 	@Column(name = "TYPE", nullable = false)
-	@XStreamAlias(Route.TYPE)
 	private RouteType type = RouteType.UNKOWN;
 
 	@Column(name = "URL")
-	@XStreamAlias("url")
 	private String url = "";
 
 	@Column(name = "COLOR")
-	@XStreamAlias("color")
 	private String color = "";
 
 	@Column(name = "TEXT_COLOR")
-	@XStreamAlias("textColor")
 	private String textColor = "";
 
 	@OneToMany(cascade={CascadeType.PERSIST}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "ROUTE_UUID", nullable = false, updatable = false)
 	@OrderBy("TRIP_INDX")
-	@XStreamImplicit(itemFieldName = Route.TRIPLIST)
 	private List<Trip> trips = new ArrayList<Trip>();
 
 	/* (non-Javadoc)

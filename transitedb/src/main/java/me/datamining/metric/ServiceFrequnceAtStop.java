@@ -20,22 +20,18 @@ import me.transit.database.Trip;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import me.datamining.metric.TransiteSpatialMetric;
 
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
+@JsonIgnoreProperties({ "startTime", "daysOfIntrest", "endTime", "log", "stopValue" })
 public class ServiceFrequnceAtStop extends TransiteSpatialMetric {
 
-	@XStreamOmitField
+
 	private Set<ServiceDate.WeekDay> daysOfIntrest = new HashSet<ServiceDate.WeekDay>();
-	
-	@XStreamOmitField
 	private long startTime = 0;
-	
-	@XStreamOmitField
 	private long endTime = 235959;
-	
-	@XStreamOmitField
 	private Log log = LogFactory.getLog(ServiceDateSample.class);
 	
 	private HashMap<String,Integer> stopValue = new HashMap<String, Integer>();

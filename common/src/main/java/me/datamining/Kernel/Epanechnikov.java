@@ -16,6 +16,9 @@
 
 package me.datamining.Kernel;
 
+import com.fasterxml.jackson.annotation.JsonRootName;
+
+@JsonRootName(value = "Epanechnikov")
 public class Epanechnikov implements IDensityKernel {
 
 	private final double squareRootOfFive = java.lang.Math.sqrt(5.0);

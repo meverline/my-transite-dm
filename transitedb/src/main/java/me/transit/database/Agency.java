@@ -18,21 +18,18 @@ import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import com.vividsolutions.jts.geom.Polygon;
 
+import me.database.neo4j.AbstractGraphNode;
 import me.database.neo4j.FIELD;
 import me.transit.annotation.GTFSFileModel;
 import me.transit.annotation.GTFSSetter;
-import me.database.neo4j.AbstractGraphNode;
 
 @Entity
 @Table(name = "tran_agency")
 @Inheritance
 @DiscriminatorColumn(name = "angency_type")
 @DiscriminatorValue("AgencyImpl")
-@XStreamAlias("Agency")
 @GTFSFileModel(filename="agency.txt")
 public class Agency extends AbstractGraphNode implements Serializable {
 
@@ -42,46 +39,36 @@ public class Agency extends AbstractGraphNode implements Serializable {
 	/**
 	 * 
 	 */
-	@XStreamOmitField
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name = "AGENCY_UUID", nullable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@XStreamOmitField
 	private long uuid = -1;
 
 	@Column(name = "NAME", nullable = false)
-	@XStreamAlias("name")
 	private String name = "";
 
 	@Column(name = "URL", nullable = false)
-	@XStreamAlias("url")
 	private String url = "";
 
 	@Column(name = "TIMEZONE", nullable = false)
-	@XStreamAlias("timeZone")
 	private String timezone = "";
 
 	@Column(name = "LANG")
-	@XStreamAlias("lang")
 	private String lang = "";
 
 	@Column(name = "PHONE")
-	@XStreamAlias("phone")
 	private String phone = "";
 
 	@Column(name = "ID")
-	@XStreamOmitField
 	private String id = "";
 
 	@Column(name = "VERSION")
-	@XStreamAlias("version")
 	private String version = "0.5";
 
 	@Column(name = "MBR", columnDefinition = "Geometry")
 	@Type(type="jts_geometry")
-	@XStreamAlias("mbr")
 	private Polygon mbr = null;
 
 	private String fareUrl = null;

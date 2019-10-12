@@ -1,14 +1,13 @@
 package me.math.grid.tiled.mr;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 import me.math.Vertex;
 import me.math.grid.AbstractSpatialGridPoint;
 
-@XStreamAlias("MetricDataResult")
 public abstract class MetricDataResult {
 
-	@XStreamAlias("Location")
 	private Vertex location_;
 	
 	public abstract void addDataToGridPoint(AbstractSpatialGridPoint pt);
@@ -20,6 +19,7 @@ public abstract class MetricDataResult {
 	/**
 	 * @return the center_
 	 */
+	@JsonGetter("location")
 	public Vertex getLocation() {
 		return location_;
 	}
@@ -27,6 +27,7 @@ public abstract class MetricDataResult {
 	/**
 	 * @param center_ the center_ to set
 	 */
+	@JsonSetter("location")
 	protected void setLocatoin(Vertex center) {
 		this.location_ = center;
 	}

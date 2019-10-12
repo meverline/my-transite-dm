@@ -22,8 +22,7 @@ import me.transit.database.Trip;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import me.datamining.metric.IDataProvider;
 
@@ -32,15 +31,13 @@ import me.datamining.metric.TransiteSpatialMetric;
  * @author meverline
  *
  */
-@XStreamAlias("SpatialData")
+@JsonIgnoreProperties({ "daysOfIntrest", "routeSerive" })
 public class ServiceDateSample extends TransiteSpatialMetric {
 	
-	@XStreamOmitField
+
 	private Set<ServiceDate.WeekDay> daysOfIntrest = new HashSet<ServiceDate.WeekDay>();
-	@XStreamOmitField
 	private Map<String,List<ServiceDate.WeekDay>> routeSerive 
 							= new HashMap<String,List<ServiceDate.WeekDay>>();
-	@XStreamOmitField
 	private Log log = LogFactory.getLog(ServiceDateSample.class);
 			
 	/**

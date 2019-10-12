@@ -5,26 +5,23 @@ import me.math.kdtree.KDTree;
 
 import javax.persistence.Column;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 public abstract class AbstractSpatialGridOverlay extends AbstractSpatialGrid {
 
 	public static final String CROSSSCOVARIANCE = "crossCovariance";
 
 	@Column(name="gridSpacingMeters" )
-	@XStreamAlias("SpacingMeters")
 	private double gridSpacingMeters_ = 1000;
 	
 	@Column(name="upperLeft", columnDefinition = "Geometry")
-	@XStreamAlias("ULV")
 	private Vertex upperLeft_ = null;
 	
 	@Column(name="lowerRight", columnDefinition = "Geometry")
-	@XStreamAlias("LRV")
 	private Vertex lowerRight_ = null;
 	
 	@Column(name="crossCovariance" )
-	@XStreamAlias(AbstractSpatialGridOverlay.CROSSSCOVARIANCE)
 	private double crossCovariance_ = 0;
 
 	/**
@@ -40,6 +37,7 @@ public abstract class AbstractSpatialGridOverlay extends AbstractSpatialGrid {
 	 * 
 	 * @return
 	 */
+	@JsonGetter("gridSpacingMeters")
 	public double getGridSpacingMeters() {
 		return gridSpacingMeters_;
 	}
@@ -48,6 +46,7 @@ public abstract class AbstractSpatialGridOverlay extends AbstractSpatialGrid {
 	 * 
 	 * @param gridSpacingMeters_
 	 */
+	@JsonSetter("gridSpacingMeters")
 	public void setGridSpacingMeters(double gridSpacingMeters_) {
 		this.gridSpacingMeters_ = gridSpacingMeters_;
 	}
@@ -55,6 +54,7 @@ public abstract class AbstractSpatialGridOverlay extends AbstractSpatialGrid {
 	/**
 	 * @return the crossCovariance
 	 */
+	@JsonGetter("crossCovariance")
 	public final double getCrossCovariance() {
 		return crossCovariance_;
 	}
@@ -62,6 +62,7 @@ public abstract class AbstractSpatialGridOverlay extends AbstractSpatialGrid {
 	/**
 	 * @param crossCovariance the crossCovariance to set
 	 */
+	@JsonSetter("crossCovariance")
 	protected void setCrossCovariance(double crossCovariance) {
 		this.crossCovariance_ = crossCovariance;
 	}
@@ -70,6 +71,7 @@ public abstract class AbstractSpatialGridOverlay extends AbstractSpatialGrid {
 	 * 
 	 * @return
 	 */
+	@JsonGetter("lowerRight")
 	public Vertex getLowerRight() {
 		return lowerRight_;
 	}
@@ -78,6 +80,7 @@ public abstract class AbstractSpatialGridOverlay extends AbstractSpatialGrid {
 	 * 
 	 * @return
 	 */
+	@JsonGetter("upperLeft")
 	public Vertex getUpperLeft() {
 		return upperLeft_;
 	}
@@ -85,7 +88,8 @@ public abstract class AbstractSpatialGridOverlay extends AbstractSpatialGrid {
 	/** 
 	 * @param upperLeft_
 	 */
-	protected void setUpperLeft(Vertex upperLeft_) {
+	@JsonSetter("upperLeft")
+	public void setUpperLeft(Vertex upperLeft_) {
 		this.upperLeft_ = upperLeft_;
 	}
 
@@ -93,7 +97,8 @@ public abstract class AbstractSpatialGridOverlay extends AbstractSpatialGrid {
 	 * 
 	 * @param lowerRight_
 	 */
-	protected void setLowerRight(Vertex lowerRight_) {
+	@JsonSetter("lowerRight")
+	public void setLowerRight(Vertex lowerRight_) {
 		this.lowerRight_ = lowerRight_;
 	}
 	
