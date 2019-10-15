@@ -3,6 +3,7 @@ package me.transit.parser.data;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.InputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.sql.SQLException;
@@ -46,9 +47,9 @@ public class DefaultFileHandler extends FileHandler {
 	 * 
 	 * @param path
 	 */
-	public DefaultFileHandler(String path, Blackboard blackboard) {
+	public DefaultFileHandler(Blackboard blackboard) {
 		super(blackboard);
-		initilize(path);
+		initilize();
 	}
 
 	/**
@@ -69,10 +70,10 @@ public class DefaultFileHandler extends FileHandler {
 	 * 
 	 * @param path
 	 */
-	private void initilize(String path) {
-		FileReader inStream;
+	private void initilize() {
+		InputStream inStream;
 		try {
-			inStream = new FileReader(path + "/common/config/ClassMap.properties");
+			inStream =  getClass().getClassLoader().getResourceAsStream("ClassMap.properties");
 			getProperties().load(inStream);
 
 			Reflections reflections = new Reflections("me.transit.database");

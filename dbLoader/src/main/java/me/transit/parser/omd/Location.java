@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 
 @Entity
 @Table(name = "omd_locations")
-public class Location {
+public class Location implements Comparable<Location>  {
 	
 	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
@@ -122,6 +122,23 @@ public class Location {
 	@JsonSetter("lng")
 	public void setLon(double lon) {
 		this.lon = lon;
+	}
+	
+	/**
+	 * 
+	 */
+	@Override
+	public int compareTo(Location l) {
+		return l.getName().compareTo(getName()) + 
+				   l.getTitle().compareTo(getTitle());
+	}
+	
+	/**
+	 * 
+	 */
+	@Override
+	public String toString() {
+		return this.getTitle();
 	}
 	
 }

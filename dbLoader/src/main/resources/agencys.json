@@ -1,0 +1,33 @@
+{
+   "agencys" : [ 
+      { 
+       "location" : "Arlington, VA",
+       "feed" : "USA: ART GTFS"
+      },
+      {
+        "location" : "Fairfax, VA, USA",
+        "feed" : "Fairfax CUE GTFS"
+      },
+      {
+        "location" : "Alexandria, VA",
+        "feed" : "DASH Bus GTFS"
+      },
+      {
+        "location" : "Washington, DC",
+        "feed" : "WMATA GTFS"
+      },
+      {
+        "location" : "Washington, DC",
+        "feed" : "DC Circulator GTFS"
+      },
+      {
+        "location" : "Washington, DC",
+        "feed" : "DC Streetcar GTFS"
+      },
+      {
+        "location" : "Montgomery, MD",
+        "feed" : "Ride On GTFS"
+      },
+
+   ]
+}

@@ -10,7 +10,9 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -24,12 +26,31 @@ public class OpenMobilityData {
 	private final static String API_KEY = "84b0aa80-1386-4f14-a026-4a7aec021430";
 	private final static String BASE_URL = "https://api.transitfeeds.com/v1";
 	private Log log = LogFactory.getLog(getClass().getName());
+	
+	private Map<String, Feed>feedCache = null;
+	private int lastPid = -1;
 
 	/**
 	 * 
 	 * @param url
 	 */
 	public OpenMobilityData() {
+	}
+	
+	private Map<String, Feed> getFeedCache() {
+		return feedCache;
+	}
+
+	private void setFeedCache(Map<String, Feed> feedCache) {
+		this.feedCache = feedCache;
+	}
+
+	private int getLastPid() {
+		return lastPid;
+	}
+
+	private void setLastPid(int lastPid) {
+		this.lastPid = lastPid;
 	}
 
 	/**
@@ -86,14 +107,8 @@ public class OpenMobilityData {
 
 		return rtn;
 	}
-
-	/**
-	 * 
-	 * @param parentId
-	 * @return
-	 */
-	public List<Feed> getFeeds(String parentId, int page) {
-		List<Feed> rtn = new ArrayList<>();
+	
+	private String pageFeed(int parentId, int page) {
 		StringBuffer api = new StringBuffer(OpenMobilityData.BASE_URL);
 		api.append("/getFeeds?key=");
 		api.append(OpenMobilityData.API_KEY);
@@ -102,14 +117,50 @@ public class OpenMobilityData {
 		api.append("&descendants=1&page=");
 		api.append(page);
 		api.append("&limit=20");
+		
+		return api.toString();
 
-		String response = this.getResponse(api.toString());
+	}
+
+	/**
+	 * 
+	 * @param parentId
+	 * @return
+	 */
+	public Map<String, Feed> getFeeds(int parentId) {
+		Map<String, Feed> rtn = new HashMap<>();
+		
+		if ( parentId == this.getLastPid() ) {
+			return this.getFeedCache();
+		}
+		
 		try {
-			FeedsResponse itemWithOwner = new ObjectMapper().readValue(response, FeedsResponse.class);
-			rtn = itemWithOwner.getResults().getFeeds();
+			
+			int page = 0;
+			boolean done = false;
+			
+			while ( ! done ) {
+				String response = this.getResponse(this.pageFeed(parentId, page));
+				if ( response.contains("No Content")) {
+					return rtn;
+				}
+				FeedsResponse fr = new ObjectMapper().readValue(response, FeedsResponse.class);
+				
+				for ( Feed f : fr.getResults().getFeeds()) {
+					rtn.put( f.getAgencyName(), f);
+				}
+				if ( fr.getResults().getPage() == fr.getResults().getNumpages()) {
+					done = true;
+				}
+				page++;
+			}
+			
 		} catch (IOException e) {
 			log.error(e.getLocalizedMessage(), e);
 		}
+		
+		this.setLastPid(parentId);
+		this.setFeedCache(rtn);
 
 		return rtn;
 	}
@@ -229,7 +280,11 @@ public class OpenMobilityData {
 			}
 		}
 
-		return fileName.toString();
+		this.unzip(fileName.toString());
+		File fp = new File(fileName.toString());
+		fp.delete();
+		
+		return fp.getAbsolutePath();
 	}
 
 }
