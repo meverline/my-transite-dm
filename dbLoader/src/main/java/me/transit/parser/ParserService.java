@@ -44,4 +44,5 @@ public class ParserService extends AbstractGTFSParser {
 	public void start() {
 		AmazonSQS sqs = AmazonSQSClientBuilder.defaultClient();
 	}
+	
 }
