@@ -1,5 +1,8 @@
 package me.transit.database;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
+
 import me.database.CSVFieldType;
 import me.transit.annotation.GTFSSetter;
 import me.transit.database.RouteStopData;
@@ -44,6 +47,7 @@ public class RouteStopData implements CSVFieldType {
 	/**
 	 * @return the routeShortName
 	 */
+	@JsonGetter("shortName")
 	public String getRouteShortName() {
 		return routeShortName;
 	}
@@ -52,6 +56,7 @@ public class RouteStopData implements CSVFieldType {
 	 * @param routeShortName the routeShortName to set
 	 */
 	@GTFSSetter(column="shortName")
+	@JsonSetter("shortName")
 	public void setRouteShortName(String routeShortName) {
 		this.routeShortName = routeShortName;
 	}
@@ -59,6 +64,7 @@ public class RouteStopData implements CSVFieldType {
 	/**
 	 * @return the tripHeadSign
 	 */
+	@JsonGetter("headSign")
 	public String getTripHeadSign() {
 		return tripHeadSign;
 	}
@@ -67,6 +73,7 @@ public class RouteStopData implements CSVFieldType {
 	 * @param tripHeadSign the tripHeadSign to set
 	 */
 	@GTFSSetter(column="headSign")
+	@JsonSetter("headSign")
 	public void setTripHeadSign(String tripHeadSign) {
 		this.tripHeadSign = tripHeadSign;
 	}

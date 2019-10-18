@@ -24,12 +24,18 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import me.database.mongo.IDocument;
 import me.database.neo4j.AbstractGraphNode;
 import me.database.neo4j.FIELD;
 import me.transit.annotation.GTFSFileModel;
 import me.transit.annotation.GTFSSetter;
+import me.transit.json.AgencyToString;
+import me.transit.json.Base64StringToGeometry;
+import me.transit.json.GeometryToBase64String;
+import me.transit.json.StringToAgency;
 
 @Entity
 @Table(name="tran_trip")
@@ -105,7 +111,8 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	/**
 	 * @return the agency
 	 */
-
+	@JsonGetter("agency_name")
+	@JsonSerialize(converter = AgencyToString.class)
 	public Agency getAgency() {
 		return agency;
 	}
@@ -113,7 +120,8 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	/**
 	 * @param agency the agency to set
 	 */
-
+	@JsonSetter("agency_name")
+	@JsonDeserialize(converter = StringToAgency.class)
 	public void setAgency(Agency agency) {
 		this.agency = agency;
 	}
@@ -224,6 +232,7 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	 * @return the shape
 	 */
 	@JsonSetter("shape_id")
+	@JsonSerialize(converter = GeometryToBase64String.class)
 	public RouteGeometry getShape() {
 		return shape;
 	}
@@ -233,6 +242,7 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	 */
 	@GTFSSetter(column="shape_id")
 	@JsonSetter("shape_id")
+	@JsonDeserialize(converter = Base64StringToGeometry.class)
 	public void setShape(RouteGeometry shape) {
 		this.shape = shape;
 	}

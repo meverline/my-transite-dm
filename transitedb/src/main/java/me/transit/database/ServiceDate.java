@@ -23,9 +23,16 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import me.database.mongo.IDocument;
 import me.transit.annotation.GTFSFileModel;
 import me.transit.annotation.GTFSSetter;
+import me.transit.json.AgencyToString;
+import me.transit.json.StringToAgency;
 
 @Entity
 @Table(name="tran_service_date")
@@ -102,7 +109,7 @@ public class ServiceDate implements TransitData, IDocument {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.ServiceDate#getUUID()
 	 */
-
+	@JsonGetter("uuid")
 	public long getUUID() {
 		return uuid;
 	}
@@ -110,7 +117,7 @@ public class ServiceDate implements TransitData, IDocument {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.ServiceDate#setUUID(long)
 	 */
-
+	@JsonSetter("uuid")
 	public void setUUID(long uuid) {
 		this.uuid = uuid;
 	}
@@ -118,7 +125,8 @@ public class ServiceDate implements TransitData, IDocument {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.ServiceDate#getAgency()
 	 */
-
+	@JsonGetter("agency_name")
+	@JsonSerialize(converter = AgencyToString.class)
 	public Agency getAgency() {
 		return agency;
 	}
@@ -126,7 +134,8 @@ public class ServiceDate implements TransitData, IDocument {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.ServiceDate#setAgency(me.transit.database.impl.Agency)
 	 */
-
+	@JsonSetter("agency_name")
+	@JsonDeserialize(converter = StringToAgency.class)
 	public void setAgency(Agency agency) {
 		this.agency = agency;
 	}
@@ -134,7 +143,7 @@ public class ServiceDate implements TransitData, IDocument {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.ServiceDate#getId()
 	 */
-
+	@JsonGetter("id")
 	public String getId() {
 		return id;
 	}
@@ -143,6 +152,7 @@ public class ServiceDate implements TransitData, IDocument {
 	 * @see me.transit.database.impl.ServiceDate#setId(java.lang.String)
 	 */
 	@GTFSSetter(column="service_id")
+	@JsonSetter("id")
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -150,7 +160,7 @@ public class ServiceDate implements TransitData, IDocument {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.ServiceDate#getVersion()
 	 */
-
+	@JsonGetter("version")
 	public String getVersion() {
 		return version;
 	}
@@ -159,6 +169,7 @@ public class ServiceDate implements TransitData, IDocument {
 	 * @see me.transit.database.impl.ServiceDate#setVersion(java.lang.String)
 	 */
 	@GTFSSetter(column="version")
+	@JsonSetter("version")
 	public void setVersion(String version) {
 		this.version = version;
 	}
@@ -166,7 +177,7 @@ public class ServiceDate implements TransitData, IDocument {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.ServiceDate#getStartDate()
 	 */
-
+	@JsonGetter("start_date")
 	public Calendar getStartDate() {
 		return startDate;
 	}
@@ -175,6 +186,7 @@ public class ServiceDate implements TransitData, IDocument {
 	 * @see me.transit.database.impl.ServiceDate#setStartDate(java.util.Calendar)
 	 */
 	@GTFSSetter(column="start_date")
+	@JsonSetter("start_date")
 	public void setStartDate(Calendar startDate) {
 		this.startDate = startDate;
 	}
@@ -182,7 +194,7 @@ public class ServiceDate implements TransitData, IDocument {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.ServiceDate#getEndDate()
 	 */
-
+	@JsonGetter("end_date")
 	public Calendar getEndDate() {
 		return endDate;
 	}
@@ -191,6 +203,7 @@ public class ServiceDate implements TransitData, IDocument {
 	 * @see me.transit.database.impl.ServiceDate#setEndDate(java.util.Calendar)
 	 */
 	@GTFSSetter(column="end_date")
+	@JsonSetter("end_date")
 	public void setEndDate(Calendar endDate) {
 		this.endDate = endDate;
 	}
@@ -198,8 +211,8 @@ public class ServiceDate implements TransitData, IDocument {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.ServiceDate#getServiceDayFlag()
 	 */
-
 	@Column(name="SERVICE_DAYS")
+	@JsonGetter("service_day_flag")
 	public int getServiceDayFlag() {
 		return serviceDayFlag;
 	}
@@ -207,6 +220,8 @@ public class ServiceDate implements TransitData, IDocument {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.ServiceDate#setServiceDayFlag(int)
 	 */
+	@GTFSSetter(column="service_day_flag")
+	@JsonSetter("service_day_flag")
 	public void setServiceDayFlag(int serviceDayFlag) {
 		this.serviceDayFlag = serviceDayFlag;
 	}
@@ -214,7 +229,7 @@ public class ServiceDate implements TransitData, IDocument {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.ServiceDate#getService()
 	 */
-
+	@JsonGetter("sevice")
 	public ServiceDays getService() {
 		return service;
 	}
@@ -223,6 +238,7 @@ public class ServiceDate implements TransitData, IDocument {
 	 * @see me.transit.database.impl.ServiceDate#setService(me.transit.database.impl.ServiceDateImpl.ServiceDays)
 	 */
 	@GTFSSetter(column="sevice")
+	@JsonSetter("sevice")
 	public void setService(ServiceDays service) {
 		this.service = service;
 	}

@@ -21,8 +21,15 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import me.transit.annotation.GTFSFileModel;
 import me.transit.annotation.GTFSSetter;
+import me.transit.json.AgencyToString;
+import me.transit.json.StringToAgency;
 
 @Entity(name = "CalendarDate")
 @Table(name = "tran_calendar_date")
@@ -65,7 +72,7 @@ public class CalendarDate implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.CalendarDate#getUUID()
 	 */
-
+	@JsonGetter("uuid")
 	public long getUUID() {
 		return uuid;
 	}
@@ -73,7 +80,7 @@ public class CalendarDate implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.CalendarDate#setUUID(long)
 	 */
-
+	@JsonSetter("uuid")
 	public void setUUID(long uuid) {
 		this.uuid = uuid;
 	}
@@ -81,7 +88,8 @@ public class CalendarDate implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.CalendarDate#getAgency()
 	 */
-
+	@JsonGetter("agency_name")
+	@JsonSerialize(converter = AgencyToString.class)
 	public Agency getAgency() {
 		return agency;
 	}
@@ -89,7 +97,8 @@ public class CalendarDate implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.CalendarDate#setAgency(me.transit.database.impl.Agency)
 	 */
-
+	@JsonSetter("agency_name")
+	@JsonDeserialize(converter = StringToAgency.class)
 	public void setAgency(Agency agency) {
 		this.agency = agency;
 	}
@@ -98,6 +107,7 @@ public class CalendarDate implements TransitData {
 	 * @see me.transit.database.impl.CalendarDate#getId()
 	 */
 	@GTFSSetter(column="service_id")
+	@JsonGetter("service_id")
 	public String getId() {
 		return id;
 	}
@@ -105,7 +115,7 @@ public class CalendarDate implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.CalendarDate#setId(java.lang.String)
 	 */
-
+	@JsonSetter("service_id")
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -113,6 +123,7 @@ public class CalendarDate implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.CalendarDate#getVersion()
 	 */
+	@JsonGetter("version")
 	public String getVersion() {
 		return version;
 	}
@@ -121,6 +132,7 @@ public class CalendarDate implements TransitData {
 	 * @see me.transit.database.impl.CalendarDate#setVersion(java.lang.String)
 	 */
 	@GTFSSetter(column="version")
+	@JsonSetter("version")
 	public void setVersion(String version) {
 		this.version = version;
 	}
@@ -128,6 +140,7 @@ public class CalendarDate implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.CalendarDate#getDate()
 	 */
+	@JsonGetter("date")
 	public Calendar getDate() {
 		return date;
 	}
@@ -136,6 +149,7 @@ public class CalendarDate implements TransitData {
 	 * @see me.transit.database.impl.CalendarDate#setDate(java.util.Calendar)
 	 */
 	@GTFSSetter(column="date")
+	@JsonSetter("date")
 	public void setDate(Calendar date) {
 		this.date = date;
 	}
@@ -143,6 +157,7 @@ public class CalendarDate implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.CalendarDate#getExceptionType()
 	 */
+	@JsonGetter("exception_type")
 	public ExceptionType getExceptionType() {
 		return exceptionType;
 	}
@@ -151,6 +166,7 @@ public class CalendarDate implements TransitData {
 	 * @see me.transit.database.impl.CalendarDate#setExceptionType(me.transit.database.impl.CalendarDateImpl.ExceptionType)
 	 */
 	@GTFSSetter(column="exception_type")
+	@JsonSetter("exception_type")
 	public void setExceptionType(ExceptionType exceptionType) {
 		this.exceptionType = exceptionType;
 	}

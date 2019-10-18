@@ -17,9 +17,17 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.vividsolutions.jts.geom.Geometry;
 
 import me.transit.annotation.GTFSSetter;
+import me.transit.json.AgencyToString;
+import me.transit.json.Base64StringToGeometry;
+import me.transit.json.GeometryToBase64String;
+import me.transit.json.StringToAgency;
 
 @Entity
 @Table(name="tran_route_geometry")
@@ -53,7 +61,7 @@ public class RouteGeometry implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.RouteGeometry#getUUID()
 	 */
-
+	@JsonGetter("uuid")
 	public long getUUID() {
 		return uuid;
 	}
@@ -61,7 +69,7 @@ public class RouteGeometry implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.RouteGeometry#setUUID(long)
 	 */
-
+	@JsonSetter("uuid")
 	public void setUUID(long uuid) {
 		this.uuid = uuid;
 	}
@@ -69,7 +77,8 @@ public class RouteGeometry implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.RouteGeometry#getAgency()
 	 */
-
+	@JsonGetter("agency_name")
+	@JsonSerialize(converter = AgencyToString.class)
 	public Agency getAgency() {
 		return agency;
 	}
@@ -77,6 +86,8 @@ public class RouteGeometry implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.RouteGeometry#setAgency(me.transit.database.impl.Agency)
 	 */
+	@JsonSetter("agency_name")
+	@JsonDeserialize(converter = StringToAgency.class)
 	public void setAgency(Agency agency) {
 		this.agency = agency;
 	}
@@ -84,14 +95,16 @@ public class RouteGeometry implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.RouteGeometry#getId()
 	 */
+	@JsonGetter("route_id")
 	public String getId() {
 		return id;
 	}
-	@GTFSSetter(column="route_id")
+	
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.RouteGeometry#setId(java.lang.String)
 	 */
-
+	@GTFSSetter(column="route_id")
+	@JsonSetter("route_id")
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -99,6 +112,7 @@ public class RouteGeometry implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.RouteGeometry#getVersion()
 	 */
+	@JsonGetter("version")
 	public String getVersion() {
 		return version;
 	}
@@ -107,6 +121,7 @@ public class RouteGeometry implements TransitData {
 	 * @see me.transit.database.impl.RouteGeometry#setVersion(java.lang.String)
 	 */
 	@GTFSSetter(column="version")
+	@JsonSetter("version")
 	public void setVersion(String version) {
 		this.version = version;
 	}
@@ -114,6 +129,8 @@ public class RouteGeometry implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.RouteGeometry#getShape()
 	 */
+	@JsonGetter("shape")
+	@JsonSerialize(converter = GeometryToBase64String.class)
 	public Geometry getShape() {
 		return shape;
 	}
@@ -122,6 +139,8 @@ public class RouteGeometry implements TransitData {
 	 * @see me.transit.database.impl.RouteGeometry#setShape(com.vividsolutions.jts.geom.Geometry)
 	 */
 	@GTFSSetter(column="shape")
+	@JsonSetter("shape")
+	@JsonDeserialize(converter = Base64StringToGeometry.class)
 	public void setShape(Geometry shape) {
 		this.shape = shape;
 	}

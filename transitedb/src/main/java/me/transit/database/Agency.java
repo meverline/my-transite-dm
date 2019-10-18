@@ -18,12 +18,16 @@ import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.vividsolutions.jts.geom.Polygon;
 
 import me.database.neo4j.AbstractGraphNode;
 import me.database.neo4j.FIELD;
 import me.transit.annotation.GTFSFileModel;
 import me.transit.annotation.GTFSSetter;
+import me.transit.json.Base64StringToGeometry;
+import me.transit.json.GeometryToBase64String;
 
 @Entity
 @Table(name = "tran_agency")
@@ -221,6 +225,8 @@ public class Agency extends AbstractGraphNode implements Serializable {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Agency#getMBR()
 	 */
+	@JsonGetter("mbr")
+	@JsonSerialize(converter = GeometryToBase64String.class)
 	public Polygon getMBR() {
 		return this.mbr;
 	}
@@ -228,6 +234,8 @@ public class Agency extends AbstractGraphNode implements Serializable {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Agency#setMBR(com.vividsolutions.jts.geom.Polygon)
 	 */
+	@JsonSetter("mbr")
+	@JsonDeserialize(converter = Base64StringToGeometry.class)
 	public void setMBR(Polygon mbr) {
 		this.mbr = mbr;
 	}

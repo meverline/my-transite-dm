@@ -22,11 +22,18 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import me.database.mongo.IDocument;
 import me.database.neo4j.AbstractGraphNode;
 import me.database.neo4j.FIELD;
 import me.transit.annotation.GTFSFileModel;
 import me.transit.annotation.GTFSSetter;
+import me.transit.json.AgencyToString;
+import me.transit.json.StringToAgency;
 
 @Entity
 @Table(name = "tran_route")
@@ -91,7 +98,7 @@ public class Route extends AbstractGraphNode implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Route#getUUID()
 	 */
-
+	@JsonGetter("uuid")
 	public long getUUID() {
 		return uuid;
 	}
@@ -99,7 +106,7 @@ public class Route extends AbstractGraphNode implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Route#setUUID(long)
 	 */
-
+	@JsonSetter("uuid")
 	public void setUUID(long uuid) {
 		this.uuid = uuid;
 	}
@@ -107,7 +114,8 @@ public class Route extends AbstractGraphNode implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Route#getAgency()
 	 */
-
+	@JsonGetter("agency_name")
+	@JsonSerialize(converter = AgencyToString.class)
 	public Agency getAgency() {
 		return agency;
 	}
@@ -115,7 +123,8 @@ public class Route extends AbstractGraphNode implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Route#setAgency(me.transit.database.impl.Agency)
 	 */
-
+	@JsonSetter("agency_name")
+	@JsonDeserialize(converter = StringToAgency.class)
 	public void setAgency(Agency agency) {
 		this.agency = agency;
 	}
@@ -123,7 +132,7 @@ public class Route extends AbstractGraphNode implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Route#getId()
 	 */
-
+	@JsonGetter("route_id")
 	public String getId() {
 		return id;
 	}
@@ -132,6 +141,7 @@ public class Route extends AbstractGraphNode implements TransitData {
 	 * @see me.transit.database.impl.Route#setId(java.lang.String)
 	 */
 	@GTFSSetter(column="route_id")
+	@JsonSetter("route_id")
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -139,7 +149,7 @@ public class Route extends AbstractGraphNode implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Route#getVersion()
 	 */
-
+	@JsonGetter("version")
 	public String getVersion() {
 		return version;
 	}
@@ -148,6 +158,7 @@ public class Route extends AbstractGraphNode implements TransitData {
 	 * @see me.transit.database.impl.Route#setVersion(java.lang.String)
 	 */
 	@GTFSSetter(column="version")
+	@JsonSetter("version")
 	public void setVersion(String version) {
 		this.version = version;
 	}
@@ -155,7 +166,7 @@ public class Route extends AbstractGraphNode implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Route#getShortName()
 	 */
-
+	@JsonGetter("route_short_name")
 	public String getShortName() {
 		return shortName;
 	}
@@ -164,6 +175,7 @@ public class Route extends AbstractGraphNode implements TransitData {
 	 * @see me.transit.database.impl.Route#setShortName(java.lang.String)
 	 */
 	@GTFSSetter(column="route_short_name")
+	@JsonSetter("route_short_name")
 	public void setShortName(String shortName) {
 		this.shortName = shortName;
 	}
@@ -171,7 +183,7 @@ public class Route extends AbstractGraphNode implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Route#getLongName()
 	 */
-
+	@JsonGetter("route_long_name")
 	public String getLongName() {
 		return longName;
 	}
@@ -180,6 +192,7 @@ public class Route extends AbstractGraphNode implements TransitData {
 	 * @see me.transit.database.impl.Route#setLongName(java.lang.String)
 	 */
 	@GTFSSetter(column="route_long_name")
+	@JsonSetter("route_long_name")
 	public void setLongName(String longName) {
 		this.longName = longName;
 	}
@@ -187,7 +200,7 @@ public class Route extends AbstractGraphNode implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Route#getDesc()
 	 */
-
+	@JsonGetter("desc")
 	public String getDesc() {
 		return desc;
 	}
@@ -196,6 +209,7 @@ public class Route extends AbstractGraphNode implements TransitData {
 	 * @see me.transit.database.impl.Route#setDesc(java.lang.String)
 	 */
 	@GTFSSetter(column="desc")
+	@JsonSetter("desc")
 	public void setDesc(String desc) {
 		this.desc = desc;
 	}
@@ -203,7 +217,7 @@ public class Route extends AbstractGraphNode implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Route#getType()
 	 */
-
+	@JsonGetter("route_type")
 	public RouteType getType() {
 		return type;
 	}
@@ -212,6 +226,7 @@ public class Route extends AbstractGraphNode implements TransitData {
 	 * @see me.transit.database.impl.Route#setType(me.transit.database.impl.RouteImpl.RouteType)
 	 */
 	@GTFSSetter(column="route_type")
+	@JsonSetter("route_type")
 	public void setType(RouteType type) {
 		this.type = type;
 	}
@@ -228,6 +243,7 @@ public class Route extends AbstractGraphNode implements TransitData {
 	 * @see me.transit.database.impl.Route#setUrl(java.lang.String)
 	 */
 	@GTFSSetter(column="url")
+	@JsonSetter("url")
 	public void setUrl(String url) {
 		this.url = url;
 	}
