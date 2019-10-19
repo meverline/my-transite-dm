@@ -19,7 +19,7 @@ public class TransitFeedParser {
 		AbstractGTFSParser parser = null;
 		
 		try {
-			if ( args[0].equals("service")) {
+			if (args.length > 0 &&  args[0].equals("service")) {
 				parser = new ParserService();
 			} else {
 				parser = new LocalParser();

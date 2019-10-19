@@ -9,8 +9,13 @@ import me.math.grid.tiled.DbTiledSpatialGrid;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Repository;
 
 @SuppressWarnings("deprecation")
+@Repository
+@Qualifier("dbTiledSpatialGridDao")
 public class DbTiledSpatialGridDao extends AbstractHibernateDao<DbTiledSpatialGrid> {
 
 	/**
@@ -28,8 +33,9 @@ public class DbTiledSpatialGridDao extends AbstractHibernateDao<DbTiledSpatialGr
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
-	public DbTiledSpatialGridDao(HibernateConnection aConnection) throws SQLException, ClassNotFoundException {
-		super(DbTiledSpatialGrid.class, aConnection);
+	@Autowired
+	public DbTiledSpatialGridDao(HibernateConnection hibernateConnection) throws SQLException, ClassNotFoundException {
+		super(DbTiledSpatialGrid.class, hibernateConnection);
 	}
 	
 	/**
