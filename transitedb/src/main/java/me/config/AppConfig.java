@@ -19,7 +19,7 @@ public class AppConfig {
 	 * @return IGraphDatabaseDAO
 	 */
 	@Bean
-	public IGraphDatabaseDAO graphdatabase() {
+	public IGraphDatabaseDAO graphDatabase() {
 		return GraphDatabaseDAO.instance();
 	}
 	

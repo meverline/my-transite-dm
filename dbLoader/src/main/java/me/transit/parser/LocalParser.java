@@ -3,16 +3,23 @@ package me.transit.parser;
 import java.io.InputStream;
 import java.sql.SQLException;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import me.database.neo4j.IGraphDatabaseDAO;
 import me.factory.DaoBeanFactory;
+import me.transit.parser.data.FileHandlerFactory;
 import me.transit.parser.message.MessageAgency;
 import me.transit.parser.message.ParserMessage;
 
-public class LocalParser extends AbstractGTFSParser{
+public class LocalParser extends AbstractGTFSParser {
 
-
+	@Autowired
+	public LocalParser(FileHandlerFactory factory) {
+		super(factory);
+		
+	}
 	/**
 	 * @param args
 	 * @throws ClassNotFoundException

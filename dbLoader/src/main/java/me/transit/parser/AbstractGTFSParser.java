@@ -1,23 +1,17 @@
 package me.transit.parser;
 
 import java.io.File;
-import java.sql.SQLException;
-import java.util.HashMap;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import me.factory.DaoBeanFactory;
-import me.transit.parser.data.Blackboard;
-import me.transit.parser.data.DefaultFileHandler;
-import me.transit.parser.data.FileHandler;
-import me.transit.parser.data.ServiceDateFileHandler;
-import me.transit.parser.data.ShapeFileHandler;
-import me.transit.parser.data.StopTimeFileHandler;
-import me.transit.parser.data.TripFileHandler;
+import me.transit.parser.data.FileHandlerFactory;
 import me.transit.parser.message.MessageAgency;
 import me.transit.parser.omd.Feed;
 import me.transit.parser.omd.Location;
@@ -26,23 +20,32 @@ import me.transit.parser.omd.OpenMobilityData;
 public abstract class AbstractGTFSParser {
 
 	private final Log log = LogFactory.getLog(getClass().getName());
-	private final Map<String, FileHandler> handlers = new HashMap<>();
-	private final Blackboard blackboard = new Blackboard();
-	private final DefaultFileHandler defaultHandler;
+	private final FileHandlerFactory factory;	
 	private final OpenMobilityData dataFeed = new OpenMobilityData();
 	private List<Location> locList = null;
-
+	private final Properties properties = new Properties();
 	/**
 	 * 
 	 */
-	public AbstractGTFSParser() {
-		DaoBeanFactory.initilize();
+	protected AbstractGTFSParser(FileHandlerFactory factory) {
+		
+		this.factory = factory;
+		
+		try {
+			InputStream inStream =  getClass().getClassLoader().getResourceAsStream("ClassMap.properties");
+			getProperties().load(inStream);
+		} catch (IOException e) {
+			log.error(e.getLocalizedMessage(), e);
+		}
 
-		defaultHandler = new DefaultFileHandler(blackboard);
-		handlers.put("shapes.txt", new ShapeFileHandler(blackboard));
-		handlers.put("calendar.txt", new ServiceDateFileHandler(blackboard));
-		handlers.put("stop_times.txt", new StopTimeFileHandler(blackboard));
-		handlers.put("trips.txt", new TripFileHandler(blackboard));
+
+	}
+	
+	/**
+	 * @return the properties
+	 */
+	public Properties getProperties() {
+		return properties;
 	}
 
 	/**
@@ -53,24 +56,10 @@ public abstract class AbstractGTFSParser {
 	}
 
 	/**
-	 * @return the blackboard
-	 */
-	protected Blackboard getBlackboard() {
-		return blackboard;
-	}
-
-	/**
-	 * @return the handlers
-	 */
-	protected Map<String, FileHandler> getHandlers() {
-		return handlers;
-	}
-
-	/**
 	 * @return the defaultHandler
 	 */
-	protected DefaultFileHandler getDefaultHandler() {
-		return defaultHandler;
+	protected FileHandlerFactory getFactory() {
+		return factory;
 	}
 
 	/**
@@ -95,27 +84,18 @@ public abstract class AbstractGTFSParser {
 	 * @param diretory
 	 */
 	protected void parse(String diretory) {
-		String files[] = getDefaultHandler().getProperties().get("order").toString().split(",");
+		
+		String files[] = getProperties().get("order").toString().split(",");
 
-		this.getBlackboard().reset();
+		this.getFactory().reset();
 		for (String dataFile : files) {
 			getLog().info("parse: " + dataFile + " " + diretory);
 
 			String key = dataFile.trim();
-			if (getHandlers().containsKey(key)) {
-				getHandlers().get(key).parse(filePath(diretory, dataFile));
-			} else {
-				getDefaultHandler().parse(filePath(diretory, dataFile));
-			}
+			this.getFactory().getHandler(key).parse(filePath(diretory, dataFile));
 		}
 
-		getBlackboard().getAgency().setMBR(getBlackboard().getMBR().toPolygon());
-		log.info(getBlackboard().getMBR().toString());
-		try {
-			getDefaultHandler().save(getBlackboard().getAgency());
-		} catch (SQLException e) {
-			getLog().error(e);
-		}
+		this.getFactory().getHandler(null).endProcess();
 		getLog().info("done processing: " + diretory);
 	}
 

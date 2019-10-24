@@ -9,26 +9,40 @@ import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;
 
-import me.factory.DaoBeanFactory;
 import me.transit.dao.RouteGeometryDao;
 import me.transit.database.RouteGeometry;
 
+@Component(value="serviceDateFileHandler")
 public class ShapeFileHandler extends FileHandler {
 
 	private Log log = LogFactory.getLog(getClass().getName());
 	protected final GeometryFactory factory = new GeometryFactory();
+	private RouteGeometryDao routeGeometryDao;
 
 	/**
 	 * 
 	 * @param blackboard
 	 */
-	public ShapeFileHandler(Blackboard blackboard) {
+	@Autowired
+	public ShapeFileHandler(RouteGeometryDao routeGeometryDao, Blackboard blackboard) {
 		super(blackboard);
+		this.routeGeometryDao = routeGeometryDao;
 	}
+	
+	/*
+	 * 
+	 */
+	@Override
+	public String handlesFile() {
+		return "shapes.txt";
+	}
+
 
 	/**
 	 * @return the factory
@@ -55,9 +69,7 @@ public class ShapeFileHandler extends FileHandler {
 				db.setId(id);
 				db.setShape(getFactory().createLineString(array));
 
-				RouteGeometryDao dao = RouteGeometryDao.class
-						.cast(DaoBeanFactory.create().getDaoBean(RouteGeometryDao.class));
-				dao.save(db);
+				routeGeometryDao.save(db);
 				getBlackboard().getShaps().put(id, db);
 			}
 

@@ -26,7 +26,7 @@ public class DaoBeanFactory {
 	public static synchronized DaoBeanFactory initilize() 
 	{
 		if (theOne == null) {
-			String paths[] = {"me.config"};
+			String paths[] = {"me"};
 		    theOne = new DaoBeanFactory(paths);
 		}
 		return theOne;

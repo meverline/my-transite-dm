@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.stereotype.Component;
 
 import me.math.kdtree.MinBoundingRectangle;
 import me.transit.database.Agency;
@@ -13,6 +14,7 @@ import me.transit.database.RouteGeometry;
 import me.transit.database.ServiceDate;
 import me.transit.database.Trip;
 
+@Component(value="blackboard")
 public class Blackboard {
 
 	private final Log log = LogFactory.getLog(getClass().getName());

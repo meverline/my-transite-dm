@@ -31,6 +31,15 @@ public class TripFileHandler extends FileHandler {
 	public TripFileHandler(Blackboard blackboard) {
 		super(blackboard);
 	}
+	
+	/*
+	 * 
+	 */
+	@Override
+	public String handlesFile() {
+		return "trips.txt";
+	}
+
 
 	/*
 	 * (non-Javadoc)

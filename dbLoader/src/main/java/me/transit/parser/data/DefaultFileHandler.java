@@ -3,7 +3,6 @@ package me.transit.parser.data;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.InputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.sql.SQLException;
@@ -31,6 +30,7 @@ import me.transit.database.CalendarDate;
 import me.transit.database.Route;
 import me.transit.database.TransitData;
 import me.transit.database.TransitStop;
+import me.transit.parser.data.savers.DataSaver;
 
 public class DefaultFileHandler extends FileHandler {
 
@@ -51,6 +51,14 @@ public class DefaultFileHandler extends FileHandler {
 		super(blackboard);
 		initilize();
 	}
+	
+	/*
+	 * 
+	 */
+	@Override
+	public String handlesFile() {
+		return null;
+	}
 
 	/**
 	 * @return the properties
@@ -65,16 +73,28 @@ public class DefaultFileHandler extends FileHandler {
 	public Map<String, Map<String, Method>> getClassMethodMap() {
 		return classMethodMap;
 	}
+	
+	/**
+	 * 
+	 */
+	public void endProcess() {
+		
+		getBlackboard().getAgency().setMBR(getBlackboard().getMBR().toPolygon());
+		log.info(getBlackboard().getMBR().toString());
+		try {
+			save(getBlackboard().getAgency());
+		} catch (SQLException e) {
+			log.error(e);
+		}
+	}
 
 	/**
 	 * 
 	 * @param path
 	 */
 	private void initilize() {
-		InputStream inStream;
+	
 		try {
-			inStream =  getClass().getClassLoader().getResourceAsStream("ClassMap.properties");
-			getProperties().load(inStream);
 
 			Reflections reflections = new Reflections("me.transit.database");
 			Set<Class<?>> annotated = reflections.getTypesAnnotatedWith(GTFSFileModel.class);

@@ -2,6 +2,8 @@ package me.transit.parser;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
 import com.amazonaws.services.sqs.model.DeleteMessageRequest;
@@ -9,10 +11,18 @@ import com.amazonaws.services.sqs.model.Message;
 import com.amazonaws.services.sqs.model.ReceiveMessageRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import me.transit.parser.data.FileHandlerFactory;
 import me.transit.parser.message.MessageAgency;
 import me.transit.parser.message.ParserMessage;
 
 public class ParserService extends AbstractGTFSParser {
+	
+	
+	@Autowired
+	public ParserService(FileHandlerFactory factory) {
+		super(factory);
+		
+	}
 	
 	/**
 	 * 

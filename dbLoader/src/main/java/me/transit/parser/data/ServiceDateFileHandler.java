@@ -10,21 +10,34 @@ import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import me.factory.DaoBeanFactory;
 import me.transit.dao.ServiceDateDao;
 import me.transit.database.ServiceDate;
 
+@Component(value="serviceDateFileHandler")
 public class ServiceDateFileHandler extends FileHandler {
 
 	private Log log = LogFactory.getLog(getClass().getName());
+	private ServiceDateDao serviceDao;
 
 	/**
 	 * 
 	 * @param blackboard
 	 */
-	public ServiceDateFileHandler(Blackboard blackboard) {
+	@Autowired
+	public ServiceDateFileHandler(ServiceDateDao serviceDao, Blackboard blackboard) {
 		super(blackboard);
+		this.serviceDao = serviceDao;
+	}
+	
+	/*
+	 * 
+	 */
+	@Override
+	public String handlesFile() {
+		return "calendar.txt";
 	}
 
 	/**
@@ -60,6 +73,32 @@ public class ServiceDateFileHandler extends FileHandler {
 			return true;
 		}
 		return false;
+	}
+	
+	/**
+	 * 
+	 * @param sat
+	 * @param sun
+	 * @param weekday
+	 * @return
+	 */
+	private ServiceDate.ServiceDays getServiceDate(boolean sat, boolean sun, boolean weekday)
+	{
+		ServiceDate.ServiceDays rtn = ServiceDate.ServiceDays.ALL_WEEK;
+		if (sat && sun && weekday) {
+			rtn =  ServiceDate.ServiceDays.ALL_WEEK;
+		} else if (weekday) {
+			rtn = ServiceDate.ServiceDays.WEEKDAY_SERVICE;
+		} else if (sat && weekday) {
+			rtn = ServiceDate.ServiceDays.WEEKDAY_SAT_SERVICE;
+		} else if (sat && sun) {
+			rtn =  ServiceDate.ServiceDays.WEEKEND_SERVICE;
+		} else if (sat) {
+			rtn =  ServiceDate.ServiceDays.SATURDAY_SERVICE;
+		} else if (sun) {
+			rtn = ServiceDate.ServiceDays.SUNDAY_SERVICE;
+		}
+		return rtn;
 	}
 
 	/*
@@ -138,24 +177,9 @@ public class ServiceDateFileHandler extends FileHandler {
 						sat = true;
 					}
 
-					if (sat && sun && weekday) {
-						sd.setService(ServiceDate.ServiceDays.ALL_WEEK);
-					} else if (weekday) {
-						sd.setService(ServiceDate.ServiceDays.WEEKDAY_SERVICE);
-					} else if (sat && weekday) {
-						sd.setService(ServiceDate.ServiceDays.WEEKDAY_SAT_SERVICE);
-					} else if (sat && sun) {
-						sd.setService(ServiceDate.ServiceDays.WEEKEND_SERVICE);
-					} else if (sat) {
-						sd.setService(ServiceDate.ServiceDays.SATURDAY_SERVICE);
-					} else if (sun) {
-						sd.setService(ServiceDate.ServiceDays.SUNDAY_SERVICE);
-					}
-
+					sd.setService(this.getServiceDate(sat, sun, weekday));
 					sd.setServiceDayFlag(serviceFlag);
 
-					ServiceDateDao serviceDao = ServiceDateDao.class
-							.cast(DaoBeanFactory.create().getDaoBean(ServiceDateDao.class));
 					serviceDao.save(sd);
 					getBlackboard().getService().put(sd.getId(), sd);
 				}

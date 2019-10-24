@@ -29,6 +29,16 @@ public abstract class FileHandler {
 	public Blackboard getBlackboard() {
 		return blackboard;
 	}
+	
+	public void endProcess() {
+		
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public abstract String handlesFile();
 
 	/**
 	 * Process the header.

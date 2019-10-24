@@ -11,10 +11,11 @@ import java.util.Map.Entry;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import me.database.mongo.IDocumentDao;
 import me.database.neo4j.IGraphDatabaseDAO;
-import me.factory.DaoBeanFactory;
 import me.transit.dao.RouteDao;
 import me.transit.dao.TransiteStopDao;
 import me.transit.database.Route;
@@ -22,16 +23,36 @@ import me.transit.database.StopTime;
 import me.transit.database.TransitStop;
 import me.transit.database.Trip;
 
+@Component(value="stopTimeFileHandler")
 public class StopTimeFileHandler extends FileHandler {
 
 	private Log log = LogFactory.getLog(getClass().getName());
+	private IDocumentDao documentDao;
+	private IGraphDatabaseDAO graphdb;
+	private RouteDao routeDao;
+	private TransiteStopDao transiteStopDao;
 
 	/**
 	 * 
 	 * @param blackboard
 	 */
-	public StopTimeFileHandler(Blackboard blackboard) {
+	@Autowired
+	public StopTimeFileHandler(RouteDao routeDao, TransiteStopDao transiteStopDao, 
+							   IDocumentDao documentDao, IGraphDatabaseDAO graphDatabase,  
+							   Blackboard blackboard) {
 		super(blackboard);
+		this.documentDao = documentDao;
+		this.graphdb = graphDatabase;
+		this.routeDao = routeDao;
+		this.transiteStopDao = transiteStopDao;
+	}
+	
+	/*
+	 * 
+	 */
+	@Override
+	public String handlesFile() {
+		return "stop_times.txt";
 	}
 
 	/**
@@ -40,22 +61,18 @@ public class StopTimeFileHandler extends FileHandler {
 	 * @return
 	 */
 	private void xrefStopToRoutes(HashMap<String, List<Trip>> tripMap) {
-		RouteDao dao = RouteDao.class.cast(DaoBeanFactory.create().getDaoBean(RouteDao.class));
-		TransiteStopDao stopDao = TransiteStopDao.class.cast(DaoBeanFactory.create().getDaoBean(TransiteStopDao.class));
-		IGraphDatabaseDAO graphdb = IGraphDatabaseDAO.class
-				.cast(DaoBeanFactory.create().getDaoBean(IGraphDatabaseDAO.class));
 
 		try {
 
 			for (Entry<String, List<Trip>> entry : tripMap.entrySet()) {
 				Map<String, TransitStop> stopIds = new HashMap<String, TransitStop>();
 
-				Route route = dao.loadById(entry.getKey(), getBlackboard().getAgencyName());
+				Route route = this.routeDao.loadById(entry.getKey(), getBlackboard().getAgencyName());
 				for (Trip trip : entry.getValue()) {
 					for (StopTime info : trip.getStopTimes()) {
 
 						if (!stopIds.containsKey(info.getStopId())) {
-							TransitStop stop = stopDao.loadById(info.getStopId(), getBlackboard().getAgencyName());
+							TransitStop stop = this.transiteStopDao.loadById(info.getStopId(), getBlackboard().getAgencyName());
 							info.setStopName(stop.getName());
 
 							Double[] location = new Double[2];
@@ -73,10 +90,9 @@ public class StopTimeFileHandler extends FileHandler {
 					graphdb.createRelationShip(route, stopInfo);
 				}
 
-				IDocumentDao docDao = IDocumentDao.class.cast(DaoBeanFactory.create().getDaoBean(IDocumentDao.class));
 				Map<String, Object> data = route.toDocument();
 				data.put(Route.TRIPLIST, entry.getValue());
-				docDao.add(data);
+				this.documentDao.add(data);
 
 			}
 
