@@ -16,9 +16,10 @@ import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.reflections.Reflections;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import me.database.neo4j.IGraphDatabaseDAO;
-import me.factory.DaoBeanFactory;
 import me.transit.annotation.GTFSFileModel;
 import me.transit.annotation.GTFSSetter;
 import me.transit.dao.AgencyDao;
@@ -32,6 +33,7 @@ import me.transit.database.TransitData;
 import me.transit.database.TransitStop;
 import me.transit.parser.data.savers.DataSaver;
 
+@Component(value="defaultFaileHandler")
 public class DefaultFileHandler extends FileHandler {
 
 	private static final String LOCATION = "Location";
@@ -42,14 +44,26 @@ public class DefaultFileHandler extends FileHandler {
 	private Log log = LogFactory.getLog(getClass().getName());
 	private final Properties properties = new Properties();
 	private final Map<String, Map<String, Method>> classMethodMap = new HashMap<>();
+	private final AgencyDao agencyDao;
+	private final IGraphDatabaseDAO graphDatabase;
+	private final TransiteStopDao transiteStopDao;
+	private final RouteDao routeDao;
+	private final CalendarDateDao calendarDateDao;
 
 	/**
 	 * 
 	 * @param path
 	 */
-	public DefaultFileHandler(Blackboard blackboard) {
+	@Autowired
+	public DefaultFileHandler(Blackboard blackboard, AgencyDao agencyDao, CalendarDateDao calendarDateDao,
+						      TransiteStopDao transiteStopDao, RouteDao routeDao, IGraphDatabaseDAO graphDatabase) {
 		super(blackboard);
 		initilize();
+		this.agencyDao = agencyDao;
+		this.graphDatabase = graphDatabase;
+		this.transiteStopDao = transiteStopDao;
+		this.routeDao = routeDao;
+		this.calendarDateDao = calendarDateDao;
 	}
 	
 	/*
@@ -179,26 +193,21 @@ public class DefaultFileHandler extends FileHandler {
 	 * @throws SQLException
 	 */
 	public void save(Object obj) throws SQLException {
-		IGraphDatabaseDAO graph = IGraphDatabaseDAO.class
-				.cast(DaoBeanFactory.create().getDaoBean(IGraphDatabaseDAO.class));
-
+		
 		if (obj instanceof Agency) {
 			Agency current = Agency.class.cast(obj);
-			AgencyDao dao = AgencyDao.class.cast(DaoBeanFactory.create().getDaoBean(AgencyDao.class));
 
-			Agency saved = dao.findByName(current.getName());
+			Agency saved = agencyDao.findByName(current.getName());
 			if (saved != null) {
 				getBlackboard().resetMBR();
 				getBlackboard().setAgency(saved);
 			} else {
-				dao.save(current);
-				graph.addNode(current);
+				agencyDao.save(current);
+				graphDatabase.addNode(current);
 				getBlackboard().setAgency(current);
 			}
 
 		} else if (obj instanceof TransitStop) {
-			TransiteStopDao dao = TransiteStopDao.class.cast(DaoBeanFactory.create().getDaoBean(TransiteStopDao.class));
-
 			TransitStop stop = TransitStop.class.cast(obj);
 
 			getBlackboard().getMBR().extend(stop.getLocation());
@@ -207,23 +216,19 @@ public class DefaultFileHandler extends FileHandler {
 				stop.setDesc(stop.getName());
 			}
 			stop.setName(stop.getName().toLowerCase());
-			dao.save(stop);
-			graph.addNode(stop);
+			transiteStopDao.save(stop);
+			graphDatabase.addNode(stop);
 
 		} else if (obj instanceof Route) {
-			RouteDao dao = RouteDao.class.cast(DaoBeanFactory.create().getDaoBean(RouteDao.class));
-
 			Route route = Route.class.cast(obj);
 			if (route.getShortName() == null || route.getShortName().isEmpty()) {
 				route.setShortName(route.getLongName());
 			}
-			dao.save(route);
-			graph.addNode(route);
+			routeDao.save(route);
+			graphDatabase.addNode(route);
 
 		} else if (obj instanceof CalendarDate) {
-			CalendarDateDao dao = CalendarDateDao.class.cast(DaoBeanFactory.create().getDaoBean(CalendarDateDao.class));
-
-			dao.save(CalendarDate.class.cast(obj));
+			calendarDateDao.save(CalendarDate.class.cast(obj));
 		} else {
 			log.error("save: Unkown class: " + obj.getClass().getName());
 		}

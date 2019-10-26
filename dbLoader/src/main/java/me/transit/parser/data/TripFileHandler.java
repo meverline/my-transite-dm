@@ -13,23 +13,29 @@ import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import me.database.neo4j.IGraphDatabaseDAO;
-import me.factory.DaoBeanFactory;
 import me.transit.dao.RouteDao;
 import me.transit.database.Route;
 import me.transit.database.Trip;
 
+@Component(value="tripFileHandler")
 public class TripFileHandler extends FileHandler {
 
 	private Log log = LogFactory.getLog(getClass().getName());
-
+	private final IGraphDatabaseDAO graphDatabase;
+	private final RouteDao routeDao;
 	/**
 	 * 
 	 * @param blackboard
 	 */
-	public TripFileHandler(Blackboard blackboard) {
+	@Autowired
+	public TripFileHandler(Blackboard blackboard, RouteDao routeDao, IGraphDatabaseDAO graphDatabase) {
 		super(blackboard);
+		this.routeDao = routeDao;
+		this.graphDatabase = graphDatabase;
 	}
 	
 	/*
@@ -142,19 +148,15 @@ public class TripFileHandler extends FileHandler {
 			}
 			inStream.close();
 
-			IGraphDatabaseDAO graphdb = IGraphDatabaseDAO.class
-					.cast(DaoBeanFactory.create().getDaoBean(IGraphDatabaseDAO.class));
-
-			RouteDao dao = RouteDao.class.cast(DaoBeanFactory.create().getDaoBean(RouteDao.class));
 			for (Entry<String, List<Trip>> data : routeToTrips.entrySet()) {
 
-				Route route = dao.loadById(data.getKey(), getBlackboard().getAgencyName());
+				Route route = routeDao.loadById(data.getKey(), getBlackboard().getAgencyName());
 				route.setTripList(data.getValue());
-				dao.save(route);
+				routeDao.save(route);
 				getBlackboard().getRouteShortName().put(data.getKey(), route.getShortName());
 
 				for (Trip entry : data.getValue()) {
-					graphdb.createRelationShip(route, entry);
+					graphDatabase.createRelationShip(route, entry);
 				}
 			}
 

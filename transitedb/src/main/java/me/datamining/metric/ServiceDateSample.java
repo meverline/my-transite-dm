@@ -10,7 +10,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import me.factory.DaoBeanFactory;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import me.transit.dao.DaoException;
 import me.transit.dao.RouteDao;
 import me.transit.database.Route;
@@ -18,15 +22,6 @@ import me.transit.database.RouteStopData;
 import me.transit.database.ServiceDate;
 import me.transit.database.TransitStop;
 import me.transit.database.Trip;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import me.datamining.metric.IDataProvider;
-
-import me.datamining.metric.TransiteSpatialMetric;
 /**
  * @author meverline
  *
@@ -60,8 +55,7 @@ public class ServiceDateSample extends TransiteSpatialMetric {
 	 */
 	public double getMetric(IDataProvider provider) {
 		
-		RouteDao dao = RouteDao.class.cast(DaoBeanFactory.create().getDaoBean(
-				RouteDao.class));
+		RouteDao dao = getDaoProvider().getRouteDao();
 		
 		TransitStop stop = TransitStop.class.cast(provider);
 

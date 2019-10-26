@@ -8,16 +8,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import me.database.neo4j.IGraphDatabaseDAO;
-import me.factory.DaoBeanFactory;
 import me.transit.parser.data.FileHandlerFactory;
 import me.transit.parser.message.MessageAgency;
 import me.transit.parser.message.ParserMessage;
 
 public class LocalParser extends AbstractGTFSParser {
+	
+	IGraphDatabaseDAO graph;
 
 	@Autowired
-	public LocalParser(FileHandlerFactory factory) {
+	public LocalParser(FileHandlerFactory factory, IGraphDatabaseDAO graphDatabase) {
 		super(factory);
+		this.graph = graphDatabase;
 		
 	}
 	/**
@@ -40,8 +42,6 @@ public class LocalParser extends AbstractGTFSParser {
 			}
 		}
 
-		IGraphDatabaseDAO graph = IGraphDatabaseDAO.class
-				.cast(DaoBeanFactory.create().getDaoBean(IGraphDatabaseDAO.class));
 
 		System.out.println("Num Coords: " + graph.getNumLocations());
 		System.out.println("Num Found: " + graph.getFoundCount());
