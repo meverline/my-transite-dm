@@ -22,7 +22,4 @@ public abstract class XmlReadable {
 	
 	public abstract void handleObject( Object obj) throws SQLException;
 	
-	public void save() throws SQLException {	
-	};
-
 }

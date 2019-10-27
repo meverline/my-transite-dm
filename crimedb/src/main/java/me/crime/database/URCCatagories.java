@@ -17,7 +17,6 @@
 package me.crime.database;
 
 import java.io.Serializable;
-import java.sql.SQLException;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,9 +24,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import me.crime.dao.URCCatagoriesDAO;
-import me.factory.DaoBeanFactory;
 
 // Uniform Crime Reports
 @Entity
@@ -110,20 +106,6 @@ public class URCCatagories extends XmlReadable implements Serializable {
 	 * @see me.crime.database.XmlReadable#handleObject(java.lang.Object)
 	 */
 	public void handleObject(Object obj) {
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see me.crime.database.XmlReadable#save()
-	 */
-	public void save() throws SQLException {
-		URCCatagoriesDAO dao = URCCatagoriesDAO.class.cast(DaoBeanFactory.create().getDaoBean(URCCatagoriesDAO.class));
-		URCCatagories cat;
-		cat = dao.findURCbyCatagory(this.catagorie_);
-		if (cat == null) {
-			dao.save(this);
-		}
 	}
 
 }

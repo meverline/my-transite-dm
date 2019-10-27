@@ -39,10 +39,6 @@ import org.hibernate.annotations.Type;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
-import me.crime.dao.AddressDao;
-import me.crime.dao.CrimeDao;
-import me.crime.dao.URCCatagoriesDAO;
-import me.factory.DaoBeanFactory;
 import me.math.Vertex;
 
 @Entity
@@ -301,31 +297,12 @@ public class Crime extends XmlReadable implements Serializable {
 
 		if (obj instanceof Address) {
 			Address addr = Address.class.cast(obj);
-			Address locatoin;
-
-			AddressDao dao = AddressDao.class.cast(DaoBeanFactory.create().getDaoBean(AddressDao.class));
-
-			locatoin = dao.loadAddress(addr.getLocation());
-			if (locatoin == null) {
-				this.setAddress(addr);
-			} else {
-				this.setAddress(locatoin);
-			}
-
+			this.setAddress(addr);
 		} else if (obj instanceof URCCatagories) {
-
-			URCCatagoriesDAO dao = URCCatagoriesDAO.class
-					.cast(DaoBeanFactory.create().getDaoBean(URCCatagoriesDAO.class));
-
 			URCCatagories cat = URCCatagories.class.cast(obj);
-			URCCatagories dbcat = dao.findURCbyCatagory(cat.getCatagorie());
-			if (dbcat == null) {
-				dao.save(cat);
-				dbcat = dao.findURCbyCatagory(cat.getCatagorie());
-			}
-			setCodes(dbcat);
-
+			setCodes(cat);
 		}
+		
 	}
 
 	/**
@@ -352,8 +329,6 @@ public class Crime extends XmlReadable implements Serializable {
 	 * 
 	 */
 	public void save() {
-		CrimeDao dao = CrimeDao.class.cast(DaoBeanFactory.create().getDaoBean(CrimeDao.class));
-
 		try {
 
 			if (this.getStartDate() == null && this.getCounty().compareTo("Vienna") == 0) {
@@ -390,27 +365,12 @@ public class Crime extends XmlReadable implements Serializable {
 
 				this.setTime(timeOrd);
 
-				AddressDao locDao = AddressDao.class.cast(DaoBeanFactory.create().getDaoBean(AddressDao.class));
-
-				Address location = locDao.loadAddress(this.getAddress().getLocation());
-				if (location != null) {
-					this.setAddress(location);
-				} else {
-					locDao.save(this.getAddress());
-				}
-
-				dao.save(this);
 			}
 
-		} catch (SQLException e) {
+		} catch (Exception e) {
 
 			log_.warn("Unable to save crime: " + this.getCrimeNumber() + "removing arrested");
-			try {
-				dao.save(this);
-			} catch (SQLException e1) {
-				log_.error("Unable to save crime: " + this.getCrimeNumber(), e);
-			}
-
+			
 		}
 	}
 
