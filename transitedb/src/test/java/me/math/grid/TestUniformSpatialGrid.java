@@ -1,16 +1,28 @@
 package me.math.grid;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.easymock.EasyMockRule;
+import org.easymock.EasyMockSupport;
+import org.easymock.Mock;
+import org.junit.Ignore;
+import org.junit.Rule;
+import org.junit.Test;
+
+import com.vividsolutions.jts.geom.Coordinate;
+import com.vividsolutions.jts.geom.GeometryFactory;
+import com.vividsolutions.jts.geom.Point;
+
+import me.datamining.densityEstimate.NonAdaptiveKDE;
 import me.datamining.jobs.DensityEstimateLocalJob;
 import me.datamining.metric.IDataProvider;
 import me.datamining.metric.TransitStopSpatialSample;
-import me.factory.DaoBeanFactory;
 import me.math.Vertex;
-import me.math.grid.AbstractSpatialGridPoint;
 import me.math.grid.array.SpatialGridPoint;
 import me.math.grid.array.UniformSpatialGrid;
 import me.math.kdtree.INode;
@@ -21,14 +33,13 @@ import me.transit.dao.query.StopQueryConstraint;
 import me.transit.database.TransitStop;
 import me.utils.TransiteEnums;
 
-import org.junit.Ignore;
-import org.junit.Test;
+public class TestUniformSpatialGrid extends EasyMockSupport {
 
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.Point;
-
-public class TestUniformSpatialGrid {
+    @Rule
+    public EasyMockRule rule = new EasyMockRule(this);
+    
+    @Mock
+    private TransiteStopDao dao;
 
 	@Test
 	public void testGrid() {
@@ -73,9 +84,6 @@ public class TestUniformSpatialGrid {
 	@Test
 	public void testDatabaseGrid() {
 
-		DaoBeanFactory.initilize();
-		TransiteStopDao dao = TransiteStopDao.class.cast(DaoBeanFactory.create().getDaoBean(TransiteStopDao.class));
-
 		GeometryFactory factory = new GeometryFactory();
 		StopQueryConstraint query = new StopQueryConstraint();
 
@@ -91,7 +99,7 @@ public class TestUniformSpatialGrid {
 
 		data.addAll(stops);
 
-		DensityEstimateLocalJob job = new DensityEstimateLocalJob(null);
+		DensityEstimateLocalJob job = new DensityEstimateLocalJob(null, new NonAdaptiveKDE());
 		job.init(ul, lr, 500);
 		job.process(data.iterator(), new TransitStopSpatialSample());
 

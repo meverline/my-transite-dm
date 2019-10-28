@@ -25,14 +25,12 @@ import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import me.database.mongo.IDocument;
 import me.transit.annotation.GTFSFileModel;
 import me.transit.annotation.GTFSSetter;
 import me.transit.json.AgencyToString;
-import me.transit.json.StringToAgency;
 
 @Entity
 @Table(name="tran_service_date")
@@ -135,7 +133,6 @@ public class ServiceDate implements TransitData, IDocument {
 	 * @see me.transit.database.impl.ServiceDate#setAgency(me.transit.database.impl.Agency)
 	 */
 	@JsonSetter("agency_name")
-	@JsonDeserialize(converter = StringToAgency.class)
 	public void setAgency(Agency agency) {
 		this.agency = agency;
 	}

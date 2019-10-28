@@ -18,15 +18,9 @@ import javax.persistence.Table;
 
 import com.vividsolutions.jts.geom.Point;
 
-import me.database.mongo.IDocumentDao;
-import me.factory.DaoBeanFactory;
 import me.math.Vertex;
 import me.math.grid.AbstractSpatialGridPoint;
-import me.math.grid.tiled.dao.DbTiledSpatialGridDao;
-import me.math.grid.tiled.dao.TileFragmentDao;
 import me.math.kdtree.KDTree;
-import me.transit.dao.query.tuple.IQueryTuple;
-import me.transit.dao.query.tuple.NumberTuple;
 
 @SuppressWarnings("serial")
 @Entity
@@ -41,10 +35,10 @@ public class DbTiledSpatialGrid extends AbstractTiledSpatialGrid implements Seri
 	@Column(name="heatMapName")
 	private String heatMapName_ = null;
 	
-	private int cacheSize_ = 5;
+	private transient int cacheSize_ = 5;
 	
-	private Map<Integer,CachedTile> cache = new HashMap<Integer,CachedTile>();
-	private List<CachedTile> accessTime_ = new ArrayList<CachedTile>();
+	private transient Map<Integer,CachedTile> cache = new HashMap<Integer,CachedTile>();
+	private transient List<CachedTile> accessTime_ = new ArrayList<CachedTile>();
 	
 	/**
 	 * Constructor for the database.
@@ -66,8 +60,6 @@ public class DbTiledSpatialGrid extends AbstractTiledSpatialGrid implements Seri
 		init(spacingInMeters);
 		setUpperLeft( new Vertex(ul.getX(), ul.getY()));
 		setLowerRight( new Vertex(lr.getX(), lr.getY()));
-
-		this.save();
 		createGrid(getUpperLeft(), getLowerRight());
 	}
 	
@@ -83,8 +75,6 @@ public class DbTiledSpatialGrid extends AbstractTiledSpatialGrid implements Seri
 		init(spacingInMeters);
 		setUpperLeft(ul);
 		setLowerRight(lr);
-
-		this.save();
 		createGrid(getUpperLeft(), getLowerRight());
 	}
 	
@@ -183,7 +173,7 @@ public class DbTiledSpatialGrid extends AbstractTiledSpatialGrid implements Seri
 	protected void addTile(SpatialTile tile) throws UnknownHostException, SQLException {
 		@SuppressWarnings("unused")
 		KDTree tree = tile.getTree();
-		this.save(tile);
+		SptialTileCache.create().save(this, tile);
 	}
 	
 	/**
@@ -203,7 +193,7 @@ public class DbTiledSpatialGrid extends AbstractTiledSpatialGrid implements Seri
 				entry = new CachedTile();
 			}
 			
-			entry.tile = this.load(index);
+			entry.tile = SptialTileCache.create().load(this, index);
 			this.cache.put(entry.tile.getIndex(), entry);
 			this.accessTime_.add(entry);
 		} 
@@ -214,69 +204,7 @@ public class DbTiledSpatialGrid extends AbstractTiledSpatialGrid implements Seri
 		Collections.sort(this.accessTime_);
 		return entry.tile;
 	}
-	
-	/**
-	 * 
-	 * @param index
-	 * @return
-	 */
-	protected SpatialTile load(int index) throws UnknownHostException
-	{
-		IDocumentDao docDao = IDocumentDao.class.cast(DaoBeanFactory.create().getDaoBean( IDocumentDao.class));
-		
-		List<IQueryTuple> list = new ArrayList<IQueryTuple>();
-		
-		list.add( new NumberTuple( SpatialTile.INDEX, new Integer(index), NumberTuple.LOGIC.EQ));
-		docDao.find(list, this.getHeatMapName());
-		return null;
-	}
-	
-	/**
-	 * 
-	 * @param tile
-	 * @throws UnknownHostException 
-	 */
-	protected void save(SpatialTile tile) throws SQLException,UnknownHostException
-	{
-		
-		IDocumentDao docDao = IDocumentDao.class.cast(DaoBeanFactory.create().getDaoBean( IDocumentDao.class));
-        docDao.add(tile, this.getHeatMapName());
-        
-        TileFragmentDao dao = 
-        		TileFragmentDao.class.cast(DaoBeanFactory.create().getDaoBean( TileFragmentDao.class));
-        
-        dao.save(new TileFragament( tile, this));
-
-	}
-	
-	/**
-	 * 
-	 * @throws SQLException
-	 */
-	public void save() throws SQLException
-	{
-		DbTiledSpatialGridDao dao = 
-				DbTiledSpatialGridDao.class.cast(DaoBeanFactory.create().getDaoBean( DbTiledSpatialGridDao.class));
-		
-		DbTiledSpatialGrid grid = dao.loadByName(this.getHeatMapName());
-		if ( grid != null ) {
-			this.setUUID(grid.getUUID());
-		}
-		dao.save(this);
-	}
-	
-	/**
-	 * 
-	 * @throws SQLException
-	 */
-	public static DbTiledSpatialGrid load(String name) throws SQLException
-	{
-		DbTiledSpatialGridDao dao = 
-				DbTiledSpatialGridDao.class.cast(DaoBeanFactory.create().getDaoBean( DbTiledSpatialGridDao.class));
-		
-		return dao.loadByName(name);
-	}
-	
+			
 	//////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////

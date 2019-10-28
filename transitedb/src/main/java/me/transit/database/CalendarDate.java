@@ -23,13 +23,11 @@ import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import me.transit.annotation.GTFSFileModel;
 import me.transit.annotation.GTFSSetter;
 import me.transit.json.AgencyToString;
-import me.transit.json.StringToAgency;
 
 @Entity(name = "CalendarDate")
 @Table(name = "tran_calendar_date")
@@ -98,7 +96,6 @@ public class CalendarDate implements TransitData {
 	 * @see me.transit.database.impl.CalendarDate#setAgency(me.transit.database.impl.Agency)
 	 */
 	@JsonSetter("agency_name")
-	@JsonDeserialize(converter = StringToAgency.class)
 	public void setAgency(Agency agency) {
 		this.agency = agency;
 	}

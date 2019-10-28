@@ -17,6 +17,20 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.easymock.EasyMockRule;
+import org.easymock.EasyMockSupport;
+import org.easymock.Mock;
+import org.junit.Ignore;
+import org.junit.Rule;
+import org.junit.Test;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.vividsolutions.jts.geom.Coordinate;
+import com.vividsolutions.jts.geom.GeometryFactory;
+import com.vividsolutions.jts.geom.Point;
+
 import me.datamining.Kernel.Epanechnikov;
 import me.datamining.bandwidth.IBandwidth;
 import me.datamining.bandwidth.SlivermanRule;
@@ -25,9 +39,7 @@ import me.datamining.mapreduce.QueryResults;
 import me.datamining.mapreduce.TiledFinilizeKDE;
 import me.datamining.mapreduce.TiledNonAdaptiveKDE;
 import me.datamining.metric.TransitStopSpatialSample;
-import me.factory.DaoBeanFactory;
 import me.math.Vertex;
-import me.math.grid.AbstractSpatialGridPoint;
 import me.math.grid.data.DensityEstimateDataSample;
 import me.math.grid.tiled.SpatialTile;
 import me.math.grid.tiled.TiledSpatialGrid;
@@ -39,17 +51,13 @@ import me.transit.dao.query.StopQueryConstraint;
 import me.transit.database.TransitStop;
 import me.utils.TransiteEnums;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.junit.Ignore;
-import org.junit.Test;
+public class TestTiledDatabaseGrid extends EasyMockSupport {
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.Point;
-
-public class TestTiledDatabaseGrid {
+    @Rule
+    public EasyMockRule rule = new EasyMockRule(this);
+    
+    @Mock
+    private TransiteStopDao dao;
 
 	public static Log log = LogFactory.getLog(TestTiledDatabaseGrid.class);
 
@@ -60,7 +68,6 @@ public class TestTiledDatabaseGrid {
 	@Test
 	public void test() {
 
-		DaoBeanFactory.initilize();
 		Vertex ul = new Vertex(38.941, -77.286);
 		Vertex lr = new Vertex(38.827, -77.078);
 
@@ -185,9 +192,6 @@ public class TestTiledDatabaseGrid {
 	@Ignore
 	@Test
 	public void testDatabaseGrid() {
-
-		DaoBeanFactory.initilize();
-		TransiteStopDao dao = TransiteStopDao.class.cast(DaoBeanFactory.create().getDaoBean(TransiteStopDao.class));
 
 		GeometryFactory factory = new GeometryFactory();
 

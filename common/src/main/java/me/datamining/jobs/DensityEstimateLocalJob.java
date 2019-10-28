@@ -5,16 +5,18 @@ import java.util.List;
 
 import me.datamining.DensityEstimateAlgorithm;
 import me.datamining.metric.AbstractSpatialMetric;
-import me.factory.DaoBeanFactory;
+import me.datamining.metric.IDataProvider;
 import me.math.grid.AbstractSpatialGridPoint;
 import me.math.grid.data.AbstractDataSample;
 import me.math.grid.data.DensityEstimateDataSample;
-import me.datamining.metric.IDataProvider;
 
 public class DensityEstimateLocalJob extends AbstractDMJob {
 	
-	public DensityEstimateLocalJob(IPopulateGrid pg) {
+	private final DensityEstimateAlgorithm densityEstimateAlgorithm;
+	
+	public DensityEstimateLocalJob(IPopulateGrid pg, DensityEstimateAlgorithm densityEstimateAlgorithm) {
 		super(pg);
+		this.densityEstimateAlgorithm = densityEstimateAlgorithm;
 	}
 	
 	/* (non-Javadoc)
@@ -31,10 +33,7 @@ public class DensityEstimateLocalJob extends AbstractDMJob {
 	public boolean process(Iterator<IDataProvider> dataList, AbstractSpatialMetric metric) {
 		
 		gridPopulator.populate(dataList, metric, this.grid_, this);
-		DensityEstimateAlgorithm kde = 
-				DensityEstimateAlgorithm.class.cast(DaoBeanFactory.create().getBean(DensityEstimateAlgorithm.class));
-			
-		kde.kernalDensityEstimate(grid_);
+		densityEstimateAlgorithm.kernalDensityEstimate(grid_);
 		return true;
 	}
 

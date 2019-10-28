@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import me.crime.dao.URCCatagoriesDAO;
@@ -23,6 +24,7 @@ public class LoadURCCatagories {
 	 * 
 	 * @param urcCatagoriesDAO
 	 */
+	@Autowired
 	public LoadURCCatagories(URCCatagoriesDAO urcCatagoriesDAO) {
 		this.urcCatagoriesDAO = urcCatagoriesDAO;
 	}

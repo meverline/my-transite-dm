@@ -35,8 +35,6 @@ import org.springframework.context.ApplicationContextAware;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import me.factory.DaoBeanFactory;
-
 public class DataBaseLoader implements ApplicationContextAware, CommandLineRunner {
 
 	private SAXParser   	   parser_ = null;
@@ -143,7 +141,6 @@ public class DataBaseLoader implements ApplicationContextAware, CommandLineRunne
 	 */
 	public void run(String... args) {
 
-		DaoBeanFactory.initilize();
 		DataBaseLoader  loader = new DataBaseLoader();
 		
 		try {

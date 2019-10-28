@@ -24,7 +24,6 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import me.database.mongo.IDocument;
@@ -33,7 +32,6 @@ import me.database.neo4j.FIELD;
 import me.transit.annotation.GTFSFileModel;
 import me.transit.annotation.GTFSSetter;
 import me.transit.json.AgencyToString;
-import me.transit.json.StringToAgency;
 
 @Entity
 @Table(name = "tran_route")
@@ -124,7 +122,6 @@ public class Route extends AbstractGraphNode implements TransitData {
 	 * @see me.transit.database.impl.Route#setAgency(me.transit.database.impl.Agency)
 	 */
 	@JsonSetter("agency_name")
-	@JsonDeserialize(converter = StringToAgency.class)
 	public void setAgency(Agency agency) {
 		this.agency = agency;
 	}

@@ -35,7 +35,6 @@ import me.transit.annotation.GTFSSetter;
 import me.transit.json.AgencyToString;
 import me.transit.json.Base64StringToGeometry;
 import me.transit.json.GeometryToBase64String;
-import me.transit.json.StringToAgency;
 
 @Entity
 @Table(name="tran_trip")
@@ -121,7 +120,6 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	 * @param agency the agency to set
 	 */
 	@JsonSetter("agency_name")
-	@JsonDeserialize(converter = StringToAgency.class)
 	public void setAgency(Agency agency) {
 		this.agency = agency;
 	}

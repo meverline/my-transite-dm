@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>transite-common</artifactId>
-	
+
 	<parent>
-        <groupId>me.transite</groupId>
-        <artifactId>agregator</artifactId>
-        <version>0.0.5</version>
-        <relativePath>../pom.xml</relativePath>
-    </parent>
+		<groupId>me.transite</groupId>
+		<artifactId>agregator</artifactId>
+		<version>0.0.5</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
 
 	<build>
 
@@ -83,55 +84,55 @@
 			<artifactId>dom4j</artifactId>
 			<version>1.6.1</version>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>com.amazonaws</groupId>
-		    <artifactId>aws-java-sdk-core</artifactId>
-		    <version>1.11.648</version>
-		</dependency>
-		
-		<dependency>
-		    <groupId>com.amazonaws</groupId>
-		    <artifactId>aws-java-sdk-sns</artifactId>
-		    <version>1.11.648</version>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk-core</artifactId>
+			<version>1.11.648</version>
 		</dependency>
 
 		<dependency>
-		    <groupId>com.amazonaws</groupId>
-		    <artifactId>aws-java-sdk-sqs</artifactId>
-		    <version>1.11.648</version>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk-sns</artifactId>
+			<version>1.11.648</version>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>com.amazonaws</groupId>
-		    <artifactId>aws-java-sdk-dynamodb</artifactId>
-		    <version>1.11.648</version>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk-sqs</artifactId>
+			<version>1.11.648</version>
 		</dependency>
-	
+
 		<dependency>
-		    <groupId>com.amazonaws</groupId>
-		    <artifactId>aws-java-sdk-s3</artifactId>
-		    <version>1.11.648</version>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk-dynamodb</artifactId>
+			<version>1.11.648</version>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>com.amazonaws</groupId>
-		    <artifactId>aws-java-sdk-rds</artifactId>
-		    <version>1.11.648</version>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk-s3</artifactId>
+			<version>1.11.648</version>
 		</dependency>
-		
+
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk-rds</artifactId>
+			<version>1.11.648</version>
+		</dependency>
+
 		<dependency>
 			<groupId>com.megginson.sax</groupId>
 			<artifactId>xml-writer</artifactId>
 			<version>0.2</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.smb-tec.neo4j</groupId>
 			<artifactId>neo4j-community</artifactId>
 			<version>2.1.6</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-math3</artifactId>
@@ -143,43 +144,43 @@
 			<artifactId>commons-collections4</artifactId>
 			<version>4.0</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.apache.hadoop</groupId>
 			<artifactId>hadoop-core</artifactId>
 			<version>1.2.1</version>
 		</dependency>
-	
+
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-spatial</artifactId>
 			<version>5.2.10.Final</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.lucee</groupId>
 			<artifactId>oswego-concurrent</artifactId>
 			<version>1.3.4</version>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>org.mongodb</groupId>
-		    <artifactId>mongodb-driver</artifactId>
-		    <version>3.11.0</version>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongodb-driver</artifactId>
+			<version>3.11.0</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.neo4j</groupId>
 			<artifactId>neo4j</artifactId>
 			<version>3.2.0</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>42.1.1.jre7</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>net.postgis</groupId>
 			<artifactId>postgis-jdbc</artifactId>
@@ -191,7 +192,7 @@
 			<artifactId>spring-asm</artifactId>
 			<version>3.1.4.RELEASE</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
@@ -208,6 +209,13 @@
 			<groupId>xml-apis</groupId>
 			<artifactId>xml-apis</artifactId>
 			<version>2.0.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.easymock</groupId>
+			<artifactId>easymock</artifactId>
+			<version>4.0.2</version>
+			<scope>test</scope>
 		</dependency>
 
 	</dependencies>

@@ -8,11 +8,10 @@ import java.util.List;
 
 import me.datamining.ClusteringAlgorithm;
 import me.datamining.metric.AbstractSpatialMetric;
-import me.factory.DaoBeanFactory;
+import me.datamining.metric.IDataProvider;
 import me.math.grid.AbstractSpatialGridPoint;
 import me.math.grid.data.AbstractDataSample;
 import me.math.grid.data.STINGDataSample;
-import me.datamining.metric.IDataProvider;
 /**
  * @author markeverline
  *
@@ -20,9 +19,11 @@ import me.datamining.metric.IDataProvider;
 public class ClusteringLocalJob extends AbstractDMJob {
 	
 	private List<AbstractSpatialGridPoint> clusters_ = null;
+	private final ClusteringAlgorithm clusteringAlgorithm;
 	
-	public ClusteringLocalJob(IPopulateGrid pg) {
+	public ClusteringLocalJob(IPopulateGrid pg, ClusteringAlgorithm clusteringAlgorithm) {
 		super(pg);
+		this.clusteringAlgorithm = clusteringAlgorithm;
 	}
 	
 	/* (non-Javadoc)
@@ -38,9 +39,7 @@ public class ClusteringLocalJob extends AbstractDMJob {
 	@Override
 	public boolean process(Iterator<IDataProvider> dataList, AbstractSpatialMetric metric) {
 		gridPopulator.populate(dataList, metric, this.grid_, this);
-		ClusteringAlgorithm alog =
-				ClusteringAlgorithm.class.cast(DaoBeanFactory.create().getBean(ClusteringAlgorithm.class));
-		clusters_ = alog.findClusters(grid_);
+		clusters_ = clusteringAlgorithm.findClusters(grid_);
 		return true;
 	}
 
