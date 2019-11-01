@@ -8,7 +8,7 @@ import org.hibernate.SessionFactory;
 import org.junit.Test;
 import org.postgresql.Driver;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
-import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 
 public class DBTestAnnonations {
 
