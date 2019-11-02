@@ -12,7 +12,7 @@ import me.database.neo4j.IGraphDatabaseDAO;
  *
  */
 @Configuration
-public class AppConfig {
+public class TransitDatabaseConfig {
 
 	/**
 	 * The Graph Datbase

@@ -18,7 +18,7 @@ import com.vividsolutions.jts.geom.GeometryFactory;
 import me.transit.dao.RouteGeometryDao;
 import me.transit.database.RouteGeometry;
 
-@Component(value="serviceDateFileHandler")
+@Component(value="shapeFileHandler")
 public class ShapeFileHandler extends FileHandler {
 
 	private Log log = LogFactory.getLog(getClass().getName());

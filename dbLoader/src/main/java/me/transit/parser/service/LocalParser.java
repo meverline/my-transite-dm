@@ -1,4 +1,4 @@
-package me.transit.parser;
+package me.transit.parser.service;
 
 import java.io.InputStream;
 import java.sql.SQLException;

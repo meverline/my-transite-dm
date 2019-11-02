@@ -21,7 +21,7 @@ import me.database.mongo.IDocumentDao;
 
 @Configuration
 @PropertySource({ "classpath:persistence-${envTarget:dev}.properties" })
-public class AppConfigBase {
+public class CommonConfigBase {
 	
     @Autowired
     private Environment env;

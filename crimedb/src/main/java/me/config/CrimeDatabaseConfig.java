@@ -15,7 +15,7 @@ import me.crime.loader.ParseCrimeXml;
  *
  */
 @Configuration
-public class AppConfig {
+public class CrimeDatabaseConfig {
 
 	@Bean(value="loadURCCatagories")
 	public LoadURCCatagories loadURCCatagories(URCCatagoriesDAO urcCatagoriesDAO) {
