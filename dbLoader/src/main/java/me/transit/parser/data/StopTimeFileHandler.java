@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Map.Entry;
 
 import org.apache.commons.logging.Log;
@@ -24,7 +25,7 @@ import me.transit.database.TransitStop;
 import me.transit.database.Trip;
 
 @Component(value="stopTimeFileHandler")
-public class StopTimeFileHandler extends FileHandler {
+public class StopTimeFileHandler extends AbstractFileHandler {
 
 	private Log log = LogFactory.getLog(getClass().getName());
 	private IDocumentDao documentDao;
@@ -41,10 +42,10 @@ public class StopTimeFileHandler extends FileHandler {
 							   IDocumentDao documentDao, IGraphDatabaseDAO graphDatabase,  
 							   Blackboard blackboard) {
 		super(blackboard);
-		this.documentDao = documentDao;
-		this.graphdb = graphDatabase;
-		this.routeDao = routeDao;
-		this.transiteStopDao = transiteStopDao;
+		this.documentDao = Objects.requireNonNull(documentDao, "documentDao can not be null");
+		this.graphdb = Objects.requireNonNull(graphDatabase, "graphDatabase can not be null");
+		this.routeDao = Objects.requireNonNull(routeDao, "routeDao can not be null");
+		this.transiteStopDao = Objects.requireNonNull(transiteStopDao, "transiteStopDao can not be null");
 	}
 	
 	/*

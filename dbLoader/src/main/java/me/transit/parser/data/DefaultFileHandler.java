@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Properties;
 import java.util.Set;
 
@@ -34,7 +35,7 @@ import me.transit.database.TransitStop;
 import me.transit.parser.data.savers.DataSaver;
 
 @Component(value="defaultFaileHandler")
-public class DefaultFileHandler extends FileHandler {
+public class DefaultFileHandler extends AbstractFileHandler {
 
 	private static final String LOCATION = "Location";
 	private static final String LATITUDE = "Latitude";
@@ -59,11 +60,11 @@ public class DefaultFileHandler extends FileHandler {
 						      TransiteStopDao transiteStopDao, RouteDao routeDao, IGraphDatabaseDAO graphDatabase) {
 		super(blackboard);
 		initilize();
-		this.agencyDao = agencyDao;
-		this.graphDatabase = graphDatabase;
-		this.transiteStopDao = transiteStopDao;
-		this.routeDao = routeDao;
-		this.calendarDateDao = calendarDateDao;
+		this.agencyDao = Objects.requireNonNull(agencyDao, "agencyDao can not be null");
+		this.graphDatabase = Objects.requireNonNull(graphDatabase,"agencyDao can not be null");
+		this.transiteStopDao = Objects.requireNonNull(transiteStopDao,"transiteStopDao can not be null");
+		this.routeDao = Objects.requireNonNull(routeDao,"routeDao can not be null");
+		this.calendarDateDao = Objects.requireNonNull(calendarDateDao,"calendarDateDao can not be null");
 	}
 	
 	/*

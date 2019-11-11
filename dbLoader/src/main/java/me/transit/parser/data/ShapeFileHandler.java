@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -19,7 +20,7 @@ import me.transit.dao.RouteGeometryDao;
 import me.transit.database.RouteGeometry;
 
 @Component(value="shapeFileHandler")
-public class ShapeFileHandler extends FileHandler {
+public class ShapeFileHandler extends AbstractFileHandler {
 
 	private Log log = LogFactory.getLog(getClass().getName());
 	protected final GeometryFactory factory = new GeometryFactory();
@@ -32,7 +33,7 @@ public class ShapeFileHandler extends FileHandler {
 	@Autowired
 	public ShapeFileHandler(RouteGeometryDao routeGeometryDao, Blackboard blackboard) {
 		super(blackboard);
-		this.routeGeometryDao = routeGeometryDao;
+		this.routeGeometryDao = Objects.requireNonNull(routeGeometryDao, "routeGeometryDao can not be null");
 	}
 	
 	/*
@@ -106,7 +107,7 @@ public class ShapeFileHandler extends FileHandler {
 			while (inStream.ready()) {
 				String line = inStream.readLine();
 				String data[] = line.split(",");
-				String id = data[indexMap.get(FileHandler.ID)].trim();
+				String id = data[indexMap.get(AbstractFileHandler.ID)].trim();
 
 				if (current == null) {
 					current = id;

@@ -2,6 +2,7 @@ package me.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 import me.crime.dao.AddressDao;
 import me.crime.dao.CrimeDao;
@@ -15,6 +16,7 @@ import me.crime.loader.ParseCrimeXml;
  *
  */
 @Configuration
+@Import(CommonConfigBase.class)
 public class CrimeDatabaseConfig {
 
 	@Bean(value="loadURCCatagories")

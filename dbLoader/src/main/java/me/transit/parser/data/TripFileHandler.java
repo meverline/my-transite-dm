@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -22,7 +23,7 @@ import me.transit.database.Route;
 import me.transit.database.Trip;
 
 @Component(value="tripFileHandler")
-public class TripFileHandler extends FileHandler {
+public class TripFileHandler extends AbstractFileHandler {
 
 	private Log log = LogFactory.getLog(getClass().getName());
 	private final IGraphDatabaseDAO graphDatabase;
@@ -34,8 +35,8 @@ public class TripFileHandler extends FileHandler {
 	@Autowired
 	public TripFileHandler(Blackboard blackboard, RouteDao routeDao, IGraphDatabaseDAO graphDatabase) {
 		super(blackboard);
-		this.routeDao = routeDao;
-		this.graphDatabase = graphDatabase;
+		this.routeDao = Objects.requireNonNull(routeDao, "routeDao can not be null");
+		this.graphDatabase = Objects.requireNonNull(graphDatabase, "graphDatabase can not be null");
 	}
 	
 	/*

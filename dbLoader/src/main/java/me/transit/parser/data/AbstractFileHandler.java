@@ -3,8 +3,9 @@ package me.transit.parser.data;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
-public abstract class FileHandler {
+public abstract class AbstractFileHandler {
 
 	protected static final String ID = "Id";
 	private final Blackboard blackboard;
@@ -13,8 +14,8 @@ public abstract class FileHandler {
 	 * 
 	 * @param blackboard
 	 */
-	protected FileHandler(Blackboard blackboard) {
-		this.blackboard = blackboard;
+	protected AbstractFileHandler(Blackboard blackboard) {
+		this.blackboard = Objects.requireNonNull(blackboard, "blackboard can not be null");
 	}
 
 	/**

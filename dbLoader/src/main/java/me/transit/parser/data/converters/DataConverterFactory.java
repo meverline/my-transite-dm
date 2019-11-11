@@ -3,14 +3,11 @@ package me.transit.parser.data.converters;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 public class DataConverterFactory {
 
 	private final Map<Class<?>, DataConverter> handlers = new HashMap<>();
 	private static DataConverterFactory self = null;
 
-	@Autowired
 	public DataConverterFactory()
 	{
 		register( new IdToServiceDate());

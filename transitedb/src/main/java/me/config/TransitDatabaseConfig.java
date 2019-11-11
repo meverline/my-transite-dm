@@ -2,6 +2,7 @@ package me.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 import me.database.neo4j.GraphDatabaseDAO;
 import me.database.neo4j.IGraphDatabaseDAO;
@@ -12,6 +13,7 @@ import me.database.neo4j.IGraphDatabaseDAO;
  *
  */
 @Configuration
+@Import(CommonConfigBase.class)
 public class TransitDatabaseConfig {
 
 	/**

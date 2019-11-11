@@ -1,12 +1,13 @@
 package me.transit.parser.omd;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -23,8 +24,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class OpenMobilityData {
 
+	private static final int BUFFER_SIZE = 4096;
+
 	private final static String API_KEY = "84b0aa80-1386-4f14-a026-4a7aec021430";
-	private final static String BASE_URL = "https://api.transitfeeds.com/v1";
+	private final static String BASE_URL = "http://api.transitfeeds.com/v1";
 	private Log log = LogFactory.getLog(getClass().getName());
 	
 	private Map<String, Feed>feedCache = null;
@@ -63,6 +66,7 @@ public class OpenMobilityData {
 
 		// many of these calls can throw exceptions, so i've just
 		// wrapped them all in one try/catch statement.
+		log.info(theUrl);
 		try {
 			// create a url object
 			URL url = new URL(theUrl);
@@ -119,10 +123,10 @@ public class OpenMobilityData {
 		api.append("&limit=20");
 		
 		return api.toString();
-
 	}
 
 	/**
+	 * 
 	 * 
 	 * @param parentId
 	 * @return
@@ -144,7 +148,10 @@ public class OpenMobilityData {
 				if ( response.contains("No Content")) {
 					return rtn;
 				}
-				FeedsResponse fr = new ObjectMapper().readValue(response, FeedsResponse.class);
+				
+				String val = response.replaceAll("\"u\":\\[\\]", "\"u\":{}").replaceAll("\\/", "/");
+				
+				FeedsResponse fr = new ObjectMapper().readValue(val, FeedsResponse.class);
 				
 				for ( Feed f : fr.getResults().getFeeds()) {
 					rtn.put( f.getAgencyName(), f);
@@ -189,18 +196,19 @@ public class OpenMobilityData {
 	 * 
 	 * @param file
 	 */
-	public void unzip(String fileZip) {
+	public void unzip(String dir, String fileZip) {
 		File file = new File(fileZip);
 
 		ZipInputStream zis = null;
 		FileOutputStream fos = null;
 
 		try {
-
+			File path = new File(dir);
 			zis = new ZipInputStream(new FileInputStream(file));
 			ZipEntry zipEntry = zis.getNextEntry();
 			while (zipEntry != null) {
-				File newFile = newFile(file.getAbsoluteFile(), zipEntry);
+				log.info(zipEntry.getName());
+				File newFile = newFile(path, zipEntry);
 				fos = new FileOutputStream(newFile);
 
 				byte[] buffer = new byte[1024];
@@ -229,6 +237,74 @@ public class OpenMobilityData {
 		}
 
 	}
+	
+	
+	private String downloadFile(String fileURL, String saveDir) {
+		
+		String saveFilePath = null;
+        HttpURLConnection httpConn = null;
+        
+        try {
+            URL url = new URL(fileURL);
+            httpConn = (HttpURLConnection) url.openConnection();
+	        int responseCode = httpConn.getResponseCode();
+	 
+	        // always check HTTP response code first
+	        if (responseCode == HttpURLConnection.HTTP_OK) {
+	        	String fileName = "";
+	            String disposition = httpConn.getHeaderField("Content-Disposition");
+	            String contentType = httpConn.getContentType();
+	            int contentLength = httpConn.getContentLength();
+	 
+	            if (disposition != null) {
+	                // extracts file name from header field
+	                int index = disposition.indexOf("filename=");
+	                if (index != -1) {
+	                    fileName = disposition.substring(index + 10,
+	                            disposition.length() - 1);
+	                }
+	            } else {
+	                // extracts file name from URL
+	                fileName = fileURL.substring(fileURL.lastIndexOf("/") + 1,
+	                        fileURL.length());
+	            }
+	 
+	            log.info("Content-Type = " + contentType);
+	            log.info("Content-Disposition = " + disposition);
+	            log.info("Content-Length = " + contentLength);
+	            log.info("fileName = " + fileName);
+	 
+	            // opens input stream from the HTTP connection
+	            InputStream inputStream = httpConn.getInputStream();
+	            saveFilePath = saveDir + File.separator + fileName.replace(' ', '_');
+	             
+	            // opens an output stream to save into file
+	            FileOutputStream outputStream = new FileOutputStream(saveFilePath);
+	 
+	            int bytesRead = -1;
+	            long total = 0;
+	            byte[] buffer = new byte[BUFFER_SIZE];
+	            while ((bytesRead = inputStream.read(buffer)) != -1) {
+	                outputStream.write(buffer, 0, bytesRead);
+	                total += bytesRead;
+	            }
+	 
+	            outputStream.close();
+	            inputStream.close();
+	 
+	            log.info(String.format("File downloaded: %s size %d bytes",saveFilePath, total));
+	        } else {
+	        	log.info("No file to download. Server replied HTTP code: " + responseCode);
+	        }
+        } catch (IOException ex ) {
+        	log.error(ex.getLocalizedMessage());
+        } finally {
+        	if (httpConn != null ) {
+        		httpConn.disconnect();
+        	}
+        }
+        return saveFilePath;
+    }
 
 	/**
 	 * 
@@ -236,55 +312,33 @@ public class OpenMobilityData {
 	 */
 	public String download(Feed feed) {
 
-		if (feed.getType() != "gtfs") {
+		if ( ! feed.getType().equals("gtfs") ) {
 			throw new IllegalArgumentException("Only type of gtfs is supported not: " + feed.getType());
 		}
 
-		int ndx = feed.getId().indexOf("/");
-		String feedName = feed.getId().substring(ndx + 1);
+		String feedName = feed.getId().substring(feed.getId().indexOf("/") + 1);
 		StringBuffer fileName = new StringBuffer(System.getProperty("java.io.tmpdir"));
 		fileName.append("GTFS");
 		fileName.append(File.separator);
 		fileName.append(feedName);
-		fileName.append(File.separator);
-		fileName.append("GTFS.zip");
-
-		File file = new File(fileName.toString());
-		file.mkdirs();
-
-		BufferedInputStream inputStream = null;
-		FileOutputStream fileOS = null;
-		try {
-
-			inputStream = new BufferedInputStream(new URL(feed.getUrl().getGtfsUrl()).openStream());
-			fileOS = new FileOutputStream(file);
-			byte data[] = new byte[1024];
-			int byteContent;
-			while ((byteContent = inputStream.read(data, 0, 1024)) != -1) {
-				fileOS.write(data, 0, byteContent);
-			}
-
-		} catch (IOException e) {
-			log.error(e.getLocalizedMessage());
-			fileName = new StringBuffer();
-		} finally {
-			try {
-				if (fileOS != null) {
-					fileOS.close();
-				}
-				if (inputStream != null) {
-					inputStream.close();
-				}
-			} catch (IOException e) {
-				log.error(e.getLocalizedMessage());
-			}
-		}
-
-		this.unzip(fileName.toString());
-		File fp = new File(fileName.toString());
-		fp.delete();
 		
-		return fp.getAbsolutePath();
+		File file = new File(fileName.toString());
+		if (file.exists()) {
+			file.delete();
+		}
+		file.mkdirs();
+		//file.deleteOnExit();
+		
+		log.info("Dir: " + fileName.toString() );
+					
+		String zipFile = this.downloadFile(feed.getUrl().getGtfsUrl(), fileName.toString());
+		if ( zipFile != null ) {
+			this.unzip(file.toString(), zipFile);
+			File fp = new File(zipFile.toString());
+			fp.delete();
+		}
+		return file.getAbsolutePath();
+		
 	}
 
 }

@@ -10,6 +10,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
 import me.database.hibernate.HibernateConnection;
@@ -17,6 +18,7 @@ import me.transit.dao.query.StopQueryConstraint;
 import me.transit.database.TransitStop;
 
 @Repository(value="transiteStopDao")
+@Scope("singleton")
 public class TransiteStopDao extends TransitDao<TransitStop> {
 	
 	/**

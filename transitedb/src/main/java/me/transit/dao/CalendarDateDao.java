@@ -4,12 +4,14 @@ import java.sql.SQLException;
 
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
 import me.database.hibernate.HibernateConnection;
 import me.transit.database.CalendarDate;
 
 @Repository(value="calendarDateDao")
+@Scope("singleton")
 public class CalendarDateDao extends TransitDao<CalendarDate> {
 	
 	/**

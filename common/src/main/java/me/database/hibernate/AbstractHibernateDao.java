@@ -3,7 +3,7 @@ package me.database.hibernate;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
-
+import java.util.Objects;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -25,10 +25,14 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 	private Class<?> daoClass;
 	
 	protected AbstractHibernateDao(Class<?> aClass) throws SQLException, ClassNotFoundException {
+		Objects.requireNonNull(aClass, "aClass cannot be null");
 		this.setDaoClass(aClass);
 	}
 	
 	protected AbstractHibernateDao(Class<?> aClass, HibernateConnection aConnection) throws SQLException, ClassNotFoundException {
+		Objects.requireNonNull(aClass, "aClass cannot be null");
+		Objects.requireNonNull(aConnection, "aConnection cannot be null");
+		
 		this.setDaoClass(aClass);
 		this.setConnection(aConnection);
 	}

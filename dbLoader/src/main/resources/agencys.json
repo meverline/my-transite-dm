@@ -1,5 +1,5 @@
 {
-   "agencys" : [ 
+   "agencys" : [
       { 
        "location" : "Arlington, VA",
        "feed" : "USA: ART GTFS"
@@ -27,7 +27,6 @@
       {
         "location" : "Montgomery, MD",
         "feed" : "Ride On GTFS"
-      },
-
-   ]
+      }
+  ]
 }

@@ -2,6 +2,7 @@ package me.transit.parser.service;
 
 import java.io.InputStream;
 import java.sql.SQLException;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -19,7 +20,7 @@ public class LocalParser extends AbstractGTFSParser {
 	@Autowired
 	public LocalParser(FileHandlerFactory factory, IGraphDatabaseDAO graphDatabase) {
 		super(factory);
-		this.graph = graphDatabase;
+		this.graph = Objects.requireNonNull(graphDatabase, "graphDatabase can not be null");
 		
 	}
 	/**

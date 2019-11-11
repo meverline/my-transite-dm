@@ -15,6 +15,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
 import me.crime.database.Crime;
@@ -24,6 +25,7 @@ import me.transit.dao.query.tuple.IQueryTuple;
 
 @SuppressWarnings("deprecation")
 @Repository(value="crimeDao")
+@Scope("singleton")
 public class CrimeDao extends AbstractHibernateDao<Crime> {
 
 	@Autowired

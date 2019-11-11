@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -17,7 +18,7 @@ import me.transit.dao.ServiceDateDao;
 import me.transit.database.ServiceDate;
 
 @Component(value="serviceDateFileHandler")
-public class ServiceDateFileHandler extends FileHandler {
+public class ServiceDateFileHandler extends AbstractFileHandler {
 
 	private Log log = LogFactory.getLog(getClass().getName());
 	private ServiceDateDao serviceDao;
@@ -29,7 +30,7 @@ public class ServiceDateFileHandler extends FileHandler {
 	@Autowired
 	public ServiceDateFileHandler(ServiceDateDao serviceDao, Blackboard blackboard) {
 		super(blackboard);
-		this.serviceDao = serviceDao;
+		this.serviceDao = Objects.requireNonNull(serviceDao, "serviceDao can not be null");
 	}
 	
 	/*
@@ -129,8 +130,8 @@ public class ServiceDateFileHandler extends FileHandler {
 					String data[] = line.split(",");
 
 					String id = null;
-					if (indexMap.get(FileHandler.ID) != null) {
-						id = data[indexMap.get(FileHandler.ID)].replace('"', ' ').trim();
+					if (indexMap.get(AbstractFileHandler.ID) != null) {
+						id = data[indexMap.get(AbstractFileHandler.ID)].replace('"', ' ').trim();
 					} else {
 						if (indexMap.get("serviceId") == null) {
 							id = data[0].replace('"', ' ').trim();

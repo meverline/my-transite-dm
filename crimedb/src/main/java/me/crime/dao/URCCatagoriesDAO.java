@@ -11,6 +11,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
 import me.crime.database.URCCatagories;
@@ -19,6 +20,7 @@ import me.database.hibernate.HibernateConnection;
 
 @SuppressWarnings("deprecation")
 @Repository(value="urcCatagoriesDAO")
+@Scope("singleton")
 public class URCCatagoriesDAO extends AbstractHibernateDao<URCCatagories> {
 	
 	@Autowired

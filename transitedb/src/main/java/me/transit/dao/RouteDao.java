@@ -13,6 +13,7 @@ import org.hibernate.ScrollableResults;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
 import me.database.hibernate.HibernateConnection;
@@ -20,6 +21,7 @@ import me.transit.database.Route;
 
 @Repository(value="routeDao")
 @SuppressWarnings("deprecation")
+@Scope("singleton")
 public class RouteDao extends TransitDao<Route>  {
 	
 	/**

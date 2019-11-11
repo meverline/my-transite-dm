@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -29,7 +30,7 @@ public abstract class AbstractGTFSParser {
 	 */
 	protected AbstractGTFSParser(FileHandlerFactory factory) {
 		
-		this.factory = factory;
+		this.factory = Objects.requireNonNull(factory, "factory can not be null");
 		
 		try {
 			InputStream inStream =  getClass().getClassLoader().getResourceAsStream("ClassMap.properties");
@@ -128,7 +129,7 @@ public abstract class AbstractGTFSParser {
 
 		long diff = end - start;
 
-		System.out.println("RunTime: " + String.format("%d min, %d sec", TimeUnit.MILLISECONDS.toMinutes(diff),
+		System.out.println(agency.getFeed() + " RunTime: " + String.format("%d min, %d sec", TimeUnit.MILLISECONDS.toMinutes(diff),
 				TimeUnit.MILLISECONDS.toSeconds(diff)
 						- TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(diff))));
 
