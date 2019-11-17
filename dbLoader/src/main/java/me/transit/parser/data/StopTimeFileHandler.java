@@ -63,42 +63,38 @@ public class StopTimeFileHandler extends AbstractFileHandler {
 	 */
 	private void xrefStopToRoutes(HashMap<String, List<Trip>> tripMap) {
 
-		try {
+		for (Entry<String, List<Trip>> entry : tripMap.entrySet()) {
+			Map<String, TransitStop> stopIds = new HashMap<String, TransitStop>();
+			Route route = this.routeDao.loadById(entry.getKey(), getBlackboard().getAgencyName());
+	
+			for (Trip trip : entry.getValue()) {
+				for (StopTime info : trip.getStopTimes()) {
 
-			for (Entry<String, List<Trip>> entry : tripMap.entrySet()) {
-				Map<String, TransitStop> stopIds = new HashMap<String, TransitStop>();
+					if (!stopIds.containsKey(info.getStopId())) {
+						TransitStop stop = this.transiteStopDao.loadById(info.getStopId(), getBlackboard().getAgencyName());
+						info.setStopName(stop.getName());
 
-				Route route = this.routeDao.loadById(entry.getKey(), getBlackboard().getAgencyName());
-				for (Trip trip : entry.getValue()) {
-					for (StopTime info : trip.getStopTimes()) {
+						Double[] location = new Double[2];
+						location[0] = stop.getLocation().getCoordinate().x;
+						location[1] = stop.getLocation().getCoordinate().y;
+						info.setLocation(location);
 
-						if (!stopIds.containsKey(info.getStopId())) {
-							TransitStop stop = this.transiteStopDao.loadById(info.getStopId(), getBlackboard().getAgencyName());
-							info.setStopName(stop.getName());
-
-							Double[] location = new Double[2];
-							location[0] = stop.getLocation().getCoordinate().x;
-							location[1] = stop.getLocation().getCoordinate().y;
-							info.setLocation(location);
-
-							stopIds.put(info.getStopId(), stop);
-						}
-						graphdb.createRelationShip(trip, stopIds.get(info.getStopId()));
+						stopIds.put(info.getStopId(), stop);
 					}
+					graphdb.createRelationShip(trip, stopIds.get(info.getStopId()));
 				}
-
+			}
+			
+			if ( route != null ) {
 				for (TransitStop stopInfo : stopIds.values()) {
 					graphdb.createRelationShip(route, stopInfo);
 				}
-
+			
 				Map<String, Object> data = route.toDocument();
 				data.put(Route.TRIPLIST, entry.getValue());
 				this.documentDao.add(data);
-
 			}
-
-		} catch (Exception e) {
-			log.error(e.getLocalizedMessage(), e);
+			
 		}
 
 		return;
@@ -110,27 +106,30 @@ public class StopTimeFileHandler extends AbstractFileHandler {
 	 * @see me.transit.parser.data.FileHandler#parse(java.lang.String)
 	 */
 	@Override
-	public void parse(String shapeFile) {
+	public boolean parse(String shapeFile) throws Exception {
 		try {
 
 			File fp = new File(shapeFile);
 			if (!fp.exists()) {
-				return;
+				log.error("file does not exist: " + shapeFile);
+				return false;
 			}
 
 			BufferedReader inStream = new BufferedReader(new FileReader(shapeFile));
 			if (!inStream.ready()) {
 				inStream.close();
-				return;
+				log.error("file is empty: " + shapeFile);
+				return false;
 			}
 
 			List<String> header = new ArrayList<String>();
-			Map<String, Integer> indexMap = processHeader(inStream.readLine(), "shape", header);
+			Map<String, Integer> indexMap = processHeader(inStream.readLine(), header);
+			log.info(header);
 
 			long lineCnt = 0;
 			long cnt = 0;
 
-			RouteTripPair trip = null;
+			RouteTripPair routeTripPair = null;
 			StopTime stopTime = null;
 
 			while (inStream.ready()) {
@@ -140,23 +139,26 @@ public class StopTimeFileHandler extends AbstractFileHandler {
 				if (line.trim().length() > 0 && line.indexOf(',') != -1) {
 					String data[] = line.split(",");
 
-					String id = data[indexMap.get("TripId")].replace('"', ' ').trim();
-					trip = getBlackboard().getTripMap().get(id);
+					String id = data[indexMap.get("trip_id")].replace('"', ' ').trim();
+					routeTripPair = getBlackboard().getTripMap().get(id);
+					if (routeTripPair == null ) {
+						log.error("Unkonwn trip: " + id);
+					}
 
-					if (indexMap.containsKey("StopId") && data[indexMap.get("StopId")] != null) {
-						String stopId = data[indexMap.get("StopId")].replace('"', ' ').trim();
-						stopTime = trip.getTrip().findStopTimeById(stopId);
+					if (indexMap.containsKey("stop_id") && data[indexMap.get("stop_id")] != null) {
+						String stopId = data[indexMap.get("stop_id")].replace('"', ' ').trim();
+						stopTime = routeTripPair.getTrip().findStopTimeById(stopId);
 						if (stopTime == null) {
 							stopTime = new StopTime();
 							stopTime.setStopId(stopId);
 							newStop = true;
-							trip.getTrip().addStopTime(stopTime);
+							routeTripPair.getTrip().addStopTime(stopTime);
 						}
 
 					}
 
-					if (indexMap.containsKey("ArrivalTime") && data[indexMap.get("ArrivalTime")] != null) {
-						String time[] = data[indexMap.get("ArrivalTime")].trim().split(":");
+					if (indexMap.containsKey("arrival_time") && data[indexMap.get("arrival_time")] != null) {
+						String time[] = data[indexMap.get("arrival_time")].trim().split(":");
 						StringBuilder builder = new StringBuilder();
 						for (String str : time) {
 							builder.append(str);
@@ -185,8 +187,8 @@ public class StopTimeFileHandler extends AbstractFileHandler {
 							}
 						}
 
-						if (indexMap.containsKey("StopHeadSign")) {
-							stopTime.setStopHeadSign(data[indexMap.get("StopHeadSign")].trim());
+						if (indexMap.containsKey("stop_headsign")) {
+							stopTime.setStopHeadSign(data[indexMap.get("stop_headsign")].trim());
 						}
 					}
 
@@ -219,6 +221,7 @@ public class StopTimeFileHandler extends AbstractFileHandler {
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage(), e);
 		}
+		return true;
 
 	}
 

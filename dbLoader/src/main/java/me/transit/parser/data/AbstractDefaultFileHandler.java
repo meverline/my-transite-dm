@@ -11,74 +11,53 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Properties;
 import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.reflections.Reflections;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import me.database.neo4j.IGraphDatabaseDAO;
 import me.transit.annotation.GTFSFileModel;
 import me.transit.annotation.GTFSSetter;
-import me.transit.dao.AgencyDao;
-import me.transit.dao.CalendarDateDao;
-import me.transit.dao.RouteDao;
-import me.transit.dao.TransiteStopDao;
-import me.transit.database.Agency;
-import me.transit.database.CalendarDate;
-import me.transit.database.Route;
 import me.transit.database.TransitData;
-import me.transit.database.TransitStop;
 import me.transit.parser.data.savers.DataSaver;
 
-@Component(value="defaultFaileHandler")
-public class DefaultFileHandler extends AbstractFileHandler {
+public abstract class AbstractDefaultFileHandler extends AbstractFileHandler {
 
-	private static final String LOCATION = "Location";
-	private static final String LATITUDE = "Latitude";
-	private static final String LONGITUDE = "Longitude";
-	private static final String AGENCYID = "AgencyId";
+	private static final String LOCATION = "location";
+	private static final String LATITUDE = "stop_lat";
+	private static final String LONGITUDE = "stop_lon";
+	private static final String AGENCYID = "agency_id";
 
-	private Log log = LogFactory.getLog(getClass().getName());
-	private final Properties properties = new Properties();
+	protected Log log = LogFactory.getLog(getClass().getName());
+	private final Map<String, Class<?>> properties = new HashMap<>();
 	private final Map<String, Map<String, Method>> classMethodMap = new HashMap<>();
-	private final AgencyDao agencyDao;
-	private final IGraphDatabaseDAO graphDatabase;
-	private final TransiteStopDao transiteStopDao;
-	private final RouteDao routeDao;
-	private final CalendarDateDao calendarDateDao;
+	protected final IGraphDatabaseDAO graphDatabase;
 
 	/**
 	 * 
 	 * @param path
 	 */
 	@Autowired
-	public DefaultFileHandler(Blackboard blackboard, AgencyDao agencyDao, CalendarDateDao calendarDateDao,
-						      TransiteStopDao transiteStopDao, RouteDao routeDao, IGraphDatabaseDAO graphDatabase) {
+	public AbstractDefaultFileHandler(Blackboard blackboard, IGraphDatabaseDAO graphDatabase) {
 		super(blackboard);
 		initilize();
-		this.agencyDao = Objects.requireNonNull(agencyDao, "agencyDao can not be null");
-		this.graphDatabase = Objects.requireNonNull(graphDatabase,"agencyDao can not be null");
-		this.transiteStopDao = Objects.requireNonNull(transiteStopDao,"transiteStopDao can not be null");
-		this.routeDao = Objects.requireNonNull(routeDao,"routeDao can not be null");
-		this.calendarDateDao = Objects.requireNonNull(calendarDateDao,"calendarDateDao can not be null");
+		this.graphDatabase = Objects.requireNonNull(graphDatabase,"graphDatabase can not be null");
 	}
-	
-	/*
-	 * 
+		
+	/**
+	 * @return the graphDatabase
 	 */
-	@Override
-	public String handlesFile() {
-		return null;
+	protected IGraphDatabaseDAO getGraphDatabase() {
+		return graphDatabase;
 	}
 
 	/**
 	 * @return the properties
 	 */
-	public Properties getProperties() {
+	public Map<String, Class<?>> getProperties() {
 		return properties;
 	}
 
@@ -193,48 +172,7 @@ public class DefaultFileHandler extends AbstractFileHandler {
 	 * @param obj
 	 * @throws SQLException
 	 */
-	public void save(Object obj) throws SQLException {
-		
-		if (obj instanceof Agency) {
-			Agency current = Agency.class.cast(obj);
-
-			Agency saved = agencyDao.findByName(current.getName());
-			if (saved != null) {
-				getBlackboard().resetMBR();
-				getBlackboard().setAgency(saved);
-			} else {
-				agencyDao.save(current);
-				graphDatabase.addNode(current);
-				getBlackboard().setAgency(current);
-			}
-
-		} else if (obj instanceof TransitStop) {
-			TransitStop stop = TransitStop.class.cast(obj);
-
-			getBlackboard().getMBR().extend(stop.getLocation());
-
-			if (stop.getDesc().isEmpty()) {
-				stop.setDesc(stop.getName());
-			}
-			stop.setName(stop.getName().toLowerCase());
-			transiteStopDao.save(stop);
-			graphDatabase.addNode(stop);
-
-		} else if (obj instanceof Route) {
-			Route route = Route.class.cast(obj);
-			if (route.getShortName() == null || route.getShortName().isEmpty()) {
-				route.setShortName(route.getLongName());
-			}
-			routeDao.save(route);
-			graphDatabase.addNode(route);
-
-		} else if (obj instanceof CalendarDate) {
-			calendarDateDao.save(CalendarDate.class.cast(obj));
-		} else {
-			log.error("save: Unkown class: " + obj.getClass().getName());
-		}
-
-	}
+	public abstract void save(Object obj) throws SQLException;
 
 	/**
 	 * 
@@ -249,22 +187,21 @@ public class DefaultFileHandler extends AbstractFileHandler {
 
 		Map<String, Method> methodMap = getClassMethodMap().get(objClass.getName());
 
-		int ndx = type.indexOf(".");
 		List<String> order = new ArrayList<String>();
-		processHeader(header, type.substring(0, ndx), order);
+		processHeader(header, order);
 
 		for (String name : order) {
 
 			String setMethodName = name;
-			if (name.compareTo(DefaultFileHandler.LATITUDE) == 0 || name.compareTo(DefaultFileHandler.LONGITUDE) == 0) {
-				setMethodName = DefaultFileHandler.LOCATION;
+			if (name.compareTo(AbstractDefaultFileHandler.LATITUDE) == 0 || name.compareTo(AbstractDefaultFileHandler.LONGITUDE) == 0) {
+				setMethodName = AbstractDefaultFileHandler.LOCATION;
 			}
 			
 			if (!methodMap.containsKey(setMethodName)) {
 				throw new NoSuchMethodException(setMethodName + " class: " + objClass.getName() + " " + name);
 			}
 
-			rtn.add(new DataSaver(methodMap.get(setMethodName), setMethodName, this.getBlackboard()));
+			rtn.add(new DataSaver(methodMap.get(setMethodName), setMethodName, this.getBlackboard(), name));
 
 		}
 		return rtn;
@@ -286,24 +223,32 @@ public class DefaultFileHandler extends AbstractFileHandler {
 	 * @see me.transit.parser.data.FileHandler#parse(java.lang.String)
 	 */
 	@Override
-	public void parse(String filePath) {
+	public boolean parse(String filePath) throws Exception {
+		boolean rtn = false;
 		String line = null;
+		BufferedReader inStream = null;
+		
 		try {
 
 			File fp = new File(filePath);
 			if (!fp.exists()) {
-				return;
+				log.error("file path does not exit: " + filePath);
+				return rtn;
 			}
 
-			BufferedReader inStream = new BufferedReader(new FileReader(filePath));
+			inStream = new BufferedReader(new FileReader(filePath));
 			if (!inStream.ready()) {
 				inStream.close();
-				return;
+				return rtn;
 			}
 
 			line = inStream.readLine();
+			String type = getType(filePath);
 			@SuppressWarnings("rawtypes")
-			Class objClass = Class.forName(this.getProperties().getProperty(getType(filePath)));
+			Class objClass = this.getProperties().get(type);
+			if ( objClass == null ) {
+				log.error("unable to find: " + type + " " + this.getProperties());
+			}
 			List<DataSaver> header = mapMethods(line, getType(filePath), objClass);
 
 			while (inStream.ready()) {
@@ -316,31 +261,34 @@ public class DefaultFileHandler extends AbstractFileHandler {
 				String lat = null;
 				String lon = null;
 
-				try {
+				
 					while (fldNdx < data.size()) {
 						DataSaver saver = header.get(headerNdx++);
 
 						String outData = data.get(fldNdx).trim();
 
 						if (outData.length() > 0) {
-							if (saver.getField().compareTo(DefaultFileHandler.LATITUDE) == 0) {
+							if (saver.getField().compareTo(AbstractDefaultFileHandler.LATITUDE) == 0) {
 								lat = outData;
 								if (lat != null && lon != null) {
 									handleCoordinate(lat, lon, saver, obj);
-									lat = null;
-									lon = null;
 								}
-							} else if (saver.getField().compareTo(DefaultFileHandler.LONGITUDE) == 0) {
-								lon = outData;
+							} else if (saver.getField().compareTo(AbstractDefaultFileHandler.LOCATION) == 0) {
+								if (saver.getOrgHeader().compareTo(AbstractDefaultFileHandler.LONGITUDE) == 0) {
+								   lat = outData;
+								} else if (saver.getOrgHeader().compareTo(AbstractDefaultFileHandler.LATITUDE) == 0) {
+								   lon = outData;
+								}
 								if (lat != null && lon != null) {
 									handleCoordinate(lat, lon, saver, obj);
 									lat = null;
 									lon = null;
 								}
-							} else if (saver.getField().compareTo(DefaultFileHandler.AGENCYID) == 0) {
+							} else if (saver.getField().compareTo(AbstractDefaultFileHandler.AGENCYID) == 0) {
 								saver.save(obj, getBlackboard().getAgencyName());
 							} else {
 								saver.save(obj, outData);
+								
 							}
 						}
 						fldNdx++;
@@ -358,17 +306,21 @@ public class DefaultFileHandler extends AbstractFileHandler {
 
 					if (valid) {
 						save(obj);
+						rtn = true;
 					}
 
-				} catch (Exception e) {
-					log.error(e.getLocalizedMessage() + " >> " + line, e);
-				}
 			}
 			inStream.close();
 
 		} catch (Exception e) {
-			log.error(e.getLocalizedMessage() + " >> " + line, e);
+			log.error(e.getLocalizedMessage() + " >> " + line);
+			throw e;
+		} finally {
+			if ( inStream != null ) {
+				inStream.close();
+			}
 		}
+		return rtn;
 	}
 
 }

@@ -70,12 +70,17 @@ public class ShapeFileHandler extends AbstractFileHandler {
 				db.setId(id);
 				db.setShape(getFactory().createLineString(array));
 
-				routeGeometryDao.save(db);
-				getBlackboard().getShaps().put(id, db);
+				if ( db.valid()) {
+					routeGeometryDao.save(db);
+					getBlackboard().getShaps().put(id, db);
+					log.info("saved route geometry: "+ db.getAgency() + " " + db.getId());
+				} else {
+					log.error("Invalid Shape: " + db.getAgency() + " " + db.getId());
+				}
 			}
 
 		} catch (Exception e) {
-			log.error("ID: " + id + " : coords size " + coords.size() + "\n" + e.getLocalizedMessage(), e);
+			log.error("ID: " + id + " : coords size " + coords.size() + "\n" + e.getLocalizedMessage());
 		}
 
 	}
@@ -86,28 +91,32 @@ public class ShapeFileHandler extends AbstractFileHandler {
 	 * @see me.transit.parser.data.FileHandler#parse(java.lang.String)
 	 */
 	@Override
-	public void parse(String shapeFile) {
+	public boolean parse(String shapeFile) throws Exception{
+		boolean rtn = false;
 		try {
 
 			File fp = new File(shapeFile);
 			if (!fp.exists()) {
-				return;
+				log.error("file does not exist: " + shapeFile);
+				return rtn;
 			}
 
 			BufferedReader inStream = new BufferedReader(new FileReader(shapeFile));
 			if (!inStream.ready()) {
 				inStream.close();
-				return;
+				log.error("file is empty: " + shapeFile);
+				return rtn;
 			}
 			List<String> header = new ArrayList<String>();
-			Map<String, Integer> indexMap = processHeader(inStream.readLine(), "shape", header);
+			Map<String, Integer> indexMap = processHeader(inStream.readLine(), header);
+			log.info(header);
 
 			List<Coordinate> coords = new ArrayList<Coordinate>();
 			String current = null;
 			while (inStream.ready()) {
 				String line = inStream.readLine();
 				String data[] = line.split(",");
-				String id = data[indexMap.get(AbstractFileHandler.ID)].trim();
+				String id = data[indexMap.get("shape_id")].trim();
 
 				if (current == null) {
 					current = id;
@@ -117,10 +126,11 @@ public class ShapeFileHandler extends AbstractFileHandler {
 					saveShape(current, coords);
 					coords.clear();
 					current = id;
+					rtn = true;
 				}
 
-				double lat = Double.parseDouble(data[indexMap.get("PtLat")]);
-				double lon = Double.parseDouble(data[indexMap.get("PtLon")]);
+				double lat = Double.parseDouble(data[indexMap.get("shape_pt_lat")]);
+				double lon = Double.parseDouble(data[indexMap.get("shape_pt_lon")]);
 				coords.add(new Coordinate(lat, lon));
 			}
 			saveShape(current, coords);
@@ -128,7 +138,9 @@ public class ShapeFileHandler extends AbstractFileHandler {
 
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage(), e);
+			rtn = false;
 		}
+		return rtn;
 	}
 
 }

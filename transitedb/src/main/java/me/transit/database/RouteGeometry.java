@@ -149,6 +149,9 @@ public class RouteGeometry implements TransitData {
 
 	public boolean valid() 
 	{
+		if ( this.getAgency() == null && this.getId() != null) {
+			return false;
+		}
 		return true;
 	}
 	

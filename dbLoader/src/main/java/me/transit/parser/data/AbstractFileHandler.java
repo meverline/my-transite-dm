@@ -21,8 +21,9 @@ public abstract class AbstractFileHandler {
 	/**
 	 * 
 	 * @param shapeFile
+	 * @throws Exception 
 	 */
-	public abstract void parse(String shapeFile);
+	public abstract boolean parse(String shapeFile) throws Exception;
 
 	/**
 	 * @return the blackboard
@@ -48,7 +49,7 @@ public abstract class AbstractFileHandler {
 	 * @param strip
 	 * @return
 	 */
-	protected Map<String, Integer> processHeader(String header, String strip, List<String> order) {
+	protected Map<String, Integer> processHeader(String header, List<String> order) {
 		String fields[] = header.split(",");
 		Map<String, Integer> indexMap = new HashMap<String, Integer>();
 

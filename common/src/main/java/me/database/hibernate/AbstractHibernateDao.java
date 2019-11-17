@@ -11,15 +11,13 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 public abstract class AbstractHibernateDao<T extends Serializable> {
 
 	private Log log = LogFactory.getLog(AbstractHibernateDao.class);
 	
-	@Autowired
 	private HibernateConnection connection = null;;
     
 	private Class<?> daoClass;
@@ -109,19 +107,17 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 	 * @throws SQLException
 	 */
 	@SuppressWarnings("deprecation")
+	@Transactional
 	public synchronized void delete(long uuid) throws SQLException {
 				
 		Session session = null;
-		Transaction tx = null;
 		
 		try {
 			session = getSessionFactory().openSession();
 			Criteria crit = session.createCriteria(this.getDaoClass());
 			
 			crit.add( Restrictions.eq("UUID", uuid));
-			tx = session.beginTransaction();
 			session.delete(crit.uniqueResult());
-			tx.commit();
 			session.flush();
 			session.close();
 		} catch (HibernateException ex) {
@@ -134,6 +130,7 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 	 * @param uuids
 	 * @throws SQLException
 	 */
+	@Transactional
 	public synchronized void delete(List<Long> uuids) throws SQLException {
 		for (Long uuid : uuids) {
 			this.delete(uuid);

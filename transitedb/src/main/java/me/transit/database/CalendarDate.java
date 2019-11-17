@@ -103,7 +103,6 @@ public class CalendarDate implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.CalendarDate#getId()
 	 */
-	@GTFSSetter(column="service_id")
 	@JsonGetter("service_id")
 	public String getId() {
 		return id;
@@ -113,6 +112,7 @@ public class CalendarDate implements TransitData {
 	 * @see me.transit.database.impl.CalendarDate#setId(java.lang.String)
 	 */
 	@JsonSetter("service_id")
+	@GTFSSetter(column="service_id")
 	public void setId(String id) {
 		this.id = id;
 	}

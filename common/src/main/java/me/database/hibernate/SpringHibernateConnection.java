@@ -9,8 +9,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author meverline
@@ -48,24 +48,20 @@ public class SpringHibernateConnection implements HibernateConnection {
 	/* (non-Javadoc)
 	 * @see me.transit.dao.hibernate.HibernateDao#save(java.lang.Object)
 	 */
+	@Transactional
 	public synchronized void save(Object item) throws SQLException {
 		
 		Session session = null;
-		Transaction tx = null;
 		
 		try {
 
 			session = getSessionFactory().openSession();
-			tx = session.beginTransaction();
-
 			session.saveOrUpdate(item);
-			tx.commit();
 			session.flush();
 			session.close();
 
 		} catch (Exception ex) {
 			if ( session != null ) {
-				tx.rollback();
 				session.close();
 		    }
 			

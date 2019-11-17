@@ -39,7 +39,7 @@ public class LocalParser extends AbstractGTFSParser {
 					parseFeeds(agency);
 				}
 			} catch (Exception e) {
-				getLog().error(e.getLocalizedMessage(), e);
+				getLog().error(e.getLocalizedMessage());
 			}
 		}
 

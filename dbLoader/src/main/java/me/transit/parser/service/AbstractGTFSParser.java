@@ -83,27 +83,28 @@ public abstract class AbstractGTFSParser {
 	 * The directory where the data file are located at.
 	 * 
 	 * @param diretory
+	 * @throws Exception 
 	 */
-	protected void parse(String diretory) {
+	protected void parse(String diretory) throws Exception {
 		
 		String files[] = getProperties().get("order").toString().split(",");
-
-		this.getFactory().reset();
+		
 		for (String dataFile : files) {
 			getLog().info("parse: " + dataFile + " " + diretory);
-
 			String key = dataFile.trim();
 			this.getFactory().getHandler(key).parse(filePath(diretory, dataFile));
+			
 		}
-
+		
 		this.getFactory().getHandler(null).endProcess();
 		getLog().info("done processing: " + diretory);
 	}
 
 	/**
+	 * @throws Exception 
 	 * 
 	 */
-	protected void parseFeeds(MessageAgency agency) {
+	protected void parseFeeds(MessageAgency agency) throws Exception {
 
 		long start = System.currentTimeMillis();
 		for (Location loc : getLocList()) {

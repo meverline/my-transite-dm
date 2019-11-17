@@ -207,7 +207,6 @@ public class OpenMobilityData {
 			zis = new ZipInputStream(new FileInputStream(file));
 			ZipEntry zipEntry = zis.getNextEntry();
 			while (zipEntry != null) {
-				log.info(zipEntry.getName());
 				File newFile = newFile(path, zipEntry);
 				fos = new FileOutputStream(newFile);
 

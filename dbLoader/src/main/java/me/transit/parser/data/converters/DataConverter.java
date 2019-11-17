@@ -41,6 +41,7 @@ public abstract class DataConverter {
 		Object parameters[] = new Object[1];
 
 		try {
+			log.info(obj.getClass().getName() + " " + meth.getName() + " " + data);
 			parameters[0] = this.convert(data);
 			meth.invoke(obj, parameters);
 		} catch (Exception e) {
@@ -52,7 +53,8 @@ public abstract class DataConverter {
 			str.append(this.getClass().getName());
 			str.append(") ");
 			str.append(data);
-			log.error(str.toString(), e);
+			log.error(str.toString());
+			throw e;
 		}
 	}
 

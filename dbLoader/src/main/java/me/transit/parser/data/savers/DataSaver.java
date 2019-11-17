@@ -16,16 +16,22 @@ public class DataSaver {
 	private final String fieldName;
 	private final Blackboard parser;
 	private final Class<?> returnType;
+	private final String orgHeader;
 	private DataConverter type;
 
 	private Log log = LogFactory.getLog(DataSaver.class);
 
 	
-	public DataSaver(Method setMethod, String field, Blackboard parser) throws NoSuchMethodException {
+	public DataSaver(Method setMethod, String field, Blackboard parser, String header) throws NoSuchMethodException {
 		this.method = setMethod;
 		this.fieldName = field;
 		this.parser = parser;
 		this.returnType = initReturnType(setMethod);
+		this.orgHeader = header;
+	}
+	
+	public String getOrgHeader() {
+		return this.orgHeader;
 	}
 
 	/**
@@ -78,16 +84,21 @@ public class DataSaver {
 	 */
 	private Class<?> initReturnType(Method setMethod) throws NoSuchMethodException {
 		DataConverterFactory factory = DataConverterFactory.create();
+		
+		if ( setMethod.getParameterCount() == 0 ) {
+			throw new NoSuchMethodException("Not a set method: " + setMethod.getName());
+		}
 		Parameter parm = (setMethod.getParameters())[0];
 		DataConverter type = factory.getHandler(parm.getType());
+		
 	    if ( type == null && parm.getType().isEnum()) {
 	    	type = factory.getHandler(Enum.class);
 	    }
 	    
 	    if ( type == null && parm.getType().isPrimitive()) {
 			throw new NoSuchMethodException("Unkown type: " + parm.getType());
-		} else {
-			log.info("OBJECT: " + parm.getType().getName() + " " + parm.getType().getName());
+		} else if ( type == null ){
+			log.error("OBJECT: " + setMethod.getName() + " " + parm.getType().getName() + " " + parm.getType().getName());
 			type = factory.getHandler(Object.class);
 		}
 	    setType(type);

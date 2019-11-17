@@ -54,7 +54,8 @@ public class TripFileHandler extends AbstractFileHandler {
 	 * @see me.transit.parser.data.FileHandler#parse(java.lang.String)
 	 */
 	@Override
-	public void parse(String shapeFile) {
+	public boolean parse(String shapeFile) throws Exception {
+		boolean rtn = false;
 		Map<String, List<Trip>> routeToTrips = new HashMap<String, List<Trip>>();
 		Set<String> invalidService = new HashSet<String>();
 
@@ -64,16 +65,21 @@ public class TripFileHandler extends AbstractFileHandler {
 			File fp = new File(shapeFile);
 			if (!fp.exists()) {
 				getBlackboard().getTripMap().clear();
+				log.error("file does not exist: " + shapeFile);
+				return rtn;
 			}
 
 			BufferedReader inStream = new BufferedReader(new FileReader(shapeFile));
 			if (!inStream.ready()) {
 				inStream.close();
 				getBlackboard().getTripMap().clear();
+				log.error("file is empty: " + shapeFile);
+				return rtn;
 			}
 
 			List<String> header = new ArrayList<String>();
-			Map<String, Integer> indexMap = processHeader(inStream.readLine(), "trip", header);
+			Map<String, Integer> indexMap = processHeader(inStream.readLine(), header);
+			log.info(header);
 
 			String routeId = null;
 			while (inStream.ready()) {
@@ -85,21 +91,21 @@ public class TripFileHandler extends AbstractFileHandler {
 
 				trip.setAgency(getBlackboard().getAgency());
 
-				if (indexMap.containsKey("RouteId")) {
-					routeId = data[indexMap.get("RouteId")].replace('"', ' ').trim();
+				if (indexMap.containsKey("route_id")) {
+					routeId = data[indexMap.get("route_id")].replace('"', ' ').trim();
 
 					if (!routeToTrips.containsKey(routeId)) {
 						routeToTrips.put(routeId, new ArrayList<Trip>());
 					}
 				}
 
-				if (indexMap.containsKey("Id")) {
-					String id = data[indexMap.get("Id")].trim();
+				if (indexMap.containsKey("trip_id")) {
+					String id = data[indexMap.get("trip_id")].trim();
 					trip.setId(id);
 				}
 
-				if (indexMap.containsKey("ServiceId")) {
-					String id = data[indexMap.get("ServiceId")].trim();
+				if (indexMap.containsKey("service_id")) {
+					String id = data[indexMap.get("service_id")].trim();
 
 					if (getBlackboard().getService().get(id) != null) {
 						trip.setService(getBlackboard().getService().get(id));
@@ -111,21 +117,21 @@ public class TripFileHandler extends AbstractFileHandler {
 					}
 				}
 
-				if (indexMap.containsKey("Headsign")) {
-					trip.setHeadSign(data[indexMap.get("Headsign")].trim());
+				if (indexMap.containsKey("trip_headsign")) {
+					trip.setHeadSign(data[indexMap.get("trip_headsign")].trim());
 				}
 
-				if (indexMap.containsKey("DirectionId")) {
+				if (indexMap.containsKey("direction_id")) {
 					try {
-						int id = Integer.parseInt(data[indexMap.get("DirectionId")].trim());
+						int id = Integer.parseInt(data[indexMap.get("direction_id")].trim());
 						Trip.DirectionType[] type = Trip.DirectionType.values();
 						trip.setDirectionId(type[id]);
 					} catch (Exception e) {
 					}
 				}
 
-				if (indexMap.containsKey("ShapeId") && data.length > indexMap.get("ShapeId")) {
-					String id = data[indexMap.get("ShapeId")].trim();
+				if (indexMap.containsKey("shape_id") && data.length > indexMap.get("shape_id")) {
+					String id = data[indexMap.get("shape_id")].trim();
 					trip.setShape(getBlackboard().getShaps().get(id));
 				}
 
@@ -160,11 +166,15 @@ public class TripFileHandler extends AbstractFileHandler {
 					graphDatabase.createRelationShip(route, entry);
 				}
 			}
+			
+			rtn = true;
 
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage(), e);
+			rtn = false;
 		}
 
+		return rtn;
 	}
 
 }

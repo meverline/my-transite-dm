@@ -122,6 +122,7 @@ public class Route extends AbstractGraphNode implements TransitData {
 	 * @see me.transit.database.impl.Route#setAgency(me.transit.database.impl.Agency)
 	 */
 	@JsonSetter("agency_name")
+	@GTFSSetter(column="agency_id")
 	public void setAgency(Agency agency) {
 		this.agency = agency;
 	}
@@ -239,7 +240,7 @@ public class Route extends AbstractGraphNode implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Route#setUrl(java.lang.String)
 	 */
-	@GTFSSetter(column="url")
+	@GTFSSetter(column="route_url")
 	@JsonSetter("url")
 	public void setUrl(String url) {
 		this.url = url;

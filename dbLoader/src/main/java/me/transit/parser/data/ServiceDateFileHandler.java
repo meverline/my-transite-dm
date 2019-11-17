@@ -108,22 +108,25 @@ public class ServiceDateFileHandler extends AbstractFileHandler {
 	 * @see me.transit.parser.data.FileHandler#parse(java.lang.String)
 	 */
 	@Override
-	public void parse(String shapeFile) {
+	public boolean parse(String shapeFile) throws Exception {
 		try {
 
 			File fp = new File(shapeFile);
 			if (!fp.exists()) {
-				return;
+				log.error("file does not exist: " + shapeFile);
+				return false;
 			}
 
 			BufferedReader inStream = new BufferedReader(new FileReader(shapeFile));
 			if (!inStream.ready()) {
 				inStream.close();
-				return;
+				log.error("file is empty: " + shapeFile);
+				return false;
 			}
-			List<String> header = new ArrayList<String>();
-			Map<String, Integer> indexMap = processHeader(inStream.readLine(), "service", header);
-
+			List<String> header = new ArrayList<String>();	
+			Map<String, Integer> indexMap = processHeader(inStream.readLine(), header);
+			log.info(header);
+			
 			while (inStream.ready()) {
 				String line = inStream.readLine();
 				if (line.trim().length() > 0 && line.indexOf(',') != -1) {
@@ -133,47 +136,47 @@ public class ServiceDateFileHandler extends AbstractFileHandler {
 					if (indexMap.get(AbstractFileHandler.ID) != null) {
 						id = data[indexMap.get(AbstractFileHandler.ID)].replace('"', ' ').trim();
 					} else {
-						if (indexMap.get("serviceId") == null) {
+						if (indexMap.get("service_id") == null) {
 							id = data[0].replace('"', ' ').trim();
 						} else {
-							id = data[indexMap.get("serviceId")].replace('"', ' ').trim();
+							id = data[indexMap.get("service_id")].replace('"', ' ').trim();
 						}
 					}
 
 					ServiceDate sd = new ServiceDate();
 
 					sd.setId(id.trim());
-					sd.setStartDate(this.convertDate(data[indexMap.get("StartDate")].replace('"', ' ').trim()));
-					sd.setEndDate(this.convertDate(data[indexMap.get("EndDate")].replace('"', ' ').trim()));
+					sd.setStartDate(this.convertDate(data[indexMap.get("start_date")].replace('"', ' ').trim()));
+					sd.setEndDate(this.convertDate(data[indexMap.get("end_date")].replace('"', ' ').trim()));
 					sd.setAgency(getBlackboard().getAgency());
 
 					int serviceFlag = 0;
 					boolean weekday = false, sat = false, sun = false;
-					if (this.convertToBoolean(data[indexMap.get("Sunday")])) {
+					if (this.convertToBoolean(data[indexMap.get("sunday")])) {
 						serviceFlag |= ServiceDate.WeekDay.SUNDAY.getBit();
 						sun = true;
 					}
-					if (this.convertToBoolean(data[indexMap.get("Monday")])) {
+					if (this.convertToBoolean(data[indexMap.get("monday")])) {
 						serviceFlag |= ServiceDate.WeekDay.MONDAY.getBit();
 						weekday |= true;
 					}
-					if (this.convertToBoolean(data[indexMap.get("Tuesday")])) {
+					if (this.convertToBoolean(data[indexMap.get("tuesday")])) {
 						serviceFlag |= ServiceDate.WeekDay.TUESDAY.getBit();
 						weekday |= true;
 					}
-					if (this.convertToBoolean(data[indexMap.get("Wednesday")])) {
+					if (this.convertToBoolean(data[indexMap.get("wednesday")])) {
 						serviceFlag |= ServiceDate.WeekDay.WENSDAY.getBit();
 						weekday |= true;
 					}
-					if (this.convertToBoolean(data[indexMap.get("Thursday")])) {
+					if (this.convertToBoolean(data[indexMap.get("thursday")])) {
 						serviceFlag |= ServiceDate.WeekDay.THURSDAY.getBit();
 						weekday |= true;
 					}
-					if (this.convertToBoolean(data[indexMap.get("Friday")])) {
+					if (this.convertToBoolean(data[indexMap.get("friday")])) {
 						serviceFlag |= ServiceDate.WeekDay.FRIDAY.getBit();
 						weekday |= true;
 					}
-					if (this.convertToBoolean(data[indexMap.get("Saturday")])) {
+					if (this.convertToBoolean(data[indexMap.get("saturday")])) {
 						serviceFlag |= ServiceDate.WeekDay.SATURDAY.getBit();
 						sat = true;
 					}
@@ -190,6 +193,7 @@ public class ServiceDateFileHandler extends AbstractFileHandler {
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage(), e);
 		}
+		return true;
 
 	}
 

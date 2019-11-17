@@ -10,10 +10,10 @@ import org.hibernate.HibernateException;
 import org.hibernate.MappingException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
+import org.springframework.transaction.annotation.Transactional;
 
 public class ManualHibernateConnection implements HibernateConnection {
 
@@ -117,23 +117,19 @@ public class ManualHibernateConnection implements HibernateConnection {
 	 * (non-Javadoc)
 	 * @see me.transit.dao.hibernate.HibernateConnection#save(java.lang.Object)
 	 */
+	@Transactional
 	public  void save(Object item) throws SQLException {
 
 		Session session = null;
-		Transaction tx = null;
 		try {
 
 			session = getSessionFactory().openSession();
-			tx = session.beginTransaction();
-
 			session.saveOrUpdate(item);
-			tx.commit();
 			session.flush();
 			session.close();
 
 		} catch (Exception ex) {
 			if ( session != null ) {
-				tx.rollback();
 				session.close();
 		    }
 			

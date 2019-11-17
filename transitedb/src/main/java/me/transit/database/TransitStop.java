@@ -141,7 +141,7 @@ public class TransitStop extends AbstractGraphNode implements TransitData, IData
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.TransitStop#setId(java.lang.String)
 	 */
-	@GTFSSetter(column="id")
+	@GTFSSetter(column="stop_id")
 	@JsonSetter("id")
 	public void setId(String id) {
 		this.id = id;
@@ -175,7 +175,7 @@ public class TransitStop extends AbstractGraphNode implements TransitData, IData
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.TransitStop#setCode(java.lang.String)
 	 */
-	@GTFSSetter(column="code")
+	@GTFSSetter(column="stop_code")
 	@JsonSetter("code")
 	public void setCode(String code) {
 		this.code = code;
@@ -192,7 +192,7 @@ public class TransitStop extends AbstractGraphNode implements TransitData, IData
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.TransitStop#setName(java.lang.String)
 	 */
-	@GTFSSetter(column="name")
+	@GTFSSetter(column="stop_name")
 	@JsonSetter("name")
 	public void setName(String name) {
 		this.name = name;
@@ -209,7 +209,7 @@ public class TransitStop extends AbstractGraphNode implements TransitData, IData
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.TransitStop#setDesc(java.lang.String)
 	 */
-	@GTFSSetter(column="desc")
+	@GTFSSetter(column="stop_desc")
 	@JsonSetter("desc")
 	public void setDesc(String desc) {
 		this.desc = desc;
@@ -262,7 +262,7 @@ public class TransitStop extends AbstractGraphNode implements TransitData, IData
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.TransitStop#setUrl(java.lang.String)
 	 */
-	@GTFSSetter(column="url")
+	@GTFSSetter(column="stop_url")
 	@JsonSetter("url")
 	public void setUrl(String url) {
 		this.url = url;
