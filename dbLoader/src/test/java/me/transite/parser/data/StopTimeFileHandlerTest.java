@@ -59,8 +59,6 @@ public class StopTimeFileHandlerTest extends EasyMockSupport {
 	@Test
 	public void test() {
 		RouteTripPair pair = new RouteTripPair("", trip);
-		StopTime stopTime = new StopTime();
-		
 		List<StopTime> times = new ArrayList<>();
 				
 		agency.setName("TEST AGENCY");
