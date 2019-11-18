@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import me.database.neo4j.IGraphDatabaseDAO;
 import me.transit.annotation.GTFSFileModel;
 import me.transit.annotation.GTFSSetter;
+import me.transit.database.Agency;
 import me.transit.database.TransitData;
 import me.transit.parser.data.savers.DataSaver;
 
@@ -284,7 +285,7 @@ public abstract class AbstractDefaultFileHandler extends AbstractFileHandler {
 									lat = null;
 									lon = null;
 								}
-							} else if (saver.getField().compareTo(AbstractDefaultFileHandler.AGENCYID) == 0) {
+							} else if (saver.getField().compareTo(AbstractDefaultFileHandler.AGENCYID) == 0 && obj.getClass() != Agency.class) {
 								saver.save(obj, getBlackboard().getAgencyName());
 							} else {
 								saver.save(obj, outData);

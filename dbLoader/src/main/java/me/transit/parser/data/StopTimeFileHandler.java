@@ -169,18 +169,18 @@ public class StopTimeFileHandler extends AbstractFileHandler {
 					}
 
 					if (!newStop) {
-						if (indexMap.containsKey("DropOffType")) {
+						if (indexMap.containsKey("drop_off_type")) {
 							try {
-								int ndx = Integer.parseInt(data[indexMap.get("DropOffType")].replace('"', ' ').trim());
+								int ndx = Integer.parseInt(data[indexMap.get("drop_off_type")].replace('"', ' ').trim());
 								stopTime.setDropOffType(StopTime.PickupType.values()[ndx]);
 							} catch (Exception ex) {
 								log.error("Unknown Dropoff Type: ");
 							}
 						}
 
-						if (indexMap.containsKey("PickupType")) {
+						if (indexMap.containsKey("pickup_type")) {
 							try {
-								int ndx = Integer.parseInt(data[indexMap.get("PickupType")].replace('"', ' ').trim());
+								int ndx = Integer.parseInt(data[indexMap.get("pickup_type")].replace('"', ' ').trim());
 								stopTime.setPickupType(StopTime.PickupType.values()[ndx]);
 							} catch (Exception ex) {
 								log.error("Unknown Pickup Type: ");
