@@ -85,7 +85,9 @@ public class StopTimeFileHandler extends AbstractFileHandler {
 				}
 			}
 			
-			if ( route != null ) {
+			if ( route == null ) {
+				log.warn("route is null for: " + entry.getKey() + " " + getBlackboard().getAgencyName());
+			} else {
 				for (TransitStop stopInfo : stopIds.values()) {
 					graphdb.createRelationShip(route, stopInfo);
 				}
