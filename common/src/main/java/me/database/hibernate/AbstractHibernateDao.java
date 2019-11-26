@@ -97,6 +97,7 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 	 * @param item
 	 * @throws SQLException
 	 */
+	@Transactional
 	public synchronized void save(T item) throws SQLException {
 		this.getConnection().save(item);
 	}

@@ -28,6 +28,7 @@ public class TripFileHandler extends AbstractFileHandler {
 	private Log log = LogFactory.getLog(getClass().getName());
 	private final IGraphDatabaseDAO graphDatabase;
 	private final RouteDao routeDao;
+	
 	/**
 	 * 
 	 * @param blackboard
@@ -132,7 +133,7 @@ public class TripFileHandler extends AbstractFileHandler {
 
 				if (indexMap.containsKey("shape_id") && data.length > indexMap.get("shape_id")) {
 					String id = data[indexMap.get("shape_id")].trim();
-					trip.setShape(getBlackboard().getShaps().get(id));
+					trip.setShape(getBlackboard().getShapes().get(id));
 				}
 
 				List<Trip> tripList = routeToTrips.get(routeId);

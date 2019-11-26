@@ -5,14 +5,19 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.annotation.Scope;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import me.database.hibernate.HibernateConnection;
 import me.database.hibernate.SpringHibernateConnection;
@@ -21,6 +26,8 @@ import me.database.mongo.IDocumentDao;
 
 
 @Configuration
+@EnableTransactionManagement
+@ComponentScan(basePackages="me.transite")
 @PropertySource({ "classpath:persistence-${envTarget:dev}.properties" })
 public class CommonConfigBase {
 	
@@ -39,19 +46,10 @@ public class CommonConfigBase {
 		
 		return data;
 	}
-
-	/**
-	 * 
-	 * @return
-	 */
+	
 	@Bean
-	@Scope("singleton")
-	public LocalSessionFactoryBean sessionFactory() {
-		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-		sessionFactory.setDataSource(dataSource());
-		sessionFactory.setPackagesToScan(this.packageToScan());
-		sessionFactory.setHibernateProperties(hibernateProperties());
-		return sessionFactory;
+	public static PropertySourcesPlaceholderConfigurer propertySourcePlaceHolderConfiguer() {
+		return new PropertySourcesPlaceholderConfigurer();
 	}
 
 	/**
@@ -59,7 +57,18 @@ public class CommonConfigBase {
 	 * @return
 	 */
 	@Bean
-	@Scope("singleton")
+	public SessionFactory sessionFactory() {
+		return new LocalSessionFactoryBuilder(dataSource())
+					.scanPackages(this.packageToScan())
+					.addProperties(hibernateProperties())
+					.buildSessionFactory();
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	@Bean
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("org.postgresql.Driver");
@@ -75,9 +84,13 @@ public class CommonConfigBase {
 	 * @return
 	 */
 	@Bean
-	@Scope("singleton")
 	public HibernateConnection hibernateConnection() {
-		return new SpringHibernateConnection(this.sessionFactory().getObject());
+		return new SpringHibernateConnection(this.sessionFactory());
+	}
+		 
+	@Bean
+	public PlatformTransactionManager transactionManager(){
+	    return new HibernateTransactionManager(sessionFactory());
 	}
 
 	/**

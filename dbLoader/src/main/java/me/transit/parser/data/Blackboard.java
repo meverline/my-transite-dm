@@ -26,11 +26,14 @@ public class Blackboard {
 	private Agency agency = null;
 	private MinBoundingRectangle mbr = null;
 
+	/**
+	 * 
+	 */
 	public void reset() {
 		this.setAgency(null);
 		this.resetMBR();
 		this.getRouteShortName().clear();
-		this.getShaps().clear();
+		this.getShapes().clear();
 		this.getService().clear();
 		this.getTripMap().clear();
 		this.getRouteToTrips().clear();
@@ -47,6 +50,9 @@ public class Blackboard {
 		return this.mbr;
 	}
 
+	/**
+	 * 
+	 */
 	public void resetMBR() {
 		mbr = new MinBoundingRectangle();
 	}
@@ -84,7 +90,7 @@ public class Blackboard {
 	/**
 	 * @return the shaps
 	 */
-	public Map<String, RouteGeometry> getShaps() {
+	public Map<String, RouteGeometry> getShapes() {
 		return shaps;
 	}
 

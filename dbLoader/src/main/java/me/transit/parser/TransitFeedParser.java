@@ -33,7 +33,6 @@ public class TransitFeedParser implements ApplicationContextAware, CommandLineRu
         SpringApplication.run(TransitFeedParser.class, args);
     }
   
- 
 	/**
 	 * @param args
 	 */

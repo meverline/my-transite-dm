@@ -29,6 +29,11 @@ public class AgencyDataFileHandler extends AbstractDefaultFileHandler {
 		return "agency.txt";
 	}
 	
+	public void deleteAgencyAndData(Agency saved)
+	{
+		
+	}
+	
 	/**
 	 * 
 	 */
