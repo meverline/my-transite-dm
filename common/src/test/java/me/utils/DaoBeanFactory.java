@@ -3,7 +3,7 @@ package me.utils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import me.database.hibernate.HibernateDao;
+import me.database.hibernate.AbstractHibernateDao;
 
 public class DaoBeanFactory {
 	
@@ -49,13 +49,13 @@ public class DaoBeanFactory {
 	 * @param beanClass
 	 * @return
 	 */
-	public HibernateDao<?> getDaoBean(Class<?> beanClass)
+	public AbstractHibernateDao<?> getDaoBean(Class<?> beanClass)
 	{
 		StringBuilder beanName = new StringBuilder();
 		
 		beanName.append( beanClass.getSimpleName().substring(0,1).toLowerCase());
 		beanName.append( beanClass.getSimpleName().substring(1));
-		return (HibernateDao<?>) context_.getBean(beanName.toString());
+		return (AbstractHibernateDao<?>) context_.getBean(beanName.toString());
 	}
 	
 	/**

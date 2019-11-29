@@ -9,28 +9,21 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import me.database.hibernate.AbstractHibernateDao;
-import me.database.hibernate.HibernateConnection;
 import me.transit.database.Agency;
 
 @SuppressWarnings("deprecation")
 @Repository(value="agencyDao")
 @Scope("singleton")
+@Transactional
 public class AgencyDao extends AbstractHibernateDao<Agency> {
-
-	/**
-	 * 
-	 * @throws SQLException
-	 * @throws ClassNotFoundException
-	 */
-	public AgencyDao() throws SQLException, ClassNotFoundException {
-		super(Agency.class);
-	}
 	
 	/**
 	 * 
@@ -38,8 +31,8 @@ public class AgencyDao extends AbstractHibernateDao<Agency> {
 	 * @throws ClassNotFoundException
 	 */
 	@Autowired
-	public AgencyDao(HibernateConnection hibernateConnection) throws SQLException, ClassNotFoundException {
-		super(Agency.class, hibernateConnection);
+	public AgencyDao(SessionFactory aSessionFactory) throws SQLException, ClassNotFoundException {
+		super(Agency.class, aSessionFactory);
 	}
 	
 	/**
@@ -69,7 +62,6 @@ public class AgencyDao extends AbstractHibernateDao<Agency> {
 			for ( Object obj : crit.list()) {
 				rtn.add(Agency.class.cast(obj));
 			}
-			session.close();
 			return rtn;
 
 		} catch (HibernateException ex) {
@@ -95,7 +87,6 @@ public class AgencyDao extends AbstractHibernateDao<Agency> {
 			
 			Object rtn = crit.uniqueResult();
 
-			session.close();
 			return rtn;
 
 		} catch (HibernateException ex) {
@@ -126,7 +117,6 @@ public class AgencyDao extends AbstractHibernateDao<Agency> {
 			   rtn.add(Agency.class.cast(it.next()));
 			}
 
-			session.close();
 			return rtn;
 			
 		} catch (HibernateException ex) {

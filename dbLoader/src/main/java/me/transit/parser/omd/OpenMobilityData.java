@@ -252,8 +252,6 @@ public class OpenMobilityData {
 	        if (responseCode == HttpURLConnection.HTTP_OK) {
 	        	String fileName = "";
 	            String disposition = httpConn.getHeaderField("Content-Disposition");
-	            String contentType = httpConn.getContentType();
-	            int contentLength = httpConn.getContentLength();
 	 
 	            if (disposition != null) {
 	                // extracts file name from header field
@@ -267,12 +265,7 @@ public class OpenMobilityData {
 	                fileName = fileURL.substring(fileURL.lastIndexOf("/") + 1,
 	                        fileURL.length());
 	            }
-	 
-	            log.info("Content-Type = " + contentType);
-	            log.info("Content-Disposition = " + disposition);
-	            log.info("Content-Length = " + contentLength);
-	            log.info("fileName = " + fileName);
-	 
+	 	 
 	            // opens input stream from the HTTP connection
 	            InputStream inputStream = httpConn.getInputStream();
 	            saveFilePath = saveDir + File.separator + fileName.replace(' ', '_');

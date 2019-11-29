@@ -3,34 +3,27 @@ package me.transit.dao;
 import java.sql.SQLException;
 
 import org.hibernate.Hibernate;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import me.database.hibernate.HibernateConnection;
 import me.transit.database.CalendarDate;
 
 @Repository(value="calendarDateDao")
 @Scope("singleton")
+@Transactional
 public class CalendarDateDao extends TransitDao<CalendarDate> {
-	
-	/**
-	 * 
-	 * @throws SQLException
-	 * @throws ClassNotFoundException
-	 */
-	public CalendarDateDao() throws SQLException, ClassNotFoundException {
-		super(CalendarDate.class);
-	}
-	
+
 	/**
 	 * 
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
 	@Autowired
-	public CalendarDateDao(HibernateConnection hibernateConnection) throws SQLException, ClassNotFoundException {
-		super(CalendarDate.class, hibernateConnection);
+	public CalendarDateDao(SessionFactory aSessionFactory) throws SQLException, ClassNotFoundException {
+		super(CalendarDate.class, aSessionFactory);
 	}
 	
 	/* (non-Javadoc)

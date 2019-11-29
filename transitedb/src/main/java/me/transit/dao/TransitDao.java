@@ -5,28 +5,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.database.hibernate.AbstractHibernateDao;
-import me.database.hibernate.HibernateConnection;
-import me.transit.database.Agency;
-
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
+import me.database.hibernate.AbstractHibernateDao;
+import me.transit.database.Agency;
+
 public abstract class TransitDao<T extends Serializable> extends AbstractHibernateDao<T> {
 
-	/**
-	 * 
-	 * @param aClass
-	 * @throws SQLException
-	 * @throws ClassNotFoundException
-	 */
-	protected TransitDao(Class<?> aClass) throws SQLException, ClassNotFoundException {
-		super(aClass);
-	}
-	
 	/**
 	 * 
 	 * @param aClass
@@ -34,8 +24,8 @@ public abstract class TransitDao<T extends Serializable> extends AbstractHiberna
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
-	protected TransitDao(Class<?> aClass, HibernateConnection hibernateConnection) throws SQLException, ClassNotFoundException {
-		super(aClass, hibernateConnection);
+	protected TransitDao(Class<?> aClass, SessionFactory aSessionFactory) throws SQLException, ClassNotFoundException {
+		super(aClass, aSessionFactory);
 	}
 	
 	/* (non-Javadoc)

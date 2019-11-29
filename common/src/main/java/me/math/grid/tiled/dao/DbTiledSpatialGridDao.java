@@ -2,31 +2,24 @@ package me.math.grid.tiled.dao;
 
 import java.sql.SQLException;
 
-import me.database.hibernate.AbstractHibernateDao;
-import me.database.hibernate.HibernateConnection;
-import me.math.grid.tiled.DbTiledSpatialGrid;
-
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import me.database.hibernate.AbstractHibernateDao;
+import me.math.grid.tiled.DbTiledSpatialGrid;
 
 @SuppressWarnings("deprecation")
 @Repository(value="dbTiledSpatialGridDao")
 @Qualifier("dbTiledSpatialGridDao")
+@Transactional
 public class DbTiledSpatialGridDao extends AbstractHibernateDao<DbTiledSpatialGrid> {
 
-	/**
-	 * 
-	 * @throws SQLException
-	 * @throws ClassNotFoundException
-	 */
-	public DbTiledSpatialGridDao() throws SQLException, ClassNotFoundException {
-		super(DbTiledSpatialGrid.class);
-	}
-	
 	/**
 	 * 
 	 * @param aConnection
@@ -34,8 +27,8 @@ public class DbTiledSpatialGridDao extends AbstractHibernateDao<DbTiledSpatialGr
 	 * @throws ClassNotFoundException
 	 */
 	@Autowired
-	public DbTiledSpatialGridDao(HibernateConnection hibernateConnection) throws SQLException, ClassNotFoundException {
-		super(DbTiledSpatialGrid.class, hibernateConnection);
+	public DbTiledSpatialGridDao(SessionFactory aSessionFactory) throws SQLException, ClassNotFoundException {
+		super(DbTiledSpatialGrid.class, aSessionFactory);
 	}
 	
 	/**

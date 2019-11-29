@@ -3,25 +3,19 @@ package me.transit.dao;
 import java.sql.SQLException;
 
 import org.hibernate.Hibernate;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import me.database.hibernate.HibernateConnection;
 import me.transit.database.Trip;
 
 @Repository(value="tripDao")
 @Scope("singleton")
+@Transactional
 public class TripDao extends TransitDao<Trip>  {
-	/**
-	 * 
-	 * @throws SQLException
-	 * @throws ClassNotFoundException
-	 */
-	public TripDao() throws SQLException, ClassNotFoundException {
-		super(Trip.class);
-	}
-	
+
 	/**
 	 * 
 	 * @param aConnection
@@ -29,8 +23,8 @@ public class TripDao extends TransitDao<Trip>  {
 	 * @throws ClassNotFoundException
 	 */
 	@Autowired
-	public TripDao(HibernateConnection hibernateConnection) throws SQLException, ClassNotFoundException {
-		super(Trip.class, hibernateConnection);
+	public TripDao(SessionFactory aSessionFactory) throws SQLException, ClassNotFoundException {
+		super(Trip.class, aSessionFactory);
 	}
 		
 	/* (non-Javadoc)

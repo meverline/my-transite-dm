@@ -11,36 +11,29 @@ import org.hibernate.Query;
 import org.hibernate.ScrollMode;
 import org.hibernate.ScrollableResults;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import me.database.hibernate.HibernateConnection;
 import me.transit.database.Route;
 
 @Repository(value="routeDao")
 @SuppressWarnings("deprecation")
 @Scope("singleton")
+@Transactional
 public class RouteDao extends TransitDao<Route>  {
-	
-	/**
-	 * 
-	 * @throws SQLException
-	 * @throws ClassNotFoundException
-	 */
-	public RouteDao() throws SQLException, ClassNotFoundException {
-		super(Route.class);
-	}
-	
+
 	/**
 	 * 
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
 	@Autowired
-	public RouteDao(HibernateConnection hibernateConnection) throws SQLException, ClassNotFoundException {
-		super(Route.class, hibernateConnection);
+	public RouteDao(SessionFactory aSessionFactory) throws SQLException, ClassNotFoundException {
+		super(Route.class, aSessionFactory);
 	}
 	
 	/* (non-Javadoc)
@@ -69,9 +62,7 @@ public class RouteDao extends TransitDao<Route>  {
 			Criteria crit = session.createCriteria(Route.class);
 			
 			crit.add(Restrictions.like("shortName", routeNumber));
-			crit.createAlias("agency", "agency").add(Restrictions.eq("agency.name", 
-			
-					agencyName));
+			crit.createAlias("agency", "agency").add(Restrictions.eq("agency.name", agencyName));
 			
 			for ( Object obj : crit.list()) {
 				Route rt = Route.class.cast(obj);
@@ -79,7 +70,6 @@ public class RouteDao extends TransitDao<Route>  {
 				Hibernate.initialize(rt.getAgency());				
 				rtn.add(rt);
 			}
-			session.close();
 		
 		} catch (HibernateException ex) {
 			getLog().error(ex.getLocalizedMessage(), ex);

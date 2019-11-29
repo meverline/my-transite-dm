@@ -18,43 +18,23 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 
 	private Log log = LogFactory.getLog(AbstractHibernateDao.class);
 	
-	private HibernateConnection connection = null;;
-    
-	private Class<?> daoClass;
+	private final SessionFactory sessionFactory; 
+	private final Class<?> daoClass;
 	
-	protected AbstractHibernateDao(Class<?> aClass) throws SQLException, ClassNotFoundException {
+	protected AbstractHibernateDao(Class<?> aClass, SessionFactory aSessionFactory) throws SQLException, ClassNotFoundException {
 		Objects.requireNonNull(aClass, "aClass cannot be null");
-		this.setDaoClass(aClass);
-	}
-	
-	protected AbstractHibernateDao(Class<?> aClass, HibernateConnection aConnection) throws SQLException, ClassNotFoundException {
-		Objects.requireNonNull(aClass, "aClass cannot be null");
-		Objects.requireNonNull(aConnection, "aConnection cannot be null");
+		Objects.requireNonNull(aSessionFactory, "aSessionFactory cannot be null");
 		
-		this.setDaoClass(aClass);
-		this.setConnection(aConnection);
+		daoClass = aClass;
+		sessionFactory = aSessionFactory;
 	}
 	
-	/**
-	 * @return the connection
-	 */
-	public HibernateConnection getConnection() {
-		return connection;
-	}
-	
-	/**
-	 * @param connection the connection to set
-	 */
-	public void setConnection(HibernateConnection connection) {
-		this.connection = connection;
-	}
-
 	/**
 	 * 
 	 * @return
 	 */
 	public SessionFactory getSessionFactory() {
-	    return getConnection().getSessionFactory();
+	    return this.sessionFactory;
 	}
 	
 	/**
@@ -75,21 +55,18 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 	 * @return the connection
 	 */
 	protected Session getSession() {
-		return this.getSessionFactory().openSession();
+		try {
+			return this.getSessionFactory().getCurrentSession();
+		} catch ( Exception e) {
+			return this.getSessionFactory().openSession();
+		}
 	}
 
 	/**
 	 * @return the daoClass
 	 */
-	protected Class<?> getDaoClass() {
+	protected final Class<?> getDaoClass() {
 		return daoClass;
-	}
-
-	/**
-	 * @param daoClass the daoClass to set
-	 */
-	protected void setDaoClass(Class<?> daoClass) {
-		this.daoClass = daoClass;
 	}
 
 	/**
@@ -99,7 +76,23 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 	 */
 	@Transactional
 	public synchronized void save(T item) throws SQLException {
-		this.getConnection().save(item);
+		
+		Session session = null;
+		
+		try {
+
+			session = getSessionFactory().openSession();
+			session.saveOrUpdate(item);
+			session.flush();
+			
+		} catch (Exception ex) {
+			if ( session != null ) {
+				session.close();
+		    }
+			
+			log.error(ex);
+			throw new SQLException(ex.getLocalizedMessage());
+		}
 	}
 	
 	/**
@@ -114,13 +107,12 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 		Session session = null;
 		
 		try {
-			session = getSessionFactory().openSession();
+			session = getSession();
 			Criteria crit = session.createCriteria(this.getDaoClass());
 			
 			crit.add( Restrictions.eq("UUID", uuid));
 			session.delete(crit.uniqueResult());
 			session.flush();
-			session.close();
 		} catch (HibernateException ex) {
 			log.error(ex.getLocalizedMessage(), ex);
 		}
@@ -155,8 +147,6 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 			
 			@SuppressWarnings("unchecked")
 			T rtn = (T) crit.uniqueResult();
-
-			session.close();
 			return rtn;
 
 		} catch (HibernateException ex) {
@@ -185,8 +175,6 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 			
 			@SuppressWarnings("unchecked")
 			T rtn = (T) crit.uniqueResult();
-
-			session.close();
 			return rtn;
 
 		} catch (HibernateException ex) {

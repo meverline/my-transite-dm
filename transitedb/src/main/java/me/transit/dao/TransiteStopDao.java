@@ -8,31 +8,24 @@ import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import me.database.hibernate.HibernateConnection;
 import me.transit.dao.query.StopQueryConstraint;
 import me.transit.database.TransitStop;
 
 @Repository(value="transiteStopDao")
 @Scope("singleton")
+@Transactional
 public class TransiteStopDao extends TransitDao<TransitStop> {
-	
-	/**
-	 * 
-	 * @throws SQLException
-	 * @throws ClassNotFoundException
-	 */
-	public TransiteStopDao() throws SQLException, ClassNotFoundException {
-		super(TransitStop.class);
-	}
-	
+		
 	@Autowired
-	public TransiteStopDao(HibernateConnection hibernateConnection) throws SQLException, ClassNotFoundException {
-		super(TransitStop.class, hibernateConnection);
+	public TransiteStopDao(SessionFactory aSessionFactory) throws SQLException, ClassNotFoundException {
+		super(TransitStop.class, aSessionFactory);
 	}
 		
 	/* (non-Javadoc)
@@ -52,7 +45,6 @@ public class TransiteStopDao extends TransitDao<TransitStop> {
 				Hibernate.initialize(st.getAgency());
 				rtn.add(st);
 			}
-			session.close();
 
 		} catch (HibernateException ex) {
 			getLog().error(ex.getLocalizedMessage(), ex);
@@ -80,7 +72,6 @@ public class TransiteStopDao extends TransitDao<TransitStop> {
 				Hibernate.initialize(st.getAgency());
 				rtn.add(st);
 			}
-			session.close();
 
 		} catch (HibernateException ex) {
 			getLog().error(ex.getLocalizedMessage(), ex);

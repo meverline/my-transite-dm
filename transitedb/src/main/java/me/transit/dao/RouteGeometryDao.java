@@ -3,26 +3,19 @@ package me.transit.dao;
 import java.sql.SQLException;
 
 import org.hibernate.Hibernate;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import me.database.hibernate.HibernateConnection;
 import me.transit.database.RouteGeometry;
 
 @Repository(value="routeGeometryDao")
 @Scope("singleton")
+@Transactional
 public class RouteGeometryDao extends TransitDao<RouteGeometry>  {
-	
-	/**
-	 * 
-	 * @throws SQLException
-	 * @throws ClassNotFoundException
-	 */
-	public RouteGeometryDao() throws SQLException, ClassNotFoundException {
-		super(RouteGeometry.class);
-	}
-	
+
 	/**
 	 * 
 	 * @param aConnection
@@ -30,8 +23,8 @@ public class RouteGeometryDao extends TransitDao<RouteGeometry>  {
 	 * @throws ClassNotFoundException
 	 */
 	@Autowired
-	public RouteGeometryDao(HibernateConnection hibernateConnection) throws SQLException, ClassNotFoundException {
-		super(RouteGeometry.class, hibernateConnection);
+	public RouteGeometryDao(SessionFactory aSessionFactory) throws SQLException, ClassNotFoundException {
+		super(RouteGeometry.class, aSessionFactory);
 	}
 	
 	/* (non-Javadoc)

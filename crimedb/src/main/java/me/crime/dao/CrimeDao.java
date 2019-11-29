@@ -12,6 +12,7 @@ import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,6 @@ import org.springframework.stereotype.Repository;
 
 import me.crime.database.Crime;
 import me.database.hibernate.AbstractHibernateDao;
-import me.database.hibernate.HibernateConnection;
 import me.transit.dao.query.tuple.IQueryTuple;
 
 @SuppressWarnings("deprecation")
@@ -29,8 +29,8 @@ import me.transit.dao.query.tuple.IQueryTuple;
 public class CrimeDao extends AbstractHibernateDao<Crime> {
 
 	@Autowired
-	public CrimeDao(HibernateConnection aConnection) throws SQLException, ClassNotFoundException {
-		super(Crime.class, aConnection);
+	public CrimeDao(SessionFactory aSessionFactory) throws SQLException, ClassNotFoundException {
+		super(Crime.class, aSessionFactory);
 	}
 	
 	/**
@@ -55,7 +55,6 @@ public class CrimeDao extends AbstractHibernateDao<Crime> {
 				Hibernate.initialize(rtn.getCodes());
 			}
 
-			session.close();
 			return rtn;
 
 		} catch (Exception ex) {
@@ -79,9 +78,7 @@ public class CrimeDao extends AbstractHibernateDao<Crime> {
 			Criteria crit = session.createCriteria(Crime.class);
 				
 			list.getCriterion(crit);
-			List<Crime> rtn = toCrime( crit.list());
-			session.close();
-			return rtn;
+			return toCrime( crit.list());
 
 		} catch (HibernateException ex) {
 			getLog().error(ex.getLocalizedMessage(), ex);
@@ -141,7 +138,6 @@ public class CrimeDao extends AbstractHibernateDao<Crime> {
 
 			}
 
-			session.close();
 			return rtn;
 
 		} catch (HibernateException ex) {
@@ -203,9 +199,6 @@ public class CrimeDao extends AbstractHibernateDao<Crime> {
 				.setMaxResults(maxResults);
 				
 				List<?> results = crit.list();
-
-				session.close();	
-				
 				return toCrime(results);
 				
 		} catch (HibernateException ex) {

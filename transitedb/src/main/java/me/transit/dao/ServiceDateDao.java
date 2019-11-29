@@ -3,26 +3,19 @@ package me.transit.dao;
 import java.sql.SQLException;
 
 import org.hibernate.Hibernate;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import me.database.hibernate.HibernateConnection;
 import me.transit.database.ServiceDate;
 
 @Repository(value="serviceDateDao")
 @Scope("singleton")
+@Transactional
 public class ServiceDateDao extends TransitDao<ServiceDate>  {
-	
-	/**
-	 * 
-	 * @throws SQLException
-	 * @throws ClassNotFoundException
-	 */
-	public ServiceDateDao() throws SQLException, ClassNotFoundException {
-		super(ServiceDate.class);
-	}
-	
+
 	/**
 	 * 
 	 * @param aConnection
@@ -30,8 +23,8 @@ public class ServiceDateDao extends TransitDao<ServiceDate>  {
 	 * @throws ClassNotFoundException
 	 */
 	@Autowired
-	public ServiceDateDao(HibernateConnection hibernateConnection) throws SQLException, ClassNotFoundException {
-		super(ServiceDate.class, hibernateConnection);
+	public ServiceDateDao(SessionFactory aSessionFactory) throws SQLException, ClassNotFoundException {
+		super(ServiceDate.class, aSessionFactory);
 	}
 	
 	/* (non-Javadoc)

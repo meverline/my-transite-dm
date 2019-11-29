@@ -19,8 +19,6 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import me.database.hibernate.HibernateConnection;
-import me.database.hibernate.SpringHibernateConnection;
 import me.database.mongo.DocumentDao;
 import me.database.mongo.IDocumentDao;
 
@@ -41,7 +39,8 @@ public class CommonConfigBase {
 	protected String[] packageToScan() {
 		String [] data = {
 				"me.transit.database",
-				"me.crime.database"
+				"me.crime.database",
+				"me.math.grid.tiled"
 		};
 		
 		return data;
@@ -78,17 +77,8 @@ public class CommonConfigBase {
 
 		return dataSource;
 	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	@Bean
-	public HibernateConnection hibernateConnection() {
-		return new SpringHibernateConnection(this.sessionFactory());
-	}
-		 
-	@Bean
+ 
+	@Bean(name = "transactionManager")
 	public PlatformTransactionManager transactionManager(){
 	    return new HibernateTransactionManager(sessionFactory());
 	}

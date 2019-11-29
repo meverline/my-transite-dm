@@ -10,13 +10,13 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
 import me.crime.database.URCCatagories;
 import me.database.hibernate.AbstractHibernateDao;
-import me.database.hibernate.HibernateConnection;
 
 @SuppressWarnings("deprecation")
 @Repository(value="urcCatagoriesDAO")
@@ -24,8 +24,8 @@ import me.database.hibernate.HibernateConnection;
 public class URCCatagoriesDAO extends AbstractHibernateDao<URCCatagories> {
 	
 	@Autowired
-	public URCCatagoriesDAO(HibernateConnection aConnection) throws SQLException, ClassNotFoundException {
-		super(URCCatagories.class, aConnection);
+	public URCCatagoriesDAO(SessionFactory aSessionFactory) throws SQLException, ClassNotFoundException {
+		super(URCCatagories.class, aSessionFactory);
 	}
 	
 	/**
@@ -43,10 +43,7 @@ public class URCCatagoriesDAO extends AbstractHibernateDao<URCCatagories> {
 
 			query.setString("name", id);
 
-			URCCatagories rtn = URCCatagories.class.cast(query.uniqueResult());
-
-			session.close();
-			return rtn;
+			return URCCatagories.class.cast(query.uniqueResult());
 
 		} catch (HibernateException ex) {
 			getLog().error(ex.getLocalizedMessage(), ex);
@@ -87,7 +84,6 @@ public class URCCatagoriesDAO extends AbstractHibernateDao<URCCatagories> {
 			   rtn.add(URCCatagories.class.cast(it.next()));
 			}
 
-			session.close();
 			return rtn;
 
 		} catch (HibernateException ex) {
@@ -125,7 +121,6 @@ public class URCCatagoriesDAO extends AbstractHibernateDao<URCCatagories> {
 				rtn.add(aUrc.getCatagorie());
 			}
 
-			session.close();
 			return rtn;
 
 		} catch (HibernateException ex) {

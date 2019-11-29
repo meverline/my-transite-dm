@@ -8,13 +8,13 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
 import me.crime.database.Address;
 import me.database.hibernate.AbstractHibernateDao;
-import me.database.hibernate.HibernateConnection;
 
 @SuppressWarnings("deprecation")
 @Repository(value="addressDao")
@@ -22,8 +22,8 @@ import me.database.hibernate.HibernateConnection;
 public class AddressDao extends AbstractHibernateDao<Address> {
 	
 	@Autowired
-	public AddressDao(HibernateConnection aConnection) throws SQLException, ClassNotFoundException {
-		super(Address.class, aConnection);
+	public AddressDao(SessionFactory aSessionFactory) throws SQLException, ClassNotFoundException {
+		super(Address.class, aSessionFactory);
 	}
 	
 	/**
@@ -48,7 +48,6 @@ public class AddressDao extends AbstractHibernateDao<Address> {
 				rtn = Address.class.cast( obj);
 			}
 
-			session.close();
 			return rtn;
 
 		} catch (HibernateException ex) {
@@ -90,10 +89,7 @@ public class AddressDao extends AbstractHibernateDao<Address> {
 											  "where addr.location like :loc order by LOCATION");
 
 			query.setString("loc", location + "%");
-
-			List<Address> rtn = toAddress(query.list());
-			session.close();
-			return rtn;
+			return toAddress(query.list());
 
 		} catch (HibernateException ex) {
 			getLog().error(ex.getLocalizedMessage(), ex);
@@ -113,10 +109,7 @@ public class AddressDao extends AbstractHibernateDao<Address> {
 
 			Session session = getSession();
 			Query<Address> query = session.createQuery("from Address as addr order by LOCATION");
-
-			List<Address> rtn = toAddress(query.list());
-			session.close();
-			return rtn;
+			return toAddress(query.list());
 
 		} catch (HibernateException ex) {
 			getLog().error(ex.getLocalizedMessage(), ex);
