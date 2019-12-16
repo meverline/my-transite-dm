@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.vividsolutions.jts.geom.Polygon;
+import org.locationtech.jts.geom.Polygon;
 
 import me.database.neo4j.AbstractGraphNode;
 import me.database.neo4j.FIELD;
@@ -232,7 +232,7 @@ public class Agency extends AbstractGraphNode implements Serializable {
 	}
 
 	/* (non-Javadoc)
-	 * @see me.transit.database.impl.Agency#setMBR(com.vividsolutions.jts.geom.Polygon)
+	 * @see me.transit.database.impl.Agency#setMBR(org.locationtech.jts.geom.Polygon)
 	 */
 	@JsonSetter("mbr")
 	@JsonDeserialize(converter = Base64StringToGeometry.class)

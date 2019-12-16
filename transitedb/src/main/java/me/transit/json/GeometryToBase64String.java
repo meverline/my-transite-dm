@@ -3,8 +3,8 @@ package me.transit.json;
 import org.apache.commons.codec.binary.Base64;
 
 import com.fasterxml.jackson.databind.util.StdConverter;
-import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.io.WKBWriter;
+import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.io.WKBWriter;
 
 public class GeometryToBase64String extends StdConverter<Geometry, String> {
 

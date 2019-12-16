@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.vividsolutions.jts.geom.Geometry;
+import org.locationtech.jts.geom.Geometry;
 
 import me.transit.annotation.GTFSSetter;
 import me.transit.json.AgencyToString;
@@ -134,7 +134,7 @@ public class RouteGeometry implements TransitData {
 	}
 
 	/* (non-Javadoc)
-	 * @see me.transit.database.impl.RouteGeometry#setShape(com.vividsolutions.jts.geom.Geometry)
+	 * @see me.transit.database.impl.RouteGeometry#setShape(org.locationtech.jts.geom.Geometry)
 	 */
 	@GTFSSetter(column="shape")
 	@JsonSetter("shape")

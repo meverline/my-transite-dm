@@ -2,7 +2,7 @@ package me.transit.parser.data.converters;
 
 import org.springframework.stereotype.Service;
 
-import com.vividsolutions.jts.geom.Geometry;
+import org.locationtech.jts.geom.Geometry;
 
 @Service(value="stringToGeometry")
 public class StringToGeometry extends DataConverter {

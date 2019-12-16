@@ -36,7 +36,7 @@ import me.math.kdtree.KDTree;
 import me.math.kdtree.INode.Direction;
 import me.math.kdtree.INodeCreator;
 
-import com.vividsolutions.jts.geom.Point;
+import org.locationtech.jts.geom.Point;
 
 public class UniformSpatialGrid extends AbstractSpatialGridOverlay implements INodeCreator {
 	

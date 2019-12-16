@@ -23,7 +23,7 @@ import me.math.kdtree.MinBoundingRectangle;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
-import com.vividsolutions.jts.geom.Polygon;
+import org.locationtech.jts.geom.Polygon;
 
 public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, IGridDocument {
 	

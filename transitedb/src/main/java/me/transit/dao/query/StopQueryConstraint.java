@@ -2,7 +2,7 @@ package me.transit.dao.query;
 
 import java.util.List;
 
-import com.vividsolutions.jts.geom.Point;
+import org.locationtech.jts.geom.Point;
 
 import me.transit.dao.query.tuple.StringTuple;
 import me.transit.database.Agency;

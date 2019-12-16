@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.vividsolutions.jts.geom.Point;
+import org.locationtech.jts.geom.Point;
 
 import me.database.neo4j.AbstractGraphNode;
 import me.database.neo4j.FIELD;
@@ -225,7 +225,7 @@ public class TransitStop extends AbstractGraphNode implements TransitData, IData
 	}
 
 	/* (non-Javadoc)
-	 * @see me.transit.database.impl.TransitStop#setLocation(com.vividsolutions.jts.geom.Point)
+	 * @see me.transit.database.impl.TransitStop#setLocation(org.locationtech.jts.geom.Point)
 	 */
 	@GTFSSetter(column="location")
 	@JsonSetter("location")

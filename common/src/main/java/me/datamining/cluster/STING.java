@@ -27,7 +27,7 @@ import org.apache.commons.math3.distribution.NormalDistribution;
 import org.apache.commons.math3.distribution.PoissonDistribution;
 import org.apache.commons.math3.exception.NumberIsTooLargeException;
 
-import com.vividsolutions.jts.geom.Point;
+import org.locationtech.jts.geom.Point;
 
 import me.datamining.ClusteringAlgorithm;
 import me.math.Vertex;

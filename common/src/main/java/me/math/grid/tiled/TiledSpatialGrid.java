@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.math.Vertex;
-import com.vividsolutions.jts.geom.Point;
+import org.locationtech.jts.geom.Point;
 
 
 public class TiledSpatialGrid extends AbstractTiledSpatialGrid {

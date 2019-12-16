@@ -20,7 +20,7 @@ import java.io.Serializable;
 import java.util.Calendar;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.vividsolutions.jts.geom.Point;
+import org.locationtech.jts.geom.Point;
 
 
 @XStreamAlias("arrested")

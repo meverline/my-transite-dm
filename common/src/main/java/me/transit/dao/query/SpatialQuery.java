@@ -9,7 +9,7 @@ import me.transit.dao.query.tuple.CircleTuple;
 import me.transit.dao.query.tuple.PolygonBoxTuple;
 import me.transit.dao.query.tuple.RectangleTuple;
 
-import com.vividsolutions.jts.geom.Point;
+import org.locationtech.jts.geom.Point;
 
 /**
  * @author markeverline

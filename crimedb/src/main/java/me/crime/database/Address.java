@@ -28,7 +28,7 @@ import javax.persistence.Table;
 import me.math.Vertex;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.vividsolutions.jts.geom.Point;
+import org.locationtech.jts.geom.Point;
 
 @Entity
 @Table(name = "crm_Address")

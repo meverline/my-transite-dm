@@ -25,7 +25,7 @@ import me.math.grid.AbstractSpatialGridPoint;
 import me.math.kdtree.IKDSearch;
 import me.math.kdtree.INode;
 
-import com.vividsolutions.jts.geom.Point;
+import org.locationtech.jts.geom.Point;
 
 
 public class RangeSearch implements IKDSearch {
