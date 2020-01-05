@@ -7,13 +7,11 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import me.transit.database.ServiceDate;
 
 @Repository(value="serviceDateDao")
 @Scope("singleton")
-@Transactional
 public class ServiceDateDao extends TransitDao<ServiceDate>  {
 
 	/**

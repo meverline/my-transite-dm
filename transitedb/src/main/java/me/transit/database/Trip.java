@@ -19,8 +19,9 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
@@ -56,12 +57,12 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@Column(name = "UUID", nullable = false)
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "TRIP_UUID", nullable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO, generator="native")
+	@GenericGenerator( name = "native", strategy = "native")
 	private long uuid = -1;
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@MapsId
 	@JoinColumn(name = "AGENCY_UUID", nullable = false, updatable = false)
 	private Agency agency = null;
 
@@ -71,7 +72,7 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	@Column(name = "VERSION")
 	private String version = "0.5";
 	
-	@ManyToOne()
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name="SERVICE_DATE_UUID", nullable=false, updatable=false)
 	private ServiceDate service = null;
 	
@@ -85,7 +86,7 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	@Enumerated(EnumType.STRING) 
 	private DirectionType directionId = DirectionType.UNKOWN;
 	
-	@ManyToOne()
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name="ROUTE_GEOMETRY_UUID", nullable=false, updatable=false)
 	private RouteGeometry shape = null;
 	

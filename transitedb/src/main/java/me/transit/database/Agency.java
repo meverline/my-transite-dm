@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
@@ -47,7 +48,8 @@ public class Agency extends AbstractGraphNode implements Serializable {
 
 	@Id
 	@Column(name = "AGENCY_UUID", nullable = false)
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO, generator="native")
+	@GenericGenerator( name = "native", strategy = "native")
 	private long uuid = -1;
 
 	@Column(name = "NAME", nullable = false)
@@ -244,7 +246,9 @@ public class Agency extends AbstractGraphNode implements Serializable {
 	 * @see me.transit.database.impl.Agency#toString()
 	 */
 	public String toString() {
-		return this.getName();
+		return Long.toString(this.getUUID()) + " " + this.getId() 
+			   + " " + this.getName()
+			   + " " + this.getUrl();
 	}
 
 	/* (non-Javadoc)

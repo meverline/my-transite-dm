@@ -22,11 +22,9 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 	private final Class<?> daoClass;
 	
 	protected AbstractHibernateDao(Class<?> aClass, SessionFactory aSessionFactory) throws SQLException, ClassNotFoundException {
-		Objects.requireNonNull(aClass, "aClass cannot be null");
-		Objects.requireNonNull(aSessionFactory, "aSessionFactory cannot be null");
 		
-		daoClass = aClass;
-		sessionFactory = aSessionFactory;
+		daoClass = Objects.requireNonNull(aClass, "aClass cannot be null");;
+		sessionFactory = Objects.requireNonNull(aSessionFactory, "aSessionFactory cannot be null");
 	}
 	
 	/**
@@ -61,14 +59,14 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 			return this.getSessionFactory().openSession();
 		}
 	}
-
+	
 	/**
 	 * @return the daoClass
 	 */
 	protected final Class<?> getDaoClass() {
 		return daoClass;
 	}
-
+	
 	/**
 	 * 
 	 * @param item
@@ -76,20 +74,11 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 	 */
 	@Transactional
 	public synchronized void save(T item) throws SQLException {
-		
-		Session session = null;
-		
+				
 		try {
-
-			session = getSessionFactory().openSession();
-			session.saveOrUpdate(item);
-			session.flush();
-			
+			Session session = this.getSession();
+			session.saveOrUpdate(item);				
 		} catch (Exception ex) {
-			if ( session != null ) {
-				session.close();
-		    }
-			
 			log.error(ex);
 			throw new SQLException(ex.getLocalizedMessage());
 		}
@@ -103,16 +92,14 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 	@SuppressWarnings("deprecation")
 	@Transactional
 	public synchronized void delete(long uuid) throws SQLException {
-				
-		Session session = null;
-		
+						
 		try {
-			session = getSession();
-			Criteria crit = session.createCriteria(this.getDaoClass());
+			final Session session = this.getSession();
 			
-			crit.add( Restrictions.eq("UUID", uuid));
-			session.delete(crit.uniqueResult());
-			session.flush();
+				Criteria crit = session.createCriteria(this.getDaoClass());
+				crit.add( Restrictions.eq("UUID", uuid));
+				session.delete(crit.uniqueResult());
+				
 		} catch (HibernateException ex) {
 			log.error(ex.getLocalizedMessage(), ex);
 		}
@@ -123,7 +110,6 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 	 * @param uuids
 	 * @throws SQLException
 	 */
-	@Transactional
 	public synchronized void delete(List<Long> uuids) throws SQLException {
 		for (Long uuid : uuids) {
 			this.delete(uuid);
@@ -139,7 +125,7 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 	protected T loadByField(String id, String property) {
 
 		try {
-
+			
 			Session session = getSession();
 			Criteria crit = session.createCriteria(this.getDaoClass());
 			

@@ -16,9 +16,9 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
@@ -42,12 +42,12 @@ public class CalendarDate implements TransitData {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "UUID", nullable = false)
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "CALENDAR_DATE_UUID", nullable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO, generator="native")
+	@GenericGenerator( name = "native", strategy = "native")
 	private long uuid = -1;
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@MapsId
 	@JoinColumn(name = "AGENCY_UUID", nullable = false, updatable = false)
 	private Agency agency = null;
 

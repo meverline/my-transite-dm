@@ -14,9 +14,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
-import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import me.database.mongo.DocumentDao;
@@ -24,9 +22,9 @@ import me.database.mongo.IDocumentDao;
 
 
 @Configuration
-@EnableTransactionManagement
 @ComponentScan(basePackages="me.transite")
 @PropertySource({ "classpath:persistence-${envTarget:dev}.properties" })
+@EnableTransactionManagement
 public class CommonConfigBase {
 	
     @Autowired
@@ -77,11 +75,6 @@ public class CommonConfigBase {
 
 		return dataSource;
 	}
- 
-	@Bean(name = "transactionManager")
-	public PlatformTransactionManager transactionManager(){
-	    return new HibernateTransactionManager(sessionFactory());
-	}
 
 	/**
 	 * 
@@ -92,7 +85,6 @@ public class CommonConfigBase {
 		hibernateProperties.setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
 		hibernateProperties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
 		hibernateProperties.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
-
 		return hibernateProperties;
 	}
 	

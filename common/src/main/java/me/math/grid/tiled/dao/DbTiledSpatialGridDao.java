@@ -9,7 +9,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import me.database.hibernate.AbstractHibernateDao;
 import me.math.grid.tiled.DbTiledSpatialGrid;
@@ -17,7 +16,6 @@ import me.math.grid.tiled.DbTiledSpatialGrid;
 @SuppressWarnings("deprecation")
 @Repository(value="dbTiledSpatialGridDao")
 @Qualifier("dbTiledSpatialGridDao")
-@Transactional
 public class DbTiledSpatialGridDao extends AbstractHibernateDao<DbTiledSpatialGrid> {
 
 	/**

@@ -14,7 +14,6 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import me.database.hibernate.AbstractHibernateDao;
 import me.transit.database.Agency;
@@ -22,7 +21,6 @@ import me.transit.database.Agency;
 @SuppressWarnings("deprecation")
 @Repository(value="agencyDao")
 @Scope("singleton")
-@Transactional
 public class AgencyDao extends AbstractHibernateDao<Agency> {
 	
 	/**
