@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import me.database.neo4j.IGraphDatabaseDAO;
 import me.transit.dao.TransiteStopDao;
 import me.transit.database.TransitStop;
+import me.transit.parser.data.converters.DataConverterFactory;
 
 @Component(value = "transitStopFileHandler")
 public class TransitStopFileHandler extends AbstractDefaultFileHandler {
@@ -17,8 +18,8 @@ public class TransitStopFileHandler extends AbstractDefaultFileHandler {
 
 	@Autowired
 	public TransitStopFileHandler(Blackboard blackboard, TransiteStopDao transiteStopDao,
-			IGraphDatabaseDAO graphDatabase) {
-		super(blackboard, graphDatabase);
+			IGraphDatabaseDAO graphDatabase, DataConverterFactory dataConverterFactory) {
+		super(blackboard, graphDatabase, dataConverterFactory);
 		this.transiteStopDao = Objects.requireNonNull(transiteStopDao, "transiteStopDao can not be null");
 	}
 	

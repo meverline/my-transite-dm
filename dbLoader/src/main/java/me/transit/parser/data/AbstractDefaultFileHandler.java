@@ -23,6 +23,7 @@ import me.transit.annotation.GTFSFileModel;
 import me.transit.annotation.GTFSSetter;
 import me.transit.database.Agency;
 import me.transit.database.TransitData;
+import me.transit.parser.data.converters.DataConverterFactory;
 import me.transit.parser.data.savers.DataSaver;
 
 public abstract class AbstractDefaultFileHandler extends AbstractFileHandler {
@@ -36,16 +37,18 @@ public abstract class AbstractDefaultFileHandler extends AbstractFileHandler {
 	private final Map<String, Class<?>> properties = new HashMap<>();
 	private final Map<String, Map<String, Method>> classMethodMap = new HashMap<>();
 	protected final IGraphDatabaseDAO graphDatabase;
+	protected final DataConverterFactory dataConverterFactory;
 
 	/**
 	 * 
 	 * @param path
 	 */
 	@Autowired
-	public AbstractDefaultFileHandler(Blackboard blackboard, IGraphDatabaseDAO graphDatabase) {
+	public AbstractDefaultFileHandler(Blackboard blackboard, IGraphDatabaseDAO graphDatabase, DataConverterFactory dataConverterFactory) {
 		super(blackboard);
 		initilize();
 		this.graphDatabase = Objects.requireNonNull(graphDatabase,"graphDatabase can not be null");
+		this.dataConverterFactory = Objects.requireNonNull(dataConverterFactory,"dataConverterFactory can not be null");
 	}
 		
 	/**
@@ -202,7 +205,7 @@ public abstract class AbstractDefaultFileHandler extends AbstractFileHandler {
 				throw new NoSuchMethodException(setMethodName + " class: " + objClass.getName() + " " + name);
 			}
 
-			rtn.add(new DataSaver(methodMap.get(setMethodName), setMethodName, this.getBlackboard(), name));
+			rtn.add(new DataSaver(methodMap.get(setMethodName), setMethodName, this.getBlackboard(), name, dataConverterFactory));
 
 		}
 		return rtn;
@@ -314,7 +317,7 @@ public abstract class AbstractDefaultFileHandler extends AbstractFileHandler {
 			inStream.close();
 
 		} catch (Exception e) {
-			log.error(e.getLocalizedMessage() + " >> " + line);
+			log.error(e.getLocalizedMessage() + " >> " + line, e);
 			throw e;
 		} finally {
 			if ( inStream != null ) {

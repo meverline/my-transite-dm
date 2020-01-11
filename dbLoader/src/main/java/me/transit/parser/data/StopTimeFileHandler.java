@@ -81,7 +81,11 @@ public class StopTimeFileHandler extends AbstractFileHandler {
 
 						stopIds.put(info.getStopId(), stop);
 					}
-					graphdb.createRelationShip(trip, stopIds.get(info.getStopId()));
+					try {
+						graphdb.createRelationShip(trip, stopIds.get(info.getStopId()));
+					} catch (Exception ex) {
+						log.error("Unable to add relationship: " + ex.getLocalizedMessage());
+					}
 				}
 			}
 			
@@ -89,7 +93,11 @@ public class StopTimeFileHandler extends AbstractFileHandler {
 				log.warn("route is null for: " + entry.getKey() + " " + getBlackboard().getAgencyName());
 			} else {
 				for (TransitStop stopInfo : stopIds.values()) {
-					graphdb.createRelationShip(route, stopInfo);
+					try {
+						graphdb.createRelationShip(route, stopInfo);
+					} catch (Exception ex) {
+						log.error("Unable to add relationship: " + ex.getLocalizedMessage());
+					}
 				}
 			
 				Map<String, Object> data = route.toDocument();
@@ -109,6 +117,7 @@ public class StopTimeFileHandler extends AbstractFileHandler {
 	 */
 	@Override
 	public boolean parse(String shapeFile) throws Exception {
+		
 		try {
 
 			File fp = new File(shapeFile);
@@ -196,7 +205,7 @@ public class StopTimeFileHandler extends AbstractFileHandler {
 
 					lineCnt++;
 					cnt++;
-					if (cnt > 100000) {
+					if (cnt > 10000) {
 						log.info("parseStopTimes " + lineCnt + " ...");
 						cnt = 0;
 					}
@@ -204,7 +213,7 @@ public class StopTimeFileHandler extends AbstractFileHandler {
 			}
 
 			inStream.close();
-
+			log.info("Found " + Long.toString(lineCnt) + " stops");
 			log.info("parseStopTimes:build routeToTrip map " + getBlackboard().getTripMap().size());
 			HashMap<String, List<Trip>> routeToTrips = new HashMap<String, List<Trip>>();
 			for (RouteTripPair pair : getBlackboard().getTripMap().values()) {

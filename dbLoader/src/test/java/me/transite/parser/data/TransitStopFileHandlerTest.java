@@ -15,6 +15,7 @@ import me.transit.dao.TransiteStopDao;
 import me.transit.database.Agency;
 import me.transit.parser.data.Blackboard;
 import me.transit.parser.data.TransitStopFileHandler;
+import me.transit.parser.data.converters.DataConverterFactory;
 
 public class TransitStopFileHandlerTest extends EasyMockSupport {
 	
@@ -30,11 +31,13 @@ public class TransitStopFileHandlerTest extends EasyMockSupport {
 	
 	@Mock(MockType.NICE) 
 	private IGraphDatabaseDAO graphDatabase;
+	
+	DataConverterFactory factory = DataConverterFactory.create();
 
 	@Test
 	public void test() {
 		agency.setName("TEST AGENCY");
-		TransitStopFileHandler testSubject = new TransitStopFileHandler(blackboard, transiteStopDao, graphDatabase);
+		TransitStopFileHandler testSubject = new TransitStopFileHandler(blackboard, transiteStopDao, graphDatabase, factory);
 		
 		try {
 			blackboard.setAgency(agency);

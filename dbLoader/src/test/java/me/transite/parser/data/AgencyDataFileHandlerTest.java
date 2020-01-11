@@ -16,6 +16,7 @@ import me.database.neo4j.IGraphDatabaseDAO;
 import me.transit.dao.AgencyDao;
 import me.transit.parser.data.AgencyDataFileHandler;
 import me.transit.parser.data.Blackboard;
+import me.transit.parser.data.converters.DataConverterFactory;
 
 public class AgencyDataFileHandlerTest extends EasyMockSupport  {
 
@@ -31,10 +32,11 @@ public class AgencyDataFileHandlerTest extends EasyMockSupport  {
 	@Mock(MockType.NICE) 
 	IGraphDatabaseDAO graphDatabase;
 	
+	DataConverterFactory factory = DataConverterFactory.create();
 	
 	@Test
 	public void test() {
-		AgencyDataFileHandler testSubject = new AgencyDataFileHandler(blackboard, agencyDao, graphDatabase);
+		AgencyDataFileHandler testSubject = new AgencyDataFileHandler(blackboard, agencyDao, graphDatabase, factory);
 		
 		try {
 			expect(agencyDao.findByName(EasyMock.anyString())).andReturn(null);

@@ -49,7 +49,8 @@ public class TransitStop extends AbstractGraphNode implements TransitData, IData
 	public static final String STOP_NAME = "name";
 	public static final String LOCATION = "location";
 
-	public enum LocationType { STOP, STATION, UNKNOW };
+	public enum LocationType { STOP, STATION, ENTRENCE_EXIT, GENERIC_NODE, BOARDING_AREA, UNKOWN };
+	public enum WheelChariBoardingType { EMPTY, SOME, NOT_AVALIABLE };
 
 	private static final long serialVersionUID = 1L;
 
@@ -90,12 +91,14 @@ public class TransitStop extends AbstractGraphNode implements TransitData, IData
 
 	@Column(name = "TYPE")
 	@Enumerated(EnumType.STRING)
-	private LocationType locationType = LocationType.UNKNOW;
+	private LocationType locationType = LocationType.UNKOWN;
 
 	@Column(name = "PARENT_STATION")
 	private int parentStation = -1;
 
-	private boolean wheelchairBoarding;
+	@Column(name = "WHEELCHAIR_BOARDING")
+	@Enumerated(EnumType.STRING)
+	private WheelChariBoardingType wheelchairBoarding = WheelChariBoardingType.EMPTY;
 
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.TransitStop#getUUID()
@@ -337,7 +340,8 @@ public class TransitStop extends AbstractGraphNode implements TransitData, IData
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.TransitStop#setStopTimezone(java.lang.String)
 	 */
-	@GTFSSetter(column="stopTimezone")
+	@GTFSSetter(column="stop_timezone")
+	@JsonSetter("stop_timezone")
 	public void setStopTimezone(String value) {
 		this.getAgency().setTimezone(value);
 	}
@@ -350,7 +354,7 @@ public class TransitStop extends AbstractGraphNode implements TransitData, IData
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.TransitStop#getStopTimezone()
 	 */
-
+	@JsonGetter("stop_timezone")
 	public String getStopTimezone() {
 		return this.getAgency().getTimezone();
 	}
@@ -363,8 +367,8 @@ public class TransitStop extends AbstractGraphNode implements TransitData, IData
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.TransitStop#getWheelchairBoarding()
 	 */
-
-	public boolean getWheelchairBoarding() {
+	@JsonGetter("wheelchair_boarding")
+	public WheelChariBoardingType getWheelchairBoarding() {
 		return wheelchairBoarding;
 	}
 
@@ -376,8 +380,9 @@ public class TransitStop extends AbstractGraphNode implements TransitData, IData
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.TransitStop#setWheelchairBoarding(boolean)
 	 */
-	@GTFSSetter(column="wheelchairBoarding")
-	public void setWheelchairBoarding(boolean value) {
+	@GTFSSetter(column="wheelchair_boarding")
+	@JsonSetter("wheelchair_boarding")
+	public void setWheelchairBoarding(WheelChariBoardingType value) {
 		wheelchairBoarding = value;
 	}
 

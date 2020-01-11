@@ -96,7 +96,7 @@ public abstract class AbstractGTFSParser {
 			
 		}
 		
-		this.getFactory().getHandler(null).endProcess();
+		this.getFactory().getHandler("agency.txt").endProcess();
 		getLog().info("done processing: " + diretory);
 	}
 

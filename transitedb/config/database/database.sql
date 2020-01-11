@@ -63,6 +63,7 @@ CREATE TABLE tran_route
   url character varying(255),
   version character varying(255),
   route_uuid bigint NOT NULL,
+  sort_order integer,
   CONSTRAINT tran_route_pkey PRIMARY KEY (route_uuid),
   CONSTRAINT fklkyilm0bairubq4wey60bhb43 FOREIGN KEY (agency_uuid)
       REFERENCES tran_agency (agency_uuid) MATCH SIMPLE
@@ -137,7 +138,7 @@ CREATE TABLE tran_stop
   parent_station integer,
   url character varying(255),
   version character varying(255),
-  wheelchairboarding boolean NOT NULL,
+  wheelchairboarding character varying(255),
   zone character varying(255),
   stop_uuid bigint NOT NULL,
   CONSTRAINT tran_stop_pkey PRIMARY KEY (stop_uuid),

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import me.database.neo4j.IGraphDatabaseDAO;
 import me.transit.dao.AgencyDao;
 import me.transit.database.Agency;
+import me.transit.parser.data.converters.DataConverterFactory;
 
 @Component(value = "agencyDataFileHandler")
 public class AgencyDataFileHandler extends AbstractDefaultFileHandler {
@@ -16,8 +17,8 @@ public class AgencyDataFileHandler extends AbstractDefaultFileHandler {
 	private final AgencyDao agencyDao;
 
 	@Autowired
-	public AgencyDataFileHandler(Blackboard blackboard, AgencyDao agencyDao, IGraphDatabaseDAO graphDatabase) {
-		super(blackboard, graphDatabase);
+	public AgencyDataFileHandler(Blackboard blackboard, AgencyDao agencyDao, IGraphDatabaseDAO graphDatabase, DataConverterFactory dataConverterFactory) {
+		super(blackboard, graphDatabase, dataConverterFactory);
 		this.agencyDao = Objects.requireNonNull(agencyDao, "agencyDao can not be null");
 	}
 

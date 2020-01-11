@@ -37,7 +37,7 @@ import me.transit.json.AgencyToString;
 @GTFSFileModel(filename="calendar_dates.txt")
 public class CalendarDate implements TransitData {
 	
-	public enum ExceptionType { ADD_SERVICE, REMOVE_SERVICE, UNKNOWN };
+	public enum ExceptionType { UNKNOWN, ADD_SERVICE, REMOVE_SERVICE };
 
 	private static final long serialVersionUID = 1L;
 

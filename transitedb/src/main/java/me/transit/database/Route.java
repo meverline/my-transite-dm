@@ -88,6 +88,9 @@ public class Route extends AbstractGraphNode implements TransitData {
 
 	@Column(name = "TEXT_COLOR")
 	private String textColor = "";
+	
+	@Column(name = "SORT_ORDER")
+	private int sortOrder = 0;
 
 	@OneToMany(cascade={CascadeType.PERSIST}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "ROUTE_UUID", nullable = false, updatable = false)
@@ -199,7 +202,7 @@ public class Route extends AbstractGraphNode implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Route#getDesc()
 	 */
-	@JsonGetter("desc")
+	@JsonGetter("route_desc")
 	public String getDesc() {
 		return desc;
 	}
@@ -207,8 +210,8 @@ public class Route extends AbstractGraphNode implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Route#setDesc(java.lang.String)
 	 */
-	@GTFSSetter(column="desc")
-	@JsonSetter("desc")
+	@GTFSSetter(column="route_desc")
+	@JsonSetter("route_desc")
 	public void setDesc(String desc) {
 		this.desc = desc;
 	}
@@ -233,7 +236,7 @@ public class Route extends AbstractGraphNode implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Route#getUrl()
 	 */
-
+	@JsonGetter("url")
 	public String getUrl() {
 		return url;
 	}
@@ -250,7 +253,7 @@ public class Route extends AbstractGraphNode implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Route#getColor()
 	 */
-
+	@JsonGetter("route_color")
 	public String getColor() {
 		return color;
 	}
@@ -259,6 +262,7 @@ public class Route extends AbstractGraphNode implements TransitData {
 	 * @see me.transit.database.impl.Route#setColor(java.lang.String)
 	 */
 	@GTFSSetter(column="route_color")
+	@JsonSetter("route_color")
 	public void setColor(String color) {
 		this.color = color;
 	}
@@ -266,7 +270,7 @@ public class Route extends AbstractGraphNode implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Route#getTextColor()
 	 */
-
+	@JsonGetter("route_text_color")
 	public String getTextColor() {
 		return textColor;
 	}
@@ -275,8 +279,26 @@ public class Route extends AbstractGraphNode implements TransitData {
 	 * @see me.transit.database.impl.Route#setTextColor(java.lang.String)
 	 */
 	@GTFSSetter(column="route_text_color")
+	@JsonSetter("route_text_color")
 	public void setTextColor(String textColor) {
 		this.textColor = textColor;
+	}
+	
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Route#getUrl()
+	 */
+	@JsonGetter("route_sort_order")
+	public int getSortOrder() {
+		return sortOrder;
+	}
+
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Route#setUrl(java.lang.String)
+	 */
+	@GTFSSetter(column="route_sort_order")
+	@JsonSetter("route_sort_order")
+	public void setSortOrder(int order) {
+		this.sortOrder = order;
 	}
 
 	/* (non-Javadoc)

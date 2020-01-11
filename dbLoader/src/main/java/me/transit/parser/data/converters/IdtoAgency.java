@@ -17,9 +17,13 @@ public class IdtoAgency extends DataConverter {
 	}
 
 	@Autowired
+	public IdtoAgency(AgencyDao agencyDao, DataConverterFactory dataConverterFactory) {
+		this.dao = agencyDao;
+		dataConverterFactory.register(this);
+	}
+	
 	public IdtoAgency(AgencyDao agencyDao) {
 		this.dao = agencyDao;
-		DataConverterFactory.create().register(this);
 	}
 
 	@Override

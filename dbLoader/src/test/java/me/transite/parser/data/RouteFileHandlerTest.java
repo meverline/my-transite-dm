@@ -14,6 +14,7 @@ import me.database.neo4j.IGraphDatabaseDAO;
 import me.transit.dao.RouteDao;
 import me.transit.parser.data.Blackboard;
 import me.transit.parser.data.RouteFileHandler;
+import me.transit.parser.data.converters.DataConverterFactory;
 
 public class RouteFileHandlerTest extends EasyMockSupport  {
 
@@ -29,10 +30,11 @@ public class RouteFileHandlerTest extends EasyMockSupport  {
 	@Mock(MockType.NICE) 
 	IGraphDatabaseDAO graphDatabase;
 	
+	DataConverterFactory factory = DataConverterFactory.create();
 
 	@Test
 	public void test() {
-		RouteFileHandler testSubject = new RouteFileHandler(blackboard, routeDao, graphDatabase);
+		RouteFileHandler testSubject = new RouteFileHandler(blackboard, routeDao, graphDatabase, factory);
 		
 		try {
 			replayAll();

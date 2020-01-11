@@ -14,6 +14,7 @@ import me.database.neo4j.IGraphDatabaseDAO;
 import me.transit.dao.CalendarDateDao;
 import me.transit.parser.data.Blackboard;
 import me.transit.parser.data.CalendarDateFileHandler;
+import me.transit.parser.data.converters.DataConverterFactory;
 
 public class CalendarDateFileHandlerTest extends EasyMockSupport  {
 
@@ -29,10 +30,12 @@ public class CalendarDateFileHandlerTest extends EasyMockSupport  {
 	@Mock(MockType.NICE) 
 	IGraphDatabaseDAO graphDatabase;
 	
+	DataConverterFactory factory = DataConverterFactory.create();
+
 
 	@Test
 	public void test() {
-		CalendarDateFileHandler testSubject = new CalendarDateFileHandler(blackboard, calendarDateDao, graphDatabase);
+		CalendarDateFileHandler testSubject = new CalendarDateFileHandler(blackboard, calendarDateDao, graphDatabase, factory);
 		
 		try {
 			replayAll();

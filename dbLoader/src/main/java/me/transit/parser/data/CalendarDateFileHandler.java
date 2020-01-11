@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import me.database.neo4j.IGraphDatabaseDAO;
 import me.transit.dao.CalendarDateDao;
 import me.transit.database.CalendarDate;
+import me.transit.parser.data.converters.DataConverterFactory;
 
 @Component(value = "calendarDateFileHandler")
 public class CalendarDateFileHandler extends AbstractDefaultFileHandler {
@@ -17,8 +18,8 @@ public class CalendarDateFileHandler extends AbstractDefaultFileHandler {
 
 	@Autowired
 	public CalendarDateFileHandler(Blackboard blackboard, CalendarDateDao calendarDateDao,
-			IGraphDatabaseDAO graphDatabase) {
-		super(blackboard, graphDatabase);
+			IGraphDatabaseDAO graphDatabase, DataConverterFactory dataConverterFactory) {
+		super(blackboard, graphDatabase, dataConverterFactory);
 		this.calendarDateDao = Objects.requireNonNull(calendarDateDao,"calendarDateDao can not be null");
 	}
 	

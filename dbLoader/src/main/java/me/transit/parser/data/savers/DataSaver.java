@@ -22,11 +22,11 @@ public class DataSaver {
 	private Log log = LogFactory.getLog(DataSaver.class);
 
 	
-	public DataSaver(Method setMethod, String field, Blackboard parser, String header) throws NoSuchMethodException {
+	public DataSaver(Method setMethod, String field, Blackboard parser, String header, DataConverterFactory factory) throws NoSuchMethodException {
 		this.method = setMethod;
 		this.fieldName = field;
 		this.parser = parser;
-		this.returnType = initReturnType(setMethod);
+		this.returnType = initReturnType(setMethod, factory);
 		this.orgHeader = header;
 	}
 	
@@ -82,8 +82,7 @@ public class DataSaver {
 	 * @throws NoSuchMethodException
 	 * 
 	 */
-	private Class<?> initReturnType(Method setMethod) throws NoSuchMethodException {
-		DataConverterFactory factory = DataConverterFactory.create();
+	private Class<?> initReturnType(Method setMethod, DataConverterFactory factory) throws NoSuchMethodException {
 		
 		if ( setMethod.getParameterCount() == 0 ) {
 			throw new NoSuchMethodException("Not a set method: " + setMethod.getName());

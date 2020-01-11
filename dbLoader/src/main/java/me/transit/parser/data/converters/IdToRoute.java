@@ -12,9 +12,13 @@ public class IdToRoute extends DataConverter {
 	private final RouteDao dao;
 	
 	@Autowired
+	public IdToRoute(RouteDao routeDao, DataConverterFactory dataConverterFactory) {
+		this.dao = routeDao;
+		dataConverterFactory.register(this);
+	}
+	
 	public IdToRoute(RouteDao routeDao) {
 		this.dao = routeDao;
-		DataConverterFactory.create().register(this);
 	}
 	
 	@Override

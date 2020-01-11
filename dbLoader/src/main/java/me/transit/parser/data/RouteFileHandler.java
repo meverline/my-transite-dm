@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import me.database.neo4j.IGraphDatabaseDAO;
 import me.transit.dao.RouteDao;
 import me.transit.database.Route;
+import me.transit.parser.data.converters.DataConverterFactory;
 
 @Component(value = "routeFileHandler")
 public class RouteFileHandler extends AbstractDefaultFileHandler {
@@ -17,8 +18,8 @@ public class RouteFileHandler extends AbstractDefaultFileHandler {
 
 	@Autowired
 	public RouteFileHandler(Blackboard blackboard, RouteDao routeDao,
-			IGraphDatabaseDAO graphDatabase) {
-		super(blackboard, graphDatabase);
+			IGraphDatabaseDAO graphDatabase, DataConverterFactory dataConverterFactory) {
+		super(blackboard, graphDatabase, dataConverterFactory);
 		this.routeDao = Objects.requireNonNull(routeDao,"routeDao can not be null");
 	}
 	

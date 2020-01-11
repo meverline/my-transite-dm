@@ -41,7 +41,7 @@ public class FileHandlerFactory {
 		handlers.put(calendarDateFileHandler.handlesFile(), calendarDateFileHandler);
 		handlers.put(routeFileHandler.handlesFile(), routeFileHandler);
 		handlers.put(transitStopFileHandler.handlesFile(), transitStopFileHandler);
-		
+		handlers.put(tripFileHandler.handlesFile(), tripFileHandler);
 	}
 	
 	/**
