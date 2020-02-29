@@ -19,19 +19,17 @@ package me.transit.dao.query.tuple;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.output.KmlFormatter;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hibernate.Criteria;
-import org.hibernate.spatial.criterion.SpatialRestrictions;
-
-import com.mongodb.BasicDBObject;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
 import org.locationtech.jts.geom.Polygon;
 import org.locationtech.jts.util.GeometricShapeFactory;
+
+import com.mongodb.BasicDBObject;
+
+import me.output.KmlFormatter;
 
 public class CircleTuple extends AbstractQueryTuple {
 
@@ -121,25 +119,29 @@ public class CircleTuple extends AbstractQueryTuple {
 	/**
 	 * 
 	 */
-	public void getCriterion(Criteria crit)
+	public Tuple getCriterion()
 	{
 		Polygon range = makeCircle(center_, distanceInMeters_);
-
+		StringBuilder builder = new StringBuilder();
 		if ( getAlias() != null ) {
-			String name =  getAlias().getSimpleName();
-			crit.createAlias( name, name);
 			
-			StringBuilder builder = new StringBuilder(name);
-			builder.append(".");
+			builder.append(" within(");
+			builder.append(getAlias().getSimpleName());
+			builder.append( ". ");
 			builder.append(getField());
-			crit.add(SpatialRestrictions.filter( builder.toString(), range));
-			crit.add(SpatialRestrictions.within( builder.toString(), range));
-			
+			builder.append(", :circle)= true ");
+				
 		} else {
 			
-			crit.add(SpatialRestrictions.filter( getField(), range));
-			crit.add(SpatialRestrictions.within( getField(), range));
+			builder.append(" within(");
+			builder.append(getField());
+			builder.append(", :circle)= true ");
+			
 		}
+		
+		Tuple rtn = new Tuple(builder.toString());
+		rtn.add("circle", range);
+		return rtn;
 		
 	}
 	

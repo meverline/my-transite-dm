@@ -4,12 +4,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Criteria;
-import org.hibernate.Hibernate;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
@@ -32,20 +33,22 @@ public class TransiteStopDao extends TransitDao<TransitStop> {
 	public List<TransitStop> query(StopQueryConstraint constraint) 
 	{
 		List<TransitStop> rtn = new ArrayList<TransitStop>();
+		Session session = null;
+		 
 		try {
 
-			Session session = getSession();
-			Criteria crit = constraint.getCirtera(session);
+		    session = getSession();
+			CriteriaBuilder builder = session.getCriteriaBuilder();
+			CriteriaQuery<TransitStop> crit = builder.createQuery(TransitStop.class);
 			
-			for ( Object obj: crit.list()) {
-				TransitStop st = TransitStop.class.cast(obj);
-				
-				Hibernate.initialize(st.getAgency());
-				rtn.add(st);
-			}
-
+			@SuppressWarnings("unused")
+			Root<TransitStop> root = crit.from(TransitStop.class);
+			rtn = session.createQuery(crit).getResultList();
+			
 		} catch (HibernateException ex) {
 			getLog().error(ex.getLocalizedMessage(), ex);
+		} finally {
+			if ( session != null ) { session.close(); }
 		}
 
 		return rtn;
@@ -54,37 +57,31 @@ public class TransiteStopDao extends TransitDao<TransitStop> {
 	/* (non-Javadoc)
 	 * @see me.transit.dao.impl.TrasiteStopDao#query(int)
 	 */
-	@SuppressWarnings("deprecation")
 	public List<TransitStop> query(int stopId) 
 	{
 		List<TransitStop> rtn = new ArrayList<TransitStop>();
+		Session session = null;
 		try {
 
-			Session session = getSession();
-			Criteria crit = session.createCriteria(TransitStop.class);
-			crit.add(Restrictions.eq("id", stopId));
+			session = getSession();
+			CriteriaBuilder builder = session.getCriteriaBuilder();
+			CriteriaQuery<TransitStop> crit = builder.createQuery(TransitStop.class);
 			
-			for ( Object obj: crit.list()) {
-				TransitStop st = TransitStop.class.cast(obj);
-				
-				Hibernate.initialize(st.getAgency());
-				rtn.add(st);
-			}
+			Root<TransitStop> root = crit.from(TransitStop.class);
+			
+			crit.where(
+				builder.equal(root.get("id"), stopId)
+			);
 
+			rtn = session.createQuery(crit).getResultList();
+			
 		} catch (HibernateException ex) {
 			getLog().error(ex.getLocalizedMessage(), ex);
+		} finally {
+			if ( session != null ) { session.close(); }
 		}
 
-		return rtn;
-	}
-	
-	/* (non-Javadoc)
-	 * @see me.transit.dao.TransitDao#loadById(long, java.lang.String)
-	 */
-	@Override
-	public TransitStop loadById(String id, String agencyName) {
-		TransitStop rtn = super.loadById(id, agencyName);
-		Hibernate.initialize(rtn.getAgency());
+
 		return rtn;
 	}
 	

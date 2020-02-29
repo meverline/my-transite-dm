@@ -75,10 +75,8 @@ public class CrimeDao extends AbstractHibernateDao<Crime> {
 		try {
 
 			Session session =  getSession();;
-			Criteria crit = session.createCriteria(Crime.class);
-				
-			list.getCriterion(crit);
-			return toCrime( crit.list());
+			Query<Crime> query = (Query<Crime>) session.createQuery("from Crime crime select *", Crime.class);
+			return toCrime( query.getResultList());
 
 		} catch (HibernateException ex) {
 			getLog().error(ex.getLocalizedMessage(), ex);

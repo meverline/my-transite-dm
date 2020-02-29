@@ -56,12 +56,13 @@ public class URCCatagoriesDAO extends AbstractHibernateDao<URCCatagories> {
 	/**
 	 * 
 	 */
-	public void save(URCCatagories current) throws SQLException {
+	public URCCatagories save(URCCatagories current) throws SQLException {
 		URCCatagories cat;
 		cat = this.findURCbyCatagory(current.getCatagorie());
 		if (cat == null) {
 			this.save(current);
 		}
+		return current;
 	}
 
 	/**

@@ -8,8 +8,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Set;
 
 import org.apache.commons.logging.Log;
@@ -17,9 +17,12 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import me.database.mongo.DocumentDao;
 import me.database.neo4j.IGraphDatabaseDAO;
 import me.transit.dao.RouteDao;
 import me.transit.database.Route;
+import me.transit.database.RouteDocument;
+import me.transit.database.RouteTrip;
 import me.transit.database.Trip;
 
 @Component(value="tripFileHandler")
@@ -28,16 +31,18 @@ public class TripFileHandler extends AbstractFileHandler {
 	private Log log = LogFactory.getLog(getClass().getName());
 	private final IGraphDatabaseDAO graphDatabase;
 	private final RouteDao routeDao;
+	private final DocumentDao documentDao;
 	
 	/**
 	 * 
 	 * @param blackboard
 	 */
 	@Autowired
-	public TripFileHandler(Blackboard blackboard, RouteDao routeDao, IGraphDatabaseDAO graphDatabase) {
+	public TripFileHandler(Blackboard blackboard, RouteDao routeDao, IGraphDatabaseDAO graphDatabase, DocumentDao documentDao) {
 		super(blackboard);
 		this.routeDao = Objects.requireNonNull(routeDao, "routeDao can not be null");
 		this.graphDatabase = Objects.requireNonNull(graphDatabase, "graphDatabase can not be null");
+		this.documentDao = Objects.requireNonNull(documentDao, "documentDao can not be null");
 	}
 	
 	/*
@@ -159,13 +164,18 @@ public class TripFileHandler extends AbstractFileHandler {
 			for (Entry<String, List<Trip>> data : routeToTrips.entrySet()) {
 
 				Route route = routeDao.loadById(data.getKey(), getBlackboard().getAgencyName());
-				route.setTripList(data.getValue());
+				for ( Trip trip : data.getValue()) {
+					route.getTripList().add(new RouteTrip( route.getId(), trip.getId()));
+					graphDatabase.createRelationShip(route, trip);
+				}
+				
 				routeDao.save(route);
 				getBlackboard().getRouteShortName().put(data.getKey(), route.getShortName());
-
-				for (Trip entry : data.getValue()) {
-					graphDatabase.createRelationShip(route, entry);
-				}
+				
+				RouteDocument doc = new RouteDocument(route);
+				doc.getTrips().addAll(data.getValue());
+				this.documentDao.add(doc);
+				
 			}
 			
 			rtn = true;

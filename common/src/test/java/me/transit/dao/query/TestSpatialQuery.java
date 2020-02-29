@@ -79,7 +79,7 @@ public class TestSpatialQuery extends EasyMockSupport {
 		expect(mongo.createAlias(EasyMock.anyString(), EasyMock.anyString())).andReturn(mongo).anyTimes();
 		replayAll();
 		
-		assertNotNull(testSubject.getCirtera(session));
+		assertNotNull(testSubject.getCirtera());
 		
 		resetAll();
 	}

@@ -16,8 +16,6 @@
 
 package me.transit.dao.query.tuple;
 
-import org.hibernate.Criteria;
-
 import com.mongodb.BasicDBObject;
 
 public interface IQueryTuple {
@@ -28,7 +26,7 @@ public interface IQueryTuple {
 	 *
 	 * @return
 	 */
-	public abstract void getCriterion(Criteria crit);
+	public abstract Tuple getCriterion();
 	
 	/**
 	 * 

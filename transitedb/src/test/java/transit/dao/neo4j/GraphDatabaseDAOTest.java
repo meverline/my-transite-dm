@@ -66,7 +66,7 @@ public class GraphDatabaseDAOTest {
 		for (String id : routeName) {
 
 			route.setShortName(id);
-			Node data = graph.findNodeByField(FIELD.route, route.makeKey());
+			Node data = graph.findNodeByField(FIELD.route, route.makeKey(), Route.class);
 
 			assertNotNull(data);
 		}

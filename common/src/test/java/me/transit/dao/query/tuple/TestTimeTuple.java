@@ -44,10 +44,10 @@ public class TestTimeTuple extends EasyMockSupport {
 		replayAll();
 		
 		TimeTuple obj = new TimeTuple("field", Calendar.getInstance(), Calendar.getInstance());
-		obj.getCriterion(mongo);
+		obj.getCriterion();
 		
 		obj = new TimeTuple(String.class, "field", Calendar.getInstance(), Calendar.getInstance());
-		obj.getCriterion(mongo);
+		obj.getCriterion();
 	}
 
 }

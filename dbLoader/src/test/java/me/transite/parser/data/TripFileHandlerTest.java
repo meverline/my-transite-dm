@@ -12,6 +12,7 @@ import org.easymock.MockType;
 import org.junit.Rule;
 import org.junit.Test;
 
+import me.database.mongo.DocumentDao;
 import me.database.neo4j.IGraphDatabaseDAO;
 import me.transit.dao.RouteDao;
 import me.transit.database.Agency;
@@ -31,6 +32,9 @@ public class TripFileHandlerTest extends EasyMockSupport {
 	@Mock(MockType.NICE)
 	private IGraphDatabaseDAO graphDatabase;
 	
+	@Mock(MockType.NICE)
+	private DocumentDao documentDao;
+	
 	private Agency agency = new Agency();
 	
 	@Mock(MockType.NICE)
@@ -39,7 +43,7 @@ public class TripFileHandlerTest extends EasyMockSupport {
 	@Test
 	public void test() {
 		agency.setName("TEST AGENCY");
-		TripFileHandler testSubject = new TripFileHandler(blackboard, routeDao, graphDatabase);
+		TripFileHandler testSubject = new TripFileHandler(blackboard, routeDao, graphDatabase, documentDao);
 				
 		try {
 			blackboard.setAgency(agency);

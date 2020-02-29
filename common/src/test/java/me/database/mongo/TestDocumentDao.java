@@ -8,9 +8,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.net.UnknownHostException;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.easymock.EasyMock;
 import org.easymock.EasyMockRule;
@@ -20,9 +18,11 @@ import org.easymock.MockType;
 import org.junit.Rule;
 import org.junit.Test;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
-import com.mongodb.Mongo;
+import com.mongodb.MongoClient;
 
 
 @SuppressWarnings("deprecation")
@@ -32,7 +32,7 @@ public class TestDocumentDao extends EasyMockSupport{
     public EasyMockRule rule = new EasyMockRule(this);
    
 	@Mock(type=MockType.NICE)
-	private Mongo writer;
+	private MongoClient writer;
 	
 	@Mock(type=MockType.NICE)
 	private DB dbmock;
@@ -85,10 +85,10 @@ public class TestDocumentDao extends EasyMockSupport{
 		};
 		
 		for (Class<?> item : info ) {
-			assertTrue(doc.isPrimativeType(item));
+			assertTrue(DbObjectMapper.isPrimativeType(item));
 		}
 		
-		assertFalse(doc.isPrimativeType(getClass() ));
+		assertFalse(DbObjectMapper.isPrimativeType(getClass() ));
 		
 		verifyAll();
 		resetAll();
@@ -140,10 +140,13 @@ public class TestDocumentDao extends EasyMockSupport{
 		
 		doc.add(objct);
 		
-		doc.add(objct.toDocument());
+		doc.add(objct);
 		
-		@SuppressWarnings("unused")
-		Object obj = doc.translateToDbObject(objct.toDocument());
+		try {
+			Object obj = DbObjectMapper.encode(objct);
+		} catch (Exception ex) {
+			
+		}
 		
 		verifyAll();
 		resetAll();
@@ -160,50 +163,42 @@ public class TestDocumentDao extends EasyMockSupport{
 		private String array[] = { "a", "b", "c", "d" };
 		private List<String> data = Arrays.asList(array);
 
-		@Override
-		public Map<String, Object> toDocument() {
-			Map<String,Object> rtn = new HashMap<String,Object>();
-
-            rtn.put(IDocument.CLASS, TestA.class.getName());
-            rtn.put("name", this.getName());
-            rtn.put("array", this.getArray());
-            rtn.put("data", this.getData());
-            rtn.put("item", null);
-			return rtn;
-		}
-
-		@Override
-		public void handleEnum(String key, Object value) {
-		}
-
+		@JsonGetter("name")
 		public String getName() {
 			return name;
 		}
 
+		@JsonSetter("name")
 		public void setName(String name) {
 			this.name = name;
 		}
 
+		@JsonGetter("array")
 		public String[] getArray() {
 			return array;
 		}
 
+		@JsonSetter("array")
 		public void setArray(String[] array) {
 			this.array = array;
 		}
 
+		@JsonGetter("data")
 		public List<String> getData() {
 			return data;
 		}
 
+		@JsonSetter("data")
 		public void setData(List<String> data) {
 			this.data = data;
 		}
 		
+		@JsonGetter("item")
 		public String getItem() {
 			return name;
 		}
 
+		@JsonSetter("item")
 		public void setItem(String name) {
 		}
 	}
@@ -215,50 +210,43 @@ public class TestDocumentDao extends EasyMockSupport{
 		private double value = 40.0;
 		private TestB object = new TestB();
 
-		@Override
-		public Map<String, Object> toDocument() {
-			Map<String,Object> rtn = new HashMap<String,Object>();
 
-            rtn.put(IDocument.CLASS, TestA.class.getName());
-            rtn.put("name", this.getName());
-            rtn.put("min", this.getMin());
-            rtn.put("value", this.getValue());
-            rtn.put("object", this.getObject());
-			return rtn;
-		}
-
-		@Override
-		public void handleEnum(String key, Object value) {
-		}
-
+		@JsonGetter("name")
 		public String getName() {
 			return name;
 		}
 
+		@JsonSetter("name")
 		public void setName(String name) {
 			this.name = name;
 		}
 
+		@JsonGetter("min")
 		public int getMin() {
 			return min;
 		}
 
+		@JsonSetter("min")
 		public void setMin(int min) {
 			this.min = min;
 		}
 
+		@JsonGetter("value")
 		public double getValue() {
 			return value;
 		}
 
+		@JsonSetter("value")
 		public void setValue(double value) {
 			this.value = value;
 		}
 
+		@JsonGetter("object")
 		public TestB getObject() {
 			return object;
 		}
 
+		@JsonSetter("object")
 		public void setObject(TestB object) {
 			this.object = object;
 		}

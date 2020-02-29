@@ -51,11 +51,11 @@ public class TestStringTuple extends EasyMockSupport {
 		for ( StringTuple.MATCH logic : StringTuple.MATCH.values()) {
 			StringTuple obj = new StringTuple( String.class, "field", "value", logic);
 			
-			obj.getCriterion(mongo);
+			obj.getCriterion();
 		}
 	
 		StringTuple obj = new StringTuple( "field", "100", StringTuple.MATCH.CONTAINS);
-		obj.getCriterion(mongo);
+		obj.getCriterion();
 	  
 	}
 

@@ -1,16 +1,17 @@
+
 package me.transit.dao;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
-import org.hibernate.Criteria;
+import javax.persistence.NoResultException;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
@@ -18,7 +19,6 @@ import org.springframework.stereotype.Repository;
 import me.database.hibernate.AbstractHibernateDao;
 import me.transit.database.Agency;
 
-@SuppressWarnings("deprecation")
 @Repository(value="agencyDao")
 @Scope("singleton")
 public class AgencyDao extends AbstractHibernateDao<Agency> {
@@ -48,25 +48,29 @@ public class AgencyDao extends AbstractHibernateDao<Agency> {
 	 * @return
 	 */
 	public synchronized List<Agency> findAllByName(String id) {
-		
-		List<Agency> rtn = new ArrayList<Agency>();
+		List<Agency> aList = null;
+		Session session = null;
 		try {
 
-			Session session = getSession();
-			Criteria crit = session.createCriteria(this.getDaoClass());
+			session = getSession();
+			CriteriaBuilder builder = session.getCriteriaBuilder();
+			CriteriaQuery<Agency> crit = builder.createQuery(Agency.class);
 			
-			crit.add( Restrictions.eq("name", id));
+			Root<?> root = crit.from(Agency.class);
 			
-			for ( Object obj : crit.list()) {
-				rtn.add(Agency.class.cast(obj));
-			}
-			return rtn;
-
+			crit.where(
+				builder.equal(root.get("name"), id)
+			);
+			
+			aList = session.createQuery(crit).getResultList();
+			
 		} catch (HibernateException ex) {
 			getLog().error(ex.getLocalizedMessage(), ex);
+		} finally {
+			if ( session != null ) { session.close(); }
 		}
 
-		return null;
+		return aList;
 	}
 	
 	/**
@@ -74,54 +78,60 @@ public class AgencyDao extends AbstractHibernateDao<Agency> {
 	 * @param id
 	 * @return
 	 */
-	public synchronized Object loadById(String id) {
-		
+	public synchronized Agency loadById(String id) {
+	    Agency rtn = null;
+	    Session session = null;
 		try {
 
-			Session session = getSession();
-			Criteria crit = session.createCriteria(this.getDaoClass());
+			session = getSession();
+			CriteriaBuilder builder = session.getCriteriaBuilder();
+			CriteriaQuery<Agency> crit = builder.createQuery(Agency.class);
 			
-			crit.add( Restrictions.eq("id", id));
+			Root<Agency> root = crit.from(Agency.class);
 			
-			Object rtn = crit.uniqueResult();
-
-			return rtn;
-
+			crit.where(
+					builder.equal(root.get("id"), id)
+			);
+			
+			rtn = session.createQuery(crit).getSingleResult();
+			
+		} catch (NoResultException ex) {
+			rtn = null;
 		} catch (HibernateException ex) {
 			getLog().error(ex.getLocalizedMessage(), ex);
+		} finally {
+			if ( session != null ) { session.close(); }
 		}
 
-		return null;
+		return rtn;
 	}
 	
 	/**
 	 * 
 	 * @return
 	 */
-	@SuppressWarnings("rawtypes")
 	public List<Agency> list()
 	{
-
+		List<Agency> rtn = null;
+		Session session = null;
 		try {
 
-			Session session = getSession();
-			Query query = session.createQuery("from Agency as urc order by NAME");
-
-			List results = query.list();
-			Iterator it = results.iterator();
-
-			List<Agency> rtn = new ArrayList<Agency>();
-			while (it.hasNext()) {
-			   rtn.add(Agency.class.cast(it.next()));
-			}
-
-			return rtn;
+			session = getSession();
+			CriteriaBuilder builder = session.getCriteriaBuilder();
+			CriteriaQuery<Agency> crit = builder.createQuery(Agency.class);
+			
+			Root<Agency> root = crit.from(Agency.class);
+			
+			crit.orderBy(builder.desc(root.get("name")));
+			rtn = session.createQuery(crit).getResultList();
 			
 		} catch (HibernateException ex) {
 			getLog().error(ex.getLocalizedMessage(), ex);
+		} finally {
+			if ( session != null ) { session.close(); }
 		}
 
-		return null;
+		return rtn;
 	}
 	
 }

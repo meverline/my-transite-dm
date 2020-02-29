@@ -5,14 +5,17 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.NoResultException;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
-import org.springframework.transaction.annotation.Transactional;
+import org.hibernate.Transaction;
 
 public abstract class AbstractHibernateDao<T extends Serializable> {
 
@@ -72,16 +75,24 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 	 * @param item
 	 * @throws SQLException
 	 */
-	@Transactional
-	public synchronized void save(T item) throws SQLException {
-				
+	public synchronized T save(T item) throws SQLException {
+			
+		Transaction tx = null;
+		Session session = null;
+		
 		try {
-			Session session = this.getSession();
-			session.saveOrUpdate(item);				
+			session = this.getSession();
+			tx = session.beginTransaction();
+			session.saveOrUpdate(item);	
+			tx.commit();
 		} catch (Exception ex) {
 			log.error(ex);
+			tx.rollback();
 			throw new SQLException(ex.getLocalizedMessage());
+		} finally {
+			if ( session != null ) { session.close(); }
 		}
+		return item;
 	}
 	
 	/**
@@ -89,19 +100,36 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 	 * @param uuid
 	 * @throws SQLException
 	 */
-	@SuppressWarnings("deprecation")
-	@Transactional
 	public synchronized void delete(long uuid) throws SQLException {
-						
+		
+		Transaction tx = null;
+		Session session= null;				
 		try {
-			final Session session = this.getSession();
+			session = this.getSession();
 			
-				Criteria crit = session.createCriteria(this.getDaoClass());
-				crit.add( Restrictions.eq("UUID", uuid));
-				session.delete(crit.uniqueResult());
-				
+			CriteriaBuilder builder = session.getCriteriaBuilder();
+			CriteriaQuery<?> crit = builder.createQuery(this.getDaoClass());
+			
+			Root<?> root = crit.from(this.getDaoClass());
+			
+			crit.where(
+					builder.equal(root.get("UUID"), uuid)
+			);
+			
+			tx = session.beginTransaction();
+			@SuppressWarnings("unchecked")
+			T result = (T) session.createQuery(crit).getSingleResult();
+			session.remove(result);
+			tx.commit();
+			
+		} catch (NoResultException ex) {
+			log.warn("unable to delete uuid: " + Long.toString(uuid));
+			tx.rollback();
 		} catch (HibernateException ex) {
 			log.error(ex.getLocalizedMessage(), ex);
+			tx.rollback();
+		} finally {
+			if ( session != null ) { session.close(); }
 		}
 	}
 	
@@ -121,25 +149,34 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 	 * @param id
 	 * @return
 	 */
-	@SuppressWarnings("deprecation")
 	protected T loadByField(String id, String property) {
-
+		T rtn = null;
+		Session session= null;	
 		try {
 			
-			Session session = getSession();
-			Criteria crit = session.createCriteria(this.getDaoClass());
+			session = getSession();
+			CriteriaBuilder builder = session.getCriteriaBuilder();
+			CriteriaQuery<?> crit = builder.createQuery(this.getDaoClass());
 			
-			crit.add( Restrictions.eq(property, id));
+			Root<?> root = crit.from(this.getDaoClass());
+			
+			crit.where(
+					builder.equal(root.get(property), id)
+			);
 			
 			@SuppressWarnings("unchecked")
-			T rtn = (T) crit.uniqueResult();
-			return rtn;
-
+			T result = (T) session.createQuery(crit).getSingleResult();
+			rtn = result;
+			
+		} catch (NoResultException ex) {
+			rtn = null;
 		} catch (HibernateException ex) {
 			log.error(ex.getLocalizedMessage(), ex);
+		} finally {
+			if ( session != null ) { session.close(); }
 		}
 
-		return null;
+		return rtn;
 
 	}
 	
@@ -149,25 +186,35 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 	 * @param aClass
 	 * @return
 	 */
-	@SuppressWarnings("deprecation")
 	public  T loadByUUID(Long id, @SuppressWarnings("rawtypes") Class aClass) {
-
+		T rtn = null;
+		Session session = null;
+		
 		try {
 
-			Session session = getSession();
-			Criteria crit = session.createCriteria(this.getDaoClass());
+			session = getSession();
+			CriteriaBuilder builder = session.getCriteriaBuilder();
+			CriteriaQuery<?> crit = builder.createQuery(this.getDaoClass());
 			
-			crit.add( Restrictions.eq("UUID", id));
+			Root<?> root = crit.from(this.getDaoClass());
+			
+			crit.where(
+					builder.equal(root.get("UUID"), id)
+			);
 			
 			@SuppressWarnings("unchecked")
-			T rtn = (T) crit.uniqueResult();
-			return rtn;
-
+			T result = (T) session.createQuery(crit).getSingleResult();
+			rtn = result;
+			
+		} catch (NoResultException ex) {
+			rtn = null;
 		} catch (HibernateException ex) {
 			log.error(ex.getLocalizedMessage(), ex);
+		} finally {
+			if ( session != null ) { session.close(); }
 		}
 
-		return null;
+		return rtn;
 
 	}
 	

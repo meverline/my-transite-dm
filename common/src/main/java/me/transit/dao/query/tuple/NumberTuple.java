@@ -1,8 +1,5 @@
 package me.transit.dao.query.tuple;
 
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Restrictions;
-
 import com.mongodb.BasicDBObject;
 import com.mongodb.QueryOperators;
 
@@ -10,8 +7,8 @@ public class NumberTuple extends AbstractQueryTuple {
 	
 	public enum LOGIC { 
 		EQ {
-            public void restriction(Criteria crit, Number value, String field) {
-                    crit.add( Restrictions.eq(field, value));
+            public String restriction(Number value, String field) {
+                  return field + " = " + value.toString();
             }
             
             public void docuument(BasicDBObject query, Number value, String field) {
@@ -20,8 +17,8 @@ public class NumberTuple extends AbstractQueryTuple {
 
     },
     NEQ {
-            public void restriction(Criteria crit, Number value, String field) {
-                    crit.add( Restrictions.not(Restrictions.eq(field, value)));
+            public String restriction( Number value, String field) {
+            	return field + " != " + value.toString();
             }
             
             public void docuument(BasicDBObject query, Number value, String field) {
@@ -29,8 +26,8 @@ public class NumberTuple extends AbstractQueryTuple {
             }
     },
     GT{
-            public void restriction(Criteria crit, Number value, String field) {
-                    crit.add( Restrictions.gt(field, value));
+            public String restriction(Number value, String field) {
+            	return field + " > " + value.toString();
             }
             
             public void docuument(BasicDBObject query,  Number value, String field) {
@@ -38,8 +35,8 @@ public class NumberTuple extends AbstractQueryTuple {
             }
     },
     GEQ{
-            public void restriction(Criteria crit, Number value, String field) {
-                    crit.add( Restrictions.ge(field, value));
+            public String restriction(Number value, String field) {
+            	return field + " >= " + value.toString();
             }
             
             public void docuument(BasicDBObject query,  Number value, String field) {
@@ -47,8 +44,8 @@ public class NumberTuple extends AbstractQueryTuple {
             }
     },
     NGT{
-            public void restriction(Criteria crit, Number value, String field) {
-                    crit.add( Restrictions.not(Restrictions.gt(field, value)));
+            public String restriction(Number value, String field) {
+            	return "not " + field + " > " + value.toString();
             }
             
             public void docuument(BasicDBObject query, Number value, String field) {
@@ -56,8 +53,8 @@ public class NumberTuple extends AbstractQueryTuple {
             }
     },
     NGEQ{
-            public void restriction(Criteria crit, Number value, String field) {
-                    crit.add( Restrictions.not(Restrictions.gt(field, value)));
+            public String restriction(Number value, String field) {
+            	return "not " + field + " >= " + value.toString();
             }
             
             public void docuument(BasicDBObject query, Number value, String field) {
@@ -65,8 +62,8 @@ public class NumberTuple extends AbstractQueryTuple {
             }
     },
     LT{
-            public void restriction(Criteria crit, Number value, String field) {
-                    crit.add( Restrictions.lt(field, value));
+            public String restriction(Number value, String field) {
+            	return field + " < " + value.toString();
             }
             
             public void docuument(BasicDBObject query,  Number value, String field) {
@@ -74,8 +71,8 @@ public class NumberTuple extends AbstractQueryTuple {
             }
     },
     LEQ{
-            public void restriction(Criteria crit, Number value, String field) {
-                    crit.add( Restrictions.le(field, value));
+            public String restriction(Number value, String field) {
+            	return field + " <=" + value.toString();
             }
             
             public void docuument(BasicDBObject query, Number value, String field) {
@@ -83,8 +80,8 @@ public class NumberTuple extends AbstractQueryTuple {
             }
     },
     NLT{
-            public void restriction(Criteria crit, Number value, String field) {
-                    crit.add( Restrictions.not(Restrictions.lt(field, value)));
+            public String restriction(Number value, String field) {
+            	return "not " + field + " < " + value.toString();
             }
             
             public void docuument(BasicDBObject query, Number value, String field) {
@@ -92,8 +89,8 @@ public class NumberTuple extends AbstractQueryTuple {
             }
     },
     NLEQ{
-            public void restriction(Criteria crit, Number value, String field) {
-                    crit.add( Restrictions.not(Restrictions.le(field, value)));
+            public String restriction(Number value, String field) {
+            	return "not " + field + " <=" + value.toString();
             }
             
             public void docuument(BasicDBObject query, Number value, String field) {
@@ -101,9 +98,8 @@ public class NumberTuple extends AbstractQueryTuple {
             }
 		};
 		
-		public abstract void restriction(Criteria crit, Number value, String field);
+		public abstract String restriction(Number value, String field);
 		public abstract void docuument(BasicDBObject query, Number value, String field);
-		
 	}
 	
 	private LOGIC logic = null;
@@ -202,28 +198,32 @@ public class NumberTuple extends AbstractQueryTuple {
 	}
 
 	@Override
-	public void getCriterion(Criteria crit) {
+	public Tuple getCriterion() {
 		
-		if ( getAlias() != null ) {
-			String name =  getAlias().getSimpleName();
-			crit.createAlias( name, name);
-			
-			StringBuilder builder = new StringBuilder(name);
-			builder.append(".");
-			builder.append(getField());
-			if ( getLo() == null ) {
-				getLogic().restriction(crit, hi, builder.toString()); 
-			} else {
-				crit.add(Restrictions.between(builder.toString(), getHi(), getLo()));
-			}
+		StringBuilder builder = new StringBuilder();
+		StringBuilder field = new StringBuilder();
 				
+		if ( getAlias() != null ) {
+						
+			field.append(getAlias().getSimpleName());
+			field.append(".");
+			field.append(getField());
 		} else {
-			if ( getLo() == null ) {
-				getLogic().restriction(crit, hi, getField()); 
-			} else {
-				crit.add(Restrictions.between(getField(), getHi(), getLo()));
-			}
+			field.append(this.getField());
 		}
+		
+		if ( getLo() == null ) {
+			builder.append(getLogic().restriction( hi, field.toString())); 
+		} else {
+			builder.append(field.toString());
+			builder.append(" between ");
+			builder.append( getHi() ); 
+			builder.append( " and ");
+			builder.append( getLo());
+		}
+		
+		return new Tuple(builder.toString());
+		
 	}
 	
 	public void getDoucmentQuery(BasicDBObject query) {

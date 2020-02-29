@@ -81,12 +81,7 @@ public class TestMinBoundingRectangle {
 		
 		obj.extend(lr);
 		assertNotNull(obj.toString());
-		
-		Map<String, Object> doc = obj.toDocument();
-		assertNotNull(doc);
-		assertTrue(doc.containsKey("top"));
-		assertTrue(doc.containsKey("bottom"));
-		
+				
 
 	}
 	
@@ -104,7 +99,6 @@ public class TestMinBoundingRectangle {
 		ld.add(lr.getLongitudeDegress());
 		obj.setBottom(ld);
 		
-		obj.handleEnum("x", ld);
 		
 	}
 

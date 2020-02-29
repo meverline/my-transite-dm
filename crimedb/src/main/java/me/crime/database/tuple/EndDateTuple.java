@@ -18,13 +18,11 @@ package me.crime.database.tuple;
 
 import java.util.Calendar;
 
+import com.mongodb.BasicDBObject;
+
 import me.crime.database.Crime;
 import me.transit.dao.query.tuple.AbstractQueryTuple;
-
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Restrictions;
-
-import com.mongodb.BasicDBObject;
+import me.transit.dao.query.tuple.Tuple;
 
 public class EndDateTuple extends AbstractQueryTuple {
 
@@ -41,13 +39,17 @@ public class EndDateTuple extends AbstractQueryTuple {
 		endDate_ = endDate;
 	}
 
-	public void getCriterion(Criteria crit) {
+	public Tuple getCriterion() {
 		
 		StringBuilder builder = new StringBuilder(getAlias().getSimpleName());
 		builder.append(".");
 		builder.append(getField());
+		builder.append(" <= ");
+		builder.append(" :endDate_");
 		
-		crit.add( Restrictions.le( builder.toString(), endDate_));
+		Tuple rtn = new Tuple(builder.toString());
+		rtn.add("endDate_", endDate_);
+		return rtn;
 	}
 
 	@Override

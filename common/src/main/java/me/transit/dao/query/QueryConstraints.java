@@ -3,11 +3,10 @@ package me.transit.dao.query;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import me.transit.dao.query.tuple.IQueryTuple;
-
-import org.hibernate.Criteria;
-import org.hibernate.Session;
+import me.transit.dao.query.tuple.Tuple;
 
 public class QueryConstraints {
 	
@@ -57,17 +56,29 @@ public class QueryConstraints {
 	 * @param session
 	 * @return
 	 */
-	@SuppressWarnings("deprecation")
-	public Criteria getCirtera(Session session) {
+	public Tuple getCirtera() {
 		
-		Criteria criteria = session.createCriteria(this.criteraClass);
+		StringBuilder builder = new StringBuilder("select * from ");
+		builder.append(this.criteraClass.getSimpleName());
+		builder.append(" where ");
+		
+		Map<String, Object> paramaters = new HashMap<>();
 		for ( String key : map.keySet() )
 		{
 			List<IQueryTuple> tupleList = map.get(key);
+			int ndx = 0; 
 			for (IQueryTuple tuple : tupleList ) {
-				tuple.getCriterion(criteria);
+				Tuple item = tuple.getCriterion();
+				if ( ndx != 0 ) {
+					builder.append(" and ");
+				}
+				builder.append(item.getWhere());
+				paramaters.putAll(item.getParameters());
 			}
 		}
-		return criteria;
+		
+		Tuple rtn = new Tuple(builder.toString());
+		rtn.getParameters().putAll(paramaters);
+		return rtn;
 	}
 }

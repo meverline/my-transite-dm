@@ -1,4 +1,4 @@
-package me.transit.database;
+ package me.transit.database;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -14,12 +15,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -32,15 +31,15 @@ import me.database.neo4j.AbstractGraphNode;
 import me.database.neo4j.FIELD;
 import me.transit.annotation.GTFSFileModel;
 import me.transit.annotation.GTFSSetter;
+import me.transit.database.converters.RouteTripToString;
 import me.transit.json.AgencyToString;
 
 @Entity
 @Table(name = "tran_route")
-@Inheritance
 @DiscriminatorColumn(name = "route_type")
-@DiscriminatorValue("TransitDateImpl")
+@DiscriminatorValue("Route")
 @GTFSFileModel(filename="routes.txt")
-public class Route extends AbstractGraphNode implements TransitData {
+public class Route extends AbstractGraphNode implements TransitData, IRoute {
 	
 	public final static String TRIPLIST = "tripList";
 	public static final String SHORTNAME = "shortName";
@@ -48,8 +47,6 @@ public class Route extends AbstractGraphNode implements TransitData {
 	public static final String DESC = "desc";
 	public static final String TYPE = "type";
 	
-	public enum RouteType { TRAM, SUBWAY, RAIL, BUS, FERRY, CABLE_CAR, GONDOLA, FUNICULAR, UNKOWN };
-
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -92,10 +89,9 @@ public class Route extends AbstractGraphNode implements TransitData {
 	@Column(name = "SORT_ORDER")
 	private int sortOrder = 0;
 
-	@OneToMany(cascade={CascadeType.PERSIST}, fetch = FetchType.EAGER)
-	@JoinColumn(name = "ROUTE_UUID", nullable = false, updatable = false)
-	@OrderBy("TRIP_INDX")
-	private List<Trip> trips = new ArrayList<Trip>();
+	@Column(name = "ROUTE_TRIP")
+	@Convert(converter = RouteTripToString.class)
+	private List<RouteTrip> trips = new ArrayList<>();
 
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Route#getUUID()
@@ -135,7 +131,7 @@ public class Route extends AbstractGraphNode implements TransitData {
 	 * @see me.transit.database.impl.Route#getId()
 	 */
 	@JsonGetter("route_id")
-	public String getId() {
+	public String getRouteId() {
 		return id;
 	}
 
@@ -144,7 +140,7 @@ public class Route extends AbstractGraphNode implements TransitData {
 	 */
 	@GTFSSetter(column="route_id")
 	@JsonSetter("route_id")
-	public void setId(String id) {
+	public void setRouteId(String id) {
 		this.id = id;
 	}
 
@@ -305,7 +301,7 @@ public class Route extends AbstractGraphNode implements TransitData {
 	 * @see me.transit.database.impl.Route#getTripList()
 	 */
 
-	public List<Trip> getTripList() {
+	public List<RouteTrip> getTripList() {
 		return this.trips;
 	}
 
@@ -313,7 +309,7 @@ public class Route extends AbstractGraphNode implements TransitData {
 	 * @see me.transit.database.impl.Route#setTripList(java.util.List)
 	 */
 
-	public void setTripList(List<Trip> list) {
+	public void setTripList(List<RouteTrip> list) {
 		this.trips = list;
 	}
 
@@ -414,4 +410,16 @@ public class Route extends AbstractGraphNode implements TransitData {
 		return key.toString();
 	}
 
+	@Override
+	@Transient
+	public String getId() {
+		return this.getRouteId();
+	}
+
+	@Override
+	@Transient
+	public void setId(String id) {
+		this.setRouteId(id);
+	}
+	
 }

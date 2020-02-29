@@ -75,13 +75,13 @@ public class TestPolygonBoxTuple extends EasyMockSupport {
 		replayAll();
 		
 		PolygonBoxTuple obj = new PolygonBoxTuple("field", box);
-		obj.getCriterion(mongo);
+		obj.getCriterion();
 		
 		obj = new PolygonBoxTuple(String.class, "field", box);
-		obj.getCriterion(mongo);
+		obj.getCriterion();
 		
 		obj.getMultipeRestriction(mongo);
-		obj.getCriterion(mongo);
+		obj.getCriterion();
 	}
 
 }

@@ -31,15 +31,15 @@ public class AddressDao extends AbstractHibernateDao<Address> {
 	 * @param id
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	public Address loadAddress(String id) {
 
 		try {
 
 			Session session = getSession();
 		
-			Query<Address> query = session.createQuery("from Address as addr where addr.location = :loc");
-
+			Query<Address> query = (Query<Address>) session.createQuery("from Address as addr where addr.location = :loc", Address.class);
+			
+			
 			query.setParameter("loc", id);
 
 			Address rtn = null;
@@ -49,6 +49,7 @@ public class AddressDao extends AbstractHibernateDao<Address> {
 			}
 
 			return rtn;
+
 
 		} catch (HibernateException ex) {
 			getLog().error(ex.getLocalizedMessage(), ex);

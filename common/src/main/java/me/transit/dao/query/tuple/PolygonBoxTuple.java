@@ -19,14 +19,12 @@ package me.transit.dao.query.tuple;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Criteria;
-import org.hibernate.spatial.criterion.SpatialRestrictions;
-
-import com.mongodb.BasicDBObject;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
 import org.locationtech.jts.geom.Polygon;
+
+import com.mongodb.BasicDBObject;
 
 public class PolygonBoxTuple extends AbstractQueryTuple {
 
@@ -79,26 +77,22 @@ public class PolygonBoxTuple extends AbstractQueryTuple {
 	/**
 	 * 
 	 */
-	public void getCriterion(Criteria crit) {
+	public Tuple getCriterion() {
 
 		Polygon range = makePolygon(this.pointLine);
+		StringBuilder builder = new StringBuilder("within( ");
 		
 		if ( getAlias() != null ) {
-			String name =  getAlias().getSimpleName();
-			crit.createAlias( name, name);
-			
-			StringBuilder builder = new StringBuilder(name);
+			builder.append(getAlias().getSimpleName());
 			builder.append(".");
-			builder.append(getField());
-			crit.add(SpatialRestrictions.filter( builder.toString(), range));
-			crit.add(SpatialRestrictions.within( builder.toString(), range));
-			
-		} else {
-			
-			crit.add(SpatialRestrictions.filter( getField(), range));
-			crit.add(SpatialRestrictions.within( getField(), range));
 		}
+		builder.append(getField());
+		builder.append(", :polygon)");
 		
+		Tuple rtn = new Tuple(builder.toString());
+		rtn.add("polygon", range);
+		
+		return rtn;
 	}
 	
 	public void getDoucmentQuery(BasicDBObject query) {

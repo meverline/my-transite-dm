@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Map.Entry;
+import java.util.Objects;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -24,7 +24,7 @@ import me.transit.database.StopTime;
 import me.transit.database.TransitStop;
 import me.transit.database.Trip;
 
-@Component(value="stopTimeFileHandler")
+@Component(value = "stopTimeFileHandler")
 public class StopTimeFileHandler extends AbstractFileHandler {
 
 	private Log log = LogFactory.getLog(getClass().getName());
@@ -38,16 +38,15 @@ public class StopTimeFileHandler extends AbstractFileHandler {
 	 * @param blackboard
 	 */
 	@Autowired
-	public StopTimeFileHandler(RouteDao routeDao, TransiteStopDao transiteStopDao, 
-							   IDocumentDao documentDao, IGraphDatabaseDAO graphDatabase,  
-							   Blackboard blackboard) {
+	public StopTimeFileHandler(RouteDao routeDao, TransiteStopDao transiteStopDao, IDocumentDao documentDao,
+			IGraphDatabaseDAO graphDatabase, Blackboard blackboard) {
 		super(blackboard);
 		this.documentDao = Objects.requireNonNull(documentDao, "documentDao can not be null");
 		this.graphdb = Objects.requireNonNull(graphDatabase, "graphDatabase can not be null");
 		this.routeDao = Objects.requireNonNull(routeDao, "routeDao can not be null");
 		this.transiteStopDao = Objects.requireNonNull(transiteStopDao, "transiteStopDao can not be null");
 	}
-	
+
 	/*
 	 * 
 	 */
@@ -65,46 +64,51 @@ public class StopTimeFileHandler extends AbstractFileHandler {
 
 		for (Entry<String, List<Trip>> entry : tripMap.entrySet()) {
 			Map<String, TransitStop> stopIds = new HashMap<String, TransitStop>();
-			Route route = this.routeDao.loadById(entry.getKey(), getBlackboard().getAgencyName());
-	
-			for (Trip trip : entry.getValue()) {
-				for (StopTime info : trip.getStopTimes()) {
+			try {
+				Route route = this.routeDao.loadById(entry.getKey(), getBlackboard().getAgencyName());
 
-					if (!stopIds.containsKey(info.getStopId())) {
-						TransitStop stop = this.transiteStopDao.loadById(info.getStopId(), getBlackboard().getAgencyName());
-						info.setStopName(stop.getName());
+				for (Trip trip : entry.getValue()) {
+					for (StopTime info : trip.getStopTimes()) {
 
-						Double[] location = new Double[2];
-						location[0] = stop.getLocation().getCoordinate().x;
-						location[1] = stop.getLocation().getCoordinate().y;
-						info.setLocation(location);
+						if (!stopIds.containsKey(info.getStopId())) {
+							TransitStop stop = this.transiteStopDao.loadById(info.getStopId(),
+									getBlackboard().getAgencyName());
+							info.setStopName(stop.getName());
 
-						stopIds.put(info.getStopId(), stop);
-					}
-					try {
-						graphdb.createRelationShip(trip, stopIds.get(info.getStopId()));
-					} catch (Exception ex) {
-						log.error("Unable to add relationship: " + ex.getLocalizedMessage());
-					}
-				}
-			}
-			
-			if ( route == null ) {
-				log.warn("route is null for: " + entry.getKey() + " " + getBlackboard().getAgencyName());
-			} else {
-				for (TransitStop stopInfo : stopIds.values()) {
-					try {
-						graphdb.createRelationShip(route, stopInfo);
-					} catch (Exception ex) {
-						log.error("Unable to add relationship: " + ex.getLocalizedMessage());
+							Double[] location = new Double[2];
+							location[0] = stop.getLocation().getCoordinate().x;
+							location[1] = stop.getLocation().getCoordinate().y;
+							info.setLocation(location);
+
+							stopIds.put(info.getStopId(), stop);
+						}
+						try {
+							graphdb.createRelationShip(trip, stopIds.get(info.getStopId()));
+						} catch (Exception ex) {
+							log.error("Unable to add relationship: " + ex.getLocalizedMessage());
+						}
 					}
 				}
-			
-				Map<String, Object> data = route.toDocument();
-				data.put(Route.TRIPLIST, entry.getValue());
-				this.documentDao.add(data);
+
+				if (route == null) {
+					log.warn(String.format("route is null for id: %s agency %s", entry.getKey(), getBlackboard().getAgencyName()));
+				} else {
+					for (TransitStop stopInfo : stopIds.values()) {
+						try {
+							graphdb.createRelationShip(route, stopInfo);
+						} catch (Exception ex) {
+							log.error("Unable to add relationship: " + ex.getLocalizedMessage());
+						}
+					}
+
+					Map<String, Object> data = route.toDocument();
+					data.put(Route.TRIPLIST, entry.getValue());
+					this.documentDao.add(data);
+				}
+			} catch (Exception e) {
+				log.error(String.format("xrefStopToRoutes Trip map error Key %s Value %s", entry.getKey(), entry.getValue()));
 			}
-			
+
 		}
 
 		return;
@@ -117,7 +121,7 @@ public class StopTimeFileHandler extends AbstractFileHandler {
 	 */
 	@Override
 	public boolean parse(String shapeFile) throws Exception {
-		
+
 		try {
 
 			File fp = new File(shapeFile);
@@ -152,7 +156,7 @@ public class StopTimeFileHandler extends AbstractFileHandler {
 
 					String id = data[indexMap.get("trip_id")].replace('"', ' ').trim();
 					routeTripPair = getBlackboard().getTripMap().get(id);
-					if (routeTripPair == null ) {
+					if (routeTripPair == null) {
 						log.error("Unkonwn trip: " + id);
 					}
 
@@ -182,7 +186,8 @@ public class StopTimeFileHandler extends AbstractFileHandler {
 					if (!newStop) {
 						if (indexMap.containsKey("drop_off_type")) {
 							try {
-								int ndx = Integer.parseInt(data[indexMap.get("drop_off_type")].replace('"', ' ').trim());
+								int ndx = Integer
+										.parseInt(data[indexMap.get("drop_off_type")].replace('"', ' ').trim());
 								stopTime.setDropOffType(StopTime.PickupType.values()[ndx]);
 							} catch (Exception ex) {
 								log.error("Unknown Dropoff Type: ");

@@ -52,7 +52,7 @@ public class TestCatagoryTuple  extends EasyMockSupport {
 	
 		CatagoryTuple obj = new CatagoryTuple(Arrays.asList(cats));	
 		
-		obj.getCriterion(mongo);
+		obj.getCriterion();
 	
 	}
 

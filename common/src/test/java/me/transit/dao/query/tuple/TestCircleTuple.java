@@ -51,13 +51,13 @@ public class TestCircleTuple extends EasyMockSupport {
 		replayAll();
 		
 		CircleTuple obj = new CircleTuple("field", ul.toPoint(), this.distance);
-		obj.getCriterion(mongo);
+		obj.getCriterion();
 		
 		obj = new CircleTuple(String.class, "field", ul.toPoint(), this.distance);
-		obj.getCriterion(mongo);
+		obj.getCriterion();
 		
 		obj.getMultipeRestriction(mongo);
-		obj.getCriterion(mongo);
+		obj.getCriterion();
 	}
 
 }

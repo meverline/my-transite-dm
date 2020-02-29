@@ -4,18 +4,20 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Criteria;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
 import org.hibernate.ScrollMode;
 import org.hibernate.ScrollableResults;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import me.transit.database.Route;
@@ -23,7 +25,6 @@ import me.transit.database.Route;
 @Repository(value="routeDao")
 @SuppressWarnings("deprecation")
 @Scope("singleton")
-@Transactional
 public class RouteDao extends TransitDao<Route>  {
 
 	/**
@@ -37,43 +38,34 @@ public class RouteDao extends TransitDao<Route>  {
 	}
 	
 	/* (non-Javadoc)
-	 * @see me.transit.dao.impl.RouteDao#loadById(long, java.lang.String)
-	 */
-	@Override
-	public synchronized Route loadById(String id, String agencyName) {
-		Route rtn = super.loadById(id, agencyName);
-		
-		if ( rtn != null ) {
-			Hibernate.initialize(rtn.getAgency());
-		}
-		return rtn;
-	}
-
-	/* (non-Javadoc)
 	 * @see me.transit.dao.impl.RouteDao#findByRouteNumber(java.lang.String, java.lang.String)
 	 */
+	@Transactional(propagation=Propagation.NOT_SUPPORTED)
 	public List<Route> findByRouteNumber(String routeNumber, String agencyName) throws DaoException
 	{
 		List<Route> rtn = new ArrayList<Route>();
+		Session session = null;
 		
 		try {
 
-			Session session = getSession();
-			Criteria crit = session.createCriteria(Route.class);
+			session = getSession();
+			CriteriaBuilder builder = session.getCriteriaBuilder();
+			CriteriaQuery<Route> crit = builder.createQuery(Route.class);
 			
-			crit.add(Restrictions.like("shortName", routeNumber));
-			crit.createAlias("agency", "agency").add(Restrictions.eq("agency.name", agencyName));
+			Root<Route> root = crit.from(Route.class);
 			
-			for ( Object obj : crit.list()) {
-				Route rt = Route.class.cast(obj);
-				
-				Hibernate.initialize(rt.getAgency());				
-				rtn.add(rt);
-			}
-		
+			crit.where(
+					builder.like(root.get("shortName"), routeNumber),
+					builder.equal(root.get("agency").get("name"), agencyName)
+			);
+			
+			rtn = session.createQuery(crit).getResultList();
+			
 		} catch (HibernateException ex) {
 			getLog().error(ex.getLocalizedMessage(), ex);
 			throw new DaoException("Route: " + routeNumber + " Agency: " + agencyName, ex);
+		} finally {
+			if ( session != null ) { session.close(); }
 		}
 
 		return rtn;
@@ -83,14 +75,19 @@ public class RouteDao extends TransitDao<Route>  {
 	 * 
 	 * @return
 	 */
-	@SuppressWarnings({ "unchecked" })
 	public RouteListIterator listAllRoutes()
 	{		
 		Session session = getSession();
-		Query<Route> query = session.createQuery("from Route as urc order by shortName");
-
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		CriteriaQuery<Route> crit = builder.createQuery(Route.class);
+		Root<Route> root = crit.from(Route.class);
+		crit.orderBy(builder.desc(root.get("shortName")));
+		
 		// query.setReadOnly(true);
-	    ScrollableResults results = query.scroll(ScrollMode.FORWARD_ONLY);
+		javax.persistence.Query query = session.createQuery(crit);
+		@SuppressWarnings("rawtypes")
+		org.hibernate.Query hquery = query.unwrap(org.hibernate.Query.class);
+		ScrollableResults results = hquery.scroll(ScrollMode.FORWARD_ONLY);
 	    	    
 	    return new RouteListIterator(results, session);
 	}

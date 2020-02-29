@@ -81,13 +81,13 @@ public class TestNumberTuple extends EasyMockSupport {
 		for ( NumberTuple.LOGIC logic : NumberTuple.LOGIC.values()) {
 			NumberTuple obj = new NumberTuple( String.class, "field", 100, logic);
 			
-			obj.getCriterion(mongo);
+			obj.getCriterion();
 		}
 	
 		NumberTuple obj = new NumberTuple( "field", 100, 10);
-		obj.getCriterion(mongo);
+		obj.getCriterion();
 	    obj = new NumberTuple( String.class, "field", 100, 10);
-		obj.getCriterion(mongo);
+		obj.getCriterion();
 		
 	}
 

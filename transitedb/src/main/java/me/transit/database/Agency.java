@@ -11,17 +11,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
+import org.locationtech.jts.geom.Polygon;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import org.locationtech.jts.geom.Polygon;
 
 import me.database.neo4j.AbstractGraphNode;
 import me.database.neo4j.FIELD;
@@ -32,9 +31,8 @@ import me.transit.json.GeometryToBase64String;
 
 @Entity
 @Table(name = "tran_agency")
-@Inheritance
 @DiscriminatorColumn(name = "angency_type")
-@DiscriminatorValue("AgencyImpl")
+@DiscriminatorValue("Agency")
 @GTFSFileModel(filename="agency.txt")
 public class Agency extends AbstractGraphNode implements Serializable {
 

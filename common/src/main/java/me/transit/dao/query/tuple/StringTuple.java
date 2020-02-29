@@ -2,9 +2,6 @@ package me.transit.dao.query.tuple;
 
 import java.util.regex.Pattern;
 
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Restrictions;
-
 import com.mongodb.BasicDBObject;
 
 public class StringTuple extends AbstractQueryTuple {
@@ -92,20 +89,19 @@ public class StringTuple extends AbstractQueryTuple {
 	 * 
 	 */
 	@Override
-	public void getCriterion(Criteria crit) {
+	public Tuple getCriterion() {
 		
+		StringBuilder builder = new StringBuilder();
 		if ( getAlias() != null ) {
-			String name =  getAlias().getSimpleName().toLowerCase();
-			
-			StringBuilder builder = new StringBuilder(name);
+			builder.append(getAlias().getSimpleName().toLowerCase());
 			builder.append(".");
-			builder.append(getField());
+		}	
 			
-			crit.createAlias( name, name).add(Restrictions.like(builder.toString(), matchType.getRestriction(value)));
-			
-		} else {
-			crit.add(Restrictions.like(getField(), matchType.getRestriction(value)));
-		}
+		builder.append(getField());
+		builder.append(" like ");
+		builder.append(matchType.getRestriction(value));
+		
+		return new Tuple(builder.toString());
 	}
 	
 	@Override

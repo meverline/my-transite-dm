@@ -2,18 +2,23 @@ package me.math.grid.tiled.dao;
 
 import java.sql.SQLException;
 
+import javax.persistence.NoResultException;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import me.database.hibernate.AbstractHibernateDao;
 import me.math.grid.tiled.DbTiledSpatialGrid;
 
-@SuppressWarnings("deprecation")
 @Repository(value="dbTiledSpatialGridDao")
 @Qualifier("dbTiledSpatialGridDao")
 public class DbTiledSpatialGridDao extends AbstractHibernateDao<DbTiledSpatialGrid> {
@@ -34,49 +39,52 @@ public class DbTiledSpatialGridDao extends AbstractHibernateDao<DbTiledSpatialGr
 	 * @param id
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
+	@Transactional(propagation=Propagation.NOT_SUPPORTED)
 	public DbTiledSpatialGrid loadByName(String id) {
 
+		DbTiledSpatialGrid rtn = null; 
 		try {
 
 			Session session = getSession();
-			Query<DbTiledSpatialGrid> query = session.createQuery("from DbTiledSpatialGrid as grid where grid.heatMapName = :loc");
-
-			query.setParameter("loc", id);
-
-			DbTiledSpatialGrid rtn = null;
-			Object obj = query.uniqueResult();
-			if ( obj != null ) {
-				rtn = DbTiledSpatialGrid.class.cast( obj);
-			}
-
-			session.close();
-			return rtn;
-
+			CriteriaBuilder builder = session.getCriteriaBuilder();
+			CriteriaQuery<?> crit = builder.createQuery(this.getDaoClass());
+			
+			Root<?> root = crit.from(this.getDaoClass());
+			
+			crit.where(
+					builder.equal(root.get("heatMapName"), id)
+			);
+			
+			rtn =  (DbTiledSpatialGrid) session.createQuery(crit).getSingleResult();
+		} catch (NoResultException ex) {
+			rtn = null;
 		} catch (HibernateException ex) {
 			getLog().error(ex.getLocalizedMessage(), ex);
 		}
 
-		return null;
+		return rtn;
 
 	}
 	
 	/**
 	 * 
 	 */
-	public void save(DbTiledSpatialGrid tile) throws SQLException
+	@Transactional
+	public DbTiledSpatialGrid save(DbTiledSpatialGrid tile) throws SQLException
 	{		
 		DbTiledSpatialGrid grid = this.loadByName(tile.getHeatMapName());
 		if ( grid != null ) {
 			tile.setUUID(grid.getUUID());
 		}
 		this.save(tile);
+		return tile;
 	}
 	
 	/**
 	 * 
 	 * @throws SQLException
 	 */
+	@Transactional(propagation=Propagation.NOT_SUPPORTED)
 	public DbTiledSpatialGrid load(String name) throws SQLException
 	{		
 		return this.loadByName(name);

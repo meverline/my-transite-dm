@@ -40,7 +40,8 @@ public class RouteFileHandler extends AbstractDefaultFileHandler {
 		if (route.getShortName() == null || route.getShortName().isEmpty()) {
 			route.setShortName(route.getLongName());
 		}
-		routeDao.save(route);
+		Route data = routeDao.save(route);
+		this.getBlackboard().getRouteuuid().put(data.getId(),  data.getUUID());
 		getGraphDatabase().addNode(route);
 	}
 }

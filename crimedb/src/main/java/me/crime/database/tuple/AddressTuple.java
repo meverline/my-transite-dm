@@ -16,13 +16,11 @@
 
 package me.crime.database.tuple;
 
+import com.mongodb.BasicDBObject;
+
 import me.crime.database.Address;
 import me.transit.dao.query.tuple.AbstractQueryTuple;
-
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Restrictions;
-
-import com.mongodb.BasicDBObject;
+import me.transit.dao.query.tuple.Tuple;
 
 
 public class AddressTuple extends AbstractQueryTuple {
@@ -36,15 +34,16 @@ public class AddressTuple extends AbstractQueryTuple {
 	}
 
 	@Override
-	public void getCriterion(Criteria crit) {
+	public Tuple getCriterion() {
 		String name =  getAlias().getSimpleName();
 		
 		StringBuilder builder = new StringBuilder(name);
 		builder.append(".");
 		builder.append(getField());
+		builder.append(" like ");
+		builder.append("%" + address_ + "%");
 		
-		crit.createAlias(name, name);
-		crit.add(Restrictions.like( builder.toString(), "%" + address_ + "%"));
+		return new Tuple(builder.toString());
 	}
 
 	@Override

@@ -1,10 +1,7 @@
 package me.transit.database;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
@@ -256,44 +253,5 @@ public class StopTime implements CSVFieldType, IDocument {
 		
 		return builder.toString();
 	}
-	
-    @Override
-    public Map<String, Object> toDocument() {
-            Map<String,Object> rtn = new HashMap<String,Object>();
-
-            rtn.put(IDocument.CLASS, StopTime.class.getName());
-            if ( this.getStopId() != null ) {
-                    rtn.put( StopTime.STOPID, this.getStopId());
-            }
-            if ( this.getStopName() != null ) {
-                    rtn.put( StopTime.STOPNAME, this.getStopName());
-            }
-            if ( this.getStopHeadSign() != null ) {
-                    rtn.put( StopTime.STOPHEADSIGN, this.getStopHeadSign());
-            }
-                            
-            Collections.sort(this.getArrivalTime());
-            rtn.put( StopTime.ARRIVALTIME, this.getArrivalTime());
-            rtn.put( StopTime.DROPOFFTYPE, this.getDropOffType().name());
-            rtn.put( StopTime.PICKUPTYPE, this.getPickupType().name());
-            
-            if ( location != null ) {
-                rtn.put( StopTime.LOCATION, location);
-            }
-            return rtn;
-    }
-    
-    /**
-     * 
-     */
-    @Override
-    public void handleEnum(String key, Object value)
-    {
-            if ( key.equals(StopTime.PICKUPTYPE) ) {
-                    this.setPickupType( StopTime.PickupType.valueOf(value.toString()));
-            } else  if ( key.equals(StopTime.DROPOFFTYPE) ) {
-                    this.setDropOffType( StopTime.PickupType.valueOf(value.toString()));
-            }
-    }
 				
 }

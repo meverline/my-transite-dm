@@ -2,6 +2,7 @@ package me.database.neo4j;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -10,19 +11,15 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.GraphDatabaseService;
+import org.neo4j.graphdb.Label;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Path;
 import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
-import org.neo4j.graphdb.factory.GraphDatabaseSettings;
-import org.neo4j.graphdb.index.ReadableIndex;
+import org.neo4j.graphdb.schema.IndexDefinition;
 import org.neo4j.graphdb.traversal.Evaluators;
 import org.neo4j.graphdb.traversal.TraversalDescription;
-import org.neo4j.graphdb.schema.IndexDefinition;
-import org.neo4j.graphdb.schema.Schema;
-
-import org.neo4j.graphdb.Label;
 
 import me.transit.database.Agency;
 import me.transit.database.Route;
@@ -45,7 +42,6 @@ public class GraphDatabaseDAO implements IGraphDatabaseDAO {
 	/**
 	 * 
 	 */
-	@SuppressWarnings("deprecation")
 	private GraphDatabaseDAO() {
 		StringBuilder field_types = new StringBuilder();
 		for (FIELD item : FIELD.values()) {
@@ -66,12 +62,10 @@ public class GraphDatabaseDAO implements IGraphDatabaseDAO {
 		}
 
 		graphDb = new GraphDatabaseFactory().newEmbeddedDatabaseBuilder(new File(getDbPath()))
-				.setConfig(GraphDatabaseSettings.node_keys_indexable, field_types.toString())
-				.setConfig(GraphDatabaseSettings.relationship_keys_indexable, rel_types.toString())
-				.setConfig(GraphDatabaseSettings.node_auto_indexing, "true")
-				.setConfig(GraphDatabaseSettings.relationship_auto_indexing, "true").newGraphDatabase();
+				.newGraphDatabase();
 
 		registerShutdownHook(graphDb);
+		indexDatabase();
 	}
 
 	/**
@@ -106,19 +100,47 @@ public class GraphDatabaseDAO implements IGraphDatabaseDAO {
 		});
 	}
 	
-	private void createIndexs()
+	/**
+	 * 
+	 * @param label
+	 * @param field
+	 * @return
+	 */
+	private IndexDefinition createIndex(Label label,  String field)
 	{
 		IndexDefinition indexDefinition;
         try ( Transaction tx = graphDb.beginTx() )
         {
-            Schema schema = graphDb.schema();
-            indexDefinition = schema.indexFor( Label.label( Agency.class.getSimpleName() ) )
-                    .on( FIELD.agency.name() )
-                    .create();
+            indexDefinition = graphDb.schema().indexFor( label ).on( field ).create();
             tx.success();
         }
+        return indexDefinition;
 	}
-
+	
+	/**
+	 * 
+	 */
+    private void indexDatabase() {
+    	Map<String, String> indexMap = new HashMap<>();
+    	
+    	indexMap.put(Agency.class.getSimpleName(), FIELD.agency.name());
+    	indexMap.put(TransitStop.class.getSimpleName(), FIELD.stop.name());
+    	indexMap.put(Trip.class.getSimpleName(), FIELD.trip.name());
+    	indexMap.put(Route.class.getSimpleName(), FIELD.route.name());
+    	indexMap.put("Point", FIELD.coordinate.name());
+    	indexMap.put("HeadSign", FIELD.trip_headSign.name());
+    	
+    	List<IndexDefinition> indexs = new ArrayList<>();
+    	for ( Map.Entry<String, String> item : indexMap.entrySet()) {
+    		try {
+    			indexs.add(createIndex(Label.label(item.getKey()), item.getValue()));
+    		} catch (Exception ex){  
+    			log.warn("indexing exception: " + ex.getLocalizedMessage());
+    		}
+    	}
+    	
+    }
+	
 	/**
 	 * 
 	 */
@@ -623,16 +645,13 @@ public class GraphDatabaseDAO implements IGraphDatabaseDAO {
 	 * GraphDatabaseDAO.FIELD, java.lang.String)
 	 */
 	@Override
-	@SuppressWarnings("deprecation")
-	public Node findNodeByField(FIELD fld, String key) {
+	public Node findNodeByField(FIELD fld, String key, Class<?> nodeClass) {
 
 		Transaction tx = beginTransaction();
 		Node rtn = null;
 
 		try {
-			ReadableIndex<Node> index = graphDb.index().getNodeAutoIndexer().getAutoIndex();
-
-			rtn = index.get(fld.name(), key).getSingle();
+			rtn = graphDb.findNode(Label.label(nodeClass.getSimpleName()), fld.toString(), key.toString());
 			tx.success();
 		} catch (Exception ex) {
 			tx.failure();

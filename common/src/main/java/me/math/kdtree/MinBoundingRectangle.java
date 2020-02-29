@@ -26,6 +26,7 @@ import me.math.Vertex;
 import me.math.grid.AbstractSpatialGridPoint;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import org.locationtech.jts.geom.Coordinate;
@@ -279,6 +280,7 @@ public class MinBoundingRectangle implements IDocument, Serializable {
 	 * 
 	 * @return
 	 */
+	@JsonIgnore
 	public Point getUpperLeft() {
 		Point pt = factory_.createPoint(new Coordinate(getTopLatDegress(),
 				getLeftLonDegress()));
@@ -289,6 +291,7 @@ public class MinBoundingRectangle implements IDocument, Serializable {
 	 * 
 	 * @return
 	 */
+	@JsonIgnore
 	public Point getLowerRight() {
 		Point pt = factory_.createPoint(new Coordinate(getBottomLatDegress(),
 				getRightLonDegress()));
@@ -299,6 +302,7 @@ public class MinBoundingRectangle implements IDocument, Serializable {
 	 * 
 	 * @return
 	 */
+	@JsonIgnore
 	public Polygon toPolygon() {
 		Coordinate coords[] = new Coordinate[5];
 
@@ -330,29 +334,13 @@ public class MinBoundingRectangle implements IDocument, Serializable {
 		return buf.toString();
 	}
 
-	@Override
-	public Map<String, Object> toDocument() {
-		
-		Map<String,Object> rtn = new HashMap<String,Object>();
 
-		rtn.put(IDocument.CLASS, MinBoundingRectangle.class.getName());
-		List<Double> top = new ArrayList<Double>();
-		top.add( getTopLatDegress() );
-		top.add( getLeftLonDegress() );
-		rtn.put("top", top);
-		
-		List<Double> bottom = new ArrayList<Double>();
-		bottom.add( getBottomLatDegress());
-		bottom.add( getRightLonDegress());
-		rtn.put("bottom", bottom);
-		
-		return rtn;
-	}
 	
 	/**
 	 * 
 	 * @param top
 	 */
+	@JsonIgnore
 	public void setTop(List<Double> top) {
 		this.toplatDegress_ = top.get(0);
 		this.leftlonDegress_ = top.get(1);
@@ -362,13 +350,10 @@ public class MinBoundingRectangle implements IDocument, Serializable {
 	 * 
 	 * @param top
 	 */
+	@JsonIgnore
 	public void setBottom(List<Double> top) {
 		this.bottomlatDegress_ = top.get(0);
 		this.rightlonDegress_ = top.get(1);
-	}
-
-	@Override
-	public void handleEnum(String key, Object value) {
 	}
 
 }

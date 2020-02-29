@@ -24,18 +24,15 @@ public class TripDao extends TransitDao<Trip>  {
 	public TripDao(SessionFactory aSessionFactory) throws SQLException, ClassNotFoundException {
 		super(Trip.class, aSessionFactory);
 	}
-		
-	/* (non-Javadoc)
-	 * @see me.transit.dao.TransitDao#loadById(long, java.lang.String)
+	
+	/*
+	 * 	
 	 */
 	@Override
-	public synchronized Trip loadById(String id, String agencyName) {
-		Trip obj = super.loadById(id, agencyName);
-		
-		Hibernate.initialize(obj.getAgency());
-		Hibernate.initialize(obj.getShape());
-		return obj;
+	protected void initObject(Trip rtn) {
+		// TODO Auto-generated method stub
+		super.initObject(rtn);
+		Hibernate.initialize(rtn.getShape());
 	}
-	
 
 }

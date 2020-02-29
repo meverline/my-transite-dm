@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.Scope;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -54,6 +55,7 @@ public class CommonConfigBase {
 	 * @return
 	 */
 	@Bean
+	@Scope("singleton")
 	public SessionFactory sessionFactory() {
 		return new LocalSessionFactoryBuilder(dataSource())
 					.scanPackages(this.packageToScan())

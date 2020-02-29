@@ -88,7 +88,7 @@ public interface IGraphDatabaseDAO {
 	 * 
 	 * @return
 	 */
-	Node findNodeByField(FIELD fld, String key);
+	Node findNodeByField(FIELD fld, String key, Class<?> nodeClass);
 
 	/**
 	 * 

@@ -49,13 +49,13 @@ public class TestRectangleTuple extends EasyMockSupport {
 		replayAll();
 		
 		RectangleTuple obj = new RectangleTuple("field", ul.toPoint(), lr.toPoint());
-		obj.getCriterion(mongo);
+		obj.getCriterion();
 		
 		obj = new RectangleTuple(String.class, "field", ul.toPoint(), lr.toPoint());
-		obj.getCriterion(mongo);
+		obj.getCriterion();
 		
 		obj.getMultipeRestriction(mongo);
-		obj.getCriterion(mongo);
+		obj.getCriterion();
 	}
 
 }

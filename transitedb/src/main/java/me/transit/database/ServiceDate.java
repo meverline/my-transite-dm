@@ -1,8 +1,6 @@
 package me.transit.database;
 
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,7 +13,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -34,9 +31,8 @@ import me.transit.json.AgencyToString;
 
 @Entity
 @Table(name="tran_service_date")
-@Inheritance
 @DiscriminatorColumn(name = "serviceDate_type")
-@DiscriminatorValue("ServiceDateImpl")
+@DiscriminatorValue("ServiceDate")
 @GTFSFileModel(filename="calendar.txt")
 public class ServiceDate implements TransitData, IDocument {
 	
@@ -347,49 +343,7 @@ public class ServiceDate implements TransitData, IDocument {
 		}
 		return rtn;
 	}
-	
-	/* (non-Javadoc)
-	 * @see me.transit.database.impl.ServiceDate#toDocument()
-	 */
-    @Override
-	public Map<String, Object> toDocument() {
-            Map<String,Object> rtn = new HashMap<String,Object>();
-            
-            rtn.put(IDocument.CLASS, ServiceDate.class.getName());
-            rtn.put(IDocument.ID, this.getUUID());
-            rtn.put(ServiceDate.STARTDATE, getStartDate().getTime());
-            rtn.put(ServiceDate.ENDDATE, getEndDate().getTime());
-            rtn.put(ServiceDate.SERVICE, this.getService().name());
-            
-            StringBuffer buffer = new StringBuffer();
-            
-            for (WeekDay day : ServiceDate.WeekDay.values()) {
-                    if ( this.hasService(day) ) {
-                            if ( buffer.length() > 0) { buffer.append(" "); }
-                            buffer.append(day.name());
-                    }
-            }
-            rtn.put(ServiceDate.SERVICEDAYFLAG, buffer);
-            return rtn;
-    }
-    
-    /* (non-Javadoc)
-	 * @see me.transit.database.impl.ServiceDate#handleEnum(java.lang.String, java.lang.Object)
-	 */
-    @Override
-	public void handleEnum(String key, Object value)
-    {
-            if ( key.equals(ServiceDate.SERVICE) ) {
-                    this.setService( ServiceDate.ServiceDays.valueOf(value.toString()));
-            } else if ( key.equals( ServiceDate.SERVICEDAYFLAG ) ) {
-                    
-                    String [] data = value.toString().split(" ");
-                    for ( String day : data) {
-                            this.addServiceData( ServiceDate.WeekDay.valueOf(day.trim() ));
-                    }
-            }
-    }
-	
+		
 	/*
 	 * (non-Javadoc)
 	 * @see me.transit.database.TransitData#valid()

@@ -18,13 +18,11 @@ package me.crime.database.tuple;
 
 import java.util.List;
 
+import com.mongodb.BasicDBObject;
+
 import me.crime.database.URCCatagories;
 import me.transit.dao.query.tuple.AbstractQueryTuple;
-
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Restrictions;
-
-import com.mongodb.BasicDBObject;
+import me.transit.dao.query.tuple.Tuple;
 
 public class CatagoryTuple extends AbstractQueryTuple {
 
@@ -37,21 +35,22 @@ public class CatagoryTuple extends AbstractQueryTuple {
 	}
 
 	@Override
-	public void getCriterion(Criteria crit) {
-		Object [] rest = new String[catagorys_.size()];
-
-		for ( int ndx = 0; ndx < catagorys_.size(); ndx++ ) {
-			rest[ndx] = catagorys_.get(ndx).toString();
-		}
-		
+	public Tuple getCriterion() {
 		String name =  getAlias().getSimpleName();
-		
 		StringBuilder builder = new StringBuilder(name);
+		
 		builder.append(".");
 		builder.append(getField());
+		builder.append(" in (");
+
+		for ( int ndx = 0; ndx < catagorys_.size(); ndx++ ) {
+			if ( ndx != 0) { builder.append(","); }
+			builder.append(catagorys_.get(ndx).toString());
+		}
 		
-		crit.createAlias(name, name);
-		crit.add(Restrictions.in( builder.toString(), rest));
+		builder.append(")");
+		
+		return new Tuple(builder.toString());
 	}
 	
 	@Override

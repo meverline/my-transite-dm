@@ -16,7 +16,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -39,9 +38,8 @@ import me.transit.json.GeometryToBase64String;
 
 @Entity
 @Table(name="tran_trip")
-@Inheritance
 @DiscriminatorColumn(name = "trip_type")
-@DiscriminatorValue("TripImpl")
+@DiscriminatorValue("Trip")
 @GTFSFileModel(filename="trips.txt")
 public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	
@@ -363,49 +361,6 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 		return true;
 	}
 	
-    /*
-     * (non-Javadoc)
-     * @see me.database.mongo.IDocument#toDocument()
-     */
-    /* (non-Javadoc)
-	 * @see me.transit.database.impl.Trip#toDocument()
-	 */
-    @Override
-    public Map<String, Object> toDocument() {
-            Map<String,Object> rtn = new HashMap<String,Object>();
-
-            rtn.put(IDocument.CLASS, Trip.class.getName());
-            rtn.put(IDocument.ID, this.getUUID());
-            rtn.put( Trip.ID, this.getId());
-            if ( this.getService() != null ) {
-                rtn.put( Trip.SERVICE, this.getService());
-            }
-            if ( this.getHeadSign() != null ) {
-                    rtn.put( Trip.HEADSIGN, this.getHeadSign());
-            }
-            if ( this.getShortName() != null ) {
-                    rtn.put( Trip.SHORTNAME, this.getShortName());
-            }
-            rtn.put( Trip.DIRECTIONID, this.getDirectionId().name());
-            rtn.put( Trip.STOPTIMES, this.getStopTimes());
-            return rtn;
-    }
-    
-    /*
-     * (non-Javadoc)
-     * @see me.database.mongo.IDocument#handleEnum(java.lang.String, java.lang.Object)
-     */
-    /* (non-Javadoc)
-	 * @see me.transit.database.impl.Trip#handleEnum(java.lang.String, java.lang.Object)
-	 */
-    @Override
-    public void handleEnum(String key, Object value)
-    {
-            if ( key.equals( Trip.DIRECTIONID ) ) {
-                    this.setDirectionId( Trip.DirectionType.valueOf(value.toString()));
-            }
-    }
-    
     /*
      * (non-Javadoc)
      * @see me.database.neo4j.IGraphNode#getProperties()

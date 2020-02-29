@@ -18,11 +18,12 @@ import me.transit.database.Trip;
 public class Blackboard {
 
 	private final Log log = LogFactory.getLog(getClass().getName());
-	private final Map<String, String> routeShortName = new HashMap<String, String>();
-	private final Map<String, RouteGeometry> shaps = new HashMap<String, RouteGeometry>();
-	private final Map<String, ServiceDate> service = new HashMap<String, ServiceDate>();
-	private final Map<String, RouteTripPair> tripMap = new HashMap<String, RouteTripPair>();
-	private final Map<String, List<Trip>> routeToTrips = new HashMap<String, List<Trip>>();
+	private final Map<String, String> routeShortName = new HashMap<>();
+	private final Map<String, RouteGeometry> shaps = new HashMap<>();
+	private final Map<String, ServiceDate> service = new HashMap<>();
+	private final Map<String, RouteTripPair> tripMap = new HashMap<>();
+	private final Map<String, List<Trip>> routeToTrips = new HashMap<>();
+	private final Map<String, Long> routeuuid = new HashMap<>();
 	private Agency agency = null;
 	private MinBoundingRectangle mbr = null;
 
@@ -141,4 +142,11 @@ public class Blackboard {
 		return null;
 	}
 
+	/**
+	 * @return the routeuuid
+	 */
+	public Map<String, Long> getRouteuuid() {
+		return routeuuid;
+	}
+	
 }

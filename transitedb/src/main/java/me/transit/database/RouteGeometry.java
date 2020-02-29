@@ -9,7 +9,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -30,9 +29,8 @@ import me.transit.json.GeometryToBase64String;
 
 @Entity
 @Table(name="tran_route_geometry")
-@Inheritance
 @DiscriminatorColumn(name = "routeGeometry_type")
-@DiscriminatorValue("RouteGeometryImpl")
+@DiscriminatorValue("RouteGeometry")
 public class RouteGeometry implements TransitData {
 
 	private static final long serialVersionUID = 1L;
@@ -144,6 +142,9 @@ public class RouteGeometry implements TransitData {
 	}
 	
 	public String toString() {
+		if ( this.getAgency() == null ) {
+			return Long.toString(this.getUUID());
+		}
 		return Long.toString(this.getUUID()) + "  " + this.getAgency().toString();
 	}
 	

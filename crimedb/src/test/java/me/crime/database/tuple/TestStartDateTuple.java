@@ -53,7 +53,7 @@ public class TestStartDateTuple extends EasyMockSupport {
 	
 		StartDateTuple obj = new StartDateTuple(start);	
 		
-		obj.getCriterion(mongo);
+		obj.getCriterion();
 	
 	}
 

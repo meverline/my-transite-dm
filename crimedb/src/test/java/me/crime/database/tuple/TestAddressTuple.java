@@ -49,7 +49,7 @@ public class TestAddressTuple extends EasyMockSupport {
 		
 			AddressTuple obj = new AddressTuple("3329 Caddy drive");	
 			
-			obj.getCriterion(mongo);
+			obj.getCriterion();
 		
 		}
 

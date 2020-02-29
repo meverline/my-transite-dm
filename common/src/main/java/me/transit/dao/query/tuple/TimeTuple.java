@@ -3,9 +3,6 @@ package me.transit.dao.query.tuple;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Restrictions;
-
 import com.mongodb.BasicDBObject;
 import com.mongodb.QueryOperators;
 
@@ -46,21 +43,27 @@ public class TimeTuple extends AbstractQueryTuple {
 	/**
 	 * 
 	 */
-	public void getCriterion(Criteria crit) {
+	public Tuple getCriterion() {
+		StringBuilder builder = new StringBuilder();
 		if ( getAlias() != null ) {
-			String name =  getAlias().getSimpleName();
-			crit.createAlias( name, name);
-			
-			StringBuilder builder = new StringBuilder(name);
+			builder.append(getAlias().getSimpleName());
 			builder.append(".");
-			builder.append(getField());
-			
-			crit.add(Restrictions.between(builder.toString(), startTime, endTime));
-		} else {
-			crit.add(Restrictions.between(getField(), startTime, endTime));
 		}
+		builder.append(getField());
+		builder.append(" between ");
+		builder.append(" :time_start ");
+		builder.append(" and ");
+		builder.append(" :time_end");
+		
+		Tuple rtn = new Tuple(builder.toString());
+		rtn.add("time_start", startTime);
+		rtn.add("time_end", endTime);
+		return rtn;
 	}
 	
+	/*
+	 * 
+	 */
 	@Override
 	public void getDoucmentQuery(BasicDBObject query) {
         SimpleDateFormat sdf = new SimpleDateFormat( TimeTuple.SDF_DATE_FORMAT);

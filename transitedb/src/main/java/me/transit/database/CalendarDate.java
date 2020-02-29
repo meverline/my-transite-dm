@@ -13,7 +13,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -31,9 +30,8 @@ import me.transit.json.AgencyToString;
 
 @Entity(name = "CalendarDate")
 @Table(name = "tran_calendar_date")
-@Inheritance
 @DiscriminatorColumn(name = "calendar_date_type")
-@DiscriminatorValue("CalendarDateImpl")
+@DiscriminatorValue("CalendarDate")
 @GTFSFileModel(filename="calendar_dates.txt")
 public class CalendarDate implements TransitData {
 	
