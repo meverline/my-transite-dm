@@ -69,8 +69,7 @@ public class TestDocumentDao extends EasyMockSupport{
 	@Test
 	public void testPrimative() throws UnknownHostException {
 		
-		this.setUpMock();
-		DocumentDao doc = DocumentDao.class.cast(DocumentDao.instance(writer));
+		this.setUpMock();		
 		
 		Class<?> info[] = {
 				String.class,
@@ -163,44 +162,85 @@ public class TestDocumentDao extends EasyMockSupport{
 		private String array[] = { "a", "b", "c", "d" };
 		private List<String> data = Arrays.asList(array);
 
-		@JsonGetter("name")
+		@JsonGetter("TestB.name")
 		public String getName() {
 			return name;
 		}
 
-		@JsonSetter("name")
+		@JsonSetter("TestB.name")
 		public void setName(String name) {
 			this.name = name;
 		}
 
-		@JsonGetter("array")
+		@JsonGetter("TestB.array")
 		public String[] getArray() {
 			return array;
 		}
 
-		@JsonSetter("array")
+		@JsonSetter("TestB.array")
 		public void setArray(String[] array) {
 			this.array = array;
 		}
 
-		@JsonGetter("data")
+		@JsonGetter("TestB.data")
 		public List<String> getData() {
 			return data;
 		}
 
-		@JsonSetter("data")
+		@JsonSetter("TestB.data")
 		public void setData(List<String> data) {
 			this.data = data;
 		}
 		
-		@JsonGetter("item")
+		@JsonGetter("TestB.item")
 		public String getItem() {
 			return name;
 		}
 
-		@JsonSetter("item")
+		@JsonSetter("TestB.item")
 		public void setItem(String name) {
 		}
+		
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + Arrays.hashCode(array);
+			result = prime * result + ((data == null) ? 0 : data.hashCode());
+			result = prime * result + ((name == null) ? 0 : name.hashCode());
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			TestB other = (TestB) obj;
+			if (!Arrays.equals(array, other.array))
+				return false;
+			if (data == null) {
+				if (other.data != null)
+					return false;
+			} else if (!data.equals(other.data))
+				return false;
+			if (name == null) {
+				if (other.name != null)
+					return false;
+			} else if (!name.equals(other.name))
+				return false;
+			return true;
+		}
+
+		@Override
+		public String toString() {
+			return "TestB [name=" + name + ", array=" + Arrays.toString(array) + ", data=" + data + "]";
+		}
+		
+		
 	}
 
 	public static class TestA implements IDocument {
@@ -251,6 +291,50 @@ public class TestDocumentDao extends EasyMockSupport{
 			this.object = object;
 		}
 		
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + min;
+			result = prime * result + ((name == null) ? 0 : name.hashCode());
+			result = prime * result + ((object == null) ? 0 : object.hashCode());
+			long temp;
+			temp = Double.doubleToLongBits(value);
+			result = prime * result + (int) (temp ^ (temp >>> 32));
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			TestA other = (TestA) obj;
+			if (min != other.min)
+				return false;
+			if (name == null) {
+				if (other.name != null)
+					return false;
+			} else if (!name.equals(other.name))
+				return false;
+			if (object == null) {
+				if (other.object != null)
+					return false;
+			} else if (!object.equals(other.object))
+				return false;
+			if (Double.doubleToLongBits(value) != Double.doubleToLongBits(other.value))
+				return false;
+			return true;
+		}
+
+		@Override
+		public String toString() {
+			return "TestA [name=" + name + ", min=" + min + ", value=" + value + ", object=" + object + "]";
+		}
+
 	}
 
 }

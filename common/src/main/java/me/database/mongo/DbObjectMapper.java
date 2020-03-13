@@ -31,9 +31,9 @@ public class DbObjectMapper {
 
 		boolean rtn = false;
 
-		if (type == String.class || type == Long.class || type == Integer.class || type == Boolean.class
-				|| type == Float.class || type == Short.class || type == Double.class || type == Character.class
-				|| type == Byte.class) {
+		if (type == String.class || type == Long.TYPE || type == Integer.TYPE || type == Boolean.TYPE
+				|| type == Float.TYPE || type == Short.TYPE || type == Double.TYPE || type == Character.TYPE
+				|| type == Byte.TYPE ) {
 			rtn = true;
 		}
 		return rtn;
@@ -49,16 +49,34 @@ public class DbObjectMapper {
 			for (Annotation man : mth.getAnnotations()) {
 				if (man.annotationType() == JsonGetter.class) {
 					JsonGetter setter = JsonGetter.class.cast(man);
-					if (List.class.isAssignableFrom(mth.getReturnType().getClass())) {
-						List<?> list = List.class.cast(mth.invoke(obj, (Object) null));
+					
+					System.out.println(setter.value() + " " + mth.getReturnType() );
+					if (List.class.isAssignableFrom(mth.getReturnType())) {
+						List<?> list = List.class.cast(mth.invoke(obj));
 
 						BasicDBList dbList = new BasicDBList();
 						for (Object item : list) {
-							dbList.add(DbObjectMapper.encode(item));
+							if ( item.getClass().isPrimitive() || item.getClass() == String.class ) {
+								dbList.add(item);
+							} else {
+								dbList.add(DbObjectMapper.encode(item));
+							}
 						}
+						System.out.print(dbList.size());
+						System.out.print(" ");
+						System.out.println(list.size());
 						rtn.append(setter.value(), dbList);
+					} else if (mth.getReturnType().isArray()) {
+						rtn.append(setter.value(), mth.invoke(obj));
+					} else if ( ! DbObjectMapper.isPrimativeType(mth.getReturnType())) {
+						rtn.append(setter.value(), DbObjectMapper.encode(mth.invoke(obj)));
 					} else {
-						rtn.append(setter.value(), mth.invoke(obj, (Object)null));
+						try {
+							rtn.append(setter.value(), mth.invoke(obj));
+						} catch( Exception ex) {
+							log.error(mth.getName() + " " + ex.getLocalizedMessage());
+							throw ex;
+						}
 					}
 				}
 			}
@@ -78,14 +96,30 @@ public class DbObjectMapper {
 					JsonSetter setter = JsonSetter.class.cast(man);
 					
 					Parameter[] parms = mth.getParameters();
-					if (List.class.isAssignableFrom(parms[0].getType().getClass())) {
+					
+					System.out.println(setter.value()+ " " + parms[0].getType()  );
+					if (List.class.isAssignableFrom(parms[0].getType())) {
 						List<Object> list = new ArrayList<>();
 
 						BasicDBList dbList = (BasicDBList) map.get(setter.value());
 						for (Object item : dbList) {
-						   list.add(DbObjectMapper.decode((BasicDBObject) item));
+						   if ( item.getClass().isPrimitive() || item.getClass() == String.class) {
+							   list.add(item);
+						   } else {
+							   list.add(DbObjectMapper.decode((BasicDBObject) item));
+						   }
 						}
+						System.out.print(dbList.size());
+						System.out.print(" ");
+						System.out.println(list.size());
 						mth.invoke(obj, list);
+					} else if (parms[0].getType().isArray()) {
+						mth.invoke(obj, map.get(setter.value()));
+					} else if ( ! DbObjectMapper.isPrimativeType(parms[0].getType())) {
+						@SuppressWarnings("unchecked")
+						Map<String, Object> objMap = (Map<String,Object>) map.get(setter.value());
+						Object theObj = DbObjectMapper.decode(objMap);
+						mth.invoke(obj, theObj);
 					} else {
 						mth.invoke(obj, map.get(setter.value()));
 					}
