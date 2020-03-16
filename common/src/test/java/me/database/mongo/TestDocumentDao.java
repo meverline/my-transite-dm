@@ -73,14 +73,14 @@ public class TestDocumentDao extends EasyMockSupport{
 		
 		Class<?> info[] = {
 				String.class,
-				Long.class,
-				Integer.class,
-				Double.class,
-				Boolean.class,
-				Float.class,
-				Short.class,
-				Character.class,
-				Byte.class
+				Long.TYPE,
+				Integer.TYPE,
+				Double.TYPE,
+				Boolean.TYPE,
+				Float.TYPE,
+				Short.TYPE,
+				Character.TYPE,
+				Byte.TYPE
 		};
 		
 		for (Class<?> item : info ) {

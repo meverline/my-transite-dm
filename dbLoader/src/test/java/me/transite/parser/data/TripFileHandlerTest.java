@@ -4,6 +4,9 @@ import static org.easymock.EasyMock.expect;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.easymock.EasyMock;
 import org.easymock.EasyMockRule;
 import org.easymock.EasyMockSupport;
@@ -16,7 +19,9 @@ import me.database.mongo.DocumentDao;
 import me.database.neo4j.IGraphDatabaseDAO;
 import me.transit.dao.RouteDao;
 import me.transit.database.Agency;
+import me.transit.database.IRoute.RouteType;
 import me.transit.database.Route;
+import me.transit.database.RouteTrip;
 import me.transit.parser.data.Blackboard;
 import me.transit.parser.data.TripFileHandler;
 
@@ -37,18 +42,34 @@ public class TripFileHandlerTest extends EasyMockSupport {
 	
 	private Agency agency = new Agency();
 	
-	@Mock(MockType.NICE)
-	private Route route;
+	private Route route = new Route();
 
 	@Test
 	public void test() {
 		agency.setName("TEST AGENCY");
 		TripFileHandler testSubject = new TripFileHandler(blackboard, routeDao, graphDatabase, documentDao);
+		
+		route.setShortName("SHORT_NAME");
+		route.setId("1");
+		route.setAgency(agency);
+		route.setLongName("LongName");
+		route.setColor("B");
+		route.setUUID(100L);
+		
+		List<RouteTrip> tripList = new ArrayList<>();
+		
+		route.setTripList(tripList);
+		route.setDesc("DESC");
+		route.setRouteId("id");
+		route.setSortOrder(1);
+		route.setTextColor("Black");
+		route.setType(RouteType.BUS);
 				
 		try {
+			
 			blackboard.setAgency(agency);
 			expect(routeDao.loadById(EasyMock.anyString(), EasyMock.anyString())).andReturn(route).anyTimes();
-			expect(route.getShortName()).andReturn("SHORT_NAME").anyTimes();
+			expect(routeDao.save(EasyMock.anyObject(Route.class))).andReturn(route).anyTimes();
 			replayAll();
 			assertTrue(testSubject.parse("src/test/resources/data/" + testSubject.handlesFile()));
 			verifyAll();

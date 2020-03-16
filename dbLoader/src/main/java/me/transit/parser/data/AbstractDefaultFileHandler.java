@@ -220,6 +220,10 @@ public abstract class AbstractDefaultFileHandler extends AbstractFileHandler {
 		int ndx = filePath.lastIndexOf("/");
 		return filePath.substring(ndx + 1);
 	}
+	
+	protected void setAgency() {
+		
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -288,9 +292,8 @@ public abstract class AbstractDefaultFileHandler extends AbstractFileHandler {
 									lat = null;
 									lon = null;
 								}
-							} else if (saver.getField().compareTo(AbstractDefaultFileHandler.AGENCYID) == 0 && obj.getClass() != Agency.class) {
-								saver.save(obj, getBlackboard().getAgencyName());
-							} else {
+								
+							} else if (saver.getField().compareTo(AbstractDefaultFileHandler.AGENCYID) != 0 ) {
 								saver.save(obj, outData);
 								
 							}

@@ -11,6 +11,7 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import me.transit.dao.ServiceDateDao;
+import me.transit.database.Agency;
 import me.transit.parser.data.Blackboard;
 import me.transit.parser.data.ServiceDateFileHandler;
 
@@ -27,6 +28,12 @@ public class ServiceDateFileHandlerTest extends EasyMockSupport  {
 
 	@Test
 	public void test() {
+		Agency agency = new Agency();
+		agency.setName("agencyName");
+		agency.setFareUrl("1");
+		agency.setVersion("0.0");
+		
+		blackboard.setAgency(agency);
 		ServiceDateFileHandler testSubject = new ServiceDateFileHandler(serviceDao, blackboard);
 		
 		try {

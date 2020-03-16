@@ -81,9 +81,6 @@ public class DocumentDao extends IDocumentDao {
 	}
 
 	/* (non-Javadoc)
-	 * @see me.database.mongo.IDocumentDao#add(me.database.mongo.IDocument, java.lang.String)
-	 */
-	/* (non-Javadoc)
 	 * @see me.database.mongo.IDocumnetDao#add(me.database.mongo.IDocument, java.lang.String)
 	 */
 	@Override
@@ -98,9 +95,6 @@ public class DocumentDao extends IDocumentDao {
 	}
 
 	/* (non-Javadoc)
-	 * @see me.database.mongo.IDocumentDao#add(me.database.mongo.IDocument)
-	 */
-	/* (non-Javadoc)
 	 * @see me.database.mongo.IDocumnetDao#add(me.database.mongo.IDocument)
 	 */
 	@Override
@@ -108,9 +102,6 @@ public class DocumentDao extends IDocumentDao {
 		this.add(document, DocumentDao.COLLECTION);
 	}
 
-	/* (non-Javadoc)
-	 * @see me.database.mongo.IDocumentDao#add(java.util.Map, java.lang.String)
-	 */
 	/* (non-Javadoc)
 	 * @see me.database.mongo.IDocumnetDao#add(java.util.Map, java.lang.String)
 	 */
@@ -125,9 +116,6 @@ public class DocumentDao extends IDocumentDao {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see me.database.mongo.IDocumentDao#add(java.util.Map)
-	 */
 	/* (non-Javadoc)
 	 * @see me.database.mongo.IDocumnetDao#add(java.util.Map)
 	 */
@@ -191,9 +179,6 @@ public class DocumentDao extends IDocumentDao {
 		return find(tupleList, DocumentDao.COLLECTION);
 	}
 
-	/* (non-Javadoc)
-	 * @see me.database.mongo.IDocumentDao#find(java.util.List, java.lang.String)
-	 */
 	/* (non-Javadoc)
 	 * @see me.database.mongo.IDocumnetDao#find(java.util.List, java.lang.String)
 	 */

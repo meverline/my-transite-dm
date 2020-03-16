@@ -21,8 +21,7 @@ public class CalendarDateFileHandlerTest extends EasyMockSupport  {
 	@Rule
 	public EasyMockRule mocks = new EasyMockRule(this);
 	
-	@Mock(MockType.NICE)
-	private Blackboard blackboard;
+	private Blackboard blackboard = new Blackboard();
 	
 	@Mock(MockType.NICE)
 	private CalendarDateDao calendarDateDao;

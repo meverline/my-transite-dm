@@ -23,8 +23,7 @@ public class AgencyDataFileHandlerTest extends EasyMockSupport  {
 	@Rule
 	public EasyMockRule mocks = new EasyMockRule(this);
 	
-	@Mock(MockType.NICE)
-	private Blackboard blackboard;
+	private Blackboard blackboard = new Blackboard();
 	
 	@Mock(MockType.NICE)
 	private AgencyDao agencyDao;

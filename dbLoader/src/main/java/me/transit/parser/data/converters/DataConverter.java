@@ -48,11 +48,13 @@ public abstract class DataConverter {
 			StringBuilder str = new StringBuilder();
 			str.append(e.getLocalizedMessage());
 			str.append(": ");
+			str.append(obj.getClass().getName());
+			str.append(".");
 			str.append(meth.getName());
 			str.append("( ");
-			str.append(this.getClass().getName());
-			str.append(") ");
 			str.append(data);
+			str.append(") ");
+			str.append(this.getClass().getName());
 			log.error(str.toString());
 			throw e;
 		}

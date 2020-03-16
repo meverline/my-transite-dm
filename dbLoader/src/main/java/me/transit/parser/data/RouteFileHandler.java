@@ -37,9 +37,11 @@ public class RouteFileHandler extends AbstractDefaultFileHandler {
 	@Override
 	public void save(Object obj) throws SQLException {
 		Route route = Route.class.cast(obj);
+		route.setAgency(this.getBlackboard().getAgency());
 		if (route.getShortName() == null || route.getShortName().isEmpty()) {
 			route.setShortName(route.getLongName());
 		}
+		
 		Route data = routeDao.save(route);
 		this.getBlackboard().getRouteuuid().put(data.getId(),  data.getUUID());
 		getGraphDatabase().addNode(route);

@@ -120,6 +120,8 @@ public class DataSaver {
 			StringBuilder str = new StringBuilder();
 			str.append(e.getLocalizedMessage());
 			str.append(": ");
+			str.append(obj.getClass().getName());
+			str.append(".");
 			str.append(this.getMethod().getName());
 			str.append("( ");
 			str.append(getType());
