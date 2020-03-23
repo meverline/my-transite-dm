@@ -89,6 +89,35 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	private RouteGeometry shape = null;
 	
 	private transient List<StopTime> stopTimes = new ArrayList<StopTime>();
+	private transient String docId = null;
+	
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Trip#getUUID()
+	 */
+	@JsonGetter("_id")
+	public String getDocId() {
+		return docId;
+	}
+
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Trip#setUUID(long)
+	 */
+	@JsonSetter("_id")
+	public void setDocId(String uuid) {
+		this.docId = uuid;
+	}
+	
+	@Override
+	@JsonGetter("@class")
+	public String getDocClass() {
+		return this.getClass().getName();
+	}
+	
+	@Override
+	@JsonSetter("@class")
+	public void setDocClass() {
+		
+	}
 	
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Trip#getUUID()

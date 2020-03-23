@@ -21,7 +21,6 @@ import me.database.mongo.DocumentDao;
 import me.database.neo4j.IGraphDatabaseDAO;
 import me.transit.dao.RouteDao;
 import me.transit.database.Route;
-import me.transit.database.RouteDocument;
 import me.transit.database.RouteTrip;
 import me.transit.database.Trip;
 
@@ -31,7 +30,6 @@ public class TripFileHandler extends AbstractFileHandler {
 	private Log log = LogFactory.getLog(getClass().getName());
 	private final IGraphDatabaseDAO graphDatabase;
 	private final RouteDao routeDao;
-	private final DocumentDao documentDao;
 	
 	/**
 	 * 
@@ -42,7 +40,6 @@ public class TripFileHandler extends AbstractFileHandler {
 		super(blackboard);
 		this.routeDao = Objects.requireNonNull(routeDao, "routeDao can not be null");
 		this.graphDatabase = Objects.requireNonNull(graphDatabase, "graphDatabase can not be null");
-		this.documentDao = Objects.requireNonNull(documentDao, "documentDao can not be null");
 	}
 	
 	/*
@@ -165,16 +162,12 @@ public class TripFileHandler extends AbstractFileHandler {
 
 				Route route = routeDao.loadById(data.getKey(), getBlackboard().getAgencyName());
 				for ( Trip trip : data.getValue()) {
-					route.getTripList().add(new RouteTrip( route.getId(), trip.getId()));
+					route.getTripList().add(new RouteTrip(route.getTripList().size(), trip));
 					graphDatabase.createRelationShip(route, trip);
 				}
 				
 				routeDao.save(route);
 				getBlackboard().getRouteShortName().put(data.getKey(), route.getShortName());
-				
-				RouteDocument doc = new RouteDocument(route);
-				doc.getTrips().addAll(data.getValue());
-				this.documentDao.add(doc);
 				
 			}
 			

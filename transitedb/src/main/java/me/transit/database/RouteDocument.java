@@ -6,10 +6,10 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
-import me.database.mongo.IDocument;
+import me.database.mongo.AbstractDocument;
 import me.transit.annotation.GTFSSetter;
 
-public class RouteDocument implements IRoute,  IDocument{
+public class RouteDocument extends AbstractDocument implements IRoute {
 
 	private long id = 0;
 	private long uuid = -1;
@@ -25,20 +25,21 @@ public class RouteDocument implements IRoute,  IDocument{
 		
 	}
 	
-	public RouteDocument(Route route) {
+	public RouteDocument(Route route, List<Trip> trips) {
 		setUUID(route.getUUID());
 	    this.setRouteId(route.getId());
 	    this.setAgency(route.getAgency().getName());
 	    this.setShortName(route.getShortName());
 	    this.setLongName(route.getLongName());
 	    this.setType(route.getType());
+	    this.getTrips().addAll(trips);
 	}
 	
 	
 	/**
 	 * @param id the id to set
 	 */
-	@JsonGetter("_id")
+	@JsonGetter("id")
 	public long getId() {
 		return id;
 	}
@@ -46,7 +47,7 @@ public class RouteDocument implements IRoute,  IDocument{
 	/**
 	 * @param id the id to set
 	 */
-	@JsonSetter("_id")
+	@JsonSetter("id")
 	public void setId(long id) {
 		this.id = id;
 	}

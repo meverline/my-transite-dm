@@ -72,9 +72,7 @@ public class TestSpatialTile {
 		obj.createGrid(25, 25, ldf, distance, new AbstractTiledSpatialGrid.CrossCovData(v));
 		
 		assertNotNull( obj.getTree());
-		
-		assertNotNull(obj.toDocument());
-		
+				
 		@SuppressWarnings("unused")
 		List<TiledSpatialGridPoint> points = obj.getGrid();
 		for (TiledSpatialGridPoint pt :  obj.getGrid()) {

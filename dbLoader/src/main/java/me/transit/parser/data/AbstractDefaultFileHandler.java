@@ -21,7 +21,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import me.database.neo4j.IGraphDatabaseDAO;
 import me.transit.annotation.GTFSFileModel;
 import me.transit.annotation.GTFSSetter;
-import me.transit.database.Agency;
 import me.transit.database.TransitData;
 import me.transit.parser.data.converters.DataConverterFactory;
 import me.transit.parser.data.savers.DataSaver;

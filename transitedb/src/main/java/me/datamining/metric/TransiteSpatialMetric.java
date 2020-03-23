@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.database.mongo.DocumentDao;
-import me.database.mongo.IDocument;
+import me.database.mongo.AbstractDocument;
 import me.transit.dao.query.tuple.IQueryTuple;
 import me.transit.dao.query.tuple.StringTuple;
 import me.transit.database.Route;
@@ -65,7 +65,7 @@ public class TransiteSpatialMetric extends AbstractSpatialMetric {
 				                  route.getShortName(), 
 				                  StringTuple.MATCH.EXACT ));
 		
-		List<IDocument> data = getDaoProvider().getDocumentDao().find(list);
+		List<AbstractDocument> data = getDaoProvider().getDocumentDao().find(list);
 		
 		rtn = RouteDocument.class.cast( data.get(0)).getTrips();
 	

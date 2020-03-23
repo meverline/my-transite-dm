@@ -7,12 +7,12 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
 import me.database.CSVFieldType;
-import me.database.mongo.IDocument;
+import me.database.mongo.AbstractDocument;
 import me.transit.annotation.GTFSFileModel;
 import me.transit.annotation.GTFSSetter;
 
 @GTFSFileModel(filename="stop_times.txt")
-public class StopTime implements CSVFieldType, IDocument {
+public class StopTime extends AbstractDocument implements CSVFieldType  {
 
 	public static final String STOPID = "stopId";
 	public static final String STOPNAME = "stopName";

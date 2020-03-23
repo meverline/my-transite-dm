@@ -5,9 +5,12 @@ import java.io.PrintStream;
 import java.io.Writer;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import org.locationtech.jts.geom.Polygon;
+
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 import me.database.mongo.IDocument;
 import me.math.LocalDownFrame;
@@ -21,11 +24,7 @@ import me.math.kdtree.INodeCreator;
 import me.math.kdtree.KDTree;
 import me.math.kdtree.MinBoundingRectangle;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonSetter;
-import org.locationtech.jts.geom.Polygon;
-
-public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, IGridDocument {
+public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, IDocument {
 	
 	public static final String ROW_OFFSET = "rowOffset";
 	public static final String COL_OFFSET = "colOffset";
@@ -39,6 +38,7 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, IG
 	private int colOffSet_ = 0;
 	private double gridSizeInMeters_ = 0;
 	private List<TiledSpatialGridPoint> grid_ = new ArrayList<TiledSpatialGridPoint>();
+	private String docId = null;
 	
 	/**
 	 * 
@@ -321,23 +321,6 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, IG
 		this.root_ = node;
 	}
 
-	public Map<String, Object> toDocument() {
-		Map<String,Object> rtn = new HashMap<String,Object>();
-		
-		rtn.put(IDocument.CLASS, SpatialTile.class.getName());
-		rtn.put(SpatialTile.ROW_OFFSET, this.getRowOffset());
-		rtn.put(SpatialTile.COL_OFFSET, this.getColOffSet());
-		rtn.put(IGridDocument.INDEX, this.getIndex());
-		rtn.put(IGridDocument.TILE_INDEX, this.tileIndex);
-		rtn.put(AbstractSpatialGrid.ROWS, this.getRows());
-		rtn.put(AbstractSpatialGrid.COLS, this.getCols());
-		
-		rtn.put("rootNode", this.root_);
-		rtn.put(IGridDocument.MBR, this.getMbr());
-		rtn.put(IGridDocument.GRID, this.getGridPoints());
-		return rtn;
-	}
-
 	public void handleEnum(String key, Object value) {		
 	}
 	
@@ -390,5 +373,30 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, IG
 		}
 		
 	}
+
+	@JsonGetter("_id")
+	@Override
+	public String getDocId() {
+		return this.docId;
+	}
+
+	@JsonSetter("_id")
+	@Override
+	public void setDocId(String docId) {
+		this.docId = docId;
+	}
+
+	@JsonGetter("@class")
+	@Override
+	public String getDocClass() {
+		return this.getClass().getName();
+	}
+
+	@JsonSetter("@class")
+	@Override
+	public void setDocClass() {		
+	}
+	
+	
 	
 }

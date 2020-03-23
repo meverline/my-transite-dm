@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import me.database.mongo.IDocument;
+import me.database.mongo.AbstractDocument;
 import me.transit.annotation.GTFSFileModel;
 import me.transit.annotation.GTFSSetter;
 import me.transit.json.AgencyToString;
@@ -34,7 +34,7 @@ import me.transit.json.AgencyToString;
 @DiscriminatorColumn(name = "serviceDate_type")
 @DiscriminatorValue("ServiceDate")
 @GTFSFileModel(filename="calendar.txt")
-public class ServiceDate implements TransitData, IDocument {
+public class ServiceDate extends AbstractDocument implements TransitData {
 	
 	public static final String STARTDATE = "startDate";
 	public static final String ENDDATE = "endDate";

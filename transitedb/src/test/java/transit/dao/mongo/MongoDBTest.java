@@ -10,6 +10,7 @@ import java.util.List;
 
 import me.database.mongo.DocumentDao;
 import me.database.mongo.IDocument;
+import me.database.mongo.AbstractDocument;
 import me.database.mongo.IDocumentDao;
 import me.transit.dao.query.tuple.IQueryTuple;
 import me.transit.dao.query.tuple.StringTuple;
@@ -17,29 +18,40 @@ import me.transit.database.Agency;
 import me.transit.database.Route;
 import me.transit.database.StopTime;
 import me.transit.database.Trip;
+import me.transit.database.Trip.DirectionType;
 
 import org.junit.Ignore;
 import org.junit.Test;
 
 @Ignore
 public class MongoDBTest {
+	
+   
 
 	@Test
 	public void testtoDocField() {
+		
+		Trip trip = new Trip();
+		StopTime st = new StopTime();
+		
+		Agency agency = new Agency();
+		agency.setName("Agency");
+		agency.setFareUrl("url");
 
-		List<String> fields = new ArrayList<String>();
+		st.setStopHeadSign("Head Sign");
+		st.setStopName("name");
+		st.setStopId("537");
+		st.setTripId("523");
+		st.setDropOffType(StopTime.PickupType.COORDINATE);
+		st.setPickupType(StopTime.PickupType.PHONE);
 
-		fields.add(Agency.AGENCY);
-		assertEquals(Agency.AGENCY, DocumentDao.toDocField(fields));
-
-		fields.clear();
-		fields.add(Route.TRIPLIST);
-		fields.add(Trip.STOPTIMES);
-		fields.add(StopTime.STOPNAME);
-
-		String tmp = DocumentDao.toDocField(fields);
-
-		assertEquals(Route.TRIPLIST + "." + Trip.STOPTIMES + "." + StopTime.STOPNAME, tmp);
+		for (int ndx = 0; ndx < 5; ndx++) {
+			trip.addStopTime(st);
+		}
+		
+		trip.setAgency(agency);
+		trip.setDirectionId(DirectionType.IN_BOUND);
+		trip.setHeadSign("headSign");
 	}
 
 	@Test
@@ -77,7 +89,7 @@ public class MongoDBTest {
 		IDocumentDao dao;
 		try {
 			dao = DocumentDao.instance();
-			List<IDocument> routes = dao.find(query);
+			List<AbstractDocument> routes = dao.find(query);
 
 			assertNotNull(routes);
 			assertEquals(8, routes.size());
@@ -106,7 +118,7 @@ public class MongoDBTest {
 		IDocumentDao dao;
 		try {
 			dao = DocumentDao.instance();
-			List<IDocument> routes = dao.find(query);
+			List<AbstractDocument> routes = dao.find(query);
 
 			assertNotNull(routes);
 			assertEquals(1, routes.size());
@@ -130,7 +142,7 @@ public class MongoDBTest {
 		IDocumentDao dao;
 		try {
 			dao = DocumentDao.instance();
-			List<IDocument> routes = dao.find(query);
+			List<AbstractDocument> routes = dao.find(query);
 
 			assertNotNull(routes);
 			assertEquals(dao.size(), routes.size());

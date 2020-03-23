@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.database.mongo.IDocument;
+import me.database.mongo.AbstractDocument;
 import me.database.mongo.IDocumentDao;
 import me.math.grid.tiled.dao.TileFragmentDao;
 import me.transit.dao.query.tuple.IQueryTuple;
@@ -59,8 +59,8 @@ public class SptialTileCache {
 	{
 		List<IQueryTuple> list = new ArrayList<IQueryTuple>();
 		
-		list.add( new NumberTuple( SpatialTile.INDEX, new Integer(index), NumberTuple.LOGIC.EQ));
-		List<IDocument> rtn = documentDao.find(list, tile.getHeatMapName());
+		list.add( new NumberTuple( IGridDocument.INDEX, new Integer(index), NumberTuple.LOGIC.EQ));
+		List<AbstractDocument> rtn = documentDao.find(list, tile.getHeatMapName());
 		
 		// TODO: convert the document from BJSON to object.
 		return null;

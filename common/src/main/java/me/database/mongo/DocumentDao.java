@@ -9,6 +9,8 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -26,6 +28,7 @@ public class DocumentDao extends IDocumentDao {
 	private static MongoClient _connection = null;
 	private DB _transDoc = null;
 	private Map<String, DBCollection> collectionMap = new HashMap<String, DBCollection>();
+	private final ObjectMapper mapper = new ObjectMapper();
 
 	/**
 	 * 
@@ -43,6 +46,8 @@ public class DocumentDao extends IDocumentDao {
 		_transDoc = _connection.getDB(IDocumentDao.TRANSITEDOC);
 		collectionMap.put(IDocumentDao.COLLECTION, _transDoc.getCollection(IDocumentDao.COLLECTION));
 		
+		mapper.setSerializationInclusion(Include.NON_NULL);
+		 
 	}
 
 	/**
@@ -87,9 +92,21 @@ public class DocumentDao extends IDocumentDao {
 	public void add(IDocument document, String collection) {
 		if (document != null) {
 			try {
-				getCollectoin(collection).insert(DbObjectMapper.encode(document));
+				getCollectoin(collection).insert(this.toMongoObject(document));
 			} catch (Exception e) {
-				this.log.error("Unable to encode " + document.getClass().getName() + ": " + e.getLocalizedMessage());
+				this.log.error("Unable to add " + document.getClass().getName() + ": " + e.getLocalizedMessage());
+				this.log.error(e);
+			}
+		}
+	}
+	
+	public void delete(IDocument document, String collection) {
+		if (document != null) {
+			try {
+				getCollectoin(collection).remove(this.toMongoObject(document));
+			} catch (Exception e) {
+				this.log.error("Unable to remove " + document.getClass().getName() + ": " + e.getLocalizedMessage());
+				this.log.error(e);
 			}
 		}
 	}
@@ -99,31 +116,9 @@ public class DocumentDao extends IDocumentDao {
 	 */
 	@Override
 	public void add(IDocument document) {
+		this.delete(document, DocumentDao.COLLECTION);
 		this.add(document, DocumentDao.COLLECTION);
 	}
-
-	/* (non-Javadoc)
-	 * @see me.database.mongo.IDocumnetDao#add(java.util.Map, java.lang.String)
-	 */
-	@Override
-	public void add(Map<String, Object> data, String collection) {
-		if (data != null) {
-			try {
-				getCollectoin(collection).insert(DbObjectMapper.toMongoObject(data));
-			} catch (Exception ex) {
-				log.error(ex);
-			}
-		}
-	}
-
-	/* (non-Javadoc)
-	 * @see me.database.mongo.IDocumnetDao#add(java.util.Map)
-	 */
-	@Override
-	public void add(Map<String, Object> data) {
-		add(data, DocumentDao.COLLECTION);
-	}
-
 
 	protected void addSkipField(String field) {
 		if (field != null) {
@@ -138,9 +133,11 @@ public class DocumentDao extends IDocumentDao {
 	 */
 	protected BasicDBObject toMongoObject(IDocument document) {
 		try {
-			return DbObjectMapper.encode(document);
+			String json = this.mapper.writeValueAsString(document);
+			return BasicDBObject.parse(json);
 		} catch (Exception e) {
 			this.log.error("Unable to encode " + document.getClass().getName() + ": " + e.getLocalizedMessage());
+			this.log.error(e);
 			return null;
 		}
 	}
@@ -175,7 +172,7 @@ public class DocumentDao extends IDocumentDao {
 	 * @see me.database.mongo.IDocumnetDao#find(java.util.List)
 	 */
 	@Override
-	public List<IDocument> find(List<IQueryTuple> tupleList) {
+	public List<AbstractDocument> find(List<IQueryTuple> tupleList) {
 		return find(tupleList, DocumentDao.COLLECTION);
 	}
 
@@ -183,7 +180,7 @@ public class DocumentDao extends IDocumentDao {
 	 * @see me.database.mongo.IDocumnetDao#find(java.util.List, java.lang.String)
 	 */
 	@Override
-	public List<IDocument> find(List<IQueryTuple> tupleList, String collection) {
+	public List<AbstractDocument> find(List<IQueryTuple> tupleList, String collection) {
 		BasicDBObject query = new BasicDBObject();
 
 		for (IQueryTuple tuple : tupleList) {
@@ -192,14 +189,16 @@ public class DocumentDao extends IDocumentDao {
 
 		DBCursor results = getCollectoin(collection).find(query);
 
-		List<IDocument> rtn = new ArrayList<IDocument>();
+		List<AbstractDocument> rtn = new ArrayList<AbstractDocument>();
 
 		log.info(query.toString() + " ---> " + results.count());
 		while (results.hasNext()) {
 			try {
-				@SuppressWarnings("unchecked")
-				Map<String, Object> item = (Map<String, Object>) results.next().toMap();
-				IDocument obj = (IDocument) DbObjectMapper.decode(item);
+				BasicDBObject item = (BasicDBObject) results.next();
+				
+				Class<?> theClass = this.getClass().getClassLoader().loadClass((String) item.get("@class"));
+				AbstractDocument obj = (AbstractDocument) this.mapper.readValue(item.toJson(), theClass);
+				  
 				rtn.add(obj);
 			} catch (Exception e) {
 				this.log.error("Unable to decode: " + e.getLocalizedMessage());

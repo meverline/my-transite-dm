@@ -1,7 +1,6 @@
 package me.database.mongo;
 
 import java.util.List;
-import java.util.Map;
 
 import me.transit.dao.query.tuple.IQueryTuple;
 
@@ -24,24 +23,11 @@ public abstract class IDocumentDao {
 	public abstract void add(IDocument document);
 
 	/**
-	 * Add data to a named collection.
-	 * @param data
-	 * @param collectName
-	 */
-	public abstract void add(Map<String, Object> data, String collection);
-
-	/**
-	 * Add map to the document to default collection.
-	 * @param data
-	 */
-	public abstract void add(Map<String, Object> data);
-
-	/**
 	 * Find an object in the collection used the given query used the default collection.
 	 * @param tupleList the query tuple to used
 	 * @return List of document objects 
 	 */
-	public abstract List<IDocument> find(List<IQueryTuple> tupleList);
+	public abstract List<AbstractDocument> find(List<IQueryTuple> tupleList);
 
 	/**
 	 * Find an object in a given collection
@@ -49,7 +35,7 @@ public abstract class IDocumentDao {
 	 * @param collectName the collection name
 	 * @return return a list of objects matching the query.
 	 */
-	public abstract List<IDocument> find(List<IQueryTuple> tupleList, String collection);
+	public abstract List<AbstractDocument> find(List<IQueryTuple> tupleList, String collection);
 
 	/**
 	 * Return the size of the default collection 

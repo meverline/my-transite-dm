@@ -101,9 +101,7 @@ public class StopTimeFileHandler extends AbstractFileHandler {
 						}
 					}
 
-					Map<String, Object> data = route.toDocument();
-					data.put(Route.TRIPLIST, entry.getValue());
-					this.documentDao.add(data);
+					this.documentDao.add(route);
 				}
 			} catch (Exception e) {
 				log.error(String.format("xrefStopToRoutes Trip map error Key %s Value %s", entry.getKey(), entry.getValue()));

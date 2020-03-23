@@ -16,28 +16,26 @@ package me.math.kdtree;
 //along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import me.database.mongo.IDocument;
-import me.math.Vertex;
-import me.math.grid.AbstractSpatialGridPoint;
-
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonRootName;
-import com.fasterxml.jackson.annotation.JsonSetter;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
 import org.locationtech.jts.geom.Polygon;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.annotation.JsonSetter;
+
+import me.database.mongo.AbstractDocument;
+import me.math.Vertex;
+import me.math.grid.AbstractSpatialGridPoint;
+
 
 @SuppressWarnings("serial")
 @JsonRootName(value = "MinBoundingRectangle")
-public class MinBoundingRectangle implements IDocument, Serializable {
+public class MinBoundingRectangle extends AbstractDocument implements Serializable {
 
 	protected static GeometryFactory factory_ = new GeometryFactory();
 

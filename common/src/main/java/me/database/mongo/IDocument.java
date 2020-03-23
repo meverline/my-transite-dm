@@ -2,8 +2,18 @@ package me.database.mongo;
 
 public interface IDocument {
 
-    public final static String ID = "_id";
-    public final static String CLASS = "@class";
-    public final static String REF = "$ref";
- 
+	/**
+	 * @return the docId
+	 */
+	String getDocId();
+
+	/**
+	 * @param docId the docId to set
+	 */
+	void setDocId(String docId);
+
+	String getDocClass();
+
+	void setDocClass();
+
 }

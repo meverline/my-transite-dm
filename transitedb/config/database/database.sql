@@ -36,7 +36,7 @@ CREATE TABLE tran_calendar_date
   version character varying(255),
   calendar_date_uuid bigint,
   CONSTRAINT tran_calendar_date_pkey PRIMARY KEY (calendar_date_uuid),
-  CONSTRAINT fk6ajaye2u2v3pvr9x3y1c1iw1p FOREIGN KEY (agency_uuid)
+  CONSTRAINT fk_calendar_agency_fkey FOREIGN KEY (agency_uuid)
       REFERENCES tran_agency (agency_uuid) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 )
@@ -65,7 +65,7 @@ CREATE TABLE tran_route
   route_uuid bigint NOT NULL,
   sort_order integer,
   CONSTRAINT tran_route_pkey PRIMARY KEY (route_uuid),
-  CONSTRAINT fklkyilm0bairubq4wey60bhb43 FOREIGN KEY (agency_uuid)
+  CONSTRAINT fk_route_agency_fkey FOREIGN KEY (agency_uuid)
       REFERENCES tran_agency (agency_uuid) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 )
@@ -87,7 +87,7 @@ CREATE TABLE tran_route_geometry
   version character varying(255),
   route_geometry_uuid bigint,
   CONSTRAINT tran_route_geometry_pkey PRIMARY KEY (route_geometry_uuid),
-  CONSTRAINT fkksq1amtbwlx3c0yltgagp127i FOREIGN KEY (agency_uuid)
+  CONSTRAINT fk_route_geometry_agency_fkey FOREIGN KEY (agency_uuid)
       REFERENCES tran_agency (agency_uuid) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 )
@@ -112,7 +112,7 @@ CREATE TABLE tran_service_date
   version character varying(255),
   service_date_uuid bigint,
   CONSTRAINT tran_service_date_pkey PRIMARY KEY (service_date_uuid),
-  CONSTRAINT fkocu3bsvkyc8ctrifhoy1we4ye FOREIGN KEY (agency_uuid)
+  CONSTRAINT fk_service_date_agency_fkey FOREIGN KEY (agency_uuid)
       REFERENCES tran_agency (agency_uuid) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 )
@@ -142,7 +142,7 @@ CREATE TABLE tran_stop
   zone character varying(255),
   stop_uuid bigint NOT NULL,
   CONSTRAINT tran_stop_pkey PRIMARY KEY (stop_uuid),
-  CONSTRAINT fkiflmthfp5tgm7ogtww8p1khn0 FOREIGN KEY (agency_uuid)
+  CONSTRAINT fk_stop_agency_fkey FOREIGN KEY (agency_uuid)
       REFERENCES tran_agency (agency_uuid) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 )
@@ -169,16 +169,16 @@ CREATE TABLE tran_trip
   route_uuid bigint NOT NULL,
   trip_uuid bigint,
   CONSTRAINT tran_trip_pkey PRIMARY KEY (trip_uuid),
-  CONSTRAINT fk19hqms3gqbpmwco11864ft123 FOREIGN KEY (route_geometry_uuid)
+  CONSTRAINT fk_trip_route_geometry_fkey FOREIGN KEY (route_geometry_uuid)
       REFERENCES tran_route_geometry (route_geometry_uuid) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT fkjerxbkxox6emc3tt8ihib6lpb FOREIGN KEY (service_date_uuid)
+  CONSTRAINT fk_trip_service_date_fkey FOREIGN KEY (service_date_uuid)
       REFERENCES tran_service_date (service_date_uuid) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT fklj46nmgkfoonm2bq83krxdjw9 FOREIGN KEY (agency_uuid)
+  CONSTRAINT fk_trip_agency_fkey FOREIGN KEY (agency_uuid)
       REFERENCES tran_agency (agency_uuid) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT fkrbmiqsp4wkfgq48y7nf6vpjug FOREIGN KEY (route_uuid)
+  CONSTRAINT fk_trip_route_fkey FOREIGN KEY (route_uuid)
       REFERENCES tran_route (route_uuid) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 )

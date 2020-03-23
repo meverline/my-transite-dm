@@ -67,33 +67,6 @@ public class TestDocumentDao extends EasyMockSupport{
 	}
 	
 	@Test
-	public void testPrimative() throws UnknownHostException {
-		
-		this.setUpMock();		
-		
-		Class<?> info[] = {
-				String.class,
-				Long.TYPE,
-				Integer.TYPE,
-				Double.TYPE,
-				Boolean.TYPE,
-				Float.TYPE,
-				Short.TYPE,
-				Character.TYPE,
-				Byte.TYPE
-		};
-		
-		for (Class<?> item : info ) {
-			assertTrue(DbObjectMapper.isPrimativeType(item));
-		}
-		
-		assertFalse(DbObjectMapper.isPrimativeType(getClass() ));
-		
-		verifyAll();
-		resetAll();
-	}
-	
-	@Test
 	public void testSkip() throws UnknownHostException {
 		
 		this.setUpMock();
@@ -129,34 +102,12 @@ public class TestDocumentDao extends EasyMockSupport{
 		assertNotNull( DocumentDao.toDocField(Arrays.asList(info)));
 	}
 	
-	@Test
-	public void testAdd() throws UnknownHostException {
-				
-		this.setUpMock();
-		DocumentDao doc = DocumentDao.class.cast(DocumentDao.instance(writer));
-		
-		TestA objct = new TestA();
-		
-		doc.add(objct);
-		
-		doc.add(objct);
-		
-		try {
-			Object obj = DbObjectMapper.encode(objct);
-		} catch (Exception ex) {
-			
-		}
-		
-		verifyAll();
-		resetAll();
-
-	}
 	
 	/////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////
 	
-	public static class TestB implements IDocument {
+	public static class TestB extends AbstractDocument {
 		
 		private String name = "Name";
 		private String array[] = { "a", "b", "c", "d" };
@@ -243,7 +194,7 @@ public class TestDocumentDao extends EasyMockSupport{
 		
 	}
 
-	public static class TestA implements IDocument {
+	public static class TestA extends AbstractDocument {
 		
 		private String name = "Name";
 		private int min = 20;

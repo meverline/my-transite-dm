@@ -83,10 +83,7 @@ public class TestTiledSpatialGridPoint extends EasyMockSupport {
         obj.setParent(point);
         assertNotNull(obj.getParent());
         obj.setParent(mock);
-        
-        obj.handleEnum("Direction", INode.Direction.XLAT.toString());
-        obj.handleEnum("self", INode.Direction.XLAT.toString());
-        
+                
         verifyAll();
         resetAll();
 	}
@@ -107,7 +104,6 @@ public class TestTiledSpatialGridPoint extends EasyMockSupport {
         obj.setRight(point);
         obj.setParent(point);
         
-        assertNotNull(obj.toDocument());
         verifyAll();
         resetAll();
         

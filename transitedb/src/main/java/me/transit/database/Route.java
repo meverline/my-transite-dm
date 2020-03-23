@@ -7,7 +7,6 @@ import java.util.Map;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -16,7 +15,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -31,7 +32,6 @@ import me.database.neo4j.AbstractGraphNode;
 import me.database.neo4j.FIELD;
 import me.transit.annotation.GTFSFileModel;
 import me.transit.annotation.GTFSSetter;
-import me.transit.database.converters.RouteTripToString;
 import me.transit.json.AgencyToString;
 
 @Entity
@@ -39,7 +39,7 @@ import me.transit.json.AgencyToString;
 @DiscriminatorColumn(name = "route_type")
 @DiscriminatorValue("Route")
 @GTFSFileModel(filename="routes.txt")
-public class Route extends AbstractGraphNode implements TransitData, IRoute {
+public class Route extends AbstractGraphNode implements TransitData, IRoute, IDocument {
 	
 	public final static String TRIPLIST = "tripList";
 	public static final String SHORTNAME = "shortName";
@@ -89,9 +89,12 @@ public class Route extends AbstractGraphNode implements TransitData, IRoute {
 	@Column(name = "SORT_ORDER")
 	private int sortOrder = 0;
 
-	@Column(name = "ROUTE_TRIP")
-	@Convert(converter = RouteTripToString.class)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable( name="ROUTE_TRIP", joinColumns = @JoinColumn(name = "ROUTE_UUID"),
+            	inverseJoinColumns = @JoinColumn(name = "ROUTE_TRIP_UUID") )
 	private List<RouteTrip> trips = new ArrayList<>();
+	
+	private transient String docId = null;
 
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Route#getUUID()
@@ -353,36 +356,6 @@ public class Route extends AbstractGraphNode implements TransitData, IRoute {
 	 * @see me.transit.database.impl.Route#toDocument()
 	 */
 
-	public Map<String, Object> toDocument() {
-
-		Map<String, Object> rtn = new HashMap<String, Object>();
-
-		rtn.put(IDocument.CLASS, Route.class.getName());
-		if (this.getShortName().isEmpty()) {
-			rtn.put(IDocument.ID, this.getLongName() + ": " + this.getAgency().getName());
-		} else {
-			rtn.put(IDocument.ID, this.getShortName() + ": " + this.getAgency().getName());
-		}
-
-		rtn.put(Agency.AGENCY, this.getAgency().getName());
-		rtn.put(Agency.UUID, this.getUUID());
-		rtn.put(Route.SHORTNAME, this.getShortName());
-		rtn.put(Route.LONGNAME, this.getLongName());
-		rtn.put(Route.DESC, this.getDesc());
-		rtn.put(Route.TYPE, this.getType().name());
-		return rtn;
-	}
-
-	/* (non-Javadoc)
-	 * @see me.transit.database.impl.Route#handleEnum(java.lang.String, java.lang.Object)
-	 */
-
-	public void handleEnum(String key, Object value) {
-		if (key.equals(Route.TYPE)) {
-			this.setType(Route.RouteType.valueOf(value.toString()));
-		}
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * @see me.database.neo4j.IGraphNode#getProperties()
@@ -420,6 +393,31 @@ public class Route extends AbstractGraphNode implements TransitData, IRoute {
 	@Transient
 	public void setId(String id) {
 		this.setRouteId(id);
+	}
+	
+	@JsonGetter("_id")
+	public String getDocId() {
+		return docId;
+	}
+
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.Trip#setUUID(long)
+	 */
+	@JsonSetter("_id")
+	public void setDocId(String uuid) {
+		this.docId = uuid;
+	}
+	
+	@Override
+	@JsonGetter("@class")
+	public String getDocClass() {
+		return this.getClass().getName();
+	}
+	
+	@Override
+	@JsonSetter("@class")
+	public void setDocClass() {
+		
 	}
 	
 }
