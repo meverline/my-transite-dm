@@ -30,7 +30,7 @@ public class GraphDatabaseDAOTest {
 
 		stop.setAgency(metro);
 
-		IGraphDatabaseDAO graph = GraphDatabaseDAO.instance();
+		IGraphDatabaseDAO graph = GraphDatabaseDAO.instance("/User/data/test");
 
 		for (String id : stopIds) {
 
@@ -61,7 +61,7 @@ public class GraphDatabaseDAOTest {
 
 		route.setAgency(metro);
 
-		IGraphDatabaseDAO graph = GraphDatabaseDAO.instance();
+		IGraphDatabaseDAO graph = GraphDatabaseDAO.instance("/User/data/test");
 
 		for (String id : routeName) {
 

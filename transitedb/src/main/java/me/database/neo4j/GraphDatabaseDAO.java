@@ -29,59 +29,26 @@ import me.transit.database.Trip;
 
 public class GraphDatabaseDAO implements IGraphDatabaseDAO {
 
-	private final static String DB_PATH = "/data/graph";
-
 	private static IGraphDatabaseDAO theOne = null;
-	private GraphDatabaseService graphDb = null;
-	private long foundCount = 0;
-	private long numLocations = 0;
-	private String dbPath = GraphDatabaseDAO.DB_PATH;
+	private final GraphDatabaseService graphDb;
 
 	public static Log log = LogFactory.getLog(IGraphDatabaseDAO.class);
 
 	/**
 	 * 
+	 * @param dbPath
 	 */
-	private GraphDatabaseDAO() {
-		StringBuilder field_types = new StringBuilder();
-		for (FIELD item : FIELD.values()) {
-			if (item.isIndex()) {
-				if (field_types.length() > 0) {
-					field_types.append(",");
-				}
-				field_types.append(item.name());
-			}
+	private GraphDatabaseDAO(final String dbPath) {
+		
+		File dbDir = new File(dbPath);
+		if (! dbDir.exists() ) {
+			dbDir.mkdirs();
 		}
-
-		StringBuilder rel_types = new StringBuilder();
-		for (REL_TYPES rel : REL_TYPES.values()) {
-			if (rel_types.length() > 0) {
-				rel_types.append(",");
-			}
-			rel_types.append(rel.name());
-		}
-
-		graphDb = new GraphDatabaseFactory().newEmbeddedDatabaseBuilder(new File(getDbPath()))
-				.newGraphDatabase();
+		
+		graphDb = new GraphDatabaseFactory().newEmbeddedDatabaseBuilder(dbDir).newGraphDatabase();
 
 		registerShutdownHook(graphDb);
 		indexDatabase();
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public String getDbPath() {
-		return dbPath;
-	}
-
-	/**
-	 * 
-	 * @param dbPath
-	 */
-	public void setDbPath(String dbPath) {
-		this.dbPath = dbPath;
 	}
 
 	/**
@@ -154,9 +121,9 @@ public class GraphDatabaseDAO implements IGraphDatabaseDAO {
 	 * 
 	 * @return
 	 */
-	public static synchronized IGraphDatabaseDAO instance() {
+	public static synchronized IGraphDatabaseDAO instance(String dbPath) {
 		if (theOne == null) {
-			theOne = new GraphDatabaseDAO();
+			theOne = new GraphDatabaseDAO(dbPath);
 		}
 		return theOne;
 	}
@@ -167,26 +134,6 @@ public class GraphDatabaseDAO implements IGraphDatabaseDAO {
 	 */
 	private Transaction beginTransaction() {
 		return graphDb.beginTx();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see me.transit.dao.neo4j.IGraphDatabaseDAO#getFoundCount()
-	 */
-	@Override
-	public long getFoundCount() {
-		return this.foundCount;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see me.transit.dao.neo4j.IGraphDatabaseDAO#getNumLocations()
-	 */
-	@Override
-	public long getNumLocations() {
-		return this.numLocations;
 	}
 
 	/**
@@ -287,10 +234,7 @@ public class GraphDatabaseDAO implements IGraphDatabaseDAO {
 				if (coord == null) {
 					coord = graphDb.createNode(Label.label("Point"));
 					coord.setProperty(FIELD.coordinate.name(), stop.makeCoordinateKey());
-					this.numLocations++;
-				} else {
-					this.foundCount++;
-				}
+				} 
 
 				Relationship relationship = node.createRelationshipTo(coord, REL_TYPES.LOCATION);
 				relationship.setProperty(FIELD.className.name(), this.getInterface(stop.getLocation()));

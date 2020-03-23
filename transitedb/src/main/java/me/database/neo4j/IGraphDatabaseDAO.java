@@ -16,18 +16,6 @@ public interface IGraphDatabaseDAO {
 
 	/**
 	 * 
-	 * @return
-	 */
-	long getFoundCount();
-
-	/**
-	 * 
-	 * @return
-	 */
-	long getNumLocations();
-
-	/**
-	 * 
 	 * @param agency
 	 * @return
 	 */

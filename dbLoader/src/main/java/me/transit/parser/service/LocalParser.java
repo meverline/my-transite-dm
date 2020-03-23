@@ -43,9 +43,6 @@ public class LocalParser extends AbstractGTFSParser {
 			}
 		}
 
-
-		System.out.println("Num Coords: " + graph.getNumLocations());
-		System.out.println("Num Found: " + graph.getFoundCount());
 		System.out.println("Done");
 
 	}
