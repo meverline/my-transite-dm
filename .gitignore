@@ -16,3 +16,6 @@ RouteFinding/
 \.metadata/
 /.settings/
 /.project
+.gitignore
+*.iml
+.idea
