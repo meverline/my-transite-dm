@@ -44,9 +44,6 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	
 	public static final String ID = "id";
 	public static final String SERVICE = "service";
-	public static final String HEADSIGN = "headSign";
-	public static final String SHORTNAME = "shortName";
-	public static final String DIRECTIONID = "directionId";
 	public static final String STOPTIMES = "stopTimes";
 
 	public enum DirectionType { OUT_BOUND, IN_BOUND, UNKNOWN}
@@ -108,19 +105,7 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	public void setDocId(String uuid) {
 		this.docId = uuid;
 	}
-	
-	@Override
-	@JsonGetter("@class")
-	public String getDocClass() {
-		return this.getClass().getName();
-	}
-	
-	@Override
-	@JsonSetter("@class")
-	public void setDocClass() {
-		
-	}
-	
+
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Trip#getUUID()
 	 */

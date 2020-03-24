@@ -36,7 +36,6 @@ import me.transit.json.GeometryToBase64String;
 @GTFSFileModel(filename="agency.txt")
 public class Agency extends AbstractGraphNode implements Serializable {
 
-	public static final String AGENCY = "agency";
 	public static final String UUID = "uuid";
 	
 	/**

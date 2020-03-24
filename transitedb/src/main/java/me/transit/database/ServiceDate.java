@@ -36,12 +36,9 @@ import me.transit.json.AgencyToString;
 @DiscriminatorValue("ServiceDate")
 @GTFSFileModel(filename="calendar.txt")
 public class ServiceDate extends AbstractDocument implements TransitData {
-	
-	public static final String STARTDATE = "startDate";
-	public static final String ENDDATE = "endDate";
+
 	public static final String SERVICE = "service";
-	public static final String SERVICEDAYFLAG = "serviceDayFlag";
-	
+
 	public enum ServiceDays { ALL_WEEK, 
 							  WEEKDAY_SERVICE,
 							  WEEKDAY_SAT_SERVICE,

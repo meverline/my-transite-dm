@@ -31,8 +31,6 @@ public class Route extends AbstractGraphNode implements TransitData, IRoute, IDo
 	
 	public final static String TRIPLIST = "tripList";
 	public static final String SHORTNAME = "shortName";
-	public static final String LONGNAME = "longName";
-	public static final String DESC = "desc";
 	public static final String TYPE = "type";
 	
 	private static final long serialVersionUID = 1L;

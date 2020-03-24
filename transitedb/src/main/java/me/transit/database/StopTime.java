@@ -14,13 +14,7 @@ import me.transit.annotation.GTFSSetter;
 @GTFSFileModel(filename="stop_times.txt")
 public class StopTime extends AbstractDocument implements CSVFieldType  {
 
-	public static final String STOPID = "stopId";
 	public static final String STOPNAME = "stopName";
-	public static final String STOPHEADSIGN = "stopHeadSign";
-	public static final String ARRIVALTIME = "arrivalTime";
-	public static final String DROPOFFTYPE = "dropOffType";
-	public static final String PICKUPTYPE = "pickupType";
-	public static final String LOCATION = "location";
 
 	public enum PickupType { REGULAR, NOPICKUP, PHONE, COORDINATE, UNKNOWN };
 	
