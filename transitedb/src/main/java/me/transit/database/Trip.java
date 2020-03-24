@@ -1,9 +1,6 @@
 package me.transit.database;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
@@ -41,6 +39,7 @@ import me.transit.json.GeometryToBase64String;
 @DiscriminatorColumn(name = "trip_type")
 @DiscriminatorValue("Trip")
 @GTFSFileModel(filename="trips.txt")
+@JsonTypeInfo(use= JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
 public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	
 	public static final String ID = "id";
@@ -50,7 +49,7 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	public static final String DIRECTIONID = "directionId";
 	public static final String STOPTIMES = "stopTimes";
 
-	public enum DirectionType { OUT_BOUND, IN_BOUND, UNKOWN };
+	public enum DirectionType { OUT_BOUND, IN_BOUND, UNKNOWN}
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -60,7 +59,7 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	@GenericGenerator( name = "native", strategy = "native")
 	private long uuid = -1;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "AGENCY_UUID", nullable = false, updatable = false)
 	private Agency agency = null;
 
@@ -70,7 +69,7 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	@Column(name = "VERSION")
 	private String version = "0.5";
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="SERVICE_DATE_UUID", nullable=false, updatable=false)
 	private ServiceDate service = null;
 	
@@ -79,16 +78,19 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	
 	@Column(name="NAME")  
 	private String shortName = "";
+
+	@Column(name="TRIP_NDX")
+	private int routeTripIndex;
 	
 	@Column(name="DIRECTION")
 	@Enumerated(EnumType.STRING) 
-	private DirectionType directionId = DirectionType.UNKOWN;
+	private DirectionType directionId = DirectionType.UNKNOWN;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="ROUTE_GEOMETRY_UUID", nullable=false, updatable=false)
 	private RouteGeometry shape = null;
 	
-	private transient List<StopTime> stopTimes = new ArrayList<StopTime>();
+	private transient List<StopTime> stopTimes = new ArrayList<>();
 	private transient String docId = null;
 	
 	/* (non-Javadoc)
@@ -258,7 +260,6 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	 * @return the shape
 	 */
 	@JsonSetter("shape_id")
-	@JsonSerialize(converter = GeometryToBase64String.class)
 	public RouteGeometry getShape() {
 		return shape;
 	}
@@ -268,7 +269,6 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	 */
 	@GTFSSetter(column="shape_id")
 	@JsonSetter("shape_id")
-	@JsonDeserialize(converter = Base64StringToGeometry.class)
 	public void setShape(RouteGeometry shape) {
 		this.shape = shape;
 	}
@@ -287,6 +287,16 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	@JsonSetter("stop_times")
 	public void setStopTimes(List<StopTime> stopTimes) {
 		this.stopTimes = stopTimes;
+	}
+
+	@JsonGetter("trip_index")
+	public int getRouteTripIndex() {
+		return routeTripIndex;
+	}
+
+	@JsonSetter("trip_index")
+	public void setRouteTripIndex(int routeTripIndex) {
+		this.routeTripIndex = routeTripIndex;
 	}
 
 	/**
@@ -323,56 +333,48 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	 * @see me.transit.database.impl.Trip#toString()
 	 */
 
+	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder( "Trip: {" + super.toString() + "}");
-		
-		builder.append("service: " + this.getService());
-		builder.append("\n");
-		builder.append("headSign: " + this.getHeadSign());
-		builder.append("\n");
-		builder.append("shortName" + this.getShortName());
-		builder.append("\n");
-		builder.append("directionId: " + this.getDirectionId());
-		builder.append("\n");
-		builder.append("stopsTimes size: " + this.getStopTimes().size());
-		return builder.toString();
+		return "Trip{" +
+				"uuid=" + uuid +
+				", agency=" + agency +
+				", id='" + id + '\'' +
+				", version='" + version + '\'' +
+				", service=" + service +
+				", headSign='" + headSign + '\'' +
+				", shortName='" + shortName + '\'' +
+				", routeTripIndex=" + routeTripIndex +
+				", directionId=" + directionId +
+				", shape=" + shape +
+				", stopTimes=" + stopTimes +
+				", docId='" + docId + '\'' +
+				'}';
 	}
-	
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	/* (non-Javadoc)
-	 * @see me.transit.database.impl.Trip#equals(java.lang.Object)
-	 */
 
-	public boolean equals(Object obj) {
-		
-		boolean rtn = false;
-		
-		if ( Trip.class.isAssignableFrom(obj.getClass()) ) {
-			Trip rhs = Trip.class.cast(obj);
-			rtn = true;
-			if ( this.getAgency() != null && ! this.getAgency().equals(rhs.getAgency()) ) {
-				rtn = false;
-			}
-			if ( this.getService() != null && (! this.getService().equals(rhs.getService()))) {
-				rtn = false;
-			}
-			if ( this.getDirectionId() != rhs.getDirectionId()) {
-				rtn = false;
-			}
-			if ( this.getShortName() != null && (! this.getShortName().equals(rhs.getShortName())) ) {
-				rtn = false;
-			}
-			if ( this.getHeadSign() != null && (! this.getHeadSign().equals(rhs.getHeadSign())) ) {
-				rtn = false;
-			}
-			
-		}
-		return rtn;
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Trip trip = (Trip) o;
+		return uuid == trip.uuid &&
+				routeTripIndex == trip.routeTripIndex &&
+				Objects.equals(agency, trip.agency) &&
+				Objects.equals(id, trip.id) &&
+				Objects.equals(version, trip.version) &&
+				Objects.equals(service, trip.service) &&
+				Objects.equals(headSign, trip.headSign) &&
+				Objects.equals(shortName, trip.shortName) &&
+				directionId == trip.directionId &&
+				Objects.equals(shape, trip.shape) &&
+				Objects.equals(stopTimes, trip.stopTimes) &&
+				Objects.equals(docId, trip.docId);
 	}
-	
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(uuid, agency, id, version, service, headSign, shortName, routeTripIndex, directionId, shape, stopTimes, docId);
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see me.transit.database.TransitData#valid()
@@ -409,12 +411,8 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 		return node;
 	}
 	
-	public String makeHeadSignKey() {		
-		StringBuffer key = new StringBuffer();
-		key.append(getHeadSign());
-		key.append("@");
-		key.append(getAgency().getName());
-		return key.toString();
+	public String makeHeadSignKey() {
+		return getHeadSign() + "@" + getAgency().getName();
 	}
 
 }

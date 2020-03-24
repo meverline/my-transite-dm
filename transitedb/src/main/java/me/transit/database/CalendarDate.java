@@ -35,7 +35,7 @@ import me.transit.json.AgencyToString;
 @GTFSFileModel(filename="calendar_dates.txt")
 public class CalendarDate implements TransitData {
 	
-	public enum ExceptionType { UNKNOWN, ADD_SERVICE, REMOVE_SERVICE };
+	public enum ExceptionType { UNKNOWN, ADD_SERVICE, REMOVE_SERVICE }
 
 	private static final long serialVersionUID = 1L;
 
@@ -45,7 +45,7 @@ public class CalendarDate implements TransitData {
 	@GenericGenerator( name = "native", strategy = "native")
 	private long uuid = -1;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "AGENCY_UUID", nullable = false, updatable = false)
 	private Agency agency = null;
 
@@ -166,15 +166,16 @@ public class CalendarDate implements TransitData {
 		this.exceptionType = exceptionType;
 	}
 
-
+	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder("CalendarData: {" + super.toString() + "}");
-
-		builder.append("date: " + this.getDate().getTime().toString());
-		builder.append("\n");
-		builder.append("exceptionType: " + this.getExceptionType());
-		builder.append("\n");
-		return builder.toString();
+		return "CalendarDate{" +
+				"uuid=" + uuid +
+				", agency=" + agency +
+				", id='" + id + '\'' +
+				", version='" + version + '\'' +
+				", date=" + date +
+				", exceptionType=" + exceptionType +
+				'}';
 	}
 
 	/* (non-Javadoc)

@@ -12,8 +12,4 @@ public interface IDocument {
 	 */
 	void setDocId(String docId);
 
-	String getDocClass();
-
-	void setDocClass();
-
 }

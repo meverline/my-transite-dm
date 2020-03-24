@@ -36,7 +36,7 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.7.9</version>
+				<version>0.8.2</version>
 				<executions>
 					<execution>
 						<id>prepare-agent</id>
@@ -57,20 +57,8 @@
 						<goals>
 							<goal>report</goal>
 						</goals>
-						<configuration>
-							<!-- Sets the path to the file which contains the execution data. -->
-
-							<dataFile>target/jacoco.exec</dataFile>
-							<!-- Sets the output directory for the code coverage report. -->
-							<outputDirectory>target/jacoco-ut</outputDirectory>
-						</configuration>
 					</execution>
 				</executions>
-				<configuration>
-					<systemPropertyVariables>
-						<jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
-					</systemPropertyVariables>
-				</configuration>
 			</plugin>
 
 		</plugins>
@@ -157,7 +145,6 @@
 			<version>2.1.1</version>
 		</dependency>
 
-
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-spatial</artifactId>
@@ -175,12 +162,6 @@
 			<artifactId>mongodb-driver</artifactId>
 			<version>3.11.0</version>
 		</dependency>
-
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.neo4j</groupId> -->
-<!-- 			<artifactId>neo4j</artifactId> -->
-<!-- 			<version>3.2.0</version> -->
-<!-- 		</dependency> -->
 
 		<dependency>
 			<groupId>org.postgresql</groupId>

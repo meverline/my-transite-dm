@@ -17,11 +17,9 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import me.database.mongo.DocumentDao;
 import me.database.neo4j.IGraphDatabaseDAO;
 import me.transit.dao.RouteDao;
 import me.transit.database.Route;
-import me.transit.database.RouteTrip;
 import me.transit.database.Trip;
 
 @Component(value="tripFileHandler")
@@ -36,7 +34,7 @@ public class TripFileHandler extends AbstractFileHandler {
 	 * @param blackboard
 	 */
 	@Autowired
-	public TripFileHandler(Blackboard blackboard, RouteDao routeDao, IGraphDatabaseDAO graphDatabase, DocumentDao documentDao) {
+	public TripFileHandler(Blackboard blackboard, RouteDao routeDao, IGraphDatabaseDAO graphDatabase) {
 		super(blackboard);
 		this.routeDao = Objects.requireNonNull(routeDao, "routeDao can not be null");
 		this.graphDatabase = Objects.requireNonNull(graphDatabase, "graphDatabase can not be null");
@@ -59,8 +57,8 @@ public class TripFileHandler extends AbstractFileHandler {
 	@Override
 	public boolean parse(String shapeFile) throws Exception {
 		boolean rtn = false;
-		Map<String, List<Trip>> routeToTrips = new HashMap<String, List<Trip>>();
-		Set<String> invalidService = new HashSet<String>();
+		Map<String, List<Trip>> routeToTrips = new HashMap<>();
+		Set<String> invalidService = new HashSet<>();
 
 		getBlackboard().getRouteShortName().clear();
 		try {
@@ -80,7 +78,7 @@ public class TripFileHandler extends AbstractFileHandler {
 				return rtn;
 			}
 
-			List<String> header = new ArrayList<String>();
+			List<String> header = new ArrayList<>();
 			Map<String, Integer> indexMap = processHeader(inStream.readLine(), header);
 			log.info(header);
 
@@ -88,7 +86,7 @@ public class TripFileHandler extends AbstractFileHandler {
 			while (inStream.ready()) {
 
 				String line = inStream.readLine();
-				String data[] = line.split(",");
+				String [] data = line.split(",");
 
 				Trip trip = new Trip();
 
@@ -98,7 +96,7 @@ public class TripFileHandler extends AbstractFileHandler {
 					routeId = data[indexMap.get("route_id")].replace('"', ' ').trim();
 
 					if (!routeToTrips.containsKey(routeId)) {
-						routeToTrips.put(routeId, new ArrayList<Trip>());
+						routeToTrips.put(routeId, new ArrayList<>());
 					}
 				}
 
@@ -161,9 +159,12 @@ public class TripFileHandler extends AbstractFileHandler {
 			for (Entry<String, List<Trip>> data : routeToTrips.entrySet()) {
 
 				Route route = routeDao.loadById(data.getKey(), getBlackboard().getAgencyName());
+				int ndx = 0;
 				for ( Trip trip : data.getValue()) {
-					route.getTripList().add(new RouteTrip(route.getTripList().size(), trip));
+					trip.setRouteTripIndex(ndx);
+					route.getTripList().add(trip);
 					graphDatabase.createRelationShip(route, trip);
+					ndx++;
 				}
 				
 				routeDao.save(route);

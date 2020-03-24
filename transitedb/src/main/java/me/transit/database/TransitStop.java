@@ -47,8 +47,8 @@ public class TransitStop extends AbstractGraphNode implements TransitData, IData
 	public static final String STOP_NAME = "name";
 	public static final String LOCATION = "location";
 
-	public enum LocationType { STOP, STATION, ENTRENCE_EXIT, GENERIC_NODE, BOARDING_AREA, UNKOWN };
-	public enum WheelChariBoardingType { EMPTY, SOME, NOT_AVALIABLE };
+	public enum LocationType { STOP, STATION, ENTRENCE_EXIT, GENERIC_NODE, BOARDING_AREA, UNKOWN }
+	public enum WheelChariBoardingType { EMPTY, SOME, NOT_AVALIABLE }
 
 	private static final long serialVersionUID = 1L;
 
@@ -58,7 +58,7 @@ public class TransitStop extends AbstractGraphNode implements TransitData, IData
 	@GenericGenerator( name = "native", strategy = "native")
 	private long uuid = -1;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "AGENCY_UUID", nullable = false, updatable = false)
 	private Agency agency = null;
 
@@ -309,25 +309,23 @@ public class TransitStop extends AbstractGraphNode implements TransitData, IData
 	 * @see me.transit.database.impl.TransitDateImpl#toString()
 	 */
 
+	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder("TransiteStop: {" + super.toString() + "}");
-
-		builder.append("code: " + this.getCode());
-		builder.append("\n");
-		builder.append("name: " + this.getName());
-		builder.append("\n");
-		builder.append("desc: " + this.getCode());
-		builder.append("\n");
-		builder.append("location: " + this.getName());
-		builder.append("\n");
-		builder.append("ZoneId: " + this.getCode());
-		builder.append("\n");
-		builder.append("url: " + this.getName());
-		builder.append("\n");
-		builder.append("locationType: " + this.getLocationType());
-		builder.append("\n");
-		builder.append("parentStation: " + this.getParentStation());
-		return builder.toString();
+		return "TransitStop{" +
+				"uuid=" + uuid +
+				", agency=" + agency +
+				", id='" + id + '\'' +
+				", version='" + version + '\'' +
+				", code='" + code + '\'' +
+				", name='" + name + '\'' +
+				", desc='" + desc + '\'' +
+				", location=" + location +
+				", zoneId='" + zoneId + '\'' +
+				", url='" + url + '\'' +
+				", locationType=" + locationType +
+				", parentStation=" + parentStation +
+				", wheelchairBoarding=" + wheelchairBoarding +
+				'}';
 	}
 
 	/*
@@ -394,7 +392,7 @@ public class TransitStop extends AbstractGraphNode implements TransitData, IData
 	 */
 
 	public boolean valid() {
-		if (this.getName() == null || this.getName().length() < 0) {
+		if (this.getName() == null || this.getName().isEmpty()) {
 			return false;
 		}
 		return true;
@@ -416,12 +414,8 @@ public class TransitStop extends AbstractGraphNode implements TransitData, IData
         return node;
 	}
 	
-	public String makeCoordinateKey() {		
-		StringBuffer key = new StringBuffer();
-		key.append( getLocation().getX() );
-		key.append(",");
-		key.append( getLocation().getY() );
-		return key.toString();
+	public String makeCoordinateKey() {
+		return  getLocation().getX() + ","+  getLocation().getY();
 	}
 
 }

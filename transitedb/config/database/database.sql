@@ -164,6 +164,7 @@ CREATE TABLE tran_trip
   id character varying(255) NOT NULL,
   name character varying(255),
   version character varying(255),
+  trip_ndx bigint NOT NULL,
   service_date_uuid bigint NOT NULL,
   route_geometry_uuid bigint NOT NULL,
   route_uuid bigint NOT NULL,
@@ -232,25 +233,6 @@ ALTER TABLE hmt_tilefragment OWNER TO postgres;
 
 -- DROP TABLE tran_routetrip;
 
-CREATE TABLE tran_routetrip
-(
-  routetrip_uuid bigint NOT NULL,
-  routeTrip_type character varying(31) NOT NULL,
-  route_uuid bigint NOT NULL,
-  trip_uuid bigint NOT NULL,
-  trip_ndx integer,
-  CONSTRAINT tran_routetrip_pkey PRIMARY KEY (routetrip_uuid),
-  CONSTRAINT fk_route_uuid FOREIGN KEY (route_uuid)
-      REFERENCES tran_route (route_uuid) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT fk_trip_uuid FOREIGN KEY (trip_uuid)
-      REFERENCES tran_trip (trip_uuid) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION
-)
-WITH (
-  OIDS=FALSE
-);
-ALTER TABLE tran_routetrip OWNER TO postgres;
 
 
  

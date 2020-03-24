@@ -5,22 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
+import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
@@ -39,6 +26,7 @@ import me.transit.json.AgencyToString;
 @DiscriminatorColumn(name = "route_type")
 @DiscriminatorValue("Route")
 @GTFSFileModel(filename="routes.txt")
+@JsonTypeInfo(use= JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
 public class Route extends AbstractGraphNode implements TransitData, IRoute, IDocument {
 	
 	public final static String TRIPLIST = "tripList";
@@ -55,7 +43,7 @@ public class Route extends AbstractGraphNode implements TransitData, IRoute, IDo
 	@GenericGenerator( name = "native", strategy = "native")
 	private long uuid = -1;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "AGENCY_UUID", nullable = false, updatable = false)
 	private Agency agency = null;
 
@@ -90,9 +78,9 @@ public class Route extends AbstractGraphNode implements TransitData, IRoute, IDo
 	private int sortOrder = 0;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable( name="ROUTE_TRIP", joinColumns = @JoinColumn(name = "ROUTE_UUID"),
-            	inverseJoinColumns = @JoinColumn(name = "ROUTE_TRIP_UUID") )
-	private List<RouteTrip> trips = new ArrayList<>();
+	@JoinColumn(name = "ROUTE_UUID", nullable = false, updatable = false)
+	@OrderBy("TRIP_NDX")
+	private List<Trip> trips = new ArrayList<>();
 	
 	private transient String docId = null;
 
@@ -304,7 +292,8 @@ public class Route extends AbstractGraphNode implements TransitData, IRoute, IDo
 	 * @see me.transit.database.impl.Route#getTripList()
 	 */
 
-	public List<RouteTrip> getTripList() {
+	@JsonGetter("trips")
+	public List<Trip> getTripList() {
 		return this.trips;
 	}
 
@@ -312,7 +301,8 @@ public class Route extends AbstractGraphNode implements TransitData, IRoute, IDo
 	 * @see me.transit.database.impl.Route#setTripList(java.util.List)
 	 */
 
-	public void setTripList(List<RouteTrip> list) {
+	@JsonSetter("trips")
+	public void setTripList(List<Trip> list) {
 		this.trips = list;
 	}
 
@@ -321,23 +311,24 @@ public class Route extends AbstractGraphNode implements TransitData, IRoute, IDo
 	 * @see me.transit.database.impl.TransitDateImpl#toString()
 	 */
 
+	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder("Route: {" + super.toString() + "}");
-
-		builder.append("shortName: " + this.getShortName());
-		builder.append("\n");
-		builder.append("longName: " + this.getLongName());
-		builder.append("\n");
-		builder.append("desc: " + this.getDesc());
-		builder.append("\n");
-		builder.append("type: " + this.getType());
-		builder.append("\n");
-		builder.append("url: " + this.getUrl());
-		builder.append("\n");
-		builder.append("color: " + this.getColor());
-		builder.append("\n");
-		builder.append("text Color: " + this.getTextColor());
-		return builder.toString();
+		return "Route{" +
+				"uuid=" + uuid +
+				", agency=" + agency +
+				", id='" + id + '\'' +
+				", version='" + version + '\'' +
+				", shortName='" + shortName + '\'' +
+				", longName='" + longName + '\'' +
+				", desc='" + desc + '\'' +
+				", type=" + type +
+				", url='" + url + '\'' +
+				", color='" + color + '\'' +
+				", textColor='" + textColor + '\'' +
+				", sortOrder=" + sortOrder +
+				", trips=" + trips +
+				", docId='" + docId + '\'' +
+				'}';
 	}
 
 	/*
@@ -375,12 +366,8 @@ public class Route extends AbstractGraphNode implements TransitData, IRoute, IDo
 	 * @see me.database.neo4j.AbstractGraphNode#makeKey(me.transit.database.TransitData)
 	 */
 	@Override
-	public String makeKey() {		
-		StringBuffer key = new StringBuffer();
-		key.append(getShortName());
-		key.append("@");
-		key.append(getAgency().getName());
-		return key.toString();
+	public String makeKey() {
+		return getShortName() + "@" + getAgency().getName();
 	}
 
 	@Override
@@ -407,17 +394,5 @@ public class Route extends AbstractGraphNode implements TransitData, IRoute, IDo
 	public void setDocId(String uuid) {
 		this.docId = uuid;
 	}
-	
-	@Override
-	@JsonGetter("@class")
-	public String getDocClass() {
-		return this.getClass().getName();
-	}
-	
-	@Override
-	@JsonSetter("@class")
-	public void setDocClass() {
-		
-	}
-	
+
 }

@@ -7,6 +7,7 @@ import static org.junit.Assert.fail;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.transit.database.Trip;
 import org.easymock.EasyMock;
 import org.easymock.EasyMockRule;
 import org.easymock.EasyMockSupport;
@@ -21,7 +22,6 @@ import me.transit.dao.RouteDao;
 import me.transit.database.Agency;
 import me.transit.database.IRoute.RouteType;
 import me.transit.database.Route;
-import me.transit.database.RouteTrip;
 import me.transit.parser.data.Blackboard;
 import me.transit.parser.data.TripFileHandler;
 
@@ -47,7 +47,7 @@ public class TripFileHandlerTest extends EasyMockSupport {
 	@Test
 	public void test() {
 		agency.setName("TEST AGENCY");
-		TripFileHandler testSubject = new TripFileHandler(blackboard, routeDao, graphDatabase, documentDao);
+		TripFileHandler testSubject = new TripFileHandler(blackboard, routeDao, graphDatabase);
 		
 		route.setShortName("SHORT_NAME");
 		route.setId("1");
@@ -56,7 +56,7 @@ public class TripFileHandlerTest extends EasyMockSupport {
 		route.setColor("B");
 		route.setUUID(100L);
 		
-		List<RouteTrip> tripList = new ArrayList<>();
+		List<Trip> tripList = new ArrayList<>();
 		
 		route.setTripList(tripList);
 		route.setDesc("DESC");

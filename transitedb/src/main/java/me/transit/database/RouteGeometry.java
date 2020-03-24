@@ -41,7 +41,7 @@ public class RouteGeometry implements TransitData {
 	@GenericGenerator( name = "native", strategy = "native")
 	private long uuid = -1;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "AGENCY_UUID", nullable = false, updatable = false)
 	private Agency agency = null;
 
@@ -140,14 +140,18 @@ public class RouteGeometry implements TransitData {
 	public void setShape(Geometry shape) {
 		this.shape = shape;
 	}
-	
+
+	@Override
 	public String toString() {
-		if ( this.getAgency() == null ) {
-			return Long.toString(this.getUUID());
-		}
-		return Long.toString(this.getUUID()) + "  " + this.getAgency().toString();
+		return "RouteGeometry{" +
+				"uuid=" + uuid +
+				", agency=" + agency +
+				", id='" + id + '\'' +
+				", version='" + version + '\'' +
+				", shape=" + shape +
+				'}';
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.RouteGeometry#valid()
 	 */

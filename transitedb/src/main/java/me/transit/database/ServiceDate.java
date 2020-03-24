@@ -1,6 +1,7 @@
 package me.transit.database;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -46,7 +47,7 @@ public class ServiceDate extends AbstractDocument implements TransitData {
 							  WEEKDAY_SAT_SERVICE,
 							  WEEKEND_SERVICE, 
 							  SATURDAY_SERVICE,
-							  SUNDAY_SERVICE };
+							  SUNDAY_SERVICE }
 							  
 	public enum WeekDay {
 		
@@ -58,7 +59,7 @@ public class ServiceDate extends AbstractDocument implements TransitData {
 		FRIDAY(0x32),
 		SATURDAY(0x64);
 		
-		private int bitFlag = 0x0;
+		private final int bitFlag;
 		
 		WeekDay(int bit) {
 			bitFlag = bit;
@@ -75,7 +76,7 @@ public class ServiceDate extends AbstractDocument implements TransitData {
 	@GenericGenerator( name = "native", strategy = "native")	
 	private long uuid = -1;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "AGENCY_UUID", nullable = false, updatable = false)
 	private Agency agency = null;
 
@@ -309,45 +310,7 @@ public class ServiceDate extends AbstractDocument implements TransitData {
 	public boolean isSaturday() {
 		return hasService( ServiceDate.WeekDay.SATURDAY);
 	}
-		
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
 
-	public boolean equals(Object obj) {
-		
-		boolean rtn = false;
-		if ( obj == null ) { return rtn; }
-		if ( ServiceDate.class.isAssignableFrom(obj.getClass()) ) {
-			ServiceDate rhs = ServiceDate.class.cast(obj);
-			rtn = true;
-			if (this.getAgency() != null && ! this.getAgency().equals(rhs.getAgency()) ) {
-				rtn = false;
-			}
-			if ( this.getEndDate() != null && ! this.getEndDate().equals(rhs.getEndDate()) ) {
-				rtn = false;
-			}
-			if ( this.getStartDate() != null && ! this.getStartDate().equals(rhs.getStartDate()) ) {
-				rtn = false;
-			}
-			if ( this.getService() != rhs.getService() ) {
-				rtn = false;
-			}
-			if ( this.getServiceDayFlag() != rhs.getServiceDayFlag()) {
-				rtn = false;
-			}
-			if ( this.getId() != null && ! this.getId().equals(rhs.getId()) ) {
-				rtn = false;
-			}
-		}
-		return rtn;
-	}
-		
-	/*
-	 * (non-Javadoc)
-	 * @see me.transit.database.TransitData#valid()
-	 */
     /* (non-Javadoc)
 	 * @see me.transit.database.impl.ServiceDate#valid()
 	 */
@@ -356,5 +319,25 @@ public class ServiceDate extends AbstractDocument implements TransitData {
 	{
 		return true;
 	}
-	
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		ServiceDate that = (ServiceDate) o;
+		return uuid == that.uuid &&
+				serviceDayFlag == that.serviceDayFlag &&
+				Objects.equals(agency, that.agency) &&
+				Objects.equals(id, that.id) &&
+				Objects.equals(version, that.version) &&
+				Objects.equals(startDate, that.startDate) &&
+				Objects.equals(endDate, that.endDate) &&
+				service == that.service;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(uuid, agency, id, version, startDate, endDate, serviceDayFlag, service);
+	}
+
 }
