@@ -23,7 +23,7 @@ import me.database.mongo.IDocumentDao;
 
 
 @Configuration
-@ComponentScan(basePackages="me.transite")
+@ComponentScan(basePackages="me.transit")
 @PropertySource({ "classpath:persistence-${envTarget:dev}.properties" })
 @EnableTransactionManagement
 public class CommonConfigBase {
@@ -39,7 +39,8 @@ public class CommonConfigBase {
 		String [] data = {
 				"me.transit.database",
 				"me.crime.database",
-				"me.math.grid.tiled"
+				"me.math.grid.tiled",
+				"me.transit.parser.omd"
 		};
 		
 		return data;

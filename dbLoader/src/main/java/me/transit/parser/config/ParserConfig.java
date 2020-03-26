@@ -1,5 +1,6 @@
 package me.transit.parser.config;
 
+import me.transit.parser.omd.dao.LocationDao;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -18,13 +19,13 @@ import me.transit.parser.service.ParserService;
 public class ParserConfig {
 
 	@Bean(value="parserService")
-	public AbstractGTFSParser parserService(FileHandlerFactory fileHandlerFactory) {
-		return new ParserService(fileHandlerFactory);
+	public AbstractGTFSParser parserService(FileHandlerFactory fileHandlerFactory, LocationDao locationDao) {
+		return new ParserService(fileHandlerFactory, locationDao);
 	}
 	
 	@Bean(value="localParser")
-	public AbstractGTFSParser localParser(FileHandlerFactory fileHandlerFactory, IGraphDatabaseDAO graphDatabase) {
-		return new LocalParser(fileHandlerFactory, graphDatabase);
+	public AbstractGTFSParser localParser(FileHandlerFactory fileHandlerFactory, IGraphDatabaseDAO graphDatabase, LocationDao locationDao) {
+		return new LocalParser(fileHandlerFactory, graphDatabase, locationDao);
 	}
 	
 	@Bean(value="dataConverterFactory")

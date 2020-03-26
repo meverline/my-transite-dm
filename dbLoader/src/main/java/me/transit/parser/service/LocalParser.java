@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.Objects;
 
+import me.transit.parser.omd.dao.LocationDao;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,13 +19,12 @@ public class LocalParser extends AbstractGTFSParser {
 	IGraphDatabaseDAO graph;
 
 	@Autowired
-	public LocalParser(FileHandlerFactory factory, IGraphDatabaseDAO graphDatabase) {
-		super(factory);
+	public LocalParser(FileHandlerFactory factory, IGraphDatabaseDAO graphDatabase, LocationDao locationDao) {
+		super(factory, locationDao);
 		this.graph = Objects.requireNonNull(graphDatabase, "graphDatabase can not be null");
 		
 	}
 	/**
-	 * @param args
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */

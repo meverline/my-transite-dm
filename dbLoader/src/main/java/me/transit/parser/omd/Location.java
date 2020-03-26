@@ -9,17 +9,22 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import org.hibernate.annotations.GenericGenerator;
+
+import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name = "omd_locations")
-public class Location implements Comparable<Location>  {
+public class Location implements Comparable<Location>, Serializable {
 	
 	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name = "LOCATION_UUID", nullable = false)
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO, generator="native")
+	@GenericGenerator( name = "native", strategy = "native")
 	private long uuid = -1;
 	
 	@Column(name = "ID", nullable = false)
@@ -132,13 +137,40 @@ public class Location implements Comparable<Location>  {
 		return l.getName().compareTo(getName()) + 
 				   l.getTitle().compareTo(getTitle());
 	}
-	
+
 	/**
-	 * 
+	 *
 	 */
 	@Override
 	public String toString() {
-		return this.getTitle();
+		return "Location{" +
+				"uuid=" + uuid +
+				", id=" + id +
+				", pid=" + pid +
+				", title='" + title + '\'' +
+				", name='" + name + '\'' +
+				", lat=" + lat +
+				", lon=" + lon +
+				'}';
 	}
-	
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Location location = (Location) o;
+		return uuid == location.uuid &&
+				id == location.id &&
+				pid == location.pid &&
+				Double.compare(location.lat, lat) == 0 &&
+				Double.compare(location.lon, lon) == 0 &&
+				Objects.equals(title, location.title) &&
+				Objects.equals(name, location.name);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(uuid, id, pid, title, name, lat, lon);
+	}
+
 }

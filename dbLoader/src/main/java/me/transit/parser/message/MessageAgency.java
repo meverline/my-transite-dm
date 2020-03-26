@@ -27,5 +27,12 @@ public class MessageAgency {
 	public void setFeed(String feed) {
 		this.feed = feed;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "MessageAgency{" +
+				"location='" + location + '\'' +
+				", feed='" + feed + '\'' +
+				'}';
+	}
 }

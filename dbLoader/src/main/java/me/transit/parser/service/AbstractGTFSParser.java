@@ -9,6 +9,7 @@ import java.util.Objects;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import me.transit.parser.omd.dao.LocationDao;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -25,12 +26,14 @@ public abstract class AbstractGTFSParser {
 	private final OpenMobilityData dataFeed = new OpenMobilityData();
 	private List<Location> locList = null;
 	private final Properties properties = new Properties();
+	private final  LocationDao locationDao;
 	/**
 	 * 
 	 */
-	protected AbstractGTFSParser(FileHandlerFactory factory) {
+	protected AbstractGTFSParser(FileHandlerFactory factory, LocationDao locationDao) {
 		
 		this.factory = Objects.requireNonNull(factory, "factory can not be null");
+		this.locationDao = Objects.requireNonNull(locationDao, "locationDao can not be null");
 		
 		try {
 			InputStream inStream =  getClass().getClassLoader().getResourceAsStream("ClassMap.properties");
@@ -71,12 +74,7 @@ public abstract class AbstractGTFSParser {
 	 * @return
 	 */
 	private String filePath(String directory, String file) {
-		StringBuilder rtn = new StringBuilder();
-
-		rtn.append(directory.trim());
-		rtn.append("/");
-		rtn.append(file.trim());
-		return rtn.toString();
+		return directory.trim() + "/"+ file.trim();
 	}
 
 	/**
@@ -101,36 +99,57 @@ public abstract class AbstractGTFSParser {
 	}
 
 	/**
+	 *
+	 * @param agency
+	 * @param loc
+	 * @throws Exception
+	 */
+	protected void parseLocation(MessageAgency agency, Location loc) throws Exception {
+		Map<String, Feed> feeds = getDataFeed().getFeeds(loc.getPid());
+		if (feeds.containsKey(agency.getFeed())) {
+			String path = dataFeed.download(feeds.get(agency.getFeed()));
+
+			File check = new File(path, "agency.txt");
+			if (check.exists()) {
+				this.getLog().info(path + " ... ");
+				this.parse(path);
+			} else {
+				log.warn("agency.txt not found for: " + loc);
+			}
+
+		}
+	}
+
+	/**
 	 * @throws Exception 
 	 * 
 	 */
 	protected void parseFeeds(MessageAgency agency) throws Exception {
 
 		long start = System.currentTimeMillis();
-		for (Location loc : getLocList()) {
 
-			if (loc.getTitle().equals(agency.getLocation())) {
+		Location location = locationDao.findByTitle(agency.getLocation());
+		if (location != null) {
+			this.parseLocation(agency, location);
+		} else {
+			log.info("agency " + agency + " not found in database");
+			for (Location loc : getLocList()) {
 
-				Map<String, Feed> feeds = getDataFeed().getFeeds(loc.getPid());
-				if (feeds.containsKey(agency.getFeed())) {
-					String path = dataFeed.download(feeds.get(agency.getFeed()));
-
-					File check = new File(path, "agency.txt");
-					if (check.exists()) {
-						this.getLog().info(path + " ... ");
-						this.parse(path);
-					}
-
+				if (locationDao.findById(loc.getId()) == null) {
+					log.info("saving: " + loc);
+					locationDao.save(loc);
 				}
 
+				if (loc.getTitle().equals(agency.getLocation())) {
+					this.parseLocation(agency, loc);
+				}
 			}
 		}
-
 		long end = System.currentTimeMillis();
 
 		long diff = end - start;
 
-		System.out.println(agency.getFeed() + " RunTime: " + String.format("%d min, %d sec", TimeUnit.MILLISECONDS.toMinutes(diff),
+		log.info(agency.getFeed() + " RunTime: " + String.format("%d min, %d sec", TimeUnit.MILLISECONDS.toMinutes(diff),
 				TimeUnit.MILLISECONDS.toSeconds(diff)
 						- TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(diff))));
 

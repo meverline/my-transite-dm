@@ -2,6 +2,7 @@ package me.transit.parser.service;
 
 import java.util.List;
 
+import me.transit.parser.omd.dao.LocationDao;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.amazonaws.services.sqs.AmazonSQS;
@@ -19,9 +20,8 @@ public class ParserService extends AbstractGTFSParser {
 	
 	
 	@Autowired
-	public ParserService(FileHandlerFactory factory) {
-		super(factory);
-		
+	public ParserService(FileHandlerFactory factory, LocationDao locationDao) {
+		super(factory, locationDao);
 	}
 	
 	/**
