@@ -2,6 +2,7 @@ package me.transit.dao.query.tuple;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.QueryOperators;
+import org.bson.Document;
 
 public class NumberTuple extends AbstractQueryTuple {
 	
@@ -11,7 +12,7 @@ public class NumberTuple extends AbstractQueryTuple {
                   return field + " = " + value.toString();
             }
             
-            public void docuument(BasicDBObject query, Number value, String field) {
+            public void docuument(Document query, Number value, String field) {
                     query.put(field, value);
             }
 
@@ -21,8 +22,8 @@ public class NumberTuple extends AbstractQueryTuple {
             	return field + " != " + value.toString();
             }
             
-            public void docuument(BasicDBObject query, Number value, String field) {
-                    query.put(field, new BasicDBObject( QueryOperators.NE, value));
+            public void docuument(Document query, Number value, String field) {
+                    query.put(field, new Document( QueryOperators.NE, value));
             }
     },
     GT{
@@ -30,8 +31,8 @@ public class NumberTuple extends AbstractQueryTuple {
             	return field + " > " + value.toString();
             }
             
-            public void docuument(BasicDBObject query,  Number value, String field) {
-                    query.put(field, new BasicDBObject( QueryOperators.GT, value));
+            public void docuument(Document query,  Number value, String field) {
+                    query.put(field, new Document( QueryOperators.GT, value));
             }
     },
     GEQ{
@@ -39,8 +40,8 @@ public class NumberTuple extends AbstractQueryTuple {
             	return field + " >= " + value.toString();
             }
             
-            public void docuument(BasicDBObject query,  Number value, String field) {
-                    query.put(field, new BasicDBObject( QueryOperators.GTE, value));
+            public void docuument(Document query,  Number value, String field) {
+                    query.put(field, new Document( QueryOperators.GTE, value));
             }
     },
     NGT{
@@ -48,8 +49,8 @@ public class NumberTuple extends AbstractQueryTuple {
             	return "not " + field + " > " + value.toString();
             }
             
-            public void docuument(BasicDBObject query, Number value, String field) {
-                    query.put(field, new BasicDBObject("$not", new BasicDBObject( QueryOperators.GT, value)));
+            public void docuument(Document query, Number value, String field) {
+                    query.put(field, new Document("$not", new Document( QueryOperators.GT, value)));
             }
     },
     NGEQ{
@@ -57,8 +58,8 @@ public class NumberTuple extends AbstractQueryTuple {
             	return "not " + field + " >= " + value.toString();
             }
             
-            public void docuument(BasicDBObject query, Number value, String field) {
-                    query.put(field, new BasicDBObject("$not", new BasicDBObject( QueryOperators.GTE, value)));
+            public void docuument(Document query, Number value, String field) {
+                    query.put(field, new Document("$not", new Document( QueryOperators.GTE, value)));
             }
     },
     LT{
@@ -66,8 +67,8 @@ public class NumberTuple extends AbstractQueryTuple {
             	return field + " < " + value.toString();
             }
             
-            public void docuument(BasicDBObject query,  Number value, String field) {
-                    query.put(field, new BasicDBObject( QueryOperators.LT, value));
+            public void docuument(Document query,  Number value, String field) {
+                    query.put(field, new Document( QueryOperators.LT, value));
             }
     },
     LEQ{
@@ -75,8 +76,8 @@ public class NumberTuple extends AbstractQueryTuple {
             	return field + " <=" + value.toString();
             }
             
-            public void docuument(BasicDBObject query, Number value, String field) {
-                    query.put(field, new BasicDBObject( QueryOperators.LTE, value));
+            public void docuument(Document query, Number value, String field) {
+                    query.put(field, new Document( QueryOperators.LTE, value));
             }
     },
     NLT{
@@ -84,8 +85,8 @@ public class NumberTuple extends AbstractQueryTuple {
             	return "not " + field + " < " + value.toString();
             }
             
-            public void docuument(BasicDBObject query, Number value, String field) {
-                    query.put(field, new BasicDBObject("$not", new BasicDBObject( QueryOperators.LT, value)));
+            public void docuument(Document query, Number value, String field) {
+                    query.put(field, new Document("$not", new Document( QueryOperators.LT, value)));
             }
     },
     NLEQ{
@@ -93,62 +94,37 @@ public class NumberTuple extends AbstractQueryTuple {
             	return "not " + field + " <=" + value.toString();
             }
             
-            public void docuument(BasicDBObject query, Number value, String field) {
-                    query.put(field, new BasicDBObject("$not", new BasicDBObject( QueryOperators.LTE, value)));
+            public void docuument(Document query, Number value, String field) {
+                    query.put(field, new Document("$not", new Document( QueryOperators.LTE, value)));
             }
 		};
 		
 		public abstract String restriction(Number value, String field);
-		public abstract void docuument(BasicDBObject query, Number value, String field);
+		public abstract void docuument(Document query, Number value, String field);
 	}
 	
 	private LOGIC logic = null;
 	private Number hi = null;
 	private Number lo = null;
 
-	/**
-	 * 
-	 * @param aField
-	 * @param value
-	 * @param type
-	 */
 	public NumberTuple(String aField, Number hiValue, Number loValue) {
 		super(null, aField);
 		setHi(hiValue);
 		setLo(loValue);
 	}
-	
-	/**
-	 * 
-	 * @param aClass
-	 * @param aField
-	 * @param value
-	 * @param type
-	 */
+
 	public NumberTuple(Class<?> aClass, String aField, Number hiValue, Number loValue) {
 		super(aClass, aField);
 		setHi(hiValue);
 		setLo(loValue);
 	}
-	
-	/**
-	 * 
-	 * @param aField
-	 * @param value
-	 * @param type
-	 */
+
 	public NumberTuple(String aField, Number hiValue, LOGIC logic) {
 		super(null, aField);
 		setHi(hiValue);
 		setLogic(logic);
 	}
-	
-	/**
-	 * 
-	 * @param aField
-	 * @param value
-	 * @param type
-	 */
+
 	public NumberTuple(Class<?> aClass, String aField, Number hiValue, LOGIC logic) {
 		super(aClass, aField);
 		setHi(hiValue);
@@ -226,7 +202,7 @@ public class NumberTuple extends AbstractQueryTuple {
 		
 	}
 	
-	public void getDoucmentQuery(BasicDBObject query) {
+	public void getDoucmentQuery(Document query) {
 		
 		if ( getLo() == null ) {
 			getLogic().docuument(query, hi, getField());

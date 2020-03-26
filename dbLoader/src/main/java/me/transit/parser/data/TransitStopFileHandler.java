@@ -3,6 +3,7 @@ package me.transit.parser.data;
 import java.sql.SQLException;
 import java.util.Objects;
 
+import me.transit.database.Agency;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -48,6 +49,12 @@ public class TransitStopFileHandler extends AbstractDefaultFileHandler {
 		transiteStopDao.save(stop);
 		getGraphDatabase().addNode(stop);
 	}
-	
-	
+
+	@Override
+	protected void setAgency(Object obj, Agency agency) {
+		TransitStop stop = TransitStop.class.cast(obj);
+		stop.setAgency(agency);
+	}
+
+
 }

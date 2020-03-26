@@ -15,8 +15,7 @@
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 package me.transit.dao.query.tuple;
-
-import com.mongodb.BasicDBObject;
+import org.bson.Document;
 
 public interface IQueryTuple {
 	
@@ -32,6 +31,6 @@ public interface IQueryTuple {
 	 * 
 	 * @param query
 	 */
-	public abstract void getDoucmentQuery(BasicDBObject query); 
+	public abstract void getDoucmentQuery(Document query);
 
 }

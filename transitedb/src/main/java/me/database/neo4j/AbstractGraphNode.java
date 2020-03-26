@@ -2,7 +2,9 @@ package me.database.neo4j;
 
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import me.transit.database.TransitData;
+
 
 public abstract class AbstractGraphNode {
 	
@@ -10,14 +12,16 @@ public abstract class AbstractGraphNode {
 	 * Get The node properties
 	 * @return
 	 */
-	public abstract Map<String, String> getProperties();
-	
-	public String makeKey() {
+	@JsonIgnore
+	public abstract Map<String, String> getProperties(String agencyName);
+
+	@JsonIgnore
+	public String makeKey(String agencyName) {
 		TransitData data = (TransitData) this;
 		StringBuffer key = new StringBuffer();
 		key.append(data.getId());
 		key.append("@");
-		key.append(data.getAgency().getName());
+		key.append(agencyName);
 		return key.toString();
 	}
 }

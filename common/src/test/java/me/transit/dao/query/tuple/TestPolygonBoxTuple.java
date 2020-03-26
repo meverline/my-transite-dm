@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bson.Document;
 import org.easymock.EasyMock;
 import org.easymock.EasyMockRule;
 import org.easymock.EasyMockSupport;
@@ -59,8 +60,8 @@ public class TestPolygonBoxTuple extends EasyMockSupport {
 	
 	@Test
 	public void testGetDoucmentQuery() {
-		
-		BasicDBObject mongo = new BasicDBObject();
+
+		Document mongo = new Document();
 		PolygonBoxTuple obj = new PolygonBoxTuple("field", box);
 		obj.getDoucmentQuery(mongo);			
 	}

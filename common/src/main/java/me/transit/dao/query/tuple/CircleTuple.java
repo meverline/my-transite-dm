@@ -21,6 +21,7 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.bson.Document;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
@@ -42,7 +43,7 @@ public class CircleTuple extends AbstractQueryTuple {
 	 * 
 	 * @param field
 	 * @param center
-	 * @param distance
+	 * @param distanceInMeters
 	 */
 	public CircleTuple( String field, Point center, double distanceInMeters )
 	{
@@ -56,7 +57,7 @@ public class CircleTuple extends AbstractQueryTuple {
 	 * @param alias
 	 * @param field
 	 * @param center
-	 * @param distance
+	 * @param distanceInMeters
 	 */
 	public CircleTuple( Class<?> alias, String field, Point center, double distanceInMeters )
 	{
@@ -83,8 +84,8 @@ public class CircleTuple extends AbstractQueryTuple {
 
 	/**
 	 * 
-	 * @param pt
-	 * @param distance
+	 * @param location
+	 * @param radiusMeters
 	 * @return
 	 */
 	private Polygon  makeCircle( Point location, double radiusMeters) {
@@ -144,8 +145,9 @@ public class CircleTuple extends AbstractQueryTuple {
 		return rtn;
 		
 	}
-	
-	public void getDoucmentQuery(BasicDBObject query) {
+
+	@Override
+	public void getDoucmentQuery(Document query) {
 				
         Coordinate coord = this.center_.getCoordinate();                
         query.append(getField(), new BasicDBObject("$geoWithin", 

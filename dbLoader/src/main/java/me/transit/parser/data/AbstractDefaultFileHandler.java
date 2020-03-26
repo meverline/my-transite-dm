@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import me.transit.database.Agency;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.reflections.Reflections;
@@ -38,10 +39,6 @@ public abstract class AbstractDefaultFileHandler extends AbstractFileHandler {
 	protected final IGraphDatabaseDAO graphDatabase;
 	protected final DataConverterFactory dataConverterFactory;
 
-	/**
-	 * 
-	 * @param path
-	 */
 	@Autowired
 	public AbstractDefaultFileHandler(Blackboard blackboard, IGraphDatabaseDAO graphDatabase, DataConverterFactory dataConverterFactory) {
 		super(blackboard);
@@ -85,10 +82,6 @@ public abstract class AbstractDefaultFileHandler extends AbstractFileHandler {
 		}
 	}
 
-	/**
-	 * 
-	 * @param path
-	 */
 	private void initilize() {
 	
 		try {
@@ -220,9 +213,7 @@ public abstract class AbstractDefaultFileHandler extends AbstractFileHandler {
 		return filePath.substring(ndx + 1);
 	}
 	
-	protected void setAgency() {
-		
-	}
+	protected abstract void setAgency(Object obj, Agency agency);
 
 	/*
 	 * (non-Javadoc)
@@ -303,7 +294,7 @@ public abstract class AbstractDefaultFileHandler extends AbstractFileHandler {
 					boolean valid = true;
 					if (TransitData.class.isAssignableFrom(obj.getClass())) {
 						TransitData td = TransitData.class.cast(obj);
-						td.setAgency(getBlackboard().getAgency());
+						this.setAgency(obj, getBlackboard().getAgency());
 						if (!td.valid()) {
 							valid = false;
 							log.error("Invalid : " + obj.getClass().getSimpleName() + " >" + line);

@@ -158,7 +158,6 @@ ALTER TABLE tran_stop OWNER TO postgres;
 CREATE TABLE tran_trip
 (
   trip_type character varying(31) NOT NULL,
-  agency_uuid bigint NOT NULL,
   direction character varying(255),
   head_sign character varying(255),
   id character varying(255) NOT NULL,
@@ -175,9 +174,6 @@ CREATE TABLE tran_trip
       ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT fk_trip_service_date_fkey FOREIGN KEY (service_date_uuid)
       REFERENCES tran_service_date (service_date_uuid) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT fk_trip_agency_fkey FOREIGN KEY (agency_uuid)
-      REFERENCES tran_agency (agency_uuid) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT fk_trip_route_fkey FOREIGN KEY (route_uuid)
       REFERENCES tran_route (route_uuid) MATCH SIMPLE

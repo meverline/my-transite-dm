@@ -3,7 +3,6 @@ package me.transit.database;
 import java.util.Calendar;
 import java.util.Objects;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorValue;
@@ -18,6 +17,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import me.transit.json.CalendarJsonConvert;
+import me.transit.json.JsonToCalendarConvert;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
@@ -28,13 +32,14 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import me.database.mongo.AbstractDocument;
 import me.transit.annotation.GTFSFileModel;
 import me.transit.annotation.GTFSSetter;
-import me.transit.json.AgencyToString;
 
 @Entity
 @Table(name="tran_service_date")
 @DiscriminatorColumn(name = "serviceDate_type")
 @DiscriminatorValue("ServiceDate")
 @GTFSFileModel(filename="calendar.txt")
+@JsonTypeInfo(use= JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
+@JsonFilter("agencyFilter")
 public class ServiceDate extends AbstractDocument implements TransitData {
 
 	public static final String SERVICE = "service";
@@ -118,7 +123,6 @@ public class ServiceDate extends AbstractDocument implements TransitData {
 	 * @see me.transit.database.impl.ServiceDate#getAgency()
 	 */
 	@JsonGetter("agency_name")
-	@JsonSerialize(converter = AgencyToString.class)
 	public Agency getAgency() {
 		return agency;
 	}
@@ -169,6 +173,7 @@ public class ServiceDate extends AbstractDocument implements TransitData {
 	 * @see me.transit.database.impl.ServiceDate#getStartDate()
 	 */
 	@JsonGetter("start_date")
+	@JsonSerialize(converter = CalendarJsonConvert.class)
 	public Calendar getStartDate() {
 		return startDate;
 	}
@@ -178,6 +183,7 @@ public class ServiceDate extends AbstractDocument implements TransitData {
 	 */
 	@GTFSSetter(column="start_date")
 	@JsonSetter("start_date")
+	@JsonSerialize(converter = JsonToCalendarConvert.class)
 	public void setStartDate(Calendar startDate) {
 		this.startDate = startDate;
 	}
@@ -186,6 +192,7 @@ public class ServiceDate extends AbstractDocument implements TransitData {
 	 * @see me.transit.database.impl.ServiceDate#getEndDate()
 	 */
 	@JsonGetter("end_date")
+	@JsonSerialize(converter = CalendarJsonConvert.class)
 	public Calendar getEndDate() {
 		return endDate;
 	}
@@ -195,6 +202,7 @@ public class ServiceDate extends AbstractDocument implements TransitData {
 	 */
 	@GTFSSetter(column="end_date")
 	@JsonSetter("end_date")
+	@JsonSerialize(converter = JsonToCalendarConvert.class)
 	public void setEndDate(Calendar endDate) {
 		this.endDate = endDate;
 	}
@@ -202,7 +210,6 @@ public class ServiceDate extends AbstractDocument implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.ServiceDate#getServiceDayFlag()
 	 */
-	@Column(name="SERVICE_DAYS")
 	@JsonGetter("service_day_flag")
 	public int getServiceDayFlag() {
 		return serviceDayFlag;
@@ -220,7 +227,7 @@ public class ServiceDate extends AbstractDocument implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.ServiceDate#getService()
 	 */
-	@JsonGetter("sevice")
+	@JsonGetter("service_days")
 	public ServiceDays getService() {
 		return service;
 	}
@@ -228,8 +235,8 @@ public class ServiceDate extends AbstractDocument implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.ServiceDate#setService(me.transit.database.impl.ServiceDateImpl.ServiceDays)
 	 */
-	@GTFSSetter(column="sevice")
-	@JsonSetter("sevice")
+	@GTFSSetter(column="service_days")
+	@JsonSetter("service_days")
 	public void setService(ServiceDays service) {
 		this.service = service;
 	}
@@ -256,6 +263,7 @@ public class ServiceDate extends AbstractDocument implements TransitData {
 	 * @see me.transit.database.impl.ServiceDate#isSunday()
 	 */
 
+	@JsonIgnore
 	public boolean isSunday() {
 		return hasService( ServiceDate.WeekDay.SUNDAY);
 	}
@@ -264,6 +272,7 @@ public class ServiceDate extends AbstractDocument implements TransitData {
 	 * @see me.transit.database.impl.ServiceDate#isMonday()
 	 */
 
+	@JsonIgnore
 	public boolean isMonday() {
 		return hasService( ServiceDate.WeekDay.MONDAY);
 	}
@@ -271,7 +280,7 @@ public class ServiceDate extends AbstractDocument implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.ServiceDate#isTuesday()
 	 */
-
+	@JsonIgnore
 	public boolean isTuesday() {
 		return hasService( ServiceDate.WeekDay.TUESDAY);
 	}
@@ -279,7 +288,7 @@ public class ServiceDate extends AbstractDocument implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.ServiceDate#isWednesday()
 	 */
-
+	@JsonIgnore
 	public boolean isWednesday() {
 		return hasService( ServiceDate.WeekDay.WENSDAY);
 	}
@@ -287,7 +296,7 @@ public class ServiceDate extends AbstractDocument implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.ServiceDate#isThursday()
 	 */
-
+	@JsonIgnore
 	public boolean isThursday() {
 		return hasService( ServiceDate.WeekDay.THURSDAY);
 	}
@@ -295,7 +304,7 @@ public class ServiceDate extends AbstractDocument implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.ServiceDate#isFriday()
 	 */
-
+	@JsonIgnore
 	public boolean isFriday() {
 		return hasService( ServiceDate.WeekDay.FRIDAY);
 	}
@@ -303,7 +312,7 @@ public class ServiceDate extends AbstractDocument implements TransitData {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.ServiceDate#isSaturday()
 	 */
-
+	@JsonIgnore
 	public boolean isSaturday() {
 		return hasService( ServiceDate.WeekDay.SATURDAY);
 	}
@@ -337,4 +346,17 @@ public class ServiceDate extends AbstractDocument implements TransitData {
 		return Objects.hash(uuid, agency, id, version, startDate, endDate, serviceDayFlag, service);
 	}
 
+	@Override
+	public String toString() {
+		return "ServiceDate{" +
+				"uuid=" + uuid +
+				", agency=" + agency +
+				", id='" + id + '\'' +
+				", version='" + version + '\'' +
+				", startDate=" + startDate +
+				", endDate=" + endDate +
+				", serviceDayFlag=" + serviceDayFlag +
+				", service=" + service +
+				'}';
+	}
 }

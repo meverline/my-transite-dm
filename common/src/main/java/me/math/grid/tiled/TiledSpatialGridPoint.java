@@ -171,15 +171,4 @@ public class TiledSpatialGridPoint extends AbstractSpatialGridPoint implements I
 		this.docId = docId;
 	}
 
-	@JsonGetter("@class")
-	@Override
-	public String getDocClass() {
-		return this.getClass().getName();
-	}
-
-	@JsonSetter("@class")
-	@Override
-	public void setDocClass() {		
-	}
-		
 }

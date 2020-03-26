@@ -1,8 +1,8 @@
 package me.transit.database;
 
 import java.util.Calendar;
+import java.util.Objects;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorValue;
@@ -17,6 +17,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import me.transit.json.CalendarJsonConvert;
+import me.transit.json.JsonToCalendarConvert;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
@@ -26,13 +29,13 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import me.transit.annotation.GTFSFileModel;
 import me.transit.annotation.GTFSSetter;
-import me.transit.json.AgencyToString;
 
 @Entity(name = "CalendarDate")
 @Table(name = "tran_calendar_date")
 @DiscriminatorColumn(name = "calendar_date_type")
 @DiscriminatorValue("CalendarDate")
 @GTFSFileModel(filename="calendar_dates.txt")
+@JsonTypeInfo(use= JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
 public class CalendarDate implements TransitData {
 	
 	public enum ExceptionType { UNKNOWN, ADD_SERVICE, REMOVE_SERVICE }
@@ -85,7 +88,6 @@ public class CalendarDate implements TransitData {
 	 * @see me.transit.database.impl.CalendarDate#getAgency()
 	 */
 	@JsonGetter("agency_name")
-	@JsonSerialize(converter = AgencyToString.class)
 	public Agency getAgency() {
 		return agency;
 	}
@@ -136,6 +138,7 @@ public class CalendarDate implements TransitData {
 	 * @see me.transit.database.impl.CalendarDate#getDate()
 	 */
 	@JsonGetter("date")
+	@JsonSerialize(converter = CalendarJsonConvert.class)
 	public Calendar getDate() {
 		return date;
 	}
@@ -145,6 +148,7 @@ public class CalendarDate implements TransitData {
 	 */
 	@GTFSSetter(column="date")
 	@JsonSetter("date")
+	@JsonSerialize(converter = JsonToCalendarConvert.class)
 	public void setDate(Calendar date) {
 		this.date = date;
 	}
@@ -173,8 +177,8 @@ public class CalendarDate implements TransitData {
 				", agency=" + agency +
 				", id='" + id + '\'' +
 				", version='" + version + '\'' +
-				", date=" + date +
 				", exceptionType=" + exceptionType +
+				", date=" + date.getTimeInMillis() +
 				'}';
 	}
 
@@ -186,4 +190,21 @@ public class CalendarDate implements TransitData {
 		return true;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		CalendarDate that = (CalendarDate) o;
+		return uuid == that.uuid &&
+				Objects.equals(agency, that.agency) &&
+				Objects.equals(id, that.id) &&
+				Objects.equals(version, that.version) &&
+				Objects.equals(date.getTimeInMillis(), that.date.getTimeInMillis()) &&
+				exceptionType == that.exceptionType;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(uuid, agency, id, version, date, exceptionType);
+	}
 }

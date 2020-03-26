@@ -112,7 +112,7 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, ID
 	}
 
 	/**
-	 * @param rowOffset_ the rowOffset_ to set
+	 * @param rowOffset the rowOffset_ to set
 	 */
 	@JsonSetter("row_offset")
 	public void setRowOffset(int rowOffset) {
@@ -128,7 +128,7 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, ID
 	}
 
 	/**
-	 * @param colOffSet_ the colOffSet_ to set
+	 * @param colOffSet the colOffSet_ to set
 	 */
 	@JsonSetter("col_offset")
 	public void setColOffSet(int colOffSet) {
@@ -161,7 +161,7 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, ID
 	 * @return
 	 */
 	public List<AbstractSpatialGridPoint> getGridPoints() {
-		List<AbstractSpatialGridPoint> rtn = new ArrayList<AbstractSpatialGridPoint>();
+		List<AbstractSpatialGridPoint> rtn = new ArrayList<>();
 		rtn.addAll(this.grid_);
 		return rtn;
 	}
@@ -200,7 +200,7 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, ID
 	}
 
 	/**
-	 * @param root_ the root_ to set
+	 * @param root the root_ to set
 	 */
 	@JsonSetter("root")
 	public void setRoot(int root) {
@@ -216,7 +216,7 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, ID
 	}
 
 	/**
-	 * @param grid_ the grid_ to set
+	 * @param grid the grid_ to set
 	 */
 	public void setGrid(List<TiledSpatialGridPoint> grid) {
 		this.grid_ = grid;
@@ -386,17 +386,4 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, ID
 		this.docId = docId;
 	}
 
-	@JsonGetter("@class")
-	@Override
-	public String getDocClass() {
-		return this.getClass().getName();
-	}
-
-	@JsonSetter("@class")
-	@Override
-	public void setDocClass() {		
-	}
-	
-	
-	
 }

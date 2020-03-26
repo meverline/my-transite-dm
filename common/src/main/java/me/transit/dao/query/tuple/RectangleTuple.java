@@ -3,6 +3,7 @@ package me.transit.dao.query.tuple;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bson.Document;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
@@ -94,7 +95,7 @@ public class RectangleTuple extends AbstractQueryTuple {
 		
 	}
 	
-	public void getDoucmentQuery(BasicDBObject query) {
+	public void getDoucmentQuery(Document query) {
 				
         Double [] ulc = new Double[2];
         

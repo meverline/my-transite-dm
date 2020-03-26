@@ -3,6 +3,7 @@ package me.transit.database;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -13,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.locationtech.jts.geom.Polygon;
@@ -34,6 +36,7 @@ import me.transit.json.GeometryToBase64String;
 @DiscriminatorColumn(name = "angency_type")
 @DiscriminatorValue("Agency")
 @GTFSFileModel(filename="agency.txt")
+@JsonTypeInfo(use= JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
 public class Agency extends AbstractGraphNode implements Serializable {
 
 	public static final String UUID = "uuid";
@@ -74,6 +77,7 @@ public class Agency extends AbstractGraphNode implements Serializable {
 	@Type(type="jts_geometry")
 	private Polygon mbr = null;
 
+	@Column(name = "FAREURL")
 	private String fareUrl = null;
 
 	public Agency() {
@@ -239,42 +243,48 @@ public class Agency extends AbstractGraphNode implements Serializable {
 		this.mbr = mbr;
 	}
 
-	/* (non-Javadoc)
-	 * @see me.transit.database.impl.Agency#toString()
-	 */
+	@Override
 	public String toString() {
-		return Long.toString(this.getUUID()) + " " + this.getId() 
-			   + " " + this.getName()
-			   + " " + this.getUrl();
+		return "Agency{" +
+				"uuid=" + uuid +
+				", name='" + name + '\'' +
+				", url='" + url + '\'' +
+				", timezone='" + timezone + '\'' +
+				", lang='" + lang + '\'' +
+				", phone='" + phone + '\'' +
+				", id='" + id + '\'' +
+				", version='" + version + '\'' +
+				", fareUrl='" + fareUrl + '\'' +
+				'}';
 	}
 
-	/* (non-Javadoc)
-	 * @see me.transit.database.impl.Agency#equals(java.lang.Object)
-	 */
-	public boolean equals(Object obj) {
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Agency agency = (Agency) o;
+		return uuid == agency.uuid &&
+				Objects.equals(name, agency.name) &&
+				Objects.equals(url, agency.url) &&
+				Objects.equals(timezone, agency.timezone) &&
+				Objects.equals(lang, agency.lang) &&
+				Objects.equals(phone, agency.phone) &&
+				Objects.equals(id, agency.id) &&
+				Objects.equals(version, agency.version) &&
+				Objects.equals(mbr, agency.mbr) &&
+				Objects.equals(fareUrl, agency.fareUrl);
+	}
 
-		boolean rtn = false;
-		if (Agency.class.isAssignableFrom(obj.getClass())) {
-			Agency rhs = Agency.class.cast(obj);
-			rtn = true;
-			if (this.getName() != null && ! this.getName().equals(rhs.getName())) {
-				rtn = false;
-			}
-			if (this.getUrl() != null && ! this.getUrl().equals(rhs.getUrl())) {
-				rtn = false;
-			}
-			if (this.getPhone() != null && ! this.getPhone().equals(rhs.getPhone())) {
-				rtn = false;
-			}
-		}
-		return rtn;
+	@Override
+	public int hashCode() {
+		return Objects.hash(uuid, name, url, timezone, lang, phone, id, version, mbr, fareUrl);
 	}
 
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Agency#setFareUrl(java.lang.String)
 	 */
-	@GTFSSetter(column="agency_fareUrl")
-	@JsonSetter("agency_fareUrl")
+	@GTFSSetter(column="agency_fare_url")
+	@JsonSetter("agency_fare_url")
 	public void setFareUrl(String url) {
 		fareUrl = url;
 	}
@@ -282,7 +292,7 @@ public class Agency extends AbstractGraphNode implements Serializable {
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Agency#getFareUrl()
 	 */
-	@JsonGetter("agency_fareUrl")
+	@JsonGetter("agency_fare_url")
 	public String getFareUrl() {
 		return fareUrl;
 	}
@@ -296,7 +306,7 @@ public class Agency extends AbstractGraphNode implements Serializable {
 	}
 
 	@Override
-	public Map<String, String> getProperties() {
+	public Map<String, String> getProperties(String agencyName) {
 		Map<String, String> node = new HashMap<>();
 	    node.put(FIELD.agency.name(), this.getName());
 	    node.put(FIELD.db_id.name(), this.getId());

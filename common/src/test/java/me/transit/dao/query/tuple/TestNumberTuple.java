@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import org.bson.Document;
 import org.easymock.EasyMock;
 import org.easymock.EasyMockRule;
 import org.easymock.EasyMockSupport;
@@ -53,8 +54,8 @@ public class TestNumberTuple extends EasyMockSupport {
 	
 	@Test
 	public void testGetDoucmentQuery() {
-		
-		BasicDBObject mongo = new BasicDBObject();
+
+		Document mongo = new Document();
 		for ( NumberTuple.LOGIC logic : NumberTuple.LOGIC.values()) {
 			NumberTuple obj = new NumberTuple( "field", 100, logic);
 			

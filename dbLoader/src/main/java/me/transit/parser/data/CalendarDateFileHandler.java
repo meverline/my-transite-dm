@@ -3,6 +3,7 @@ package me.transit.parser.data;
 import java.sql.SQLException;
 import java.util.Objects;
 
+import me.transit.database.Agency;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -37,5 +38,11 @@ public class CalendarDateFileHandler extends AbstractDefaultFileHandler {
 	@Override
 	public void save(Object obj) throws SQLException {
 		calendarDateDao.save(CalendarDate.class.cast(obj));
+	}
+
+	@Override
+	protected void setAgency(Object obj, Agency agency) {
+		CalendarDate date = CalendarDate.class.cast(obj);
+		date.setAgency(agency);
 	}
 }

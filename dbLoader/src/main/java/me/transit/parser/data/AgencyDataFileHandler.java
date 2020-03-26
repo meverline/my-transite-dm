@@ -56,4 +56,9 @@ public class AgencyDataFileHandler extends AbstractDefaultFileHandler {
 		
 
 	}
+
+	@Override
+	protected void setAgency(Object obj, Agency agency) {
+
+	}
 }

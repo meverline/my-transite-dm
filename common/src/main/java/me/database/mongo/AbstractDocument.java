@@ -24,16 +24,4 @@ public abstract class AbstractDocument implements IDocument {
 		this.docId = docId;
 	}
 
-	@Override
-	@JsonGetter("@class")
-	public String getDocClass() {
-		return this.getClass().getName();
-	}
-	
-	@Override
-	@JsonSetter("@class")
-	public void setDocClass() {
-		
-	}
-	
 }

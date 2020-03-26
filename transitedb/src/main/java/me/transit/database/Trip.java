@@ -2,7 +2,6 @@ package me.transit.database;
 
 import java.util.*;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorValue;
@@ -17,22 +16,19 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import me.database.mongo.IDocument;
 import me.database.neo4j.AbstractGraphNode;
 import me.database.neo4j.FIELD;
 import me.transit.annotation.GTFSFileModel;
 import me.transit.annotation.GTFSSetter;
-import me.transit.json.AgencyToString;
-import me.transit.json.Base64StringToGeometry;
-import me.transit.json.GeometryToBase64String;
 
 @Entity
 @Table(name="tran_trip")
@@ -40,6 +36,7 @@ import me.transit.json.GeometryToBase64String;
 @DiscriminatorValue("Trip")
 @GTFSFileModel(filename="trips.txt")
 @JsonTypeInfo(use= JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
+@JsonFilter("agencyFilter")
 public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	
 	public static final String ID = "id";
@@ -55,10 +52,6 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	@GeneratedValue(strategy = GenerationType.AUTO, generator="native")
 	@GenericGenerator( name = "native", strategy = "native")
 	private long uuid = -1;
-
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "AGENCY_UUID", nullable = false, updatable = false)
-	private Agency agency = null;
 
 	@Column(name = "ID", nullable = false)
 	private String id = null;
@@ -122,22 +115,6 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 		this.uuid = uuid;
 	}
 
-	/**
-	 * @return the agency
-	 */
-	@JsonGetter("agency_name")
-	@JsonSerialize(converter = AgencyToString.class)
-	public Agency getAgency() {
-		return agency;
-	}
-
-	/**
-	 * @param agency the agency to set
-	 */
-	@JsonSetter("agency_name")
-	public void setAgency(Agency agency) {
-		this.agency = agency;
-	}
 
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Trip#getId()
@@ -322,7 +299,6 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 	public String toString() {
 		return "Trip{" +
 				"uuid=" + uuid +
-				", agency=" + agency +
 				", id='" + id + '\'' +
 				", version='" + version + '\'' +
 				", service=" + service +
@@ -343,7 +319,6 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 		Trip trip = (Trip) o;
 		return uuid == trip.uuid &&
 				routeTripIndex == trip.routeTripIndex &&
-				Objects.equals(agency, trip.agency) &&
 				Objects.equals(id, trip.id) &&
 				Objects.equals(version, trip.version) &&
 				Objects.equals(service, trip.service) &&
@@ -357,7 +332,7 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(uuid, agency, id, version, service, headSign, shortName, routeTripIndex, directionId, shape, stopTimes, docId);
+		return Objects.hash(uuid, id, version, service, headSign, shortName, routeTripIndex, directionId, shape, stopTimes, docId);
 	}
 
 	/*
@@ -382,22 +357,24 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
      * @see me.database.neo4j.IGraphNode#getProperties()
      */
 	@Override
-	public Map<String, String> getProperties() {
+	@JsonIgnore
+	public Map<String, String> getProperties(String agencyName) {
 		Map<String, String> node = new HashMap<>();
-		node.put(FIELD.trip.name(), makeKey());
+		node.put(FIELD.trip.name(), makeKey(agencyName));
 		node.put(FIELD.db_name.name(), this.getHeadSign());
 		node.put(FIELD.className.name(), this.getClass().getSimpleName());
 		node.put(FIELD.direction.name(), this.getDirectionId().name());
-		node.put(FIELD.trip_headSign.name(), this.makeHeadSignKey());
+		node.put(FIELD.trip_headSign.name(), this.makeHeadSignKey(agencyName));
 		if (this.getShortName() != null) {
 			node.put(FIELD.db_id.name(), this.getShortName());
 		}
 		
 		return node;
 	}
-	
-	public String makeHeadSignKey() {
-		return getHeadSign() + "@" + getAgency().getName();
+
+	@JsonIgnore
+	public String makeHeadSignKey(String agencyName) {
+		return getHeadSign() + "@" + agencyName;
 	}
 
 }

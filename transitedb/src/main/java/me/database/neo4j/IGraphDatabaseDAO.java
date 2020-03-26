@@ -37,10 +37,10 @@ public interface IGraphDatabaseDAO {
 
 	/**
 	 * 
-	 * @param route
+	 * @param trip
 	 * @return
 	 */
-	Node addNode(Trip trip);
+	Node addNode(Trip trip, Agency agency);
 
 	/**
 	 * 
@@ -52,7 +52,7 @@ public interface IGraphDatabaseDAO {
 
 	/**
 	 * 
-	 * @param fromTrip
+	 * @param fromRoute
 	 * @param toStop
 	 * @return
 	 */

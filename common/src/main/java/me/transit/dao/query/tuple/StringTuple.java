@@ -3,6 +3,7 @@ package me.transit.dao.query.tuple;
 import java.util.regex.Pattern;
 
 import com.mongodb.BasicDBObject;
+import org.bson.Document;
 
 public class StringTuple extends AbstractQueryTuple {
 	
@@ -105,7 +106,7 @@ public class StringTuple extends AbstractQueryTuple {
 	}
 	
 	@Override
-	public void getDoucmentQuery(BasicDBObject query) {
+	public void getDoucmentQuery(Document query) {
 
 		if ( matchType == MATCH.EXACT) {
 			query.put(getField(), value );

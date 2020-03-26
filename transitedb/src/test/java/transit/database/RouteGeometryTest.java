@@ -3,6 +3,10 @@ package transit.database;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ser.FilterProvider;
+import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
+import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import org.junit.Test;
 import org.meanbean.test.BeanTester;
 import org.meanbean.test.Configuration;
@@ -15,7 +19,7 @@ import org.locationtech.jts.geom.LineString;
 import me.transit.database.Agency;
 import me.transit.database.RouteGeometry;
 
-public class RouteGeometryTest {
+public class RouteGeometryTest extends AbstractDatabaseTest {
 
 	private BeanTester tester = new BeanTester();
 
@@ -28,6 +32,25 @@ public class RouteGeometryTest {
 				.build();
 
 		tester.testBean(RouteGeometry.class, configuration);
+	}
+
+
+	@Test
+	public void testJson() throws JsonProcessingException {
+		RouteGeometry object = new RouteGeometry();
+
+		object.setAgency(this.createAgency());
+		object.setId("id");
+		object.setShape(this.mbr.toPolygon());
+		object.setUUID(300L);
+
+		FilterProvider filters = new SimpleFilterProvider()
+				.addFilter("agencyFilter", SimpleBeanPropertyFilter.serializeAllExcept());
+		String json = mapper.writer(filters).writeValueAsString(object);
+		RouteGeometry geo = mapper.readValue(json, RouteGeometry.class);
+
+		assertEquals(object, geo);
+
 	}
 
 	/**

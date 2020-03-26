@@ -3,6 +3,7 @@ package me.transit.parser.data;
 import java.sql.SQLException;
 import java.util.Objects;
 
+import me.transit.database.Agency;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -45,5 +46,11 @@ public class RouteFileHandler extends AbstractDefaultFileHandler {
 		Route data = routeDao.save(route);
 		this.getBlackboard().getRouteuuid().put(data.getId(),  data.getUUID());
 		getGraphDatabase().addNode(route);
+	}
+
+	@Override
+	protected void setAgency(Object obj, Agency agency) {
+		Route route = Route.class.cast(obj);
+		route.setAgency(agency);
 	}
 }

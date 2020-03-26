@@ -4,11 +4,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.Test;
 
 import me.transit.database.StopTime;
 
-public class StopTimeTest {
+public class StopTimeTest extends AbstractDatabaseTest {
 
 	/**
 	 * 
@@ -25,6 +26,29 @@ public class StopTimeTest {
 		assertEquals("", st.getStopName());
 		assertNull(st.getStopId());
 		assertNull(st.getTripId());
+	}
+
+	@Test
+	public void testJson() throws JsonProcessingException {
+
+		StopTime object = new StopTime();
+
+		object.setStopHeadSign("Head Sign");
+		object.setStopName("name");
+		object.setStopId("537");
+		object.setTripId("523");
+		object.setDropOffType(StopTime.PickupType.COORDINATE);
+		object.setPickupType(StopTime.PickupType.PHONE);
+
+		for (int n = 0; n < 5; n++) {
+			object.addArrivalTime(n);
+		}
+
+		String json = mapper.writeValueAsString(object);
+		StopTime st = mapper.readValue(json, StopTime.class);
+
+		assertEquals(object, st );
+
 	}
 
 	/**

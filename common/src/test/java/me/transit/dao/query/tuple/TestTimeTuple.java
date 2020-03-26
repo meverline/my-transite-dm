@@ -4,6 +4,7 @@ import static org.easymock.EasyMock.expect;
 
 import java.util.Calendar;
 
+import org.bson.Document;
 import org.easymock.EasyMock;
 import org.easymock.EasyMockRule;
 import org.easymock.EasyMockSupport;
@@ -28,8 +29,8 @@ public class TestTimeTuple extends EasyMockSupport {
 	
 	@Test
 	public void testGetDoucmentQuery() {
-		
-		BasicDBObject mongo = new BasicDBObject();
+
+		Document mongo = new Document();
 		TimeTuple obj = new TimeTuple("field", Calendar.getInstance(), Calendar.getInstance());
 		obj.getDoucmentQuery(mongo);			
 	}

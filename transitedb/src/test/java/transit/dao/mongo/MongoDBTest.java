@@ -48,8 +48,7 @@ public class MongoDBTest {
 		for (int ndx = 0; ndx < 5; ndx++) {
 			trip.addStopTime(st);
 		}
-		
-		trip.setAgency(agency);
+
 		trip.setDirectionId(DirectionType.IN_BOUND);
 		trip.setHeadSign("headSign");
 	}

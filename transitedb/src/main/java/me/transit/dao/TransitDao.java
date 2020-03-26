@@ -21,7 +21,7 @@ public abstract class TransitDao<T extends TransitData> extends AbstractHibernat
 	/**
 	 * 
 	 * @param aClass
-	 * @param aConnection
+	 * @param aSessionFactory
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
@@ -74,7 +74,6 @@ public abstract class TransitDao<T extends TransitData> extends AbstractHibernat
 	 * @param rtn
 	 */
 	protected void initObject(T rtn) {
-		Hibernate.initialize(rtn.getAgency());
 	}
 	
 	/* (non-Javadoc)

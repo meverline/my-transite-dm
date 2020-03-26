@@ -10,6 +10,9 @@ import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.List;
 
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
 import org.easymock.EasyMock;
 import org.easymock.EasyMockRule;
 import org.easymock.EasyMockSupport;
@@ -22,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
-import com.mongodb.MongoClient;
+import com.mongodb.client.MongoClient;
 
 
 @SuppressWarnings("deprecation")
@@ -35,14 +38,14 @@ public class TestDocumentDao extends EasyMockSupport{
 	private MongoClient writer;
 	
 	@Mock(type=MockType.NICE)
-	private DB dbmock;
+	private MongoDatabase dbmock;
 	
 	@Mock(type=MockType.NICE)
-	private DBCollection collection;
+	private MongoCollection<Document> collection;
 	
 	
 	private void setUpMock() {
-		expect(writer.getDB(EasyMock.anyString())).andReturn(dbmock).anyTimes();
+		expect(writer.getDatabase(EasyMock.anyString())).andReturn(dbmock).anyTimes();
 		expect(dbmock.getCollection(EasyMock.anyString())).andReturn(collection).anyTimes();
 		expect(collection.count()).andReturn(new Long(3)).anyTimes();
 		

@@ -2,6 +2,7 @@ package me.transit.dao.query.tuple;
 
 import static org.easymock.EasyMock.expect;
 
+import org.bson.Document;
 import org.easymock.EasyMock;
 import org.easymock.EasyMockRule;
 import org.easymock.EasyMockSupport;
@@ -30,8 +31,8 @@ public class TestStringTuple extends EasyMockSupport {
 	
 	@Test
 	public void testGetDoucmentQuery() {
-		
-		BasicDBObject mongo = new BasicDBObject();
+
+		Document mongo = new Document();
 		for ( StringTuple.MATCH logic : StringTuple.MATCH.values()) {
 			StringTuple obj = new StringTuple( "field", "value", logic);
 			obj.getDoucmentQuery(mongo);

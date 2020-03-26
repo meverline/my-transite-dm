@@ -25,24 +25,14 @@ public interface TransitData extends Serializable {
 	 * @param id
 	 */
 	public void setVersion(String id);
-	
-	/**
-	 * @return the agencyId
-	 */
-	public Agency getAgency();
 
-	/**
-	 * @param agencyId the agencyId to set
-	 */
-	public void setAgency(Agency agencyId);
-	
 	/**
 	 * @return the serviceId
 	 */
 	public String getId();
 
 	/**
-	 * @param serviceId the serviceId to set
+	 * @param id the serviceId to set
 	 */
 	public void setId(String id);
 	

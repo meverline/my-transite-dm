@@ -3,6 +3,7 @@ package me.transit.dao.query.tuple;
 import static org.easymock.EasyMock.expect;
 import static org.junit.Assert.assertTrue;
 
+import org.bson.Document;
 import org.easymock.EasyMock;
 import org.easymock.EasyMockRule;
 import org.easymock.EasyMockSupport;
@@ -33,8 +34,8 @@ public class TestRectangleTuple extends EasyMockSupport {
 	
 	@Test
 	public void testGetDoucmentQuery() {
-		
-		BasicDBObject mongo = new BasicDBObject();
+
+		Document mongo = new Document();
 		RectangleTuple obj = new RectangleTuple("field", ul.toPoint(), lr.toPoint());
 		obj.getDoucmentQuery(mongo);			
 	}

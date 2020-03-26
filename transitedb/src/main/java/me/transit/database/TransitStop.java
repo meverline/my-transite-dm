@@ -2,6 +2,7 @@ package me.transit.database;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,6 +19,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.locationtech.jts.geom.Point;
@@ -32,7 +35,6 @@ import me.database.neo4j.FIELD;
 import me.datamining.metric.IDataProvider;
 import me.transit.annotation.GTFSFileModel;
 import me.transit.annotation.GTFSSetter;
-import me.transit.json.AgencyToString;
 import me.transit.json.Base64StringToGeometry;
 import me.transit.json.GeometryToBase64String;
 
@@ -42,6 +44,7 @@ import me.transit.json.GeometryToBase64String;
 @DiscriminatorColumn(name = "tran_stop_type")
 @DiscriminatorValue("TransitStop")
 @GTFSFileModel(filename="stops.txt")
+@JsonTypeInfo(use= JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
 public class TransitStop extends AbstractGraphNode implements TransitData, IDataProvider  {
 	
 	public static final String STOP_NAME = "name";
@@ -118,7 +121,6 @@ public class TransitStop extends AbstractGraphNode implements TransitData, IData
 	 * @see me.transit.database.impl.TransitStop#getAgency()
 	 */
 	@JsonGetter("agency_name")
-	@JsonSerialize(converter = AgencyToString.class)
 	public Agency getAgency() {
 		return agency;
 	}
@@ -309,25 +311,6 @@ public class TransitStop extends AbstractGraphNode implements TransitData, IData
 	 * @see me.transit.database.impl.TransitDateImpl#toString()
 	 */
 
-	@Override
-	public String toString() {
-		return "TransitStop{" +
-				"uuid=" + uuid +
-				", agency=" + agency +
-				", id='" + id + '\'' +
-				", version='" + version + '\'' +
-				", code='" + code + '\'' +
-				", name='" + name + '\'' +
-				", desc='" + desc + '\'' +
-				", location=" + location +
-				", zoneId='" + zoneId + '\'' +
-				", url='" + url + '\'' +
-				", locationType=" + locationType +
-				", parentStation=" + parentStation +
-				", wheelchairBoarding=" + wheelchairBoarding +
-				'}';
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -403,19 +386,65 @@ public class TransitStop extends AbstractGraphNode implements TransitData, IData
 	 * @see me.database.neo4j.IGraphNode#getProperties()
 	 */
 	@Override
-	public Map<String, String> getProperties() {
+	@JsonIgnore
+	public Map<String, String> getProperties(String agencyName) {
 		Map<String, String> node = new HashMap<>();
 		
-		node.put( FIELD.stop.name(), makeKey());
+		node.put( FIELD.stop.name(), makeKey(agencyName));
         node.put( FIELD.db_name.name(), this.getName());
         node.put( FIELD.db_id.name(), this.getId());
         node.put(FIELD.className.name(), this.getClass().getSimpleName());
         node.put(FIELD.coordinate.name(),this.makeCoordinateKey());
         return node;
 	}
-	
+
+	@JsonIgnore
 	public String makeCoordinateKey() {
 		return  getLocation().getX() + ","+  getLocation().getY();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		TransitStop that = (TransitStop) o;
+		return uuid == that.uuid &&
+				parentStation == that.parentStation &&
+				Objects.equals(agency, that.agency) &&
+				Objects.equals(id, that.id) &&
+				Objects.equals(version, that.version) &&
+				Objects.equals(code, that.code) &&
+				Objects.equals(name, that.name) &&
+				Objects.equals(desc, that.desc) &&
+				Objects.equals(location, that.location) &&
+				Objects.equals(zoneId, that.zoneId) &&
+				Objects.equals(url, that.url) &&
+				locationType == that.locationType &&
+				wheelchairBoarding == that.wheelchairBoarding;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(uuid, agency, id, version, code, name, desc, location, zoneId, url, locationType, parentStation, wheelchairBoarding);
+	}
+
+	@Override
+	public String toString() {
+		return "TransitStop{" +
+				"uuid=" + uuid +
+				", agency=" + agency +
+				", id='" + id + '\'' +
+				", version='" + version + '\'' +
+				", code='" + code + '\'' +
+				", name='" + name + '\'' +
+				", desc='" + desc + '\'' +
+				", location=" + location +
+				", zoneId='" + zoneId + '\'' +
+				", url='" + url + '\'' +
+				", locationType=" + locationType +
+				", parentStation=" + parentStation +
+				", wheelchairBoarding=" + wheelchairBoarding +
+				'}';
 	}
 
 }

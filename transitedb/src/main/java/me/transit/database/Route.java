@@ -12,16 +12,14 @@ import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import me.database.mongo.IDocument;
 import me.database.neo4j.AbstractGraphNode;
 import me.database.neo4j.FIELD;
 import me.transit.annotation.GTFSFileModel;
 import me.transit.annotation.GTFSSetter;
-import me.transit.json.AgencyToString;
 
-@Entity
+ @Entity
 @Table(name = "tran_route")
 @DiscriminatorColumn(name = "route_type")
 @DiscriminatorValue("Route")
@@ -102,7 +100,6 @@ public class Route extends AbstractGraphNode implements TransitData, IRoute, IDo
 	 * @see me.transit.database.impl.Route#getAgency()
 	 */
 	@JsonGetter("agency_name")
-	@JsonSerialize(converter = AgencyToString.class)
 	public Agency getAgency() {
 		return agency;
 	}
@@ -350,9 +347,9 @@ public class Route extends AbstractGraphNode implements TransitData, IRoute, IDo
 	 * @see me.database.neo4j.IGraphNode#getProperties()
 	 */
 	@Override
-	public Map<String, String> getProperties() {
+	public Map<String, String> getProperties(String agencyName) {
 		Map<String, String> node = new HashMap<>();
-		node.put(FIELD.route.name(), makeKey());
+		node.put(FIELD.route.name(), makeKey(agencyName));
 		node.put(FIELD.db_name.name(), this.getShortName());
 		node.put(FIELD.db_id.name(), this.getId());
 		node.put(FIELD.className.name(), this.getClass().getSimpleName());
@@ -364,7 +361,7 @@ public class Route extends AbstractGraphNode implements TransitData, IRoute, IDo
 	 * @see me.database.neo4j.AbstractGraphNode#makeKey(me.transit.database.TransitData)
 	 */
 	@Override
-	public String makeKey() {
+	public String makeKey(String agencyName) {
 		return getShortName() + "@" + getAgency().getName();
 	}
 

@@ -3,6 +3,7 @@ package me.transit.dao.query.tuple;
 import static org.easymock.EasyMock.expect;
 import static org.junit.Assert.assertTrue;
 
+import org.bson.Document;
 import org.easymock.EasyMock;
 import org.easymock.EasyMockRule;
 import org.easymock.EasyMockSupport;
@@ -36,7 +37,7 @@ public class TestCircleTuple extends EasyMockSupport {
 	@Test
 	public void testGetDoucmentQuery() {
 		
-		BasicDBObject mongo = new BasicDBObject();
+		Document mongo = new Document();
 		CircleTuple obj = new CircleTuple("field", ul.toPoint(), this.distance);
 		obj.getDoucmentQuery(mongo);			
 	}

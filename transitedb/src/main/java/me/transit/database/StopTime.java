@@ -1,7 +1,9 @@
 package me.transit.database;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
@@ -16,7 +18,7 @@ public class StopTime extends AbstractDocument implements CSVFieldType  {
 
 	public static final String STOPNAME = "stopName";
 
-	public enum PickupType { REGULAR, NOPICKUP, PHONE, COORDINATE, UNKNOWN };
+	public enum PickupType { REGULAR, NOPICKUP, PHONE, COORDINATE, UNKNOWN }
 	
 	private static final String SEPERATOR = ";";
 	
@@ -24,7 +26,7 @@ public class StopTime extends AbstractDocument implements CSVFieldType  {
 	private static final long serialVersionUID = 1L;
 	
 	private String stopId = null;
-	private List<Long> arrivalTime = new ArrayList<Long>();
+	private List<Long> arrivalTime = new ArrayList<>();
 	private String stopHeadSign = "";
 	private String stopName = "";
 	private PickupType pickupType = PickupType.REGULAR;
@@ -57,7 +59,7 @@ public class StopTime extends AbstractDocument implements CSVFieldType  {
 	}
 
 	/**
-	 * @param arrivalTime the TripId to set
+	 * @param id the TripId to set
 	 */
 	@GTFSSetter(column="trip_id")
 	@JsonSetter("trip_id")
@@ -85,7 +87,7 @@ public class StopTime extends AbstractDocument implements CSVFieldType  {
 	
 	/**
 	 * 
-	 * @param departureTime
+	 * @param arrivalTime
 	 */
 	
 	public void addArrivalTime(long arrivalTime) {
@@ -135,7 +137,7 @@ public class StopTime extends AbstractDocument implements CSVFieldType  {
 	}
 
 	/**
-	 * @param stopId the stopId to set
+	 * @param name the stopId to set
 	 */
 	@GTFSSetter(column="stop_name")
 	@JsonSetter("stop_name")
@@ -201,9 +203,9 @@ public class StopTime extends AbstractDocument implements CSVFieldType  {
 	@Override
 	public void fromCSVLine(String line) {
 		
-		String data[] = line.split(CSVFieldType.COMMA);
+		String [] data = line.split(CSVFieldType.COMMA);
 		
-		String time[] = data[0].split(StopTime.SEPERATOR);
+		String [] time = data[0].split(StopTime.SEPERATOR);
 		this.getArrivalTime().clear();
 		for ( String ndx : time) {
 			this.addArrivalTime( Long.parseLong(ndx));
@@ -215,8 +217,6 @@ public class StopTime extends AbstractDocument implements CSVFieldType  {
 		this.setStopId( data[4]);
 		this.setStopName( data[5]);
 		this.setTripId(data[6]);
-		
-		return;
 	}
 
 	/**
@@ -247,5 +247,40 @@ public class StopTime extends AbstractDocument implements CSVFieldType  {
 		
 		return builder.toString();
 	}
-				
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		StopTime stopTime = (StopTime) o;
+		return Objects.equals(stopId, stopTime.stopId) &&
+				Objects.equals(arrivalTime, stopTime.arrivalTime) &&
+				Objects.equals(stopHeadSign, stopTime.stopHeadSign) &&
+				Objects.equals(stopName, stopTime.stopName) &&
+				pickupType == stopTime.pickupType &&
+				dropOffType == stopTime.dropOffType &&
+				Objects.equals(tripId, stopTime.tripId) &&
+				Arrays.equals(location, stopTime.location);
+	}
+
+	@Override
+	public int hashCode() {
+		int result = Objects.hash(stopId, arrivalTime, stopHeadSign, stopName, pickupType, dropOffType, tripId);
+		result = 31 * result + Arrays.hashCode(location);
+		return result;
+	}
+
+	@Override
+	public String toString() {
+		return "StopTime{" +
+				"stopId='" + stopId + '\'' +
+				", arrivalTime=" + arrivalTime +
+				", stopHeadSign='" + stopHeadSign + '\'' +
+				", stopName='" + stopName + '\'' +
+				", pickupType=" + pickupType +
+				", dropOffType=" + dropOffType +
+				", tripId='" + tripId + '\'' +
+				", location=" + Arrays.toString(location) +
+				'}';
+	}
 }

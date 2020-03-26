@@ -5,6 +5,7 @@ import java.util.Calendar;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.QueryOperators;
+import org.bson.Document;
 
 public class TimeTuple extends AbstractQueryTuple {
 	
@@ -65,7 +66,7 @@ public class TimeTuple extends AbstractQueryTuple {
 	 * 
 	 */
 	@Override
-	public void getDoucmentQuery(BasicDBObject query) {
+	public void getDoucmentQuery(Document query) {
         SimpleDateFormat sdf = new SimpleDateFormat( TimeTuple.SDF_DATE_FORMAT);
         
         String start = sdf.format(startTime.getTime());

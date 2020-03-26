@@ -19,6 +19,7 @@ package me.transit.dao.query.tuple;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bson.Document;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
@@ -95,7 +96,7 @@ public class PolygonBoxTuple extends AbstractQueryTuple {
 		return rtn;
 	}
 	
-	public void getDoucmentQuery(BasicDBObject query) {
+	public void getDoucmentQuery(Document query) {
 				
         
 		List<Double[]> list = new ArrayList<Double[]>();

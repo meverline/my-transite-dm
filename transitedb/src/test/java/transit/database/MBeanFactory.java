@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import me.math.Vertex;
+import me.math.kdtree.MinBoundingRectangle;
 import org.meanbean.lang.Factory;
 
 import org.locationtech.jts.geom.Coordinate;
@@ -64,9 +66,24 @@ public class MBeanFactory {
 
 	public static class AgencyFactory implements Factory<Agency> {
 
+		protected final Vertex ul = new Vertex(38.941, -77.286);
+		private final Agency agency = new Agency();
+
+		public AgencyFactory() {
+			agency.setFareUrl("https://www.coursera.org/learn/blockchain-basics?authMode=login");
+			agency.setId("id");
+			agency.setLang("lang");
+			agency.setName("name");
+			agency.setPhone("703-123-4567");
+			agency.setTimezone("EST");
+			agency.setUUID(100L);
+			agency.setVersion("0.5");
+			agency.setMBR((new MinBoundingRectangle(ul)).toPolygon());
+		}
+
 		@Override
 		public Agency create() {
-			return new Agency();
+			return agency;
 		}
 	}
 

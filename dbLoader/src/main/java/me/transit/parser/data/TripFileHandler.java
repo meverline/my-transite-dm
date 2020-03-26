@@ -90,8 +90,6 @@ public class TripFileHandler extends AbstractFileHandler {
 
 				Trip trip = new Trip();
 
-				trip.setAgency(getBlackboard().getAgency());
-
 				if (indexMap.containsKey("route_id")) {
 					routeId = data[indexMap.get("route_id")].replace('"', ' ').trim();
 
@@ -151,7 +149,6 @@ public class TripFileHandler extends AbstractFileHandler {
 					tripList.add(trip);
 				}
 
-				trip.setAgency(getBlackboard().getAgency());
 				getBlackboard().getTripMap().put(trip.getId(), new RouteTripPair(routeId, tripToUse));
 			}
 			inStream.close();

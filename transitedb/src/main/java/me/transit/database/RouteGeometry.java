@@ -1,6 +1,5 @@
 package me.transit.database;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorValue;
@@ -13,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.locationtech.jts.geom.Geometry;
@@ -23,14 +24,17 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import me.transit.annotation.GTFSSetter;
-import me.transit.json.AgencyToString;
 import me.transit.json.Base64StringToGeometry;
 import me.transit.json.GeometryToBase64String;
+
+import java.util.Objects;
 
 @Entity
 @Table(name="tran_route_geometry")
 @DiscriminatorColumn(name = "routeGeometry_type")
 @DiscriminatorValue("RouteGeometry")
+@JsonTypeInfo(use= JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
+@JsonFilter("agencyFilter")
 public class RouteGeometry implements TransitData {
 
 	private static final long serialVersionUID = 1L;
@@ -75,7 +79,6 @@ public class RouteGeometry implements TransitData {
 	 * @see me.transit.database.impl.RouteGeometry#getAgency()
 	 */
 	@JsonGetter("agency_name")
-	@JsonSerialize(converter = AgencyToString.class)
 	public Agency getAgency() {
 		return agency;
 	}
@@ -163,5 +166,21 @@ public class RouteGeometry implements TransitData {
 		}
 		return true;
 	}
-	
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		RouteGeometry that = (RouteGeometry) o;
+		return uuid == that.uuid &&
+				Objects.equals(agency, that.agency) &&
+				Objects.equals(id, that.id) &&
+				Objects.equals(version, that.version) &&
+				Objects.equals(shape, that.shape);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(uuid, agency, id, version, shape);
+	}
 }
