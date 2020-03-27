@@ -13,6 +13,6 @@ int SimpleInterest(int P,int T,int R)
 
 int main() {
 	
-	cout << SimpleInterest(1000, 2, 13) << '\n';
+	cout << SimpleInterest(1000, 2, 13) << endl;
 	return 0;
 }
