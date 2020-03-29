@@ -1,2 +1,0 @@
-agency_id,agency_name,agency_url,agency_timezone,agency_lang,agency_phone,agency_fare_url
-ACT,Allegany County Transit,http://gov.allconet.org/act,America/New_York,en,(301)722-6360,http://gov.allconet.org/ACT/generalinfo.html

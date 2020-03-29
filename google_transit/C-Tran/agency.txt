@@ -1,2 +1,0 @@
-agency_id,agency_name,agency_url,agency_timezone,agency_phone,agency_lang
-ctran,Cary Transit,http://www.townofcary.org/Departments/Planning_Department/Transportation/C-Tran.htm,America/New_York,(919)485-RIDE,en

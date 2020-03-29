@@ -1,2 +1,0 @@
-agency_id,agency_name,agency_url,agency_timezone,agency_phone,agency_lang
-cht,Chapel Hill Transit,http://www.chtransit.org,America/New_York,(919)969-4900,en

@@ -1,2 +1,0 @@
-agency_id,agency_name,agency_url,agency_timezone,agency_phone,agency_lang
-tta,Triangle Transit,http://www.triangletransit.org,America/New_York,(919)485-RIDE,en

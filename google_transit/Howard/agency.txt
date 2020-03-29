@@ -1,2 +1,0 @@
-agency_id,agency_name,agency_url,agency_timezone,agency_lang,agency_phone
-1,Maryland Transit Administration,http://www.mta.maryland.gov,America/New_York,en,410-539-5000

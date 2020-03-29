@@ -1,5 +1,0 @@
-service_id,monday,tuesday,wednesday,thursday,friday,saturday,sunday,start_date,end_date
-regular,1,1,1,1,1,0,0,20120904,20180101
-nonfsu,0,1,0,0,0,0,0,20121220,20130122
-fsu,1,1,1,1,1,0,0,20130123,20130517
-tuesfri,0,1,0,0,1,0,0,20120904,20180101

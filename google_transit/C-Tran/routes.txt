@@ -1,7 +1,0 @@
-route_id,agency_id,route_short_name,route_long_name,route_desc,route_type,route_url,route_color,route_text_color
-1,ctran,1,Maynard Road (Clockwise),,3,http://www.townofcary.org/Departments/Planning_Department/Transportation/C-Tran/Fixed_Route_Service.htm,FF9900,
-2,ctran,2,Maynard Road (Counter-Clockwise),,3,http://www.townofcary.org/Departments/Planning_Department/Transportation/C-Tran/Fixed_Route_Service.htm,FF9900,
-3,ctran,3,Harrison Avenue,,3,http://www.townofcary.org/Departments/Planning_Department/Transportation/C-Tran/Fixed_Route_Service.htm,FF9900,
-4,ctran,4,High House Road,,3,http://www.townofcary.org/Departments/Planning_Department/Transportation/C-Tran/Fixed_Route_Service.htm,FF9900,
-5,ctran,5,Kildaire Farm Road,,3,http://www.townofcary.org/Departments/Planning_Department/Transportation/C-Tran/Fixed_Route_Service.htm,FF9900,
-6,ctran,6,Buck Jones Road,,3,http://www.townofcary.org/Departments/Planning_Department/Transportation/C-Tran/Fixed_Route_Service.htm,FF9900,

@@ -1,6 +1,0 @@
-route_id,agency_id,route_short_name,route_long_name,route_desc,route_type,route_url,route_color,route_text_color
-crx,ttaex,CRX,Chapel Hill-Raleigh Express,,3,http://triangletransit.org/bus/maps-and-schedules/#exp,458B00,
-drx,ttaex,DRX,Durham-Raleigh Express,,3,http://triangletransit.org/bus/maps-and-schedules/#exp,458B00,
-krx,ttaex,KRX,Knightdale-Raleigh Express (operated by CAT),,3,http://triangletransit.org/bus/maps-and-schedules/#exp,458B00,
-wrx,ttaex,WRX,Wake Forest-Raleigh Express (operated by CAT),,3,http://triangletransit.org/bus/maps-and-schedules/#exp,458B00,
-zwx,ttaex,ZWX,Zebulon-Wendell-Raleigh Express (operated by CAT),,3,http://triangletransit.org/bus/maps-and-schedules/#exp,458B00,

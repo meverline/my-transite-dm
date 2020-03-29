@@ -1,5 +1,0 @@
-service_id,monday,tuesday,wednesday,thursday,friday,saturday,sunday,start_date,end_date
-1,1,1,1,1,1,0,0,20120630,20130630
-2,0,0,0,0,0,1,0,20120630,20130630
-3,0,0,0,0,0,0,1,20120630,20130630
-101,0,0,0,0,0,0,0,20120630,20130630

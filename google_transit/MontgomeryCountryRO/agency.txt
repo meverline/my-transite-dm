@@ -1,2 +1,0 @@
-agency_id,agency_name,agency_url,agency_timezone,agency_lang,agency_phone
-MCRO,Montgomery County MD Ride On,http://www.montgomerycountymd.gov/content/dot/transit/index.asp,America/New_York,en,240-777-0311

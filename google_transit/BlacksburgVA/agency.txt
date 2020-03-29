@@ -1,2 +1,0 @@
-agency_id,agency_name,agency_url,agency_timezone,agency_lang,agency_phone
-"F1FB7E1D-9018-44B2-9016-8B624721B9E5","Blacksburg Transit","http://www.btransit.org/","America/New_York","en","540-961-1185"

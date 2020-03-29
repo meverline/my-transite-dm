@@ -1,2 +1,0 @@
-service_id,monday,tuesday,wednesday,thursday,friday,saturday,sunday,start_date,end_date
-SCHED EFF 11-08-2010,1,1,1,1,1,0,0,20101108,20140521

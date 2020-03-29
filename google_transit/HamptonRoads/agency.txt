@@ -1,2 +1,0 @@
-agency_name,agency_url,agency_timezone,agency_lang,agency_phone
-"Hampton Roads Transit (HRT)",http://www.gohrt.com/,America/New_York,EN,(757) 222-6100
