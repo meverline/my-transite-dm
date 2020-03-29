@@ -9,9 +9,7 @@ CREATE TABLE omd_locations
     pid bigint NOT NULL,
     title character varying(255) NOT NULL,
     name character varying(255) NOT NULL,
-    lat float4 NOT NULL,
-    lon float4 NOT NULL
-)
+    location geometry NOT NULL
     WITH (
         OIDS=FALSE
     );

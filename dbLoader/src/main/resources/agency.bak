@@ -1,6 +1,6 @@
 {
    "agencys" : [
-      { 
+      {
        "location" : "Arlington, VA, USA",
        "feed" : "USA: ART GTFS"
       },
@@ -11,6 +11,18 @@
       {
         "location" : "Alexandria, VA, USA",
         "feed" : "DASH Bus GTFS"
+      },
+      {
+        "location" : "Washington, DC, USA",
+        "feed" : "WMATA GTFS"
+      },
+      {
+        "location" : "Washington, DC, USA",
+        "feed" : "DC Circulator GTFS"
+      },
+      {
+        "location" : "Washington, DC, USA",
+        "feed" : "DC Streetcar GTFS"
       },
       {
         "location" : "Montgomery, MD, USA",

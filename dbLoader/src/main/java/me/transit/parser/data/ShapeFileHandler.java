@@ -73,7 +73,6 @@ public class ShapeFileHandler extends AbstractFileHandler {
 				if ( db.valid()) {
 					routeGeometryDao.save(db);
 					getBlackboard().getShapes().put(id, db);
-					log.info("saved route geometry: "+ db.getAgency() + " " + db.getId());
 				} else {
 					log.error("Invalid Shape: " + db.getAgency() + " " + db.getId());
 				}

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
@@ -133,7 +134,7 @@ public class DocumentDao extends IDocumentDao {
 	 */
 	protected Document toMongoObject(IDocument document) {
 		try {
-			String [] ignoreFields = { "agency_name" };
+			String [] ignoreFields = { "agency_name", "shape_id" };
 			FilterProvider filters = new SimpleFilterProvider()
 					.addFilter("agencyFilter", SimpleBeanPropertyFilter.serializeAllExcept(ignoreFields));
 
@@ -192,9 +193,9 @@ public class DocumentDao extends IDocumentDao {
 
 		List<AbstractDocument> rtn = new ArrayList<>();
 
-		getCollectoin(collection).find(query).forEach(new Block<Document>() {
+		getCollectoin(collection).find(query).forEach(new Consumer<Document>() {
 			@Override
-			public void apply(Document item) {
+			public void accept(Document item){
 				try {
 					Class<?> theClass = this.getClass().getClassLoader().loadClass((String) item.get("@class"));
 					AbstractDocument obj = (AbstractDocument) mapper.readValue(item.toJson(), theClass);
@@ -221,7 +222,7 @@ public class DocumentDao extends IDocumentDao {
 	 */
 	@Override
 	public long size(String collection) {
-		return getCollectoin(collection).count();
+		return getCollectoin(collection).countDocuments();
 	}
 
 }

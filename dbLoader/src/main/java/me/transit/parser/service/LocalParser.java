@@ -4,7 +4,10 @@ import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.Objects;
 
+import me.transit.parser.data.Blackboard;
 import me.transit.parser.omd.dao.LocationDao;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,12 +18,13 @@ import me.transit.parser.message.MessageAgency;
 import me.transit.parser.message.ParserMessage;
 
 public class LocalParser extends AbstractGTFSParser {
-	
-	IGraphDatabaseDAO graph;
+
+	private final Log log = LogFactory.getLog(getClass().getName());
+	private final IGraphDatabaseDAO graph;
 
 	@Autowired
-	public LocalParser(FileHandlerFactory factory, IGraphDatabaseDAO graphDatabase, LocationDao locationDao) {
-		super(factory, locationDao);
+	public LocalParser(FileHandlerFactory factory, IGraphDatabaseDAO graphDatabase, LocationDao locationDao, Blackboard blackboard) {
+		super(factory, locationDao, blackboard);
 		this.graph = Objects.requireNonNull(graphDatabase, "graphDatabase can not be null");
 		
 	}
@@ -35,8 +39,13 @@ public class LocalParser extends AbstractGTFSParser {
 		if (inStream != null) {
 			try {
 				ParserMessage fr = new ObjectMapper().readValue(inStream, ParserMessage.class);
+
 				for ( MessageAgency agency : fr.getAgencys()) {
-					parseFeeds(agency);
+					if ( this.doesExist(agency)) {
+						parseFeeds(agency);
+					} else {
+					   log.warn("unable to find: " + agency);
+					}
 				}
 			} catch (Exception e) {
 				getLog().error(e.getLocalizedMessage());

@@ -23,6 +23,7 @@ import com.mongodb.BasicDBObject;
 import me.crime.database.Crime;
 import me.transit.dao.query.tuple.AbstractQueryTuple;
 import me.transit.dao.query.tuple.Tuple;
+import org.bson.Document;
 
 public class EndDateTuple extends AbstractQueryTuple {
 
@@ -53,7 +54,7 @@ public class EndDateTuple extends AbstractQueryTuple {
 	}
 
 	@Override
-	public void getDoucmentQuery(BasicDBObject query) {
+	public void getDoucmentQuery(Document query) {
 		throw new UnsupportedOperationException();
 	}
 }

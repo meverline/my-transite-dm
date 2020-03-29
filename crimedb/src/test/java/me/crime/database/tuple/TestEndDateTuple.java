@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 
 import java.util.Calendar;
 
+import org.bson.Document;
 import org.easymock.EasyMock;
 import org.easymock.EasyMockRule;
 import org.easymock.EasyMockSupport;
@@ -32,7 +33,7 @@ public class TestEndDateTuple extends EasyMockSupport {
 	public void testGetDoucmentQuery() {
 		
 		try {
-			BasicDBObject mongo = new BasicDBObject();
+			Document mongo = new Document();
 			EndDateTuple obj = new EndDateTuple(start);	
 			
 			obj.getDoucmentQuery(mongo);

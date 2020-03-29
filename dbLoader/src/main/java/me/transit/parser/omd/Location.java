@@ -9,13 +9,21 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import me.transit.json.Base64StringToGeometry;
+import me.transit.json.GeometryToBase64String;
+import me.transit.parser.omd.dao.json.GeometryFixer;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+import org.locationtech.jts.geom.Point;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
 @Table(name = "omd_locations")
+@JsonDeserialize(converter = GeometryFixer.class)
 public class Location implements Comparable<Location>, Serializable {
 	
 	@SuppressWarnings("unused")
@@ -28,22 +36,23 @@ public class Location implements Comparable<Location>, Serializable {
 	private long uuid = -1;
 	
 	@Column(name = "ID", nullable = false)
-	private int id;
+	private int id = -1;
 	
 	@Column(name = "PID", nullable = false)
-	private int pid;
+	private int pid = -1;
 	
 	@Column(name = "TITLE", nullable = false)
-	private String title;
+	private String title = null;
 	
 	@Column(name = "NAME", nullable = false)
-	private String name;
-	
-	@Column(name = "LAT", nullable = false)
-	private double lat;
-	
-	@Column(name = "LON", nullable = false)
-	private double lon;
+	private String name = null;
+
+	private transient double lat = -1.0;
+	private transient double lon = -1.0;
+
+	@Column(name = "LOCATION", columnDefinition = "Geometry")
+	@Type(type="jts_geometry")
+	private Point location = null;
 	/**
 	 * @return the id
 	 */
@@ -128,7 +137,17 @@ public class Location implements Comparable<Location>, Serializable {
 	public void setLon(double lon) {
 		this.lon = lon;
 	}
-	
+
+	@JsonGetter("location")
+	@JsonSerialize(converter = GeometryToBase64String.class)
+	public Point getLocation() {  return location;  }
+
+	@JsonSetter("location")
+	@JsonDeserialize(converter = Base64StringToGeometry.class)
+	public void setLocation(Point location) {
+		this.location = location;
+	}
+
 	/**
 	 * 
 	 */
@@ -149,8 +168,7 @@ public class Location implements Comparable<Location>, Serializable {
 				", pid=" + pid +
 				", title='" + title + '\'' +
 				", name='" + name + '\'' +
-				", lat=" + lat +
-				", lon=" + lon +
+				", location=" + location +
 				'}';
 	}
 
@@ -162,15 +180,14 @@ public class Location implements Comparable<Location>, Serializable {
 		return uuid == location.uuid &&
 				id == location.id &&
 				pid == location.pid &&
-				Double.compare(location.lat, lat) == 0 &&
-				Double.compare(location.lon, lon) == 0 &&
+				Objects.equals(location.location, this.location) &&
 				Objects.equals(title, location.title) &&
 				Objects.equals(name, location.name);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(uuid, id, pid, title, name, lat, lon);
+		return Objects.hash(uuid, id, pid, title, name, location);
 	}
 
 }

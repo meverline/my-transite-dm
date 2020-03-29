@@ -2,6 +2,7 @@ package me.transit.parser.service;
 
 import java.util.List;
 
+import me.transit.parser.data.Blackboard;
 import me.transit.parser.omd.dao.LocationDao;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -20,8 +21,8 @@ public class ParserService extends AbstractGTFSParser {
 	
 	
 	@Autowired
-	public ParserService(FileHandlerFactory factory, LocationDao locationDao) {
-		super(factory, locationDao);
+	public ParserService(FileHandlerFactory factory, LocationDao locationDao, Blackboard blackboard) {
+		super(factory, locationDao, blackboard);
 	}
 	
 	/**

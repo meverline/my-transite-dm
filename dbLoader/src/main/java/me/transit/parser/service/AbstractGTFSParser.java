@@ -3,12 +3,15 @@ package me.transit.parser.service;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import me.transit.parser.data.Blackboard;
 import me.transit.parser.omd.dao.LocationDao;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -26,14 +29,16 @@ public abstract class AbstractGTFSParser {
 	private final OpenMobilityData dataFeed = new OpenMobilityData();
 	private List<Location> locList = null;
 	private final Properties properties = new Properties();
-	private final  LocationDao locationDao;
+	private final LocationDao locationDao;
+	private final Blackboard blackboard;
 	/**
 	 * 
 	 */
-	protected AbstractGTFSParser(FileHandlerFactory factory, LocationDao locationDao) {
+	protected AbstractGTFSParser(FileHandlerFactory factory, LocationDao locationDao, Blackboard blackboard) {
 		
 		this.factory = Objects.requireNonNull(factory, "factory can not be null");
 		this.locationDao = Objects.requireNonNull(locationDao, "locationDao can not be null");
+		this.blackboard = Objects.requireNonNull(blackboard, "blackboard can not be null");
 		
 		try {
 			InputStream inStream =  getClass().getClassLoader().getResourceAsStream("ClassMap.properties");
@@ -86,7 +91,8 @@ public abstract class AbstractGTFSParser {
 	protected void parse(String diretory) throws Exception {
 		
 		String files[] = getProperties().get("order").toString().split(",");
-		
+
+		this.blackboard.reset();
 		for (String dataFile : files) {
 			getLog().info("parse: " + dataFile + " " + diretory);
 			String key = dataFile.trim();
@@ -106,6 +112,13 @@ public abstract class AbstractGTFSParser {
 	 */
 	protected void parseLocation(MessageAgency agency, Location loc) throws Exception {
 		Map<String, Feed> feeds = getDataFeed().getFeeds(loc.getPid());
+
+		String agencyName = agency.getLocation().replace(',', '_').replace(' ', '_');
+		File fp = new File("/Users/markeverline/tmp/Feeds_" + agencyName  + ".json");
+
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.writerWithDefaultPrettyPrinter().writeValue(fp, feeds);
+
 		if (feeds.containsKey(agency.getFeed())) {
 			String path = dataFeed.download(feeds.get(agency.getFeed()));
 
@@ -114,7 +127,7 @@ public abstract class AbstractGTFSParser {
 				this.getLog().info(path + " ... ");
 				this.parse(path);
 			} else {
-				log.warn("agency.txt not found for: " + loc);
+				log.warn("agency.txt not found for: " + loc + " pids found ");
 			}
 
 		}
@@ -153,6 +166,32 @@ public abstract class AbstractGTFSParser {
 				TimeUnit.MILLISECONDS.toSeconds(diff)
 						- TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(diff))));
 
+	}
+
+	public boolean doesExist(MessageAgency agency) throws SQLException {
+
+		Location location = locationDao.findByTitle(agency.getLocation());
+		if (location != null) {
+			return true;
+		}
+		else
+		{
+			for (Location loc : getLocList()) {
+				if (locationDao.findById(loc.getId()) == null) {
+					try {
+						locationDao.save(loc);
+					} catch (SQLException ex) {
+						log.error("Unable to save location: " + loc + " error " + ex.getLocalizedMessage());
+					}
+				}
+
+				if (loc.getTitle().equals(agency.getLocation())) {
+					return  true;
+				}
+			}
+		}
+
+		return false;
 	}
 	
 	/**

@@ -113,6 +113,18 @@ public class Feed {
 		this.latest = latest;
 	}
 
+	@Override
+	public String toString() {
+		return "Feed{" +
+				"id='" + id + '\'' +
+				", type='" + type + '\'' +
+				", agencyName='" + agencyName + '\'' +
+				", location=" + location +
+				", url=" + url +
+				", latest=" + latest +
+				'}';
+	}
+
 	//////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////
 
@@ -134,6 +146,13 @@ public class Feed {
 		@JsonSetter("ts")
 		public void setTimestamp(int timestamp) {
 			this.timestamp = timestamp;
+		}
+
+		@Override
+		public String toString() {
+			return "Latest{" +
+					"timestamp=" + timestamp +
+					'}';
 		}
 	}
 
@@ -178,5 +197,12 @@ public class Feed {
 			this.gtfsUrl = gtfsUrl;
 		}
 
+		@Override
+		public String toString() {
+			return "URL{" +
+					"website='" + website + '\'' +
+					", gtfsUrl='" + gtfsUrl + '\'' +
+					'}';
+		}
 	}
 }

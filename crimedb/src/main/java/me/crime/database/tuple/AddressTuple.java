@@ -21,6 +21,7 @@ import com.mongodb.BasicDBObject;
 import me.crime.database.Address;
 import me.transit.dao.query.tuple.AbstractQueryTuple;
 import me.transit.dao.query.tuple.Tuple;
+import org.bson.Document;
 
 
 public class AddressTuple extends AbstractQueryTuple {
@@ -47,7 +48,7 @@ public class AddressTuple extends AbstractQueryTuple {
 	}
 
 	@Override
-	public void getDoucmentQuery(BasicDBObject query) {
+	public void getDoucmentQuery(Document query) {
 		throw new UnsupportedOperationException();
 	}
 

@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 
 import java.util.Arrays;
 
+import org.bson.Document;
 import org.easymock.EasyMock;
 import org.easymock.EasyMockRule;
 import org.easymock.EasyMockSupport;
@@ -31,7 +32,7 @@ public class TestCatagoryTuple  extends EasyMockSupport {
 	public void testGetDoucmentQuery() {
 		
 		try {
-			BasicDBObject mongo = new BasicDBObject();
+			Document mongo = new Document();
 			CatagoryTuple obj = new CatagoryTuple(Arrays.asList(cats));	
 			
 			obj.getDoucmentQuery(mongo);

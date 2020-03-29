@@ -3,6 +3,7 @@ package me.crime.database.tuple;
 import static org.easymock.EasyMock.expect;
 import static org.junit.Assert.*;
 
+import org.bson.Document;
 import org.easymock.EasyMock;
 import org.easymock.EasyMockRule;
 import org.easymock.EasyMockSupport;
@@ -28,7 +29,7 @@ public class TestAddressTuple extends EasyMockSupport {
 		public void testGetDoucmentQuery() {
 			
 			try {
-				BasicDBObject mongo = new BasicDBObject();
+				Document mongo = new Document();
 				AddressTuple obj = new AddressTuple("3329 Caddy drive");	
 				
 				obj.getDoucmentQuery(mongo);
