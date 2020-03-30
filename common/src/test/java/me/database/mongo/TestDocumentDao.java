@@ -47,7 +47,7 @@ public class TestDocumentDao extends EasyMockSupport{
 	private void setUpMock() {
 		expect(writer.getDatabase(EasyMock.anyString())).andReturn(dbmock).anyTimes();
 		expect(dbmock.getCollection(EasyMock.anyString())).andReturn(collection).anyTimes();
-		expect(collection.count()).andReturn(new Long(3)).anyTimes();
+		expect(collection.countDocuments()).andReturn(new Long(3)).anyTimes();
 		
 		replayAll();
 	}
@@ -75,7 +75,7 @@ public class TestDocumentDao extends EasyMockSupport{
 		this.setUpMock();
 		DocumentDao doc = DocumentDao.class.cast(DocumentDao.instance(writer));
 		
-		String info[] = {
+		String [] info = {
 				"_id",
 				"@class"
 		};
@@ -93,7 +93,7 @@ public class TestDocumentDao extends EasyMockSupport{
 	@Test
 	public void testToDocField() throws UnknownHostException {
 				
-		String info[] = {
+		String [] info = {
 				"_id",
 				"@class",
 				"field1",
@@ -113,7 +113,7 @@ public class TestDocumentDao extends EasyMockSupport{
 	public static class TestB extends AbstractDocument {
 		
 		private String name = "Name";
-		private String array[] = { "a", "b", "c", "d" };
+		private String [] array = { "a", "b", "c", "d" };
 		private List<String> data = Arrays.asList(array);
 
 		@JsonGetter("TestB.name")

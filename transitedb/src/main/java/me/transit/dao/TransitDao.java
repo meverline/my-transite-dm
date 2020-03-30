@@ -40,7 +40,6 @@ public abstract class TransitDao<T extends TransitData> extends AbstractHibernat
 	/* (non-Javadoc)
 	 * @see me.transit.dao.impl.TransitDao#findByAgency(me.transit.database.Agency)
 	 */
-	@SuppressWarnings("unchecked")
 	public  List<Long> findByAgency(Agency agency) throws SQLException {
 		
 		Session session = null;
@@ -50,7 +49,7 @@ public abstract class TransitDao<T extends TransitData> extends AbstractHibernat
 
 			session = getSession();
 			CriteriaBuilder builder = session.getCriteriaBuilder();
-			CriteriaQuery<?> crit = builder.createQuery(this.getDaoClass());
+			CriteriaQuery<Long> crit = builder.createQuery(Long.class);
 			
 			Root<T> root = (Root<T>) crit.from(this.getDaoClass());
 			crit.select(root.get("id"));
@@ -58,7 +57,7 @@ public abstract class TransitDao<T extends TransitData> extends AbstractHibernat
 				builder.equal(root.get("agency").get("name"), agency.getName())
 			);
 			
-			alist = (List<Long>) session.createQuery(crit).getResultList();				
+			alist = session.createQuery(crit).getResultList();
 		
 		} catch (HibernateException ex) {
 			getLog().error(ex.getLocalizedMessage(), ex);
@@ -103,8 +102,7 @@ public abstract class TransitDao<T extends TransitData> extends AbstractHibernat
 			if ( aList.size() < 1 ) {
 				getLog().info(" Unable to find Id: " + id + " agency " + agencyName);
 			} else {
-				rtn = (T) aList.get(0);
-				this.initObject(rtn);
+				rtn = aList.get(0);
 			}
 
 		} catch (Exception ex) {

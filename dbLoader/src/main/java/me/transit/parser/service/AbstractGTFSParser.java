@@ -90,7 +90,7 @@ public abstract class AbstractGTFSParser {
 	 */
 	protected void parse(String diretory) throws Exception {
 		
-		String files[] = getProperties().get("order").toString().split(",");
+		String [] files = getProperties().get("order").toString().split(",");
 
 		this.blackboard.reset();
 		for (String dataFile : files) {
@@ -111,10 +111,15 @@ public abstract class AbstractGTFSParser {
 	 * @throws Exception
 	 */
 	protected void parseLocation(MessageAgency agency, Location loc) throws Exception {
+		final String dirRoot = "/Users/markeverline/tmp";
 		Map<String, Feed> feeds = getDataFeed().getFeeds(loc.getPid());
 
 		String agencyName = agency.getLocation().replace(',', '_').replace(' ', '_');
-		File fp = new File("/Users/markeverline/tmp/Feeds_" + agencyName  + ".json");
+		File dir = new File(dirRoot);
+		if ( ! dir.exists() ) {
+			dir.mkdirs();
+		}
+		File fp = new File(dirRoot + "/Feeds_" + agencyName  + ".json");
 
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.writerWithDefaultPrettyPrinter().writeValue(fp, feeds);
