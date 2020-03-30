@@ -2,7 +2,7 @@
    "agencys" : [
       { 
        "location" : "Arlington, VA, USA",
-       "feed" : "USA: ART GTFS"
+       "feed" : "ART GTFS"
       },
       {
         "location" : "Fairfax, VA, USA",

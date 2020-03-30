@@ -34,7 +34,11 @@ public class StopTimeFileHandler extends AbstractFileHandler {
 	private TransiteStopDao transiteStopDao;
 
 	/**
-	 * 
+	 *
+	 * @param routeDao
+	 * @param transiteStopDao
+	 * @param documentDao
+	 * @param graphDatabase
 	 * @param blackboard
 	 */
 	@Autowired
@@ -57,13 +61,12 @@ public class StopTimeFileHandler extends AbstractFileHandler {
 
 	/**
 	 * 
-	 * @param stopMap
-	 * @return
+	 * @param tripMap
 	 */
 	private void xrefStopToRoutes(HashMap<String, List<Trip>> tripMap) {
 
 		for (Entry<String, List<Trip>> entry : tripMap.entrySet()) {
-			Map<String, TransitStop> stopIds = new HashMap<String, TransitStop>();
+			Map<String, TransitStop> stopIds = new HashMap<>();
 			try {
 				Route route = this.routeDao.loadById(entry.getKey(), getBlackboard().getAgencyName());
 
@@ -109,7 +112,6 @@ public class StopTimeFileHandler extends AbstractFileHandler {
 
 		}
 
-		return;
 	}
 
 	/*
@@ -135,93 +137,95 @@ public class StopTimeFileHandler extends AbstractFileHandler {
 				return false;
 			}
 
-			List<String> header = new ArrayList<String>();
+			List<String> header = new ArrayList<>();
 			Map<String, Integer> indexMap = processHeader(inStream.readLine(), header);
 			log.info(header);
 
 			long lineCnt = 0;
 			long cnt = 0;
 
-			RouteTripPair routeTripPair = null;
-			StopTime stopTime = null;
-
 			while (inStream.ready()) {
 
-				Boolean newStop = false;
+				boolean newStop = false;
 				String line = inStream.readLine();
 				if (line.trim().length() > 0 && line.indexOf(',') != -1) {
-					String data[] = line.split(",");
+					String [] data = line.split(",");
 
-					String id = data[indexMap.get("trip_id")].replace('"', ' ').trim();
-					routeTripPair = getBlackboard().getTripMap().get(id);
-					if (routeTripPair == null) {
-						log.error("Unkonwn trip: " + id);
-					}
+					try {
+						String id = data[indexMap.get("trip_id")].trim();
+						RouteTripPair routeTripPair = getBlackboard().getTripMap().get(id);
+						if (routeTripPair == null) {
+							log.error("Unkonwn trip: " + id);
+						} else {
 
-					if (indexMap.containsKey("stop_id") && data[indexMap.get("stop_id")] != null) {
-						String stopId = data[indexMap.get("stop_id")].replace('"', ' ').trim();
-						stopTime = routeTripPair.getTrip().findStopTimeById(stopId);
-						if (stopTime == null) {
-							stopTime = new StopTime();
-							stopTime.setStopId(stopId);
-							newStop = true;
-							routeTripPair.getTrip().addStopTime(stopTime);
-						}
+							if (indexMap.containsKey("stop_id") && data[indexMap.get("stop_id")] != null) {
+								String stopId = data[indexMap.get("stop_id")].replace('"', ' ').trim();
+								StopTime stopTime = routeTripPair.getTrip().findStopTimeById(stopId);
+								if (stopTime == null) {
+									stopTime = new StopTime();
+									stopTime.setStopId(stopId);
+									newStop = true;
+									routeTripPair.getTrip().addStopTime(stopTime);
+								}
 
-					}
 
-					if (indexMap.containsKey("arrival_time") && data[indexMap.get("arrival_time")] != null) {
-						String time[] = data[indexMap.get("arrival_time")].trim().split(":");
-						StringBuilder builder = new StringBuilder();
-						for (String str : time) {
-							builder.append(str);
-						}
-						if (builder.toString().length() > 0) {
-							stopTime.addArrivalTime(Long.parseLong(builder.toString().replace('"', ' ').trim()));
-						}
-					}
+								if (indexMap.containsKey("arrival_time") && data[indexMap.get("arrival_time")] != null) {
+									String[] time = data[indexMap.get("arrival_time")].trim().split(":");
+									StringBuilder builder = new StringBuilder();
+									for (String str : time) {
+										builder.append(str);
+									}
+									if (builder.toString().length() > 0) {
+										stopTime.addArrivalTime(Long.parseLong(builder.toString().replace('"', ' ').trim()));
+									}
+								}
 
-					if (!newStop) {
-						if (indexMap.containsKey("drop_off_type")) {
-							try {
-								int ndx = Integer
-										.parseInt(data[indexMap.get("drop_off_type")].replace('"', ' ').trim());
-								stopTime.setDropOffType(StopTime.PickupType.values()[ndx]);
-							} catch (Exception ex) {
-								log.error("Unknown Dropoff Type: ");
+								if (!newStop) {
+									if (indexMap.containsKey("drop_off_type")) {
+										try {
+											int ndx = Integer
+													.parseInt(data[indexMap.get("drop_off_type")].replace('"', ' ').trim());
+											stopTime.setDropOffType(StopTime.PickupType.values()[ndx]);
+										} catch (Exception ex) {
+											log.error("Unknown Dropoff Type: ");
+										}
+									}
+
+									if (indexMap.containsKey("pickup_type")) {
+										try {
+											int ndx = Integer.parseInt(data[indexMap.get("pickup_type")].replace('"', ' ').trim());
+											stopTime.setPickupType(StopTime.PickupType.values()[ndx]);
+										} catch (Exception ex) {
+											log.error("Unknown Pickup Type: ");
+										}
+									}
+
+									if (indexMap.containsKey("stop_headsign")) {
+										stopTime.setStopHeadSign(data[indexMap.get("stop_headsign")].trim());
+									}
+
+								}
 							}
 						}
-
-						if (indexMap.containsKey("pickup_type")) {
-							try {
-								int ndx = Integer.parseInt(data[indexMap.get("pickup_type")].replace('"', ' ').trim());
-								stopTime.setPickupType(StopTime.PickupType.values()[ndx]);
-							} catch (Exception ex) {
-								log.error("Unknown Pickup Type: ");
-							}
+						lineCnt++;
+						cnt++;
+						if (cnt > 10000) {
+							log.info("parseStopTimes " + lineCnt + " ...");
+							cnt = 0;
 						}
-
-						if (indexMap.containsKey("stop_headsign")) {
-							stopTime.setStopHeadSign(data[indexMap.get("stop_headsign")].trim());
-						}
-					}
-
-					lineCnt++;
-					cnt++;
-					if (cnt > 10000) {
-						log.info("parseStopTimes " + lineCnt + " ...");
-						cnt = 0;
+					} catch ( Exception ex ) {
+						log.error(ex.getLocalizedMessage() + " : " + line + " : " + indexMap.toString());
 					}
 				}
 			}
 
 			inStream.close();
-			log.info("Found " + Long.toString(lineCnt) + " stops");
+			log.info("Found " + lineCnt + " stops");
 			log.info("parseStopTimes:build routeToTrip map " + getBlackboard().getTripMap().size());
-			HashMap<String, List<Trip>> routeToTrips = new HashMap<String, List<Trip>>();
+			HashMap<String, List<Trip>> routeToTrips = new HashMap<>();
 			for (RouteTripPair pair : getBlackboard().getTripMap().values()) {
 				if (!routeToTrips.containsKey(pair.getRouteId())) {
-					routeToTrips.put(pair.getRouteId(), new ArrayList<Trip>());
+					routeToTrips.put(pair.getRouteId(), new ArrayList<>());
 				}
 				List<Trip> list = routeToTrips.get(pair.getRouteId());
 				if (!list.contains(pair.getTrip())) {

@@ -90,66 +90,71 @@ public class TripFileHandler extends AbstractFileHandler {
 
 				Trip trip = new Trip();
 
-				if (indexMap.containsKey("route_id")) {
-					routeId = data[indexMap.get("route_id")].replace('"', ' ').trim();
+				try {
+					if (indexMap.containsKey("route_id")) {
+						routeId = data[indexMap.get("route_id")].replace('"', ' ').trim();
 
-					if (!routeToTrips.containsKey(routeId)) {
-						routeToTrips.put(routeId, new ArrayList<>());
-					}
-				}
-
-				if (indexMap.containsKey("trip_id")) {
-					String id = data[indexMap.get("trip_id")].trim();
-					trip.setId(id);
-				}
-
-				if (indexMap.containsKey("service_id")) {
-					String id = data[indexMap.get("service_id")].trim();
-
-					if (getBlackboard().getService().get(id) != null) {
-						trip.setService(getBlackboard().getService().get(id));
-					} else {
-						if (!invalidService.contains(id)) {
-							log.error("Invalid trip service id: " + id + " route: " + routeId);
-							invalidService.add(id);
+						if (!routeToTrips.containsKey(routeId)) {
+							routeToTrips.put(routeId, new ArrayList<>());
 						}
 					}
-				}
 
-				if (indexMap.containsKey("trip_headsign")) {
-					trip.setHeadSign(data[indexMap.get("trip_headsign")].trim());
-				}
-
-				if (indexMap.containsKey("direction_id")) {
-					try {
-						int id = Integer.parseInt(data[indexMap.get("direction_id")].trim());
-						Trip.DirectionType[] type = Trip.DirectionType.values();
-						trip.setDirectionId(type[id]);
-					} catch (Exception e) {
+					if (indexMap.containsKey("trip_id")) {
+						String id = data[indexMap.get("trip_id")].trim();
+						trip.setId(id);
 					}
-				}
 
-				if (indexMap.containsKey("shape_id") && data.length > indexMap.get("shape_id")) {
-					String id = data[indexMap.get("shape_id")].trim();
-					trip.setShape(getBlackboard().getShapes().get(id));
-				}
+					if (indexMap.containsKey("service_id")) {
+						String id = data[indexMap.get("service_id")].trim();
 
-				List<Trip> tripList = routeToTrips.get(routeId);
-				Trip tripToUse = trip;
-				boolean found = false;
-				for (Trip item : tripList) {
-					if (item.equals(trip)) {
-						tripToUse = item;
-						found = true;
-						break;
+						if (getBlackboard().getService().get(id) != null) {
+							trip.setService(getBlackboard().getService().get(id));
+						} else {
+							if (!invalidService.contains(id)) {
+								log.error("Invalid trip service id: " + id + " route: " + routeId);
+								invalidService.add(id);
+							}
+						}
 					}
-				}
 
-				if (!found) {
-					tripList.add(trip);
-				}
+					if (indexMap.containsKey("trip_headsign")) {
+						trip.setHeadSign(data[indexMap.get("trip_headsign")].trim());
+					}
 
-				getBlackboard().getTripMap().put(trip.getId(), new RouteTripPair(routeId, tripToUse));
+					if (indexMap.containsKey("direction_id")) {
+						try {
+							int id = Integer.parseInt(data[indexMap.get("direction_id")].trim());
+							Trip.DirectionType[] type = Trip.DirectionType.values();
+							trip.setDirectionId(type[id]);
+						} catch (Exception e) {
+						}
+					}
+
+					if (indexMap.containsKey("shape_id") && data.length > indexMap.get("shape_id")) {
+						String id = data[indexMap.get("shape_id")].trim();
+						trip.setShape(getBlackboard().getShapes().get(id));
+					}
+
+					List<Trip> tripList = routeToTrips.get(routeId);
+					Trip tripToUse = trip;
+					boolean found = false;
+					for (Trip item : tripList) {
+						if (item.equals(trip)) {
+							tripToUse = item;
+							found = true;
+							break;
+						}
+					}
+
+					if (!found) {
+						tripList.add(trip);
+					}
+
+					getBlackboard().getTripMap().put(trip.getId(), new RouteTripPair(routeId, tripToUse));
+
+				} catch ( Exception ex ) {
+					log.error(ex.getLocalizedMessage() + " : " + line + " : " + indexMap.toString());
+				}
 			}
 			inStream.close();
 
