@@ -10,7 +10,7 @@ CREATE TABLE omd_locations
     title character varying(255) NOT NULL,
     name character varying(255) NOT NULL,
     location geometry NOT NULL
-    WITH (
+)   WITH (
         OIDS=FALSE
     );
 ALTER TABLE omd_locations OWNER TO postgres;
