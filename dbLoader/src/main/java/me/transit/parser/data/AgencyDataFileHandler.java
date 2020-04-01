@@ -61,4 +61,16 @@ public class AgencyDataFileHandler extends AbstractDefaultFileHandler {
 	protected void setAgency(Object obj, Agency agency) {
 
 	}
+
+	@Override
+	public void endProcess() {
+		Agency agency = this.getBlackboard().getAgency();
+		log.info(agency.getName() + " " + agency.getUUID() + " saving mbr " + this.getBlackboard().getMBR());
+		agency.setMBR(this.getBlackboard().getMBR().toPolygon());
+		try {
+			this.save(agency);
+		} catch (SQLException e) {
+			log.error("Unable to save agency MBR" + e.getLocalizedMessage());
+		}
+	}
 }

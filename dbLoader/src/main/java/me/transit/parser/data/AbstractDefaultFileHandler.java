@@ -123,13 +123,7 @@ public abstract class AbstractDefaultFileHandler extends AbstractFileHandler {
 	 * @param obj
 	 */
 	private void handleCoordinate(String lat, String lon, DataSaver saver, Object obj) {
-		StringBuilder coord = new StringBuilder();
-
-		coord.append(lat);
-		coord.append(",");
-		coord.append(lon);
-		saver.save(obj, coord.toString());
-		return;
+		saver.save(obj, lat + "," + lon);
 	}
 
 	/**
@@ -138,7 +132,7 @@ public abstract class AbstractDefaultFileHandler extends AbstractFileHandler {
 	 * @return
 	 */
 	private List<String> breakLine(String aLine) {
-		List<String> array = new ArrayList<String>();
+		List<String> array = new ArrayList<>();
 		String token = aLine;
 		boolean hasToken = true;
 		while (hasToken) {
@@ -179,22 +173,22 @@ public abstract class AbstractDefaultFileHandler extends AbstractFileHandler {
 	 * @throws NoSuchMethodException
 	 */
 	private List<DataSaver> mapMethods(String header, String type, Class<?> objClass) throws NoSuchMethodException {
-		List<DataSaver> rtn = new ArrayList<DataSaver>();
+		List<DataSaver> rtn = new ArrayList<>();
 
 		Map<String, Method> methodMap = getClassMethodMap().get(objClass.getName());
 
-		List<String> order = new ArrayList<String>();
+		List<String> order = new ArrayList<>();
 		processHeader(header, order);
 
 		for (String name : order) {
 
-			String setMethodName = name;
+			String setMethodName = name.trim();
 			if (name.compareTo(AbstractDefaultFileHandler.LATITUDE) == 0 || name.compareTo(AbstractDefaultFileHandler.LONGITUDE) == 0) {
 				setMethodName = AbstractDefaultFileHandler.LOCATION;
 			}
 			
 			if (!methodMap.containsKey(setMethodName)) {
-				throw new NoSuchMethodException(setMethodName + " class: " + objClass.getName() + " " + name);
+				throw new NoSuchMethodException(setMethodName + " class: " + objClass.getName() + " |" + name  + "| have " + methodMap.keySet().toString());
 			}
 
 			rtn.add(new DataSaver(methodMap.get(setMethodName), setMethodName, this.getBlackboard(), name, dataConverterFactory));
@@ -246,6 +240,7 @@ public abstract class AbstractDefaultFileHandler extends AbstractFileHandler {
 			Class objClass = this.getProperties().get(type);
 			if ( objClass == null ) {
 				log.error("unable to find: " + type + " " + this.getProperties());
+				return false;
 			}
 			List<DataSaver> header = mapMethods(line, getType(filePath), objClass);
 
@@ -268,7 +263,7 @@ public abstract class AbstractDefaultFileHandler extends AbstractFileHandler {
 						if (outData.length() > 0) {
 							if (saver.getField().compareTo(AbstractDefaultFileHandler.LATITUDE) == 0) {
 								lat = outData;
-								if (lat != null && lon != null) {
+								if (lon != null) {
 									handleCoordinate(lat, lon, saver, obj);
 								}
 							} else if (saver.getField().compareTo(AbstractDefaultFileHandler.LOCATION) == 0) {

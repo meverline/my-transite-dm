@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -34,8 +35,7 @@ public class OpenMobilityData {
 	private int lastPid = -1;
 
 	/**
-	 * 
-	 * @param url
+	 *
 	 */
 	public OpenMobilityData() {
 	}
@@ -96,7 +96,7 @@ public class OpenMobilityData {
 	 */
 	public List<Location> getLocations() {
 		List<Location> rtn = new ArrayList<>();
-		StringBuffer api = new StringBuffer(OpenMobilityData.BASE_URL);
+		StringBuilder api = new StringBuilder(OpenMobilityData.BASE_URL);
 		api.append("/getLocations?key=");
 		api.append(OpenMobilityData.API_KEY);
 
@@ -113,7 +113,7 @@ public class OpenMobilityData {
 	}
 	
 	private String pageFeed(int parentId, int page) {
-		StringBuffer api = new StringBuffer(OpenMobilityData.BASE_URL);
+		StringBuilder api = new StringBuilder(OpenMobilityData.BASE_URL);
 		api.append("/getFeeds?key=");
 		api.append(OpenMobilityData.API_KEY);
 		api.append("&location=");
@@ -194,7 +194,7 @@ public class OpenMobilityData {
 
 	/**
 	 * 
-	 * @param file
+	 * @param fileZip
 	 */
 	public void unzip(String dir, String fileZip) {
 		File file = new File(fileZip);
@@ -236,8 +236,80 @@ public class OpenMobilityData {
 		}
 
 	}
-	
-	
+
+	/**
+	 *
+	 * @param responseCode
+	 * @param connection
+	 * @return
+	 */
+	private HttpURLConnection isRedicrect(int responseCode, HttpURLConnection connection) throws IOException {
+		HttpURLConnection rtn = null;
+		if ( responseCode == HttpURLConnection.HTTP_MOVED_PERM ||
+				responseCode == HttpURLConnection.HTTP_MOVED_TEMP ||
+		        responseCode == HttpURLConnection.HTTP_SEE_OTHER) {
+			String newUrl = connection.getHeaderField("Location");
+			log.info("Redirect to url: " + newUrl);
+			rtn = (HttpURLConnection) new URL(newUrl).openConnection();
+
+		}
+		return rtn;
+	}
+
+	/**
+	 *
+	 * @param fileURL
+	 * @param saveDir
+	 * @param httpConn
+	 * @return
+	 * @throws IOException
+	 */
+	private String downloadFile(String fileURL,  String saveDir, HttpURLConnection httpConn) throws IOException {
+
+		String fileName = "";
+		String disposition = httpConn.getHeaderField("Content-Disposition");
+
+		if (disposition != null) {
+			// extracts file name from header field
+			int index = disposition.indexOf("filename=");
+			if (index != -1) {
+				fileName = disposition.substring(index + 10,
+						disposition.length() - 1);
+			}
+		} else {
+			// extracts file name from URL
+			fileName = fileURL.substring(fileURL.lastIndexOf("/") + 1);
+		}
+
+		// opens input stream from the HTTP connection
+		InputStream inputStream = httpConn.getInputStream();
+		String  saveFilePath = saveDir + File.separator + fileName.replace(' ', '_');
+
+		// opens an output stream to save into file
+		FileOutputStream outputStream = new FileOutputStream(saveFilePath);
+
+		int bytesRead = -1;
+		long total = 0;
+		byte[] buffer = new byte[BUFFER_SIZE];
+		while ((bytesRead = inputStream.read(buffer)) != -1) {
+			outputStream.write(buffer, 0, bytesRead);
+			total += bytesRead;
+		}
+
+		outputStream.close();
+		inputStream.close();
+
+		log.info(String.format("File downloaded: %s size %d bytes",saveFilePath, total));
+
+		return saveFilePath;
+	}
+
+	/**
+	 *
+	 * @param fileURL
+	 * @param saveDir
+	 * @return
+	 */
 	private String downloadFile(String fileURL, String saveDir) {
 		
 		String saveFilePath = null;
@@ -245,48 +317,22 @@ public class OpenMobilityData {
         
         try {
             URL url = new URL(fileURL);
+
             httpConn = (HttpURLConnection) url.openConnection();
+            httpConn.setInstanceFollowRedirects(true);
 	        int responseCode = httpConn.getResponseCode();
 	 
 	        // always check HTTP response code first
 	        if (responseCode == HttpURLConnection.HTTP_OK) {
-	        	String fileName = "";
-	            String disposition = httpConn.getHeaderField("Content-Disposition");
-	 
-	            if (disposition != null) {
-	                // extracts file name from header field
-	                int index = disposition.indexOf("filename=");
-	                if (index != -1) {
-	                    fileName = disposition.substring(index + 10,
-	                            disposition.length() - 1);
-	                }
-	            } else {
-	                // extracts file name from URL
-	                fileName = fileURL.substring(fileURL.lastIndexOf("/") + 1,
-	                        fileURL.length());
-	            }
-	 	 
-	            // opens input stream from the HTTP connection
-	            InputStream inputStream = httpConn.getInputStream();
-	            saveFilePath = saveDir + File.separator + fileName.replace(' ', '_');
-	             
-	            // opens an output stream to save into file
-	            FileOutputStream outputStream = new FileOutputStream(saveFilePath);
-	 
-	            int bytesRead = -1;
-	            long total = 0;
-	            byte[] buffer = new byte[BUFFER_SIZE];
-	            while ((bytesRead = inputStream.read(buffer)) != -1) {
-	                outputStream.write(buffer, 0, bytesRead);
-	                total += bytesRead;
-	            }
-	 
-	            outputStream.close();
-	            inputStream.close();
-	 
-	            log.info(String.format("File downloaded: %s size %d bytes",saveFilePath, total));
+	        	saveFilePath = this.downloadFile(fileURL, saveDir, httpConn);
 	        } else {
-	        	log.info("No file to download. Server replied HTTP code: " + responseCode);
+
+				log.info("No file to download. Server replied HTTP code: " + responseCode);
+				HttpURLConnection redirectConn = this.isRedicrect(responseCode, httpConn);
+				if ( redirectConn != null ) {
+					saveFilePath = this.downloadFile(fileURL, saveDir, redirectConn);
+				}
+
 	        }
         } catch (IOException ex ) {
         	log.error(ex.getLocalizedMessage());
@@ -300,7 +346,7 @@ public class OpenMobilityData {
 
 	/**
 	 * 
-	 * @param url
+	 * @param feed
 	 */
 	public String download(Feed feed) {
 
@@ -326,7 +372,7 @@ public class OpenMobilityData {
 		String zipFile = this.downloadFile(feed.getUrl().getGtfsUrl(), fileName.toString());
 		if ( zipFile != null ) {
 			this.unzip(file.toString(), zipFile);
-			File fp = new File(zipFile.toString());
+			File fp = new File(zipFile);
 			fp.delete();
 		}
 		return file.getAbsolutePath();

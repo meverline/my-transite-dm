@@ -17,6 +17,7 @@ package me.math.kdtree;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
@@ -280,9 +281,8 @@ public class MinBoundingRectangle extends AbstractDocument implements Serializab
 	 */
 	@JsonIgnore
 	public Point getUpperLeft() {
-		Point pt = factory_.createPoint(new Coordinate(getTopLatDegress(),
+		return factory_.createPoint(new Coordinate(getTopLatDegress(),
 				getLeftLonDegress()));
-		return pt;
 	}
 
 	/**
@@ -291,9 +291,8 @@ public class MinBoundingRectangle extends AbstractDocument implements Serializab
 	 */
 	@JsonIgnore
 	public Point getLowerRight() {
-		Point pt = factory_.createPoint(new Coordinate(getBottomLatDegress(),
+		return  factory_.createPoint(new Coordinate(getBottomLatDegress(),
 				getRightLonDegress()));
-		return pt;
 	}
 
 	/**
@@ -302,7 +301,7 @@ public class MinBoundingRectangle extends AbstractDocument implements Serializab
 	 */
 	@JsonIgnore
 	public Polygon toPolygon() {
-		Coordinate coords[] = new Coordinate[5];
+		Coordinate [] coords = new Coordinate[5];
 
 		coords[0] = new Coordinate(getTopLatDegress(), getLeftLonDegress());
 		coords[1] = new Coordinate(getTopLatDegress(), getRightLonDegress());
@@ -312,28 +311,17 @@ public class MinBoundingRectangle extends AbstractDocument implements Serializab
 		return factory_.createPolygon(factory_.createLinearRing(coords), null);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
-		StringBuilder buf = new StringBuilder();
-
-		buf.append("MBR Top: ");
-		buf.append(getTopLatDegress());
-		buf.append(",");
-		buf.append(getLeftLonDegress());
-		buf.append(" Bottom: ");
-		buf.append(getBottomLatDegress());
-		buf.append(",");
-		buf.append(getRightLonDegress());
-		return buf.toString();
+		return "MinBoundingRectangle{" +
+				"bottomlatDegress_=" + bottomlatDegress_ +
+				", toplatDegress_=" + toplatDegress_ +
+				", leftlonDegress_=" + leftlonDegress_ +
+				", rightlonDegress_=" + rightlonDegress_ +
+				'}';
 	}
 
 
-	
 	/**
 	 * 
 	 * @param top
@@ -352,6 +340,22 @@ public class MinBoundingRectangle extends AbstractDocument implements Serializab
 	public void setBottom(List<Double> top) {
 		this.bottomlatDegress_ = top.get(0);
 		this.rightlonDegress_ = top.get(1);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		MinBoundingRectangle that = (MinBoundingRectangle) o;
+		return Double.compare(that.bottomlatDegress_, bottomlatDegress_) == 0 &&
+				Double.compare(that.toplatDegress_, toplatDegress_) == 0 &&
+				Double.compare(that.leftlonDegress_, leftlonDegress_) == 0 &&
+				Double.compare(that.rightlonDegress_, rightlonDegress_) == 0;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(bottomlatDegress_, toplatDegress_, leftlonDegress_, rightlonDegress_);
 	}
 
 }
