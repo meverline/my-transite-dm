@@ -1,35 +1,21 @@
 package me.transit.database;
 
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import me.transit.annotation.GTFSFileModel;
+import me.transit.annotation.GTFSSetter;
+import me.transit.json.Base64StringToGeometry;
+import me.transit.json.GeometryToBase64String;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.locationtech.jts.geom.Polygon;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
-import me.database.neo4j.AbstractGraphNode;
-import me.database.neo4j.FIELD;
-import me.transit.annotation.GTFSFileModel;
-import me.transit.annotation.GTFSSetter;
-import me.transit.json.Base64StringToGeometry;
-import me.transit.json.GeometryToBase64String;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name = "tran_agency")
@@ -37,7 +23,7 @@ import me.transit.json.GeometryToBase64String;
 @DiscriminatorValue("Agency")
 @GTFSFileModel(filename="agency.txt")
 @JsonTypeInfo(use= JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
-public class Agency extends AbstractGraphNode implements Serializable {
+public class Agency implements Serializable {
 
 	public static final String UUID = "uuid";
 	
@@ -305,13 +291,4 @@ public class Agency extends AbstractGraphNode implements Serializable {
 		return true;
 	}
 
-	@Override
-	public Map<String, String> getProperties(String agencyName) {
-		Map<String, String> node = new HashMap<>();
-	    node.put(FIELD.agency.name(), this.getName());
-	    node.put(FIELD.db_id.name(), this.getId());
-	    node.put(FIELD.className.name(), this.getClass().getName());		
-		return node;
-	}
-	
 }

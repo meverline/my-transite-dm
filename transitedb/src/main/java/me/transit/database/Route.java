@@ -19,13 +19,13 @@ import me.database.neo4j.FIELD;
 import me.transit.annotation.GTFSFileModel;
 import me.transit.annotation.GTFSSetter;
 
- @Entity
+@Entity
 @Table(name = "tran_route")
 @DiscriminatorColumn(name = "route_type")
 @DiscriminatorValue("Route")
 @GTFSFileModel(filename="routes.txt")
 @JsonTypeInfo(use= JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
-public class Route extends AbstractGraphNode implements TransitData, IRoute, IDocument {
+public class Route implements TransitData, IRoute, IDocument {
 	
 	public final static String TRIPLIST = "tripList";
 	public static final String SHORTNAME = "shortName";
@@ -341,29 +341,6 @@ public class Route extends AbstractGraphNode implements TransitData, IRoute, IDo
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Route#toDocument()
 	 */
-
-	/*
-	 * (non-Javadoc)
-	 * @see me.database.neo4j.IGraphNode#getProperties()
-	 */
-	@Override
-	public Map<String, String> getProperties(String agencyName) {
-		Map<String, String> node = new HashMap<>();
-		node.put(FIELD.route.name(), makeKey(agencyName));
-		node.put(FIELD.db_name.name(), this.getShortName());
-		node.put(FIELD.db_id.name(), this.getId());
-		node.put(FIELD.className.name(), this.getClass().getSimpleName());
-		return node;
-	}
-	
-	/*
-	 * (non-Javadoc)
-	 * @see me.database.neo4j.AbstractGraphNode#makeKey(me.transit.database.TransitData)
-	 */
-	@Override
-	public String makeKey(String agencyName) {
-		return getShortName() + "@" + getAgency().getName();
-	}
 
 	@Override
 	@Transient

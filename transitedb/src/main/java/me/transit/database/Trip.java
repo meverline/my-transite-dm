@@ -1,34 +1,18 @@
 package me.transit.database;
 
-import java.util.*;
-
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonFilter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import me.database.mongo.IDocument;
+import me.transit.annotation.GTFSFileModel;
+import me.transit.annotation.GTFSSetter;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.hibernate.annotations.GenericGenerator;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonSetter;
-
-import me.database.mongo.IDocument;
-import me.database.neo4j.AbstractGraphNode;
-import me.database.neo4j.FIELD;
-import me.transit.annotation.GTFSFileModel;
-import me.transit.annotation.GTFSSetter;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name="tran_trip")
@@ -37,7 +21,7 @@ import me.transit.annotation.GTFSSetter;
 @GTFSFileModel(filename="trips.txt")
 @JsonTypeInfo(use= JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
 @JsonFilter("agencyFilter")
-public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
+public class Trip implements TransitData, IDocument  {
 	
 	public static final String ID = "id";
 	public static final String SERVICE = "service";
@@ -345,36 +329,7 @@ public class Trip extends AbstractGraphNode implements TransitData, IDocument  {
 
 	public boolean valid() 
 	{
-		if ( this.getService() == null || this.getStopTimes().size() < 1 )
-		{
-			return false;
-		}
-		return true;
-	}
-	
-    /*
-     * (non-Javadoc)
-     * @see me.database.neo4j.IGraphNode#getProperties()
-     */
-	@Override
-	@JsonIgnore
-	public Map<String, String> getProperties(String agencyName) {
-		Map<String, String> node = new HashMap<>();
-		node.put(FIELD.trip.name(), makeKey(agencyName));
-		node.put(FIELD.db_name.name(), this.getHeadSign());
-		node.put(FIELD.className.name(), this.getClass().getSimpleName());
-		node.put(FIELD.direction.name(), this.getDirectionId().name());
-		node.put(FIELD.trip_headSign.name(), this.makeHeadSignKey(agencyName));
-		if (this.getShortName() != null) {
-			node.put(FIELD.db_id.name(), this.getShortName());
-		}
-		
-		return node;
-	}
-
-	@JsonIgnore
-	public String makeHeadSignKey(String agencyName) {
-		return getHeadSign() + "@" + agencyName;
+		return this.getService() == null || this.getStopTimes().size() < 1;
 	}
 
 }

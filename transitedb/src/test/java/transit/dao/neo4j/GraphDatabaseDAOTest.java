@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
 
+import me.database.neo4j.visitors.RouteVisitor;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.neo4j.graphdb.Node;
@@ -62,11 +63,12 @@ public class GraphDatabaseDAOTest {
 		route.setAgency(metro);
 
 		IGraphDatabaseDAO graph = GraphDatabaseDAO.instance("/User/data/test");
+		RouteVisitor visitor = new RouteVisitor(route);
 
 		for (String id : routeName) {
 
 			route.setShortName(id);
-			Node data = graph.findNodeByField(FIELD.route, route.makeKey(metro.getName()), Route.class);
+			Node data = graph.findNodeByField(FIELD.route, visitor.makeKey(metro.getName()), Route.class);
 
 			assertNotNull(data);
 		}

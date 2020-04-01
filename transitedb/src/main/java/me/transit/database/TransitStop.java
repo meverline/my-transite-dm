@@ -1,43 +1,21 @@
 package me.transit.database;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonTypeInfo;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
-import org.locationtech.jts.geom.Point;
-
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
-import me.database.neo4j.AbstractGraphNode;
-import me.database.neo4j.FIELD;
 import me.datamining.metric.IDataProvider;
 import me.transit.annotation.GTFSFileModel;
 import me.transit.annotation.GTFSSetter;
 import me.transit.json.Base64StringToGeometry;
 import me.transit.json.GeometryToBase64String;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+import org.locationtech.jts.geom.Point;
 
+import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "tran_stop")
@@ -45,7 +23,7 @@ import me.transit.json.GeometryToBase64String;
 @DiscriminatorValue("TransitStop")
 @GTFSFileModel(filename="stops.txt")
 @JsonTypeInfo(use= JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
-public class TransitStop extends AbstractGraphNode implements TransitData, IDataProvider  {
+public class TransitStop implements TransitData, IDataProvider  {
 	
 	public static final String STOP_NAME = "name";
 	public static final String LOCATION = "location";
@@ -379,28 +357,6 @@ public class TransitStop extends AbstractGraphNode implements TransitData, IData
 			return false;
 		}
 		return true;
-	}
-	
-	/*
-	 * (non-Javadoc)
-	 * @see me.database.neo4j.IGraphNode#getProperties()
-	 */
-	@Override
-	@JsonIgnore
-	public Map<String, String> getProperties(String agencyName) {
-		Map<String, String> node = new HashMap<>();
-		
-		node.put( FIELD.stop.name(), makeKey(agencyName));
-        node.put( FIELD.db_name.name(), this.getName());
-        node.put( FIELD.db_id.name(), this.getId());
-        node.put(FIELD.className.name(), this.getClass().getSimpleName());
-        node.put(FIELD.coordinate.name(),this.makeCoordinateKey());
-        return node;
-	}
-
-	@JsonIgnore
-	public String makeCoordinateKey() {
-		return  getLocation().getX() + ","+  getLocation().getY();
 	}
 
 	@Override

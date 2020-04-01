@@ -78,10 +78,4 @@ public interface IGraphDatabaseDAO {
 	 */
 	Node findNodeByField(FIELD fld, String key, Class<?> nodeClass);
 
-	/**
-	 * 
-	 * @return
-	 */
-	List<Node> allRelationships(REL_TYPES type, Node node);
-
 }

@@ -1,33 +1,30 @@
 package me.database.neo4j;
-
-import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
+import me.database.neo4j.visitors.AgencyVisitor;
+import me.database.neo4j.visitors.RouteVisitor;
+import me.database.neo4j.visitors.TransiteStopVisitor;
+import me.database.neo4j.visitors.TripVisitor;
+import me.transit.database.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.neo4j.graphdb.Direction;
-import org.neo4j.graphdb.GraphDatabaseService;
-import org.neo4j.graphdb.Label;
-import org.neo4j.graphdb.Node;
-import org.neo4j.graphdb.Path;
-import org.neo4j.graphdb.Relationship;
-import org.neo4j.graphdb.Transaction;
+import org.neo4j.graphdb.*;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.neo4j.graphdb.schema.IndexDefinition;
 import org.neo4j.graphdb.traversal.Evaluators;
 import org.neo4j.graphdb.traversal.TraversalDescription;
 
-import me.transit.database.Agency;
-import me.transit.database.Route;
-import me.transit.database.RouteStopData;
-import me.transit.database.TransitStop;
-import me.transit.database.Trip;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class GraphDatabaseDAO implements IGraphDatabaseDAO {
+
+	enum REL_TYPES implements RelationshipType {
+		HAS_STOP, AGENCY, LOCATION, HAS_A, HEAD_SIGN
+	}
 
 	private static IGraphDatabaseDAO theOne = null;
 	private final GraphDatabaseService graphDb;
@@ -59,12 +56,9 @@ public class GraphDatabaseDAO implements IGraphDatabaseDAO {
 		// Registers a shutdown hook for the Neo4j instance so that it
 		// shuts down nicely when the VM exits (even if you "Ctrl-C" the
 		// running application).
-		Runtime.getRuntime().addShutdownHook(new Thread() {
-			@Override
-			public void run() {
-				graphDb.shutdown();
-			}
-		});
+		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+			graphDb.shutdown();
+		}));
 	}
 	
 	/**
@@ -167,7 +161,7 @@ public class GraphDatabaseDAO implements IGraphDatabaseDAO {
 	 * @param agency
 	 * @return
 	 */
-	private Node addAgency(Agency agency) {
+	private Node addAgency(AgencyVisitor agency) {
 		Map<String, String> properites = agency.getProperties(agency.getName());
 		Node node = graphDb.createNode(Label.label(agency.getClass().getSimpleName()));
 		for (Entry<String, String> entry : properites.entrySet()) {
@@ -184,13 +178,13 @@ public class GraphDatabaseDAO implements IGraphDatabaseDAO {
 	 */
 	@Override
 	public Node addNode(Agency agency) {
-
+		AgencyVisitor visitor = new AgencyVisitor(agency);
 		Node node = null;
 		Transaction tx = beginTransaction();
 		try {
 			node = graphDb.findNode(Label.label(Agency.class.getName()), FIELD.agency.name(), agency.getName());
 			if (node == null) {
-				node = this.addAgency(agency);
+				node = this.addAgency(visitor);
 			}
 			tx.success();
 
@@ -211,29 +205,30 @@ public class GraphDatabaseDAO implements IGraphDatabaseDAO {
 	 */
 	@Override
 	public Node addNode(TransitStop stop) {
+		TransiteStopVisitor visitor = new TransiteStopVisitor(stop);
 		Node node = null;
-		Map<String, String> properites = stop.getProperties(stop.getAgency().getName());
+		Map<String, String> properites = visitor.getProperties(stop.getAgency().getName());
 
 		Transaction tx = beginTransaction();
 		try {
 			
 			node = graphDb.findNode(Label.label(stop.getClass().getSimpleName()),
-													FIELD.stop.name(), stop.makeKey(stop.getAgency().getName()));
-			String key = stop.makeCoordinateKey();
+													FIELD.stop.name(), visitor.makeKey(stop.getAgency().getName()));
+			String key = visitor.makeCoordinateKey();
 			Node coord = graphDb.findNode(Label.label("Point"),
 												FIELD.coordinate.name(), key);
 
 			if (node == null) {
 				node = graphDb.createNode(Label.label(stop.getClass().getName()));
 				for (Entry<String, String> entry : properites.entrySet()) {
-					if (entry.getKey() != FIELD.coordinate.name()) {
+					if (entry.getKey().equals( FIELD.coordinate.name()) ) {
 						node.setProperty(entry.getKey(), entry.getValue());
 					}
 				}
 
 				if (coord == null) {
 					coord = graphDb.createNode(Label.label("Point"));
-					coord.setProperty(FIELD.coordinate.name(), stop.makeCoordinateKey());
+					coord.setProperty(FIELD.coordinate.name(), visitor.makeCoordinateKey());
 				} 
 
 				Relationship relationship = node.createRelationshipTo(coord, REL_TYPES.LOCATION);
@@ -245,7 +240,7 @@ public class GraphDatabaseDAO implements IGraphDatabaseDAO {
 
 		} catch (Exception ex) {
 			tx.failure();
-			logException("Error adding route: " + stop.makeKey(stop.getAgency().getName()), ex);
+			logException("Error adding route: " + visitor.makeKey(stop.getAgency().getName()), ex);
 		} finally {
 			tx.close();
 		}
@@ -261,12 +256,13 @@ public class GraphDatabaseDAO implements IGraphDatabaseDAO {
 	 */
 	@Override
 	public Node addNode(Route route) {
-		Map<String, String> properites = route.getProperties(route.getAgency().getName());
+		RouteVisitor visitor = new RouteVisitor(route);
+		Map<String, String> properites = visitor.getProperties(route.getAgency().getName());
 		Node node = null;
 		Transaction tx = beginTransaction();
 		try {
 			node = graphDb.findNode(Label.label(Route.class.getSimpleName()),
-										FIELD.route.name(), route.makeKey(route.getAgency().getName()));
+										FIELD.route.name(), visitor.makeKey(route.getAgency().getName()));
 			if (node == null) {
 
 				node = graphDb.createNode(Label.label(route.getClass().getSimpleName()));
@@ -279,7 +275,7 @@ public class GraphDatabaseDAO implements IGraphDatabaseDAO {
 			tx.success();
 		} catch (Exception ex) {
 			tx.failure();
-			logException("Error adding route: " + route.makeKey(route.getAgency().getName()), ex);
+			logException("Error adding route: " + visitor.makeKey(route.getAgency().getName()), ex);
 		} finally {
 			tx.close();
 		}
@@ -294,15 +290,16 @@ public class GraphDatabaseDAO implements IGraphDatabaseDAO {
 	 */
 	@Override
 	public Node addNode(Trip trip, Agency agency) {
-		Map<String, String> properites = trip.getProperties(agency.getName());
+		TripVisitor visitor = new TripVisitor(trip);
+		Map<String, String> properites = visitor.getProperties(agency.getName());
 		Node node = null;
 		Transaction tx = beginTransaction();
 		try {
 
 			node = graphDb.findNode(Label.label(trip.getClass().getSimpleName()), 
-											FIELD.trip.name(), trip.makeKey(agency.getName()));
+											FIELD.trip.name(), visitor.makeKey(agency.getName()));
 			Node hs = graphDb.findNode(Label.label("HeadSign"), 
-											FIELD.trip_headSign.name(), trip.makeHeadSignKey(agency.getName()));
+											FIELD.trip_headSign.name(), visitor.makeHeadSignKey(agency.getName()));
 
 			if (node == null) {
 				node = graphDb.createNode(Label.label(trip.getClass().getSimpleName()));
@@ -314,14 +311,14 @@ public class GraphDatabaseDAO implements IGraphDatabaseDAO {
 
 				if (hs == null) {
 					hs = graphDb.createNode(Label.label("HeadSign"));
-					hs.setProperty(FIELD.trip_headSign.name(), trip.makeHeadSignKey(agency.getName()));
+					hs.setProperty(FIELD.trip_headSign.name(), visitor.makeHeadSignKey(agency.getName()));
 					createRelationShip(hs, agency);
 				}
 			}
 			tx.success();
 		} catch (Exception ex) {
 			tx.failure();
-			logException("Error adding trip: " + trip.makeKey(agency.getName()), ex);
+			logException("Error adding trip: " + visitor.makeKey(agency.getName()), ex);
 		} finally {
 			tx.close();
 		}
@@ -338,18 +335,20 @@ public class GraphDatabaseDAO implements IGraphDatabaseDAO {
 	 */
 	@Override
 	public boolean createRelationShip(Trip fromTrip, TransitStop toStop) {
+		TripVisitor tripVisitor = new TripVisitor(fromTrip);
+		TransiteStopVisitor stopVisitor = new TransiteStopVisitor(toStop);
 
 		Transaction tx = beginTransaction();
 		try {
 
 			Node to = graphDb.findNode(Label.label(toStop.getClass().getSimpleName()),
-												FIELD.stop.name(), toStop.makeKey(toStop.getAgency().getName()));
+												FIELD.stop.name(), stopVisitor.makeKey(toStop.getAgency().getName()));
 			if (to == null) {
 				to = this.addNode(toStop);
 			}
 
 			Node from = graphDb.findNode(Label.label(fromTrip.getClass().getSimpleName()),
-											FIELD.trip.name(), fromTrip.makeKey(toStop.getAgency().getName()));
+											FIELD.trip.name(), tripVisitor.makeKey(toStop.getAgency().getName()));
 			if (from == null) {
 				from = this.addNode(fromTrip, toStop.getAgency());
 			}
@@ -382,17 +381,19 @@ public class GraphDatabaseDAO implements IGraphDatabaseDAO {
 	 */
 	@Override
 	public boolean createRelationShip(Route fromRoute, TransitStop toStop) {
+		RouteVisitor routeVisitor = new RouteVisitor(fromRoute);
+		TransiteStopVisitor stopVisitor = new TransiteStopVisitor(toStop);
 
 		Transaction tx = beginTransaction();
 		try {
 			Node to = graphDb.findNode(Label.label(toStop.getClass().getSimpleName()),
-											FIELD.stop.name(), toStop.makeKey(toStop.getAgency().getName()));
+											FIELD.stop.name(), stopVisitor.makeKey(toStop.getAgency().getName()));
 			if (to == null) {
 				to = this.addNode(toStop);
 			}
 
 			Node from = graphDb.findNode(Label.label(fromRoute.getClass().getSimpleName()),
-											FIELD.route.name(), fromRoute.makeKey(toStop.getAgency().getName()));
+											FIELD.route.name(), routeVisitor.makeKey(toStop.getAgency().getName()));
 			if (from == null) {
 				from = this.addNode(fromRoute);
 			}
@@ -424,23 +425,24 @@ public class GraphDatabaseDAO implements IGraphDatabaseDAO {
 	 */
 	@Override
 	public boolean createRelationShip(Route fromRoute, Trip toTrip) {
-
+		RouteVisitor routeVisitor = new RouteVisitor(fromRoute);
+		TripVisitor tripVisitor = new TripVisitor(toTrip);
 		Transaction tx = beginTransaction();
 		try {
 			Node to = graphDb.findNode(Label.label(toTrip.getClass().getSimpleName()), 
-											FIELD.trip.name(), toTrip.makeKey(fromRoute.getAgency().getName()));
+											FIELD.trip.name(), tripVisitor.makeKey(fromRoute.getAgency().getName()));
 			if (to == null) {
 				to = this.addNode(toTrip, fromRoute.getAgency());
 			}
 
 			Node from = graphDb.findNode(Label.label(fromRoute.getClass().getSimpleName()),
-											FIELD.route.name(), fromRoute.makeKey(fromRoute.getAgency().getName()));
+					                     FIELD.route.name(), routeVisitor.makeKey(fromRoute.getAgency().getName()));
 			if (from == null) {
 				from = this.addNode(fromRoute);
 			}
 
-			Node tohs = graphDb.findNode(Label.label("HeadSign"), FIELD.trip_headSign.name(), 
-								toTrip.makeHeadSignKey(fromRoute.getAgency().getName()));
+			Node tohs = graphDb.findNode(Label.label("HeadSign"), FIELD.trip_headSign.name(),
+					tripVisitor.makeHeadSignKey(fromRoute.getAgency().getName()));
 
 			if (to == null || from == null) {
 				log.warn("Warng adding relationsip route to trip: nodes null: " + from + " to " + to);
@@ -470,14 +472,14 @@ public class GraphDatabaseDAO implements IGraphDatabaseDAO {
 	 * @param toAgency
 	 * @return
 	 */
-	private boolean createRelationShip(Node from, Agency toAgency) {
-
+	private void createRelationShip(Node from, Agency toAgency) {
+		AgencyVisitor visitor = new AgencyVisitor(toAgency);
 		Transaction tx = beginTransaction();
 		try {
 			Node to = graphDb.findNode(Label.label(toAgency.getClass().getName()), 
 											FIELD.agency.name(), toAgency.getName());
 			if (to == null) {
-				to = this.addAgency(toAgency);
+				to = this.addAgency(visitor);
 			}
 
 			from.createRelationshipTo(to, REL_TYPES.AGENCY);
@@ -488,7 +490,6 @@ public class GraphDatabaseDAO implements IGraphDatabaseDAO {
 		} finally {
 			tx.close();
 		}
-		return true;
 	}
 
 	/*
@@ -499,12 +500,12 @@ public class GraphDatabaseDAO implements IGraphDatabaseDAO {
 	 */
 	@Override
 	public List<RouteStopData> findRoutes(TransitStop stop) {
-
-		List<RouteStopData> rtn = new ArrayList<RouteStopData>();
+		TransiteStopVisitor visitor = new TransiteStopVisitor(stop);
+		List<RouteStopData> rtn = new ArrayList<>();
 		Transaction tx = beginTransaction();
 		try {
 			Node stopNode = graphDb.findNode(Label.label(stop.getClass().getSimpleName()), 
-												FIELD.stop.name(), stop.makeKey(stop.getAgency().getName()));
+												FIELD.stop.name(), visitor.makeKey(stop.getAgency().getName()));
 			if (stopNode != null) {
 
 				TraversalDescription td = graphDb.traversalDescription().depthFirst()
@@ -548,39 +549,6 @@ public class GraphDatabaseDAO implements IGraphDatabaseDAO {
 		return rtn;
 	}
 
-	/**
-	 * 
-	 * @param node
-	 * @return
-	 */
-	protected String nodeToString(Node node) {
-		StringBuilder item = new StringBuilder();
-		item.append("{");
-		for (String prop : node.getPropertyKeys()) {
-			item.append("[ " + prop + " " + node.getProperty(prop) + "]");
-		}
-		item.append("}");
-		return item.toString();
-	}
-
-	/**
-	 * 
-	 * @param rtn
-	 * @param start
-	 */
-	protected void showRelationships(Node rtn, String start) {
-		for (Relationship rel : rtn.getRelationships()) {
-
-			Node endNode = rel.getEndNode();
-			String cn = "";
-			if (rel.hasProperty(FIELD.className.name())) {
-				cn = rel.getProperty(FIELD.className.name()).toString();
-			}
-
-			System.out.println(start + " " + rel.getType().name() + " " + cn + " : " + nodeToString(endNode));
-		}
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -595,7 +563,7 @@ public class GraphDatabaseDAO implements IGraphDatabaseDAO {
 		Node rtn = null;
 
 		try {
-			rtn = graphDb.findNode(Label.label(nodeClass.getSimpleName()), fld.toString(), key.toString());
+			rtn = graphDb.findNode(Label.label(nodeClass.getSimpleName()), fld.toString(), key);
 			tx.success();
 		} catch (Exception ex) {
 			tx.failure();
@@ -604,18 +572,6 @@ public class GraphDatabaseDAO implements IGraphDatabaseDAO {
 			tx.close();
 		}
 		return rtn;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * me.transit.dao.neo4j.IGraphDatabaseDAO#allRelationships(me.transit.dao.neo4j.
-	 * GraphDatabaseDAO.REL_TYPES, org.neo4j.graphdb.Node)
-	 */
-	@Override
-	public List<Node> allRelationships(REL_TYPES type, Node node) {
-		return null;
 	}
 
 }
