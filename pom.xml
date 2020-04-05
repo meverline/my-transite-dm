@@ -108,6 +108,7 @@
 		<module>transitedb</module>
 		<module>crimedb</module>
 		<module>dbLoader</module>
+		<module>heatmapWeb</module>
 	</modules>
 
 </project>
