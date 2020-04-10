@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>me.transite</groupId>
-	<artifactId>agregator</artifactId>
-	<version>0.0.5</version>
-	<packaging>pom</packaging>
+	<artifactId>me.transite.gui</artifactId>
+	
+	<parent>
+		<groupId>me.transite</groupId>
+		<artifactId>applications</artifactId>
+		<version>0.0.5</version>
+		<relativePath>../../pom.xml</relativePath>
+	</parent>
 	
 	<build>
-			<plugins>
+
+		<plugins>
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -68,45 +72,62 @@
 				</configuration>
 			</plugin>
 
+
 		</plugins>
 
+		<resources>
+
+			<resource>
+				<directory>config</directory>
+				<targetPath>${project.build.outputDirectory}/config</targetPath>
+				<includes>
+					<include>**/**</include>
+				</includes>
+			</resource>
+
+		</resources>
+
+
 	</build>
-	
+
 	<dependencies>
-	
+
 		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
+			<groupId>me.transite</groupId>
+			<artifactId>transite-common</artifactId>
+			<version>0.0.5</version>
 		</dependency>
 
 		<dependency>
-		    <groupId>org.meanbean</groupId>
-		    <artifactId>meanbean</artifactId>
-		    <version>2.0.3</version>
-		    <scope>test</scope>
+			<groupId>me.transite</groupId>
+			<artifactId>me.transite.transitedb</artifactId>
+			<version>0.0.5</version>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>org.easymock</groupId>
-		    <artifactId>easymock</artifactId>
-		    <version>3.5</version>
-		    <scope>test</scope>
+			<groupId>me.transite</groupId>
+			<artifactId>me.transite.crimedb</artifactId>
+			<version>0.0.5</version>
 		</dependency>
-		
+
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.11</version>
-			<scope>test</scope>
+			<groupId>org.jfree</groupId>
+			<artifactId>jfreechart</artifactId>
+			<version>1.0.19</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.swinglabs</groupId>
+			<artifactId>swingx</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.swinglabs</groupId>
+			<artifactId>swingx-ws</artifactId>
+			<version>1.0</version>
 		</dependency>
 
 	</dependencies>
-
-	<modules>
-		<module>libs</module>
-		<module>apps</module>
-		<module>servers</module>
-	</modules>
 
 </project>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>me.transite</groupId>
+	<artifactId>libaries</artifactId>
+	<version>0.0.5</version>
+	<packaging>pom</packaging>
+
+	<parent>
+		<groupId>me.transite</groupId>
+		<artifactId>agregator</artifactId>
+		<version>0.0.5</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+
+	<build>
+			<plugins>
+
+		</plugins>
+
+	</build>
+	
+	<dependencies>
+	
+
+
+	</dependencies>
+
+	<modules>
+		<module>common</module>
+		<module>transitedb</module>
+		<module>crimedb</module>
+	</modules>
+
+</project>
