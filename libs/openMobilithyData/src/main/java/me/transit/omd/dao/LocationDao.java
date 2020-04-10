@@ -1,8 +1,7 @@
-package me.transit.parser.omd.dao;
+package me.transit.omd.dao;
 
 import me.database.hibernate.AbstractHibernateDao;
-import me.transit.database.Agency;
-import me.transit.parser.omd.Location;
+import me.transit.omd.data.Location;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.NoResultException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;

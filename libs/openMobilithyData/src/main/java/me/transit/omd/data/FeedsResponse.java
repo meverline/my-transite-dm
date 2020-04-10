@@ -1,4 +1,4 @@
-package me.transit.parser.omd;
+package me.transit.omd.data;
 
 import java.util.ArrayList;
 import java.util.List;

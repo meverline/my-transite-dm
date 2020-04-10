@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.util.Objects;
 
 import me.transit.parser.data.Blackboard;
-import me.transit.parser.omd.dao.LocationDao;
+import me.transit.omd.dao.LocationDao;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;

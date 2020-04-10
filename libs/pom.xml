@@ -12,19 +12,28 @@
 		<groupId>me.transite</groupId>
 		<artifactId>agregator</artifactId>
 		<version>0.0.5</version>
-		<relativePath>../pom.xml</relativePath>
 	</parent>
 
 	<build>
-			<plugins>
 
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.2.0</version>
+			</plugin>
 		</plugins>
 
 	</build>
 	
 	<dependencies>
-	
 
+		<dependency>
+			<groupId>org.easymock</groupId>
+			<artifactId>easymock</artifactId>
+			<version>4.0.2</version>
+			<scope>test</scope>
+		</dependency>
 
 	</dependencies>
 
@@ -32,6 +41,7 @@
 		<module>common</module>
 		<module>transitedb</module>
 		<module>crimedb</module>
-	</modules>
+        <module>openMobilithyData</module>
+    </modules>
 
 </project>

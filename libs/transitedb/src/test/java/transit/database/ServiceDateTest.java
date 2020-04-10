@@ -13,7 +13,6 @@ import me.transit.database.ServiceDate;
 
 import java.util.Calendar;
 
-import static org.testng.AssertJUnit.assertEquals;
 
 public class ServiceDateTest extends AbstractDatabaseTest {
 

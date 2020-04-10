@@ -3,7 +3,7 @@ package me.transit.parser.service;
 import java.util.List;
 
 import me.transit.parser.data.Blackboard;
-import me.transit.parser.omd.dao.LocationDao;
+import me.transit.omd.dao.LocationDao;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.amazonaws.services.sqs.AmazonSQS;

@@ -1,4 +1,4 @@
-package me.transit.parser.omd;
+package me.transit.omd.data;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +13,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import me.transit.json.Base64StringToGeometry;
 import me.transit.json.GeometryToBase64String;
-import me.transit.parser.omd.dao.json.GeometryFixer;
+import me.transit.omd.dao.json.GeometryFixer;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.locationtech.jts.geom.Point;

@@ -12,7 +12,8 @@ import org.meanbean.test.ConfigurationBuilder;
 
 import me.transit.database.Agency;
 
-import static org.testng.AssertJUnit.assertEquals;
+import static org.junit.Assert.assertEquals;
+
 
 public class AgencyTest extends  AbstractDatabaseTest {
 

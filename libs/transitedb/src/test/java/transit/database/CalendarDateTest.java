@@ -13,8 +13,6 @@ import me.transit.database.CalendarDate;
 
 import java.util.Calendar;
 
-import static org.testng.AssertJUnit.assertEquals;
-
 public class CalendarDateTest  extends AbstractDatabaseTest {
 
 	private BeanTester tester = new BeanTester();

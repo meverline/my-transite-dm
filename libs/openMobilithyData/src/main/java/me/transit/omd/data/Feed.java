@@ -1,4 +1,4 @@
-package me.transit.parser.omd;
+package me.transit.omd.data;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;

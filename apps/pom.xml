@@ -12,7 +12,6 @@
 		<groupId>me.transite</groupId>
 		<artifactId>agregator</artifactId>
 		<version>0.0.5</version>
-		<relativePath>../pom.xml</relativePath>
 	</parent>
 	
 	<build>

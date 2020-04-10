@@ -1,7 +1,7 @@
 package me.transit.parser.config;
 
 import me.transit.parser.data.Blackboard;
-import me.transit.parser.omd.dao.LocationDao;
+import me.transit.omd.dao.LocationDao;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;

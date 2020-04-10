@@ -1,7 +1,7 @@
-package me.transit.parser.omd.dao.json;
+package me.transit.omd.dao.json;
 
 import com.fasterxml.jackson.databind.util.StdConverter;
-import me.transit.parser.omd.Location;
+import me.transit.omd.data.Location;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;

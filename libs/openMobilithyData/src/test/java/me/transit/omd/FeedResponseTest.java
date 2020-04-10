@@ -1,4 +1,4 @@
-package me.transite.parser.omd;
+package me.transit.omd;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import me.transit.parser.omd.FeedsResponse;
+import me.transit.omd.data.FeedsResponse;
 
 public class FeedResponseTest {
 

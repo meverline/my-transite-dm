@@ -8,7 +8,7 @@ import org.meanbean.test.ConfigurationBuilder;
 
 import me.transit.database.TransitStop;
 
-import static org.testng.AssertJUnit.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 public class TransitStopTest extends  AbstractDatabaseTest {
 

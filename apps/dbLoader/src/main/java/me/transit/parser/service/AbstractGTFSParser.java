@@ -12,15 +12,15 @@ import java.util.concurrent.TimeUnit;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import me.transit.parser.data.Blackboard;
-import me.transit.parser.omd.dao.LocationDao;
+import me.transit.omd.dao.LocationDao;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import me.transit.parser.data.FileHandlerFactory;
 import me.transit.parser.message.MessageAgency;
-import me.transit.parser.omd.Feed;
-import me.transit.parser.omd.Location;
-import me.transit.parser.omd.OpenMobilityData;
+import me.transit.omd.data.Feed;
+import me.transit.omd.data.Location;
+import me.transit.omd.data.OpenMobilityData;
 
 public abstract class AbstractGTFSParser {
 

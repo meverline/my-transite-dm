@@ -12,8 +12,7 @@ import org.meanbean.test.ConfigurationBuilder;
 
 import java.util.Calendar;
 
-import static com.mongodb.internal.connection.tlschannel.util.Util.assertTrue;
-import static org.testng.AssertJUnit.assertNotNull;
+import static org.junit.Assert.assertNotNull;
 
 public class RouteTest extends AbstractDatabaseTest {
 
