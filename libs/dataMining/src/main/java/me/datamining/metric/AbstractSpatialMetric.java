@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import me.datamining.metric.IDataProvider;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 

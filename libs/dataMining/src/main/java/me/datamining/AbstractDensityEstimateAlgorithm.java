@@ -19,8 +19,8 @@ public abstract class AbstractDensityEstimateAlgorithm implements DensityEstimat
 	private  IDensityKernel denstiyKernel = new Epanechnikov();
 	private  IBandwidth xBandWidth = new SlivermanRule();
 	private  IBandwidth yBandWidth = new SlivermanRule();
-    private  DescriptiveStatistics xstats_ = new DescriptiveStatistics();
-    private  DescriptiveStatistics ystats_ = new DescriptiveStatistics();
+    private  final DescriptiveStatistics xstats_ = new DescriptiveStatistics();
+    private  final DescriptiveStatistics ystats_ = new DescriptiveStatistics();
 	private  AbstractSpatialGridOverlay grid = null;
 	private  List<SpatialSamplePoint> sampleValues = null;
 	private  double crossCovariance = 0.0;

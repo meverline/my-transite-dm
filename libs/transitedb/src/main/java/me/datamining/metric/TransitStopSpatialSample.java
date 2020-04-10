@@ -4,7 +4,6 @@ import java.util.List;
 
 import me.transit.database.RouteStopData;
 import me.transit.database.TransitStop;
-import me.datamining.metric.TransiteSpatialMetric;
 
 public class TransitStopSpatialSample extends TransiteSpatialMetric {
 		

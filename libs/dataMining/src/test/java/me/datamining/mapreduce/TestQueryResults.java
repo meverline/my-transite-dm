@@ -1,7 +1,5 @@
 package me.datamining.mapreduce;
 
-import static org.junit.Assert.*;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -9,6 +7,8 @@ import java.io.PrintStream;
 import org.junit.Test;
 
 import me.math.Vertex;
+
+import static org.junit.Assert.assertEquals;
 
 public class TestQueryResults {
 

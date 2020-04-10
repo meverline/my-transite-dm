@@ -235,7 +235,7 @@ public class STING implements ClusteringAlgorithm {
 		double factor = Math.sqrt(1 / (Math.PI * this.getDensity()));
 		double distance = Math.max((double) this.getGridSizeInMeters(), factor);
 
-		HashSet<AbstractSpatialGridPoint> clusterPoints = new HashSet<AbstractSpatialGridPoint>();
+		HashSet<AbstractSpatialGridPoint> clusterPoints = new HashSet<>();
 		List<AbstractSpatialGridPoint> possiableNodes = nodeFinder.getResults();
 
 		ClusterNodeEvaluation evaluator = new ClusterNodeEvaluation( this.getRangeLow(), 
@@ -272,7 +272,7 @@ public class STING implements ClusteringAlgorithm {
 			}
 		}
 
-		List<AbstractSpatialGridPoint> rtn = new ArrayList<AbstractSpatialGridPoint>();
+		List<AbstractSpatialGridPoint> rtn = new ArrayList<>();
 		for (AbstractSpatialGridPoint point : clusterPoints) {
 			rtn.add(point);
 		}
@@ -385,7 +385,7 @@ public class STING implements ClusteringAlgorithm {
 
 		public int relevantCount_ = 0;
 		private ClusterNodeEvaluation evaluator_ = null;
-		private List<AbstractSpatialGridPoint> relevent_ = new ArrayList<AbstractSpatialGridPoint>();
+		private List<AbstractSpatialGridPoint> relevent_ = new ArrayList<>();
 
 		public findReleventNodes(double min, double max, double threshold) {
 			evaluator_ = new ClusterNodeEvaluation(min, max, threshold);

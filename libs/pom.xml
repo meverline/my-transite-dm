@@ -42,6 +42,7 @@
 		<module>transitedb</module>
 		<module>crimedb</module>
         <module>openMobilithyData</module>
+        <module>dataMining</module>
     </modules>
 
 </project>

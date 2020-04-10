@@ -3,8 +3,6 @@
  */
 package me.datamining.metric;
 
-import me.datamining.metric.IDataProvider;
-
 /**
  * @author meverline
  *
