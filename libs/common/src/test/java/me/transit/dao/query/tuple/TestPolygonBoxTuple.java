@@ -15,33 +15,32 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import com.mongodb.BasicDBObject;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
 import org.locationtech.jts.geom.Polygon;
-
-import me.math.Vertex;
-import me.math.kdtree.MinBoundingRectangle;
 
 public class TestPolygonBoxTuple extends EasyMockSupport {
 
     @Rule
     public EasyMockRule rule = new EasyMockRule(this);
    
-    private List<Point> box = new ArrayList<Point>();
+    private List<Point> box = new ArrayList<>();
     
     private static final GeometryFactory factory_  = new GeometryFactory();
     
     @Before
     public void setUp() {
-    		    
-	    MinBoundingRectangle obj = new MinBoundingRectangle();
-		obj = new MinBoundingRectangle(new Vertex(38.827, -77.078));
-		obj.extend(new Vertex(38.941, -77.286));
-	    
-		
-		Polygon poly = obj.toPolygon();
+
+		Coordinate [] coords = new Coordinate[5];
+
+		coords[0] = new Coordinate(38.941, 77.078);
+		coords[1] = new Coordinate(38.941, -77.286);
+		coords[2] = new Coordinate(38.827, -77.286);
+		coords[3] = new Coordinate(38.827, -77.078);
+		coords[4] = coords[0];
+		Polygon poly = factory_.createPolygon(factory_.createLinearRing(coords), null);
+
 		
 		for ( Coordinate cord : poly.getCoordinates()) {
 			box.add( factory_.createPoint(cord));

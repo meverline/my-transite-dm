@@ -48,6 +48,18 @@
 			<artifactId>transite-common</artifactId>
 			<version>0.0.5</version>
 		</dependency>
+
+		<dependency>
+			<groupId>me.transite</groupId>
+			<artifactId>dataMining</artifactId>
+			<version>0.0.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>me.transite</groupId>
+			<artifactId>mathlib</artifactId>
+			<version>0.0.5</version>
+		</dependency>
 		
 	</dependencies>
 

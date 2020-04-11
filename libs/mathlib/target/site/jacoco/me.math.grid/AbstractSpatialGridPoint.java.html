@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AbstractSpatialGridPoint.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mathlib</a> &gt; <a href="index.source.html" class="el_package">me.math.grid</a> &gt; <span class="el_source">AbstractSpatialGridPoint.java</span></div><h1>AbstractSpatialGridPoint.java</h1><pre class="source lang-java linenums">package me.math.grid;
+
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+//CIRAS: Crime Information Retrieval and Analysis System
+//Copyright 2009 by Russ Brasser, Mark Everline and Eric Franklin
+//
+//This program is free software: you can redistribute it and/or modify
+//it under the terms of the GNU General Public License as published by
+//the Free Software Foundation, either version 3 of the License, or
+//(at your option) any later version.
+//
+//This program is distributed in the hope that it will be useful,
+//but WITHOUT ANY WARRANTY; without even the implied warranty of
+//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//GNU General Public License for more details.
+//
+//You should have received a copy of the GNU General Public License
+//along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+
+import me.math.Vertex;
+import me.math.grid.array.SpatialGridPoint;
+import me.math.grid.data.AbstractDataSample;
+import me.math.grid.tiled.TiledSpatialGridPoint;
+import me.math.kdtree.INode;
+import me.math.kdtree.MinBoundingRectangle;
+
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = &quot;type&quot;)
+@JsonSubTypes({ @Type(value = SpatialGridPoint.class, name = &quot;SpatialGridPoint&quot;),
+		@Type(value = TiledSpatialGridPoint.class, name = &quot;TiledSpatialGridPoint&quot;)})
+public abstract class AbstractSpatialGridPoint implements INode {
+	
+	public static final String ROW = &quot;row&quot;;
+	public static final String COL = &quot;col&quot;;
+	public static final String INDEX = &quot;index&quot;;
+	public static final String DATA = &quot;data&quot;;
+	public static final String DIRECTION = &quot;direction&quot;;
+	public static final String MBR = &quot;MBR&quot;;
+	public static final String DEPTH = &quot;depth&quot;;
+
+<span class="fc" id="L46">	private int row_ = -1;</span>
+<span class="fc" id="L47">	private int col_ = -1;</span>
+<span class="fc" id="L48">	private int index_ = -1;</span>
+<span class="fc" id="L49">	private AbstractDataSample data_ = null;</span>
+<span class="fc" id="L50">	private INode.Direction direction_ = INode.Direction.UNKOWN;</span>
+<span class="fc" id="L51">	private MinBoundingRectangle mbr_ = null;</span>
+<span class="fc" id="L52">	private int depth_ = 0;</span>
+
+
+	/**
+	 *
+	 */
+<span class="fc" id="L58">	protected AbstractSpatialGridPoint() {</span>
+
+<span class="fc" id="L60">	}</span>
+
+	/**
+	 * 
+	 * @return
+	 */
+	@JsonGetter(&quot;row&quot;)
+	public int getRow() {
+<span class="fc" id="L68">		return row_;</span>
+	}
+
+	/**
+	 * 
+	 */
+	@JsonGetter(&quot;col&quot;)
+	public int getCol() {
+<span class="fc" id="L76">		return col_;</span>
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	@JsonIgnore
+	public int getIndex() {
+<span class="fc" id="L85">		return index_;</span>
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public String dumpInfo() {
+<span class="nc" id="L93">		StringBuffer buffer = new StringBuffer();</span>
+
+<span class="nc" id="L95">		buffer.append(&quot;\t[&quot; + this.getRow() + &quot;, &quot; + this.getCol() + &quot;]&quot;);</span>
+<span class="nc" id="L96">		return buffer.toString();</span>
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public abstract Vertex getVertex();
+	
+	/**
+	 * @param corner_ the corner_ to set
+	 */
+	protected abstract void setCorner(Vertex corner_);
+
+	/**
+	 * @param row_ the row_ to set
+	 */
+	@JsonSetter(&quot;row&quot;)
+	protected void setRow(int row_) {
+<span class="fc" id="L115">		this.row_ = row_;</span>
+<span class="fc" id="L116">	}</span>
+
+	/**
+	 * @param col_ the col_ to set
+	 */
+	@JsonSetter(&quot;col&quot;)
+	protected void setCol(int col_) {
+<span class="fc" id="L123">		this.col_ = col_;</span>
+<span class="fc" id="L124">	}</span>
+
+	/**
+	 * @param index_ the index_ to set
+	 */
+	@JsonIgnore
+	protected void setIndex(int index_) {
+<span class="fc" id="L131">		this.index_ = index_;</span>
+<span class="fc" id="L132">	}</span>
+	
+	/**
+	 * @return the data_
+	 */
+	@JsonGetter(&quot;data&quot;)
+	public AbstractDataSample getData() {
+<span class="fc" id="L139">		return data_;</span>
+	}
+
+	/**
+	 * @param data_ the data_ to set
+	 */
+	@JsonSetter(&quot;data&quot;)
+	public void setData(AbstractDataSample data_) {
+<span class="fc" id="L147">		this.data_ = data_;</span>
+<span class="fc" id="L148">	}</span>
+	
+	public Vertex getPointVertex() {
+<span class="fc" id="L151">		return this.getVertex();</span>
+	}
+	
+	@JsonGetter(&quot;depth&quot;)
+	public int getDepth() {
+<span class="fc" id="L156">		return this.depth_;</span>
+	}
+	
+	@JsonSetter(&quot;depth&quot;)
+	public void setDepth(int depth) {
+<span class="fc" id="L161">		this.depth_ = depth;</span>
+<span class="fc" id="L162">	}</span>
+	
+	@JsonGetter(&quot;direction&quot;)
+	public Direction getDirection() {
+<span class="fc" id="L166">		return this.direction_;</span>
+	}
+	
+	@JsonSetter(&quot;direction&quot;)
+	public void setDirection(Direction dir) {
+<span class="fc" id="L171">		this.direction_ = dir;</span>
+<span class="fc" id="L172">	}</span>
+
+	@JsonGetter(&quot;mbr&quot;)
+	public MinBoundingRectangle getMBR() {
+<span class="fc" id="L176">		return this.mbr_;</span>
+	}
+	
+	@JsonSetter(&quot;mbr&quot;)
+	public void setMBR(MinBoundingRectangle mbr) {
+<span class="fc" id="L181">		this.mbr_ = mbr;</span>
+<span class="fc" id="L182">	}</span>
+
+	public boolean contains(Vertex pt) {
+<span class="nc" id="L185">		return getMBR().contains(pt);</span>
+	}
+	
+	/**
+	 * 
+	 * @param dir
+	 * @param depth
+	 */
+	public void initNode(Direction dir, int depth)
+	{
+<span class="fc" id="L195">		setDirection(dir);</span>
+<span class="fc" id="L196">		setDepth(depth);</span>
+<span class="fc" id="L197">		setMBR( new MinBoundingRectangle( this.getPointVertex()));</span>
+<span class="fc" id="L198">	}</span>
+	
+	 /* 
+	   * (non-Javadoc)
+	   * @see java.lang.Object#toString()
+	   */
+	public String toString()
+	{
+<span class="fc" id="L206">       StringBuffer buf = new StringBuffer();</span>
+
+<span class="fc" id="L208">       buf.append(getDirection() + &quot; &quot;);</span>
+<span class="fc" id="L209">       buf.append(getDepth());</span>
+<span class="fc" id="L210">       buf.append(&quot; { &quot; + getPoint().getIndex());</span>
+<span class="fc bfc" id="L211" title="All 2 branches covered.">       if ( this.getPointVertex() != null ) {</span>
+<span class="fc" id="L212">    	   		buf.append(&quot; ( &quot; + getPointVertex().getLatitudeDegress() +&quot;,&quot; +</span>
+<span class="fc" id="L213">                               getPointVertex().getLongitudeDegress() + &quot;)&quot;);</span>
+       }
+<span class="fc" id="L215">       return buf.toString();</span>
+	}
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

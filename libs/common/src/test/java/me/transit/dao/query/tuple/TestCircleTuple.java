@@ -8,27 +8,33 @@ import org.easymock.EasyMock;
 import org.easymock.EasyMockRule;
 import org.easymock.EasyMockSupport;
 import org.hibernate.Criteria;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import com.mongodb.BasicDBObject;
-
-import me.math.Vertex;
 import me.utils.TransiteEnums;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.Point;
 
 public class TestCircleTuple extends EasyMockSupport {
 
     @Rule
     public EasyMockRule rule = new EasyMockRule(this);
-    
-    private Vertex ul = new Vertex(38.941, -77.286);
+
     private double distance = TransiteEnums.DistanceUnitType.MI.toMeters(1.1);
-    	
+	private static final GeometryFactory factory_  = new GeometryFactory();
+	private Point ul;
+
+	@Before
+	public void setUp() {
+		ul = factory_.createPoint(new Coordinate(38.941, -77.286));
+	}
 	@Test
 	public void testConstructor() {
 		
-		CircleTuple obj = new CircleTuple("field", ul.toPoint(), this.distance);		
-		obj = new CircleTuple(String.class, "field", ul.toPoint(), this.distance);
+		CircleTuple obj = new CircleTuple("field", ul, this.distance);
+		obj = new CircleTuple(String.class, "field", ul, this.distance);
 		
 		assertTrue(obj.hasMultipleCriterion());
 			
@@ -38,7 +44,7 @@ public class TestCircleTuple extends EasyMockSupport {
 	public void testGetDoucmentQuery() {
 		
 		Document mongo = new Document();
-		CircleTuple obj = new CircleTuple("field", ul.toPoint(), this.distance);
+		CircleTuple obj = new CircleTuple("field", ul, this.distance);
 		obj.getDoucmentQuery(mongo);			
 	}
 	
@@ -51,10 +57,10 @@ public class TestCircleTuple extends EasyMockSupport {
 		expect(mongo.createAlias(EasyMock.anyString(), EasyMock.anyString())).andReturn(mongo).anyTimes();
 		replayAll();
 		
-		CircleTuple obj = new CircleTuple("field", ul.toPoint(), this.distance);
+		CircleTuple obj = new CircleTuple("field", ul, this.distance);
 		obj.getCriterion();
 		
-		obj = new CircleTuple(String.class, "field", ul.toPoint(), this.distance);
+		obj = new CircleTuple(String.class, "field", ul, this.distance);
 		obj.getCriterion();
 		
 		obj.getMultipeRestriction(mongo);

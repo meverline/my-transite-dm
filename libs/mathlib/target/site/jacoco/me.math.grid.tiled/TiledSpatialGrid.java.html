@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TiledSpatialGrid.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mathlib</a> &gt; <a href="index.source.html" class="el_package">me.math.grid.tiled</a> &gt; <span class="el_source">TiledSpatialGrid.java</span></div><h1>TiledSpatialGrid.java</h1><pre class="source lang-java linenums">package me.math.grid.tiled;
+
+import java.io.IOException;
+import java.io.PrintStream;
+import java.io.Writer;
+import java.net.UnknownHostException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import me.math.Vertex;
+import org.locationtech.jts.geom.Point;
+
+
+public class TiledSpatialGrid extends AbstractTiledSpatialGrid {
+
+<span class="fc" id="L17">	private List&lt;SpatialTile&gt; grid_ = new ArrayList&lt;&gt;();</span>
+	
+	/**
+	 * 
+	 * @param spacingInMeters
+	 */
+	public TiledSpatialGrid( double spacingInMeters)
+<span class="fc" id="L24">	{</span>
+<span class="fc" id="L25">		init(spacingInMeters);</span>
+<span class="fc" id="L26">	}</span>
+
+	/**
+	 *
+	 * @param ul
+	 * @param lr
+	 * @param spacingInMeters
+	 * @throws UnknownHostException 
+	 * @throws SQLException 
+	 */
+<span class="fc" id="L36">	public TiledSpatialGrid(Point ul, Point lr, double spacingInMeters) throws UnknownHostException, SQLException {</span>
+<span class="fc" id="L37">		init(spacingInMeters);</span>
+<span class="fc" id="L38">		setUpperLeft( new Vertex(ul.getX(), ul.getY()));</span>
+<span class="fc" id="L39">		setLowerRight( new Vertex(lr.getX(), lr.getY()));</span>
+
+<span class="fc" id="L41">		createGrid(getUpperLeft(), getLowerRight());</span>
+<span class="fc" id="L42">	}</span>
+	
+	/**
+	 *
+	 * @param ul
+	 * @param lr
+	 * @param spacingInMeters
+	 * @throws UnknownHostException 
+	 * @throws SQLException 
+	 */
+<span class="fc" id="L52">	public TiledSpatialGrid(Vertex ul, Vertex lr, double spacingInMeters) throws UnknownHostException, SQLException {</span>
+<span class="fc" id="L53">		init(spacingInMeters);</span>
+<span class="fc" id="L54">		setUpperLeft( ul);</span>
+<span class="fc" id="L55">		setLowerRight( lr );</span>
+
+<span class="fc" id="L57">		createGrid(getUpperLeft(), getLowerRight());</span>
+<span class="fc" id="L58">	}</span>
+	
+	@Override
+	public TiledSpatialGridPoint get(int index, int row, int column) {
+<span class="fc" id="L62">		return this.grid_.get(index).getEntry( row, column);</span>
+	}
+
+	@Override
+	public TiledSpatialGridPoint get(int index, int gridIndex) {
+<span class="fc" id="L67">		return grid_.get(index).getEntry(gridIndex);</span>
+	}
+
+	@Override
+	protected void addTile(SpatialTile tile) {
+<span class="fc" id="L72">		this.grid_.add(tile);</span>
+<span class="fc" id="L73">	}</span>
+	    
+	/**
+	 * 
+	 * @return
+	 */
+	public List&lt;SpatialTile&gt; getTiles()
+	{
+<span class="fc" id="L81">		return this.grid_;</span>
+	}
+	
+	/**
+	 * 
+	 * @param out
+	 */
+	public void dump(Writer out) {
+		
+<span class="fc" id="L90">		StringBuilder buf = new StringBuilder();</span>
+
+<span class="fc" id="L92">		buf.append(&quot;Rows &quot;);</span>
+<span class="fc" id="L93">		buf.append(this.getRows());</span>
+<span class="fc" id="L94">		buf.append(&quot; Cols &quot;);</span>
+<span class="fc" id="L95">		buf.append(this.getCols());</span>
+<span class="fc" id="L96">		buf.append(&quot;\n&quot;);</span>
+		
+		try {
+<span class="fc" id="L99">			out.write(buf.toString());</span>
+<span class="nc" id="L100">		} catch (IOException e) {</span>
+<span class="nc" id="L101">			e.printStackTrace();</span>
+<span class="fc" id="L102">		}</span>
+		
+<span class="fc bfc" id="L104" title="All 2 branches covered.">		for ( SpatialTile tile : this.grid_) {</span>
+<span class="fc" id="L105">			tile.dump(out, this.getTileSize(), &quot;     &quot;);</span>
+<span class="fc" id="L106">		}</span>
+		
+<span class="fc" id="L108">	}</span>
+	
+	/**
+	 * 
+	 * @param out
+	 * @throws UnknownHostException
+	 */
+	public void toCSV(PrintStream out, boolean iterpolationValue ) throws UnknownHostException {
+		
+<span class="fc bfc" id="L117" title="All 2 branches covered.">		for (int row = 0; row &lt; this.getRows(); row++ ) {</span>
+<span class="fc bfc" id="L118" title="All 2 branches covered.">			for (int col = 0; col &lt; this.getCols(); col++ ) {</span>
+<span class="fc" id="L119">				TiledSpatialGridPoint pt = this.getEntry(row, col);</span>
+<span class="fc bfc" id="L120" title="All 2 branches covered.">				if ( col != 0 ) { out.print(&quot;,&quot;); }</span>
+<span class="pc bpc" id="L121" title="1 of 2 branches missed.">				if ( pt.getData() != null ) {</span>
+<span class="nc bnc" id="L122" title="All 2 branches missed.">					if ( iterpolationValue ) {</span>
+<span class="nc" id="L123">						out.print(pt.getData().getInterpolationValue());</span>
+					} else {
+<span class="nc" id="L125">						out.print(pt.getData().getValue());</span>
+					}
+				}
+			}
+<span class="fc" id="L129">			out.println();</span>
+		}
+		
+<span class="fc" id="L132">	}</span>
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

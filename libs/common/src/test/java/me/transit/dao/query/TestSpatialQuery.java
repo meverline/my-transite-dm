@@ -23,8 +23,6 @@ import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
 import org.locationtech.jts.geom.Polygon;
 
-import me.math.Vertex;
-import me.math.kdtree.MinBoundingRectangle;
 import me.utils.TransiteEnums;
 
 public class TestSpatialQuery extends EasyMockSupport {
@@ -40,9 +38,6 @@ public class TestSpatialQuery extends EasyMockSupport {
     
     @Mock
     private Session session;
-    
-	private Vertex ul = new Vertex(38.941, -77.286);
-	private Vertex lr = new Vertex(38.827, -77.078);
 	private double distance = TransiteEnums.DistanceUnitType.MI.toMeters(0.1);
 	
 	private static final GeometryFactory factory_  = new GeometryFactory();
@@ -50,16 +45,23 @@ public class TestSpatialQuery extends EasyMockSupport {
 	@SuppressWarnings("deprecation")
 	@Test
 	public void test() {
-	
+
+		Point ul = factory_.createPoint(new Coordinate(38.941, -77.286));
+		Point lr = factory_.createPoint(new Coordinate(38.827, -77.078));
+
 		testSubject.clear();
-		testSubject.addCircle("field", ul.toPoint(), distance);
-		testSubject.addCircle(String.class, "field", ul.toPoint(), distance);
-		
-		MinBoundingRectangle obj = new MinBoundingRectangle();
-		obj = new MinBoundingRectangle(new Vertex(38.827, -77.078));
-		obj.extend(new Vertex(38.941, -77.286));
-		
-		Polygon poly = obj.toPolygon();
+		testSubject.addCircle("field", ul, distance);
+		testSubject.addCircle(String.class, "field", ul, distance);
+
+		Coordinate [] coords = new Coordinate[5];
+
+		coords[0] = new Coordinate(38.941, 77.078);
+		coords[1] = new Coordinate(38.941, -77.286);
+		coords[2] = new Coordinate(38.827, -77.286);
+		coords[3] = new Coordinate(38.827, -77.078);
+		coords[4] = coords[0];
+		Polygon poly = factory_.createPolygon(factory_.createLinearRing(coords), null);
+
 		List<Point> box = new ArrayList<Point>();
 		for ( Coordinate cord : poly.getCoordinates()) {
 			box.add( factory_.createPoint(cord));
@@ -68,8 +70,8 @@ public class TestSpatialQuery extends EasyMockSupport {
 		testSubject.addPolygon("field", box);
 		testSubject.addPolygon(String.class, "field", box);
 		
-		testSubject.addRectangle("field", lr.toPoint(), ul.toPoint());
-		testSubject.addRectangle(String.class, "field", lr.toPoint(), ul.toPoint());
+		testSubject.addRectangle("field", lr, ul);
+		testSubject.addRectangle(String.class, "field", lr, ul);
 		
 		testSubject.addOrderBy("name");
 		testSubject.addOrderBy(null);
