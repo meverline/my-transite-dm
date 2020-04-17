@@ -1,4 +1,4 @@
-package org.me.transite.dm.controller;
+package org.dm.transit.controller;
 
 import me.transit.dao.AgencyDao;
 import me.transit.database.Agency;
@@ -23,7 +23,7 @@ public class AgencyController {
         this.agencyDao = Objects.requireNonNull(agencyDao, "agencyDao can not be null");
     }
 
-    @RequestMapping(value = "/agency/list")
+    @RequestMapping(value = "/agency/list/names")
     public ModelAndView listNames(HttpServletResponse response) throws IOException {
         List<String> agencies = agencyDao.list().stream().map(agency -> {
             return agency.getName();
@@ -31,6 +31,15 @@ public class AgencyController {
 
         ModelAndView view = new ModelAndView("agency");
         view.addObject("agencyNames", agencies);
+        return view;
+    }
+
+    @RequestMapping(value = "/agency/list")
+    public ModelAndView list(HttpServletResponse response) throws IOException {
+        List<Agency> agencies = agencyDao.list();
+
+        ModelAndView view = new ModelAndView("agency");
+        view.addObject("agencies", agencies);
         return view;
     }
 }

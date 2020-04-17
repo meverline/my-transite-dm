@@ -38,6 +38,7 @@
 
 	<modules>
 		<module>common</module>
+		<module>message</module>
         <module>openMobilithyData</module>
         <module>dataMining</module>
 		<module>mathlib</module>

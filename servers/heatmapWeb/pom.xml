@@ -42,6 +42,18 @@
 
 		<dependency>
 			<groupId>me.transite</groupId>
+			<artifactId>message</artifactId>
+			<version>0.0.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>me.transite</groupId>
+			<artifactId>openMobilithyData</artifactId>
+			<version>0.0.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>me.transite</groupId>
 			<artifactId>me.transite.transitedb</artifactId>
 			<version>0.0.5</version>
 		</dependency>

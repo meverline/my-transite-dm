@@ -1,4 +1,4 @@
-package org.me.transite.dm.config;
+package org.dm.transit.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
-@ComponentScan(basePackages="org.me.transite.dm")
+@ComponentScan(basePackages= "org.dm.transit")
 @EnableWebMvc
 public class MvcConfiguration implements WebMvcConfigurer {
 
