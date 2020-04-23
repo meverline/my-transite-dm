@@ -1,0 +1,9 @@
+1. Create VPN -
+    Subnets
+       1. AppServer
+       2. RDS
+       3. Sting/KDE subnet
+       4. Data Loader
+       5. DataServer for RDS
+
+2. Create RDS - Postgress with GIS Support

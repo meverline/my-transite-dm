@@ -1,8 +1,9 @@
 package org.dm.transit.controller;
 
 import me.datamining.DataMiningTypes;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
@@ -10,18 +11,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@Controller
+@RestController
+@RequestMapping("dm-algorithms")
 public class DataMiningAlgoritms {
 
-    @RequestMapping(value = "/dataMiningAlgoritms/list")
-    public ModelAndView listNames(HttpServletResponse response) throws IOException {
-        List<String> rtm = new ArrayList<>();
+    @GetMapping(value = "/list")
+    public List<String> listNames() throws IOException {
+        List<String> rtn = new ArrayList<>();
         for (DataMiningTypes type : DataMiningTypes.values()) {
-            rtm.add(type.name());
+            rtn.add(type.name());
         }
 
-        ModelAndView view = new ModelAndView("datamining");
-        view.addObject("algorithms", rtm);
-        return view;
+        return rtn;
     }
 }
