@@ -272,10 +272,7 @@ public class STING implements ClusteringAlgorithm {
 		}
 
 		List<AbstractSpatialGridPoint> rtn = new ArrayList<>();
-		for (AbstractSpatialGridPoint point : clusterPoints) {
-			rtn.add(point);
-		}
-
+		rtn.addAll(clusterPoints);
 		return rtn;
 	}
 
