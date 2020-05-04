@@ -1,14 +1,13 @@
 package me.transit.json;
 
-import com.fasterxml.jackson.databind.util.StdConverter;
-import me.database.hibernate.AbstractHibernateDao;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import com.fasterxml.jackson.databind.util.StdConverter;
 
 public class JsonToCalendarConvert extends StdConverter<String, Calendar> implements CalendarSerailizer{
 

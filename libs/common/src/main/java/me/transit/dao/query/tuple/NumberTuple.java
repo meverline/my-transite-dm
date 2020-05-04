@@ -1,8 +1,8 @@
 package me.transit.dao.query.tuple;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.QueryOperators;
 import org.bson.Document;
+
+import com.mongodb.QueryOperators;
 
 public class NumberTuple extends AbstractQueryTuple {
 	

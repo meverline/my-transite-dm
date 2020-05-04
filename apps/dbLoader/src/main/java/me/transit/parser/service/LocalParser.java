@@ -20,6 +20,7 @@ import me.transit.parser.message.ParserMessage;
 public class LocalParser extends AbstractGTFSParser {
 
 	private final Log log = LogFactory.getLog(getClass().getName());
+	@SuppressWarnings("unused")
 	private final IGraphDatabaseDAO graph;
 
 	@Autowired

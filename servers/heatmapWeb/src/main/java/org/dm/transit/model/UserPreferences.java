@@ -10,6 +10,7 @@ import javax.persistence.*;
 import java.awt.Color;
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "dm_userPreferences")
 public class UserPreferences implements Serializable

@@ -13,7 +13,6 @@ import org.hibernate.Criteria;
 import org.junit.Rule;
 import org.junit.Test;
 
-import com.mongodb.BasicDBObject;
 
 public class TestCatagoryTuple  extends EasyMockSupport {
 

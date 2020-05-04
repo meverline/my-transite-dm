@@ -11,7 +11,12 @@ import java.io.Serializable;
 @Table(name = "dm_userJobs")
 public class UserJob implements Serializable {
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
     @Column(name = "UUID", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO, generator="native")
     @GenericGenerator( name = "native", strategy = "native")

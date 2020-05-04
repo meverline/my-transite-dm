@@ -1,17 +1,15 @@
 package transit.database;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import me.transit.database.Agency;
+import java.util.Calendar;
+
 import org.junit.Test;
 import org.meanbean.test.BeanTester;
 import org.meanbean.test.Configuration;
 import org.meanbean.test.ConfigurationBuilder;
 
-import me.transit.database.CalendarDate;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
-import java.util.Calendar;
+import me.transit.database.CalendarDate;
 
 public class CalendarDateTest  extends AbstractDatabaseTest {
 
@@ -38,6 +36,7 @@ public class CalendarDateTest  extends AbstractDatabaseTest {
 		date.setVersion("0.5");
 
 		String json = mapper.writeValueAsString(date);
+		@SuppressWarnings("unused")
 		CalendarDate rtn = mapper.readValue(json, CalendarDate.class);
 
 	}

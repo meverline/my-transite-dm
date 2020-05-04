@@ -2,7 +2,6 @@ package me.datamining.Kernel;
 
 import org.junit.Test;
 
-@SuppressWarnings("unused")
 public class TestKernel {
 
 	@Test

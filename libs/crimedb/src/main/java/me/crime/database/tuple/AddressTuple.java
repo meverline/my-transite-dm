@@ -16,12 +16,11 @@
 
 package me.crime.database.tuple;
 
-import com.mongodb.BasicDBObject;
+import org.bson.Document;
 
 import me.crime.database.Address;
 import me.transit.dao.query.tuple.AbstractQueryTuple;
 import me.transit.dao.query.tuple.Tuple;
-import org.bson.Document;
 
 
 public class AddressTuple extends AbstractQueryTuple {

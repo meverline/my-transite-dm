@@ -188,7 +188,6 @@ public class STING implements ClusteringAlgorithm {
 			return 0;
 		}
 		PoissonDistribution pdf = new PoissonDistribution(lambda);
-		//TODO: fix needs to take in double
 		return pdf.probability((int)value);
 	}
 

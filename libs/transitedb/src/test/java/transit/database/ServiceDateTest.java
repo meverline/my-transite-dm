@@ -45,6 +45,7 @@ public class ServiceDateTest extends AbstractDatabaseTest {
 		FilterProvider filters = new SimpleFilterProvider()
 				.addFilter("agencyFilter", SimpleBeanPropertyFilter.serializeAllExcept());
 		String json = mapper.writer(filters).writeValueAsString(object);
+		@SuppressWarnings("unused")
 		ServiceDate sd = mapper.readValue(json, ServiceDate.class);
 
 	}

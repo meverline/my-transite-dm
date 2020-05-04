@@ -1,10 +1,9 @@
 package me.transit.json;
 
-import com.fasterxml.jackson.databind.util.StdConverter;
-import me.transit.database.Agency;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
+import com.fasterxml.jackson.databind.util.StdConverter;
 
 public class CalendarJsonConvert extends StdConverter<Calendar, String> implements CalendarSerailizer {
 

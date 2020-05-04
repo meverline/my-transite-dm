@@ -64,6 +64,7 @@ public class SptialTileCache {
 		List<IQueryTuple> list = new ArrayList<>();
 		
 		list.add( new NumberTuple( IGridDocument.INDEX, index, NumberTuple.LOGIC.EQ));
+		@SuppressWarnings("unused")
 		List<AbstractDocument> rtn = documentDao.find(list, tile.getHeatMapName());
 		
 		// TODO: convert the document from BJSON to object.

@@ -10,8 +10,6 @@ import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.List;
 
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.easymock.EasyMock;
 import org.easymock.EasyMockRule;
@@ -23,12 +21,11 @@ import org.junit.Test;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
 import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 
 
-@SuppressWarnings("deprecation")
 public class TestDocumentDao extends EasyMockSupport{
 
     @Rule

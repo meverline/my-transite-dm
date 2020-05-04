@@ -1,7 +1,7 @@
 package me.crime.database.tuple;
 
 import static org.easymock.EasyMock.expect;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import org.bson.Document;
 import org.easymock.EasyMock;
@@ -10,8 +10,6 @@ import org.easymock.EasyMockSupport;
 import org.hibernate.Criteria;
 import org.junit.Rule;
 import org.junit.Test;
-
-import com.mongodb.BasicDBObject;
 
 public class TestAddressTuple extends EasyMockSupport {
 

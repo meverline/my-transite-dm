@@ -1,12 +1,12 @@
 package org.dm.transit.dao;
 
-import me.database.hibernate.AbstractHibernateDao;
+import java.sql.SQLException;
+
 import org.dm.transit.model.UserJob;
-import org.dm.transit.model.UserPreferences;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.sql.SQLException;
+import me.database.hibernate.AbstractHibernateDao;
 
 public class UserJobDao extends AbstractHibernateDao<UserJob> {
 

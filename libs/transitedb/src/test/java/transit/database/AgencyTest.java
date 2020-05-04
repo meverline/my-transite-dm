@@ -1,16 +1,15 @@
 package transit.database;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import me.math.Vertex;
-import me.math.kdtree.MinBoundingRectangle;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import org.meanbean.test.BeanTester;
 import org.meanbean.test.Configuration;
 import org.meanbean.test.ConfigurationBuilder;
 
-import me.transit.database.Agency;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
-import static org.junit.Assert.assertEquals;
+import me.transit.database.Agency;
 
 
 public class AgencyTest extends  AbstractDatabaseTest {

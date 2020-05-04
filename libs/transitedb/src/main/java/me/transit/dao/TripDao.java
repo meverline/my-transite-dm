@@ -30,7 +30,6 @@ public class TripDao extends TransitDao<Trip>  {
 	 */
 	@Override
 	protected void initObject(Trip rtn) {
-		// TODO Auto-generated method stub
 		super.initObject(rtn);
 		Hibernate.initialize(rtn.getShape());
 	}

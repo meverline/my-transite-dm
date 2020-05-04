@@ -18,12 +18,11 @@ package me.crime.database.tuple;
 
 import java.util.Calendar;
 
-import com.mongodb.BasicDBObject;
+import org.bson.Document;
 
 import me.crime.database.Crime;
 import me.transit.dao.query.tuple.AbstractQueryTuple;
 import me.transit.dao.query.tuple.Tuple;
-import org.bson.Document;
 
 public class EndDateTuple extends AbstractQueryTuple {
 

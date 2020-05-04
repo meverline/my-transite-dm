@@ -2,9 +2,6 @@ package me.database.neo4j;
 
 import java.util.Map;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import me.transit.database.TransitData;
-
 
 public abstract class AbstractGraphNode {
 

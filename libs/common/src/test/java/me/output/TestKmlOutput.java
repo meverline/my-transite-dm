@@ -16,7 +16,6 @@ public class TestKmlOutput {
 	public void test() throws IOException {
 		GeometryFactory factory_  = new GeometryFactory();
 		Point ul = factory_.createPoint(new Coordinate(38.941, -77.286));
-		Point lr = factory_.createPoint(new Coordinate(38.827, -77.078));
 
 		Coordinate [] coords = new Coordinate[5];
 

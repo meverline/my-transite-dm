@@ -26,7 +26,6 @@ import java.util.Objects;
 @JsonDeserialize(converter = GeometryFixer.class)
 public class Location implements Comparable<Location>, Serializable {
 	
-	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 
 	@Id

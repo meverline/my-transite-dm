@@ -7,7 +7,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -51,6 +50,7 @@ public abstract class TransitDao<T extends TransitData> extends AbstractHibernat
 			CriteriaBuilder builder = session.getCriteriaBuilder();
 			CriteriaQuery<Long> crit = builder.createQuery(Long.class);
 			
+			@SuppressWarnings("unchecked")
 			Root<T> root = (Root<T>) crit.from(this.getDaoClass());
 			crit.select(root.get("id"));
 			crit.where(
