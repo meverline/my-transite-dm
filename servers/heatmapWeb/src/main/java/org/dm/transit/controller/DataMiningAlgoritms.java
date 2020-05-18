@@ -14,13 +14,12 @@ import me.datamining.DataMiningTypes;
 @RequestMapping("dm-algorithms")
 public class DataMiningAlgoritms {
 
-    @GetMapping(value = "/list")
+	@GetMapping(value = "/list")
     public List<String> listNames() throws IOException {
         List<String> rtn = new ArrayList<>();
         for (DataMiningTypes type : DataMiningTypes.values()) {
             rtn.add(type.name());
         }
-
         return rtn;
     }
 }

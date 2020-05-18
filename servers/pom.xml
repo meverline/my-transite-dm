@@ -14,6 +14,9 @@
 
 	<modules>
 		<module>heatmapWeb</module>
+		<module>compute</module>
+		<module>data</module>
+		<module>manager</module>
 	</modules>
 
 </project>
