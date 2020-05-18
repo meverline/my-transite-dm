@@ -17,6 +17,8 @@ public class ComputeController {
         SearchRequest rtn = new SearchRequest();
         rtn.setName(parameters.getName());
         rtn.setSearchId(UUID.randomUUID().toString());
+        
+        // send to the compute server.
 
         return rtn;
     }
