@@ -20,6 +20,7 @@ package me.math;
 import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
@@ -59,10 +60,12 @@ public class Vertex implements Serializable {
 		lon_ = v.getLongitudeDegress();
 	}
 
+	@JsonIgnore
 	public double getLatitudeRadians() {
 		return EarthConstants.toRadians(lat_);
 	}
 
+	@JsonIgnore
 	public double getLongitudeRadians() {
 		return EarthConstants.toRadians(lon_);
 	}
@@ -87,17 +90,24 @@ public class Vertex implements Serializable {
 		lon_ = value;
 	}
 
-	
+	@JsonIgnore
 	public String toString() {
 		return "(" + lat_ + ", " + lon_ + ") ";
 	}
+	
+	@JsonIgnore
+	public Coordinate toCoordinate() {
+		return new Coordinate(getLatitudeDegress(), getLongitudeDegress() );
+	}
 
+	@JsonIgnore
 	public Point toPoint()
 	{
 		GeometryFactory factory_  = new GeometryFactory();
-		return factory_.createPoint(new Coordinate(getLatitudeDegress(), getLongitudeDegress() ));
+		return factory_.createPoint(this.toCoordinate());
 	}
 	
+	@JsonIgnore
 	public void formPoint(Point pt)
 	{
 		lat_ = pt.getCoordinate().x;
@@ -116,15 +126,18 @@ public class Vertex implements Serializable {
 
 	}
 
+	@JsonIgnore
 	public double distanceFrom(Vertex pt)
 	{
 		return pt.getEcfFromLatLon().distance( this.getEcfFromLatLon());
 	}
 
+	@JsonIgnore
 	public VectorMath getEcfFromLatLon() {
 		return getEcfFromLatLonAlt(0.0);
 	}
 	
+	@JsonIgnore
 	public VectorMath getEcfFromLatLonAlt(double altMeters) {
 		double latRad = this.getLatitudeRadians();
 		double lonRad = this.getLongitudeRadians();
