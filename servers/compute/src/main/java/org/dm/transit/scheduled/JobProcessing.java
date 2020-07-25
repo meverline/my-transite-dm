@@ -23,25 +23,24 @@ public class JobProcessing {
 	
 	private final Log log = LogFactory.getLog(getClass().getName());
 	private final ExecutorService executor;
-	private final Environment env;
 	private final AmazonSQS sqs;
 	private final String url;
 	
 	@Autowired
 	public JobProcessing(Environment env) {
-		this.env = env;
 		this.executor = Executors.newFixedThreadPool(Integer.parseInt(env.getProperty("jobs.maxThreads")));
 		this.sqs = AmazonSQSClientBuilder.defaultClient();
 		this.url = env.getProperty("jobs.sqs.url");
 	}
 
-	@Scheduled(fixedRate = 1000)
+	@Scheduled(fixedRate = 10000) // Time in milliseconds 10 seconds
 	public void scheduleFixedRateTask() {
 		final ReceiveMessageRequest receiveMessageRequest = new ReceiveMessageRequest(url);
         final List<Message> messages = sqs.receiveMessage(receiveMessageRequest).getMessages();
 
         for (final Message message : messages) {
         	try {
+        		String body = message.getBody();
         		
         	} catch ( Exception ex) {
         		log.error(ex.getLocalizedMessage(), ex);

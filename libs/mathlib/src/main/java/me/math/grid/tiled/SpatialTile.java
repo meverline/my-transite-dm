@@ -10,6 +10,7 @@ import java.util.List;
 import org.locationtech.jts.geom.Polygon;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
 import me.database.mongo.IDocument;
@@ -141,6 +142,7 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, ID
 	 * @param column
 	 * @return
 	 */
+	@JsonIgnore()
 	public TiledSpatialGridPoint getEntry(int row, int column) {
 		int index = ((row - this.getRowOffset()) * this.getCols()) + (column - this.getColOffSet());
 		return grid_.get(index);
@@ -151,6 +153,7 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, ID
 	 * @param index
 	 * @return
 	 */
+	@JsonIgnore()
 	public TiledSpatialGridPoint getEntry(int index) {
 		int tileIndex = index - this.getIndex();
 		return grid_.get(tileIndex);
@@ -160,10 +163,12 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, ID
 	 * 
 	 * @return
 	 */
+	@JsonIgnore()
 	public List<AbstractSpatialGridPoint> getGridPoints() {
 		return new ArrayList<>(this.grid_);
 	}
 	
+	@JsonIgnore()
 	public INode create(AbstractSpatialGridPoint loc, Direction dir, INode parent, int depth) {
 		TiledSpatialGridPoint rtn = null;
 		if ( loc instanceof TiledSpatialGridPoint ) {
@@ -178,6 +183,7 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, ID
 	 * 
 	 * @return
 	 */
+	@JsonIgnore()
 	public KDTree getTree() {
 		KDTree rtn;
 		if ( this.getRoot() != -1) {
@@ -216,6 +222,7 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, ID
 	/**
 	 * @param grid the grid_ to set
 	 */
+	@JsonSetter("grid")
 	public void setGrid(List<TiledSpatialGridPoint> grid) {
 		this.grid_ = grid;
 	}

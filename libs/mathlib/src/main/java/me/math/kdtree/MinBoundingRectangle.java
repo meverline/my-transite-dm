@@ -198,7 +198,7 @@ public class MinBoundingRectangle extends AbstractDocument implements Serializab
 	 * 
 	 * @return
 	 */
-	@JsonGetter("bottomlatDegress")
+	@JsonGetter("bottomLatDegress")
 	public double getBottomLatDegress() {
 		return bottomlatDegress_;
 	}
@@ -207,7 +207,7 @@ public class MinBoundingRectangle extends AbstractDocument implements Serializab
 	 * 
 	 * @return
 	 */
-	@JsonGetter("toplatDegress")
+	@JsonGetter("topLatDegress")
 	public double getTopLatDegress() {
 		return toplatDegress_;
 	}
@@ -216,7 +216,7 @@ public class MinBoundingRectangle extends AbstractDocument implements Serializab
 	 * 
 	 * @param toplatDegress_
 	 */
-	@JsonSetter("toplatDegress")
+	@JsonSetter("topLatDegress")
 	public void setToplatDegress(double toplatDegress_) {
 		this.toplatDegress_ = toplatDegress_;
 	}
@@ -225,7 +225,7 @@ public class MinBoundingRectangle extends AbstractDocument implements Serializab
 	 * 
 	 * @return
 	 */
-	@JsonGetter("leftlonDegress")
+	@JsonGetter("leftLonDegress")
 	public double getLeftLonDegress() {
 		return leftlonDegress_;
 	}
@@ -234,7 +234,7 @@ public class MinBoundingRectangle extends AbstractDocument implements Serializab
 	 * 
 	 * @param leftlonDegress_
 	 */
-	@JsonSetter("leftlonDegress")
+	@JsonSetter("leftLonDegress")
 	public void setLeftlonDegress(double leftlonDegress_) {
 		this.leftlonDegress_ = leftlonDegress_;
 	}
@@ -243,7 +243,7 @@ public class MinBoundingRectangle extends AbstractDocument implements Serializab
 	 * 
 	 * @return
 	 */
-	@JsonGetter("rightlonDegress")
+	@JsonGetter("rightLonDegress")
 	public double getRightLonDegress() {
 		return rightlonDegress_;
 	}
@@ -252,7 +252,7 @@ public class MinBoundingRectangle extends AbstractDocument implements Serializab
 	 * 
 	 * @param rightlonDegress_
 	 */
-	@JsonSetter("rightlonDegress")
+	@JsonSetter("rightLonDegress")
 	public void setRightlonDegress(double rightlonDegress_) {
 		this.rightlonDegress_ = rightlonDegress_;
 	}
@@ -261,7 +261,7 @@ public class MinBoundingRectangle extends AbstractDocument implements Serializab
 	 * 
 	 * @return
 	 */
-	@JsonSetter("bottomlatDegress")
+	@JsonSetter("bottomLatDegress")
 	public double getBottomlatDegress_() {
 		return bottomlatDegress_;
 	}
@@ -270,7 +270,7 @@ public class MinBoundingRectangle extends AbstractDocument implements Serializab
 	 * 
 	 * @param bottomlatDegress
 	 */
-	@JsonSetter("bottomlatDegress")
+	@JsonSetter("bottomLatDegress")
 	public void setBottomlatDegress(double bottomlatDegress) {
 		this.bottomlatDegress_ = bottomlatDegress;
 	}
