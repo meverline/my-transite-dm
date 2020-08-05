@@ -18,7 +18,7 @@ public class DMJob {
 	public enum Day { Sun, Mon, Tue, Wen, Thur, Fri, Sat }
 	
 	private String name;
-	private double gridSpaceInMeters = 1609.3;
+	private double gridSpaceInMeters = 1609.34; // 1 mile
 	private DataMiningTypes dataMiningType = DataMiningTypes.KDE_HEATMAP;
 	private MetricTypes metricType = MetricTypes.ServiceFrequnceAtStop;
 	private Shape shape;
@@ -30,6 +30,17 @@ public class DMJob {
 	
 	public DMJob() {	
 	}
+	
+	/**
+	 * 
+	 * @param name the name
+	 * @param shape the shape
+	 */
+	public DMJob(String name, Shape shape) {
+		this.setName(name);
+		this.setShape(shape);
+	}
+
 
 	/**
 	 * @return the name

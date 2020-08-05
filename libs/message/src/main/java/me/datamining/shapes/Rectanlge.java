@@ -66,6 +66,18 @@ public class Rectanlge implements Shape{
 		this.lowerRight = lowerRight;
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		boolean rtn = false;
+		if ( obj instanceof Rectanlge ) {
+			Rectanlge rhs = Rectanlge.class.cast(obj);
+			
+			rtn = getUpperLeft().equals(rhs.getUpperLeft()) && 
+				  getLowerRight().equals(rhs.getLowerRight());
+		}
+		return rtn;
+	}
+
 	/*
 	 * 
 	 */

@@ -87,6 +87,21 @@ public class Circle implements Shape{
     {
         return 6378137.0;
     }
+	
+	
+
+	@Override
+	public boolean equals(Object obj) {
+		
+		boolean rtn = false;
+		if ( obj instanceof Circle ) {
+			Circle rhs = Circle.class.cast(obj);
+			
+			rtn = getCenter().equals(rhs.getCenter()) && 
+					getDistanceInMeters() == rhs.getDistanceInMeters();
+		}
+		return rtn;
+	}
 
 	@JsonIgnore
     @Override
