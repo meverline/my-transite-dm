@@ -6,11 +6,14 @@ import java.io.Writer;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.locationtech.jts.geom.Polygon;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
 import me.database.mongo.IDocument;
@@ -19,12 +22,17 @@ import me.math.VectorMath;
 import me.math.Vertex;
 import me.math.grid.AbstractSpatialGrid;
 import me.math.grid.AbstractSpatialGridPoint;
+import me.math.grid.data.AbstractDataSample;
+import me.math.grid.data.CrossCovData;
 import me.math.kdtree.INode;
 import me.math.kdtree.INode.Direction;
 import me.math.kdtree.INodeCreator;
 import me.math.kdtree.KDTree;
 import me.math.kdtree.MinBoundingRectangle;
 
+@JsonRootName(value = "SpatialTile")
+@JsonPropertyOrder({ "_id", "rows", "cols", "defaultValue", "row_offset", "col_offset", "grid_size_in_meters", 
+					 "index", "tile_index", "frame", "cc_data", "grid" })
 public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, IDocument {
 	
 	public static final String ROW_OFFSET = "rowOffset";
@@ -34,12 +42,14 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, ID
 	private int tileIndex = -1;
 	private MinBoundingRectangle  mbr_ = null;
 	private int index_ = 0;
-	private int root_ = -1;
 	private int rowOffset_ = 0;
 	private int colOffSet_ = 0;
 	private double gridSizeInMeters_ = 0;
 	private List<TiledSpatialGridPoint> grid_ = new ArrayList<>();
 	private String docId = null;
+	private LocalDownFrame frame;
+	private AbstractDataSample defaulValue;
+	private CrossCovData ccdata;
 	
 	/**
 	 * 
@@ -71,8 +81,10 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, ID
 	public void createGrid(int rows, int cols, 
 						   LocalDownFrame southWestFrame, 
 						   double spacingInMeters, 
-						   AbstractTiledSpatialGrid.CrossCovData data)
+						   CrossCovData data)
 	{
+		this.setFrame(southWestFrame);
+		this.setCcdata(data);
 		this.setRows(rows);
 		this.setCols(cols);
 		
@@ -137,7 +149,7 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, ID
 	}
 
 	/**
-	 * 
+	 *    
 	 * @param row
 	 * @param column
 	 * @return
@@ -145,7 +157,7 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, ID
 	@JsonIgnore()
 	public TiledSpatialGridPoint getEntry(int row, int column) {
 		int index = ((row - this.getRowOffset()) * this.getCols()) + (column - this.getColOffSet());
-		return grid_.get(index);
+		return getGrid().get(index);
 	}
 	
 	/**
@@ -156,7 +168,7 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, ID
 	@JsonIgnore()
 	public TiledSpatialGridPoint getEntry(int index) {
 		int tileIndex = index - this.getIndex();
-		return grid_.get(tileIndex);
+		return getGrid().get(tileIndex);
 	}
 	
 	/**
@@ -165,7 +177,7 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, ID
 	 */
 	@JsonIgnore()
 	public List<AbstractSpatialGridPoint> getGridPoints() {
-		return new ArrayList<>(this.grid_);
+		return new ArrayList<>(this.getGrid());
 	}
 	
 	@JsonIgnore()
@@ -185,46 +197,60 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, ID
 	 */
 	@JsonIgnore()
 	public KDTree getTree() {
-		KDTree rtn;
-		if ( this.getRoot() != -1) {
-			rtn = new KDTree( this.getEntry(this.getRoot()));
-		} else  {
-			rtn = new KDTree( this.getGridPoints(), this);
-			setRoot(TiledSpatialGridPoint.class.cast(rtn.getRootNode()).getIndex());
-		}
-		return rtn;
-	}
-
-	/**
-	 * @return the root_
-	 */
-	@JsonGetter("root")
-	public int getRoot() {
-		return root_;
-	}
-
-	/**
-	 * @param root the root_ to set
-	 */
-	@JsonSetter("root")
-	public void setRoot(int root) {
-		this.root_ = root;
+		return new KDTree( this.getGridPoints(), this);
 	}
 
 	/**
 	 * @return the grid_
 	 */
 	@JsonGetter("grid")
-	public List<TiledSpatialGridPoint> getGrid() {
-		return grid_;
+	public List<TiledSpatialGridPoint> getSparseGrid() {
+		String defaultHash = this.defaulValue.hash();
+		return getGrid()
+					.stream()
+					.filter(item -> item.getData().hash().compareTo(defaultHash) != 0 )
+					.collect(Collectors.toList());
 	}
 
 	/**
 	 * @param grid the grid_ to set
 	 */
 	@JsonSetter("grid")
-	public void setGrid(List<TiledSpatialGridPoint> grid) {
-		this.grid_ = grid;
+	public void setSparseGrid(List<TiledSpatialGridPoint> sparseGrid) {
+		this.createGrid(getRows(), getCols(), getFrame(), getGridSizeInMeters(), getCcdata());
+		
+		// set the grid default vale
+		grid_.forEach( item -> { 
+				try {
+					item.setData(defaulValue.getClass().newInstance());
+					item.getData().copy(defaulValue);
+				} catch (InstantiationException | IllegalAccessException e) {
+					item.setData(null);
+				}
+				
+			}
+		);
+		
+		sparseGrid.forEach(item->{
+			TiledSpatialGridPoint entry = this.getEntry(item.getRow(), item.getCol());
+			entry.setData(item.getData());
+		});
+	}
+	
+	/**
+	 * @return the grid_
+	 */
+	@JsonIgnore
+	public List<TiledSpatialGridPoint> getGrid() {
+		return grid_;
+	}
+
+	/**
+	 * @param grid_ the grid_ to set
+	 */
+	@JsonIgnore
+	public void setGrid(List<TiledSpatialGridPoint> grid_) {
+		this.grid_ = grid_;
 	}
 
 	/**
@@ -262,7 +288,7 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, ID
 	/**
 	 * @return the mbr_
 	 */
-	@JsonGetter("min_bounding_rectangle")
+	@JsonIgnore
 	public MinBoundingRectangle getMbr() {
 		return mbr_;
 	}
@@ -270,12 +296,13 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, ID
 	/**
 	 * @param mbr_ the mbr_ to set
 	 */
-	@JsonSetter("min_bounding_rectangle")
-	public void setMbr(MinBoundingRectangle mbr_) {
+	@JsonIgnore
+	protected void setMbr(MinBoundingRectangle mbr_) {
 		this.mbr_ = mbr_;
 	}
 
 	@Override
+	@JsonIgnore
 	public AbstractSpatialGridPoint getNextGridPoint(
 			AbstractSpatialGridPoint gridPt) {
 		throw new UnsupportedOperationException();
@@ -316,16 +343,7 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, ID
 			e.printStackTrace();
 		}
 	}
-	
-	/**
-	 * 
-	 * @param node
-	 */
-	@JsonGetter("root_node")
-	public void setRootNode(int node) {
-		this.root_ = node;
-	}
-
+	 
 	public void handleEnum(String key, Object value) {		
 	}
 	
@@ -333,6 +351,7 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, ID
 	 * 
 	 * @return
 	 */
+	@JsonIgnore
 	public Polygon getBoundingBox()
 	{
 		return this.getMbr().toPolygon();
@@ -342,6 +361,7 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, ID
 	 * 
 	 * @param box
 	 */
+	@JsonIgnore
 	public void setBoundingBox(Polygon box) {
 		this.setMbr( new MinBoundingRectangle(box));
 	}
@@ -352,6 +372,14 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, ID
 	@JsonGetter("grid_size_in_meters")
 	public double getGridSizeInMeters() {
 		return gridSizeInMeters_;
+	}
+	
+	/**
+	 * @return the gridSizeInMeters_
+	 */
+	@JsonSetter("grid_size_in_meters")
+	public void getGridSizeInMeters(double size) {
+		gridSizeInMeters_ = size;
 	}
 	
 	/**
@@ -391,4 +419,69 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, ID
 		this.docId = docId;
 	}
 
+	/**
+	 * @return the defaulValue
+	 */
+	@JsonGetter("defaultValue")
+	public AbstractDataSample getDefaulValue() {
+		defaulValue = null;
+		
+		grid_.forEach(item->{ 
+			String itemHash = item.getData().hash();
+			if ( defaulValue == null || itemHash.compareTo(defaulValue.hash()) == 0 ) {
+				try {
+					defaulValue = item.getData().getClass().newInstance();
+					defaulValue.copy(item.getData());
+				} catch (InstantiationException | IllegalAccessException e) {
+					this.defaulValue = null;
+				}
+				
+			}
+		});
+		return defaulValue;
+	}
+
+	/**
+	 * @param defaulValue the defaulValue to set
+	 */
+	@JsonSetter("defaultValue")
+	public void setDefaulValue(AbstractDataSample defaulValue) {
+		this.defaulValue = defaulValue;
+	}
+
+	/**
+	 * @return the frame
+	 */
+	@JsonGetter("frame")
+	public LocalDownFrame getFrame() {
+		return frame;
+	}
+
+	/**
+	 * @param frame the frame to set
+	 */
+	@JsonSetter("frame")
+	public void setFrame(LocalDownFrame frame) {
+		this.frame = frame;
+	}
+
+	/**
+	 * @return the ccdata
+	 */
+	@JsonGetter("cc_data")
+	public CrossCovData getCcdata() {
+		return ccdata;
+	}
+
+	/**
+	 * @param ccdata the ccdata to set
+	 */
+	@JsonSetter("cc_data")
+	public void setCcdata(CrossCovData ccdata) {
+		this.ccdata = ccdata;
+	}
+	
+	
+	
+	
 }

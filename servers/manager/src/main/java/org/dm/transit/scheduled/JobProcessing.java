@@ -16,6 +16,9 @@ import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
 import com.amazonaws.services.sqs.model.Message;
 import com.amazonaws.services.sqs.model.ReceiveMessageRequest;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import me.datamining.DMJob;
 
 @Service
 @PropertySource({ "classpath:persistence-${envTarget:dev}.hmj.properties" })
@@ -26,6 +29,7 @@ public class JobProcessing {
 	private final Environment env;
 	private final AmazonSQS sqs;
 	private final String url;
+	private final ObjectMapper mapper = new ObjectMapper();
 	
 	@Autowired
 	public JobProcessing(Environment env) {
@@ -42,6 +46,7 @@ public class JobProcessing {
 
         for (final Message message : messages) {
         	try {
+        		
         		
         	} catch ( Exception ex) {
         		log.error(ex.getLocalizedMessage(), ex);

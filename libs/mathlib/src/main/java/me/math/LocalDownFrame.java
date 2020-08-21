@@ -19,19 +19,52 @@
 
 package me.math;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
+@JsonRootName(value = "LocalDownFrame")
 public class LocalDownFrame extends ECFPositionedFrame{
 
 	public enum RelativePositionOrder {
 		NORTH_THEN_EAST,
 		EAST_THEN_NORTH
 	}
+	
+	private Vertex position;
+	
+	public LocalDownFrame() {	
+	}
+	
+	/**
+	 * @return the position
+	 */
+	@JsonGetter("position")
+	public Vertex getPosition() {
+		return position;
+	}
+
+	/**
+	 * @param position the position to set
+	 */
+	@JsonSetter("position")
+	public void setPosition(Vertex position) {
+		this.position = position;
+		init(position.getEcfFromLatLon(),
+				 ThreeRotationQuaternion.RotationYXY(-Math.PI / 2.0,
+						 							 position.getLongitudeRadians(),
+						 							 -position.getLatitudeRadians()));
+	}
+
+
 
 	/// <summary>
 	/// Creates a LocalDownFrame from a GeoPoint
 	/// </summary>
 	/// <param name="position"></param>
 	public LocalDownFrame(Vertex position) {
+		this.position = position;
 		init(position.getEcfFromLatLon(),
 			 ThreeRotationQuaternion.RotationYXY(-Math.PI / 2.0,
 					 							 position.getLongitudeRadians(),
@@ -43,7 +76,7 @@ public class LocalDownFrame extends ECFPositionedFrame{
 	/// </summary>
 	/// <param name="positionECF"></param>
 	public LocalDownFrame(VectorMath positionECF) {
-		Vertex position = new Vertex(positionECF);
+		position = new Vertex(positionECF);
 		init(positionECF,
 			 ThreeRotationQuaternion.RotationYXY(-Math.PI / 2.0,
 					 							 position.getLongitudeRadians(),
@@ -57,7 +90,7 @@ public class LocalDownFrame extends ECFPositionedFrame{
 	/// <param name="lonDegrees"></param>
 	/// <param name="altMeters"></param>
 	public LocalDownFrame(double latDegrees, double lonDegrees) {
-		Vertex position = new Vertex(latDegrees, lonDegrees);
+		position = new Vertex(latDegrees, lonDegrees);
 		init(position.getEcfFromLatLon(),
 			 ThreeRotationQuaternion.RotationYXY(-Math.PI / 2.0,
 					 							 position.getLongitudeRadians(),
@@ -75,6 +108,7 @@ public class LocalDownFrame extends ECFPositionedFrame{
 	/// <param name="eastDistanceMeters"></param>
 	/// <param name="order"></param>
 	/// <returns></returns>
+	@JsonIgnore
 	public VectorMath getRelativePosition(double northDistanceMeters,
 									      double eastDistanceMeters, 
 									      RelativePositionOrder order) {

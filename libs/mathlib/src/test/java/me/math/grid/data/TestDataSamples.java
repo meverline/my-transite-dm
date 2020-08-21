@@ -1,11 +1,19 @@
 package me.math.grid.data;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import java.io.IOException;
 
 import org.junit.Test;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class TestDataSamples {
 
+	ObjectMapper json = new ObjectMapper();
+	
 	@Test
 	public void testDensityEstimateDataSample() {
 		DensityEstimateDataSample obj = new DensityEstimateDataSample();
@@ -18,6 +26,17 @@ public class TestDataSamples {
 		
 		obj.setInterpolationValue(0.15);
 		assertEquals(0.15, obj.getInterpolationValue(), 0.01);
+		
+		try {
+			String str = json.writeValueAsString(obj);
+			DensityEstimateDataSample dup = json.readValue(str, DensityEstimateDataSample.class);
+			
+			
+		} catch ( IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 	}
 	
@@ -46,6 +65,15 @@ public class TestDataSamples {
 		
 		obj.setInterpolationValue(0.15);
 		assertEquals(0.15, obj.getInterpolationValue(), 0.01);
+		
+		try {
+			String str = json.writeValueAsString(obj);
+			STINGDataSample dup = json.readValue(str, STINGDataSample.class);
+			
+		} catch ( IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		
 	}

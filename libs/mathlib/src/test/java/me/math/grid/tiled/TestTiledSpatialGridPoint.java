@@ -16,6 +16,8 @@ import org.meanbean.test.BeanTester;
 import org.meanbean.test.Configuration;
 import org.meanbean.test.ConfigurationBuilder;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import me.math.Vertex;
 import me.math.grid.AbstractSpatialGridPoint;
 import me.math.kdtree.INode;
@@ -54,12 +56,23 @@ public class TestTiledSpatialGridPoint extends EasyMockSupport {
 		TiledSpatialGridPoint obj = new TiledSpatialGridPoint(10, 10, v, 20, 20);
 		
 		assertNotNull(obj);
-		obj.setRightNode(10);
-	    obj.setLeftNode(20);
-	    obj.setParentNode(10);
 	    obj.setCorner(v);
 	    obj.setGrid(new SpatialTile());
 	}
+	
+	@Test
+	public void testJson() {
+		ObjectMapper json = new ObjectMapper();
+		Vertex v = new Vertex(-77.286, 38.941);
+		TiledSpatialGridPoint obj = new TiledSpatialGridPoint(10, 10, v, 20, 20);
+		
+		assertNotNull(obj);
+	    obj.setCorner(v);
+	    obj.setGrid(new SpatialTile());
+	    
+	    
+	}
+	
 	
 	@Test
 	public void testNodeGridMethods() {

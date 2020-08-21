@@ -1,12 +1,16 @@
 package me.math;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import java.io.IOException;
 
 import org.junit.Test;
-
 import org.locationtech.jts.geom.Point;
 
-import me.math.Vertex;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class TestVertex {
 
@@ -28,6 +32,24 @@ public class TestVertex {
 		obj.setLongitudeDegress(50.0);
 		assertEquals( obj.getLatitudeDegress(), 39.0, 0.01);
 		assertEquals( obj.getLongitudeDegress(), 50.0, 0.01);
+		
+	}
+	
+	@Test
+	public void testJson() {
+		Vertex obj = new Vertex(38.941, -77.286);
+		ObjectMapper json = new ObjectMapper();
+		
+		try {
+			String str = json.writeValueAsString(obj);
+			Vertex dup = json.readValue(str, Vertex.class);
+			
+			assertTrue(dup.equals(obj));
+			
+		} catch ( IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	

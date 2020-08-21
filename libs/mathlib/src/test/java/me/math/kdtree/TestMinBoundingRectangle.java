@@ -1,15 +1,18 @@
 package me.math.kdtree;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-
 import org.locationtech.jts.geom.Point;
 import org.locationtech.jts.geom.Polygon;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import me.math.Vertex;
 import me.math.grid.AbstractSpatialGridPoint;
@@ -54,7 +57,26 @@ public class TestMinBoundingRectangle {
 		
 		assertTrue(obj.contains(ul));
 		assertTrue(obj.contains(ul.toPoint()));
-		assertTrue(obj.contains(grid.get(10, 10)));
+		assertTrue(obj.contains(grid.get(10, 10)));	
+	}
+	
+	@Test
+	public void testJson() {
+		MinBoundingRectangle obj = new MinBoundingRectangle(ul);
+		obj.extend(lr);
+		
+		ObjectMapper json = new ObjectMapper();
+		
+		try {
+			String str = json.writeValueAsString(obj);
+			MinBoundingRectangle dup = json.readValue(str, MinBoundingRectangle.class);
+			
+			assertTrue(dup.equals(obj));
+			
+		} catch ( IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@Test

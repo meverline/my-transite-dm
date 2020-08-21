@@ -1,10 +1,3 @@
-package me.math.grid;
-
-import javax.persistence.Column;
-
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonSetter;
-
 //	  CIRAS: Crime Information Retrieval and Analysis System
 //Copyright 2009 by Russ Brasser, Mark Everline and Eric Franklin
 //
@@ -24,10 +17,15 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 //Based Upon C# code by Frank Levine and Paul Greene
 //Adapted to Java by Mark Everline
 
+package me.math.grid;
+
+import javax.persistence.Column;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import me.math.EarthConstants;
 import me.math.Vertex;
 
-public abstract class AbstractSpatialGrid {
+public abstract class AbstractSpatialGrid implements Cloneable {
 	
 	public static final String ROWS = "rows";
 	public static final String COLS = "cols";

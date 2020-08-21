@@ -10,6 +10,7 @@ import me.math.VectorMath;
 import me.math.Vertex;
 import me.math.grid.AbstractSpatialGridOverlay;
 import me.math.grid.AbstractSpatialGridPoint;
+import me.math.grid.data.CrossCovData;
 import me.math.kdtree.INode;
 import me.math.kdtree.INode.Direction;
 import me.math.kdtree.INodeCreator;
@@ -182,35 +183,5 @@ public abstract class AbstractTiledSpatialGrid extends AbstractSpatialGridOverla
 			AbstractSpatialGridPoint gridPt) {
 		throw new UnsupportedOperationException();
 	}
-	
-	///////////////////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////////////////
-	
-	public static class CrossCovData {
 		
-	   private double d_latitude = 0.0;
-	   private double d_longitude = 0.0;
-       private int number = 0;
-       private final Vertex avgPoint;
-       
-       public CrossCovData(Vertex pt) {
-    	   avgPoint = pt;
-       }
-        
-       public void addPoint(Vertex pt) {
-    	   number++;
-    	   d_latitude += pt.getLatitudeDegress() - avgPoint.getLatitudeDegress();
-           d_longitude += pt.getLongitudeDegress() - avgPoint.getLongitudeDegress();
-       }
-       
-       public double crossCovariance() {
-           d_latitude = d_latitude / ( number - 1.0);
-           d_longitude = d_longitude / ( number - 1.0);
-           return Math.abs((d_latitude * d_longitude) / ( number - 1.0));
-       }
-       
-	}
-	
-	
 }

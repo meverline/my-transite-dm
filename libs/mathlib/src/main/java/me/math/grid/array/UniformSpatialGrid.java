@@ -169,18 +169,13 @@ public class UniformSpatialGrid extends AbstractSpatialGridOverlay implements IN
 		
 		LocalDownFrame southWestFrame = new LocalDownFrame(lowerLeft.getEcfFromLatLon());
 
-		for (int rowIndex = 0; rowIndex < this.getRows(); rowIndex++) {
-			for (int colIndex = 0; colIndex < this.getCols(); colIndex++) {
-				initGridPoit(rowIndex, colIndex);
-			}
-		}
-
         double d_latitude = 0.0;
         double d_longitude = 0.0;
         Vertex avgPoint = findAverageLatLon(upperLeft, lowerRight);
 		int number = 0;
 		for (int rowIndex = 0; rowIndex < this.getRows(); rowIndex++) {
 			for (int colIndex = 0; colIndex < this.getCols(); colIndex++) {
+				initGridPoit(rowIndex, colIndex);
 				double northDistanceMeters = (double) rowIndex* this.getGridSpacingMeters();
 				double eastDistanceMeters = (double) colIndex* this.getGridSpacingMeters();
 

@@ -19,6 +19,7 @@
 
 package me.math;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class OrthoFrame {
 
@@ -26,26 +27,32 @@ public class OrthoFrame {
 	protected VectorMath m_y;
 	protected VectorMath m_z;
 
+	@JsonIgnore
 	public VectorMath getXAxis() {
 		return m_x;
 	}
 
+	@JsonIgnore
 	public void setXAxis(VectorMath x) {
 		m_x = x;
 	}
 
+	@JsonIgnore
 	public VectorMath getYAxis() {
 		return m_y;
 	}
 
+	@JsonIgnore
 	public void setYAxis(VectorMath y) {
 		m_y = y;
 	}
 
+	@JsonIgnore
 	public VectorMath getZAxis() {
 		return m_z;
 	}
 
+	@JsonIgnore
 	public void setZAxis(VectorMath z) {
 		m_z = z;
 	}

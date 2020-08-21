@@ -30,6 +30,13 @@ public abstract class AbstractDataSample {
 	public double getInterpolationValue() {
 		return this.interpolationValue;
 	}
+	
+	/**
+	 * 
+	 * @param item
+	 * @return
+	 */
+	public abstract void copy(AbstractDataSample item);
 
 	/**
 	 * 
@@ -41,5 +48,11 @@ public abstract class AbstractDataSample {
 	 * 
 	 */
 	public abstract void addValue(double value);
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public abstract String hash();
 
 }

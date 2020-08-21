@@ -4,29 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
+import org.hashids.Hashids;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
 @JsonRootName(value = "STINGDataSample")
 public class STINGDataSample extends AbstractDataSample {
 
-
 	private boolean checked = false;
 	private List<Double> values = new ArrayList<>();
-	private transient  DescriptiveStatistics stats = null;
+	private transient  DescriptiveStatistics stats = new DescriptiveStatistics();
 	
-	private void init()
-	{
-		if ( stats == null) {
-			stats = new DescriptiveStatistics();
-		}
-	}
 	/**
 	 * 
 	 * @return
 	 */
+	@JsonIgnore
 	protected boolean isDataListEmpty()
 	{
 		return this.values.isEmpty();
@@ -52,14 +48,14 @@ public class STINGDataSample extends AbstractDataSample {
 
 	
 	@Override
+	@JsonIgnore
 	public double getValue() {
-		init();
 		return stats.getSum();
 	}
-
+	
 	@Override
+	@JsonIgnore
 	public void addValue(double value) {
-		init();
 		this.values.add(value);
 		stats.addValue(value);
 	}
@@ -71,12 +67,14 @@ public class STINGDataSample extends AbstractDataSample {
 	
 	@JsonSetter("values")
 	public void setValues(List<Double> values) {
-		this.values = values;
+		stats.clear();
+		this.values.addAll(values);
+		this.values.forEach( item -> stats.addValue(item));
 	}
 	
+	@JsonIgnore
 	public double getSampleNumber()
 	{
-		init();
 		return stats.getN();
 	}
 	
@@ -84,8 +82,8 @@ public class STINGDataSample extends AbstractDataSample {
 	 * 
 	 * @return
 	 */
+	@JsonIgnore
 	public double getMin() {
-		init();
 		return stats.getMin();
 	}
 
@@ -93,8 +91,8 @@ public class STINGDataSample extends AbstractDataSample {
 	 * 
 	 * @return
 	 */
+	@JsonIgnore
 	public double getMax() {
-		init();
 		return stats.getMax();
 	}
 
@@ -102,8 +100,8 @@ public class STINGDataSample extends AbstractDataSample {
 	 * 
 	 * @return
 	 */
+	@JsonIgnore
 	public double average() {
-		init();
 		return stats.getMean();
 	}
 
@@ -111,9 +109,39 @@ public class STINGDataSample extends AbstractDataSample {
 	 * 
 	 * @return
 	 */
+	@JsonIgnore
 	public double standardDeviation() {
-		init();
 		return stats.getStandardDeviation();
+	}
+	
+	/*
+	 * 
+	 */
+	@Override
+	public void copy(AbstractDataSample item) {
+		if ( item instanceof STINGDataSample) {
+			STINGDataSample obj = (STINGDataSample) item;
+			obj.setInterpolationValue(this.getInterpolationValue());
+			obj.setChecked(this.isChecked());
+			obj.setValues(this.getValues());
+		}		
+	}
+	
+	/*
+	 * 
+	 */
+	@Override
+	public String hash() {
+	   Hashids hashids = new Hashids(getClass().getName());
+	   return hashids.encode(
+	            Double.hashCode(getInterpolationValue()),
+	            Double.hashCode(getValue()),
+	            values.size(),
+	            Double.hashCode(average()),
+	            Double.hashCode(standardDeviation()),
+	            Double.hashCode(getMin()),
+	            Double.hashCode(getMin())
+	   );
 	}
 
 }

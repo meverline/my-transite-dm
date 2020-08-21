@@ -2,7 +2,13 @@ package me.math;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
+
 import org.junit.Test;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import me.math.kdtree.MinBoundingRectangle;
 
 @SuppressWarnings("unused")
 public class TestLocalDownFrame {
@@ -20,6 +26,25 @@ public class TestLocalDownFrame {
 	{
 		LocalDownFrame ldf = new LocalDownFrame(new Vertex(38.9, -75.0));
 		assertEquals(2.0, ldf.angleInRadiansForArcLength(20.0, 10), 0.01);
+		
+	}
+	
+	@Test
+	public void testJson()
+	{
+		LocalDownFrame ldf = new LocalDownFrame(new Vertex(38.9, -75.0));
+		assertEquals(2.0, ldf.angleInRadiansForArcLength(20.0, 10), 0.01);
+		
+		ObjectMapper json = new ObjectMapper();
+		
+		try {
+			String str = json.writeValueAsString(ldf);
+			LocalDownFrame dup = json.readValue(str, LocalDownFrame.class);
+			
+		} catch ( IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	

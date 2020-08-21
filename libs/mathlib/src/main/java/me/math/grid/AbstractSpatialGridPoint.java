@@ -32,31 +32,37 @@ import me.math.kdtree.MinBoundingRectangle;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
 @JsonSubTypes({ @Type(value = SpatialGridPoint.class, name = "SpatialGridPoint"),
-		@Type(value = TiledSpatialGridPoint.class, name = "TiledSpatialGridPoint")})
+			   @Type(value = TiledSpatialGridPoint.class, name = "TiledSpatialGridPoint")})
 public abstract class AbstractSpatialGridPoint implements INode {
 	
-	public static final String ROW = "row";
-	public static final String COL = "col";
-	public static final String INDEX = "index";
-	public static final String DATA = "data";
-	public static final String DIRECTION = "direction";
-	public static final String MBR = "MBR";
-	public static final String DEPTH = "depth";
-
+	private Vertex corner_ = null;
 	private int row_ = -1;
 	private int col_ = -1;
 	private int index_ = -1;
-	private AbstractDataSample data_ = null;
-	private INode.Direction direction_ = INode.Direction.UNKOWN;
-	private MinBoundingRectangle mbr_ = null;
 	private int depth_ = 0;
-
+	private AbstractDataSample data_ = null;
+	private MinBoundingRectangle mbr_ = null;
+	
+	private transient INode.Direction direction_ = INode.Direction.UNKOWN;
+	private transient INode left_ = null;
+	private transient INode right_ = null;
+	private transient INode parent_ = null;
 
 	/**
 	 *
 	 */
 	protected AbstractSpatialGridPoint() {
 
+	}
+	
+	/**
+	 *
+	 */
+	protected AbstractSpatialGridPoint(int row, int col, Vertex corner, int index) {
+		this.setRow(row);
+		this.setCol(col);
+		this.setCorner(corner);
+		this.setIndex(index);
 	}
 
 	/**
@@ -97,16 +103,14 @@ public abstract class AbstractSpatialGridPoint implements INode {
 	}
 
 	/**
-	 * 
-	 * @return
+	 * return
 	 */
-	public abstract Vertex getVertex();
+	@JsonIgnore
+	public Vertex getVertex()
+	{
+		return new Vertex(corner_);
+	}
 	
-	/**
-	 * @param corner_ the corner_ to set
-	 */
-	protected abstract void setCorner(Vertex corner_);
-
 	/**
 	 * @param row_ the row_ to set
 	 */
@@ -147,26 +151,27 @@ public abstract class AbstractSpatialGridPoint implements INode {
 		this.data_ = data_;
 	}
 	
+	@JsonIgnore
 	public Vertex getPointVertex() {
 		return this.getVertex();
 	}
 	
-	@JsonGetter("depth")
+	@JsonIgnore
 	public int getDepth() {
 		return this.depth_;
 	}
 	
-	@JsonSetter("depth")
+	@JsonIgnore
 	public void setDepth(int depth) {
 		this.depth_ = depth;
 	}
 	
-	@JsonGetter("direction")
+	@JsonIgnore
 	public Direction getDirection() {
 		return this.direction_;
 	}
 	
-	@JsonSetter("direction")
+	@JsonIgnore
 	public void setDirection(Direction dir) {
 		this.direction_ = dir;
 	}
@@ -179,6 +184,70 @@ public abstract class AbstractSpatialGridPoint implements INode {
 	@JsonSetter("mbr")
 	public void setMBR(MinBoundingRectangle mbr) {
 		this.mbr_ = mbr;
+	}
+	
+	/**
+	 * @return the corner_
+	 */
+	@JsonIgnore
+	public Vertex getCorner() {
+		return corner_;
+	}
+
+	/**
+	 * @param corner_ the corner_ to set
+	 */
+	@JsonIgnore
+	public void setCorner(Vertex corner_) {
+		this.corner_ = corner_;
+	}
+
+	/**
+	 * @return the left_
+	 */
+	@JsonIgnore
+	public INode getLeft() {
+		return left_;
+	}
+
+	/**
+	 * @param left_ the left_ to set
+	 */
+	@JsonIgnore
+	public void setLeft(INode left_) {
+		this.left_ = left_;
+	}
+
+	/**
+	 * @return the right_
+	 */
+	@JsonIgnore
+	public INode getRight() {
+		return right_;
+	}
+
+	/**
+	 * @param right_ the right_ to set
+	 */
+	@JsonIgnore
+	public void setRight(INode right_) {
+		this.right_ = right_;
+	}
+
+	/**
+	 * @return the parent_
+	 */
+	@JsonIgnore
+	public INode getParent() {
+		return parent_;
+	}
+
+	/**
+	 * @param parent_ the parent_ to set
+	 */
+	@JsonIgnore
+	public void setParent(INode parent_) {
+		this.parent_ = parent_;
 	}
 
 	public boolean contains(Vertex pt) {
@@ -214,5 +283,14 @@ public abstract class AbstractSpatialGridPoint implements INode {
        }
        return buf.toString();
 	}
+	
+	/* (non-Javadoc)
+	 * @see me.math.kdtree.INode#getPoint()
+	 */
+	@JsonIgnore
+	public AbstractSpatialGridPoint getPoint() {
+		return this;
+	}
+	
 	
 }

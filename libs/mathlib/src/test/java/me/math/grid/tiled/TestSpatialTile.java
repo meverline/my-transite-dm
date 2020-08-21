@@ -16,9 +16,13 @@ import org.meanbean.test.BeanTester;
 import org.meanbean.test.Configuration;
 import org.meanbean.test.ConfigurationBuilder;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import me.math.LocalDownFrame;
 import me.math.Vertex;
 import me.math.grid.data.AbstractDataSample;
+import me.math.grid.data.CrossCovData;
+import me.math.grid.data.DensityEstimateDataSample;
 import me.math.kdtree.MinBoundingRectangle;
 import me.utils.TransiteEnums;
 
@@ -30,7 +34,12 @@ public class TestSpatialTile {
 		
 		Configuration configuration = new ConfigurationBuilder().
 						overrideFactory("mbr", new MinBoundingRectangleFactory()).
-						ignoreProperty("boundingBox").build();
+						ignoreProperty("boundingBox").
+						ignoreProperty( "grid" ).
+						ignoreProperty( "defaulValue" ).
+						ignoreProperty( "sparseGrid" ).
+						ignoreProperty( "frame" ).
+						build();
 		
 		tester.testBean(SpatialTile.class, configuration);
 	}
@@ -48,7 +57,6 @@ public class TestSpatialTile {
 		
 		assertNotNull( obj.getGridPoints());
 		assertNotNull( obj.getBoundingBox());
-		obj.setRoot(0);
 		
 		try {
 			obj.getNextGridPoint(obj.getEntry(1, 1));
@@ -58,7 +66,36 @@ public class TestSpatialTile {
 		}
 		
 		obj.handleEnum("key", "value");
-		obj.setRoot(10);
+
+	}
+	
+	@Test
+	public void testJson() {
+		Vertex v = new Vertex(-77.286, 38.941);
+		double distance = TransiteEnums.DistanceUnitType.MI.toMeters(0.1);
+		LocalDownFrame ldf = new LocalDownFrame(v);
+		
+		SpatialTile obj = new SpatialTile(0, 0, 5, 15);
+		
+		obj.createGrid(25, 25, ldf, distance, new CrossCovData(v));
+		
+		for (TiledSpatialGridPoint pt :  obj.getGrid()) {
+			pt.setData( new DensityEstimateDataSample());
+		}
+		
+		for (int j= 0; j < 25; j++) {
+			obj.getEntry(j, j).getData().addValue(5.0);
+		}
+		
+		ObjectMapper json = new ObjectMapper();
+		
+		try {
+			String str = json.writeValueAsString(obj);
+			SpatialTile dup = json.readValue(str, SpatialTile.class);
+			
+		} catch ( IOException e) {
+			fail(e.getLocalizedMessage());
+		}
 	}
 	
 	@Test
@@ -69,7 +106,7 @@ public class TestSpatialTile {
 		
 		SpatialTile obj = new SpatialTile(100, 200, 5, 15);
 		
-		obj.createGrid(25, 25, ldf, distance, new AbstractTiledSpatialGrid.CrossCovData(v));
+		obj.createGrid(25, 25, ldf, distance, new CrossCovData(v));
 		
 		assertNotNull( obj.getTree());
 				
@@ -100,6 +137,15 @@ public class TestSpatialTile {
 
 		@Override
 		public void addValue(double value) {			
+		}
+
+		@Override
+		public void copy(AbstractDataSample item) {
+		}
+		
+		@Override
+		public String hash() {
+			return "X";
 		}
 		
 	}

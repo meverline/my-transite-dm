@@ -37,6 +37,12 @@
             <artifactId>transite-common</artifactId>
             <version>0.0.5</version>
         </dependency>
+        
+        <dependency>
+		   <groupId>org.hashids</groupId>
+		   <artifactId>hashids</artifactId>
+		   <version>1.0.3</version>
+		</dependency>
 
     </dependencies>
 

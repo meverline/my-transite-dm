@@ -20,6 +20,14 @@ public class TiledSpatialGrid extends AbstractTiledSpatialGrid {
 	 * 
 	 * @param spacingInMeters
 	 */
+	public TiledSpatialGrid( )
+	{
+	}
+	
+	/**
+	 * 
+	 * @param spacingInMeters
+	 */
 	public TiledSpatialGrid( double spacingInMeters)
 	{
 		init(spacingInMeters);

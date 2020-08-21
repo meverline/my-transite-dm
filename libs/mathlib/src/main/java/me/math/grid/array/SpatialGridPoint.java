@@ -16,21 +16,15 @@
 
 package me.math.grid.array;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import me.math.Vertex;
 import me.math.grid.AbstractSpatialGridPoint;
-import me.math.kdtree.INode;
 
 public class SpatialGridPoint extends AbstractSpatialGridPoint{
 
-	private Vertex corner_ = null;
-	private UniformSpatialGrid grid_ = null;
-	private INode left_ = null;
-	private INode right_ = null;
-	private INode parent_ = null;
-	
+	private transient UniformSpatialGrid grid_ = null;
+
 	/**
 	 * 
 	 * @param row
@@ -40,11 +34,7 @@ public class SpatialGridPoint extends AbstractSpatialGridPoint{
 	 * @param grid
 	 */
 	public SpatialGridPoint(int row, int col, Vertex corner, int index, UniformSpatialGrid grid) {
-
-		this.setRow(row);
-		this.setCol(col);
-		this.setCorner(corner);
-		this.setIndex(index);
+		super(row, col, corner, index);
 		grid_ = grid;
 	}
 
@@ -52,6 +42,7 @@ public class SpatialGridPoint extends AbstractSpatialGridPoint{
 	 * 
 	 * @return
 	 */
+	@JsonIgnore
 	public UniformSpatialGrid Grid()
 	{
 		return grid_;
@@ -61,75 +52,9 @@ public class SpatialGridPoint extends AbstractSpatialGridPoint{
 	 * 
 	 * @return
 	 */
-	@JsonGetter("corner")
-	public Vertex getVertex()
-	{
-		return new Vertex(corner_);
-	}
-	
-	/**
-	 * @param corner_ the corner_ to set
-	 */
-	@JsonSetter("corner")
-	protected void setCorner(Vertex corner_) {
-		this.corner_ = corner_;
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
 	public String dumpInfo() {
 		return "\t[" + this.getRow() + ", " + this.getCol() + "]";
 	}
 
-	/* (non-Javadoc)
-	 * @see me.math.kdtree.INode#getLeft()
-	 */
-	public INode getLeft() {
-		return this.left_;
-	}
-
-	/* (non-Javadoc)
-	 * @see me.math.kdtree.INode#setLeft(me.math.kdtree.INode)
-	 */
-	public void setLeft(INode left) {
-		this.left_ = left;
-	}
-
-	/* (non-Javadoc)
-	 * @see me.math.kdtree.INode#getRight()
-	 */
-	public INode getRight() {
-		return this.right_;
-	}
-
-	/* (non-Javadoc)
-	 * @see me.math.kdtree.INode#setRight(me.math.kdtree.INode)
-	 */
-	public void setRight(INode right) {
-		this.right_ = right;
-	}
-
-	/* (non-Javadoc)
-	 * @see me.math.kdtree.INode#getParent()
-	 */
-	public INode getParent() {
-		return this.parent_;
-	}
-	
-	public void setParent(INode index) 
-	{
-		this.parent_ = index;
-	}
-
-	/* (non-Javadoc)
-	 * @see me.math.kdtree.INode#getPoint()
-	 */
-	public AbstractSpatialGridPoint getPoint() {
-		return this;
-	}
-	
-	
 
 }
