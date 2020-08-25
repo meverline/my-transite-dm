@@ -18,8 +18,6 @@ import com.amazonaws.services.sqs.model.Message;
 import com.amazonaws.services.sqs.model.ReceiveMessageRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import me.datamining.DMJob;
-
 @Service
 @PropertySource({ "classpath:persistence-${envTarget:dev}.hmj.properties" })
 public class JobProcessing {

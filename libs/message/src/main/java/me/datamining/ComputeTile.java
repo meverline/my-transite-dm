@@ -2,82 +2,40 @@ package me.datamining;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import me.math.grid.tiled.SpatialTile;
 
-import me.math.grid.tiled.AbstractTiledSpatialGrid;
+@JsonRootName("ComputeTile")
+public class ComputeTile extends TileJob {
 
-public class ComputeTile {
+    private SpatialTile target;
+    private SpatialTile compute;
 
-	private String jobNumber;
-	private String tileId;
-	private int  tileNumber;
-	private AbstractTiledSpatialGrid  tile;
-	
-	public ComputeTile() {
-		
-	}
+    public ComputeTile() {}
 
-	/**
-	 * @return the jobNumber
-	 */
-	@JsonGetter("jobNumber")
-	public String getJobNumber() {
-		return jobNumber;
-	}
+    public ComputeTile(String jobNumber, int  tileNumber, SpatialTile target, SpatialTile compute) {
+        super(jobNumber, tileNumber);
+        this.setTarget(target);
+        this.setCompute(compute);
+    }
 
-	/**
-	 * @param jobNumber the jobNumber to set
-	 */
-	@JsonSetter("jobNumber")
-	public void setJobNumber(String jobNumber) {
-		this.jobNumber = jobNumber;
-	}
+    @JsonGetter("target")
+    public SpatialTile getTarget() {
+        return target;
+    }
 
-	/**
-	 * @return the tileId
-	 */
-	@JsonGetter("tileId")
-	public String getTileId() {
-		return tileId;
-	}
+    @JsonSetter("target")
+    public void setTarget(SpatialTile target) {
+        this.target = target;
+    }
 
-	/**
-	 * @param tileId the tileId to set
-	 */
-	@JsonSetter("tileId")
-	public void setTileId(String tileId) {
-		this.tileId = tileId;
-	}
+    @JsonGetter("compute")
+    public SpatialTile getCompute() {
+        return compute;
+    }
 
-	/**
-	 * @return the tileNumber
-	 */
-	@JsonGetter("tileNumber")
-	public int getTileNumber() {
-		return tileNumber;
-	}
-
-	/**
-	 * @param tileNumber the tileNumber to set
-	 */
-	@JsonSetter("tileNumber")
-	public void setTileNumber(int tileNumber) {
-		this.tileNumber = tileNumber;
-	}
-
-	/**
-	 * @return the tile
-	 */
-	@JsonGetter("tile")
-	public AbstractTiledSpatialGrid getTile() {
-		return tile;
-	}
-
-	/**
-	 * @param tile the tile to set
-	 */
-	@JsonSetter("tile")
-	public void setTile(AbstractTiledSpatialGrid tile) {
-		this.tile = tile;
-	}
-	 
+    @JsonSetter("compute")
+    public void setCompute(SpatialTile compute) {
+        this.compute = compute;
+    }
 }

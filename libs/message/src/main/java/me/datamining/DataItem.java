@@ -7,11 +7,15 @@ import me.math.Vertex;
 
 public class DataItem {
 	
-	private Vertex location;
-	private double value;
+	private Vertex location = null;
+	private double value = 0.0;
 	
 	public DataItem() {
-		
+	}
+
+	public DataItem(Vertex location, double value) {
+		this.setLocation(location);
+		this.setValue(value);
 	}
 	
 	/**
@@ -21,6 +25,7 @@ public class DataItem {
 	public Vertex getLocation() {
 		return location;
 	}
+
 	/**
 	 * @param location the location to set
 	 */
@@ -28,6 +33,7 @@ public class DataItem {
 	public void setLocation(Vertex location) {
 		this.location = location;
 	}
+
 	/**
 	 * @return the value
 	 */
@@ -35,6 +41,7 @@ public class DataItem {
 	public double getValue() {
 		return value;
 	}
+
 	/**
 	 * @param value the value to set
 	 */
@@ -42,7 +49,5 @@ public class DataItem {
 	public void setValue(double value) {
 		this.value = value;
 	}
-	
-	
 
 }

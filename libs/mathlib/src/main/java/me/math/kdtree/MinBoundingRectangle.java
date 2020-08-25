@@ -84,6 +84,7 @@ public class MinBoundingRectangle extends AbstractDocument implements Serializab
 	 * 
 	 * @param location
 	 */
+	@JsonIgnore
 	public void extend(AbstractSpatialGridPoint location) {
 		if (location != null) {
 			bottomlatDegress_ = Math.min(location.getVertex().getLatitudeDegress(), bottomlatDegress_);
@@ -97,6 +98,7 @@ public class MinBoundingRectangle extends AbstractDocument implements Serializab
 	 * 
 	 * @param location
 	 */
+	@JsonIgnore
 	public void extend(Point location) {
 		if (location != null) {
 			bottomlatDegress_ = Math.min(location.getX(), bottomlatDegress_);
@@ -111,6 +113,7 @@ public class MinBoundingRectangle extends AbstractDocument implements Serializab
 	 * 
 	 * @param location
 	 */
+	@JsonIgnore
 	public void extend(Vertex location) {
 		if (location != null) {
 			bottomlatDegress_ = Math.min(location.getLatitudeDegress(), bottomlatDegress_);
@@ -124,6 +127,7 @@ public class MinBoundingRectangle extends AbstractDocument implements Serializab
 	 * 
 	 * @param location
 	 */
+	@JsonIgnore
 	public void extend(MinBoundingRectangle location) {
 		if (location != null) {
 			bottomlatDegress_ = Math.min(location.getBottomLatDegress(),bottomlatDegress_);
@@ -168,6 +172,7 @@ public class MinBoundingRectangle extends AbstractDocument implements Serializab
 	 * 
 	 * @return
 	 */
+	@JsonIgnore
 	public Vertex center() {
 		double lat = toplatDegress_;
 		if (bottomlatDegress_ != toplatDegress_) {
@@ -184,6 +189,7 @@ public class MinBoundingRectangle extends AbstractDocument implements Serializab
 	 * 
 	 * @return
 	 */
+	@JsonIgnore
 	public boolean isRectangle() {
 		if (bottomlatDegress_ == toplatDegress_) {
 			return true;

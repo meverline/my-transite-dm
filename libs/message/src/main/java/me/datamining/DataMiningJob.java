@@ -11,9 +11,11 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
 import me.datamining.shapes.Shape;
+import me.datamining.types.DataMiningTypes;
+import me.datamining.types.MetricTypes;
 
 @JsonRootName("DMJob")
-public class DMJob {
+public class DataMiningJob {
 	
 	public enum Day { Sun, Mon, Tue, Wen, Thur, Fri, Sat }
 	
@@ -28,7 +30,7 @@ public class DMJob {
 	private List<Day> weekdays = new ArrayList<>();
 	
 	
-	public DMJob() {	
+	public DataMiningJob() {
 	}
 	
 	/**
@@ -36,7 +38,7 @@ public class DMJob {
 	 * @param name the name
 	 * @param shape the shape
 	 */
-	public DMJob(String name, Shape shape) {
+	public DataMiningJob(String name, Shape shape) {
 		this.setName(name);
 		this.setShape(shape);
 	}

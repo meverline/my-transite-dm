@@ -1,19 +1,15 @@
 package me.math.grid.tiled;
 
+import me.database.mongo.AbstractDocument;
+import me.database.mongo.IDocumentDao;
+import me.math.grid.tiled.dao.TileFragmentDao;
+import me.transit.dao.query.tuple.IQueryTuple;
+import me.transit.dao.query.tuple.NumberTuple;
+
 import java.net.UnknownHostException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import me.database.mongo.AbstractDocument;
-import me.database.mongo.IDocumentDao;
-import me.math.grid.tiled.DbTiledSpatialGrid;
-import me.math.grid.tiled.IGridDocument;
-import me.math.grid.tiled.SpatialTile;
-import me.math.grid.tiled.TileFragament;
-import me.math.grid.tiled.dao.TileFragmentDao;
-import me.transit.dao.query.tuple.IQueryTuple;
-import me.transit.dao.query.tuple.NumberTuple;
 
 public class SptialTileCache {
 

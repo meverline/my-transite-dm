@@ -2,8 +2,8 @@ package org.dm.transit.model;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
-import me.datamining.BandWidthTypes;
-import me.datamining.DensityKernelTypes;
+import me.datamining.types.BandWidthTypes;
+import me.datamining.types.DensityKernelTypes;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;

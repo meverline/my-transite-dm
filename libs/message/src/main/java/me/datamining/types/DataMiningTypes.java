@@ -1,4 +1,4 @@
-package me.datamining;
+package me.datamining.types;
 
 public enum DataMiningTypes {
     KDE_HEATMAP,

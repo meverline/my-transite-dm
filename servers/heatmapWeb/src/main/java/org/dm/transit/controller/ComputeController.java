@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import me.datamining.DMJob;
+import me.datamining.DataMiningJob;
 
 @RestController
 public class ComputeController {
 
     @PostMapping(value = "/search")
-    public SearchRequest search(@RequestBody DMJob parameters) throws IOException {
+    public SearchRequest search(@RequestBody DataMiningJob parameters) throws IOException {
         SearchRequest rtn = new SearchRequest();
         rtn.setName(parameters.getName());
         rtn.setSearchId(UUID.randomUUID().toString());

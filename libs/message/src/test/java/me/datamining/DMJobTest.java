@@ -29,7 +29,7 @@ public class DMJobTest {
 	{
 		Configuration configuration = new ConfigurationBuilder().overrideFactory("shape", new ShapeFactory()).build();
 
-		tester.testBean(DMJob.class, configuration);
+		tester.testBean(DataMiningJob.class, configuration);
 	}
 
 	@Test
@@ -41,13 +41,13 @@ public class DMJobTest {
 		obj.setCenter(center);
 		obj.setDistanceInMeters(100);
 		
-		DMJob job = new DMJob("test", obj);
+		DataMiningJob job = new DataMiningJob("test", obj);
 		
 		try {
 			String rtn = mapper.writeValueAsString(job);
 			assertNotNull(rtn);
 			
-			DMJob decode = mapper.readValue(rtn, DMJob.class);	
+			DataMiningJob decode = mapper.readValue(rtn, DataMiningJob.class);
 			assertNotNull(decode.getShape());
 			assertEquals(job.getShape(),decode.getShape());
 			assertEquals(job.getName(), decode.getName());
@@ -65,13 +65,13 @@ public class DMJobTest {
 		
 		Rectanlge obj = new Rectanlge(left, right);
 		
-		DMJob job = new DMJob("test", obj);
+		DataMiningJob job = new DataMiningJob("test", obj);
 		
 		try {
 			String rtn = mapper.writeValueAsString(job);
 			assertNotNull(rtn);
 			
-			DMJob decode = mapper.readValue(rtn, DMJob.class);	
+			DataMiningJob decode = mapper.readValue(rtn, DataMiningJob.class);
 			assertNotNull(decode.getShape());
 			assertEquals(job.getShape(),decode.getShape());
 			assertEquals(job.getName(), decode.getName());

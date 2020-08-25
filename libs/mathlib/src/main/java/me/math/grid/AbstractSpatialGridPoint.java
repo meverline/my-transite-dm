@@ -278,9 +278,10 @@ public abstract class AbstractSpatialGridPoint implements INode {
        buf.append(getDepth());
        buf.append(" { " + getPoint().getIndex());
        if ( this.getPointVertex() != null ) {
-    	   		buf.append(" ( " + getPointVertex().getLatitudeDegress() +"," +
-                               getPointVertex().getLongitudeDegress() + ")");
+    	   		buf.append(" ( " + getVertex().getLatitudeDegress() +"," +
+                               getVertex().getLongitudeDegress() + ")");
        }
+       buf.append("}");
        return buf.toString();
 	}
 	

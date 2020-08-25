@@ -13,6 +13,7 @@
 	</parent>
 
 	<modules>
+		<module>registration</module>
 		<module>heatmapWeb</module>
 		<module>compute</module>
 		<module>data</module>

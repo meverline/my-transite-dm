@@ -30,7 +30,6 @@ import org.locationtech.jts.geom.Point;
 @SuppressWarnings("serial")
 public class Vertex implements Serializable {
 
-
 	private double lat_;
 	private double lon_;
 

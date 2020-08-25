@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import me.datamining.DataMiningTypes;
+import me.datamining.types.DataMiningTypes;
 
 @RestController
 @RequestMapping("dm-algorithms")
