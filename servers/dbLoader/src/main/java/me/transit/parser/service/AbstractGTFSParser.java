@@ -1,5 +1,17 @@
 package me.transit.parser.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import me.transit.omd.dao.LocationDao;
+import me.transit.omd.data.Feed;
+import me.transit.omd.data.Location;
+import me.transit.omd.data.OpenMobilityData;
+import me.transit.parser.data.Blackboard;
+import me.transit.parser.data.FileHandlerFactory;
+import me.transit.parser.message.MessageAgency;
+import me.transit.parser.message.ParserMessage;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,18 +21,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import me.transit.parser.data.Blackboard;
-import me.transit.omd.dao.LocationDao;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import me.transit.parser.data.FileHandlerFactory;
-import me.transit.parser.message.MessageAgency;
-import me.transit.omd.data.Feed;
-import me.transit.omd.data.Location;
-import me.transit.omd.data.OpenMobilityData;
 
 public abstract class AbstractGTFSParser {
 
@@ -210,6 +210,24 @@ public abstract class AbstractGTFSParser {
 		return locList;
 	}
 
+	/**
+	 *
+	 * @param fr
+	 */
+	public void messageProcessor(ParserMessage fr) {
+		try {
+			for (MessageAgency agency : fr.getAgencys()) {
+				if ( this.doesExist(agency)) {
+					parseFeeds(agency);
+				} else {
+					log.warn("unable to find: " + agency);
+				}
+			}
+		} catch (Exception ex) {
+			this.getLog().error(ex.getLocalizedMessage(), ex);
+		}
+	}
+
     /**
      * 
      * @return
@@ -223,5 +241,10 @@ public abstract class AbstractGTFSParser {
 	 * 
 	 */
 	public abstract void start();
+
+	/**
+	 *
+	 */
+	public abstract void stop();
 
 }

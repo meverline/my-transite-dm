@@ -12,7 +12,7 @@ public class StringToLong extends DataConverter {
 
 	@Override
 	public Object convert(String data) {
-		Long rtn = null;
+		Long rtn;
 		if (data.contains(":")) {
 			String time[] = data.split(":");
 			String str = time[0] + time[1];

@@ -103,7 +103,6 @@
 
 	<modules>
 		<module>libs</module>
-		<module>apps</module>
 		<module>servers</module>
 	</modules>
 

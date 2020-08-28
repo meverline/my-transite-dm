@@ -18,6 +18,7 @@
 		<module>compute</module>
 		<module>data</module>
 		<module>manager</module>
+		<module>dbLoader</module>
 	</modules>
 
 </project>

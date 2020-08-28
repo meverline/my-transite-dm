@@ -5,6 +5,7 @@ import java.util.Random;
 import me.math.LocalDownFrame;
 import me.math.Vertex;
 import me.math.grid.data.AbstractDataSample;
+import me.math.grid.data.CrossCovData;
 import me.math.grid.tiled.AbstractTiledSpatialGrid;
 import me.math.grid.tiled.SpatialTile;
 import me.math.grid.tiled.TiledSpatialGridPoint;
@@ -20,7 +21,7 @@ public class AbstractMapReduceTest {
 		
 		SpatialTile tile = new SpatialTile(100, 200, 5, 15);
 		
-		tile.createGrid(25, 25, ldf, distance, new AbstractTiledSpatialGrid.CrossCovData(v));
+		tile.createGrid(25, 25, ldf, distance, new CrossCovData(v));
 		Random r = new Random();
 		
 		for (TiledSpatialGridPoint pt :  tile.getGrid()) {
@@ -43,7 +44,12 @@ public class AbstractMapReduceTest {
 		public TestData(double startValue) {
 			value = startValue;
 		}
-		
+
+		@Override
+		public void copy(AbstractDataSample item) {
+			item.addValue(value);
+		}
+
 		@Override
 		public double getValue() {
 			return value;
@@ -53,6 +59,11 @@ public class AbstractMapReduceTest {
 		public void addValue(double value) {
 			this.value += value;
 		}
-		
+
+		@Override
+		public String hash() {
+			return Long.toString(Double.hashCode(this.getValue()));
+		}
+
 	}
 }
