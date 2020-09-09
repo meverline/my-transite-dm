@@ -12,8 +12,23 @@
     <artifactId>message</artifactId>
 
 	<dependencies>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
 	
-	 <dependency>
+	    <dependency>
             <groupId>me.transite</groupId>
             <artifactId>mathlib</artifactId>
             <version>0.0.5</version>

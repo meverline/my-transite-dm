@@ -12,7 +12,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @Configuration
 @ComponentScan(basePackages= "org.dm.transit")
 @EnableWebMvc
-public class MvcConfiguration implements WebMvcConfigurer {
+public class ComputeConfiguration implements WebMvcConfigurer {
 
 	@Bean
 	public ViewResolver getViewResolver(){
@@ -27,5 +27,4 @@ public class MvcConfiguration implements WebMvcConfigurer {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 	}
 
-	
 }

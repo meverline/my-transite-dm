@@ -1,7 +1,7 @@
 package me.datamining;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
-import org.codehaus.jackson.annotate.JsonSetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 public class TileJob {
 

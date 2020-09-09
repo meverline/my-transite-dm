@@ -11,15 +11,6 @@
 
 	<packaging>war</packaging>
 	<name>computeServer</name>
-	<url>http://maven.apache.org</url>
-
-	<repositories>
-		<repository>
-			<id>springsource-milestones</id>
-			<name>SpringSource Milestones Proxy</name>
-			<url>https://oss.sonatype.org/content/repositories/springsource-milestones</url>
-		</repository>
-	</repositories>
 
 	<build>
 		<finalName>computeServer</finalName>
@@ -37,25 +28,21 @@
 		<dependency>
 			<groupId>me.transite</groupId>
 			<artifactId>transite-common</artifactId>
-			<version>0.0.5</version>
 		</dependency>
 
 		<dependency>
 			<groupId>me.transite</groupId>
 			<artifactId>message</artifactId>
-			<version>0.0.5</version>
 		</dependency>
 
 		<dependency>
 			<groupId>me.transite</groupId>
 			<artifactId>openMobilithyData</artifactId>
-			<version>0.0.5</version>
 		</dependency>
 
 		<dependency>
 			<groupId>me.transite</groupId>
 			<artifactId>me.transite.transitedb</artifactId>
-			<version>0.0.5</version>
 		</dependency>
 
 		<dependency>
@@ -69,6 +56,7 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
