@@ -7,28 +7,45 @@
 	<packaging>pom</packaging>
 
 	<parent>
-		<groupId>me.transite</groupId>
-		<artifactId>agregator</artifactId>
-		<version>0.0.5</version>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.3.3.RELEASE</version>
+		<relativePath/>
 	</parent>
 
 	<properties>
 		<java.version>1.8</java.version>
-
 		<spring.version>5.2.0.RELEASE</spring.version>
 		<spring.boot.version>2.3.3.RELEASE</spring.boot.version>
 		<spring.boot.starter.version>2.3.3.RELEASE</spring.boot.starter.version>
 		<cglib.version>2.2.2</cglib.version>
+		<spring-cloud.version>Hoxton.SR7</spring-cloud.version>
 	</properties>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>3.2.3</version>
+				</plugin>
+
+			</plugins>
+		</pluginManagement>
+	</build>
 
 	<dependencyManagement>
 
 		<dependencies>
 
+			<!-- spring micro services depencies (spring boot) -->
+
 			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-dependencies</artifactId>
-				<version>2.2.6.RELEASE</version>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -129,14 +146,58 @@
 
 	</dependencyManagement>
 
+	<dependencies>
+
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.meanbean</groupId>
+			<artifactId>meanbean</artifactId>
+			<version>2.0.3</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.easymock</groupId>
+			<artifactId>easymock</artifactId>
+			<version>4.0.2</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.junit.vintage</groupId>
+					<artifactId>junit-vintage-engine</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+	</dependencies>
+
+
 	<modules>
 		<module>registration</module>
-		<module>heatmapWeb</module>
 		<module>compute</module>
+		<module>redeucer</module>
 		<module>data</module>
 		<module>manager</module>
 		<module>dbLoader</module>
-		<module>redeucer</module>
+		<module>web</module>
 	</modules>
 
 </project>

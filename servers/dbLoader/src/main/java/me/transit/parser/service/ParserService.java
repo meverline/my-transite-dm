@@ -13,7 +13,6 @@ import me.transit.parser.data.Blackboard;
 import me.transit.parser.data.FileHandlerFactory;
 import me.transit.parser.message.ParserMessage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.aws.messaging.listener.annotation.SqsListener;
 
 import java.util.List;
 import java.util.Objects;

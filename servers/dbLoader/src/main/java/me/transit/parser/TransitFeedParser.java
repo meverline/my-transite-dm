@@ -18,6 +18,7 @@ public class TransitFeedParser implements ApplicationContextAware, CommandLineRu
 	private ApplicationContext applicationContext;
 
 	public static void main(String[] args) {
+		System.setProperty("spring.config.name", "transiteLoader");
 		SpringApplication.run(TransitFeedParser.class, args);
 	}
 
@@ -51,7 +52,5 @@ public class TransitFeedParser implements ApplicationContextAware, CommandLineRu
 		}
 
 	}
-
-
 
 }

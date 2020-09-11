@@ -6,10 +6,9 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.RequestMethod;
 import me.transit.dao.AgencyDao;
 import me.transit.database.Agency;
 
@@ -24,14 +23,14 @@ public class AgencyController {
         this.agencyDao = Objects.requireNonNull(agencyDao, "agencyDao can not be null");
     }
 
-    @GetMapping(value = "/names")
+    @RequestMapping(value= "/names", method = RequestMethod.GET, produces = "application/json" )
     public List<String> listNames() throws IOException {
         return agencyDao.list().stream().map(agency -> {
             return agency.getName();
         }).collect(Collectors.toList());
     }
 
-    @GetMapping(value = "/list")
+    @RequestMapping(value= "/list", method = RequestMethod.GET, produces = "application/json" )
     public List<Agency> list() throws IOException {
         return agencyDao.list();
     }

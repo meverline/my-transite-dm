@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import me.transit.omd.dao.LocationDao;
@@ -22,7 +23,7 @@ public class OpenMoblityLocations {
         this.locationDao = Objects.requireNonNull(locationDao, "locationDao can not be null");
     }
 
-    @RequestMapping(value = "/list")
+    @RequestMapping(value= "/list", method = RequestMethod.GET, produces = "application/json" )
     public List<Location> listNames() throws IOException {
         return locationDao.list();
     }

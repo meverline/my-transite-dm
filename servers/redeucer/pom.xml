@@ -6,10 +6,80 @@
         <artifactId>servers</artifactId>
         <groupId>me.transite</groupId>
         <version>0.0.5</version>
+        <relativePath/>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>redeucer</artifactId>
 
+    <dependencies>
+
+        <dependency>
+            <groupId>me.transite</groupId>
+            <artifactId>transite-common</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>me.transite</groupId>
+            <artifactId>message</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>me.transite</groupId>
+            <artifactId>openMobilithyData</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>me.transite</groupId>
+            <artifactId>me.transite.transitedb</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-sns</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-sqs</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>me.transite.ComputeApplication</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>build-info</id>
+                        <goals>
+                            <goal>build-info</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>repackage</id>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

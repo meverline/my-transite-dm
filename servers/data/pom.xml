@@ -7,6 +7,7 @@
 		<groupId>me.transite</groupId>
 		<artifactId>servers</artifactId>
 		<version>0.0.5</version>
+		<relativePath/>
 	</parent>
 
 	<packaging>war</packaging>

@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import me.datamining.types.DataMiningTypes;
@@ -14,7 +15,7 @@ import me.datamining.types.DataMiningTypes;
 @RequestMapping("dm-algorithms")
 public class DataMiningAlgoritms {
 
-	@GetMapping(value = "/list")
+    @RequestMapping(value= "/list", method = RequestMethod.GET, produces = "application/json" )
     public List<String> listNames() throws IOException {
         List<String> rtn = new ArrayList<>();
         for (DataMiningTypes type : DataMiningTypes.values()) {
