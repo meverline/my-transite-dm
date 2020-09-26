@@ -18,8 +18,7 @@
 		<spring.version>5.2.0.RELEASE</spring.version>
 		<spring.boot.version>2.3.3.RELEASE</spring.boot.version>
 		<spring.boot.starter.version>2.3.3.RELEASE</spring.boot.starter.version>
-		<cglib.version>2.2.2</cglib.version>
-		<spring-cloud.version>Hoxton.SR7</spring-cloud.version>
+		<me.transite.version>0.0.5</me.transite.version>
 	</properties>
 
 	<build>
@@ -45,7 +44,7 @@
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>${spring-cloud.version}</version>
+				<version>Hoxton.SR7</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -55,44 +54,46 @@
 			<dependency>
 				<groupId>me.transite</groupId>
 				<artifactId>transite-common</artifactId>
-				<version>0.0.5</version>
+				<version>${me.transite.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>me.transite</groupId>
 				<artifactId>dataMining</artifactId>
-				<version>0.0.5</version>
+				<version>${me.transite.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>me.transite</groupId>
 				<artifactId>mathlib</artifactId>
-				<version>0.0.5</version>
+				<version>${me.transite.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>me.transite</groupId>
 				<artifactId>message</artifactId>
-				<version>0.0.5</version>
+				<version>${me.transite.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>me.transite</groupId>
 				<artifactId>openMobilithyData</artifactId>
-				<version>0.0.5</version>
+				<version>${me.transite.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>me.transite</groupId>
 				<artifactId>tiledb</artifactId>
-				<version>0.0.5</version>
+				<version>${me.transite.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>me.transite</groupId>
 				<artifactId>me.transite.transitedb</artifactId>
-				<version>0.0.5</version>
+				<version>${me.transite.version}</version>
 			</dependency>
+
+			<!-- start thrid party -->
 
 			<dependency>
 				<groupId>log4j</groupId>
@@ -126,6 +127,14 @@
 				<version>1.11.648</version>
 			</dependency>
 
+			<!-- CGLib for @Configuration -->
+			<dependency>
+				<groupId>cglib</groupId>
+				<artifactId>cglib-nodep</artifactId>
+				<version>2.2.2</version>
+				<scope>runtime</scope>
+			</dependency>
+
 			<!-- servlet spec -->
 
 			<dependency>
@@ -140,6 +149,12 @@
 				<artifactId>jsp-api</artifactId>
 				<version>2.1</version>
 				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-webmvc</artifactId>
+				<version>${spring.version}</version>
 			</dependency>
 
 		</dependencies>

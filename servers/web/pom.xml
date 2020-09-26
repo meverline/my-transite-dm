@@ -15,7 +15,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>frontend</module>
+        <module>gui</module>
         <module>heatmapWeb</module>
     </modules>
 
