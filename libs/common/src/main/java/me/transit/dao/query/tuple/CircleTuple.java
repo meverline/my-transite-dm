@@ -93,13 +93,13 @@ public class CircleTuple extends AbstractQueryTuple {
         shapeFactory.setSize(radiusMeters / CircleTuple.equatorialRadiusInMeters() * 2);
         Polygon circle = shapeFactory.createCircle();
 
-        List<Coordinate> coords = new ArrayList<Coordinate>();
+        List<Coordinate> coords = new ArrayList<>();
         for ( Coordinate coord : circle.getCoordinates()) {
             coords.add( coord );
         }
 
         coords.add(coords.get(0));
-        Coordinate array[] = new Coordinate[coords.size()];
+        Coordinate [] array = new Coordinate[coords.size()];
         coords.toArray(array);
 
         StringBuilder kml = new StringBuilder();

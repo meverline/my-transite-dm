@@ -17,14 +17,6 @@ public class MongoTimeTupleTest extends EasyMockSupport {
     public EasyMockRule rule = new EasyMockRule(this);
 
     @Test
-    public void testConstructor() {
-        @SuppressWarnings("unused")
-        TimeTuple obj = new TimeTuple("field", Calendar.getInstance(), Calendar.getInstance());
-        obj = new TimeTuple(String.class, "field", Calendar.getInstance(), Calendar.getInstance());
-
-    }
-
-    @Test
     public void testGetDoucmentQuery() {
 
         Document mongo = new Document();

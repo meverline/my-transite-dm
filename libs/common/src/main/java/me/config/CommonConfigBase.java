@@ -73,7 +73,7 @@ public class CommonConfigBase {
 	 * 
 	 * @return
 	 */
-	private final Properties hibernateProperties() {
+	private Properties hibernateProperties() {
 		Properties hibernateProperties = new Properties();
 		hibernateProperties.setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
 		hibernateProperties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));

@@ -19,8 +19,8 @@ public class TestRectangleTuple {
 	@Test
 	public void testConstructor() {
 
-		Point lr = factory_.createPoint(new Coordinate(38.827, -77.078));;
-		Point ul = factory_.createPoint(new Coordinate(38.941, -77.286));;
+		Point lr = factory_.createPoint(new Coordinate(38.827, -77.078));
+		Point ul = factory_.createPoint(new Coordinate(38.941, -77.286));
 
 		RectangleTuple obj = new RectangleTuple("field", ul, lr);
 

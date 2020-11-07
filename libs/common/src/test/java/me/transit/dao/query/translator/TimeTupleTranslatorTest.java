@@ -19,14 +19,6 @@ public class TimeTupleTranslatorTest extends EasyMockSupport {
     public EasyMockRule rule = new EasyMockRule(this);
 
     @Test
-    public void testConstructor() {
-        @SuppressWarnings("unused")
-        TimeTuple obj = new TimeTuple("field", Calendar.getInstance(), Calendar.getInstance());
-        obj = new TimeTuple(String.class, "field", Calendar.getInstance(), Calendar.getInstance());
-
-    }
-
-    @Test
     public void testGetCriterion() {
 
         Criteria mongo = this.createNiceMock(Criteria.class);

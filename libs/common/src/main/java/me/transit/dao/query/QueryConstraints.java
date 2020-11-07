@@ -23,7 +23,7 @@ public class QueryConstraints {
 	}
 
 	protected IOrmQueryTranslator translatorFactory(IQueryTuple query) {
-		IOrmQueryTranslator translator = null;
+		IOrmQueryTranslator translator;
 
 		if ( query instanceof CircleTuple) {
 			translator = new CircleTupleTranslator(query);
@@ -58,7 +58,7 @@ public class QueryConstraints {
 	protected void add(IQueryTuple tuple) {
 		String key = tuple.getField();
 		if ( ! map.containsKey(key) ) {
-		   List<IQueryTuple> list = new ArrayList<IQueryTuple>();
+		   List<IQueryTuple> list = new ArrayList<>();
 		   
 		   map.put(key, list);
 		}
@@ -94,6 +94,7 @@ public class QueryConstraints {
 				}
 				builder.append(item.getWhere());
 				paramaters.putAll(item.getParameters());
+				ndx++;
 			}
 		}
 		

@@ -70,9 +70,9 @@ public class SpatialQuery extends QueryConstraints {
 	{
 		add( new RectangleTuple( field, ll, ur));
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param aClass
 	 * @param field
 	 * @param polygon
@@ -83,7 +83,7 @@ public class SpatialQuery extends QueryConstraints {
 	}
 
 	/**
-	 *
+	 * 
 	 * @param field
 	 * @param polygon
 	 */

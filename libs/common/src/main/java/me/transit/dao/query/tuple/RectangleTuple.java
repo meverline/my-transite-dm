@@ -67,7 +67,7 @@ public class RectangleTuple extends AbstractQueryTuple {
 	 */
 	public Polygon makeRectangle( Point ul, Point lr ) {
 
-		List<Coordinate> coords = new ArrayList<Coordinate>();
+		List<Coordinate> coords = new ArrayList<>();
 		
 		coords.add(this.getUl().getCoordinate());
 		coords.add(new Coordinate( this.getLr().getCoordinate().x, this.getUl().getCoordinate().y));
@@ -75,7 +75,7 @@ public class RectangleTuple extends AbstractQueryTuple {
 		coords.add(new Coordinate( this.getUl().getCoordinate().x, this.getLr().getCoordinate().y));
 		coords.add(coords.get(0));
 		
-		Coordinate array[] = new Coordinate[coords.size()];
+		Coordinate[] array = new Coordinate[coords.size()];
 		coords.toArray(array);
 
         return factory_.createPolygon(factory_.createLinearRing(array), null);

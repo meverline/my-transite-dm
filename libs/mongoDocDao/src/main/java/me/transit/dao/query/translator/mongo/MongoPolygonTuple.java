@@ -20,7 +20,7 @@ public class MongoPolygonTuple implements IMongoQueryTranslator {
 
     public void getDoucmentQuery(Document query) {
 
-        List<Double[]> list = new ArrayList<Double[]>();
+        List<Double[]> list = new ArrayList<>();
 
         for ( Point pt : tuple.getPointLine()) {
             Double [] data = new Double[2];
