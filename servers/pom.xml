@@ -93,6 +93,12 @@
 				<version>${me.transite.version}</version>
 			</dependency>
 
+			<dependency>
+				<groupId>me.transite</groupId>
+				<artifactId>mongo.document.dao</artifactId>
+				<version>${me.transite.version}</version>
+			</dependency>
+
 			<!-- start thrid party -->
 
 			<dependency>

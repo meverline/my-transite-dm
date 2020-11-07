@@ -69,7 +69,8 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 	protected final Class<?> getDaoClass() {
 		return daoClass;
 	}
-	
+
+
 	/**
 	 * 
 	 * @param item

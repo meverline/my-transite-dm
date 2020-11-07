@@ -16,8 +16,6 @@
 
 package me.crime.database.tuple;
 
-import org.bson.Document;
-
 import me.crime.database.Address;
 import me.transit.dao.query.tuple.AbstractQueryTuple;
 import me.transit.dao.query.tuple.Tuple;
@@ -33,7 +31,6 @@ public class AddressTuple extends AbstractQueryTuple {
 		address_ = start;
 	}
 
-	@Override
 	public Tuple getCriterion() {
 		String name =  getAlias().getSimpleName();
 		
@@ -45,11 +42,5 @@ public class AddressTuple extends AbstractQueryTuple {
 		
 		return new Tuple(builder.toString());
 	}
-
-	@Override
-	public void getDoucmentQuery(Document query) {
-		throw new UnsupportedOperationException();
-	}
-
 
 }

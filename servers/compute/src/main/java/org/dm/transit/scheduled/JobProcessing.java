@@ -1,11 +1,22 @@
 package org.dm.transit.scheduled;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.Objects;
+import java.util.concurrent.*;
 
+import com.amazonaws.services.sqs.model.SendMessageRequest;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import me.datamining.ComputeTile;
+import me.datamining.PopulateTile;
+import me.datamining.TileJob;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.dm.transit.callable.ComputeTileCallable;
+import org.dm.transit.callable.PopulateJobCallable;
+import org.dm.transit.callable.ReaduceHandler;
+import org.dm.transit.dataMine.PopulateGrid;
+import org.dm.transit.dataMine.TiledNonAdaptiveKDE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -24,29 +35,48 @@ public class JobProcessing {
 	private final Log log = LogFactory.getLog(getClass().getName());
 	private final ExecutorService executor;
 	private final AmazonSQS sqs;
-	private final String url;
+	private final String computeUrl;
+	private final String reduceUrl;
+	private final ObjectMapper decoder = new ObjectMapper();
+	private final PopulateGrid populateGrid;
+	private final TiledNonAdaptiveKDE tiledNonAdaptiveKDE;
 	
 	@Autowired
-	public JobProcessing(Environment env) {
+	public JobProcessing(Environment env, PopulateGrid populateGrid, TiledNonAdaptiveKDE tiledNonAdaptiveKDE) {
+		this.populateGrid = Objects.requireNonNull(populateGrid,"populateGrid can not be null");
+		this.tiledNonAdaptiveKDE = Objects.requireNonNull(tiledNonAdaptiveKDE,"tiledNonAdaptiveKDE can not be null");
 		this.executor = Executors.newFixedThreadPool(Integer.parseInt(env.getProperty("jobs.maxThreads")));
 		this.sqs = AmazonSQSClientBuilder.defaultClient();
-		this.url = env.getProperty("jobs.sqs.url");
+		this.computeUrl = env.getProperty("jobs.sqs.compute");
+		this.reduceUrl = env.getProperty("jobs.sqs.redeucer");
 	}
 
 	@Scheduled(fixedRate = 10000) // Time in milliseconds 10 seconds
 	public void scheduleFixedRateTask() {
-		final ReceiveMessageRequest receiveMessageRequest = new ReceiveMessageRequest(url);
+		final ReceiveMessageRequest receiveMessageRequest = new ReceiveMessageRequest(computeUrl);
         final List<Message> messages = sqs.receiveMessage(receiveMessageRequest).getMessages();
-
+		final List<Future<TileJob>> list = new ArrayList<>();
         for (final Message message : messages) {
         	try {
         		String body = message.getBody();
-        		
+        		Object obj = decoder.readValue(body, TileJob.class);
+				Callable<TileJob> callable;
+
+        		if ( obj instanceof PopulateTile) {
+        			callable = new PopulateJobCallable(populateGrid, PopulateTile.class.cast(obj));
+					list.add( this.executor.submit(callable));
+        		} else if ( obj instanceof ComputeTile ) {
+        			callable = new ComputeTileCallable(tiledNonAdaptiveKDE, ComputeTile.class.cast(obj));
+					list.add( this.executor.submit(callable));
+        		} else {
+        			log.warn("unkown tila job type: " + body);
+				}
+
         	} catch ( Exception ex) {
         		log.error(ex.getLocalizedMessage(), ex);
         	}
         }
-        
+        this.executor.submit(new ReaduceHandler(this.reduceUrl, list));
 	}
-	
+
 }

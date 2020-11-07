@@ -1,32 +1,24 @@
 package me.transit.dao.query.tuple;
 
-import static org.easymock.EasyMock.expect;
-import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import org.bson.Document;
-import org.easymock.EasyMock;
 import org.easymock.EasyMockRule;
 import org.easymock.EasyMockSupport;
-import org.hibernate.Criteria;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
 import org.locationtech.jts.geom.Polygon;
 
-public class TestPolygonBoxTuple extends EasyMockSupport {
+import java.util.ArrayList;
+import java.util.List;
 
-    @Rule
-    public EasyMockRule rule = new EasyMockRule(this);
-   
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+
+public class TestPolygonBoxTuple {
+
     private List<Point> box = new ArrayList<>();
-    
     private static final GeometryFactory factory_  = new GeometryFactory();
     
     @Before
@@ -50,38 +42,17 @@ public class TestPolygonBoxTuple extends EasyMockSupport {
     	
 	@Test
 	public void testConstructor() {
-		PolygonBoxTuple obj = new PolygonBoxTuple("field", box);		
+		PolygonBoxTuple obj = new PolygonBoxTuple("field", box);
+		assertEquals("field", obj.getField());
+		assertEquals(box, obj.getPointLine());
+
 		obj = new PolygonBoxTuple(String.class, "field", box);
-		
+
+		assertEquals("field", obj.getField());
+		assertEquals(box, obj.getPointLine());
+		assertEquals(String.class, obj.getAlias());
 		assertFalse(obj.hasMultipleCriterion());
 			
-	}
-	
-	@Test
-	public void testGetDoucmentQuery() {
-
-		Document mongo = new Document();
-		PolygonBoxTuple obj = new PolygonBoxTuple("field", box);
-		obj.getDoucmentQuery(mongo);			
-	}
-	
-	@Test
-	public void testGetCriterion() {
-		
-		Criteria mongo = this.createNiceMock(Criteria.class);
-		
-		expect(mongo.add(EasyMock.anyObject())).andReturn(mongo).anyTimes();
-		expect(mongo.createAlias(EasyMock.anyString(), EasyMock.anyString())).andReturn(mongo).anyTimes();
-		replayAll();
-		
-		PolygonBoxTuple obj = new PolygonBoxTuple("field", box);
-		obj.getCriterion();
-		
-		obj = new PolygonBoxTuple(String.class, "field", box);
-		obj.getCriterion();
-		
-		obj.getMultipeRestriction(mongo);
-		obj.getCriterion();
 	}
 
 }

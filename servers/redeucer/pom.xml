@@ -26,12 +26,22 @@
 
         <dependency>
             <groupId>me.transite</groupId>
+            <artifactId>tiledb</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>me.transite</groupId>
             <artifactId>openMobilithyData</artifactId>
         </dependency>
 
         <dependency>
             <groupId>me.transite</groupId>
             <artifactId>me.transite.transitedb</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>me.transite</groupId>
+            <artifactId>mongo.document.dao</artifactId>
         </dependency>
 
         <dependency>
@@ -52,6 +62,18 @@
         <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-java-sdk-sqs</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>me.transite</groupId>
+            <artifactId>mongo.document.dao</artifactId>
+            <version>0.0.5</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>me.transite</groupId>
+            <artifactId>mongo.document.dao</artifactId>
+            <version>0.0.5</version>
+            <scope>compile</scope>
         </dependency>
 
     </dependencies>

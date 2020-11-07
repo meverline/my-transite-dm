@@ -37,7 +37,6 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, ID
 	
 	public static final String ROW_OFFSET = "rowOffset";
 	public static final String COL_OFFSET = "colOffset";
-	
 
 	private int tileIndex = -1;
 	private MinBoundingRectangle  mbr_ = null;
@@ -213,7 +212,8 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, ID
 	}
 
 	/**
-	 * @param grid the grid_ to set
+	 *
+	 * @param sparseGrid
 	 */
 	@JsonSetter("grid")
 	public void setSparseGrid(List<TiledSpatialGridPoint> sparseGrid) {

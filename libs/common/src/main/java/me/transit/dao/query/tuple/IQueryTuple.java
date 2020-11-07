@@ -15,22 +15,9 @@
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 package me.transit.dao.query.tuple;
-import org.bson.Document;
 
 public interface IQueryTuple {
 	
-	public String getField();
-
-	/**
-	 *
-	 * @return
-	 */
-	public abstract Tuple getCriterion();
-	
-	/**
-	 * 
-	 * @param query
-	 */
-	public abstract void getDoucmentQuery(Document query);
+	String getField();
 
 }

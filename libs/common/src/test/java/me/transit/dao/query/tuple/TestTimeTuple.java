@@ -1,52 +1,34 @@
 package me.transit.dao.query.tuple;
 
-import static org.easymock.EasyMock.expect;
-
-import java.util.Calendar;
-
-import org.bson.Document;
-import org.easymock.EasyMock;
 import org.easymock.EasyMockRule;
 import org.easymock.EasyMockSupport;
-import org.hibernate.Criteria;
 import org.junit.Rule;
 import org.junit.Test;
 
-public class TestTimeTuple extends EasyMockSupport {
+import java.util.Calendar;
 
-    @Rule
-    public EasyMockRule rule = new EasyMockRule(this);
-    	
+import static org.junit.Assert.assertEquals;
+
+public class TestTimeTuple  {
+
 	@Test
 	public void testConstructor() {
+
+		Calendar start = Calendar.getInstance();
+		Calendar end = Calendar.getInstance();
 		@SuppressWarnings("unused")
-		TimeTuple obj = new TimeTuple("field", Calendar.getInstance(), Calendar.getInstance());		
-		obj = new TimeTuple(String.class, "field", Calendar.getInstance(), Calendar.getInstance());
+		TimeTuple obj = new TimeTuple("field", start, end);
+
+		assertEquals("field", obj.getField());
+		assertEquals(start, obj.getStartTime());
+		assertEquals(end, obj.getEndTime());
+
+		obj = new TimeTuple(String.class, "field", start, end);
+
+		assertEquals("field", obj.getField());
+		assertEquals(String.class, obj.getAlias());
+		assertEquals(start, obj.getStartTime());
+		assertEquals(end, obj.getEndTime());
 			
 	}
-	
-	@Test
-	public void testGetDoucmentQuery() {
-
-		Document mongo = new Document();
-		TimeTuple obj = new TimeTuple("field", Calendar.getInstance(), Calendar.getInstance());
-		obj.getDoucmentQuery(mongo);			
-	}
-	
-	@Test
-	public void testGetCriterion() {
-		
-		Criteria mongo = this.createNiceMock(Criteria.class);
-		
-		expect(mongo.add(EasyMock.anyObject())).andReturn(mongo).anyTimes();
-		expect(mongo.createAlias(EasyMock.anyString(), EasyMock.anyString())).andReturn(mongo).anyTimes();
-		replayAll();
-		
-		TimeTuple obj = new TimeTuple("field", Calendar.getInstance(), Calendar.getInstance());
-		obj.getCriterion();
-		
-		obj = new TimeTuple(String.class, "field", Calendar.getInstance(), Calendar.getInstance());
-		obj.getCriterion();
-	}
-
 }

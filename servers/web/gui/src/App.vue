@@ -10,13 +10,13 @@
     </md-toolbar>
     <vue-splitter-v initial-size="20%">
       <template slot="left">
-        <QueryLayout/>
+        <p>Query</p>
       </template>
       <template slot="'right">
         <vue-splitter-h>
-          <template slot="top" initial-size="90%"><p>Map</p></template>
+          <template slot="top" ><p>Map</p></template>
           <template slot="bottom">
-            <ReusltsTable/>
+            <p>Table</p>
           </template>
         </vue-splitter-h>
       </template>

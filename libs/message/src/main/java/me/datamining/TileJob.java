@@ -2,7 +2,17 @@ package me.datamining;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "_type")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = ComputeTile.class, name = "ComputeTile"),
+        @JsonSubTypes.Type(value = PopulateTile.class, name = "PopulateTile")
+})
 public class TileJob {
 
     private String jobNumber;

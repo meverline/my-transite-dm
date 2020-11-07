@@ -22,27 +22,20 @@ import org.hibernate.criterion.Criterion;
 
 public abstract class AbstractQueryTuple implements IQueryTuple {
 	
-	private Class<?> alias = null;
-	private String field  = null;
+	private final Class<?> alias;
+	private final String field;
 	
 	protected AbstractQueryTuple(Class<?> aClass, String aField )
 	{
-		setAlias(aClass);
-		setField(aField);
+		this.alias = aClass;
+		this.field = aField;
 	}
 	
 	/**
 	 * @return the alias
 	 */
-	protected Class<?> getAlias() {
+	public Class<?> getAlias() {
 		return alias;
-	}
-	
-	/**
-	 * @param alias the alias to set
-	 */
-	protected void setAlias(Class<?> alias) {
-		this.alias = alias;
 	}
 
 	/**
@@ -50,13 +43,6 @@ public abstract class AbstractQueryTuple implements IQueryTuple {
 	 */
 	public String getField() {
 		return field;
-	}
-	
-	/**
-	 * @param field the field to set
-	 */
-	protected void setField(String field) {
-		this.field = field;
 	}
 
 	public void getMultipeRestriction(Criteria crit) {

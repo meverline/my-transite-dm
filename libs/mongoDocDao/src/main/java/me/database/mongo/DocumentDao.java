@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
+import me.transit.dao.query.translator.mongo.*;
+import me.transit.dao.query.tuple.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.bson.Document;
@@ -21,11 +23,9 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
-import me.transit.dao.query.tuple.IQueryTuple;
-
 public class DocumentDao extends IDocumentDao {
 
-	private Log log = LogFactory.getLog(IDocumentDao.class);
+	private Log log = LogFactory.getLog(DocumentDao.class);
 	private List<String> skipData = new ArrayList<String>();
 	protected static DocumentDao _theOne = null;
 	private static MongoClient _connection = null;
@@ -174,6 +174,27 @@ public class DocumentDao extends IDocumentDao {
 		return false;
 	}
 
+	private IMongoQueryTranslator translatorFactory(IQueryTuple query) {
+		IMongoQueryTranslator translator = null;
+
+		if ( query instanceof CircleTuple ) {
+			translator = new MongoCircleTuple(query);
+		} else if ( query instanceof NumberTuple) {
+			translator =  new MongoNumberTuple(query);
+		} else if ( query instanceof  PolygonBoxTuple ) {
+			translator =  new MongoPolygonTuple(query);
+		} else if ( query instanceof  RectangleTuple ) {
+			translator =  new MongoRectagleTuple(query);
+		} else if ( query instanceof  StringTuple) {
+			translator =   new MongoStringTuple(query);
+		} else if ( query instanceof  TimeTuple ) {
+			translator =  new MongoTimeTuple(query);
+		} else {
+			throw new IllegalArgumentException("Unknown IQueryTuple type: " + query.getClass().getName());
+		}
+		return  translator;
+	}
+
 	/* (non-Javadoc)
 	 * @see me.database.mongo.IDocumnetDao#find(java.util.List)
 	 */
@@ -190,7 +211,7 @@ public class DocumentDao extends IDocumentDao {
 		Document query = new Document();
 
 		for (IQueryTuple tuple : tupleList) {
-			tuple.getDoucmentQuery(query);
+			this.translatorFactory(tuple).getDoucmentQuery(query);
 		}
 
 		List<AbstractDocument> rtn = new ArrayList<>();

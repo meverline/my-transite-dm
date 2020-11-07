@@ -1,17 +1,15 @@
 package me.crime.database.tuple;
 
-import static org.easymock.EasyMock.expect;
-import static org.junit.Assert.*;
-
-import java.util.Arrays;
-
-import org.bson.Document;
 import org.easymock.EasyMock;
 import org.easymock.EasyMockRule;
 import org.easymock.EasyMockSupport;
 import org.hibernate.Criteria;
 import org.junit.Rule;
 import org.junit.Test;
+
+import java.util.Arrays;
+
+import static org.easymock.EasyMock.expect;
 
 
 public class TestCatagoryTuple  extends EasyMockSupport {
@@ -26,21 +24,7 @@ public class TestCatagoryTuple  extends EasyMockSupport {
 		CatagoryTuple obj = new CatagoryTuple(Arrays.asList(cats));		
 		
 	}
-	
-	@Test
-	public void testGetDoucmentQuery() {
-		
-		try {
-			Document mongo = new Document();
-			CatagoryTuple obj = new CatagoryTuple(Arrays.asList(cats));	
-			
-			obj.getDoucmentQuery(mongo);
-		} catch (Exception ex) {
-			assertTrue(true);
-		}
-				
-	}
-	
+
 	@Test
 	public void testGetCriterion() {
 		

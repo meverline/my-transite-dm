@@ -19,18 +19,15 @@ package me.transit.dao.query.tuple;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.bson.Document;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
 import org.locationtech.jts.geom.Polygon;
 
-import com.mongodb.BasicDBObject;
-
 public class PolygonBoxTuple extends AbstractQueryTuple {
 
-	private GeometryFactory factory_  = new GeometryFactory();
-	private List<Point> pointLine = null;
+	private final GeometryFactory factory_  = new GeometryFactory();
+	private final List<Point> pointLine;
 
 	/**
 	 * 
@@ -55,12 +52,16 @@ public class PolygonBoxTuple extends AbstractQueryTuple {
 		pointLine = aList;
 	}
 
+	public List<Point> getPointLine() {
+		return pointLine;
+	}
+
 	/**
 	 * 
 	 * @param aList
 	 * @return
 	 */
-	private Polygon makePolygon(List<Point> aList ) {
+	public Polygon makePolygon(List<Point> aList ) {
 
 		List<Coordinate> coords = new ArrayList<Coordinate>();
 		
@@ -73,47 +74,6 @@ public class PolygonBoxTuple extends AbstractQueryTuple {
 		coords.toArray(array);
 
         return factory_.createPolygon(factory_.createLinearRing(array), null);
-	}
-
-	/**
-	 * 
-	 */
-	public Tuple getCriterion() {
-
-		Polygon range = makePolygon(this.pointLine);
-		StringBuilder builder = new StringBuilder("within( ");
-		
-		if ( getAlias() != null ) {
-			builder.append(getAlias().getSimpleName());
-			builder.append(".");
-		}
-		builder.append(getField());
-		builder.append(", :polygon)");
-		
-		Tuple rtn = new Tuple(builder.toString());
-		rtn.add("polygon", range);
-		
-		return rtn;
-	}
-	
-	public void getDoucmentQuery(Document query) {
-				
-        
-		List<Double[]> list = new ArrayList<Double[]>();
-		
-		for ( Point pt : this.pointLine) {
-		  Double [] data = new Double[2];
-		  data[0] = pt.getCoordinate().x;
-		  data[1] = pt.getCoordinate().y;
-		  list.add(data);
-		}
-		
-		Double [] data = new Double[2];
-		data[0] = this.pointLine.get(0).getCoordinate().x;
-		data[1] = this.pointLine.get(0).getCoordinate().y;
-		
-		query.put(getField(), new BasicDBObject("$geoWithin", list));
-
 	}
 
 }

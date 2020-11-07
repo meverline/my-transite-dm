@@ -16,13 +16,11 @@
 
 package me.crime.database.tuple;
 
-import java.util.Calendar;
-
-import org.bson.Document;
-
 import me.crime.database.Crime;
 import me.transit.dao.query.tuple.AbstractQueryTuple;
 import me.transit.dao.query.tuple.Tuple;
+
+import java.util.Calendar;
 
 
 public class StartDateTuple extends AbstractQueryTuple {
@@ -51,11 +49,6 @@ public class StartDateTuple extends AbstractQueryTuple {
 		Tuple rtn = new Tuple(builder.toString());
 		rtn.add("startDate_", startDate_);
 		return rtn;
-	}
-	
-	@Override
-	public void getDoucmentQuery(Document query) {
-		throw new UnsupportedOperationException();
 	}
 
 }

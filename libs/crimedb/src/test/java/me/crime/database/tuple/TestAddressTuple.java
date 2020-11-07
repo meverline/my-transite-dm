@@ -1,15 +1,13 @@
 package me.crime.database.tuple;
 
-import static org.easymock.EasyMock.expect;
-import static org.junit.Assert.assertTrue;
-
-import org.bson.Document;
 import org.easymock.EasyMock;
 import org.easymock.EasyMockRule;
 import org.easymock.EasyMockSupport;
 import org.hibernate.Criteria;
 import org.junit.Rule;
 import org.junit.Test;
+
+import static org.easymock.EasyMock.expect;
 
 public class TestAddressTuple extends EasyMockSupport {
 
@@ -22,20 +20,7 @@ public class TestAddressTuple extends EasyMockSupport {
 			AddressTuple obj = new AddressTuple("3329 Caddy drive");		
 			
 		}
-		
-		@Test
-		public void testGetDoucmentQuery() {
-			
-			try {
-				Document mongo = new Document();
-				AddressTuple obj = new AddressTuple("3329 Caddy drive");	
-				
-				obj.getDoucmentQuery(mongo);
-			} catch (Exception ex) {
-				assertTrue(true);
-			}
-					
-		}
+
 		
 		@Test
 		public void testGetCriterion() {

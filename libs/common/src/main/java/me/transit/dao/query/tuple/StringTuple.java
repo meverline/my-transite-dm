@@ -1,64 +1,16 @@
 package me.transit.dao.query.tuple;
 
-import java.util.regex.Pattern;
-
-import org.bson.Document;
-
 public class StringTuple extends AbstractQueryTuple {
 	
 	public enum MATCH {
-		START {
-			public String getRestriction( String value)
-			{
-				return "%" + value;
-			}
-			
-			public String docuument( String value) {
-				return ".*" +value;
-			}
-		},
-		END {
-			public String getRestriction(String value)
-			{
-				return value + "%";
-			}
-			
-			public String docuument( String value) {
-				return value + ".*";
-			}
-		},
-		CONTAINS {
-			public String getRestriction( String value)
-			{
-				return "%" + value + "%";
-			}
-			
-			public String docuument( String value) {
-				return ".*" +value + "*.";
-			}
-		},
-		EXACT {
-			public String getRestriction(String value)
-			{
-				return value;
-			}
-			
-			public String docuument( String value) {
-				return  value;
-			}
-		};
-		
-		/**
-		 * 
-		 * @param value
-		 */
-		public abstract String getRestriction( String value);
-		
-		public abstract String docuument( String value);
+		START ,
+		END ,
+		CONTAINS ,
+		EXACT
 	}
 	
-	private String value = "";
-	private MATCH matchType = null;
+	private final String value;
+	private final MATCH matchType;
 
 	/**
 	 * 
@@ -85,32 +37,12 @@ public class StringTuple extends AbstractQueryTuple {
 		matchType = type;
 	}
 
-	/**
-	 * 
-	 */
-	@Override
-	public Tuple getCriterion() {
-		
-		StringBuilder builder = new StringBuilder();
-		if ( getAlias() != null ) {
-			builder.append(getAlias().getSimpleName().toLowerCase());
-			builder.append(".");
-		}	
-			
-		builder.append(getField());
-		builder.append(" like ");
-		builder.append(matchType.getRestriction(value));
-		
-		return new Tuple(builder.toString());
+	public String getValue() {
+		return value;
 	}
-	
-	@Override
-	public void getDoucmentQuery(Document query) {
 
-		if ( matchType == MATCH.EXACT) {
-			query.put(getField(), value );
-		} else {
-			query.put(getField(), Pattern.compile(matchType.docuument(value), Pattern.CASE_INSENSITIVE) );
-		}
+	public MATCH getMatchType() {
+		return matchType;
 	}
+
 }

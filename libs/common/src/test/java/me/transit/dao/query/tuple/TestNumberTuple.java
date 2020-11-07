@@ -1,17 +1,11 @@
 package me.transit.dao.query.tuple;
 
-import static org.easymock.EasyMock.expect;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
-import org.bson.Document;
-import org.easymock.EasyMock;
 import org.easymock.EasyMockRule;
 import org.easymock.EasyMockSupport;
-import org.hibernate.Criteria;
 import org.junit.Rule;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class TestNumberTuple extends EasyMockSupport {
 
@@ -47,46 +41,6 @@ public class TestNumberTuple extends EasyMockSupport {
 		assertEquals(100, obj.getHi().intValue());
 		assertEquals("field", obj.getField());
 		assertEquals(NumberTuple.LOGIC.EQ, obj.getLogic());
-		
-	}
-	
-	@Test
-	public void testGetDoucmentQuery() {
-
-		Document mongo = new Document();
-		for ( NumberTuple.LOGIC logic : NumberTuple.LOGIC.values()) {
-			NumberTuple obj = new NumberTuple( "field", 100, logic);
-			
-			obj.getDoucmentQuery(mongo);
-		}
-		
-		try {
-			NumberTuple obj = new NumberTuple( "field", 100, 10);
-			obj.getDoucmentQuery(mongo);
-			fail("not here");
-		} catch (Exception ex) {
-			assertTrue(true);
-		}
-		
-	}
-	
-	@Test
-	public void testGetCriterion() {
-		
-		Criteria mongo = this.createNiceMock(Criteria.class);
-		
-		expect(mongo.add(EasyMock.anyObject())).andReturn(mongo).anyTimes();
-		replayAll();
-		for ( NumberTuple.LOGIC logic : NumberTuple.LOGIC.values()) {
-			NumberTuple obj = new NumberTuple( String.class, "field", 100, logic);
-			
-			obj.getCriterion();
-		}
-	
-		NumberTuple obj = new NumberTuple( "field", 100, 10);
-		obj.getCriterion();
-	    obj = new NumberTuple( String.class, "field", 100, 10);
-		obj.getCriterion();
 		
 	}
 

@@ -5,14 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import me.transit.dao.query.tuple.IQueryTuple;
-import me.transit.dao.query.tuple.Tuple;
+import me.transit.dao.query.translator.*;
+import me.transit.dao.query.tuple.*;
 
 public class QueryConstraints {
 	
-	private Class<?> criteraClass = null;
-	private HashMap<String, List<IQueryTuple>> map = new HashMap<String, List<IQueryTuple>>();
-	private List<String> orderBy = new ArrayList<String>();
+	private final Class<?> criteraClass;
+	private final HashMap<String, List<IQueryTuple>> map = new HashMap<>();
+	private final List<String> orderBy = new ArrayList<>();
 
 	/**
 	 * 
@@ -21,7 +21,28 @@ public class QueryConstraints {
 	protected QueryConstraints(Class<?> mainClass) {
 		criteraClass = mainClass;
 	}
-	
+
+	protected IOrmQueryTranslator translatorFactory(IQueryTuple query) {
+		IOrmQueryTranslator translator = null;
+
+		if ( query instanceof CircleTuple) {
+			translator = new CircleTupleTranslator(query);
+		} else if (query instanceof NumberTuple) {
+			translator = new NumberTupleTranslator(query);
+		} else if (query instanceof PolygonBoxTuple) {
+			translator = new PolygonTupleTranslator(query);
+		} else if( query instanceof RectangleTuple) {
+			translator = new RectangleTupleTranslator(query);
+		} else if ( query instanceof  StringTuple) {
+			translator = new StringTupleTranslator(query);
+		} else if ( query instanceof  TimeTuple) {
+			translator = new TimeTupleTranslator(query);
+		} else {
+			throw new IllegalArgumentException("Unknown IQueryTuple type: " + query.getClass().getName());
+		}
+		return translator;
+	}
+
 	/**
 	 * 
 	 */
@@ -50,10 +71,9 @@ public class QueryConstraints {
 			orderBy.add(field);
 		}
 	}
-	
+
 	/**
-	 * 
-	 * @param session
+	 *
 	 * @return
 	 */
 	public Tuple getCirtera() {
@@ -68,7 +88,7 @@ public class QueryConstraints {
 			List<IQueryTuple> tupleList = map.get(key);
 			int ndx = 0; 
 			for (IQueryTuple tuple : tupleList ) {
-				Tuple item = tuple.getCriterion();
+				Tuple item = this.translatorFactory(tuple).getCriterion();
 				if ( ndx != 0 ) {
 					builder.append(" and ");
 				}

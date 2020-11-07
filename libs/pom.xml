@@ -71,6 +71,7 @@
         <module>crimedb</module>
         <module>tiledb</module>
         <module>transitedb</module>
+        <module>mongoDocDao</module>
     </modules>
 
 </project>

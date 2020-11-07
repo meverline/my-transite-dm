@@ -16,13 +16,11 @@
 
 package me.crime.database.tuple;
 
-import java.util.List;
-
-import org.bson.Document;
-
 import me.crime.database.URCCatagories;
 import me.transit.dao.query.tuple.AbstractQueryTuple;
 import me.transit.dao.query.tuple.Tuple;
+
+import java.util.List;
 
 public class CatagoryTuple extends AbstractQueryTuple {
 
@@ -34,7 +32,6 @@ public class CatagoryTuple extends AbstractQueryTuple {
 		catagorys_ = start;
 	}
 
-	@Override
 	public Tuple getCriterion() {
 		String name =  getAlias().getSimpleName();
 		StringBuilder builder = new StringBuilder(name);
@@ -51,11 +48,6 @@ public class CatagoryTuple extends AbstractQueryTuple {
 		builder.append(")");
 		
 		return new Tuple(builder.toString());
-	}
-	
-	@Override
-	public void getDoucmentQuery(Document query) {
-		throw new UnsupportedOperationException();
 	}
 
 }
