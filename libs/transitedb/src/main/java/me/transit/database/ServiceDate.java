@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import me.database.mongo.AbstractDocument;
+import me.database.nsstore.AbstractDocument;
 import me.transit.annotation.GTFSFileModel;
 import me.transit.annotation.GTFSSetter;
 

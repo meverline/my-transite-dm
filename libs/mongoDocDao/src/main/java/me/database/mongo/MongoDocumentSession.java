@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
+import me.database.nsstore.AbstractDocument;
+import me.database.nsstore.IDocument;
+import me.database.nsstore.IDocumentSession;
 import me.transit.dao.query.translator.mongo.*;
 import me.transit.dao.query.tuple.*;
 import org.apache.commons.logging.Log;
@@ -23,56 +26,39 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
-public class DocumentDao extends IDocumentDao {
+public class MongoDocumentSession extends IDocumentSession {
 
-	private Log log = LogFactory.getLog(DocumentDao.class);
-	private List<String> skipData = new ArrayList<String>();
-	protected static DocumentDao _theOne = null;
-	private static MongoClient _connection = null;
-	private MongoDatabase _transDoc = null;
-	private Map<String, MongoCollection<Document>> collectionMap = new HashMap<>();
+	public final static String LOCALHOST = "localhost";
+
+	private Log log = LogFactory.getLog(MongoDocumentSession.class);
+	private final List<String> skipData = new ArrayList<String>();
+	private final MongoClient _connection;
+	private final MongoDatabase _transDoc;
+	private final Map<String, MongoCollection<Document>> collectionMap = new HashMap<>();
 	private final ObjectMapper mapper = new ObjectMapper();
 
 	/**
-	 * 
-	 * @param connection
+	 *
+	 * @param database
 	 * @throws UnknownHostException
 	 */
-	public DocumentDao(MongoClient connection) throws UnknownHostException {
+	public MongoDocumentSession(Map<String,String> properties) throws UnknownHostException {
 		this.addSkipField("_id");
 		this.addSkipField("@class");
-		if (connection != null) {
-			_connection = connection;
-		} else if (_connection == null) {
+
+		if ( properties.get(IDocumentSession.HOST).equals(LOCALHOST)) {
 			_connection = MongoClients.create();
+		} else {
+			StringBuilder url = new StringBuilder();
+			url.append(properties.get(IDocumentSession.HOST));
+			url.append(":");
+			url.append(properties.get(IDocumentSession.PORT));
+
+			_connection = MongoClients.create(url.toString());
 		}
-		_transDoc = _connection.getDatabase(IDocumentDao.TRANSITEDOC);
-		collectionMap.put(IDocumentDao.COLLECTION, _transDoc.getCollection(IDocumentDao.COLLECTION));
-		
+
+		_transDoc = _connection.getDatabase( properties.get(IDocumentSession.DATABASE));
 		mapper.setSerializationInclusion(Include.NON_NULL);
-		 
-	}
-
-	/**
-	 * 
-	 * @return
-	 * @throws UnknownHostException
-	 */
-	public static synchronized IDocumentDao instance() throws UnknownHostException {
-		if (_theOne == null) {
-			_theOne = new DocumentDao(null);
-		}
-		return _theOne;
-	}
-
-	/**
-	 * 
-	 * @return
-	 * @throws UnknownHostException
-	 */
-	public static synchronized IDocumentDao instance(MongoClient connection) throws UnknownHostException {
-		_theOne = new DocumentDao(connection);
-		return _theOne;
 	}
 
 	/**
@@ -119,8 +105,8 @@ public class DocumentDao extends IDocumentDao {
 	 */
 	@Override
 	public void add(IDocument document) {
-		this.delete(document, DocumentDao.COLLECTION);
-		this.add(document, DocumentDao.COLLECTION);
+		this.delete(document, MongoDocumentSession.COLLECTION);
+		this.add(document, MongoDocumentSession.COLLECTION);
 	}
 
 	protected void addSkipField(String field) {
@@ -148,23 +134,6 @@ public class DocumentDao extends IDocumentDao {
 		}
 	}
 
-	/**
-	 * 
-	 * @param fieldList
-	 * @return
-	 */
-	public static String toDocField(List<String> fieldList) {
-		StringBuilder queryField = new StringBuilder();
-
-		for (String fld : fieldList) {
-			if (queryField.length() > 0) {
-				queryField.append(".");
-			}
-			queryField.append(fld);
-		}
-		return queryField.toString();
-	}
-
 	protected boolean skipField(String field) {
 		for (String item : this.skipData) {
 			if (field.equals(item)) {
@@ -180,15 +149,15 @@ public class DocumentDao extends IDocumentDao {
 		if ( query instanceof CircleTuple ) {
 			translator = new MongoCircleTuple(query);
 		} else if ( query instanceof NumberTuple) {
-			translator =  new MongoNumberTuple(query);
+			translator = new MongoNumberTuple(query);
 		} else if ( query instanceof  PolygonBoxTuple ) {
-			translator =  new MongoPolygonTuple(query);
+			translator = new MongoPolygonTuple(query);
 		} else if ( query instanceof  RectangleTuple ) {
-			translator =  new MongoRectagleTuple(query);
+			translator = new MongoRectagleTuple(query);
 		} else if ( query instanceof  StringTuple) {
-			translator =   new MongoStringTuple(query);
+			translator = new MongoStringTuple(query);
 		} else if ( query instanceof  TimeTuple ) {
-			translator =  new MongoTimeTuple(query);
+			translator = new MongoTimeTuple(query);
 		} else {
 			throw new IllegalArgumentException("Unknown IQueryTuple type: " + query.getClass().getName());
 		}
@@ -200,7 +169,7 @@ public class DocumentDao extends IDocumentDao {
 	 */
 	@Override
 	public List<AbstractDocument> find(List<IQueryTuple> tupleList) {
-		return find(tupleList, DocumentDao.COLLECTION);
+		return find(tupleList, MongoDocumentSession.COLLECTION);
 	}
 
 	/* (non-Javadoc)
@@ -237,7 +206,7 @@ public class DocumentDao extends IDocumentDao {
 	 */
 	@Override
 	public long size() {
-		return size(DocumentDao.COLLECTION);
+		return size(MongoDocumentSession.COLLECTION);
 	}
 
 	/* (non-Javadoc)

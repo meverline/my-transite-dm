@@ -4,12 +4,13 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
+import me.database.nsstore.IDocument;
 import me.math.Vertex;
 import me.math.grid.AbstractSpatialGridPoint;
 import me.math.kdtree.INode;
 
 
-public class TiledSpatialGridPoint extends AbstractSpatialGridPoint implements INode, IGridDocument {
+public class TiledSpatialGridPoint extends AbstractSpatialGridPoint implements INode, IDocument {
 
 	private int tileIndex_;
 	private String docId = null;

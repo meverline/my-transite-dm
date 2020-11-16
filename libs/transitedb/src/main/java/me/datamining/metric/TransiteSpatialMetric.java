@@ -4,8 +4,9 @@ package me.datamining.metric;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.database.mongo.DocumentDao;
-import me.database.mongo.AbstractDocument;
+import me.database.nsstore.IDocumentSession;
+import me.database.nsstore.AbstractDocument;
+import me.database.nsstore.StoreUtils;
 import me.transit.dao.query.tuple.IQueryTuple;
 import me.transit.dao.query.tuple.StringTuple;
 import me.transit.database.Route;
@@ -61,7 +62,7 @@ public class TransiteSpatialMetric extends AbstractSpatialMetric {
 		
 		List<IQueryTuple> list = new ArrayList<IQueryTuple>();
 		
-		list.add( new StringTuple(DocumentDao.toDocField(fields), 
+		list.add( new StringTuple(StoreUtils.toDocField(fields),
 				                  route.getShortName(), 
 				                  StringTuple.MATCH.EXACT ));
 		

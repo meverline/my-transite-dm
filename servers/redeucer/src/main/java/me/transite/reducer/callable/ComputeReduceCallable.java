@@ -1,15 +1,8 @@
 package me.transite.reducer.callable;
 
-import me.database.mongo.DocumentDao;
-import me.database.mongo.IDocument;
+import me.database.mongo.MongoDocumentSession;
 import me.datamining.ComputeTile;
-import me.datamining.PopulateTile;
 import me.datamining.TileJob;
-import me.math.grid.AbstractSpatialGridPoint;
-import me.math.grid.data.AbstractDataSample;
-import me.math.grid.tiled.DbTiledSpatialGrid;
-import me.math.grid.tiled.SpatialTile;
-import me.math.grid.tiled.TiledSpatialGridPoint;
 
 import java.util.Objects;
 import java.util.concurrent.Callable;
@@ -18,9 +11,9 @@ public class ComputeReduceCallable implements Callable<TileJob> {
 
     private final ComputeReduceCallable computeReduce;
     private final ComputeTile message;
-    private final DocumentDao documentDao;
+    private final MongoDocumentSession documentDao;
 
-    public ComputeReduceCallable(ComputeReduceCallable computeReduce, ComputeTile message, DocumentDao documentDao) {
+    public ComputeReduceCallable(ComputeReduceCallable computeReduce, ComputeTile message, MongoDocumentSession documentDao) {
         this.computeReduce = Objects.requireNonNull(computeReduce,"computeReduce can not be null");
         this.message = Objects.requireNonNull(message,"computeReduce can not be null");
         this.documentDao = Objects.requireNonNull(documentDao,"documentDao can not be null");

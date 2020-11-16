@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
-import me.database.mongo.AbstractDocument;
+import me.database.nsstore.AbstractDocument;
 import me.math.Vertex;
 import me.math.grid.AbstractSpatialGridPoint;
 

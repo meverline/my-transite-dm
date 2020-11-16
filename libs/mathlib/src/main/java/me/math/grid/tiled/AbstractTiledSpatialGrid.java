@@ -8,7 +8,7 @@ import javax.persistence.Column;
 import me.math.LocalDownFrame;
 import me.math.VectorMath;
 import me.math.Vertex;
-import me.math.grid.AbstractSpatialGridOverlay;
+import me.math.grid.AbstractSpatialGrid;
 import me.math.grid.AbstractSpatialGridPoint;
 import me.math.grid.data.CrossCovData;
 import me.math.kdtree.INode;
@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
 @JsonSubTypes({ @Type(value = SpatialTile.class, name = "SpatialTile"),
 		        @Type(value = TiledSpatialGrid.class, name = "TiledSpatialGrid") })
-public abstract class AbstractTiledSpatialGrid extends AbstractSpatialGridOverlay implements INodeCreator {
+public abstract class AbstractTiledSpatialGrid extends AbstractSpatialGrid implements INodeCreator {
 
 	private Log logger = LogFactory.getLog(TiledSpatialGrid.class);
 

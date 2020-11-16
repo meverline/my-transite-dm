@@ -6,7 +6,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
-import me.database.mongo.AbstractDocument;
+import me.database.nsstore.AbstractDocument;
 import me.transit.annotation.GTFSSetter;
 
 public class RouteDocument extends AbstractDocument implements IRoute {

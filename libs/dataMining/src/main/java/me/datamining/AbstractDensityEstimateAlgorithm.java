@@ -10,7 +10,7 @@ import me.datamining.Kernel.IDensityKernel;
 import me.datamining.bandwidth.IBandwidth;
 import me.datamining.bandwidth.SlivermanRule;
 import me.math.Vertex;
-import me.math.grid.AbstractSpatialGridOverlay;
+import me.math.grid.AbstractSpatialGrid;
 
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
@@ -21,7 +21,7 @@ public abstract class AbstractDensityEstimateAlgorithm implements DensityEstimat
 	private  IBandwidth yBandWidth = new SlivermanRule();
     private  final DescriptiveStatistics xstats_ = new DescriptiveStatistics();
     private  final DescriptiveStatistics ystats_ = new DescriptiveStatistics();
-	private  AbstractSpatialGridOverlay grid = null;
+	private AbstractSpatialGrid grid = null;
 	private  List<SpatialSamplePoint> sampleValues = null;
 	private  double crossCovariance = 0.0;
 
@@ -93,14 +93,14 @@ public abstract class AbstractDensityEstimateAlgorithm implements DensityEstimat
 	/**
 	 * @return the theGrid
 	 */
-	public AbstractSpatialGridOverlay getGrid() {
+	public AbstractSpatialGrid getGrid() {
 		return grid;
 	}
 	
 	/**
 	 * @param theGrid the theGrid to set
 	 */
-	public void setGrid(AbstractSpatialGridOverlay theGrid) {
+	public void setGrid(AbstractSpatialGrid theGrid) {
 		this.grid = theGrid;
 	}
 
@@ -169,7 +169,7 @@ public abstract class AbstractDensityEstimateAlgorithm implements DensityEstimat
 	 * (non-Javadoc)
 	 * @see me.datamining.DensityEstimateAlgorithm#init(me.math.grid.UniformSpatialGrid, java.util.List)
 	 */
-	public void init(AbstractSpatialGridOverlay theGrid) {
+	public void init(AbstractSpatialGrid theGrid) {
 		this.setGrid(theGrid);
 		setCrossCovariance(this.crossCovariance(getSampleValues()));
 	}
@@ -178,7 +178,7 @@ public abstract class AbstractDensityEstimateAlgorithm implements DensityEstimat
 	 * (non-Javadoc)
 	 * @see me.datamining.DensityEstimateAlgorithm#kernalDensityEstimate(me.math.grid.UniformSpatialGrid, java.util.List)
 	 */
-	public void kernalDensityEstimate(AbstractSpatialGridOverlay theGrid) {
+	public void kernalDensityEstimate(AbstractSpatialGrid theGrid) {
 		this.init(theGrid);
 		this.kernalDensityEstimate(getDenstiyKernel(), getXBandWidth(), getYBandWidth());
 	}

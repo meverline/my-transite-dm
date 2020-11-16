@@ -9,9 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.database.mongo.DocumentDao;
-import me.database.mongo.IDocument;
-import me.database.mongo.AbstractDocument;
-import me.database.mongo.IDocumentDao;
+import me.database.nsstore.IDocument;
+import me.database.nsstore.AbstractDocument;
+import me.database.nsstore.IDocumentSession;
+import me.database.nsstore.StoreUtils;
 import me.transit.dao.query.tuple.IQueryTuple;
 import me.transit.dao.query.tuple.StringTuple;
 import me.transit.database.Agency;
@@ -56,7 +57,7 @@ public class MongoDBTest {
 	@Test
 	public void testCount() {
 
-		IDocumentDao dao;
+		IDocumentSession dao;
 		try {
 			dao = DocumentDao.instance();
 
@@ -79,13 +80,13 @@ public class MongoDBTest {
 		fields.add(Trip.STOPTIMES);
 		fields.add(StopTime.STOPNAME);
 
-		String tmp = DocumentDao.toDocField(fields);
+		String tmp = StoreUtils.toDocField(fields);
 
 		List<IQueryTuple> query = new ArrayList<IQueryTuple>();
 
 		query.add(new StringTuple(tmp, "n barton", StringTuple.MATCH.END));
 
-		IDocumentDao dao;
+		IDocumentSession dao;
 		try {
 			dao = DocumentDao.instance();
 			List<AbstractDocument> routes = dao.find(query);
@@ -108,13 +109,13 @@ public class MongoDBTest {
 		fields.clear();
 		fields.add(Route.SHORTNAME);
 
-		String tmp = DocumentDao.toDocField(fields);
+		String tmp = StoreUtils.toDocField(fields);
 
 		List<IQueryTuple> query = new ArrayList<IQueryTuple>();
 
 		query.add(new StringTuple(tmp, "4B", StringTuple.MATCH.EXACT));
 
-		IDocumentDao dao;
+		IDocumentSession dao;
 		try {
 			dao = DocumentDao.instance();
 			List<AbstractDocument> routes = dao.find(query);
@@ -138,7 +139,7 @@ public class MongoDBTest {
 
 		List<IQueryTuple> query = new ArrayList<IQueryTuple>();
 
-		IDocumentDao dao;
+		IDocumentSession dao;
 		try {
 			dao = DocumentDao.instance();
 			List<AbstractDocument> routes = dao.find(query);

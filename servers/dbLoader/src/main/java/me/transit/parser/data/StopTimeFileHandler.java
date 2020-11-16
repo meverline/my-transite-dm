@@ -15,7 +15,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import me.database.mongo.IDocumentDao;
+import me.database.nsstore.IDocumentSession;
 import me.database.neo4j.IGraphDatabaseDAO;
 import me.transit.dao.RouteDao;
 import me.transit.dao.TransiteStopDao;
@@ -28,7 +28,7 @@ import me.transit.database.Trip;
 public class StopTimeFileHandler extends AbstractFileHandler {
 
 	private Log log = LogFactory.getLog(getClass().getName());
-	private IDocumentDao documentDao;
+	private IDocumentSession documentDao;
 	private IGraphDatabaseDAO graphdb;
 	private RouteDao routeDao;
 	private TransiteStopDao transiteStopDao;
@@ -42,7 +42,7 @@ public class StopTimeFileHandler extends AbstractFileHandler {
 	 * @param blackboard
 	 */
 	@Autowired
-	public StopTimeFileHandler(RouteDao routeDao, TransiteStopDao transiteStopDao, IDocumentDao documentDao,
+	public StopTimeFileHandler(RouteDao routeDao, TransiteStopDao transiteStopDao, IDocumentSession documentDao,
 			IGraphDatabaseDAO graphDatabase, Blackboard blackboard) {
 		super(blackboard);
 		this.documentDao = Objects.requireNonNull(documentDao, "documentDao can not be null");

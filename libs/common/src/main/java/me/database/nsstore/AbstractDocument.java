@@ -1,4 +1,4 @@
-package me.database.mongo;
+package me.database.nsstore;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;

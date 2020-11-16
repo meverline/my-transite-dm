@@ -1,4 +1,4 @@
-package me.database.mongo;
+package me.database.nsstore;
 
 public interface IDocument {
 

@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 
 import me.datamining.Kernel.IDensityKernel;
 import me.datamining.bandwidth.IBandwidth;
-import me.math.grid.AbstractSpatialGridOverlay;
+import me.math.grid.AbstractSpatialGrid;
 
 public interface DensityEstimateAlgorithm {
 	
@@ -33,20 +33,18 @@ public interface DensityEstimateAlgorithm {
 	 * @throws FileNotFoundException
 	 */
 	public void saveGird(String fileName, String dir) throws FileNotFoundException;
-	
+
 	/**
-	 * 
+	 *
 	 * @param theGrid
-	 * @param sampleValues
 	 */
-	public void init(AbstractSpatialGridOverlay theGrid);
-	
+	public void init(AbstractSpatialGrid theGrid);
+
 	/**
-	 * 
-	 * @param kernel
-	 * @param smothParm
+	 *
+	 * @param theGrid
 	 */
-	public void kernalDensityEstimate(AbstractSpatialGridOverlay theGrid);
+	public void kernalDensityEstimate(AbstractSpatialGrid theGrid);
 
 	/**
 	 * 

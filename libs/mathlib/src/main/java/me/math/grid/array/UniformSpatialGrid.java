@@ -28,7 +28,7 @@ import java.util.List;
 import me.math.LocalDownFrame;
 import me.math.VectorMath;
 import me.math.Vertex;
-import me.math.grid.AbstractSpatialGridOverlay;
+import me.math.grid.AbstractSpatialGrid;
 import me.math.grid.AbstractSpatialGridPoint;
 import me.math.kdtree.INode;
 import me.math.kdtree.KDTree;
@@ -37,7 +37,7 @@ import me.math.kdtree.INodeCreator;
 
 import org.locationtech.jts.geom.Point;
 
-public class UniformSpatialGrid extends AbstractSpatialGridOverlay implements INodeCreator {
+public class UniformSpatialGrid extends AbstractSpatialGrid implements INodeCreator {
 	
 	protected SpatialGridPoint[][] grid_ = null;
 	

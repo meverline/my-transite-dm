@@ -14,7 +14,7 @@ import org.locationtech.jts.geom.Point;
 
 public class TiledSpatialGrid extends AbstractTiledSpatialGrid {
 
-	private List<SpatialTile> grid_ = new ArrayList<>();
+	private final List<SpatialTile> grid_ = new ArrayList<>();
 
 	/**
 	 *

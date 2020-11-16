@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
-import me.database.mongo.IDocument;
+import me.database.nsstore.IDocument;
 import me.math.LocalDownFrame;
 import me.math.VectorMath;
 import me.math.Vertex;
@@ -34,9 +34,6 @@ import me.math.kdtree.MinBoundingRectangle;
 @JsonPropertyOrder({ "_id", "rows", "cols", "defaultValue", "row_offset", "col_offset", "grid_size_in_meters", 
 					 "index", "tile_index", "frame", "cc_data", "grid" })
 public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, IDocument {
-	
-	public static final String ROW_OFFSET = "rowOffset";
-	public static final String COL_OFFSET = "colOffset";
 
 	private int tileIndex = -1;
 	private MinBoundingRectangle  mbr_ = null;
@@ -168,6 +165,11 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, ID
 	public TiledSpatialGridPoint getEntry(int index) {
 		int tileIndex = index - this.getIndex();
 		return getGrid().get(tileIndex);
+	}
+
+	@Override
+	public TiledSpatialGridPoint get(int index, int gridIndex) {
+		return grid_.get(index);
 	}
 	
 	/**
@@ -307,7 +309,7 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, ID
 			AbstractSpatialGridPoint gridPt) {
 		throw new UnsupportedOperationException();
 	}
-	
+
 	public void dump(Writer out, int tileSize, String tab)
 	{
 		StringBuilder buf = new StringBuilder();

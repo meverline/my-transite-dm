@@ -16,7 +16,7 @@ import org.easymock.MockType;
 import org.junit.Rule;
 import org.junit.Test;
 
-import me.database.mongo.DocumentDao;
+import me.database.mongo.MongoDocumentSession;
 import me.database.neo4j.IGraphDatabaseDAO;
 import me.transit.dao.RouteDao;
 import me.transit.database.Agency;
@@ -38,7 +38,7 @@ public class TripFileHandlerTest extends EasyMockSupport {
 	private IGraphDatabaseDAO graphDatabase;
 	
 	@Mock(MockType.NICE)
-	private DocumentDao documentDao;
+	private MongoDocumentSession documentDao;
 	
 	private Agency agency = new Agency();
 	

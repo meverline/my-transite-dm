@@ -1,14 +1,17 @@
-package me.database.mongo;
+package me.database.nsstore;
 
 import java.util.List;
 
 import me.transit.dao.query.tuple.IQueryTuple;
 
-public abstract class IDocumentDao {
+public abstract class IDocumentSession {
+
+	public final static String HOST = "host";
+	public final static String PORT = "port";
+	public final static String DATABASE = "database";
 
 	public final static String COLLECTION = "schedules";
 	public final static String TRANSITEDOC = "transiteDoc";
-	public final static String LOCALHOST = "localhost";
 
 	/**
 	 * Add document to the named collection. 
@@ -30,10 +33,10 @@ public abstract class IDocumentDao {
 	public abstract List<AbstractDocument> find(List<IQueryTuple> tupleList);
 
 	/**
-	 * Find an object in a given collection
-	 * @param tupleList the query parameters. 
-	 * @param collectName the collection name
-	 * @return return a list of objects matching the query.
+	 *
+	 * @param tupleList
+	 * @param collection
+	 * @return
 	 */
 	public abstract List<AbstractDocument> find(List<IQueryTuple> tupleList, String collection);
 

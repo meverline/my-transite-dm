@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+import me.math.grid.AbstractSpatialGrid;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.math3.distribution.BinomialDistribution;
@@ -31,7 +32,6 @@ import org.locationtech.jts.geom.Point;
 
 import me.datamining.ClusteringAlgorithm;
 import me.math.Vertex;
-import me.math.grid.AbstractSpatialGridOverlay;
 import me.math.grid.AbstractSpatialGridPoint;
 import me.math.grid.array.UniformSpatialGrid;
 import me.math.grid.data.STINGDataSample;
@@ -42,7 +42,7 @@ import me.math.kdtree.search.RangeSearch;
 
 public class STING implements ClusteringAlgorithm {
 
-	private AbstractSpatialGridOverlay grid_ = null;
+	private AbstractSpatialGrid grid_ = null;
 	private int rangeHi = Integer.MAX_VALUE;
 	private int rangeLow = 0;
 	private double confidence = 0.5;
@@ -88,7 +88,7 @@ public class STING implements ClusteringAlgorithm {
 	 * 
 	 * @param aGrid
 	 */
-	public void init(AbstractSpatialGridOverlay aGrid)
+	public void init(AbstractSpatialGrid aGrid)
 	{
 		grid_ = aGrid;
 		tree_ = aGrid.getTree();
@@ -216,7 +216,7 @@ public class STING implements ClusteringAlgorithm {
 	/* (non-Javadoc)
 	 * @see me.datamining.ClusteringAlgorithm#findClusters()
 	 */
-	public List<AbstractSpatialGridPoint> findClusters(AbstractSpatialGridOverlay aGrid) {
+	public List<AbstractSpatialGridPoint> findClusters(AbstractSpatialGrid aGrid) {
 		this.init(aGrid);
 		return this.findClusters();
 	}

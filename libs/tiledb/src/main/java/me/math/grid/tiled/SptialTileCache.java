@@ -1,7 +1,7 @@
 package me.math.grid.tiled;
 
-import me.database.mongo.AbstractDocument;
-import me.database.mongo.IDocumentDao;
+import me.database.nsstore.AbstractDocument;
+import me.database.nsstore.IDocumentSession;
 import me.math.grid.tiled.dao.TileFragmentDao;
 import me.transit.dao.query.tuple.IQueryTuple;
 import me.transit.dao.query.tuple.NumberTuple;
@@ -13,7 +13,9 @@ import java.util.List;
 
 public class SptialTileCache {
 
-	private final IDocumentDao documentDao;
+	private static final String INDEX = "index";
+
+	private final IDocumentSession documentDao;
 	private final TileFragmentDao tileFragmentDao;
 	private static SptialTileCache theOne = null;
 	
@@ -22,7 +24,7 @@ public class SptialTileCache {
 	 * @param documentDao
 	 * @param tileFragmentDao
 	 */
-	private SptialTileCache(IDocumentDao documentDao, TileFragmentDao tileFragmentDao) {
+	private SptialTileCache(IDocumentSession documentDao, TileFragmentDao tileFragmentDao) {
 		this.documentDao = documentDao;
 		this.tileFragmentDao = tileFragmentDao;
 	}
@@ -32,7 +34,7 @@ public class SptialTileCache {
 	 * @param documentDao
 	 * @param tileFragmentDao
 	 */
-	public synchronized static void initilize(IDocumentDao documentDao, TileFragmentDao tileFragmentDao) {
+	public synchronized static void initilize(IDocumentSession documentDao, TileFragmentDao tileFragmentDao) {
 		
 		if ( theOne == null ) {
 			theOne = new SptialTileCache(documentDao, tileFragmentDao);
@@ -59,7 +61,7 @@ public class SptialTileCache {
 	{
 		List<IQueryTuple> list = new ArrayList<>();
 		
-		list.add( new NumberTuple( IGridDocument.INDEX, index, NumberTuple.LOGIC.EQ));
+		list.add( new NumberTuple( SptialTileCache.INDEX, index, NumberTuple.LOGIC.EQ));
 		@SuppressWarnings("unused")
 		List<AbstractDocument> rtn = documentDao.find(list, tile.getHeatMapName());
 		

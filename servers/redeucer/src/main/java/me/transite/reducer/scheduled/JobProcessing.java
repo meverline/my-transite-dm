@@ -5,7 +5,7 @@ import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
 import com.amazonaws.services.sqs.model.Message;
 import com.amazonaws.services.sqs.model.ReceiveMessageRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import me.database.mongo.DocumentDao;
+import me.database.mongo.MongoDocumentSession;
 import me.datamining.ComputeTile;
 import me.datamining.PopulateTile;
 import me.datamining.TileJob;
@@ -38,10 +38,10 @@ public class JobProcessing {
 	private final ObjectMapper decoder = new ObjectMapper();
 	private final ComputeReduceCallable computeReduce;
 	private final PopulateReduceCallable populateReduce;
-	private final DocumentDao documentDao;
+	private final MongoDocumentSession documentDao;
 	
 	@Autowired
-	public JobProcessing(Environment env, ComputeReduceCallable computeReduce, PopulateReduceCallable populateReduce, DocumentDao documentDao) {
+	public JobProcessing(Environment env, ComputeReduceCallable computeReduce, PopulateReduceCallable populateReduce, MongoDocumentSession documentDao) {
 		this.computeReduce = Objects.requireNonNull(computeReduce,"computeReduce can not be null");
 		this.populateReduce = Objects.requireNonNull(populateReduce,"populateReduce can not be null");
 		this.documentDao = Objects.requireNonNull(documentDao,"documentDao can not be null");

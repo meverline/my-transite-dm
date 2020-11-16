@@ -25,7 +25,7 @@ import org.hibernate.annotations.GenericGenerator;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
-import me.database.mongo.IDocument;
+import me.database.nsstore.IDocument;
 import me.transit.annotation.GTFSFileModel;
 import me.transit.annotation.GTFSSetter;
 

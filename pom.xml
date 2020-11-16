@@ -66,6 +66,7 @@
     <modules>
         <module>libs</module>
         <module>servers</module>
+        <module>libs/dynamoDBdbDcoDB</module>
     </modules>
 
 </project>

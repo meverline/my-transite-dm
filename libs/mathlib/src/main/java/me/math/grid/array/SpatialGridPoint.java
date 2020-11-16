@@ -23,7 +23,7 @@ import me.math.grid.AbstractSpatialGridPoint;
 
 public class SpatialGridPoint extends AbstractSpatialGridPoint{
 
-	private transient UniformSpatialGrid grid_ = null;
+	private final transient UniformSpatialGrid grid_;
 
 	/**
 	 * 

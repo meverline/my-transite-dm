@@ -10,6 +10,8 @@ import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.List;
 
+import me.database.nsstore.AbstractDocument;
+import me.database.nsstore.IDocumentSession;
 import org.bson.Document;
 import org.easymock.EasyMock;
 import org.easymock.EasyMockRule;
@@ -54,12 +56,12 @@ public class TestDocumentDao extends EasyMockSupport{
 		
 		this.setUpMock();
 
-		IDocumentDao doc = DocumentDao.instance(writer);
+		IDocumentSession doc = MongoDocumentSession.instance(writer);
 		assertNotNull(doc);
 		assertEquals(3, doc.size());
 		assertEquals(3, doc.size("unk"));
 		
-		doc = DocumentDao.instance(writer);
+		doc = MongoDocumentSession.instance(writer);
 		assertNotNull(doc);
 		
 		verifyAll();
@@ -70,7 +72,7 @@ public class TestDocumentDao extends EasyMockSupport{
 	public void testSkip() throws UnknownHostException {
 		
 		this.setUpMock();
-		DocumentDao doc = DocumentDao.class.cast(DocumentDao.instance(writer));
+		MongoDocumentSession doc = MongoDocumentSession.class.cast(MongoDocumentSession.instance(writer));
 		
 		String [] info = {
 				"_id",
@@ -99,7 +101,7 @@ public class TestDocumentDao extends EasyMockSupport{
 				"field4",
 		};
 				
-		assertNotNull( DocumentDao.toDocField(Arrays.asList(info)));
+		assertNotNull( MongoDocumentSession.toDocField(Arrays.asList(info)));
 	}
 	
 	

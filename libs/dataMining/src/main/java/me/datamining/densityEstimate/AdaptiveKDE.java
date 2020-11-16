@@ -21,19 +21,16 @@ import me.math.kdtree.search.RangeSearch;
 public class AdaptiveKDE extends AbstractDensityEstimateAlgorithm {
 
 	private KDTree tree_ = null;
-	
-	/**
-	 * 
-	 * @param samples
-	 * @param grid
-	 */
+
+    /**
+     *
+     */
 	public AdaptiveKDE()
 	{
 	}
 
 	/**
-	 * 
-	 * @param samples
+	 *
 	 * @param grid
 	 */
 	public AdaptiveKDE(UniformSpatialGrid grid)

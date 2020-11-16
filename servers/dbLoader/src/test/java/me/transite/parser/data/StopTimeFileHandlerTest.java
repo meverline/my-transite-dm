@@ -16,7 +16,7 @@ import org.easymock.MockType;
 import org.junit.Rule;
 import org.junit.Test;
 
-import me.database.mongo.IDocumentDao;
+import me.database.nsstore.IDocumentSession;
 import me.database.neo4j.IGraphDatabaseDAO;
 import me.transit.dao.RouteDao;
 import me.transit.dao.TransiteStopDao;
@@ -44,7 +44,7 @@ public class StopTimeFileHandlerTest extends EasyMockSupport {
 	private TransiteStopDao transiteStopDao;
 	
 	@Mock(MockType.NICE)
-	private IDocumentDao documentDao;
+	private IDocumentSession documentDao;
 	
 	@Mock(MockType.NICE)
 	private IGraphDatabaseDAO graphDatabase; 
