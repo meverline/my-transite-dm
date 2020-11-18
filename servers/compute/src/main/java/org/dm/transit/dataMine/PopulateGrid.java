@@ -1,7 +1,7 @@
 package org.dm.transit.dataMine;
 
 import me.datamining.DataItem;
-import me.math.grid.AbstractSpatialGridPoint;
+import me.math.grid.SpatialGridPoint;
 import me.math.grid.tiled.SpatialTile;
 import me.math.kdtree.KDTree;
 import me.math.kdtree.search.RangeSearch;
@@ -20,18 +20,18 @@ public class PopulateGrid {
      */
     public void populate(SpatialTile gridTile, List<DataItem> list) {
         KDTree tree = gridTile.getTree();
-        RangeSearch search = new RangeSearch(list.get(0).getLocation(), gridTile.getGridSizeInMeters());
+        RangeSearch search = new RangeSearch(list.get(0).getLocation(), gridTile.getGridSpacingMeters());
 
         for (DataItem item : list) {
             if (gridTile.getMbr().contains(item.getLocation())) {
                 search.reset();
                 search.setPoint(item.getLocation());
-                search.setDistanceInMeters(gridTile.getGridSizeInMeters());
+                search.setDistanceInMeters(gridTile.getGridSpacingMeters());
 
                 tree.find(search);
-                List<AbstractSpatialGridPoint> results = search.getResults();
+                List<SpatialGridPoint> results = search.getResults();
 
-                for (AbstractSpatialGridPoint pt : results) {
+                for (SpatialGridPoint pt : results) {
                     pt.getData().addValue(item.getValue());
                 }
             }

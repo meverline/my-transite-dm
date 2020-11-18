@@ -17,7 +17,7 @@
 package me.math.kdtree;
 
 import me.math.Vertex;
-import me.math.grid.AbstractSpatialGridPoint;
+import me.math.grid.SpatialGridPoint;
 
 public interface INode {
 
@@ -96,6 +96,6 @@ public interface INode {
    * 
    * @return
    */
-  AbstractSpatialGridPoint getPoint() ;
+  SpatialGridPoint getPoint() ;
 
 }

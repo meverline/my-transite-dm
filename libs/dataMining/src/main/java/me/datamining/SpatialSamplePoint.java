@@ -1,6 +1,6 @@
 package me.datamining;
 
-import me.math.grid.AbstractSpatialGridPoint;
+import me.math.grid.SpatialGridPoint;
 
 
 public interface SpatialSamplePoint {
@@ -67,7 +67,7 @@ public interface SpatialSamplePoint {
 	 */
 	public void addSampleData(Object data);
 	
-	public AbstractSpatialGridPoint getGridPoint();
-	public void setGridPoint(AbstractSpatialGridPoint aPoint);
+	public SpatialGridPoint getGridPoint();
+	public void setGridPoint(SpatialGridPoint aPoint);
 
 }

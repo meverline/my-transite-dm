@@ -8,10 +8,13 @@ import static org.junit.Assert.assertTrue;
 
 import java.net.UnknownHostException;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import me.database.nsstore.AbstractDocument;
 import me.database.nsstore.IDocumentSession;
+import me.database.nsstore.StoreUtils;
 import org.bson.Document;
 import org.easymock.EasyMock;
 import org.easymock.EasyMockRule;
@@ -30,6 +33,8 @@ import com.mongodb.client.MongoDatabase;
 
 public class TestDocumentDao extends EasyMockSupport{
 
+	private final static String COLLECTION = "schedules";
+
     @Rule
     public EasyMockRule rule = new EasyMockRule(this);
    
@@ -41,9 +46,14 @@ public class TestDocumentDao extends EasyMockSupport{
 	
 	@Mock(type=MockType.NICE)
 	private MongoCollection<Document> collection;
+
+	private Map<String, String> properties = new HashMap<>();
 	
 	
 	private void setUpMock() {
+
+		properties.put(IDocumentSession.DATABASE, "transiteDoc");
+
 		expect(writer.getDatabase(EasyMock.anyString())).andReturn(dbmock).anyTimes();
 		expect(dbmock.getCollection(EasyMock.anyString())).andReturn(collection).anyTimes();
 		expect(collection.countDocuments()).andReturn(new Long(3)).anyTimes();
@@ -56,12 +66,11 @@ public class TestDocumentDao extends EasyMockSupport{
 		
 		this.setUpMock();
 
-		IDocumentSession doc = MongoDocumentSession.instance(writer);
+		IDocumentSession doc = new MongoDocumentSession(writer,properties);
 		assertNotNull(doc);
-		assertEquals(3, doc.size());
 		assertEquals(3, doc.size("unk"));
 		
-		doc = MongoDocumentSession.instance(writer);
+		doc = new MongoDocumentSession(writer, properties);
 		assertNotNull(doc);
 		
 		verifyAll();
@@ -72,7 +81,7 @@ public class TestDocumentDao extends EasyMockSupport{
 	public void testSkip() throws UnknownHostException {
 		
 		this.setUpMock();
-		MongoDocumentSession doc = MongoDocumentSession.class.cast(MongoDocumentSession.instance(writer));
+		MongoDocumentSession doc = new MongoDocumentSession(writer, properties);
 		
 		String [] info = {
 				"_id",
@@ -101,7 +110,7 @@ public class TestDocumentDao extends EasyMockSupport{
 				"field4",
 		};
 				
-		assertNotNull( MongoDocumentSession.toDocField(Arrays.asList(info)));
+		assertNotNull( StoreUtils.toDocField(Arrays.asList(info)));
 	}
 	
 	

@@ -4,7 +4,7 @@ import me.datamining.AbstractDensityEstimateAlgorithm;
 import me.datamining.SpatialSamplePoint;
 import me.datamining.Kernel.IDensityKernel;
 import me.datamining.bandwidth.IBandwidth;
-import me.math.grid.AbstractSpatialGridPoint;
+import me.math.grid.SpatialGridPoint;
 import me.math.grid.data.DensityEstimateDataSample;
 
 public class NonAdaptiveKDE extends AbstractDensityEstimateAlgorithm {
@@ -39,7 +39,7 @@ public class NonAdaptiveKDE extends AbstractDensityEstimateAlgorithm {
         for (int r = 0; r < this.getGrid().getRows(); r++) {
             for (int c = 0; c < this.getGrid().getCols(); c++) {
                 double estitmate = 0.0;
-                AbstractSpatialGridPoint gridPt =  this.getGrid().get(r, c);
+                SpatialGridPoint gridPt =  this.getGrid().get(r, c);
 
                 for (SpatialSamplePoint cnt : this.getSampleValues()) {
                 	    double t = 0;

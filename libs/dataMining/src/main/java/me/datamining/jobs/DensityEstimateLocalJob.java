@@ -6,7 +6,7 @@ import java.util.List;
 import me.datamining.DensityEstimateAlgorithm;
 import me.datamining.metric.AbstractSpatialMetric;
 import me.datamining.metric.IDataProvider;
-import me.math.grid.AbstractSpatialGridPoint;
+import me.math.grid.SpatialGridPoint;
 import me.math.grid.data.AbstractDataSample;
 import me.math.grid.data.DensityEstimateDataSample;
 
@@ -41,20 +41,20 @@ public class DensityEstimateLocalJob extends AbstractDMJob {
 	 * @see me.datamining.DMJob#getResults(double)
 	 */
 	@Override
-	public Iterator<AbstractSpatialGridPoint> getResults(double minValue) {
+	public Iterator<SpatialGridPoint> getResults(double minValue) {
 		return new KDEUniformGridIterator(minValue);
 	}
 	
 	////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////
 	
-	public class KDEUniformGridIterator implements Iterator<AbstractSpatialGridPoint>
+	public class KDEUniformGridIterator implements Iterator<SpatialGridPoint>
 	{
-		private List<AbstractSpatialGridPoint> pointsWithValues = null;
+		private List<SpatialGridPoint> pointsWithValues = null;
 		
 		public KDEUniformGridIterator(double minValue) {
 			
-			for ( AbstractSpatialGridPoint pt : grid_.getGridPoints()) {
+			for ( SpatialGridPoint pt : grid_.getGridPoints()) {
 				if( pt.getData().getInterpolationValue() >= minValue ) {
 					pointsWithValues.add(pt);
 				}
@@ -65,7 +65,7 @@ public class DensityEstimateLocalJob extends AbstractDMJob {
 			return pointsWithValues.isEmpty();
 		}
 
-		public AbstractSpatialGridPoint next() {
+		public SpatialGridPoint next() {
 			return pointsWithValues.remove(0);
 		}
 

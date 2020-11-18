@@ -11,7 +11,7 @@ import java.util.List;
 import org.junit.Test;
 
 import me.math.Vertex;
-import me.math.grid.AbstractSpatialGridPoint;
+import me.math.grid.SpatialGridPoint;
 import me.math.kdtree.INode;
 import me.math.kdtree.KDTree;
 import me.utils.TransiteEnums;
@@ -32,7 +32,7 @@ public class TestUniformSpatialGrid {
 		assertEquals(80, grid.getRows());
 		assertNotNull(grid.get(10, 10));
 		
-		List<AbstractSpatialGridPoint> list = grid.getGridPoints();
+		List<SpatialGridPoint> list = grid.getGridPoints();
 		assertNotNull(list);
 		assertEquals(113*80, list.size());
 		

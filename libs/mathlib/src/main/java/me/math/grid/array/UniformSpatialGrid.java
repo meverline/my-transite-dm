@@ -29,7 +29,8 @@ import me.math.LocalDownFrame;
 import me.math.VectorMath;
 import me.math.Vertex;
 import me.math.grid.AbstractSpatialGrid;
-import me.math.grid.AbstractSpatialGridPoint;
+import me.math.grid.SpatialGridPoint;
+import me.math.grid.data.CrossCovData;
 import me.math.kdtree.INode;
 import me.math.kdtree.KDTree;
 import me.math.kdtree.INode.Direction;
@@ -40,10 +41,11 @@ import org.locationtech.jts.geom.Point;
 public class UniformSpatialGrid extends AbstractSpatialGrid implements INodeCreator {
 	
 	protected SpatialGridPoint[][] grid_ = null;
-	
+	private Vertex upperLeft_ = null;
+	private Vertex lowerRight_ = null;
 	/**
-	 * 
-	 * @param spacing
+	 *
+	 * @param spacingInMeters
 	 */
 	public UniformSpatialGrid( double spacingInMeters)
 	{
@@ -54,7 +56,7 @@ public class UniformSpatialGrid extends AbstractSpatialGrid implements INodeCrea
 	 *
 	 * @param ul
 	 * @param lr
-	 * @param spacing
+	 * @param spacingInMeters
 	 */
 	public UniformSpatialGrid(Point ul, Point lr, double spacingInMeters) {
 		init(spacingInMeters);
@@ -63,12 +65,12 @@ public class UniformSpatialGrid extends AbstractSpatialGrid implements INodeCrea
 
 		createGrid(getUpperLeft(), getLowerRight());
 	}
-	
+
 	/**
 	 *
 	 * @param ul
 	 * @param lr
-	 * @param spacing
+	 * @param spacingInMeters
 	 */
 	public UniformSpatialGrid(Vertex ul, Vertex lr, double spacingInMeters) {
 		init(spacingInMeters);
@@ -102,9 +104,9 @@ public class UniformSpatialGrid extends AbstractSpatialGrid implements INodeCrea
 	 * @param gridPt
 	 * @return
 	 */
-	public AbstractSpatialGridPoint getNextGridPoint(AbstractSpatialGridPoint gridPt)
+	public SpatialGridPoint getNextGridPoint(SpatialGridPoint gridPt)
 	{
-		AbstractSpatialGridPoint next;
+		SpatialGridPoint next;
 
 		if (gridPt.getRow() == 0 ) {
 			next = get(gridPt.getRow()+1, gridPt.getCol());
@@ -169,9 +171,8 @@ public class UniformSpatialGrid extends AbstractSpatialGrid implements INodeCrea
 		
 		LocalDownFrame southWestFrame = new LocalDownFrame(lowerLeft.getEcfFromLatLon());
 
-        double d_latitude = 0.0;
-        double d_longitude = 0.0;
-        Vertex avgPoint = findAverageLatLon(upperLeft, lowerRight);
+		this.setCcdata(new CrossCovData(findAverageLatLon(upperLeft, lowerRight)));
+
 		int number = 0;
 		for (int rowIndex = 0; rowIndex < this.getRows(); rowIndex++) {
 			for (int colIndex = 0; colIndex < this.getCols(); colIndex++) {
@@ -184,18 +185,11 @@ public class UniformSpatialGrid extends AbstractSpatialGrid implements INodeCrea
 															eastDistanceMeters,
 															LocalDownFrame.RelativePositionOrder.NORTH_THEN_EAST);
 
-				Vertex pt = Vertex.getLatLonFromEcf(newPos); 
+				Vertex pt = Vertex.getLatLonFromEcf(newPos);
 				addGridPoint(rowIndex, colIndex, pt, number++);
-				
-	            d_latitude += pt.getLatitudeDegress() - avgPoint.getLatitudeDegress();
-	            d_longitude += pt.getLongitudeDegress() - avgPoint.getLongitudeDegress();
+				this.getCcdata().addPoint(pt);
 			}
 		}
-		
-        d_latitude = d_latitude / ( number - 1.0);
-        d_longitude = d_longitude / ( number - 1.0);
-
-       this.setCrossCovariance(Math.abs((d_latitude * d_longitude) / ( number - 1.0)));
 	}
 	
 	/**
@@ -204,7 +198,7 @@ public class UniformSpatialGrid extends AbstractSpatialGrid implements INodeCrea
 	 * @param c
 	 * @return
 	 */
-	public AbstractSpatialGridPoint get(int r, int c) {
+	public SpatialGridPoint get(int r, int c) {
 		if ((r > -1 && r < getRows()) && (c > -1 &&  c < getCols())) {
 			return grid_[r][c];
 		}
@@ -231,9 +225,9 @@ public class UniformSpatialGrid extends AbstractSpatialGrid implements INodeCrea
 	 * 
 	 * @return
 	 */
-	public List<AbstractSpatialGridPoint> getGridPoints()
+	public List<SpatialGridPoint> getGridPoints()
 	{
-		ArrayList<AbstractSpatialGridPoint> rtn = new ArrayList<>();
+		ArrayList<SpatialGridPoint> rtn = new ArrayList<>();
 
 		for ( int  r = 0; r < getRows(); r++) {
 			for ( int c = 0; c< getCols(); c++) {
@@ -243,7 +237,7 @@ public class UniformSpatialGrid extends AbstractSpatialGrid implements INodeCrea
 		return rtn;
 	}
 	
-	public INode create(AbstractSpatialGridPoint loc, Direction dir, INode parent, int depth) {
+	public INode create(SpatialGridPoint loc, Direction dir, INode parent, int depth) {
 		SpatialGridPoint gp = SpatialGridPoint.class.cast(loc);
 		gp.setParent(parent);
 		gp.initNode(dir, depth);
@@ -257,5 +251,55 @@ public class UniformSpatialGrid extends AbstractSpatialGrid implements INodeCrea
 	public KDTree getTree() {
 		return new KDTree(this.getGridPoints(), this);
 	}
+
+	/**
+	 *
+	 * @return
+	 */
+	public Vertex getLowerRight() {
+		return lowerRight_;
+	}
+
+	/**
+	 *
+	 * @param lowerRight_
+	 */
+	public void setLowerRight(Vertex lowerRight_) {
+		this.lowerRight_ = lowerRight_;
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	public Vertex getUpperLeft() {
+		return upperLeft_;
+	}
+
+	/**
+	 * @param upperLeft_
+	 */
+	public void setUpperLeft(Vertex upperLeft_) {
+		this.upperLeft_ = upperLeft_;
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	public double getMaxLatitude()
+	{
+		return lowerRight_.getLatitudeDegress();
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	public double getMaxLongitude()
+	{
+		return lowerRight_.getLongitudeDegress();
+	}
+
 
 }

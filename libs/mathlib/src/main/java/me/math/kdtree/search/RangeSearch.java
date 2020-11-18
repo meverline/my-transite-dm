@@ -21,7 +21,7 @@ import java.util.List;
 
 import me.math.EarthConstants;
 import me.math.Vertex;
-import me.math.grid.AbstractSpatialGridPoint;
+import me.math.grid.SpatialGridPoint;
 import me.math.kdtree.IKDSearch;
 import me.math.kdtree.INode;
 
@@ -30,7 +30,7 @@ import org.locationtech.jts.geom.Point;
 
 public class RangeSearch implements IKDSearch {
 
-	private List<AbstractSpatialGridPoint> list_;
+	private List<SpatialGridPoint> list_;
 	private double distanceInMeters_;
 	private Vertex point_;
 
@@ -77,7 +77,7 @@ public class RangeSearch implements IKDSearch {
 	/**
    * 
    */
-	public List<AbstractSpatialGridPoint> getResults() {
+	public List<SpatialGridPoint> getResults() {
 		return getList();
 	}
 
@@ -115,7 +115,7 @@ public class RangeSearch implements IKDSearch {
 	 * 
 	 * @return
 	 */
-	protected List<AbstractSpatialGridPoint> getList() {
+	protected List<SpatialGridPoint> getList() {
 		return list_;
 	}
 
@@ -123,7 +123,7 @@ public class RangeSearch implements IKDSearch {
 	 * 
 	 * @param list_
 	 */
-	protected void setList(List<AbstractSpatialGridPoint> list_) {
+	protected void setList(List<SpatialGridPoint> list_) {
 		this.list_ = list_;
 	}
 

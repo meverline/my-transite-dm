@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import me.math.Vertex;
-import me.math.grid.AbstractSpatialGridPoint;
+import me.math.grid.SpatialGridPoint;
 import me.math.grid.array.UniformSpatialGrid;
 import me.math.kdtree.INode;
 import me.math.kdtree.KDNode;
@@ -50,7 +50,7 @@ public class TestRangeSearch {
 		RangeSearch obj = new RangeSearch(grid.get(10, 10).getPointVertex(), TransiteEnums.DistanceUnitType.MI.toMeters(0.2));
 		
 		assertTrue(obj.getList().isEmpty());
-		for ( AbstractSpatialGridPoint gp : grid.getGridPoints()) {
+		for ( SpatialGridPoint gp : grid.getGridPoints()) {
 			KDNode node = new KDNode(gp, INode.Direction.XLAT, null, 0);
 			
 			obj.compare(node);

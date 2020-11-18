@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import me.math.Vertex;
-import me.math.grid.AbstractSpatialGridPoint;
+import me.math.grid.SpatialGridPoint;
 import me.math.grid.array.UniformSpatialGrid;
 import me.math.kdtree.INode.Direction;
 import me.math.kdtree.search.RangeSearch;
@@ -47,8 +47,8 @@ public class TestKDTree {
 		writer.close();
 		
 		int cnt = 0;
-		List<AbstractSpatialGridPoint> rtn = null;
-		for ( AbstractSpatialGridPoint pt : grid.getGridPoints()) {
+		List<SpatialGridPoint> rtn = null;
+		for ( SpatialGridPoint pt : grid.getGridPoints()) {
 			RangeSearch search = new RangeSearch(pt.getPointVertex(), 1000);
 			
 			tree.find(search);	
@@ -73,7 +73,7 @@ public class TestKDTree {
 	class MockINodeCreator implements INodeCreator {
 
 		@Override
-		public INode create(AbstractSpatialGridPoint loc, Direction dir, INode parent, int depth) {
+		public INode create(SpatialGridPoint loc, Direction dir, INode parent, int depth) {
 			return new KDNode(loc, dir, parent, depth);
 		}
 		

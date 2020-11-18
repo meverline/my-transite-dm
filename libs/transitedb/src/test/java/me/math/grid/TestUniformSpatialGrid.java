@@ -23,7 +23,6 @@ import me.datamining.jobs.DensityEstimateLocalJob;
 import me.datamining.metric.IDataProvider;
 import me.datamining.metric.TransitStopSpatialSample;
 import me.math.Vertex;
-import me.math.grid.array.SpatialGridPoint;
 import me.math.grid.array.UniformSpatialGrid;
 import me.math.kdtree.INode;
 import me.math.kdtree.KDTree;
@@ -55,7 +54,7 @@ public class TestUniformSpatialGrid extends EasyMockSupport {
 		assertEquals(80, grid.getRows());
 		assertNotNull(grid.get(10, 10));
 
-		List<AbstractSpatialGridPoint> list = grid.getGridPoints();
+		List<SpatialGridPoint> list = grid.getGridPoints();
 		assertNotNull(list);
 		assertEquals(113 * 80, list.size());
 
@@ -71,7 +70,7 @@ public class TestUniformSpatialGrid extends EasyMockSupport {
 
 		KDTree tree = new KDTree(grid.getGridPoints(), grid);
 
-		for (AbstractSpatialGridPoint pt : grid.getGridPoints()) {
+		for (SpatialGridPoint pt : grid.getGridPoints()) {
 			RangeSearch search = new RangeSearch(pt.getPointVertex(), 10);
 			tree.search(search);
 			assertFalse(search.getResults().isEmpty());

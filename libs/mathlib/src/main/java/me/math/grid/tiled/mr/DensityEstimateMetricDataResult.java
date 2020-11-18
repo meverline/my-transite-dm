@@ -1,7 +1,7 @@
 package me.math.grid.tiled.mr;
 
 import me.math.Vertex;
-import me.math.grid.AbstractSpatialGridPoint;
+import me.math.grid.SpatialGridPoint;
 
 public class DensityEstimateMetricDataResult extends MetricDataResult {
 	
@@ -27,7 +27,7 @@ public class DensityEstimateMetricDataResult extends MetricDataResult {
 	}
 
 	@Override
-	public void addDataToGridPoint(AbstractSpatialGridPoint pt) {
+	public void addDataToGridPoint(SpatialGridPoint pt) {
 		
 	}
 	

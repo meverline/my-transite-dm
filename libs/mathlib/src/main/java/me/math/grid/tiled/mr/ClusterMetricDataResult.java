@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.math.Vertex;
-import me.math.grid.AbstractSpatialGridPoint;
+import me.math.grid.SpatialGridPoint;
 
 public class ClusterMetricDataResult extends MetricDataResult {
 	
@@ -29,7 +29,7 @@ public class ClusterMetricDataResult extends MetricDataResult {
 	}
 	
 	@Override
-	public void addDataToGridPoint(AbstractSpatialGridPoint pt) {
+	public void addDataToGridPoint(SpatialGridPoint pt) {
 	}
 
 }

@@ -27,23 +27,8 @@ public class DynamoDocumentSession extends IDocumentSession {
     }
 
     @Override
-    public void add(IDocument document) {
-
-    }
-
-    @Override
-    public List<AbstractDocument> find(List<IQueryTuple> tupleList) {
-        return null;
-    }
-
-    @Override
     public List<AbstractDocument> find(List<IQueryTuple> tupleList, String collection) {
         return null;
-    }
-
-    @Override
-    public long size() {
-        return 0;
     }
 
     @Override

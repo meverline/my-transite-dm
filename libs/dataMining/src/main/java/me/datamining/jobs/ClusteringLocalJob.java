@@ -9,7 +9,7 @@ import java.util.List;
 import me.datamining.ClusteringAlgorithm;
 import me.datamining.metric.AbstractSpatialMetric;
 import me.datamining.metric.IDataProvider;
-import me.math.grid.AbstractSpatialGridPoint;
+import me.math.grid.SpatialGridPoint;
 import me.math.grid.data.AbstractDataSample;
 import me.math.grid.data.STINGDataSample;
 /**
@@ -18,7 +18,7 @@ import me.math.grid.data.STINGDataSample;
  */
 public class ClusteringLocalJob extends AbstractDMJob {
 	
-	private List<AbstractSpatialGridPoint> clusters_ = null;
+	private List<SpatialGridPoint> clusters_ = null;
 	private final ClusteringAlgorithm clusteringAlgorithm;
 	
 	public ClusteringLocalJob(IPopulateGrid pg, ClusteringAlgorithm clusteringAlgorithm) {
@@ -47,20 +47,20 @@ public class ClusteringLocalJob extends AbstractDMJob {
 	 * @see me.datamining.DMJob#getResults(double)
 	 */
 	@Override
-	public Iterator<AbstractSpatialGridPoint> getResults(double minValue) {
+	public Iterator<SpatialGridPoint> getResults(double minValue) {
 		return new STINGUniformGridIterator(minValue);
 	}
 	
 	////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////
 	
-	public class STINGUniformGridIterator implements Iterator<AbstractSpatialGridPoint>
+	public class STINGUniformGridIterator implements Iterator<SpatialGridPoint>
 	{
-		private List<AbstractSpatialGridPoint> pointsWithValues = null;
+		private List<SpatialGridPoint> pointsWithValues = null;
 		
 		public STINGUniformGridIterator(double minValue) {
 			
-			for ( AbstractSpatialGridPoint pt : clusters_) {
+			for ( SpatialGridPoint pt : clusters_) {
 				if( pt.getData().getInterpolationValue() >= minValue ) {
 					pointsWithValues.add(pt);
 				}
@@ -71,7 +71,7 @@ public class ClusteringLocalJob extends AbstractDMJob {
 			return pointsWithValues.isEmpty();
 		}
 
-		public AbstractSpatialGridPoint next() {
+		public SpatialGridPoint next() {
 			return pointsWithValues.remove(0);
 		}
 

@@ -19,10 +19,13 @@
 
 package me.math;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverter;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @JsonRootName(value = "LocalDownFrame")
 public class LocalDownFrame extends ECFPositionedFrame{
@@ -178,5 +181,31 @@ public class LocalDownFrame extends ECFPositionedFrame{
 		// The Latitude Constant
 
 	}
+	///////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////
+
+	public static class DynamoConvert implements DynamoDBTypeConverter<String, LocalDownFrame>
+	{
+		private final ObjectMapper mapper = new ObjectMapper();
+		@Override
+		public String convert(LocalDownFrame crossCovData) {
+			try {
+				return mapper.writeValueAsString(crossCovData);
+			} catch (JsonProcessingException e) {
+				throw new IllegalArgumentException(e);
+			}
+		}
+
+		@Override
+		public LocalDownFrame unconvert(String s) {
+			try {
+				return mapper.readValue(s, LocalDownFrame.class);
+			} catch (JsonProcessingException e) {
+				throw new IllegalArgumentException(e);
+			}
+		}
+	}
+
 
 }

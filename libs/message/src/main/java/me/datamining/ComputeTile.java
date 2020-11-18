@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import me.datamining.types.DataMiningTypes;
+import me.math.grid.SpatialGridPoint;
 import me.math.grid.tiled.SpatialTile;
-import me.math.grid.tiled.TiledSpatialGridPoint;
 
 import java.util.List;
 
@@ -15,11 +15,11 @@ public class ComputeTile extends TileJob {
     private DataMiningTypes dmType;
     private long n;
     private SpatialTile target;
-    private List<TiledSpatialGridPoint> gridPoints;
+    private List<SpatialGridPoint> gridPoints;
 
     public ComputeTile() {}
 
-    public ComputeTile(String jobNumber, int  tileNumber, SpatialTile target, List<TiledSpatialGridPoint> gridPoints, DataMiningTypes type) {
+    public ComputeTile(String jobNumber, int  tileNumber, SpatialTile target, List<SpatialGridPoint> gridPoints, DataMiningTypes type) {
         super(jobNumber, tileNumber);
         this.setTarget(target);
         this.setGridPoints(gridPoints);
@@ -37,12 +37,12 @@ public class ComputeTile extends TileJob {
     }
 
     @JsonGetter("gridPoints")
-    public List<TiledSpatialGridPoint> getGridPoints() {
+    public List<SpatialGridPoint> getGridPoints() {
         return gridPoints;
     }
 
     @JsonSetter("gridPoints")
-    public void setGridPoints(List<TiledSpatialGridPoint> gridPoints) {
+    public void setGridPoints(List<SpatialGridPoint> gridPoints) {
         this.gridPoints = gridPoints;
     }
 

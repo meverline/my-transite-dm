@@ -5,7 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import me.math.Vertex;
-import me.math.grid.array.SpatialGridPoint;
+import me.math.grid.SpatialGridPoint;
 import me.math.grid.array.UniformSpatialGrid;
 import me.math.grid.data.AbstractDataSample;
 import me.math.grid.data.DensityEstimateDataSample;

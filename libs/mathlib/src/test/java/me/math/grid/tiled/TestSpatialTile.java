@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.List;
 
+import me.math.grid.SpatialGridPoint;
 import org.junit.Test;
 import org.meanbean.lang.Factory;
 import org.meanbean.test.BeanTester;
@@ -52,9 +53,6 @@ public class TestSpatialTile {
 		assertEquals(200, obj.getColOffSet());
 		assertEquals(5, obj.getIndex());
 		assertEquals(15, obj.getTileIndex());
-				
-		assertEquals(0.0, obj.getGridSizeInMeters(), 0.001);
-		
 		assertNotNull( obj.getGridPoints());
 		assertNotNull( obj.getBoundingBox());
 		
@@ -79,7 +77,7 @@ public class TestSpatialTile {
 		
 		obj.createGrid(25, 25, ldf, distance, new CrossCovData(v));
 		
-		for (TiledSpatialGridPoint pt :  obj.getGrid()) {
+		for (SpatialGridPoint pt :  obj.getGrid()) {
 			pt.setData( new DensityEstimateDataSample());
 		}
 		
@@ -90,7 +88,8 @@ public class TestSpatialTile {
 		ObjectMapper json = new ObjectMapper();
 		
 		try {
-			String str = json.writeValueAsString(obj);
+			String str = json.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
+			System.out.println(str);
 			SpatialTile dup = json.readValue(str, SpatialTile.class);
 			
 		} catch ( IOException e) {
@@ -111,8 +110,8 @@ public class TestSpatialTile {
 		assertNotNull( obj.getTree());
 				
 		@SuppressWarnings("unused")
-		List<TiledSpatialGridPoint> points = obj.getGrid();
-		for (TiledSpatialGridPoint pt :  obj.getGrid()) {
+		List<SpatialGridPoint> points = obj.getGrid();
+		for (SpatialGridPoint pt :  obj.getGrid()) {
 			pt.setData( new TestData());
 		}
 		

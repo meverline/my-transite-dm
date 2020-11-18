@@ -16,7 +16,7 @@ import me.datamining.Kernel.IDensityKernel;
 import me.datamining.bandwidth.IBandwidth;
 import me.datamining.bandwidth.ScottsRule;
 import me.math.Vertex;
-import me.math.grid.AbstractSpatialGridPoint;
+import me.math.grid.SpatialGridPoint;
 import me.math.grid.array.UniformSpatialGrid;
 import me.math.grid.data.DensityEstimateDataSample;
 import me.utils.TransiteEnums;
@@ -77,7 +77,7 @@ public class TestAdaptiveKDE {
 		UniformSpatialGrid grid = new UniformSpatialGrid(ul, lr, distance);
 		List<SpatialSamplePoint> data = new ArrayList<SpatialSamplePoint>();
 		
-		for (AbstractSpatialGridPoint pt  : grid.getGridPoints()) {
+		for (SpatialGridPoint pt  : grid.getGridPoints()) {
 			double value = Math.random()*10;
 			if ( (int) value % 2 == 0) {
 				pt.setData( new DensityEstimateDataSample());
@@ -94,9 +94,9 @@ public class TestAdaptiveKDE {
 
 	private class SpatialSamplePointMock implements SpatialSamplePoint {
 		
-		private AbstractSpatialGridPoint pt;
+		private SpatialGridPoint pt;
 		
-		public SpatialSamplePointMock(AbstractSpatialGridPoint pt) {
+		public SpatialSamplePointMock(SpatialGridPoint pt) {
 			this.pt = pt;
 		}
 
@@ -149,12 +149,12 @@ public class TestAdaptiveKDE {
 		}
 
 		@Override
-		public AbstractSpatialGridPoint getGridPoint() {
+		public SpatialGridPoint getGridPoint() {
 			return pt;
 		}
 
 		@Override
-		public void setGridPoint(AbstractSpatialGridPoint aPoint) {			
+		public void setGridPoint(SpatialGridPoint aPoint) {
 		}
 		
 	}

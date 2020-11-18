@@ -9,7 +9,7 @@ import java.io.PrintStream;
 import org.junit.Test;
 
 import me.math.grid.tiled.SpatialTile;
-import me.math.grid.tiled.TiledSpatialGridPoint;
+import me.math.grid.SpatialGridPoint;
 
 public class TestPopulateGrid  extends AbstractMapReduceTest{
 
@@ -24,7 +24,7 @@ public class TestPopulateGrid  extends AbstractMapReduceTest{
 		qr.startWrite(ps);
 		
 		int ndx = 0;
-		for (TiledSpatialGridPoint pt :  tile.getGrid()) {
+		for (SpatialGridPoint pt :  tile.getGrid()) {
 			if ( ndx % 2 == 0) {
 				qr.write(ps, pt.getVertex(), pt.getData().getValue());
 			}

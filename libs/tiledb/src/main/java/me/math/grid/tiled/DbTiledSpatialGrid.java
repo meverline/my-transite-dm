@@ -16,17 +16,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import me.math.grid.SpatialGridPoint;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.locationtech.jts.geom.Point;
 
 import me.math.Vertex;
-import me.math.grid.AbstractSpatialGridPoint;
 import me.math.kdtree.KDTree;
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name="hmt_SpatialGrid")
-public class DbTiledSpatialGrid extends AbstractTiledSpatialGrid implements Serializable {
-	
+public class DbTiledSpatialGrid extends TiledSpatialGrid implements Serializable {
+
+	private Log logger = LogFactory.getLog(getClass());
+
 	@Id
 	@Column(name="GRID_UUID", nullable=false)
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -153,26 +157,37 @@ public class DbTiledSpatialGrid extends AbstractTiledSpatialGrid implements Seri
 	}
 
 	@Override
-	public TiledSpatialGridPoint get(int index, int row, int col) throws UnknownHostException {
-		return this.getTileFromCache(index).getEntry(row, col);
+	public SpatialGridPoint get(int index, int row, int col)  {
+		try {
+			return this.getTileFromCache(index).getEntry(row, col);
+		} catch (UnknownHostException e) {
+			logger.error(e.getLocalizedMessage(), e);
+			return null;
+		}
 	}
 	
 	@Override
-	public AbstractSpatialGridPoint get(int index, int gridIndex) {
-		AbstractSpatialGridPoint pt =  null;
+	public SpatialGridPoint get(int index, int gridIndex) {
+		SpatialGridPoint pt =  null;
 		try {
 			pt = this.getTileFromCache(index).getEntry(gridIndex);
 		} catch (UnknownHostException e) {
-			e.printStackTrace();
+			logger.error(e.getLocalizedMessage(), e);
 		}
 		return pt;
 	}
 
 	@Override
-	protected void addTile(SpatialTile tile) throws UnknownHostException, SQLException {
+	protected void addTile(SpatialTile tile)  {
 		@SuppressWarnings("unused")
 		KDTree tree = tile.getTree();
-		SptialTileCache.create().save(this, tile);
+		try {
+			SptialTileCache.create().save(this, tile);
+		} catch (SQLException throwables) {
+			logger.error(throwables.getLocalizedMessage(), throwables);
+		} catch (UnknownHostException e) {
+			logger.error(e.getLocalizedMessage(), e);
+		}
 	}
 	
 	/**

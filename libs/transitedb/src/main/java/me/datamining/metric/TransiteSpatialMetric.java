@@ -66,7 +66,7 @@ public class TransiteSpatialMetric extends AbstractSpatialMetric {
 				                  route.getShortName(), 
 				                  StringTuple.MATCH.EXACT ));
 		
-		List<AbstractDocument> data = getDaoProvider().getDocumentDao().find(list);
+		List<AbstractDocument> data = getDaoProvider().getDocumentDao().find(list, "schedules");
 		
 		rtn = RouteDocument.class.cast( data.get(0)).getTrips();
 	

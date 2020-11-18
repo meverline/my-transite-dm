@@ -8,7 +8,7 @@ import me.math.grid.data.AbstractDataSample;
 import me.math.grid.data.CrossCovData;
 import me.math.grid.tiled.AbstractTiledSpatialGrid;
 import me.math.grid.tiled.SpatialTile;
-import me.math.grid.tiled.TiledSpatialGridPoint;
+import me.math.grid.SpatialGridPoint;
 import me.utils.TransiteEnums;
 
 public class AbstractMapReduceTest {
@@ -24,7 +24,7 @@ public class AbstractMapReduceTest {
 		tile.createGrid(25, 25, ldf, distance, new CrossCovData(v));
 		Random r = new Random();
 		
-		for (TiledSpatialGridPoint pt :  tile.getGrid()) {
+		for (SpatialGridPoint pt :  tile.getGrid()) {
 			pt.setData( new TestData(r.nextDouble()*5));
 		}
 		

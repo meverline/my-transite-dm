@@ -1,9 +1,12 @@
 package me.math.grid.data;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverter;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import me.math.Vertex;
 
 @JsonRootName(value = "CrossCovData")
@@ -29,20 +32,30 @@ public class CrossCovData {
      * 
      * @param pt
      */
-    public void addPoint(Vertex pt) {
- 	   number++;
- 	   latitude += pt.getLatitudeDegress() - avgPoint.getLatitudeDegress();
-       longitude += pt.getLongitudeDegress() - avgPoint.getLongitudeDegress();
+    public void add(CrossCovData pt) {
+ 	   number += pt.getNumber();
+ 	   latitude += pt.getLatitude();
+       longitude += pt.getLongitude();
     }
+
+	/**
+	 *
+	 * @param pt
+	 */
+	public void addPoint(Vertex pt) {
+		number++;
+		latitude += pt.getLatitudeDegress() - avgPoint.getLatitudeDegress();
+		longitude += pt.getLongitudeDegress() - avgPoint.getLongitudeDegress();
+	}
     
     /**
      * 
      * @return
      */
     public double crossCovariance() {
-        latitude = latitude / ( number - 1.0);
-        longitude = longitude / ( number - 1.0);
-        return Math.abs((latitude * longitude) / ( number - 1.0));
+        this.setLatitude( getLatitude() / ( getNumber() - 1.0));
+        this.setLongitude( getLongitude() / ( getNumber() - 1.0));
+        return Math.abs((getLatitude() * getLongitude()) / ( getNumber() - 1.0));
     }
 
 	/**
@@ -109,6 +122,29 @@ public class CrossCovData {
 		this.avgPoint = avgPoint;
 	}
     
-    
-    
+    ///////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////
+
+	public static class DynamoConvert implements DynamoDBTypeConverter<String, CrossCovData>
+	{
+		private final ObjectMapper mapper = new ObjectMapper();
+		@Override
+		public String convert(CrossCovData crossCovData) {
+			try {
+				return mapper.writeValueAsString(crossCovData);
+			} catch (JsonProcessingException e) {
+				throw new IllegalArgumentException(e);
+			}
+		}
+
+		@Override
+		public CrossCovData unconvert(String s) {
+			try {
+				return mapper.readValue(s, CrossCovData.class);
+			} catch (JsonProcessingException e) {
+				throw new IllegalArgumentException(e);
+			}
+		}
+	}
 }

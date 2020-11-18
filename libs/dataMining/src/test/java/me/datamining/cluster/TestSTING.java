@@ -7,7 +7,7 @@ import org.meanbean.test.BeanTester;
 
 import me.datamining.cluster.STING.ClusterNodeEvaluation;
 import me.math.Vertex;
-import me.math.grid.AbstractSpatialGridPoint;
+import me.math.grid.SpatialGridPoint;
 import me.math.grid.array.UniformSpatialGrid;
 import me.math.grid.data.STINGDataSample;
 import me.utils.TransiteEnums;
@@ -72,7 +72,7 @@ public class TestSTING {
 	@Test
 	public void testFindClusters() {
 				
-		for (AbstractSpatialGridPoint pt  : grid.getGridPoints()) {
+		for (SpatialGridPoint pt  : grid.getGridPoints()) {
 			double value = Math.random()*10;
 			if ( (int) value % 2 == 0) {
 				pt.setData( new STINGDataSample());

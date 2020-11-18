@@ -25,7 +25,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import me.math.Vertex;
-import me.math.grid.AbstractSpatialGridPoint;
+import me.math.grid.SpatialGridPoint;
 
 public class KDTree {
 
@@ -37,7 +37,7 @@ public class KDTree {
 	 * 
 	 * @param aList
 	 */
-	public KDTree(List<AbstractSpatialGridPoint> aList, INodeCreator creator) {
+	public KDTree(List<SpatialGridPoint> aList, INodeCreator creator) {
 		comparator_ = new GridComparator(INode.Direction.XLAT);
 		aList.sort(comparator_);
 
@@ -65,7 +65,7 @@ public class KDTree {
 	 * @param depth
 	 * @return
 	 */
-	private INode insertNode(List<AbstractSpatialGridPoint> aList,
+	private INode insertNode(List<SpatialGridPoint> aList,
 							 INode.Direction direction, 
 							 INode parent, 
 							 int depth, 
@@ -78,7 +78,7 @@ public class KDTree {
 		// Note using interger math other wise the midpoint calculation fails eventually 3/2 > 1.5  vs 1
 		int midpoint = (int) Math.floor((aList.size() / 2) + 0.5f);
 
-		AbstractSpatialGridPoint pt = aList.get(midpoint);
+		SpatialGridPoint pt = aList.get(midpoint);
 		INode node = creator.create(pt, direction, parent, depth);
 		
 		INode.Direction change = direction;
@@ -88,7 +88,7 @@ public class KDTree {
 			change = INode.Direction.XLAT;
 		}
 
-		List<AbstractSpatialGridPoint> leftList = new ArrayList<>();
+		List<SpatialGridPoint> leftList = new ArrayList<>();
 
 		for (int n = 0; n < midpoint; n++) {
 			leftList.add(aList.get(n));
@@ -101,7 +101,7 @@ public class KDTree {
 			node.getMBR().extend(node.getLeft().getMBR());
 		}
 
-		List<AbstractSpatialGridPoint> rightList = new ArrayList<>();
+		List<SpatialGridPoint> rightList = new ArrayList<>();
 
 		for (int n = midpoint + 1; n < aList.size(); n++) {
 			rightList.add(aList.get(n));
@@ -244,7 +244,7 @@ public class KDTree {
 	 * @param nodeSearch
 	 * @return
 	 */
-	public List<AbstractSpatialGridPoint> search(IKDSearch nodeSearch) {
+	public List<SpatialGridPoint> search(IKDSearch nodeSearch) {
 		if (root_.contains(nodeSearch.getVertex())) {
 			search(root_, nodeSearch);
 		}
@@ -256,7 +256,7 @@ public class KDTree {
 	 * @param search
 	 * @return
 	 */
-	public List<AbstractSpatialGridPoint> find(IKDSearch search) {
+	public List<SpatialGridPoint> find(IKDSearch search) {
 		if (root_.contains(search.getVertex())) {
 			find(root_, search);
 		}
@@ -268,7 +268,7 @@ public class KDTree {
 	 * @param search
 	 * @return
 	 */
-	public List<AbstractSpatialGridPoint> searchStats(IKDSearch search) {
+	public List<SpatialGridPoint> searchStats(IKDSearch search) {
 		searchStats(root_, search);
 		return search.getResults();
 	}
@@ -276,7 +276,7 @@ public class KDTree {
   ///////////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////////
 
-  public class GridComparator implements Comparator<AbstractSpatialGridPoint> {
+  public class GridComparator implements Comparator<SpatialGridPoint> {
 
           private INode.Direction direction_;
 
@@ -311,7 +311,7 @@ public class KDTree {
                   return 0;
           }
 
-          public int compare(AbstractSpatialGridPoint o1, AbstractSpatialGridPoint o2)
+          public int compare(SpatialGridPoint o1, SpatialGridPoint o2)
           {
                   Vertex left = o1.getVertex();
                   Vertex right = o2.getVertex();

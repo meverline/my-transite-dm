@@ -39,14 +39,17 @@ public class MongoDocumentSession extends IDocumentSession {
 
 	/**
 	 *
-	 * @param database
+	 * @param connection
+	 * @param properties
 	 * @throws UnknownHostException
 	 */
-	public MongoDocumentSession(Map<String,String> properties) throws UnknownHostException {
+	public MongoDocumentSession(MongoClient connection, Map<String,String> properties) throws UnknownHostException {
 		this.addSkipField("_id");
 		this.addSkipField("@class");
 
-		if ( properties.get(IDocumentSession.HOST).equals(LOCALHOST)) {
+		if ( connection != null ) {
+			_connection = connection;
+		} else if ( properties.get(IDocumentSession.HOST).equals(LOCALHOST)) {
 			_connection = MongoClients.create();
 		} else {
 			StringBuilder url = new StringBuilder();
@@ -59,6 +62,15 @@ public class MongoDocumentSession extends IDocumentSession {
 
 		_transDoc = _connection.getDatabase( properties.get(IDocumentSession.DATABASE));
 		mapper.setSerializationInclusion(Include.NON_NULL);
+	}
+
+	/**
+	 *
+	 * @param properties
+	 * @throws UnknownHostException
+	 */
+	public MongoDocumentSession(Map<String,String> properties) throws UnknownHostException {
+		this(null, properties);
 	}
 
 	/**
@@ -98,15 +110,6 @@ public class MongoDocumentSession extends IDocumentSession {
 				this.log.error(e);
 			}
 		}
-	}
-
-	/* (non-Javadoc)
-	 * @see me.database.mongo.IDocumnetDao#add(me.database.mongo.IDocument)
-	 */
-	@Override
-	public void add(IDocument document) {
-		this.delete(document, MongoDocumentSession.COLLECTION);
-		this.add(document, MongoDocumentSession.COLLECTION);
 	}
 
 	protected void addSkipField(String field) {
@@ -165,14 +168,6 @@ public class MongoDocumentSession extends IDocumentSession {
 	}
 
 	/* (non-Javadoc)
-	 * @see me.database.mongo.IDocumnetDao#find(java.util.List)
-	 */
-	@Override
-	public List<AbstractDocument> find(List<IQueryTuple> tupleList) {
-		return find(tupleList, MongoDocumentSession.COLLECTION);
-	}
-
-	/* (non-Javadoc)
 	 * @see me.database.mongo.IDocumnetDao#find(java.util.List, java.lang.String)
 	 */
 	@Override
@@ -199,14 +194,6 @@ public class MongoDocumentSession extends IDocumentSession {
 		});
 
 		return rtn;
-	}
-
-	/* (non-Javadoc)
-	 * @see me.database.mongo.IDocumnetDao#size()
-	 */
-	@Override
-	public long size() {
-		return size(MongoDocumentSession.COLLECTION);
 	}
 
 	/* (non-Javadoc)

@@ -5,7 +5,7 @@ import java.util.List;
 
 import me.datamining.metric.AbstractSpatialMetric;
 import me.datamining.metric.IDataProvider;
-import me.math.grid.AbstractSpatialGridPoint;
+import me.math.grid.SpatialGridPoint;
 import me.math.grid.array.UniformSpatialGrid;
 import me.math.kdtree.KDTree;
 import me.math.kdtree.search.RangeSearch;
@@ -31,10 +31,10 @@ public class TranisteStopGridPopulator implements IPopulateGrid {
 			search.reset();
 			search.setPoint(stop.getLocation());
 			
-			List<AbstractSpatialGridPoint> aList = tree_.find(search);
+			List<SpatialGridPoint> aList = tree_.find(search);
 			double value = metric.getMetric(stop);
 			
-			for (AbstractSpatialGridPoint pt : aList ) {
+			for (SpatialGridPoint pt : aList ) {
 				if ( pt.getData() == null ) {
 					pt.setData(job.getDataSample());
 				}	

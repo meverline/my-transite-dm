@@ -17,12 +17,12 @@
 package me.math.kdtree;
 
 import me.math.Vertex;
-import me.math.grid.AbstractSpatialGridPoint;
+import me.math.grid.SpatialGridPoint;
 
 public class KDNode implements  INode {
 
   private Vertex center_;
-  private AbstractSpatialGridPoint point_;
+  private SpatialGridPoint point_;
   private INode.Direction direction_;
   private MinBoundingRectangle mbr_;
   private KDNode left_;
@@ -30,7 +30,7 @@ public class KDNode implements  INode {
   private INode parent_;
   private int    depth_ = 0;
 
-  public KDNode(AbstractSpatialGridPoint loc, INode.Direction dir, INode parent, int depth)
+  public KDNode(SpatialGridPoint loc, INode.Direction dir, INode parent, int depth)
   {
           point_ = loc;
           direction_ = dir;
@@ -53,7 +53,7 @@ public class KDNode implements  INode {
    * (non-Javadoc)
    * @see me.math.kdtree.INode#getPoint()
    */
-  public AbstractSpatialGridPoint getPoint() {
+  public SpatialGridPoint getPoint() {
           return point_;
   }
 

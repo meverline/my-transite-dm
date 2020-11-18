@@ -4,13 +4,13 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
 import me.math.Vertex;
-import me.math.grid.AbstractSpatialGridPoint;
+import me.math.grid.SpatialGridPoint;
 
 public abstract class MetricDataResult {
 
 	private Vertex location_;
 	
-	public abstract void addDataToGridPoint(AbstractSpatialGridPoint pt);
+	public abstract void addDataToGridPoint(SpatialGridPoint pt);
 	
 	protected MetricDataResult(Vertex aPoint) {
 		this.setLocatoin(aPoint);

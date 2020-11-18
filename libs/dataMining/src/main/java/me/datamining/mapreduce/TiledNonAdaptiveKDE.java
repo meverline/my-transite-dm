@@ -9,7 +9,7 @@ import me.datamining.Kernel.IDensityKernel;
 import me.datamining.bandwidth.IBandwidth;
 import me.datamining.bandwidth.SlivermanRule;
 import me.math.grid.tiled.SpatialTile;
-import me.math.grid.tiled.TiledSpatialGridPoint;
+import me.math.grid.SpatialGridPoint;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -114,7 +114,8 @@ public class TiledNonAdaptiveKDE implements ResultsHandler {
 	}
 
 	/**
-	 * @param crossCovariance the crossCovariance to set
+	 *
+	 * @param value
 	 */
 	public void setN(long value) {
 		this.number_ = value;
@@ -125,11 +126,11 @@ public class TiledNonAdaptiveKDE implements ResultsHandler {
 			this.dataPoints_.add( new DataResult(result));
 		}
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param gridTile
-	 * @param aList
+	 * @param dataStream
 	 */
     public void kernalDensityEstimate(SpatialTile gridTile, InputStream dataStream)
     {
@@ -140,7 +141,7 @@ public class TiledNonAdaptiveKDE implements ResultsHandler {
     	double hparm = getXBandWidth().bandWidth(this.getVariance(), 2, this.getN());
     	double hGeoParm = getYBandWidth().bandWidth( this.getCrossCovariance(), 2, this.getN());
          
-    	for ( TiledSpatialGridPoint cnt : gridTile.getGrid()) {
+    	for ( SpatialGridPoint cnt : gridTile.getGrid()) {
     	   double estitmate = 0.0;
     	   for ( DataResult data : this.dataPoints_) {
         	    double t = 0;

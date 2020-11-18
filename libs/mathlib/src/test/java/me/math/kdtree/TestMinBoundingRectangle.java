@@ -15,7 +15,7 @@ import org.locationtech.jts.geom.Polygon;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import me.math.Vertex;
-import me.math.grid.AbstractSpatialGridPoint;
+import me.math.grid.SpatialGridPoint;
 import me.math.grid.array.UniformSpatialGrid;
 import me.utils.TransiteEnums;
 
@@ -89,7 +89,7 @@ public class TestMinBoundingRectangle {
 		obj.extend(grid.get(20, 20));
 		obj.extend((Vertex)null);
 		obj.extend(lr.toPoint());
-		obj.extend((AbstractSpatialGridPoint)null);
+		obj.extend((SpatialGridPoint)null);
 		obj.extend((MinBoundingRectangle)null);
 		
 		obj = new MinBoundingRectangle((Polygon)null);

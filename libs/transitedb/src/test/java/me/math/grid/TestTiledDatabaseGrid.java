@@ -43,7 +43,7 @@ import me.math.Vertex;
 import me.math.grid.data.DensityEstimateDataSample;
 import me.math.grid.tiled.SpatialTile;
 import me.math.grid.tiled.TiledSpatialGrid;
-import me.math.grid.tiled.TiledSpatialGridPoint;
+import me.math.grid.SpatialGridPoint;
 import me.math.kdtree.KDTree;
 import me.math.kdtree.search.RangeSearch;
 import me.transit.dao.TransiteStopDao;
@@ -85,9 +85,9 @@ public class TestTiledDatabaseGrid extends EasyMockSupport {
 			assertEquals(list.size(), 12);
 
 			int numCells = grid.getTileSize() * grid.getTileSize();
-			List<AbstractSpatialGridPoint> prev = null;
+			List<SpatialGridPoint> prev = null;
 			for (SpatialTile tile : list) {
-				List<AbstractSpatialGridPoint> ptList = tile.getGridPoints();
+				List<SpatialGridPoint> ptList = tile.getGridPoints();
 				assertNotNull(ptList);
 				assertEquals(numCells, ptList.size());
 				if (prev != null) {
@@ -101,26 +101,25 @@ public class TestTiledDatabaseGrid extends EasyMockSupport {
 			int blockSize = grid.getTileSize() * grid.getTileSize();
 			for (int row = 0; row < grid.getRows(); row++) {
 				for (int col = 0; col < grid.getCols(); col++) {
-					TiledSpatialGridPoint pt = grid.getEntry(row, col);
+					SpatialGridPoint pt = grid.getEntry(row, col);
 					assertNotNull(pt);
 					assertEquals(row, pt.getRow());
 					assertEquals(col, pt.getCol());
 
 					int tile = pt.getIndex() / blockSize;
-					assertEquals(pt.getTileIndex(), tile);
 				}
 			}
 
 			numCells = grid.getCols() * grid.getRows();
 			for (int ndx = 0; ndx < numCells; ndx++) {
-				AbstractSpatialGridPoint pt = grid.getEntry(ndx);
+				SpatialGridPoint pt = grid.getEntry(ndx);
 				assertNotNull(pt);
 				assertEquals(pt.getIndex(), ndx);
 			}
 
 			for (SpatialTile tile : grid.getTiles()) {
 				KDTree tree = tile.getTree();
-				for (TiledSpatialGridPoint pt : tile.getGrid()) {
+				for (SpatialGridPoint pt : tile.getGrid()) {
 					RangeSearch search = new RangeSearch(pt.getPointVertex(), 10);
 					tree.search(search);
 					assertFalse(search.getResults().isEmpty());

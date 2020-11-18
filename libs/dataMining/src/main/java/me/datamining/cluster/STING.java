@@ -32,7 +32,7 @@ import org.locationtech.jts.geom.Point;
 
 import me.datamining.ClusteringAlgorithm;
 import me.math.Vertex;
-import me.math.grid.AbstractSpatialGridPoint;
+import me.math.grid.SpatialGridPoint;
 import me.math.grid.array.UniformSpatialGrid;
 import me.math.grid.data.STINGDataSample;
 import me.math.kdtree.IKDSearch;
@@ -216,7 +216,7 @@ public class STING implements ClusteringAlgorithm {
 	/* (non-Javadoc)
 	 * @see me.datamining.ClusteringAlgorithm#findClusters()
 	 */
-	public List<AbstractSpatialGridPoint> findClusters(AbstractSpatialGrid aGrid) {
+	public List<SpatialGridPoint> findClusters(AbstractSpatialGrid aGrid) {
 		this.init(aGrid);
 		return this.findClusters();
 	}
@@ -224,7 +224,7 @@ public class STING implements ClusteringAlgorithm {
 	/* (non-Javadoc)
 	 * @see me.datamining.ClusteringAlgorithm#findClusters()
 	 */
-	public List<AbstractSpatialGridPoint> findClusters() {
+	public List<SpatialGridPoint> findClusters() {
 
 		findReleventNodes nodeFinder = new findReleventNodes(
 				this.getRangeLow(), this.getRangeHi(), this.getConfidence());
@@ -234,8 +234,8 @@ public class STING implements ClusteringAlgorithm {
 		double factor = Math.sqrt(1 / (Math.PI * this.getDensity()));
 		double distance = Math.max((double) this.getGridSizeInMeters(), factor);
 
-		HashSet<AbstractSpatialGridPoint> clusterPoints = new HashSet<>();
-		List<AbstractSpatialGridPoint> possiableNodes = nodeFinder.getResults();
+		HashSet<SpatialGridPoint> clusterPoints = new HashSet<>();
+		List<SpatialGridPoint> possiableNodes = nodeFinder.getResults();
 
 		ClusterNodeEvaluation evaluator = new ClusterNodeEvaluation( this.getRangeLow(), 
 																	 this.getRangeHi(), 
@@ -245,16 +245,16 @@ public class STING implements ClusteringAlgorithm {
 		log.debug("STING distance: " + distance);
 
 		while (!possiableNodes.isEmpty()) {
-			AbstractSpatialGridPoint pt = possiableNodes.remove(0);
+			SpatialGridPoint pt = possiableNodes.remove(0);
 			if (!clusterPoints.contains(pt)) {
 				clusterPoints.add(pt);
 			}
 
-			List<AbstractSpatialGridPoint> check = null;
+			List<SpatialGridPoint> check = null;
 			if (distance != this.getGridSizeInMeters()) {
 				check = tree_.find(new RangeSearch(pt.getVertex(), distance));
 			
-				for (AbstractSpatialGridPoint n : check) {
+				for (SpatialGridPoint n : check) {
 					if (n.getData() instanceof STINGDataSample) {
 						STINGDataSample sample = STINGDataSample.class.cast(n);
 						if (!sample.isChecked()) {
@@ -271,7 +271,7 @@ public class STING implements ClusteringAlgorithm {
 			}
 		}
 
-		List<AbstractSpatialGridPoint> rtn = new ArrayList<>();
+		List<SpatialGridPoint> rtn = new ArrayList<>();
 		rtn.addAll(clusterPoints);
 		return rtn;
 	}
@@ -381,7 +381,7 @@ public class STING implements ClusteringAlgorithm {
 
 		public int relevantCount_ = 0;
 		private ClusterNodeEvaluation evaluator_ = null;
-		private List<AbstractSpatialGridPoint> relevent_ = new ArrayList<>();
+		private List<SpatialGridPoint> relevent_ = new ArrayList<>();
 
 		public findReleventNodes(double min, double max, double threshold) {
 			evaluator_ = new ClusterNodeEvaluation(min, max, threshold);
@@ -391,7 +391,7 @@ public class STING implements ClusteringAlgorithm {
 			return false;
 		}
 
-		public List<AbstractSpatialGridPoint> getResults() {
+		public List<SpatialGridPoint> getResults() {
 			return relevent_;
 		}
 
@@ -401,7 +401,7 @@ public class STING implements ClusteringAlgorithm {
 
 		public void compare(INode node) {
 
-			AbstractSpatialGridPoint pt = node.getPoint();
+			SpatialGridPoint pt = node.getPoint();
 			if (pt.getData() != null ) {
 				STINGDataSample data = STINGDataSample.class.cast(pt.getData());
 				if (evaluator_.isRelevent(data.average(),

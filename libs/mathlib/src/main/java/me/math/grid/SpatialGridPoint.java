@@ -2,67 +2,45 @@ package me.math.grid;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-
-//CIRAS: Crime Information Retrieval and Analysis System
-//Copyright 2009 by Russ Brasser, Mark Everline and Eric Franklin
-//
-//This program is free software: you can redistribute it and/or modify
-//it under the terms of the GNU General Public License as published by
-//the Free Software Foundation, either version 3 of the License, or
-//(at your option) any later version.
-//
-//This program is distributed in the hope that it will be useful,
-//but WITHOUT ANY WARRANTY; without even the implied warranty of
-//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//GNU General Public License for more details.
-//
-//You should have received a copy of the GNU General Public License
-//along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 import me.math.Vertex;
-import me.math.grid.array.SpatialGridPoint;
 import me.math.grid.data.AbstractDataSample;
-import me.math.grid.tiled.TiledSpatialGridPoint;
 import me.math.kdtree.INode;
 import me.math.kdtree.MinBoundingRectangle;
 
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
-@JsonSubTypes({ @Type(value = SpatialGridPoint.class, name = "SpatialGridPoint"),
-			   @Type(value = TiledSpatialGridPoint.class, name = "TiledSpatialGridPoint")})
-public abstract class AbstractSpatialGridPoint implements INode {
+@JsonRootName(value = "SpatialGridPoint")
+public class SpatialGridPoint implements INode {
 	
 	private Vertex corner_ = null;
 	private int row_ = -1;
 	private int col_ = -1;
 	private int index_ = -1;
-	private int depth_ = 0;
 	private AbstractDataSample data_ = null;
-	private MinBoundingRectangle mbr_ = null;
-	
+
+	private transient int depth_ = 0;
+	private transient MinBoundingRectangle mbr_ = null;
 	private transient INode.Direction direction_ = INode.Direction.UNKOWN;
 	private transient INode left_ = null;
 	private transient INode right_ = null;
 	private transient INode parent_ = null;
+	private transient AbstractSpatialGrid grid_;
 
 	/**
 	 *
 	 */
-	protected AbstractSpatialGridPoint() {
-
+	public SpatialGridPoint() {
 	}
 	
 	/**
 	 *
 	 */
-	protected AbstractSpatialGridPoint(int row, int col, Vertex corner, int index) {
+	public SpatialGridPoint(int row, int col, Vertex corner, int index, AbstractSpatialGrid grid ) {
 		this.setRow(row);
 		this.setCol(col);
 		this.setCorner(corner);
 		this.setIndex(index);
+		this.grid_ = grid;
 	}
 
 	/**
@@ -90,6 +68,8 @@ public abstract class AbstractSpatialGridPoint implements INode {
 	public int getIndex() {
 		return index_;
 	}
+
+
 
 	/**
 	 * 
@@ -176,12 +156,12 @@ public abstract class AbstractSpatialGridPoint implements INode {
 		this.direction_ = dir;
 	}
 
-	@JsonGetter("mbr")
+	@JsonIgnore
 	public MinBoundingRectangle getMBR() {
 		return this.mbr_;
 	}
-	
-	@JsonSetter("mbr")
+
+	@JsonIgnore
 	public void setMBR(MinBoundingRectangle mbr) {
 		this.mbr_ = mbr;
 	}
@@ -289,9 +269,18 @@ public abstract class AbstractSpatialGridPoint implements INode {
 	 * @see me.math.kdtree.INode#getPoint()
 	 */
 	@JsonIgnore
-	public AbstractSpatialGridPoint getPoint() {
+	public SpatialGridPoint getPoint() {
 		return this;
 	}
-	
-	
+
+	/**
+	 *
+	 * @return
+	 */
+	@JsonIgnore
+	public AbstractSpatialGrid Grid()
+	{
+		return grid_;
+	}
+
 }

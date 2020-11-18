@@ -19,29 +19,22 @@
 
 package me.math.grid;
 
-import javax.persistence.Column;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverted;
 import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import me.math.EarthConstants;
 import me.math.Vertex;
+import me.math.grid.data.CrossCovData;
 import me.math.kdtree.KDTree;
 
 public abstract class AbstractSpatialGrid implements Cloneable {
 
 	private int rows_ = 0;
 	private int cols_ = 0;
-
-	@Column(name="gridSpacingMeters" )
 	private double gridSpacingMeters_ = 1000;
-
-	@Column(name="upperLeft", columnDefinition = "Geometry")
-	private Vertex upperLeft_ = null;
-
-	@Column(name="lowerRight", columnDefinition = "Geometry")
-	private Vertex lowerRight_ = null;
-
-	@Column(name="crossCovariance" )
-	private double crossCovariance_ = 0;
+	private CrossCovData ccdata;
 
 	protected AbstractSpatialGrid()
 	{
@@ -51,18 +44,27 @@ public abstract class AbstractSpatialGrid implements Cloneable {
 	 * 
 	 * @return
 	 */
-	@Column(name="numColumns")
 	@JsonGetter("cols")
+	@DynamoDBAttribute(attributeName = "cols")
 	public int getCols() {
 		return cols_;
+	}
+
+	/**
+	 *
+	 * @param cols_
+	 */
+	@JsonSetter("cols")
+	protected void setCols(int cols_) {
+		this.cols_ = cols_;
 	}
 
 	/**
 	 * 
 	 * @return
 	 */
-	@Column(name="numRows")
 	@JsonGetter("rows")
+	@DynamoDBAttribute(attributeName = "rows")
 	public int getRows() {
 		return rows_;
 	}
@@ -78,21 +80,12 @@ public abstract class AbstractSpatialGrid implements Cloneable {
 
 	/**
 	 * 
-	 * @param cols_
-	 */
-	@JsonSetter("cols")
-	protected void setCols(int cols_) {
-		this.cols_ = cols_;
-	}
-
-	/**
-	 * 
 	 * @param upperLeft
 	 * @param lowerRight
 	 * @param spacingInMeters
 	 * @return
 	 */
-	public static int findNumberOfRows(Vertex upperLeft, Vertex lowerRight, double spacingInMeters) {
+	protected static int findNumberOfRows(final Vertex upperLeft, final Vertex lowerRight, final double spacingInMeters) {
 		Vertex upperRight = new Vertex(upperLeft.getLatitudeDegress(),
 				lowerRight.getLongitudeDegress());
 
@@ -107,7 +100,7 @@ public abstract class AbstractSpatialGrid implements Cloneable {
 	 * @param spacingInMeters
 	 * @return
 	 */
-	public static int findNumberOfCols(Vertex upperLeft, Vertex lowerRight, double spacingInMeters) {
+	protected static int findNumberOfCols(final Vertex upperLeft, final Vertex lowerRight, final double spacingInMeters) {
 		Vertex lowerLeft = new Vertex(lowerRight.getLatitudeDegress(),
 									  upperLeft.getLongitudeDegress());
 
@@ -115,7 +108,7 @@ public abstract class AbstractSpatialGrid implements Cloneable {
 		return (int) Math.floor(lonGroundRangeMeters / spacingInMeters) + 1;
 	}
 	
-	public abstract AbstractSpatialGridPoint getNextGridPoint(AbstractSpatialGridPoint gridPt);
+	public abstract SpatialGridPoint getNextGridPoint(SpatialGridPoint gridPt);
 
 	/**
 	 *
@@ -131,6 +124,7 @@ public abstract class AbstractSpatialGrid implements Cloneable {
 	 * @return
 	 */
 	@JsonGetter("gridSpacingMeters")
+	@DynamoDBAttribute(attributeName = "gridSpacingMeters")
 	public double getGridSpacingMeters() {
 		return gridSpacingMeters_;
 	}
@@ -147,70 +141,27 @@ public abstract class AbstractSpatialGrid implements Cloneable {
 	/**
 	 * @return the crossCovariance
 	 */
-	@JsonGetter("crossCovariance")
+	@JsonIgnore
 	public final double getCrossCovariance() {
-		return crossCovariance_;
+		return this.getCcdata().crossCovariance();
 	}
 
 	/**
-	 * @param crossCovariance the crossCovariance to set
+	 * @return the ccdata
 	 */
-	@JsonSetter("crossCovariance")
-	protected void setCrossCovariance(double crossCovariance) {
-		this.crossCovariance_ = crossCovariance;
+	@JsonGetter("cc_data")
+	@DynamoDBTypeConverted(converter = CrossCovData.DynamoConvert.class)
+	@DynamoDBAttribute(attributeName = "cc_data")
+	public CrossCovData getCcdata() {
+		return ccdata;
 	}
 
 	/**
-	 *
-	 * @return
+	 * @param ccdata the ccdata to set
 	 */
-	@JsonGetter("lowerRight")
-	public Vertex getLowerRight() {
-		return lowerRight_;
-	}
-
-	/**
-	 *
-	 * @return
-	 */
-	@JsonGetter("upperLeft")
-	public Vertex getUpperLeft() {
-		return upperLeft_;
-	}
-
-	/**
-	 * @param upperLeft_
-	 */
-	@JsonSetter("upperLeft")
-	public void setUpperLeft(Vertex upperLeft_) {
-		this.upperLeft_ = upperLeft_;
-	}
-
-	/**
-	 *
-	 * @param lowerRight_
-	 */
-	@JsonSetter("lowerRight")
-	public void setLowerRight(Vertex lowerRight_) {
-		this.lowerRight_ = lowerRight_;
-	}
-
-	/**
-	 *
-	 * @return
-	 */
-	public double getMaxLatitude()
-	{
-		return lowerRight_.getLatitudeDegress();
-	}
-
-	/**
-	 *
-	 * @return
-	 */
-	public double getMaxLongitude()
-	{
-		return lowerRight_.getLongitudeDegress();
+	@JsonSetter("cc_data")
+	public void setCcdata(CrossCovData ccdata) {
+		this.ccdata = ccdata;
 	}
 
 	/**
@@ -219,7 +170,7 @@ public abstract class AbstractSpatialGrid implements Cloneable {
 	 * @param lowerRight
 	 * @return
 	 */
-	protected Vertex findAverageLatLon(Vertex upperLeft, Vertex lowerRight)
+	protected Vertex findAverageLatLon(final Vertex upperLeft, final Vertex lowerRight)
 	{
 		double avg_lat = (upperLeft.getLatitudeDegress() + lowerRight.getLatitudeDegress()) / 2.0;
 		double avg_lon = (upperLeft.getLongitudeDegress() + lowerRight.getLongitudeDegress()) / 2.0;
@@ -227,7 +178,7 @@ public abstract class AbstractSpatialGrid implements Cloneable {
 		return new Vertex( avg_lat, avg_lon);
 	}
 
-	public abstract AbstractSpatialGridPoint get(int index, int gridIndex);
+	public abstract SpatialGridPoint get(int index, int gridIndex);
 
 	/**
 	 *

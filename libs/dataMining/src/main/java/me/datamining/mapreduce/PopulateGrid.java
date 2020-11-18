@@ -6,7 +6,7 @@ package me.datamining.mapreduce;
 import java.io.InputStream;
 import java.util.List;
 
-import me.math.grid.AbstractSpatialGridPoint;
+import me.math.grid.SpatialGridPoint;
 import me.math.grid.data.AbstractDataSample;
 import me.math.grid.tiled.SpatialTile;
 import me.math.kdtree.KDTree;
@@ -49,18 +49,18 @@ public class PopulateGrid implements ResultsHandler {
 	public void handleResult(DataResult result) {
 		
 		if ( search_ == null ) {
-			search_ = new RangeSearch(result.getPoint(), tile_.getGridSizeInMeters());
+			search_ = new RangeSearch(result.getPoint(), tile_.getGridSpacingMeters());
 		}
 		
 		if ( this.tile_.getMbr().contains(result.getPoint()) ) {
 			search_.reset();
 			search_.setPoint(result.getPoint());
-			search_.setDistanceInMeters(tile_.getGridSizeInMeters());
+			search_.setDistanceInMeters(tile_.getGridSpacingMeters());
 			
 		    tree_.find(search_);
-		    List<AbstractSpatialGridPoint> results = search_.getResults();
+		    List<SpatialGridPoint> results = search_.getResults();
 		    
-		    for ( AbstractSpatialGridPoint pt : results) {
+		    for ( SpatialGridPoint pt : results) {
 		    	pt.getData().addValue(result.getMetric());
 		    }
 		} 
@@ -77,7 +77,7 @@ public class PopulateGrid implements ResultsHandler {
 		if ( gridTile == null ) { throw new IllegalArgumentException("gridTile can't be null"); }
 		if ( dataStream == null ) { throw new IllegalArgumentException("dataStream can't be null"); }
 		
-		for (AbstractSpatialGridPoint pt : gridTile.getGrid()) {
+		for (SpatialGridPoint pt : gridTile.getGrid()) {
 			try {
 				AbstractDataSample data = (AbstractDataSample) sampleClass_.newInstance();
 				pt.setData(data);

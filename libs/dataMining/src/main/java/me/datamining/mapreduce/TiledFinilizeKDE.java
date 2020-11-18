@@ -3,7 +3,7 @@ package me.datamining.mapreduce;
 import java.util.List;
 
 import me.math.grid.tiled.SpatialTile;
-import me.math.grid.tiled.TiledSpatialGridPoint;
+import me.math.grid.SpatialGridPoint;
 import me.math.grid.data.AbstractDataSample;
 
 public class TiledFinilizeKDE {
@@ -29,11 +29,11 @@ public class TiledFinilizeKDE {
 	public void finishKDETile(SpatialTile zeroTile, List<SpatialTile> aList)
 	{
 	 	int index = 0;
-    	for ( TiledSpatialGridPoint cnt : zeroTile.getGrid()) {    	   
+    	for ( SpatialGridPoint cnt : zeroTile.getGrid()) {
      	   AbstractDataSample sample = cnt.getData();
      	   double total = 0;
        	   for ( SpatialTile tile : aList ) {
-               TiledSpatialGridPoint gridPt = tile.getGrid().get(index);
+			   SpatialGridPoint gridPt = tile.getGrid().get(index);
                
                total += gridPt.getData().getInterpolationValue();
        	   }   

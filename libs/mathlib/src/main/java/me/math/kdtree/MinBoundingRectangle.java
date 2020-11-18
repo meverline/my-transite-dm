@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 
 import me.database.nsstore.AbstractDocument;
 import me.math.Vertex;
-import me.math.grid.AbstractSpatialGridPoint;
+import me.math.grid.SpatialGridPoint;
 
 
 @SuppressWarnings("serial")
@@ -55,7 +55,7 @@ public class MinBoundingRectangle extends AbstractDocument implements Serializab
 	 * 
 	 * @param s
 	 */
-	public MinBoundingRectangle(AbstractSpatialGridPoint s) {
+	public MinBoundingRectangle(SpatialGridPoint s) {
 		extend(s);
 	}
 
@@ -85,7 +85,7 @@ public class MinBoundingRectangle extends AbstractDocument implements Serializab
 	 * @param location
 	 */
 	@JsonIgnore
-	public void extend(AbstractSpatialGridPoint location) {
+	public void extend(SpatialGridPoint location) {
 		if (location != null) {
 			bottomlatDegress_ = Math.min(location.getVertex().getLatitudeDegress(), bottomlatDegress_);
 			toplatDegress_ = Math.max(location.getVertex().getLatitudeDegress(), toplatDegress_);
@@ -143,7 +143,7 @@ public class MinBoundingRectangle extends AbstractDocument implements Serializab
 	 * @param location
 	 * @return
 	 */
-	public boolean contains(AbstractSpatialGridPoint location) {
+	public boolean contains(SpatialGridPoint location) {
 		return contains(location.getVertex());
 	}
 

@@ -5,7 +5,7 @@ import me.datamining.Kernel.IDensityKernel;
 import me.datamining.bandwidth.IBandwidth;
 import me.datamining.bandwidth.SlivermanRule;
 import me.math.grid.tiled.SpatialTile;
-import me.math.grid.tiled.TiledSpatialGridPoint;
+import me.math.grid.SpatialGridPoint;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -101,14 +101,14 @@ public class TiledNonAdaptiveKDE {
      * @param gridTile
      * @param gridPoints
      */
-    public void kernalDensityEstimate(SpatialTile gridTile, List<TiledSpatialGridPoint> gridPoints)
+    public void kernalDensityEstimate(SpatialTile gridTile, List<SpatialGridPoint> gridPoints)
     {
         double hparm = getXBandWidth().bandWidth(this.getVariance(), 2, this.getN());
         double hGeoParm = getYBandWidth().bandWidth( gridTile.getCcdata().crossCovariance(), 2, this.getN());
 
-        for ( TiledSpatialGridPoint cnt : gridTile.getGrid()) {
+        for ( SpatialGridPoint cnt : gridTile.getGrid()) {
             double estitmate = 0.0;
-            for ( TiledSpatialGridPoint data : gridPoints) {
+            for ( SpatialGridPoint data : gridPoints) {
                 double t = 0;
                 if ( cnt.getData() != null ) {
                     t = cnt.getData().getValue() -  data.getData().getValue();

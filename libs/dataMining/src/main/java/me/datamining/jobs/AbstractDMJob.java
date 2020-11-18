@@ -4,7 +4,7 @@ import java.util.Iterator;
 
 import me.datamining.metric.AbstractSpatialMetric;
 import me.math.Vertex;
-import me.math.grid.AbstractSpatialGridPoint;
+import me.math.grid.SpatialGridPoint;
 import me.math.grid.array.UniformSpatialGrid;
 import me.math.grid.data.AbstractDataSample;
 import me.math.kdtree.KDTree;
@@ -44,7 +44,7 @@ public abstract class AbstractDMJob {
 	  * 
 	  * @return
 	  */
-	 public abstract Iterator<AbstractSpatialGridPoint> getResults(double minValue);
+	 public abstract Iterator<SpatialGridPoint> getResults(double minValue);
 	 
 	 /**
 	  * 
