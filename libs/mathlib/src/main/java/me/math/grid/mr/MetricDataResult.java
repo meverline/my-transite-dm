@@ -1,4 +1,4 @@
-package me.math.grid.tiled.mr;
+package me.math.grid.mr;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;

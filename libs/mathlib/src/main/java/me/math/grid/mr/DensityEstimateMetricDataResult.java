@@ -1,4 +1,4 @@
-package me.math.grid.tiled.mr;
+package me.math.grid.mr;
 
 import me.math.Vertex;
 import me.math.grid.SpatialGridPoint;

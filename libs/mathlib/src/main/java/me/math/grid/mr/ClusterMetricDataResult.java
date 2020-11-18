@@ -1,4 +1,4 @@
-package me.math.grid.tiled.mr;
+package me.math.grid.mr;
 
 import java.util.ArrayList;
 import java.util.List;
