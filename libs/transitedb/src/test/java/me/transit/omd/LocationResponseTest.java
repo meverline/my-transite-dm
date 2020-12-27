@@ -7,6 +7,7 @@ import static org.junit.Assert.fail;
 import java.io.FileReader;
 import java.io.IOException;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -29,11 +30,11 @@ public class LocationResponseTest {
 			input.close();
 
 			LocationsResponse fr = new ObjectMapper().readValue(response.toString(), LocationsResponse.class);
-			assertNotNull(fr);
-			assertNotNull(fr.getResults().getLocations());
-			assertTrue(true);
+			Assert.assertNotNull(fr);
+			Assert.assertNotNull(fr.getResults().getLocations());
+			Assert.assertTrue(true);
 		} catch (IOException e) {
-			fail(e.getLocalizedMessage());
+			Assert.fail(e.getLocalizedMessage());
 		}
 	
 	}

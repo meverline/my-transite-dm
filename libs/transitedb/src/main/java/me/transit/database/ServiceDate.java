@@ -40,7 +40,7 @@ import me.transit.annotation.GTFSSetter;
 @GTFSFileModel(filename="calendar.txt")
 @JsonTypeInfo(use= JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
 @JsonFilter("agencyFilter")
-public class ServiceDate extends AbstractDocument implements TransitData {
+public class ServiceDate extends TransitData {
 
 	public static final String SERVICE = "service";
 
@@ -78,16 +78,9 @@ public class ServiceDate extends AbstractDocument implements TransitData {
 	@GenericGenerator( name = "native", strategy = "native")	
 	private long uuid = -1;
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "AGENCY_UUID", nullable = false, updatable = false)
-	private Agency agency = null;
-
 	@Column(name = "ID", nullable = false)
 	private String id = null;
 
-	@Column(name = "VERSION")
-	private String version = "0.5";
-	
 	@Column(name="START_DATE")
 	@Type(type = "java.util.Calendar")
 	private Calendar startDate = null;
@@ -120,22 +113,6 @@ public class ServiceDate extends AbstractDocument implements TransitData {
 	}
 
 	/* (non-Javadoc)
-	 * @see me.transit.database.impl.ServiceDate#getAgency()
-	 */
-	@JsonGetter("agency_name")
-	public Agency getAgency() {
-		return agency;
-	}
-
-	/* (non-Javadoc)
-	 * @see me.transit.database.impl.ServiceDate#setAgency(me.transit.database.impl.Agency)
-	 */
-	@JsonSetter("agency_name")
-	public void setAgency(Agency agency) {
-		this.agency = agency;
-	}
-
-	/* (non-Javadoc)
 	 * @see me.transit.database.impl.ServiceDate#getId()
 	 */
 	@JsonGetter("id")
@@ -150,23 +127,6 @@ public class ServiceDate extends AbstractDocument implements TransitData {
 	@JsonSetter("id")
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	/* (non-Javadoc)
-	 * @see me.transit.database.impl.ServiceDate#getVersion()
-	 */
-	@JsonGetter("version")
-	public String getVersion() {
-		return version;
-	}
-
-	/* (non-Javadoc)
-	 * @see me.transit.database.impl.ServiceDate#setVersion(java.lang.String)
-	 */
-	@GTFSSetter(column="version")
-	@JsonSetter("version")
-	public void setVersion(String version) {
-		this.version = version;
 	}
 
 	/* (non-Javadoc)
@@ -333,9 +293,9 @@ public class ServiceDate extends AbstractDocument implements TransitData {
 		ServiceDate that = (ServiceDate) o;
 		return uuid == that.uuid &&
 				serviceDayFlag == that.serviceDayFlag &&
-				Objects.equals(agency, that.agency) &&
+				Objects.equals(getAgency(), that.getAgency()) &&
 				Objects.equals(id, that.id) &&
-				Objects.equals(version, that.version) &&
+				Objects.equals(getVersion(), that.getVersion()) &&
 				Objects.equals(startDate, that.startDate) &&
 				Objects.equals(endDate, that.endDate) &&
 				service == that.service;
@@ -343,16 +303,16 @@ public class ServiceDate extends AbstractDocument implements TransitData {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(uuid, agency, id, version, startDate, endDate, serviceDayFlag, service);
+		return Objects.hash(uuid, getAgency(), id, getVersion(), startDate, endDate, serviceDayFlag, service);
 	}
 
 	@Override
 	public String toString() {
 		return "ServiceDate{" +
 				"uuid=" + uuid +
-				", agency=" + agency +
+				", agency=" + getAgency() +
 				", id='" + id + '\'' +
-				", version='" + version + '\'' +
+				", version='" + getVersion() + '\'' +
 				", startDate=" + startDate +
 				", endDate=" + endDate +
 				", serviceDayFlag=" + serviceDayFlag +

@@ -4,8 +4,7 @@ package me.datamining.metric;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.database.nsstore.IDocumentSession;
-import me.database.nsstore.AbstractDocument;
+import me.database.nsstore.IDocument;
 import me.database.nsstore.StoreUtils;
 import me.transit.dao.query.tuple.IQueryTuple;
 import me.transit.dao.query.tuple.StringTuple;
@@ -66,7 +65,7 @@ public class TransiteSpatialMetric extends AbstractSpatialMetric {
 				                  route.getShortName(), 
 				                  StringTuple.MATCH.EXACT ));
 		
-		List<AbstractDocument> data = getDaoProvider().getDocumentDao().find(list, "schedules");
+		List<IDocument> data = getDaoProvider().getDocumentDao().find(list, "schedules");
 		
 		rtn = RouteDocument.class.cast( data.get(0)).getTrips();
 	

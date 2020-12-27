@@ -1,6 +1,7 @@
 package me.transit.parser;
 
 import me.transit.parser.service.AbstractGTFSParser;
+import me.transit.parser.service.ParserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
@@ -13,8 +14,8 @@ public class FeedParserListener implements ApplicationListener<ApplicationReadyE
     private final AbstractGTFSParser registry;
 
     @Autowired
-    public FeedParserListener(AbstractGTFSParser parser) {
-        this.registry = parser;
+    public FeedParserListener(AbstractGTFSParser parserService) {
+        this.registry = parserService;
     }
 
     @Override

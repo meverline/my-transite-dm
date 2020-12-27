@@ -21,20 +21,27 @@ package me.math.grid;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverted;
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.*;
 import me.math.EarthConstants;
 import me.math.Vertex;
+import me.math.grid.array.UniformSpatialGrid;
 import me.math.grid.data.CrossCovData;
+import me.math.grid.tiled.SpatialTile;
+import me.math.grid.tiled.TiledSpatialGrid;
 import me.math.kdtree.KDTree;
 
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
+@JsonSubTypes({ @JsonSubTypes.Type(value = SpatialTile.class, name = "SpatialTile"),
+				@JsonSubTypes.Type(value = UniformSpatialGrid.class, name = "UniformSpatialGrid"),
+				@JsonSubTypes.Type(value = TiledSpatialGrid.class, name = "TiledSpatialGrid") })
 public abstract class AbstractSpatialGrid implements Cloneable {
 
 	private int rows_ = 0;
 	private int cols_ = 0;
 	private double gridSpacingMeters_ = 1000;
 	private CrossCovData ccdata;
+	private Vertex upperLeft_ = null;
+	private Vertex lowerRight_ = null;
 
 	protected AbstractSpatialGrid()
 	{
@@ -185,5 +192,60 @@ public abstract class AbstractSpatialGrid implements Cloneable {
 	 * @return
 	 */
 	public abstract KDTree getTree();
+
+	/**
+	 *
+	 * @return
+	 */
+	@JsonIgnore
+	public Vertex getLowerRight() {
+		return lowerRight_;
+	}
+
+	/**
+	 *
+	 * @param lowerRight_
+	 */
+	@JsonIgnore
+	public void setLowerRight(Vertex lowerRight_) {
+		this.lowerRight_ = lowerRight_;
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	@JsonIgnore
+	public Vertex getUpperLeft() {
+		return upperLeft_;
+	}
+
+	/**
+	 * @param upperLeft_
+	 */
+	@JsonIgnore
+	public void setUpperLeft(Vertex upperLeft_) {
+		this.upperLeft_ = upperLeft_;
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	@JsonIgnore
+	public double getMaxLatitude()
+	{
+		return lowerRight_.getLatitudeDegress();
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	@JsonIgnore
+	public double getMaxLongitude()
+	{
+		return lowerRight_.getLongitudeDegress();
+	}
 
 }

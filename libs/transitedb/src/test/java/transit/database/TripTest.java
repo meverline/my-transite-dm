@@ -48,7 +48,6 @@ public class TripTest extends AbstractDatabaseTest {
 		sd.setId("id");
 		sd.setService(ServiceDate.ServiceDays.WEEKDAY_SERVICE);
 		sd.setUUID(500L);
-		sd.setDocId("id");
 		sd.setServiceDayFlag(10);
 
 		StopTime st = new StopTime();
@@ -68,12 +67,12 @@ public class TripTest extends AbstractDatabaseTest {
 
 		object.setRouteTripIndex(10);
 		object.setDirectionId(Trip.DirectionType.IN_BOUND);
-		object.setDocId("docId");
+		object.setDocId(-1);
 		object.setHeadSign("headSign");
 		object.setShape(rg);
 		object.setService(sd);
 		object.setId("id");
-		object.setDocId("docId");
+		object.setDocId(-1);
 		object.setShortName("shortName");
 		object.setUUID(1000L);
 
@@ -127,7 +126,6 @@ public class TripTest extends AbstractDatabaseTest {
 			sd.setId("id");
 			sd.setService(ServiceDate.ServiceDays.WEEKDAY_SERVICE);
 			sd.setUUID(500L);
-			sd.setDocId("id");
 			sd.setServiceDayFlag(10);
 		}
 

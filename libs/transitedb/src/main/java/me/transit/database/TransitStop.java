@@ -23,7 +23,7 @@ import java.util.Objects;
 @DiscriminatorValue("TransitStop")
 @GTFSFileModel(filename="stops.txt")
 @JsonTypeInfo(use= JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
-public class TransitStop implements TransitData, IDataProvider  {
+public class TransitStop extends TransitData implements IDataProvider  {
 	
 	public static final String STOP_NAME = "name";
 	public static final String LOCATION = "location";
@@ -38,16 +38,6 @@ public class TransitStop implements TransitData, IDataProvider  {
 	@GeneratedValue(strategy = GenerationType.AUTO, generator="native")
 	@GenericGenerator( name = "native", strategy = "native")
 	private long uuid = -1;
-
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "AGENCY_UUID", nullable = false, updatable = false)
-	private Agency agency = null;
-
-	@Column(name = "ID", nullable = false)
-	private String id = null;
-
-	@Column(name = "VERSION")
-	private String version = "0.5";
 
 	@Column(name = "CODE")
 	private String code = "";
@@ -79,6 +69,9 @@ public class TransitStop implements TransitData, IDataProvider  {
 	@Enumerated(EnumType.STRING)
 	private WheelChariBoardingType wheelchairBoarding = WheelChariBoardingType.EMPTY;
 
+	@Column(name = "ID", nullable = false)
+	private String id = null;
+
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.TransitStop#getUUID()
 	 */
@@ -93,56 +86,6 @@ public class TransitStop implements TransitData, IDataProvider  {
 	@JsonSetter("uuid")
 	public void setUUID(long uuid) {
 		this.uuid = uuid;
-	}
-
-	/* (non-Javadoc)
-	 * @see me.transit.database.impl.TransitStop#getAgency()
-	 */
-	@JsonGetter("agency_name")
-	public Agency getAgency() {
-		return agency;
-	}
-
-	/* (non-Javadoc)
-	 * @see me.transit.database.impl.TransitStop#setAgency(me.transit.database.impl.Agency)
-	 */
-	@JsonSetter("agency_name")
-	public void setAgency(Agency agency) {
-		this.agency = agency;
-	}
-
-	/* (non-Javadoc)
-	 * @see me.transit.database.impl.TransitStop#getId()
-	 */
-	@JsonGetter("id")
-	public String getId() {
-		return id;
-	}
-
-	/* (non-Javadoc)
-	 * @see me.transit.database.impl.TransitStop#setId(java.lang.String)
-	 */
-	@GTFSSetter(column="stop_id")
-	@JsonSetter("id")
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	/* (non-Javadoc)
-	 * @see me.transit.database.impl.TransitStop#getVersion()
-	 */
-	@JsonGetter("version")
-	public String getVersion() {
-		return version;
-	}
-
-	/* (non-Javadoc)
-	 * @see me.transit.database.impl.TransitStop#setVersion(java.lang.String)
-	 */
-	@GTFSSetter(column="version")
-	@JsonSetter("version")
-	public void setVersion(String version) {
-		this.version = version;
 	}
 
 	/* (non-Javadoc)
@@ -343,6 +286,23 @@ public class TransitStop implements TransitData, IDataProvider  {
 		wheelchairBoarding = value;
 	}
 
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.TransitStop#getId()
+	 */
+	@JsonGetter("id")
+	public String getId() {
+		return id;
+	}
+
+	/* (non-Javadoc)
+	 * @see me.transit.database.impl.TransitStop#setId(java.lang.String)
+	 */
+	@GTFSSetter(column="stop_id")
+	@JsonSetter("id")
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -366,9 +326,9 @@ public class TransitStop implements TransitData, IDataProvider  {
 		TransitStop that = (TransitStop) o;
 		return uuid == that.uuid &&
 				parentStation == that.parentStation &&
-				Objects.equals(agency, that.agency) &&
-				Objects.equals(id, that.id) &&
-				Objects.equals(version, that.version) &&
+				Objects.equals(this.getAgency(), that.getAgency()) &&
+				Objects.equals(this.getId(), that.getId()) &&
+				Objects.equals(this.getVersion(), that.getVersion()) &&
 				Objects.equals(code, that.code) &&
 				Objects.equals(name, that.name) &&
 				Objects.equals(desc, that.desc) &&
@@ -381,16 +341,16 @@ public class TransitStop implements TransitData, IDataProvider  {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(uuid, agency, id, version, code, name, desc, location, zoneId, url, locationType, parentStation, wheelchairBoarding);
+		return Objects.hash(uuid, this.getAgency(), this.getId(), this.getVersion(), code, name, desc, location, zoneId, url, locationType, parentStation, wheelchairBoarding);
 	}
 
 	@Override
 	public String toString() {
 		return "TransitStop{" +
 				"uuid=" + uuid +
-				", agency=" + agency +
-				", id='" + id + '\'' +
-				", version='" + version + '\'' +
+				", agency=" + this.getAgency() +
+				", id='" + this.getId() + '\'' +
+				", version='" + this.getVersion() + '\'' +
 				", code='" + code + '\'' +
 				", name='" + name + '\'' +
 				", desc='" + desc + '\'' +

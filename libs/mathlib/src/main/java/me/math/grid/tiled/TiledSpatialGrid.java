@@ -23,9 +23,7 @@ import org.locationtech.jts.geom.Point;
 public class TiledSpatialGrid extends AbstractTiledSpatialGrid implements IDocument {
 
 	private long uuid = -1;
-	private String docId = null;
-	private Vertex upperLeft_ = null;
-	private Vertex lowerRight_ = null;
+	private long docId = -1;
 	private final List<SpatialTile> grid_ = new ArrayList<>();
 
 	/**
@@ -54,8 +52,8 @@ public class TiledSpatialGrid extends AbstractTiledSpatialGrid implements IDocum
 	 */
 	public TiledSpatialGrid(Point ul, Point lr, double spacingInMeters) throws UnknownHostException, SQLException {
 		init(spacingInMeters);
-		setUpperLeft( new Vertex(ul.getX(), ul.getY()));
-		setLowerRight( new Vertex(lr.getX(), lr.getY()));
+		setUpperLeft( new Vertex(ul));
+		setLowerRight( new Vertex(lr));
 
 		createGrid(getUpperLeft(), getLowerRight());
 	}
@@ -93,13 +91,13 @@ public class TiledSpatialGrid extends AbstractTiledSpatialGrid implements IDocum
 	@JsonGetter("_id")
 	@DynamoDBAttribute(attributeName = "id")
 	@Override
-	public String getDocId() {
+	public long getDocId() {
 		return this.docId;
 	}
 
 	@JsonSetter("_id")
 	@Override
-	public void setDocId(String docId) {
+	public void setDocId(long docId) {
 		this.docId = docId;
 	}
 
@@ -183,61 +181,5 @@ public class TiledSpatialGrid extends AbstractTiledSpatialGrid implements IDocum
 		}
 		
 	}
-
-	/**
-	 *
-	 * @return
-	 */
-	@JsonIgnore
-	public Vertex getLowerRight() {
-		return lowerRight_;
-	}
-
-	/**
-	 *
-	 * @param lowerRight_
-	 */
-	@JsonIgnore
-	public void setLowerRight(Vertex lowerRight_) {
-		this.lowerRight_ = lowerRight_;
-	}
-
-	/**
-	 *
-	 * @return
-	 */
-	@JsonIgnore
-	public Vertex getUpperLeft() {
-		return upperLeft_;
-	}
-
-	/**
-	 * @param upperLeft_
-	 */
-	@JsonIgnore
-	public void setUpperLeft(Vertex upperLeft_) {
-		this.upperLeft_ = upperLeft_;
-	}
-
-	/**
-	 *
-	 * @return
-	 */
-	@JsonIgnore
-	public double getMaxLatitude()
-	{
-		return lowerRight_.getLatitudeDegress();
-	}
-
-	/**
-	 *
-	 * @return
-	 */
-	@JsonIgnore
-	public double getMaxLongitude()
-	{
-		return lowerRight_.getLongitudeDegress();
-	}
-
 
 }

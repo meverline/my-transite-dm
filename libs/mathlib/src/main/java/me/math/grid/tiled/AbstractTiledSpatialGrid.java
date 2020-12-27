@@ -21,9 +21,6 @@ import org.apache.commons.logging.LogFactory;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
-@JsonSubTypes({ @Type(value = SpatialTile.class, name = "SpatialTile"),
-		        @Type(value = TiledSpatialGrid.class, name = "TiledSpatialGrid") })
 public abstract class AbstractTiledSpatialGrid extends AbstractSpatialGrid implements INodeCreator {
 
 	private Log logger = LogFactory.getLog(getClass());

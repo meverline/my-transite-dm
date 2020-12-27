@@ -10,25 +10,23 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
 
+import me.transit.dao.RouteDocumentDao;
+import me.transit.database.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import me.database.nsstore.IDocumentSession;
+import me.database.nsstore.DocumentSession;
 import me.database.neo4j.IGraphDatabaseDAO;
 import me.transit.dao.RouteDao;
 import me.transit.dao.TransiteStopDao;
-import me.transit.database.Route;
-import me.transit.database.StopTime;
-import me.transit.database.TransitStop;
-import me.transit.database.Trip;
 
 @Component(value = "stopTimeFileHandler")
 public class StopTimeFileHandler extends AbstractFileHandler {
 
 	private Log log = LogFactory.getLog(getClass().getName());
-	private IDocumentSession documentDao;
+	private RouteDocumentDao documentDao;
 	private IGraphDatabaseDAO graphdb;
 	private RouteDao routeDao;
 	private TransiteStopDao transiteStopDao;
@@ -42,7 +40,7 @@ public class StopTimeFileHandler extends AbstractFileHandler {
 	 * @param blackboard
 	 */
 	@Autowired
-	public StopTimeFileHandler(RouteDao routeDao, TransiteStopDao transiteStopDao, IDocumentSession documentDao,
+	public StopTimeFileHandler(RouteDao routeDao, TransiteStopDao transiteStopDao, RouteDocumentDao documentDao,
 			IGraphDatabaseDAO graphDatabase, Blackboard blackboard) {
 		super(blackboard);
 		this.documentDao = Objects.requireNonNull(documentDao, "documentDao can not be null");
@@ -104,7 +102,7 @@ public class StopTimeFileHandler extends AbstractFileHandler {
 						}
 					}
 
-					this.documentDao.add(route);
+					this.documentDao.add( new RouteDocument(route, entry.getValue()));
 				}
 			} catch (Exception e) {
 				log.error(String.format("xrefStopToRoutes Trip map error Key %s Value %s", entry.getKey(), entry.getValue()));

@@ -48,7 +48,6 @@ public class RouteTest extends AbstractDatabaseTest {
 		sd.setId("id");
 		sd.setService(ServiceDate.ServiceDays.WEEKDAY_SERVICE);
 		sd.setUUID(500L);
-		sd.setDocId("id");
 		sd.setServiceDayFlag(10);
 
 		StopTime st = new StopTime();
@@ -68,12 +67,12 @@ public class RouteTest extends AbstractDatabaseTest {
 
 		trip.setRouteTripIndex(10);
 		trip.setDirectionId(Trip.DirectionType.IN_BOUND);
-		trip.setDocId("docId");
+		trip.setDocId(-1);
 		trip.setHeadSign("headSign");
 		trip.setShape(rg);
 		trip.setService(sd);
 		trip.setId("id");
-		trip.setDocId("docId");
+		trip.setDocId(-1);
 		trip.setShortName("shortName");
 		trip.setUUID(1000L);
 
@@ -82,10 +81,10 @@ public class RouteTest extends AbstractDatabaseTest {
 		}
 
 		Route object = new Route();
-		object.setAgency(agency);;
+		object.setAgency(agency);
 		object.setColor("blue");
 		object.setDesc("desc");
-		object.setDocId("id");
+		object.setDocId(-1);
 		object.setId("id");
 		object.setLongName("longName");
 		object.setShortName("shortName");

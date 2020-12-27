@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 import me.database.nsstore.AbstractDocument;
-import me.database.nsstore.IDocumentSession;
+import me.database.nsstore.DocumentSession;
 import me.database.nsstore.StoreUtils;
 import org.bson.Document;
 import org.easymock.EasyMock;
@@ -31,9 +31,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
 
-public class TestDocumentDao extends EasyMockSupport{
-
-	private final static String COLLECTION = "schedules";
+public class DocumentDaoIT extends EasyMockSupport{
 
     @Rule
     public EasyMockRule rule = new EasyMockRule(this);
@@ -47,16 +45,16 @@ public class TestDocumentDao extends EasyMockSupport{
 	@Mock(type=MockType.NICE)
 	private MongoCollection<Document> collection;
 
-	private Map<String, String> properties = new HashMap<>();
+	private final Map<String, String> properties = new HashMap<>();
 	
 	
 	private void setUpMock() {
 
-		properties.put(IDocumentSession.DATABASE, "transiteDoc");
+		properties.put(DocumentSession.DATABASE, "transiteDoc");
 
 		expect(writer.getDatabase(EasyMock.anyString())).andReturn(dbmock).anyTimes();
 		expect(dbmock.getCollection(EasyMock.anyString())).andReturn(collection).anyTimes();
-		expect(collection.countDocuments()).andReturn(new Long(3)).anyTimes();
+		expect(collection.countDocuments()).andReturn(3L).anyTimes();
 		
 		replayAll();
 	}
@@ -66,7 +64,7 @@ public class TestDocumentDao extends EasyMockSupport{
 		
 		this.setUpMock();
 
-		IDocumentSession doc = new MongoDocumentSession(writer,properties);
+		DocumentSession doc = new MongoDocumentSession(writer,properties);
 		assertNotNull(doc);
 		assertEquals(3, doc.size("unk"));
 		
@@ -78,7 +76,7 @@ public class TestDocumentDao extends EasyMockSupport{
 	}
 	
 	@Test
-	public void testSkip() throws UnknownHostException {
+	public void testSkip()  {
 		
 		this.setUpMock();
 		MongoDocumentSession doc = new MongoDocumentSession(writer, properties);
@@ -99,7 +97,7 @@ public class TestDocumentDao extends EasyMockSupport{
 	}
 	
 	@Test
-	public void testToDocField() throws UnknownHostException {
+	public void testToDocField() {
 				
 		String [] info = {
 				"_id",
@@ -161,6 +159,7 @@ public class TestDocumentDao extends EasyMockSupport{
 
 		@JsonSetter("TestB.item")
 		public void setItem(String name) {
+			this.name = name;
 		}
 		
 		@Override
@@ -190,11 +189,10 @@ public class TestDocumentDao extends EasyMockSupport{
 			} else if (!data.equals(other.data))
 				return false;
 			if (name == null) {
-				if (other.name != null)
-					return false;
-			} else if (!name.equals(other.name))
-				return false;
-			return true;
+				return other.name == null;
+			} else {
+				return name.equals(other.name);
+			}
 		}
 
 		@Override
@@ -287,9 +285,7 @@ public class TestDocumentDao extends EasyMockSupport{
 					return false;
 			} else if (!object.equals(other.object))
 				return false;
-			if (Double.doubleToLongBits(value) != Double.doubleToLongBits(other.value))
-				return false;
-			return true;
+			return Double.doubleToLongBits(value) == Double.doubleToLongBits(other.value);
 		}
 
 		@Override

@@ -35,7 +35,7 @@ import me.transit.annotation.GTFSSetter;
 @DiscriminatorValue("Route")
 @GTFSFileModel(filename="routes.txt")
 @JsonTypeInfo(use= JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
-public class Route implements TransitData, IRoute, IDocument {
+public class Route  extends TransitData implements IRoute, IDocument {
 	
 	public final static String TRIPLIST = "tripList";
 	public static final String SHORTNAME = "shortName";
@@ -49,15 +49,8 @@ public class Route implements TransitData, IRoute, IDocument {
 	@GenericGenerator( name = "native", strategy = "native")
 	private long uuid = -1;
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "AGENCY_UUID", nullable = false, updatable = false)
-	private Agency agency = null;
-
 	@Column(name = "ID", nullable = false)
 	private String id = null;
-
-	@Column(name = "VERSION")
-	private String version = "0.5";
 
 	@Column(name = "SHORT_NAME", nullable = false)
 	private String shortName = "";
@@ -88,7 +81,7 @@ public class Route implements TransitData, IRoute, IDocument {
 	@OrderBy("TRIP_NDX")
 	private List<Trip> trips = new ArrayList<>();
 	
-	private transient String docId = null;
+	private transient long docId = -1;
 
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Route#getUUID()
@@ -107,23 +100,6 @@ public class Route implements TransitData, IRoute, IDocument {
 	}
 
 	/* (non-Javadoc)
-	 * @see me.transit.database.impl.Route#getAgency()
-	 */
-	@JsonGetter("agency_name")
-	public Agency getAgency() {
-		return agency;
-	}
-
-	/* (non-Javadoc)
-	 * @see me.transit.database.impl.Route#setAgency(me.transit.database.impl.Agency)
-	 */
-	@JsonSetter("agency_name")
-	@GTFSSetter(column="agency_id")
-	public void setAgency(Agency agency) {
-		this.agency = agency;
-	}
-
-	/* (non-Javadoc)
 	 * @see me.transit.database.impl.Route#getId()
 	 */
 	@JsonGetter("route_id")
@@ -138,23 +114,6 @@ public class Route implements TransitData, IRoute, IDocument {
 	@JsonSetter("route_id")
 	public void setRouteId(String id) {
 		this.id = id;
-	}
-
-	/* (non-Javadoc)
-	 * @see me.transit.database.impl.Route#getVersion()
-	 */
-	@JsonGetter("version")
-	public String getVersion() {
-		return version;
-	}
-
-	/* (non-Javadoc)
-	 * @see me.transit.database.impl.Route#setVersion(java.lang.String)
-	 */
-	@GTFSSetter(column="version")
-	@JsonSetter("version")
-	public void setVersion(String version) {
-		this.version = version;
 	}
 
 	/* (non-Javadoc)
@@ -320,9 +279,9 @@ public class Route implements TransitData, IRoute, IDocument {
 	public String toString() {
 		return "Route{" +
 				"uuid=" + uuid +
-				", agency=" + agency +
+				", agency=" + getAgency() +
 				", id='" + id + '\'' +
-				", version='" + version + '\'' +
+				", version='" + getVersion() + '\'' +
 				", shortName='" + shortName + '\'' +
 				", longName='" + longName + '\'' +
 				", desc='" + desc + '\'' +
@@ -365,7 +324,7 @@ public class Route implements TransitData, IRoute, IDocument {
 	}
 	
 	@JsonGetter("_id")
-	public String getDocId() {
+	public long getDocId() {
 		return docId;
 	}
 
@@ -373,7 +332,7 @@ public class Route implements TransitData, IRoute, IDocument {
 	 * @see me.transit.database.impl.Trip#setUUID(long)
 	 */
 	@JsonSetter("_id")
-	public void setDocId(String uuid) {
+	public void setDocId(long uuid) {
 		this.docId = uuid;
 	}
 

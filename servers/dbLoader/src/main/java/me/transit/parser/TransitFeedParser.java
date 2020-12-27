@@ -13,7 +13,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan({ "me.transit"})
-public class TransitFeedParser implements ApplicationContextAware, CommandLineRunner {
+public class  TransitFeedParser implements ApplicationContextAware, CommandLineRunner {
 
 	private ApplicationContext applicationContext;
 

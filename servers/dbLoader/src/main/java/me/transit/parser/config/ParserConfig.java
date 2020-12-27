@@ -37,8 +37,12 @@ public class ParserConfig {
 	}
 
 	@Bean
-	public FeedParserListener sqsLifecycle(AbstractGTFSParser registry) {
-		return new FeedParserListener(registry);
+	public FeedParserListener sqsLifecycle(FileHandlerFactory fileHandlerFactory,
+										   LocationDao locationDao,
+										   Blackboard blackboard,
+										   IGraphDatabaseDAO graphDatabase) {
+		return new FeedParserListener(this.parserService(fileHandlerFactory,
+				locationDao, blackboard, graphDatabase));
 	}
 	
 	@Bean(value="localParser")

@@ -19,7 +19,7 @@ public class RouteDocument extends AbstractDocument implements IRoute {
 	private String longName = "";
 	private String desc = "";
 	private RouteType type = RouteType.UNKOWN;
-	private List<Trip> trips = new ArrayList<Trip>();
+	private List<Trip> trips = new ArrayList<>();
 	
 	public RouteDocument() {
 		
@@ -34,10 +34,11 @@ public class RouteDocument extends AbstractDocument implements IRoute {
 	    this.setType(route.getType());
 	    this.getTrips().addAll(trips);
 	}
-	
-	
+
+
 	/**
-	 * @param id the id to set
+	 *
+	 * @return
 	 */
 	@JsonGetter("id")
 	public long getId() {

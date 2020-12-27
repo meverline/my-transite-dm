@@ -49,10 +49,9 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, ID
 	private int rowOffset_ = 0;
 	private int colOffSet_ = 0;
 	private List<SpatialGridPoint> grid_ = new ArrayList<>();
-	private String docId = null;
+	private long docId = -1;
 	private LocalDownFrame frame;
 	private AbstractDataSample defaulValue;
-
 	private long gridUUID;
 	
 	/**
@@ -119,6 +118,9 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, ID
 				this.mbr_.extend(pt);
 			}
 		}
+
+		this.setUpperLeft(new Vertex(this.getMbr().getUpperLeft()));
+		this.setLowerRight(new Vertex(this.getMbr().getLowerRight()));
 	}
 
 	@JsonGetter("gridUUID")
@@ -421,13 +423,13 @@ public class SpatialTile extends AbstractSpatialGrid implements INodeCreator, ID
 	@JsonGetter("_id")
 	@DynamoDBAttribute(attributeName = "id")
 	@Override
-	public String getDocId() {
+	public long getDocId() {
 		return this.docId;
 	}
 
 	@JsonSetter("_id")
 	@Override
-	public void setDocId(String docId) {
+	public void setDocId(long docId) {
 		this.docId = docId;
 	}
 

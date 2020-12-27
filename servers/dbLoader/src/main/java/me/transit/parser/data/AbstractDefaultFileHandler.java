@@ -95,7 +95,7 @@ public abstract class AbstractDefaultFileHandler extends AbstractFileHandler {
 						GTFSFileModel model = GTFSFileModel.class.cast(annoation);
 						this.getProperties().put(model.filename(), cls);
 						Map<String, Method> clsmap = new HashMap<>();
-						for (Method mth : cls.getDeclaredMethods()) {
+						for (Method mth : cls.getMethods()) {
 							for (Annotation man : mth.getAnnotations()) {
 								if (man.annotationType() == GTFSSetter.class) {
 									GTFSSetter setter = GTFSSetter.class.cast(man);

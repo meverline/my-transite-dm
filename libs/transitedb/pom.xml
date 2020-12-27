@@ -33,6 +33,18 @@
 
 		<dependency>
 			<groupId>me.transite</groupId>
+			<artifactId>mongo.document.dao</artifactId>
+			<version>0.0.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>me.transite</groupId>
+			<artifactId>dynamoDBdbDcoDB</artifactId>
+			<version>0.0.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>me.transite</groupId>
 			<artifactId>dataMining</artifactId>
 			<version>0.0.5</version>
 		</dependency>
@@ -42,7 +54,13 @@
 			<artifactId>mathlib</artifactId>
 			<version>0.0.5</version>
 		</dependency>
-		
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.13.1</version>
+			<scope>test</scope>
+		</dependency>
+
 	</dependencies>
 
 </project>

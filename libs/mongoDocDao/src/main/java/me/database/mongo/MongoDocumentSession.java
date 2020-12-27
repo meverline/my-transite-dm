@@ -1,21 +1,5 @@
 package me.database.mongo;
 
-import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Consumer;
-
-import me.database.nsstore.AbstractDocument;
-import me.database.nsstore.IDocument;
-import me.database.nsstore.IDocumentSession;
-import me.transit.dao.query.translator.mongo.*;
-import me.transit.dao.query.tuple.*;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.bson.Document;
-
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
@@ -25,17 +9,32 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import me.database.nsstore.AbstractDocument;
+import me.database.nsstore.DocumentSession;
+import me.database.nsstore.IDocument;
+import me.transit.dao.query.translator.mongo.*;
+import me.transit.dao.query.tuple.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.bson.Document;
 
-public class MongoDocumentSession extends IDocumentSession {
+import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Consumer;
+
+public class MongoDocumentSession extends DocumentSession {
 
 	public final static String LOCALHOST = "localhost";
 
 	private Log log = LogFactory.getLog(MongoDocumentSession.class);
 	private final List<String> skipData = new ArrayList<String>();
-	private final MongoClient _connection;
-	private final MongoDatabase _transDoc;
 	private final Map<String, MongoCollection<Document>> collectionMap = new HashMap<>();
 	private final ObjectMapper mapper = new ObjectMapper();
+	private final MongoClient connection;
+	private final MongoDatabase transDoc;
 
 	/**
 	 *
@@ -43,24 +42,24 @@ public class MongoDocumentSession extends IDocumentSession {
 	 * @param properties
 	 * @throws UnknownHostException
 	 */
-	public MongoDocumentSession(MongoClient connection, Map<String,String> properties) throws UnknownHostException {
+	public MongoDocumentSession(MongoClient connection, Map<String,String> properties) {
 		this.addSkipField("_id");
 		this.addSkipField("@class");
 
 		if ( connection != null ) {
-			_connection = connection;
-		} else if ( properties.get(IDocumentSession.HOST).equals(LOCALHOST)) {
-			_connection = MongoClients.create();
+			this.connection = connection;
+		} else if ( properties.get(DocumentSession.HOST).equals(LOCALHOST)) {
+			this.connection = MongoClients.create();
 		} else {
 			StringBuilder url = new StringBuilder();
-			url.append(properties.get(IDocumentSession.HOST));
+			url.append(properties.get(DocumentSession.HOST));
 			url.append(":");
-			url.append(properties.get(IDocumentSession.PORT));
+			url.append(properties.get(DocumentSession.PORT));
 
-			_connection = MongoClients.create(url.toString());
+			this.connection = MongoClients.create(url.toString());
 		}
 
-		_transDoc = _connection.getDatabase( properties.get(IDocumentSession.DATABASE));
+		this.transDoc = this.connection.getDatabase( properties.get(DocumentSession.DATABASE));
 		mapper.setSerializationInclusion(Include.NON_NULL);
 	}
 
@@ -69,7 +68,7 @@ public class MongoDocumentSession extends IDocumentSession {
 	 * @param properties
 	 * @throws UnknownHostException
 	 */
-	public MongoDocumentSession(Map<String,String> properties) throws UnknownHostException {
+	public MongoDocumentSession(Map<String,String> properties) {
 		this(null, properties);
 	}
 
@@ -81,7 +80,7 @@ public class MongoDocumentSession extends IDocumentSession {
 	private MongoCollection<Document> getCollectoin(String collection) {
 
 		if (!collectionMap.containsKey(collection)) {
-			collectionMap.put(collection, _transDoc.getCollection(collection));
+			collectionMap.put(collection, this.transDoc.getCollection(collection));
 		}
 		return collectionMap.get(collection);
 	}
@@ -96,6 +95,21 @@ public class MongoDocumentSession extends IDocumentSession {
 				getCollectoin(collection).insertOne(this.toMongoObject(document));
 			} catch (Exception e) {
 				this.log.error("Unable to add " + document.getClass().getName() + ": " + e.getLocalizedMessage());
+				this.log.error(e);
+			}
+		}
+	}
+
+	@Override
+	public void update(IDocument document, String collection) {
+		if (document != null) {
+			try {
+				Document query = new Document();
+				IQueryTuple tuple = new NumberTuple("_id", document.getDocId(), NumberTuple.LOGIC.EQ);
+				this.translatorFactory(tuple).getDoucmentQuery(query);
+				getCollectoin(collection).updateOne(query, this.toMongoObject(document));
+			} catch (Exception e) {
+				this.log.error("Unable to update " + document.getClass().getName() + ": " + e.getLocalizedMessage());
 				this.log.error(e);
 			}
 		}
@@ -171,14 +185,14 @@ public class MongoDocumentSession extends IDocumentSession {
 	 * @see me.database.mongo.IDocumnetDao#find(java.util.List, java.lang.String)
 	 */
 	@Override
-	public List<AbstractDocument> find(List<IQueryTuple> tupleList, String collection) {
+	public List<IDocument> find(List<IQueryTuple> tupleList, String collection) {
 		Document query = new Document();
 
 		for (IQueryTuple tuple : tupleList) {
 			this.translatorFactory(tuple).getDoucmentQuery(query);
 		}
 
-		List<AbstractDocument> rtn = new ArrayList<>();
+		List<IDocument> rtn = new ArrayList<>();
 
 		getCollectoin(collection).find(query).forEach(new Consumer<Document>() {
 			@Override

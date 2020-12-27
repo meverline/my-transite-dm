@@ -1,6 +1,8 @@
 package me.config;
 
-import me.database.nsstore.IDocumentSession;
+import me.database.nsstore.DocumentSession;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
@@ -25,6 +27,8 @@ public class CommonConfigBase {
 	
     @Autowired
     private Environment env;
+
+	private Log log = LogFactory.getLog(CommonConfigBase.class);
     
 	/**
 	 * 
@@ -35,7 +39,7 @@ public class CommonConfigBase {
 				"me.transit.database",
 				"me.crime.database",
 				"me.math.grid.tiled",
-				"me.transit.parser.omd"
+				"me.transit.omd.data"
 		};
 		
 		return data;
@@ -84,38 +88,6 @@ public class CommonConfigBase {
 		hibernateProperties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
 		hibernateProperties.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
 		return hibernateProperties;
-	}
-
-	private Map<String, String> documentProperties()
-	{
-		final Map<String, String> properties = new HashMap<>();
-
-		properties.put(IDocumentSession.HOST, env.getProperty("nosql.document.store.host"));
-		properties.put(IDocumentSession.PORT, env.getProperty("nosql.document.store.port"));
-		properties.put(IDocumentSession.DATABASE, env.getProperty("nosql.document.store.database"));
-
-		return properties;
-	}
-
-	@Bean
-	@Scope("singleton")
-	public IDocumentSession documentDatabase() throws IllegalAccessException {
-
-		final String storeClass = env.getProperty("nosql.document.store.class");
-		if ( storeClass == null ) {
-			throw new IllegalAccessException("nosql.document.store.class is not specfied");
-		}
-
-		IDocumentSession rtn = null;
-		try {
-			Class<?>  cls = getClass().getClassLoader().loadClass(storeClass);
-			Constructor<?> constructors = cls.getConstructor(new Class[]{Map.class});
-			rtn = (IDocumentSession) constructors.newInstance(this.documentProperties());
-		} catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
-			throw  new IllegalArgumentException(storeClass + e.getLocalizedMessage());
-		}
-
-		return rtn;
 	}
 
 }

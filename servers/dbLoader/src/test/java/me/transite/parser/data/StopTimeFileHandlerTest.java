@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import me.transit.dao.RouteDocumentDao;
 import org.easymock.EasyMock;
 import org.easymock.EasyMockRule;
 import org.easymock.EasyMockSupport;
@@ -16,7 +17,7 @@ import org.easymock.MockType;
 import org.junit.Rule;
 import org.junit.Test;
 
-import me.database.nsstore.IDocumentSession;
+import me.database.nsstore.DocumentSession;
 import me.database.neo4j.IGraphDatabaseDAO;
 import me.transit.dao.RouteDao;
 import me.transit.dao.TransiteStopDao;
@@ -44,7 +45,7 @@ public class StopTimeFileHandlerTest extends EasyMockSupport {
 	private TransiteStopDao transiteStopDao;
 	
 	@Mock(MockType.NICE)
-	private IDocumentSession documentDao;
+	private RouteDocumentDao documentDao;
 	
 	@Mock(MockType.NICE)
 	private IGraphDatabaseDAO graphDatabase; 

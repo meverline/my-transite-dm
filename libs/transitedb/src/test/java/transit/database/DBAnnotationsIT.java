@@ -18,7 +18,7 @@ import me.transit.database.ServiceDate;
 import me.transit.database.TransitStop;
 import me.transit.database.Trip;
 
-public class DBTestAnnotations {
+public class DBAnnotationsIT {
 
 	/**
 	 * 
@@ -38,7 +38,9 @@ public class DBTestAnnotations {
 	 */
 	private SimpleDriverDataSource dataSource() {
 
-		return new SimpleDriverDataSource(new Driver(), "jdbc:postgresql://localhost:5432/Transit", "postgres",
+		return new SimpleDriverDataSource(new Driver(),
+				"jdbc:postgresql://localhost:5432/Transit",
+				"postgres",
 				"postgres");
 	}
 

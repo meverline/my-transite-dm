@@ -1,34 +1,19 @@
 package me.transit.database;
 
-import java.util.Calendar;
-import java.util.Objects;
-
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import me.transit.annotation.GTFSFileModel;
+import me.transit.annotation.GTFSSetter;
 import me.transit.json.CalendarJsonConvert;
 import me.transit.json.JsonToCalendarConvert;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
-import me.transit.annotation.GTFSFileModel;
-import me.transit.annotation.GTFSSetter;
+import javax.persistence.*;
+import java.util.Calendar;
+import java.util.Objects;
 
 @Entity(name = "CalendarDate")
 @Table(name = "tran_calendar_date")
@@ -36,7 +21,7 @@ import me.transit.annotation.GTFSSetter;
 @DiscriminatorValue("CalendarDate")
 @GTFSFileModel(filename="calendar_dates.txt")
 @JsonTypeInfo(use= JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
-public class CalendarDate implements TransitData {
+public class CalendarDate extends TransitData {
 	
 	public enum ExceptionType { UNKNOWN, ADD_SERVICE, REMOVE_SERVICE }
 
@@ -48,15 +33,8 @@ public class CalendarDate implements TransitData {
 	@GenericGenerator( name = "native", strategy = "native")
 	private long uuid = -1;
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "AGENCY_UUID", nullable = false, updatable = false)
-	private Agency agency = null;
-
 	@Column(name = "ID")
 	private String id = null;
-
-	@Column(name = "VERSION")
-	private String version = "0.5";
 
 	@Column(name = "DATE")
 	@Type(type = "java.util.Calendar")
@@ -65,8 +43,6 @@ public class CalendarDate implements TransitData {
 	@Column(name = "EXCCEPTOIN_TYPE")
 	@Enumerated(EnumType.STRING)
 	private ExceptionType exceptionType = ExceptionType.UNKNOWN;
-
-
 
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.CalendarDate#getUUID()
@@ -82,22 +58,6 @@ public class CalendarDate implements TransitData {
 	@JsonSetter("uuid")
 	public void setUUID(long uuid) {
 		this.uuid = uuid;
-	}
-
-	/* (non-Javadoc)
-	 * @see me.transit.database.impl.CalendarDate#getAgency()
-	 */
-	@JsonGetter("agency_name")
-	public Agency getAgency() {
-		return agency;
-	}
-
-	/* (non-Javadoc)
-	 * @see me.transit.database.impl.CalendarDate#setAgency(me.transit.database.impl.Agency)
-	 */
-	@JsonSetter("agency_name")
-	public void setAgency(Agency agency) {
-		this.agency = agency;
 	}
 
 	/* (non-Javadoc)
@@ -117,23 +77,6 @@ public class CalendarDate implements TransitData {
 		this.id = id;
 	}
 
-	/* (non-Javadoc)
-	 * @see me.transit.database.impl.CalendarDate#getVersion()
-	 */
-	@JsonGetter("version")
-	public String getVersion() {
-		return version;
-	}
-
-	/* (non-Javadoc)
-	 * @see me.transit.database.impl.CalendarDate#setVersion(java.lang.String)
-	 */
-	@GTFSSetter(column="version")
-	@JsonSetter("version")
-	public void setVersion(String version) {
-		this.version = version;
-	}
-	
 	/* (non-Javadoc)
 	 * @see me.transit.database.impl.CalendarDate#getDate()
 	 */
@@ -174,9 +117,9 @@ public class CalendarDate implements TransitData {
 	public String toString() {
 		return "CalendarDate{" +
 				"uuid=" + uuid +
-				", agency=" + agency +
+				", agency=" + getAgency() +
 				", id='" + id + '\'' +
-				", version='" + version + '\'' +
+				", version='" + getVersion() + '\'' +
 				", exceptionType=" + exceptionType +
 				", date=" + date.getTimeInMillis() +
 				'}';
@@ -196,15 +139,15 @@ public class CalendarDate implements TransitData {
 		if (o == null || getClass() != o.getClass()) return false;
 		CalendarDate that = (CalendarDate) o;
 		return uuid == that.uuid &&
-				Objects.equals(agency, that.agency) &&
+				Objects.equals(getAgency(), that.getAgency()) &&
 				Objects.equals(id, that.id) &&
-				Objects.equals(version, that.version) &&
+				Objects.equals(getVersion(), that.getVersion()) &&
 				Objects.equals(date.getTimeInMillis(), that.date.getTimeInMillis()) &&
 				exceptionType == that.exceptionType;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(uuid, agency, id, version, date, exceptionType);
+		return Objects.hash(uuid, getAgency(), id, getVersion(), date, exceptionType);
 	}
 }

@@ -41,8 +41,7 @@ import org.locationtech.jts.geom.Point;
 public class UniformSpatialGrid extends AbstractSpatialGrid implements INodeCreator {
 	
 	protected SpatialGridPoint[][] grid_ = null;
-	private Vertex upperLeft_ = null;
-	private Vertex lowerRight_ = null;
+
 	/**
 	 *
 	 * @param spacingInMeters
@@ -60,8 +59,8 @@ public class UniformSpatialGrid extends AbstractSpatialGrid implements INodeCrea
 	 */
 	public UniformSpatialGrid(Point ul, Point lr, double spacingInMeters) {
 		init(spacingInMeters);
-		setUpperLeft( new Vertex(ul.getX(), ul.getY()));
-		setLowerRight( new Vertex(lr.getX(), lr.getY()));
+		setUpperLeft( new Vertex(ul));
+		setLowerRight( new Vertex(lr));
 
 		createGrid(getUpperLeft(), getLowerRight());
 	}
@@ -251,55 +250,5 @@ public class UniformSpatialGrid extends AbstractSpatialGrid implements INodeCrea
 	public KDTree getTree() {
 		return new KDTree(this.getGridPoints(), this);
 	}
-
-	/**
-	 *
-	 * @return
-	 */
-	public Vertex getLowerRight() {
-		return lowerRight_;
-	}
-
-	/**
-	 *
-	 * @param lowerRight_
-	 */
-	public void setLowerRight(Vertex lowerRight_) {
-		this.lowerRight_ = lowerRight_;
-	}
-
-	/**
-	 *
-	 * @return
-	 */
-	public Vertex getUpperLeft() {
-		return upperLeft_;
-	}
-
-	/**
-	 * @param upperLeft_
-	 */
-	public void setUpperLeft(Vertex upperLeft_) {
-		this.upperLeft_ = upperLeft_;
-	}
-
-	/**
-	 *
-	 * @return
-	 */
-	public double getMaxLatitude()
-	{
-		return lowerRight_.getLatitudeDegress();
-	}
-
-	/**
-	 *
-	 * @return
-	 */
-	public double getMaxLongitude()
-	{
-		return lowerRight_.getLongitudeDegress();
-	}
-
 
 }

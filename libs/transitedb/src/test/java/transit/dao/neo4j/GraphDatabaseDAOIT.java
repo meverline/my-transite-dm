@@ -19,7 +19,7 @@ import me.transit.database.Route;
 import me.transit.database.RouteStopData;
 import me.transit.database.TransitStop;
 
-public class GraphDatabaseDAOTest {
+public class GraphDatabaseDAOIT {
 
 	@Ignore
 	@Test

@@ -1,7 +1,8 @@
 package me.math.grid.tiled;
 
 import me.database.nsstore.AbstractDocument;
-import me.database.nsstore.IDocumentSession;
+import me.database.nsstore.DocumentSession;
+import me.database.nsstore.IDocument;
 import me.math.grid.tiled.dao.TileFragmentDao;
 import me.transit.dao.query.tuple.IQueryTuple;
 import me.transit.dao.query.tuple.NumberTuple;
@@ -15,7 +16,7 @@ public class SptialTileCache {
 
 	private static final String INDEX = "index";
 
-	private final IDocumentSession documentDao;
+	private final DocumentSession documentDao;
 	private final TileFragmentDao tileFragmentDao;
 	private static SptialTileCache theOne = null;
 	
@@ -24,7 +25,7 @@ public class SptialTileCache {
 	 * @param documentDao
 	 * @param tileFragmentDao
 	 */
-	private SptialTileCache(IDocumentSession documentDao, TileFragmentDao tileFragmentDao) {
+	private SptialTileCache(DocumentSession documentDao, TileFragmentDao tileFragmentDao) {
 		this.documentDao = documentDao;
 		this.tileFragmentDao = tileFragmentDao;
 	}
@@ -34,7 +35,7 @@ public class SptialTileCache {
 	 * @param documentDao
 	 * @param tileFragmentDao
 	 */
-	public synchronized static void initilize(IDocumentSession documentDao, TileFragmentDao tileFragmentDao) {
+	public synchronized static void initilize(DocumentSession documentDao, TileFragmentDao tileFragmentDao) {
 		
 		if ( theOne == null ) {
 			theOne = new SptialTileCache(documentDao, tileFragmentDao);
@@ -63,7 +64,7 @@ public class SptialTileCache {
 		
 		list.add( new NumberTuple( SptialTileCache.INDEX, index, NumberTuple.LOGIC.EQ));
 		@SuppressWarnings("unused")
-		List<AbstractDocument> rtn = documentDao.find(list, tile.getHeatMapName());
+		List<IDocument> rtn = documentDao.find(list, tile.getHeatMapName());
 		
 		// TODO: convert the document from BJSON to object.
 		return null;

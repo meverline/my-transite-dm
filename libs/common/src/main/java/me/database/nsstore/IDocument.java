@@ -5,11 +5,11 @@ public interface IDocument {
 	/**
 	 * @return the docId
 	 */
-	String getDocId();
+	long getDocId();
 
 	/**
 	 * @param docId the docId to set
 	 */
-	void setDocId(String docId);
+	void setDocId(long docId);
 
 }

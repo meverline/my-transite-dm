@@ -2,7 +2,7 @@ package me.datamining.metric;
 
 import org.springframework.stereotype.Service;
 
-import me.database.nsstore.IDocumentSession;
+import me.database.nsstore.DocumentSession;
 import me.database.neo4j.IGraphDatabaseDAO;
 import me.transit.dao.RouteDao;
 
@@ -11,7 +11,7 @@ public class DaoProvider {
 	
 	private final RouteDao routeDao;
 	private final IGraphDatabaseDAO graphDatabase;
-	private final IDocumentSession documentDao;
+	private final DocumentSession documentDao;
 	
 	/**
 	 * 
@@ -19,7 +19,7 @@ public class DaoProvider {
 	 * @param graphDatabase
 	 * @param documentDao
 	 */
-	public DaoProvider(RouteDao routeDao, IGraphDatabaseDAO graphDatabase, IDocumentSession documentDao) {
+	public DaoProvider(RouteDao routeDao, IGraphDatabaseDAO graphDatabase, DocumentSession documentDao) {
 		this.routeDao = routeDao;
 		this.graphDatabase = graphDatabase;
 		this.documentDao = documentDao;
@@ -42,7 +42,7 @@ public class DaoProvider {
 	/**
 	 * @return the documentDao
 	 */
-	protected IDocumentSession getDocumentDao() {
+	protected DocumentSession getDocumentDao() {
 		return documentDao;
 	}
 	

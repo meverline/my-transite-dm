@@ -64,12 +64,10 @@ public class SpatialGridPoint implements INode {
 	 * 
 	 * @return
 	 */
-	@JsonIgnore
+	@JsonGetter("index")
 	public int getIndex() {
 		return index_;
 	}
-
-
 
 	/**
 	 * 
@@ -110,7 +108,7 @@ public class SpatialGridPoint implements INode {
 	/**
 	 * @param index_ the index_ to set
 	 */
-	@JsonIgnore
+	@JsonSetter("index")
 	protected void setIndex(int index_) {
 		this.index_ = index_;
 	}
@@ -169,7 +167,7 @@ public class SpatialGridPoint implements INode {
 	/**
 	 * @return the corner_
 	 */
-	@JsonIgnore
+	@JsonGetter("corner")
 	public Vertex getCorner() {
 		return corner_;
 	}
@@ -177,7 +175,7 @@ public class SpatialGridPoint implements INode {
 	/**
 	 * @param corner_ the corner_ to set
 	 */
-	@JsonIgnore
+	@JsonSetter("corner")
 	public void setCorner(Vertex corner_) {
 		this.corner_ = corner_;
 	}

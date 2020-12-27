@@ -12,6 +12,7 @@
         <java.version>1.8</java.version>
         <spring.version>5.2.0.RELEASE</spring.version>
         <cglib.version>2.2.2</cglib.version>
+        <skip.integration.tests>false</skip.integration.tests>
     </properties>
 
     <build>
@@ -26,6 +27,26 @@
                     <target>1.8</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>3.0.0-M5</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                        <configuration>
+                            <includes>
+                                <include>**/*IT.java</include>
+                            </includes>
+                            <skipTests>${skip.integration.tests}</skipTests>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
 
         </plugins>
@@ -66,7 +87,6 @@
     <modules>
         <module>libs</module>
         <module>servers</module>
-        <module>libs/dynamoDBdbDcoDB</module>
     </modules>
 
 </project>

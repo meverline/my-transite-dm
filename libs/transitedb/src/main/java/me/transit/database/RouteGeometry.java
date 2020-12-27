@@ -35,7 +35,7 @@ import java.util.Objects;
 @DiscriminatorValue("RouteGeometry")
 @JsonTypeInfo(use= JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
 @JsonFilter("agencyFilter")
-public class RouteGeometry implements TransitData {
+public class RouteGeometry extends TransitData {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -45,16 +45,9 @@ public class RouteGeometry implements TransitData {
 	@GenericGenerator( name = "native", strategy = "native")
 	private long uuid = -1;
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "AGENCY_UUID", nullable = false, updatable = false)
-	private Agency agency = null;
-
 	@Column(name = "ID", nullable = false)
 	private String id = null;
 
-	@Column(name = "VERSION")
-	private String version = "0.5";
-	
 	@Column(name="SHAPE", columnDefinition = "Geometry")
 	@Type(type="jts_geometry")
 	private Geometry shape = null;
@@ -76,22 +69,6 @@ public class RouteGeometry implements TransitData {
 	}
 
 	/* (non-Javadoc)
-	 * @see me.transit.database.impl.RouteGeometry#getAgency()
-	 */
-	@JsonGetter("agency_name")
-	public Agency getAgency() {
-		return agency;
-	}
-
-	/* (non-Javadoc)
-	 * @see me.transit.database.impl.RouteGeometry#setAgency(me.transit.database.impl.Agency)
-	 */
-	@JsonSetter("agency_name")
-	public void setAgency(Agency agency) {
-		this.agency = agency;
-	}
-	
-	/* (non-Javadoc)
 	 * @see me.transit.database.impl.RouteGeometry#getId()
 	 */
 	@JsonGetter("route_id")
@@ -106,23 +83,6 @@ public class RouteGeometry implements TransitData {
 	@JsonSetter("route_id")
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	/* (non-Javadoc)
-	 * @see me.transit.database.impl.RouteGeometry#getVersion()
-	 */
-	@JsonGetter("version")
-	public String getVersion() {
-		return version;
-	}
-
-	/* (non-Javadoc)
-	 * @see me.transit.database.impl.RouteGeometry#setVersion(java.lang.String)
-	 */
-	@GTFSSetter(column="version")
-	@JsonSetter("version")
-	public void setVersion(String version) {
-		this.version = version;
 	}
 
 	/* (non-Javadoc)
@@ -148,9 +108,9 @@ public class RouteGeometry implements TransitData {
 	public String toString() {
 		return "RouteGeometry{" +
 				"uuid=" + uuid +
-				", agency=" + agency +
+				", agency=" + getAgency() +
 				", id='" + id + '\'' +
-				", version='" + version + '\'' +
+				", version='" + getVersion() + '\'' +
 				", shape=" + shape +
 				'}';
 	}
@@ -173,14 +133,14 @@ public class RouteGeometry implements TransitData {
 		if (o == null || getClass() != o.getClass()) return false;
 		RouteGeometry that = (RouteGeometry) o;
 		return uuid == that.uuid &&
-				Objects.equals(agency, that.agency) &&
+				Objects.equals(getAgency(), that.getAgency()) &&
 				Objects.equals(id, that.id) &&
-				Objects.equals(version, that.version) &&
+				Objects.equals(getVersion(), that.getVersion()) &&
 				Objects.equals(shape, that.shape);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(uuid, agency, id, version, shape);
+		return Objects.hash(uuid, getAgency(), id, getVersion(), shape);
 	}
 }

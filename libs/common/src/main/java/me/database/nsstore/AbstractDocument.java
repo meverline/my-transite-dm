@@ -5,14 +5,14 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 
 public abstract class AbstractDocument implements IDocument {
     
-    private String docId = null;
+    private long docId = -1;
      
 	/**
 	 * @return the docId
 	 */
     @Override
 	@JsonGetter("_id")
-	public String getDocId() {
+	public long getDocId() {
 		return docId;
 	}
 	/**
@@ -20,7 +20,7 @@ public abstract class AbstractDocument implements IDocument {
 	 */
     @Override
 	@JsonSetter("_id")
-	public void setDocId(String docId) {
+	public void setDocId(long docId) {
 		this.docId = docId;
 	}
 

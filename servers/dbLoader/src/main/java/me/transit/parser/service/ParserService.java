@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 import java.util.Objects;
 
-public class ParserService extends AbstractGTFSParser {
+public class  ParserService extends AbstractGTFSParser {
 
     private final AmazonSQS sqs = AmazonSQSClientBuilder.defaultClient();
     private final String url;

@@ -38,11 +38,6 @@
 
 		<dependency>
 			<groupId>me.transite</groupId>
-			<artifactId>openMobilithyData</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>me.transite</groupId>
 			<artifactId>mongo.document.dao</artifactId>
 			<version>0.0.5</version>
 		</dependency>
@@ -63,6 +58,18 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongodb-driver</artifactId>
+			<version>3.12.7</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongodb-driver-core</artifactId>
+			<version>3.12.7</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -71,7 +78,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<mainClass>me.transite.parser.TransitFeedParser</mainClass>
+					<mainClass>me.transit.parser.TransitFeedParser</mainClass>
 				</configuration>
 				<executions>
 					<execution>

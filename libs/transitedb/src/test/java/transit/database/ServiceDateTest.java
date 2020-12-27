@@ -39,7 +39,6 @@ public class ServiceDateTest extends AbstractDatabaseTest {
 		object.setId("id");
 		object.setService(ServiceDate.ServiceDays.WEEKDAY_SERVICE);
 		object.setUUID(500L);
-		object.setDocId("id");
 		object.setServiceDayFlag(10);
 
 		FilterProvider filters = new SimpleFilterProvider()
