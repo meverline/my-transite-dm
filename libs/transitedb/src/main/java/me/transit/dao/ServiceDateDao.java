@@ -8,14 +8,16 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
 import me.transit.database.ServiceDate;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository(value="serviceDateDao")
 @Scope("singleton")
+@Transactional
 public class ServiceDateDao extends TransitDao<ServiceDate>  {
 
 	/**
 	 * 
-	 * @param aConnection
+	 * @param aSessionFactory
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */

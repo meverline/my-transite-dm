@@ -16,6 +16,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.transaction.annotation.Transactional;
 
 public abstract class AbstractHibernateDao<T extends Serializable> {
 
@@ -25,7 +26,6 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 	private final Class<?> daoClass;
 	
 	protected AbstractHibernateDao(Class<?> aClass, SessionFactory aSessionFactory) throws SQLException, ClassNotFoundException {
-		
 		daoClass = Objects.requireNonNull(aClass, "aClass cannot be null");
 		sessionFactory = Objects.requireNonNull(aSessionFactory, "aSessionFactory cannot be null");
 	}
@@ -56,13 +56,9 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 	 * @return the connection
 	 */
 	protected Session getSession() {
-		try {
-			return this.getSessionFactory().getCurrentSession();
-		} catch ( Exception e) {
-			return this.getSessionFactory().openSession();
-		}
+		return this.getSessionFactory().getCurrentSession();
 	}
-	
+
 	/**
 	 * @return the daoClass
 	 */
@@ -76,17 +72,15 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 	 * @param item
 	 * @throws SQLException
 	 */
+	@Transactional
 	public synchronized T save(T item) throws SQLException {
 			
 		Transaction tx = null;
 
 		try (Session session = this.getSession()) {
-			tx = session.beginTransaction();
 			session.saveOrUpdate(item);
-			tx.commit();
 		} catch (Exception ex) {
 			log.error(ex);
-			tx.rollback();
 			throw new SQLException(ex.getLocalizedMessage());
 		}
 		return item;
@@ -97,9 +91,9 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 	 * @param uuid
 	 * @throws SQLException
 	 */
+	@Transactional
 	public synchronized void delete(long uuid) throws SQLException {
-		
-		Transaction tx = null;
+
 		try (Session session = this.getSession()) {
 
 			CriteriaBuilder builder = session.getCriteriaBuilder();
@@ -111,18 +105,14 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 					builder.equal(root.get("UUID"), uuid)
 			);
 
-			tx = session.beginTransaction();
 			@SuppressWarnings("unchecked")
 			T result = (T) session.createQuery(crit).getSingleResult();
 			session.remove(result);
-			tx.commit();
 
 		} catch (NoResultException ex) {
 			log.warn("unable to delete uuid: " + Long.toString(uuid));
-			tx.rollback();
 		} catch (HibernateException ex) {
 			log.error(ex.getLocalizedMessage(), ex);
-			tx.rollback();
 		}
 	}
 	
@@ -202,6 +192,7 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 	 * @param aClass
 	 * @return
 	 */
+	@Transactional(readOnly = true)
 	public  T loadByUUID(Long id, @SuppressWarnings("rawtypes") Class aClass) {
 		T rtn = null;
 

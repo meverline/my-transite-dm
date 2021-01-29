@@ -8,14 +8,16 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
 import me.transit.database.RouteGeometry;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository(value="routeGeometryDao")
 @Scope("singleton")
+@Transactional
 public class RouteGeometryDao extends TransitDao<RouteGeometry>  {
 
 	/**
 	 * 
-	 * @param aConnection
+	 * @param aSessionFactory
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
@@ -23,7 +25,8 @@ public class RouteGeometryDao extends TransitDao<RouteGeometry>  {
 	public RouteGeometryDao(SessionFactory aSessionFactory) throws SQLException, ClassNotFoundException {
 		super(RouteGeometry.class, aSessionFactory);
 	}
-	
+
+	@Transactional(readOnly = true)
 	public RouteGeometry findGeometryById(String id, String agencyName) throws DaoException
 	{
 		return this.loadById(id, agencyName);

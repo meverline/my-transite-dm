@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -29,14 +30,17 @@ public class LocationDao extends AbstractHibernateDao<Location> {
         super(Location.class, aSessionFactory);
     }
 
+    @Transactional(readOnly = true)
     public synchronized Location findById(int id) {
         return this.loadByField(id, "id");
     }
 
+    @Transactional(readOnly = true)
     public synchronized Location findByTitle(String title) {
         return this.loadByField(title, "title");
     }
 
+    @Transactional(readOnly = true)
     public List<Location> list()
     {
         List<Location> rtn = null;

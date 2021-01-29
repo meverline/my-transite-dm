@@ -8,9 +8,11 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
 import me.transit.database.CalendarDate;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository(value="calendarDateDao")
 @Scope("singleton")
+@Transactional
 public class CalendarDateDao extends TransitDao<CalendarDate> {
 
 	/**

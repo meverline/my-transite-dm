@@ -8,8 +8,10 @@ import org.springframework.stereotype.Repository;
 
 import me.database.hibernate.AbstractHibernateDao;
 import me.math.grid.tiled.TileFragament;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository(value="tileFragmentDao")
+@Transactional
 public class TileFragmentDao extends AbstractHibernateDao<TileFragament> {
 
 	/**

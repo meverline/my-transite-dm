@@ -25,6 +25,7 @@ import me.transit.database.Route;
 @Repository(value="routeDao")
 @SuppressWarnings("deprecation")
 @Scope("singleton")
+@Transactional
 public class RouteDao extends TransitDao<Route>  {
 
 	/**
@@ -43,12 +44,10 @@ public class RouteDao extends TransitDao<Route>  {
 	@Transactional(propagation=Propagation.NOT_SUPPORTED)
 	public List<Route> findByRouteNumber(String routeNumber, String agencyName) throws DaoException
 	{
-		List<Route> rtn = new ArrayList<Route>();
-		Session session = null;
-		
-		try {
+		List<Route> rtn;
 
-			session = getSession();
+		try (Session session = getSession()) {
+
 			CriteriaBuilder builder = session.getCriteriaBuilder();
 			CriteriaQuery<Route> crit = builder.createQuery(Route.class);
 			
@@ -64,8 +63,6 @@ public class RouteDao extends TransitDao<Route>  {
 		} catch (HibernateException ex) {
 			getLog().error(ex.getLocalizedMessage(), ex);
 			throw new DaoException("Route: " + routeNumber + " Agency: " + agencyName, ex);
-		} finally {
-			if ( session != null ) { session.close(); }
 		}
 
 		return rtn;

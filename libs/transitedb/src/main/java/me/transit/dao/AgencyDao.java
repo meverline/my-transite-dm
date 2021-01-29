@@ -18,9 +18,11 @@ import org.springframework.stereotype.Repository;
 
 import me.database.hibernate.AbstractHibernateDao;
 import me.transit.database.Agency;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository(value="agencyDao")
 @Scope("singleton")
+@Transactional
 public class AgencyDao extends AbstractHibernateDao<Agency> {
 	
 	/**
@@ -47,12 +49,11 @@ public class AgencyDao extends AbstractHibernateDao<Agency> {
 	 * @param id
 	 * @return
 	 */
+	@Transactional(readOnly = true)
 	public synchronized List<Agency> findAllByName(String id) {
 		List<Agency> aList = null;
-		Session session = null;
-		try {
+		try (Session session = getSession()) {
 
-			session = getSession();
 			CriteriaBuilder builder = session.getCriteriaBuilder();
 			CriteriaQuery<Agency> crit = builder.createQuery(Agency.class);
 			
@@ -66,10 +67,7 @@ public class AgencyDao extends AbstractHibernateDao<Agency> {
 			
 		} catch (HibernateException ex) {
 			getLog().error(ex.getLocalizedMessage(), ex);
-		} finally {
-			if ( session != null ) { session.close(); }
 		}
-
 		return aList;
 	}
 	
@@ -78,12 +76,12 @@ public class AgencyDao extends AbstractHibernateDao<Agency> {
 	 * @param id
 	 * @return
 	 */
+	@Transactional(readOnly = true)
 	public synchronized Agency loadById(String id) {
 	    Agency rtn = null;
-	    Session session = null;
-		try {
 
-			session = getSession();
+		try (Session session = getSession()) {
+
 			CriteriaBuilder builder = session.getCriteriaBuilder();
 			CriteriaQuery<Agency> crit = builder.createQuery(Agency.class);
 			
@@ -99,8 +97,6 @@ public class AgencyDao extends AbstractHibernateDao<Agency> {
 			rtn = null;
 		} catch (HibernateException ex) {
 			getLog().error(ex.getLocalizedMessage(), ex);
-		} finally {
-			if ( session != null ) { session.close(); }
 		}
 
 		return rtn;
@@ -110,13 +106,12 @@ public class AgencyDao extends AbstractHibernateDao<Agency> {
 	 * 
 	 * @return
 	 */
+	@Transactional(readOnly = true)
 	public List<Agency> list()
 	{
 		List<Agency> rtn = null;
-		Session session = null;
-		try {
+		try (Session session = getSession()) {
 
-			session = getSession();
 			CriteriaBuilder builder = session.getCriteriaBuilder();
 			CriteriaQuery<Agency> crit = builder.createQuery(Agency.class);
 			
@@ -127,8 +122,6 @@ public class AgencyDao extends AbstractHibernateDao<Agency> {
 			
 		} catch (HibernateException ex) {
 			getLog().error(ex.getLocalizedMessage(), ex);
-		} finally {
-			if ( session != null ) { session.close(); }
 		}
 
 		return rtn;

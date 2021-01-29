@@ -17,9 +17,11 @@ import org.springframework.stereotype.Repository;
 
 import me.transit.dao.query.StopQueryConstraint;
 import me.transit.database.TransitStop;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository(value="transiteStopDao")
 @Scope("singleton")
+@Transactional
 public class TransiteStopDao extends TransitDao<TransitStop> {
 		
 	@Autowired
@@ -30,14 +32,13 @@ public class TransiteStopDao extends TransitDao<TransitStop> {
 	/* (non-Javadoc)
 	 * @see me.transit.dao.impl.TrasiteStopDao#query(me.transit.dao.query.StopQueryConstraint)
 	 */
+	@Transactional(readOnly = true)
 	public List<TransitStop> query(StopQueryConstraint constraint) 
 	{
-		List<TransitStop> rtn = new ArrayList<TransitStop>();
-		Session session = null;
-		 
-		try {
+		List<TransitStop> rtn = new ArrayList<>();
 
-		    session = getSession();
+		try (Session session = getSession()){
+
 			CriteriaBuilder builder = session.getCriteriaBuilder();
 			CriteriaQuery<TransitStop> crit = builder.createQuery(TransitStop.class);
 			
@@ -47,8 +48,6 @@ public class TransiteStopDao extends TransitDao<TransitStop> {
 			
 		} catch (HibernateException ex) {
 			getLog().error(ex.getLocalizedMessage(), ex);
-		} finally {
-			if ( session != null ) { session.close(); }
 		}
 
 		return rtn;
@@ -57,13 +56,13 @@ public class TransiteStopDao extends TransitDao<TransitStop> {
 	/* (non-Javadoc)
 	 * @see me.transit.dao.impl.TrasiteStopDao#query(int)
 	 */
+	@Transactional(readOnly = true)
 	public List<TransitStop> query(int stopId) 
 	{
-		List<TransitStop> rtn = new ArrayList<TransitStop>();
-		Session session = null;
-		try {
+		List<TransitStop> rtn = new ArrayList<>();
 
-			session = getSession();
+		try (Session session = getSession()) {
+
 			CriteriaBuilder builder = session.getCriteriaBuilder();
 			CriteriaQuery<TransitStop> crit = builder.createQuery(TransitStop.class);
 			
@@ -77,10 +76,7 @@ public class TransiteStopDao extends TransitDao<TransitStop> {
 			
 		} catch (HibernateException ex) {
 			getLog().error(ex.getLocalizedMessage(), ex);
-		} finally {
-			if ( session != null ) { session.close(); }
 		}
-
 
 		return rtn;
 	}

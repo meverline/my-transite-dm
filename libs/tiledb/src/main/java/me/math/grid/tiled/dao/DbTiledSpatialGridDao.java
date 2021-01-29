@@ -21,6 +21,7 @@ import me.math.grid.tiled.DbTiledSpatialGrid;
 
 @Repository(value="dbTiledSpatialGridDao")
 @Qualifier("dbTiledSpatialGridDao")
+@Transactional
 public class DbTiledSpatialGridDao extends AbstractHibernateDao<DbTiledSpatialGrid> {
 
 	/**
@@ -43,9 +44,8 @@ public class DbTiledSpatialGridDao extends AbstractHibernateDao<DbTiledSpatialGr
 	public DbTiledSpatialGrid loadByName(String id) {
 
 		DbTiledSpatialGrid rtn = null; 
-		try {
+		try (Session session = getSession()){
 
-			Session session = getSession();
 			CriteriaBuilder builder = session.getCriteriaBuilder();
 			CriteriaQuery<?> crit = builder.createQuery(this.getDaoClass());
 			

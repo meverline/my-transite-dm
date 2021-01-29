@@ -14,6 +14,7 @@ import org.hibernate.SessionFactory;
 import me.database.hibernate.AbstractHibernateDao;
 import me.transit.database.Agency;
 import me.transit.database.TransitData;
+import org.springframework.transaction.annotation.Transactional;
 
 public abstract class TransitDao<T extends TransitData> extends AbstractHibernateDao<T> {
 
@@ -31,6 +32,7 @@ public abstract class TransitDao<T extends TransitData> extends AbstractHibernat
 	/* (non-Javadoc)
 	 * @see me.transit.dao.impl.TransitDao#deleteByAgency(me.transit.database.Agency)
 	 */
+	@Transactional(readOnly = true)
 	public synchronized void deleteByAgency(Agency agency) throws SQLException {
 		List<Long> array = this.findByAgency(agency);
 		this.delete(array);
@@ -39,14 +41,13 @@ public abstract class TransitDao<T extends TransitData> extends AbstractHibernat
 	/* (non-Javadoc)
 	 * @see me.transit.dao.impl.TransitDao#findByAgency(me.transit.database.Agency)
 	 */
+	@Transactional(readOnly = true)
 	public  List<Long> findByAgency(Agency agency) throws SQLException {
-		
-		Session session = null;
+
 		List<Long> alist = null;
 		
-		try {
+		try (Session session = getSession()) {
 
-			session = getSession();
 			CriteriaBuilder builder = session.getCriteriaBuilder();
 			CriteriaQuery<Long> crit = builder.createQuery(Long.class);
 			
@@ -61,10 +62,7 @@ public abstract class TransitDao<T extends TransitData> extends AbstractHibernat
 		
 		} catch (HibernateException ex) {
 			getLog().error(ex.getLocalizedMessage(), ex);
-		} finally {
-			if ( session != null ) { session.close(); }
 		}
-
 		return alist;
 	}
 	
@@ -79,14 +77,13 @@ public abstract class TransitDao<T extends TransitData> extends AbstractHibernat
 	 * @see me.transit.dao.impl.TransitDao#loadById(long, java.lang.String)
 	 */
 	@SuppressWarnings("unchecked")
+	@Transactional(readOnly = true)
 	public T loadById(String id, String agencyName) {
-		
-		Session session = null;
+
 		T rtn = null;
 		
-		try {
+		try (Session session = getSession()){
 
-			session = getSession();
 			CriteriaBuilder builder = session.getCriteriaBuilder();
 			CriteriaQuery<?> crit = builder.createQuery(this.getDaoClass());
 			
@@ -111,8 +108,6 @@ public abstract class TransitDao<T extends TransitData> extends AbstractHibernat
 						   " " + agencyName +
 						   " " + ex.getClass().getName() +
 						   " " + ex.getLocalizedMessage());
-		} finally {
-			if ( session != null ) { session.close(); }
 		}
 
 		return rtn;

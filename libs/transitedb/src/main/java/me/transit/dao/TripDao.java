@@ -9,14 +9,16 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
 import me.transit.database.Trip;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository(value="tripDao")
 @Scope("singleton")
+@Transactional
 public class TripDao extends TransitDao<Trip>  {
 
 	/**
 	 * 
-	 * @param aConnection
+	 * @param aSessionFactory
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
