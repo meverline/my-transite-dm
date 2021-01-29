@@ -9,9 +9,10 @@
     <packaging>war</packaging>
 
     <parent>
-        <groupId>me.transite</groupId>
         <artifactId>web</artifactId>
-        <version>0.0.5</version>
+        <groupId>me.transite.servers</groupId>
+        <version>1.0.0</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <name>heatmapWeb</name>
@@ -60,11 +61,6 @@
         <dependency>
             <groupId>me.transite</groupId>
             <artifactId>message</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>me.transite</groupId>
-            <artifactId>openMobilithyData</artifactId>
         </dependency>
 
         <dependency>

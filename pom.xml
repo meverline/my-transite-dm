@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>me.transite</groupId>
     <artifactId>agregator</artifactId>
-    <version>0.0.5</version>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
 
     <properties>

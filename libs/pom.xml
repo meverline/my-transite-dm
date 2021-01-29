@@ -9,8 +9,8 @@
     <parent>
         <groupId>me.transite</groupId>
         <artifactId>agregator</artifactId>
-        <version>0.0.5</version>
-        <relativePath/>
+        <version>1.0.0</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <build>

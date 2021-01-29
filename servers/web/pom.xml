@@ -5,12 +5,12 @@
     <parent>
         <artifactId>servers</artifactId>
         <groupId>me.transite</groupId>
-        <version>0.0.5</version>
-        <relativePath/>
+        <version>1.0.0</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-
+    <groupId>me.transite.servers</groupId>
     <artifactId>web</artifactId>
     <packaging>pom</packaging>
 

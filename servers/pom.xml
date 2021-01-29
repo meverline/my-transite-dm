@@ -3,8 +3,10 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	<groupId>me.transite</groupId>
 	<artifactId>servers</artifactId>
 	<packaging>pom</packaging>
+	<version>1.0.0</version>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -18,7 +20,8 @@
 		<spring.version>5.2.0.RELEASE</spring.version>
 		<spring.boot.version>2.3.3.RELEASE</spring.boot.version>
 		<spring.boot.starter.version>2.3.3.RELEASE</spring.boot.starter.version>
-		<me.transite.version>0.0.5</me.transite.version>
+		<me.transite.version>1.0.0</me.transite.version>
+		<cglib.version>2.2.2</cglib.version>
 	</properties>
 
 	<build>
@@ -72,12 +75,6 @@
 			<dependency>
 				<groupId>me.transite</groupId>
 				<artifactId>message</artifactId>
-				<version>${me.transite.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>me.transite</groupId>
-				<artifactId>openMobilithyData</artifactId>
 				<version>${me.transite.version}</version>
 			</dependency>
 
