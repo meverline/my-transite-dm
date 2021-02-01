@@ -2,6 +2,7 @@ package me.config;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -9,7 +10,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -62,7 +62,7 @@ public class CommonConfigBase {
 	@Bean
 	public LocalSessionFactoryBean sessionFactory() {
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-		sessionFactory.setDataSource(dataSource());
+		sessionFactory.setDataSource(this.dataSource());
 		sessionFactory.setPackagesToScan(this.packageToScan());
 		sessionFactory.setHibernateProperties(this.hibernateProperties());
 		return sessionFactory;
@@ -74,7 +74,7 @@ public class CommonConfigBase {
 	 */
 	@Bean
 	public DataSource dataSource() {
-		final DriverManagerDataSource dataSource = new DriverManagerDataSource();
+		final BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setDriverClassName("org.postgresql.Driver");
 		dataSource.setUrl(getEnv().getProperty("database.jdbc.connection"));
 		dataSource.setUsername(getEnv().getProperty("database.username"));

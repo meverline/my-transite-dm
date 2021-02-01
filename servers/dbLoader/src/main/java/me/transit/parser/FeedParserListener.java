@@ -12,20 +12,25 @@ public class FeedParserListener implements ApplicationListener<ApplicationReadyE
 
 
     private final AbstractGTFSParser registry;
+    private final boolean isService;
 
-    @Autowired
-    public FeedParserListener(AbstractGTFSParser parserService) {
+    public FeedParserListener(AbstractGTFSParser parserService, boolean isService) {
         this.registry = parserService;
+        this.isService = isService;
     }
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
-        registry.start();
+        if ( this.isService ) {
+            registry.start();
+        }
     }
 
     @PreDestroy
     public void destroy() {
-        registry.stop();
+        if ( this.isService ) {
+            registry.stop();
+        }
     }
 
 }

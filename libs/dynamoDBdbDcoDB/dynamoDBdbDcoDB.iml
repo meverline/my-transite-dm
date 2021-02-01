@@ -66,6 +66,8 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-tx:5.2.0.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.data:spring-data-commons:2.2.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.26" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.tomcat:tomcat-dbcp:9.0.41" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.tomcat:tomcat-juli:9.0.41" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.amazonaws:aws-java-sdk-dynamodb:1.11.897" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.amazonaws:aws-java-sdk-s3:1.11.897" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.amazonaws:aws-java-sdk-kms:1.11.897" level="project" />

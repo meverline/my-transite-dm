@@ -17,9 +17,11 @@ import me.transit.parser.service.LocalParser;
 import me.transit.parser.service.ParserService;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @Import(TransitDatabaseConfig.class)
+@EnableTransactionManagement
 @PropertySource("classpath:application.properties")
 public class ParserConfig {
 
@@ -41,8 +43,9 @@ public class ParserConfig {
 										   LocationDao locationDao,
 										   Blackboard blackboard,
 										   IGraphDatabaseDAO graphDatabase) {
+		Boolean isService = env.getProperty("dbLoader.isService", Boolean.class);
 		return new FeedParserListener(this.parserService(fileHandlerFactory,
-				locationDao, blackboard, graphDatabase));
+				locationDao, blackboard, graphDatabase), isService);
 	}
 	
 	@Bean(value="localParser")
