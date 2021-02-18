@@ -49,8 +49,7 @@ public class LoadURCCatagories {
 			 log_.error("unable to find me/crime/loader/CrimeData.txt");
 		} else {
 
-			try {
-				BufferedReader bf = new BufferedReader(new InputStreamReader(s));
+			try (BufferedReader bf = new BufferedReader(new InputStreamReader(s))){
 
 				while (bf.ready()) {
 					String word = bf.readLine().trim().toUpperCase();
@@ -74,7 +73,6 @@ public class LoadURCCatagories {
 					}
 
 				}
-				bf.close();
 
 			} catch (IOException e) {
 				log_.error(e.getLocalizedMessage(), e);

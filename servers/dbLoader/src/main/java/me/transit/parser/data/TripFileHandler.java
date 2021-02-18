@@ -61,18 +61,17 @@ public class TripFileHandler extends AbstractFileHandler {
 		Set<String> invalidService = new HashSet<>();
 
 		getBlackboard().getRouteShortName().clear();
-		try {
 
-			File fp = new File(shapeFile);
-			if (!fp.exists()) {
-				getBlackboard().getTripMap().clear();
-				log.error("file does not exist: " + shapeFile);
-				return rtn;
-			}
+		File fp = new File(shapeFile);
+		if (!fp.exists()) {
+			getBlackboard().getTripMap().clear();
+			log.error("file does not exist: " + shapeFile);
+			return rtn;
+		}
 
-			BufferedReader inStream = new BufferedReader(new FileReader(shapeFile));
+		try (BufferedReader inStream = new BufferedReader(new FileReader(shapeFile))){
+			;
 			if (!inStream.ready()) {
-				inStream.close();
 				getBlackboard().getTripMap().clear();
 				log.error("file is empty: " + shapeFile);
 				return rtn;
@@ -156,7 +155,6 @@ public class TripFileHandler extends AbstractFileHandler {
 					log.error(ex.getLocalizedMessage() + " : " + line + " : " + indexMap.toString());
 				}
 			}
-			inStream.close();
 
 			for (Entry<String, List<Trip>> data : routeToTrips.entrySet()) {
 
@@ -171,7 +169,6 @@ public class TripFileHandler extends AbstractFileHandler {
 				
 				routeDao.save(route);
 				getBlackboard().getRouteShortName().put(data.getKey(), route.getShortName());
-				
 			}
 			
 			rtn = true;

@@ -92,17 +92,16 @@ public class ShapeFileHandler extends AbstractFileHandler {
 	@Override
 	public boolean parse(String shapeFile) throws Exception{
 		boolean rtn = false;
-		try {
 
-			File fp = new File(shapeFile);
-			if (!fp.exists()) {
-				log.error("file does not exist: " + shapeFile);
-				return rtn;
-			}
+		File fp = new File(shapeFile);
+		if (!fp.exists()) {
+			log.error("file does not exist: " + shapeFile);
+			return rtn;
+		}
 
-			BufferedReader inStream = new BufferedReader(new FileReader(shapeFile));
+		try (BufferedReader inStream = new BufferedReader(new FileReader(shapeFile))) {
+
 			if (!inStream.ready()) {
-				inStream.close();
 				log.error("file is empty: " + shapeFile);
 				return rtn;
 			}
@@ -133,7 +132,6 @@ public class ShapeFileHandler extends AbstractFileHandler {
 				coords.add(new Coordinate(lat, lon));
 			}
 			saveShape(current, coords);
-			inStream.close();
 
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage(), e);

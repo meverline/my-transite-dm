@@ -44,8 +44,8 @@ public class LocationDao extends AbstractHibernateDao<Location> {
     public List<Location> list()
     {
         List<Location> rtn = null;
-        try (Session session = getSession()) {
-
+        try  {
+            Session session = getSession();
             CriteriaBuilder builder = session.getCriteriaBuilder();
             CriteriaQuery<Location> crit = builder.createQuery(Location.class);
 

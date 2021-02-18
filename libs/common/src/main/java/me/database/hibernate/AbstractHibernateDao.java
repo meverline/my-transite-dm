@@ -74,11 +74,9 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 	 */
 	@Transactional
 	public synchronized T save(T item) throws SQLException {
-			
-		Transaction tx = null;
 
-		try (Session session = this.getSession()) {
-			session.saveOrUpdate(item);
+		try {
+			this.getSession().saveOrUpdate(item);
 		} catch (Exception ex) {
 			log.error(ex);
 			throw new SQLException(ex.getLocalizedMessage());
@@ -93,9 +91,8 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 	 */
 	@Transactional
 	public synchronized void delete(long uuid) throws SQLException {
-
-		try (Session session = this.getSession()) {
-
+		try {
+			Session session = this.getSession();
 			CriteriaBuilder builder = session.getCriteriaBuilder();
 			CriteriaQuery<?> crit = builder.createQuery(this.getDaoClass());
 
@@ -134,8 +131,8 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 	 */
 	protected T loadByField(String id, String property) {
 		T rtn = null;
-		try (Session session = getSession()) {
-
+		try  {
+			Session session = getSession();
 			CriteriaBuilder builder = session.getCriteriaBuilder();
 			CriteriaQuery<?> crit = builder.createQuery(this.getDaoClass());
 
@@ -161,8 +158,8 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 
 	protected T loadByField(int id, String property) {
 		T rtn = null;
-		try (Session session = getSession()) {
-
+		try {
+			Session session = getSession();
 			CriteriaBuilder builder = session.getCriteriaBuilder();
 			CriteriaQuery<?> crit = builder.createQuery(this.getDaoClass());
 
@@ -196,8 +193,8 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 	public  T loadByUUID(Long id, @SuppressWarnings("rawtypes") Class aClass) {
 		T rtn = null;
 
-		try (Session session = getSession()) {
-
+		try {
+			Session session = getSession();
 			CriteriaBuilder builder = session.getCriteriaBuilder();
 			CriteriaQuery<?> crit = builder.createQuery(this.getDaoClass());
 
@@ -220,7 +217,4 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 		return rtn;
 
 	}
-	
-
-	
 }

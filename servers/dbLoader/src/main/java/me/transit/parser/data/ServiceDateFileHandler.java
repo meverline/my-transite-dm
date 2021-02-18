@@ -109,17 +109,16 @@ public class ServiceDateFileHandler extends AbstractFileHandler {
 	 */
 	@Override
 	public boolean parse(String shapeFile) throws Exception {
-		try {
 
-			File fp = new File(shapeFile);
-			if (!fp.exists()) {
-				log.error("file does not exist: " + shapeFile);
-				return false;
-			}
+		File fp = new File(shapeFile);
+		if (!fp.exists()) {
+			log.error("file does not exist: " + shapeFile);
+			return false;
+		}
 
-			BufferedReader inStream = new BufferedReader(new FileReader(shapeFile));
+		try (BufferedReader inStream = new BufferedReader(new FileReader(shapeFile))){
+
 			if (!inStream.ready()) {
-				inStream.close();
 				log.error("file is empty: " + shapeFile);
 				return false;
 			}
@@ -188,7 +187,6 @@ public class ServiceDateFileHandler extends AbstractFileHandler {
 					getBlackboard().getService().put(sd.getId(), sd);
 				}
 			}
-			inStream.close();
 
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage(), e);

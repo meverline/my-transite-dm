@@ -37,8 +37,8 @@ public class TransiteStopDao extends TransitDao<TransitStop> {
 	{
 		List<TransitStop> rtn = new ArrayList<>();
 
-		try (Session session = getSession()){
-
+		try {
+			Session session = getSession();
 			CriteriaBuilder builder = session.getCriteriaBuilder();
 			CriteriaQuery<TransitStop> crit = builder.createQuery(TransitStop.class);
 			
@@ -61,8 +61,8 @@ public class TransiteStopDao extends TransitDao<TransitStop> {
 	{
 		List<TransitStop> rtn = new ArrayList<>();
 
-		try (Session session = getSession()) {
-
+		try {
+			Session session = getSession();
 			CriteriaBuilder builder = session.getCriteriaBuilder();
 			CriteriaQuery<TransitStop> crit = builder.createQuery(TransitStop.class);
 			

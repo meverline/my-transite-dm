@@ -10,6 +10,7 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -21,7 +22,7 @@ import java.util.Objects;
 @GTFSFileModel(filename = "trips.txt")
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
 @JsonFilter("agencyFilter")
-public class Trip extends TransitData implements IDocument {
+public class Trip  implements IDocument, Serializable {
 
     public static final String ID = "id";
     public static final String SERVICE = "service";
@@ -60,6 +61,9 @@ public class Trip extends TransitData implements IDocument {
 
     @Column(name = "ID", nullable = false)
     private String id = null;
+
+    @Column(name = "VERSION")
+    private String version = "0.5";
 
     private transient List<StopTime> stopTimes = new ArrayList<>();
     private transient long docId = -1;
@@ -224,6 +228,25 @@ public class Trip extends TransitData implements IDocument {
     public void setRouteTripIndex(int routeTripIndex) {
         this.routeTripIndex = routeTripIndex;
     }
+
+    /**
+     *
+     * @return
+     */
+    @JsonGetter("version")
+    public String getVersion() {
+        return this.version;
+    };
+
+    /**
+     *
+     * @param id
+     */
+    @GTFSSetter(column="version")
+    @JsonSetter("version")
+    public void setVersion(String id) {
+        this.version = id;
+    };
 
     /**
      * @param stopTime

@@ -1,5 +1,6 @@
 package me.transit.parser.service;
 
+import ch.hsr.geohash.GeoHash;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import me.transit.omd.dao.LocationDao;
 import me.transit.omd.data.Feed;
@@ -16,10 +17,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Properties;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 public abstract class AbstractGTFSParser {
@@ -31,8 +29,13 @@ public abstract class AbstractGTFSParser {
 	private final Properties properties = new Properties();
 	private final LocationDao locationDao;
 	private final Blackboard blackboard;
+	private final Map<String, Location> agencyHash = new HashMap<>();
+
 	/**
-	 * 
+	 *
+	 * @param factory
+	 * @param locationDao
+	 * @param blackboard
 	 */
 	protected AbstractGTFSParser(FileHandlerFactory factory, LocationDao locationDao, Blackboard blackboard) {
 		
@@ -43,13 +46,32 @@ public abstract class AbstractGTFSParser {
 		try {
 			InputStream inStream =  getClass().getClassLoader().getResourceAsStream("ClassMap.properties");
 			getProperties().load(inStream);
+			this.locationHashTable();
 		} catch (IOException e) {
 			log.error(e.getLocalizedMessage(), e);
 		}
-
-
 	}
-	
+
+	/**
+	 *
+	 */
+	protected void locationHashTable() {
+		if ( this.getAgencyHash().isEmpty() ) {
+			List<Location> list = locationDao.list();
+			for (Location item : list) {
+				getAgencyHash().put(item.getTitle(), item);
+			}
+		}
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	protected Map<String, Location> getAgencyHash() {
+		return agencyHash;
+	}
+
 	/**
 	 * @return the properties
 	 */
@@ -139,8 +161,9 @@ public abstract class AbstractGTFSParser {
 	}
 
 	/**
-	 * @throws Exception 
-	 * 
+	 *
+	 * @param agency
+	 * @throws Exception
 	 */
 	protected void parseFeeds(MessageAgency agency) throws Exception {
 
@@ -173,10 +196,14 @@ public abstract class AbstractGTFSParser {
 
 	}
 
-	public boolean doesExist(MessageAgency agency) throws SQLException {
+	/**
+	 *
+	 * @param agency
+	 * @return
+	 */
+	public boolean doesExist(MessageAgency agency)  {
 
-		Location location = locationDao.findByTitle(agency.getLocation());
-		if (location != null) {
+		if ( getAgencyHash().containsKey(agency.getLocation()) ) {
 			return true;
 		}
 		else
@@ -185,6 +212,7 @@ public abstract class AbstractGTFSParser {
 				if (locationDao.findById(loc.getId()) == null) {
 					try {
 						locationDao.save(loc);
+						getAgencyHash().put(loc.getTitle(), loc);
 					} catch (SQLException ex) {
 						log.error("Unable to save location: " + loc + " error " + ex.getLocalizedMessage());
 					}

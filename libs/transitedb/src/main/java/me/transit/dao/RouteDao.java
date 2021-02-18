@@ -41,13 +41,13 @@ public class RouteDao extends TransitDao<Route>  {
 	/* (non-Javadoc)
 	 * @see me.transit.dao.impl.RouteDao#findByRouteNumber(java.lang.String, java.lang.String)
 	 */
-	@Transactional(propagation=Propagation.NOT_SUPPORTED)
+	@Transactional(propagation=Propagation.NOT_SUPPORTED, readOnly = true)
 	public List<Route> findByRouteNumber(String routeNumber, String agencyName) throws DaoException
 	{
 		List<Route> rtn;
 
-		try (Session session = getSession()) {
-
+		try {
+			Session session = getSession();
 			CriteriaBuilder builder = session.getCriteriaBuilder();
 			CriteriaQuery<Route> crit = builder.createQuery(Route.class);
 			
@@ -128,10 +128,7 @@ public class RouteDao extends TransitDao<Route>  {
 				this._results.close();
 				this._results = null;
 			}
-			if ( this._session != null ) {
-				this._session.close();
-				this._session = null;
-			}
+			this._session = null;
 		}
 		
 		/**

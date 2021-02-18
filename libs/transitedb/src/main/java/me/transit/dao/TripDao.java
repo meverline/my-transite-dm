@@ -2,6 +2,7 @@ package me.transit.dao;
 
 import java.sql.SQLException;
 
+import me.database.hibernate.AbstractHibernateDao;
 import org.hibernate.Hibernate;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository(value="tripDao")
 @Scope("singleton")
 @Transactional
-public class TripDao extends TransitDao<Trip>  {
+
+public class TripDao extends AbstractHibernateDao<Trip> {
 
 	/**
 	 * 
@@ -30,9 +32,7 @@ public class TripDao extends TransitDao<Trip>  {
 	/*
 	 * 	
 	 */
-	@Override
 	protected void initObject(Trip rtn) {
-		super.initObject(rtn);
 		Hibernate.initialize(rtn.getShape());
 	}
 

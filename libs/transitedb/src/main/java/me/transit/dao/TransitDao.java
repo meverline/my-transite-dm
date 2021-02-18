@@ -43,11 +43,10 @@ public abstract class TransitDao<T extends TransitData> extends AbstractHibernat
 	 */
 	@Transactional(readOnly = true)
 	public  List<Long> findByAgency(Agency agency) throws SQLException {
-
 		List<Long> alist = null;
 		
-		try (Session session = getSession()) {
-
+		try  {
+			Session session = getSession();
 			CriteriaBuilder builder = session.getCriteriaBuilder();
 			CriteriaQuery<Long> crit = builder.createQuery(Long.class);
 			
@@ -79,11 +78,10 @@ public abstract class TransitDao<T extends TransitData> extends AbstractHibernat
 	@SuppressWarnings("unchecked")
 	@Transactional(readOnly = true)
 	public T loadById(String id, String agencyName) {
-
 		T rtn = null;
 		
-		try (Session session = getSession()){
-
+		try {
+			Session session = getSession();
 			CriteriaBuilder builder = session.getCriteriaBuilder();
 			CriteriaQuery<?> crit = builder.createQuery(this.getDaoClass());
 			

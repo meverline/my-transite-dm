@@ -52,8 +52,8 @@ public class AgencyDao extends AbstractHibernateDao<Agency> {
 	@Transactional(readOnly = true)
 	public synchronized List<Agency> findAllByName(String id) {
 		List<Agency> aList = null;
-		try (Session session = getSession()) {
-
+		try {
+			Session session = getSession();
 			CriteriaBuilder builder = session.getCriteriaBuilder();
 			CriteriaQuery<Agency> crit = builder.createQuery(Agency.class);
 			
@@ -80,8 +80,8 @@ public class AgencyDao extends AbstractHibernateDao<Agency> {
 	public synchronized Agency loadById(String id) {
 	    Agency rtn = null;
 
-		try (Session session = getSession()) {
-
+		try {
+			Session session = getSession();
 			CriteriaBuilder builder = session.getCriteriaBuilder();
 			CriteriaQuery<Agency> crit = builder.createQuery(Agency.class);
 			
@@ -110,8 +110,8 @@ public class AgencyDao extends AbstractHibernateDao<Agency> {
 	public List<Agency> list()
 	{
 		List<Agency> rtn = null;
-		try (Session session = getSession()) {
-
+		try {
+			Session session = getSession();
 			CriteriaBuilder builder = session.getCriteriaBuilder();
 			CriteriaQuery<Agency> crit = builder.createQuery(Agency.class);
 			

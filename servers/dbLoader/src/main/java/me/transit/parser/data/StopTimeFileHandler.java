@@ -120,17 +120,15 @@ public class StopTimeFileHandler extends AbstractFileHandler {
 	@Override
 	public boolean parse(String shapeFile) throws Exception {
 
-		try {
+		File fp = new File(shapeFile);
+		if (!fp.exists()) {
+			log.error("file does not exist: " + shapeFile);
+			return false;
+		}
 
-			File fp = new File(shapeFile);
-			if (!fp.exists()) {
-				log.error("file does not exist: " + shapeFile);
-				return false;
-			}
+		try (BufferedReader inStream = new BufferedReader(new FileReader(shapeFile))){
 
-			BufferedReader inStream = new BufferedReader(new FileReader(shapeFile));
 			if (!inStream.ready()) {
-				inStream.close();
 				log.error("file is empty: " + shapeFile);
 				return false;
 			}
@@ -217,7 +215,6 @@ public class StopTimeFileHandler extends AbstractFileHandler {
 				}
 			}
 
-			inStream.close();
 			log.info("Found " + lineCnt + " stops");
 			log.info("parseStopTimes:build routeToTrip map " + getBlackboard().getTripMap().size());
 			HashMap<String, List<Trip>> routeToTrips = new HashMap<>();
