@@ -1,17 +1,18 @@
 package me.transit.parser.data;
 
-import java.sql.SQLException;
-import java.util.Objects;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
+import lombok.extern.apachecommons.CommonsLog;
 import me.database.neo4j.IGraphDatabaseDAO;
 import me.transit.dao.AgencyDao;
 import me.transit.database.Agency;
 import me.transit.parser.data.converters.DataConverterFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.sql.SQLException;
+import java.util.Objects;
 
 @Component(value = "agencyDataFileHandler")
+@CommonsLog
 public class AgencyDataFileHandler extends AbstractDefaultFileHandler {
 
 	private final AgencyDao agencyDao;

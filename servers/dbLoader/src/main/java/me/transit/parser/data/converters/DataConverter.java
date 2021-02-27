@@ -3,14 +3,13 @@ package me.transit.parser.data.converters;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import lombok.extern.apachecommons.CommonsLog;
 
 import me.transit.parser.data.Blackboard;
 
+@CommonsLog
 public abstract class DataConverter {
 
-	private Log log = LogFactory.getLog(getClass().getName());
 	private Blackboard blackboard = null;
 	private Class<?> returnType = null;
 	

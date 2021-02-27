@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import lombok.extern.apachecommons.CommonsLog;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -19,6 +20,7 @@ import me.database.hibernate.AbstractHibernateDao;
 @SuppressWarnings("deprecation")
 @Repository(value="addressDao")
 @Scope("singleton")
+@CommonsLog
 public class AddressDao extends AbstractHibernateDao<Address> {
 	
 	@Autowired
@@ -52,7 +54,7 @@ public class AddressDao extends AbstractHibernateDao<Address> {
 
 
 		} catch (HibernateException ex) {
-			getLog().error(ex.getLocalizedMessage(), ex);
+			log.error(ex.getLocalizedMessage(), ex);
 		}
 
 		return null;
@@ -93,7 +95,7 @@ public class AddressDao extends AbstractHibernateDao<Address> {
 			return toAddress(query.list());
 
 		} catch (HibernateException ex) {
-			getLog().error(ex.getLocalizedMessage(), ex);
+			log.error(ex.getLocalizedMessage(), ex);
 		}
 
 		return null;
@@ -113,7 +115,7 @@ public class AddressDao extends AbstractHibernateDao<Address> {
 			return toAddress(query.list());
 
 		} catch (HibernateException ex) {
-			getLog().error(ex.getLocalizedMessage(), ex);
+			log.error(ex.getLocalizedMessage(), ex);
 		}
 
 		return null;

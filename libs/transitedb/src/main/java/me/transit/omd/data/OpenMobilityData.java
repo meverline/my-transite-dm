@@ -1,12 +1,9 @@
 package me.transit.omd.data;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.apachecommons.CommonsLog;
+
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
@@ -17,19 +14,14 @@ import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-
+@CommonsLog
 public class OpenMobilityData {
 
 	private static final int BUFFER_SIZE = 4096;
 
 	private final static String API_KEY = "84b0aa80-1386-4f14-a026-4a7aec021430";
 	private final static String BASE_URL = "http://api.transitfeeds.com/v1";
-	private Log log = LogFactory.getLog(getClass().getName());
-	
+
 	private Map<String, Feed>feedCache = null;
 	private int lastPid = -1;
 

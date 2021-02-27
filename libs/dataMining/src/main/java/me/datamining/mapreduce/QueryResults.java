@@ -1,25 +1,21 @@
 package me.datamining.mapreduce;
 
-import java.io.InputStream;
-import java.io.PrintStream;
-
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-
+import lombok.extern.apachecommons.CommonsLog;
 import me.math.Vertex;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+import java.io.InputStream;
+import java.io.PrintStream;
+
+@CommonsLog
 public class QueryResults {
-	
-	protected static Log log_ = LogFactory.getLog(QueryResults.class);
-	
+
 	private static final String LAT = "lat";
 	private static final String LON = "lon";
 	private static final String VALUE = "value";
@@ -113,7 +109,7 @@ public class QueryResults {
 			xml.parse( new InputSource(stream), new ParserHandler(callback));
 			rtn = true;
 		} catch (Exception e) {
-			log_.error("error parsing data result file", e);
+			log.error("error parsing data result file", e);
 			e.printStackTrace();
 		} 
 		return rtn;

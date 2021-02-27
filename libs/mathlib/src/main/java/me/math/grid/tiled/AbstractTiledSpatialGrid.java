@@ -1,10 +1,10 @@
 package me.math.grid.tiled;
 
-import java.net.UnknownHostException;
-import java.sql.SQLException;
-
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import lombok.extern.apachecommons.CommonsLog;
 import me.math.LocalDownFrame;
 import me.math.VectorMath;
 import me.math.Vertex;
@@ -16,14 +16,12 @@ import me.math.kdtree.INode.Direction;
 import me.math.kdtree.INodeCreator;
 import me.math.kdtree.KDTree;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import java.net.UnknownHostException;
+import java.sql.SQLException;
 
-import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
-
+@CommonsLog
 public abstract class AbstractTiledSpatialGrid extends AbstractSpatialGrid implements INodeCreator {
 
-	private Log logger = LogFactory.getLog(getClass());
 	private int tileSize = 32;
 
 	/**
@@ -107,7 +105,7 @@ public abstract class AbstractTiledSpatialGrid extends AbstractSpatialGrid imple
 		int tilesCols = totalColTiles * this.tileSize;
 		int tilesRows = totalRowTiles * this.tileSize;
 		
-		logger.info(getClass().getSimpleName() + " Rows: " +  this.getRows() 
+		log.info(getClass().getSimpleName() + " Rows: " +  this.getRows()
 											   + " Cols: " + this.getCols()
 											   + " Num Cells " + (this.getRows() * this.getCols())
 											   + " Tile Cols " + tilesCols + " Tile Row "+ tilesRows);

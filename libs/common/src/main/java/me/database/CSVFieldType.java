@@ -2,9 +2,9 @@ package me.database;
 
 public interface CSVFieldType {
 	
-	public static final String COMMA = ",";
+	String COMMA = ",";
 	
-	public String toCSVLine();
-	public void fromCSVLine(String line);
+	String toCSVLine();
+	void fromCSVLine(String line);
 
 }

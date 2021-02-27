@@ -1,31 +1,24 @@
 package me.transit.parser.data;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Objects;
-
+import lombok.extern.apachecommons.CommonsLog;
+import me.database.neo4j.IGraphDatabaseDAO;
+import me.transit.dao.RouteDao;
 import me.transit.dao.RouteDocumentDao;
+import me.transit.dao.TransiteStopDao;
 import me.transit.database.*;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import me.database.nsstore.DocumentSession;
-import me.database.neo4j.IGraphDatabaseDAO;
-import me.transit.dao.RouteDao;
-import me.transit.dao.TransiteStopDao;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.util.*;
+import java.util.Map.Entry;
 
 @Component(value = "stopTimeFileHandler")
+@CommonsLog
 public class StopTimeFileHandler extends AbstractFileHandler {
 
-	private Log log = LogFactory.getLog(getClass().getName());
 	private RouteDocumentDao documentDao;
 	private IGraphDatabaseDAO graphdb;
 	private RouteDao routeDao;
@@ -72,8 +65,9 @@ public class StopTimeFileHandler extends AbstractFileHandler {
 					for (StopTime info : trip.getStopTimes()) {
 
 						if (!stopIds.containsKey(info.getStopId())) {
-							TransitStop stop = this.transiteStopDao.loadById(info.getStopId(),
-									getBlackboard().getAgencyName());
+							Long id = this.getBlackboard().getStopuuid().get(info.getStopId());
+							TransitStop stop = this.transiteStopDao.loadByUUID(id);
+
 							info.setStopName(stop.getName());
 
 							Double[] location = new Double[2];
@@ -105,7 +99,7 @@ public class StopTimeFileHandler extends AbstractFileHandler {
 					this.documentDao.add( new RouteDocument(route, entry.getValue()));
 				}
 			} catch (Exception e) {
-				log.error(String.format("xrefStopToRoutes Trip map error Key %s Value %s", entry.getKey(), entry.getValue()));
+				log.error(String.format("xrefStopToRoutes Trip map error Key %s Value %s", entry.getKey(), e.getLocalizedMessage()));
 			}
 
 		}

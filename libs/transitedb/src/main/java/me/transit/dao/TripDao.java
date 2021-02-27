@@ -1,21 +1,19 @@
 package me.transit.dao;
 
-import java.sql.SQLException;
-
 import me.database.hibernate.AbstractHibernateDao;
+import me.transit.database.Trip;
 import org.hibernate.Hibernate;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
-
-import me.transit.database.Trip;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.sql.SQLException;
 
 @Repository(value="tripDao")
 @Scope("singleton")
 @Transactional
-
 public class TripDao extends AbstractHibernateDao<Trip> {
 
 	/**

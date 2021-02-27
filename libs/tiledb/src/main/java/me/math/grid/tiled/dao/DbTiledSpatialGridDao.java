@@ -7,6 +7,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import lombok.extern.apachecommons.CommonsLog;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -22,6 +23,7 @@ import me.math.grid.tiled.DbTiledSpatialGrid;
 @Repository(value="dbTiledSpatialGridDao")
 @Qualifier("dbTiledSpatialGridDao")
 @Transactional
+@CommonsLog
 public class DbTiledSpatialGridDao extends AbstractHibernateDao<DbTiledSpatialGrid> {
 
 	/**
@@ -59,7 +61,7 @@ public class DbTiledSpatialGridDao extends AbstractHibernateDao<DbTiledSpatialGr
 		} catch (NoResultException ex) {
 			rtn = null;
 		} catch (HibernateException ex) {
-			getLog().error(ex.getLocalizedMessage(), ex);
+			log.error(ex.getLocalizedMessage(), ex);
 		}
 
 		return rtn;

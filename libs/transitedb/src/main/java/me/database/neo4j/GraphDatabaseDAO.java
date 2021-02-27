@@ -1,13 +1,11 @@
 package me.database.neo4j;
-import java.util.HashMap;
 
+import lombok.extern.apachecommons.CommonsLog;
 import me.database.neo4j.visitors.AgencyVisitor;
 import me.database.neo4j.visitors.RouteVisitor;
 import me.database.neo4j.visitors.TransiteStopVisitor;
 import me.database.neo4j.visitors.TripVisitor;
 import me.transit.database.*;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.neo4j.graphdb.*;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.neo4j.graphdb.schema.IndexDefinition;
@@ -16,11 +14,16 @@ import org.neo4j.graphdb.traversal.TraversalDescription;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+@CommonsLog
 public class GraphDatabaseDAO implements IGraphDatabaseDAO {
+	
+	private static final String HEAD_SIGN = "HeadSign";
+	private static final String POINT = "Point";
 
 	enum REL_TYPES implements RelationshipType {
 		HAS_STOP, AGENCY, LOCATION, HAS_A, HEAD_SIGN
@@ -28,8 +31,6 @@ public class GraphDatabaseDAO implements IGraphDatabaseDAO {
 
 	private static IGraphDatabaseDAO theOne = null;
 	private final GraphDatabaseService graphDb;
-
-	public static Log log = LogFactory.getLog(IGraphDatabaseDAO.class);
 
 	/**
 	 * 
@@ -88,8 +89,8 @@ public class GraphDatabaseDAO implements IGraphDatabaseDAO {
     	indexMap.put(TransitStop.class.getSimpleName(), FIELD.stop.name());
     	indexMap.put(Trip.class.getSimpleName(), FIELD.trip.name());
     	indexMap.put(Route.class.getSimpleName(), FIELD.route.name());
-    	indexMap.put("Point", FIELD.coordinate.name());
-    	indexMap.put("HeadSign", FIELD.trip_headSign.name());
+    	indexMap.put(GraphDatabaseDAO.POINT, FIELD.coordinate.name());
+    	indexMap.put(GraphDatabaseDAO.HEAD_SIGN, FIELD.trip_headSign.name());
     	
     	List<IndexDefinition> indexs = new ArrayList<>();
     	for ( Map.Entry<String, String> item : indexMap.entrySet()) {
@@ -215,7 +216,7 @@ public class GraphDatabaseDAO implements IGraphDatabaseDAO {
 			node = graphDb.findNode(Label.label(stop.getClass().getSimpleName()),
 													FIELD.stop.name(), visitor.makeKey(stop.getAgency().getName()));
 			String key = visitor.makeCoordinateKey();
-			Node coord = graphDb.findNode(Label.label("Point"),
+			Node coord = graphDb.findNode(Label.label(GraphDatabaseDAO.POINT),
 												FIELD.coordinate.name(), key);
 
 			if (node == null) {
@@ -227,7 +228,7 @@ public class GraphDatabaseDAO implements IGraphDatabaseDAO {
 				}
 
 				if (coord == null) {
-					coord = graphDb.createNode(Label.label("Point"));
+					coord = graphDb.createNode(Label.label(GraphDatabaseDAO.POINT));
 					coord.setProperty(FIELD.coordinate.name(), visitor.makeCoordinateKey());
 				} 
 
@@ -298,7 +299,7 @@ public class GraphDatabaseDAO implements IGraphDatabaseDAO {
 
 			node = graphDb.findNode(Label.label(trip.getClass().getSimpleName()), 
 											FIELD.trip.name(), visitor.makeKey(agency.getName()));
-			Node hs = graphDb.findNode(Label.label("HeadSign"), 
+			Node hs = graphDb.findNode(Label.label(GraphDatabaseDAO.HEAD_SIGN), 
 											FIELD.trip_headSign.name(), visitor.makeHeadSignKey(agency.getName()));
 
 			if (node == null) {
@@ -308,13 +309,14 @@ public class GraphDatabaseDAO implements IGraphDatabaseDAO {
 				}
 
 				createRelationShip(node, agency);
-
-				if (hs == null) {
-					hs = graphDb.createNode(Label.label("HeadSign"));
-					hs.setProperty(FIELD.trip_headSign.name(), visitor.makeHeadSignKey(agency.getName()));
-					createRelationShip(hs, agency);
-				}
 			}
+
+			if (hs == null) {
+				hs = graphDb.createNode(Label.label(GraphDatabaseDAO.HEAD_SIGN));
+				hs.setProperty(FIELD.trip_headSign.name(), visitor.makeHeadSignKey(agency.getName()));
+				createRelationShip(hs, agency);
+			}
+
 			tx.success();
 		} catch (Exception ex) {
 			tx.failure();
@@ -441,7 +443,7 @@ public class GraphDatabaseDAO implements IGraphDatabaseDAO {
 				from = this.addNode(fromRoute);
 			}
 
-			Node tohs = graphDb.findNode(Label.label("HeadSign"), FIELD.trip_headSign.name(),
+			Node tohs = graphDb.findNode(Label.label(GraphDatabaseDAO.HEAD_SIGN), FIELD.trip_headSign.name(),
 					tripVisitor.makeHeadSignKey(fromRoute.getAgency().getName()));
 
 			if (to == null || from == null) {
@@ -452,6 +454,12 @@ public class GraphDatabaseDAO implements IGraphDatabaseDAO {
 
 			Relationship relationship = from.createRelationshipTo(to, REL_TYPES.HAS_A);
 			relationship.setProperty(FIELD.className.name(), this.getInterface(fromRoute));
+
+			if (tohs == null || from == null) {
+				log.warn("Warng adding HeadSign relationsip route to trip: nodes null: " + from + " to " + tohs);
+				tx.success();
+				return false;
+			}
 
 			relationship = from.createRelationshipTo(tohs, REL_TYPES.HEAD_SIGN);
 			relationship.setProperty(FIELD.className.name(), this.getInterface(fromRoute));

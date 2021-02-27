@@ -1,21 +1,21 @@
 package me.transit.dao;
 
-import java.sql.SQLException;
-import java.util.List;
+import lombok.extern.apachecommons.CommonsLog;
+import me.database.hibernate.AbstractHibernateDao;
+import me.transit.database.Agency;
+import me.transit.database.TransitData;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.sql.SQLException;
+import java.util.List;
 
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-
-import me.database.hibernate.AbstractHibernateDao;
-import me.transit.database.Agency;
-import me.transit.database.TransitData;
-import org.springframework.transaction.annotation.Transactional;
-
+@CommonsLog
 public abstract class TransitDao<T extends TransitData> extends AbstractHibernateDao<T> {
 
 	/**
@@ -25,7 +25,7 @@ public abstract class TransitDao<T extends TransitData> extends AbstractHibernat
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
-	protected TransitDao(Class<?> aClass, SessionFactory aSessionFactory) throws SQLException, ClassNotFoundException {
+	protected TransitDao(Class<T> aClass, SessionFactory aSessionFactory) throws SQLException, ClassNotFoundException {
 		super(aClass, aSessionFactory);
 	}
 	
@@ -60,7 +60,7 @@ public abstract class TransitDao<T extends TransitData> extends AbstractHibernat
 			alist = session.createQuery(crit).getResultList();
 		
 		} catch (HibernateException ex) {
-			getLog().error(ex.getLocalizedMessage(), ex);
+			log.error(ex.getLocalizedMessage(), ex);
 		}
 		return alist;
 	}
@@ -83,25 +83,25 @@ public abstract class TransitDao<T extends TransitData> extends AbstractHibernat
 		try {
 			Session session = getSession();
 			CriteriaBuilder builder = session.getCriteriaBuilder();
-			CriteriaQuery<?> crit = builder.createQuery(this.getDaoClass());
+			CriteriaQuery<T> crit = builder.createQuery(this.getDaoClass());
 			
-			Root<T> root = (Root<T>) crit.from(this.getDaoClass());
-			
-			crit.where(
-				builder.equal(root.get("id"), id),
-				builder.equal(root.get("agency").get("name"), agencyName)
-			);
-			
+			Root<T> root = crit.from(this.getDaoClass());
+
+			crit.select(root).where(
+				builder.and(builder.equal(root.get("id"), id),
+							builder.equal(root.get("agency").get("name"), agencyName)
+			));
+
 			List<T>  aList = (List<T>) session.createQuery(crit).getResultList();
 					
 			if ( aList.size() < 1 ) {
-				getLog().info(" Unable to find Id: " + id + " agency " + agencyName);
+				log.info(" Unable to find Id: " + id + " agency " + agencyName);
 			} else {
 				rtn = aList.get(0);
 			}
 
 		} catch (Exception ex) {
-			getLog().error(getDaoClass().getName() + 
+			log.error(getDaoClass().getName() +
 						   ": " + id + 
 						   " " + agencyName +
 						   " " + ex.getClass().getName() +

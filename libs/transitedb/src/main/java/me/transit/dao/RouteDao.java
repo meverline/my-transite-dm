@@ -1,31 +1,26 @@
 package me.transit.dao;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-
-import org.hibernate.Hibernate;
-import org.hibernate.HibernateException;
-import org.hibernate.ScrollMode;
-import org.hibernate.ScrollableResults;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import lombok.extern.apachecommons.CommonsLog;
+import me.transit.database.Route;
+import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import me.transit.database.Route;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository(value="routeDao")
 @SuppressWarnings("deprecation")
 @Scope("singleton")
 @Transactional
+@CommonsLog
 public class RouteDao extends TransitDao<Route>  {
 
 	/**
@@ -52,16 +47,16 @@ public class RouteDao extends TransitDao<Route>  {
 			CriteriaQuery<Route> crit = builder.createQuery(Route.class);
 			
 			Root<Route> root = crit.from(Route.class);
-			
-			crit.where(
-					builder.like(root.get("shortName"), routeNumber),
-					builder.equal(root.get("agency").get("name"), agencyName)
-			);
-			
+
+			crit.select(root).where(
+					builder.and(builder.like(root.get("shortName"), routeNumber),
+								builder.equal(root.get("agency").get("name"), agencyName)
+			));
+
 			rtn = session.createQuery(crit).getResultList();
 			
 		} catch (HibernateException ex) {
-			getLog().error(ex.getLocalizedMessage(), ex);
+			log.error(ex.getLocalizedMessage(), ex);
 			throw new DaoException("Route: " + routeNumber + " Agency: " + agencyName, ex);
 		}
 

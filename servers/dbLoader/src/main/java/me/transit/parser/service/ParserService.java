@@ -7,6 +7,7 @@ import com.amazonaws.services.sqs.model.Message;
 import com.amazonaws.services.sqs.model.ReceiveMessageRequest;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.apachecommons.CommonsLog;
 import me.database.neo4j.IGraphDatabaseDAO;
 import me.transit.omd.dao.LocationDao;
 import me.transit.parser.data.Blackboard;
@@ -16,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.Objects;
-
+@CommonsLog
 public class  ParserService extends AbstractGTFSParser {
 
     private final AmazonSQS sqs = AmazonSQSClientBuilder.defaultClient();
@@ -53,7 +54,7 @@ public class  ParserService extends AbstractGTFSParser {
                 try {
                     this.messageProcessor(new ObjectMapper().readValue(message.getMD5OfBody(), ParserMessage.class));
                 } catch (JsonProcessingException ex) {
-                    this.getLog().error(ex.getLocalizedMessage(), ex);
+                    log.error(ex.getLocalizedMessage(), ex);
                 }
             }
 

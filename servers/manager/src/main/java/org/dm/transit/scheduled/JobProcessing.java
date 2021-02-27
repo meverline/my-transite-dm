@@ -4,8 +4,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import lombok.extern.apachecommons.CommonsLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -20,9 +19,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
 @PropertySource({ "classpath:persistence-${envTarget:dev}.hmj.properties" })
+@CommonsLog
 public class JobProcessing {
-	
-	private final Log log = LogFactory.getLog(getClass().getName());
+
 	private final ExecutorService executor;
 	private final Environment env;
 	private final AmazonSQS sqs;

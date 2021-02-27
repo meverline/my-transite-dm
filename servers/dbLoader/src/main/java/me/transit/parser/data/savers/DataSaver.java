@@ -3,13 +3,13 @@ package me.transit.parser.data.savers;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import lombok.extern.apachecommons.CommonsLog;
 
 import me.transit.parser.data.Blackboard;
 import me.transit.parser.data.converters.DataConverter;
 import me.transit.parser.data.converters.DataConverterFactory;
 
+@CommonsLog
 public class DataSaver {
 
 	private final Method method;
@@ -19,9 +19,6 @@ public class DataSaver {
 	private final String orgHeader;
 	private DataConverter type;
 
-	private Log log = LogFactory.getLog(DataSaver.class);
-
-	
 	public DataSaver(Method setMethod, String field, Blackboard parser, String header, DataConverterFactory factory) throws NoSuchMethodException {
 		this.method = setMethod;
 		this.fieldName = field;

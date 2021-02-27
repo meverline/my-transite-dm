@@ -1,28 +1,28 @@
 
 package me.transit.dao;
 
-import java.sql.SQLException;
-import java.util.List;
-
-import javax.persistence.NoResultException;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-
+import lombok.extern.apachecommons.CommonsLog;
+import me.database.hibernate.AbstractHibernateDao;
+import me.transit.database.Agency;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
-
-import me.database.hibernate.AbstractHibernateDao;
-import me.transit.database.Agency;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.NoResultException;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import java.sql.SQLException;
+import java.util.List;
 
 @Repository(value="agencyDao")
 @Scope("singleton")
 @Transactional
+@CommonsLog
 public class AgencyDao extends AbstractHibernateDao<Agency> {
 	
 	/**
@@ -66,7 +66,7 @@ public class AgencyDao extends AbstractHibernateDao<Agency> {
 			aList = session.createQuery(crit).getResultList();
 			
 		} catch (HibernateException ex) {
-			getLog().error(ex.getLocalizedMessage(), ex);
+			log.error(ex.getLocalizedMessage(), ex);
 		}
 		return aList;
 	}
@@ -96,7 +96,7 @@ public class AgencyDao extends AbstractHibernateDao<Agency> {
 		} catch (NoResultException ex) {
 			rtn = null;
 		} catch (HibernateException ex) {
-			getLog().error(ex.getLocalizedMessage(), ex);
+			log.error(ex.getLocalizedMessage(), ex);
 		}
 
 		return rtn;
@@ -121,7 +121,7 @@ public class AgencyDao extends AbstractHibernateDao<Agency> {
 			rtn = session.createQuery(crit).getResultList();
 			
 		} catch (HibernateException ex) {
-			getLog().error(ex.getLocalizedMessage(), ex);
+			log.error(ex.getLocalizedMessage(), ex);
 		}
 
 		return rtn;

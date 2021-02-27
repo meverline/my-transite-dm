@@ -1,31 +1,27 @@
 package me.database.hibernate;
 
-import java.io.Serializable;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.Objects;
+import lombok.extern.apachecommons.CommonsLog;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.NoResultException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.io.Serializable;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Objects;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.springframework.transaction.annotation.Transactional;
-
+@CommonsLog
 public abstract class AbstractHibernateDao<T extends Serializable> {
 
-	private Log log = LogFactory.getLog(AbstractHibernateDao.class);
-	
 	private final SessionFactory sessionFactory; 
-	private final Class<?> daoClass;
+	private final Class<T> daoClass;
 	
-	protected AbstractHibernateDao(Class<?> aClass, SessionFactory aSessionFactory) throws SQLException, ClassNotFoundException {
+	protected AbstractHibernateDao(Class<T> aClass, SessionFactory aSessionFactory) throws SQLException, ClassNotFoundException {
 		daoClass = Objects.requireNonNull(aClass, "aClass cannot be null");
 		sessionFactory = Objects.requireNonNull(aSessionFactory, "aSessionFactory cannot be null");
 	}
@@ -36,20 +32,6 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 	 */
 	public SessionFactory getSessionFactory() {
 	    return this.sessionFactory;
-	}
-	
-	/**
-	 * @return the log
-	 */
-	protected Log getLog() {
-		return log;
-	}
-
-	/**
-	 * @param log the log to set
-	 */
-	protected void setLog(Log log) {
-		this.log = log;
 	}
 
 	/**
@@ -62,7 +44,7 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 	/**
 	 * @return the daoClass
 	 */
-	protected final Class<?> getDaoClass() {
+	protected final Class<T> getDaoClass() {
 		return daoClass;
 	}
 
@@ -94,9 +76,9 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 		try {
 			Session session = this.getSession();
 			CriteriaBuilder builder = session.getCriteriaBuilder();
-			CriteriaQuery<?> crit = builder.createQuery(this.getDaoClass());
+			CriteriaQuery<T> crit = builder.createQuery(this.getDaoClass());
 
-			Root<?> root = crit.from(this.getDaoClass());
+			Root<T> root = crit.from(this.getDaoClass());
 
 			crit.where(
 					builder.equal(root.get("UUID"), uuid)
@@ -134,9 +116,9 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 		try  {
 			Session session = getSession();
 			CriteriaBuilder builder = session.getCriteriaBuilder();
-			CriteriaQuery<?> crit = builder.createQuery(this.getDaoClass());
+			CriteriaQuery<T> crit = builder.createQuery(this.getDaoClass());
 
-			Root<?> root = crit.from(this.getDaoClass());
+			Root<T> root = crit.from(this.getDaoClass());
 
 			crit.where(
 					builder.equal(root.get(property), id)
@@ -161,9 +143,9 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 		try {
 			Session session = getSession();
 			CriteriaBuilder builder = session.getCriteriaBuilder();
-			CriteriaQuery<?> crit = builder.createQuery(this.getDaoClass());
+			CriteriaQuery<T> crit = builder.createQuery(this.getDaoClass());
 
-			Root<?> root = crit.from(this.getDaoClass());
+			Root<T> root = crit.from(this.getDaoClass());
 
 			crit.where(
 					builder.equal(root.get(property), id)
@@ -190,15 +172,15 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public  T loadByUUID(Long id, @SuppressWarnings("rawtypes") Class aClass) {
+	protected  T loadByUUID(Long id, @SuppressWarnings("rawtypes") Class aClass) {
 		T rtn = null;
 
 		try {
 			Session session = getSession();
 			CriteriaBuilder builder = session.getCriteriaBuilder();
-			CriteriaQuery<?> crit = builder.createQuery(this.getDaoClass());
+			CriteriaQuery<T> crit = builder.createQuery(this.getDaoClass());
 
-			Root<?> root = crit.from(this.getDaoClass());
+			Root<T> root = crit.from(this.getDaoClass());
 
 			crit.where(
 					builder.equal(root.get("UUID"), id)

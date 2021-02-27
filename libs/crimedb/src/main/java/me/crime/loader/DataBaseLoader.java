@@ -16,17 +16,7 @@
 
 package me.crime.loader;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.sql.SQLException;
-
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import lombok.extern.apachecommons.CommonsLog;
 import org.springframework.beans.BeansException;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -35,13 +25,20 @@ import org.springframework.context.ApplicationContextAware;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.sql.SQLException;
+
+@CommonsLog
 public class DataBaseLoader implements ApplicationContextAware, CommandLineRunner {
 
 	private SAXParser   	   parser_ = null;
 	private ApplicationContext applicationContext;
 	private ParseCrimeXml      parseCrimeXml;
-
-	protected static Log log_ = LogFactory.getLog(DataBaseLoader.class);
 	
 	/**
 	 * 
@@ -87,9 +84,9 @@ public class DataBaseLoader implements ApplicationContextAware, CommandLineRunne
 			SAXParserFactory factory = SAXParserFactory.newInstance();
 			parser_ = factory.newSAXParser();
 		} catch (ParserConfigurationException e) {
-			DataBaseLoader.log_.error(e);
+			DataBaseLoader.log.error(e);
 		} catch (SAXException e) {
-			DataBaseLoader.log_.error(e);
+			DataBaseLoader.log.error(e);
 		}
 	}
 
@@ -105,9 +102,9 @@ public class DataBaseLoader implements ApplicationContextAware, CommandLineRunne
 			parser_.parse(new InputSource(new FileReader(data)), getParseCrimeXml());
 
 		} catch (SAXException e) {
-			DataBaseLoader.log_.error(e,e);
+			DataBaseLoader.log.error(e,e);
 		} catch (IOException e) {
-			DataBaseLoader.log_.error(e,e);
+			DataBaseLoader.log.error(e,e);
 		}
 		return getParseCrimeXml().numberOfRecoredsSaved();
 	}
@@ -124,10 +121,10 @@ public class DataBaseLoader implements ApplicationContextAware, CommandLineRunne
 		int total = 0;
 		for ( int ndx = 0; ndx < files.length; ndx++ ) {
 		     if ( files[ndx].isFile()  && (! files[ndx].isHidden()) ) {
-		    	 DataBaseLoader.log_.info("parsing: " + files[ndx].toString() + "...");
+		    	 DataBaseLoader.log.info("parsing: " + files[ndx].toString() + "...");
 		    	 parse( files[ndx].toString() );
 			     total += getParseCrimeXml().numberOfRecoredsSaved();
-			     DataBaseLoader.log_.info(files[ndx].toString() + " saved: " + getParseCrimeXml().numberOfRecoredsSaved() + "...");
+			     DataBaseLoader.log.info(files[ndx].toString() + " saved: " + getParseCrimeXml().numberOfRecoredsSaved() + "...");
 			     getParseCrimeXml().reset();
 		     }
 		}
@@ -147,9 +144,9 @@ public class DataBaseLoader implements ApplicationContextAware, CommandLineRunne
 			LoadURCCatagories loadURCCatagories = (LoadURCCatagories) getContext().getBean("loadURCCatagories");
 			loadURCCatagories.loadURCTable();
 		} catch (SQLException e) {
-			log_.error(e);
+			log.error(e);
 		} catch (ClassNotFoundException e) {
-			log_.error(e);
+			log.error(e);
 		}
 
 		int total = 0;
@@ -165,9 +162,9 @@ public class DataBaseLoader implements ApplicationContextAware, CommandLineRunne
 			   
 			   System.out.println(s + " done, saved:" + total);
 			} catch ( Exception ex ) {
-				log_.error(ex);
+				log.error(ex);
 			} catch ( java.lang.Error ex ) {
-				log_.error(ex);
+				log.error(ex);
 			}
 		}
 	}

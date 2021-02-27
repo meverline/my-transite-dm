@@ -9,13 +9,12 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import lombok.extern.apachecommons.CommonsLog;
 import me.database.nsstore.AbstractDocument;
 import me.database.nsstore.DocumentSession;
 import me.database.nsstore.IDocument;
 import me.transit.dao.query.translator.mongo.*;
 import me.transit.dao.query.tuple.*;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.bson.Document;
 
 import java.net.UnknownHostException;
@@ -25,11 +24,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
+@CommonsLog
 public class MongoDocumentSession extends DocumentSession {
 
 	public final static String LOCALHOST = "localhost";
 
-	private Log log = LogFactory.getLog(MongoDocumentSession.class);
 	private final List<String> skipData = new ArrayList<String>();
 	private final Map<String, MongoCollection<Document>> collectionMap = new HashMap<>();
 	private final ObjectMapper mapper = new ObjectMapper();

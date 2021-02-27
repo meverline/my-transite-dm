@@ -1,27 +1,27 @@
 package me.transit.dao;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-
+import lombok.extern.apachecommons.CommonsLog;
+import me.transit.dao.query.StopQueryConstraint;
+import me.transit.database.TransitStop;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
-
-import me.transit.dao.query.StopQueryConstraint;
-import me.transit.database.TransitStop;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository(value="transiteStopDao")
 @Scope("singleton")
 @Transactional
+@CommonsLog
 public class TransiteStopDao extends TransitDao<TransitStop> {
 		
 	@Autowired
@@ -47,10 +47,15 @@ public class TransiteStopDao extends TransitDao<TransitStop> {
 			rtn = session.createQuery(crit).getResultList();
 			
 		} catch (HibernateException ex) {
-			getLog().error(ex.getLocalizedMessage(), ex);
+			log.error(ex.getLocalizedMessage(), ex);
 		}
 
 		return rtn;
+	}
+
+	@Transactional(readOnly = true)
+	public TransitStop loadByUUID(long uuid) {
+		return this.loadByUUID(uuid, TransitStop.class);
 	}
 	
 	/* (non-Javadoc)
@@ -75,7 +80,7 @@ public class TransiteStopDao extends TransitDao<TransitStop> {
 			rtn = session.createQuery(crit).getResultList();
 			
 		} catch (HibernateException ex) {
-			getLog().error(ex.getLocalizedMessage(), ex);
+			log.error(ex.getLocalizedMessage(), ex);
 		}
 
 		return rtn;

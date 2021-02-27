@@ -1,8 +1,7 @@
 package me.transit.parser;
 
+import lombok.extern.apachecommons.CommonsLog;
 import me.transit.parser.service.AbstractGTFSParser;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -13,6 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan({ "me.transit"})
+@CommonsLog
 public class  TransitFeedParser implements ApplicationContextAware, CommandLineRunner {
 
 	private ApplicationContext applicationContext;
@@ -35,7 +35,6 @@ public class  TransitFeedParser implements ApplicationContextAware, CommandLineR
 	 * @param args
 	 */
 	public void run(String... args) {
-		Log log = LogFactory.getLog(TransitFeedParser.class.getName());		
 		AbstractGTFSParser parser = null;
 		
 		try {

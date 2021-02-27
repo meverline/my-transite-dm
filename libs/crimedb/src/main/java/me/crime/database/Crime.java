@@ -16,34 +16,21 @@
 
 package me.crime.database;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import lombok.extern.apachecommons.CommonsLog;
+import me.math.Vertex;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.TimeZone;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
-import javax.persistence.Table;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.hibernate.annotations.Type;
-
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-
-import me.math.Vertex;
-
 @Entity
 @Table(name = "crm_CRIME")
 @XStreamAlias("crime")
+@CommonsLog
 public class Crime extends XmlReadable implements Serializable {
 
 	public static final long serialVersionUID = 1;
@@ -101,8 +88,6 @@ public class Crime extends XmlReadable implements Serializable {
 	@Column(name = "TIME_ORDINAL", nullable = false)
 	@XStreamAlias("time")
 	private double time_ = 0.0;
-
-	protected static Log log_ = LogFactory.getLog(Crime.class);
 
 	public Crime() {
 		init("");
@@ -369,7 +354,7 @@ public class Crime extends XmlReadable implements Serializable {
 
 		} catch (Exception e) {
 
-			log_.warn("Unable to save crime: " + this.getCrimeNumber() + "removing arrested");
+			log.warn("Unable to save crime: " + this.getCrimeNumber() + "removing arrested");
 			
 		}
 	}

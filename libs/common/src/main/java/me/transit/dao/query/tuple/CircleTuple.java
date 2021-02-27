@@ -1,8 +1,7 @@
 package me.transit.dao.query.tuple;
 
+import lombok.extern.apachecommons.CommonsLog;
 import me.output.KmlFormatter;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
@@ -12,9 +11,9 @@ import org.locationtech.jts.util.GeometricShapeFactory;
 import java.util.ArrayList;
 import java.util.List;
 
+@CommonsLog
 public class CircleTuple extends AbstractQueryTuple {
 
-    private static Log log = LogFactory.getLog(CircleTuple.class);
     private final GeometryFactory factory_  = new GeometryFactory();
     private final double distanceInMeters_;
     private final Point center_;
@@ -72,10 +71,6 @@ public class CircleTuple extends AbstractQueryTuple {
 
     public Point getCenter() {
         return center_;
-    }
-
-    public static Log getLog() {
-        return log;
     }
 
     /**

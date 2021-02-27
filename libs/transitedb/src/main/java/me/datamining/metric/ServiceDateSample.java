@@ -3,38 +3,25 @@
  */
 package me.datamining.metric;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
+import lombok.extern.apachecommons.CommonsLog;
 import me.transit.dao.DaoException;
 import me.transit.dao.RouteDao;
-import me.transit.database.Route;
-import me.transit.database.RouteStopData;
-import me.transit.database.ServiceDate;
-import me.transit.database.TransitStop;
-import me.transit.database.Trip;
+import me.transit.database.*;
+
+import java.util.*;
 /**
  * @author meverline
  *
  */
 @JsonIgnoreProperties({ "daysOfIntrest", "routeSerive" })
+@CommonsLog
 public class ServiceDateSample extends TransiteSpatialMetric {
-	
 
 	private Set<ServiceDate.WeekDay> daysOfIntrest = new HashSet<ServiceDate.WeekDay>();
 	private Map<String,List<ServiceDate.WeekDay>> routeSerive 
 							= new HashMap<String,List<ServiceDate.WeekDay>>();
-	private Log log = LogFactory.getLog(ServiceDateSample.class);
-			
+
 	/**
 	 * @return the daysOfIntrest
 	 */

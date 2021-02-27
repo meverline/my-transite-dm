@@ -1,26 +1,20 @@
 package me.transit.parser.data;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import lombok.extern.apachecommons.CommonsLog;
+import me.transit.dao.ServiceDateDao;
+import me.transit.database.ServiceDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import me.transit.dao.ServiceDateDao;
-import me.transit.database.ServiceDate;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.util.*;
 
 @Component(value="serviceDateFileHandler")
+@CommonsLog
 public class ServiceDateFileHandler extends AbstractFileHandler {
 
-	private Log log = LogFactory.getLog(getClass().getName());
 	private ServiceDateDao serviceDao;
 
 	/**

@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import lombok.extern.apachecommons.CommonsLog;
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
@@ -26,6 +27,7 @@ import me.transit.dao.query.tuple.IQueryTuple;
 @SuppressWarnings("deprecation")
 @Repository(value="crimeDao")
 @Scope("singleton")
+@CommonsLog
 public class CrimeDao extends AbstractHibernateDao<Crime> {
 
 	@Autowired
@@ -58,7 +60,7 @@ public class CrimeDao extends AbstractHibernateDao<Crime> {
 			return rtn;
 
 		} catch (Exception ex) {
-			getLog().error(ex.getLocalizedMessage(), ex);
+			log.error(ex.getLocalizedMessage(), ex);
 		}
 
 		return null;
@@ -79,7 +81,7 @@ public class CrimeDao extends AbstractHibernateDao<Crime> {
 			return toCrime( query.getResultList());
 
 		} catch (HibernateException ex) {
-			getLog().error(ex.getLocalizedMessage(), ex);
+			log.error(ex.getLocalizedMessage(), ex);
 		}
 
 		return null;
@@ -139,7 +141,7 @@ public class CrimeDao extends AbstractHibernateDao<Crime> {
 			return rtn;
 
 		} catch (HibernateException ex) {
-			getLog().error(ex.getLocalizedMessage(), ex);
+			log.error(ex.getLocalizedMessage(), ex);
 		}
 
 		return null;
@@ -200,7 +202,7 @@ public class CrimeDao extends AbstractHibernateDao<Crime> {
 				return toCrime(results);
 				
 		} catch (HibernateException ex) {
-			getLog().error(ex.getLocalizedMessage(), ex);
+			log.error(ex.getLocalizedMessage(), ex);
 			return null;
 		}
 	}

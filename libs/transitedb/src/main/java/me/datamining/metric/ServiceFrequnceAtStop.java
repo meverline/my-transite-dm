@@ -1,34 +1,22 @@
 package me.datamining.metric;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
+import lombok.extern.apachecommons.CommonsLog;
 import me.transit.dao.DaoException;
 import me.transit.dao.RouteDao;
-import me.transit.database.Route;
-import me.transit.database.RouteStopData;
-import me.transit.database.ServiceDate;
-import me.transit.database.StopTime;
-import me.transit.database.TransitStop;
-import me.transit.database.Trip;
+import me.transit.database.*;
+
+import java.util.*;
 
 @JsonIgnoreProperties({ "startTime", "daysOfIntrest", "endTime", "log", "stopValue" })
+@CommonsLog
 public class ServiceFrequnceAtStop extends TransiteSpatialMetric {
 
 
 	private Set<ServiceDate.WeekDay> daysOfIntrest = new HashSet<ServiceDate.WeekDay>();
 	private long startTime = 0;
 	private long endTime = 235959;
-	private Log log = LogFactory.getLog(ServiceDateSample.class);
-	
+
 	private HashMap<String,Integer> stopValue = new HashMap<String, Integer>();
 	
 	/**

@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
+import lombok.extern.apachecommons.CommonsLog;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -21,6 +22,7 @@ import me.database.hibernate.AbstractHibernateDao;
 @SuppressWarnings("deprecation")
 @Repository(value="urcCatagoriesDAO")
 @Scope("singleton")
+@CommonsLog
 public class URCCatagoriesDAO extends AbstractHibernateDao<URCCatagories> {
 	
 	@Autowired
@@ -46,7 +48,7 @@ public class URCCatagoriesDAO extends AbstractHibernateDao<URCCatagories> {
 			return URCCatagories.class.cast(query.uniqueResult());
 
 		} catch (HibernateException ex) {
-			getLog().error(ex.getLocalizedMessage(), ex);
+			log.error(ex.getLocalizedMessage(), ex);
 		}
 
 		return null;
@@ -88,7 +90,7 @@ public class URCCatagoriesDAO extends AbstractHibernateDao<URCCatagories> {
 			return rtn;
 
 		} catch (HibernateException ex) {
-			getLog().error(ex.getLocalizedMessage(), ex);
+			log.error(ex.getLocalizedMessage(), ex);
 		}
 
 		return null;
@@ -125,7 +127,7 @@ public class URCCatagoriesDAO extends AbstractHibernateDao<URCCatagories> {
 			return rtn;
 
 		} catch (HibernateException ex) {
-			getLog().error(ex.getLocalizedMessage(), ex);
+			log.error(ex.getLocalizedMessage(), ex);
 		}
 
 		return null;

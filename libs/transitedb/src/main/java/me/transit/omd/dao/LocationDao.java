@@ -1,5 +1,6 @@
 package me.transit.omd.dao;
 
+import lombok.extern.apachecommons.CommonsLog;
 import me.database.hibernate.AbstractHibernateDao;
 import me.transit.omd.data.Location;
 import org.hibernate.HibernateException;
@@ -18,6 +19,7 @@ import java.util.List;
 
 @Repository(value="locationDao")
 @Scope("singleton")
+@CommonsLog
 public class LocationDao extends AbstractHibernateDao<Location> {
 
     /**
@@ -55,7 +57,7 @@ public class LocationDao extends AbstractHibernateDao<Location> {
             rtn = session.createQuery(crit).getResultList();
 
         } catch (HibernateException ex) {
-            getLog().error(ex.getLocalizedMessage(), ex);
+            log.error(ex.getLocalizedMessage(), ex);
         }
 
         return rtn;

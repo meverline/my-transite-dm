@@ -3,29 +3,23 @@
  */
 package me.datamining.mapreduce;
 
-import java.io.InputStream;
-import java.util.List;
-
+import lombok.extern.apachecommons.CommonsLog;
 import me.math.grid.SpatialGridPoint;
 import me.math.grid.data.AbstractDataSample;
 import me.math.grid.tiled.SpatialTile;
 import me.math.kdtree.KDTree;
 import me.math.kdtree.search.RangeSearch;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.io.InputStream;
+import java.util.List;
 
 /**
  * @author markeverline
  *
  */
+@CommonsLog
 public class PopulateGrid implements ResultsHandler {
 
-	@JsonIgnore
-	private Log logger = LogFactory.getLog(PopulateGrid.class);
-	
 	private SpatialTile tile_ = null;
 	private KDTree tree_ = null;
 	private RangeSearch search_ = null;
@@ -82,7 +76,7 @@ public class PopulateGrid implements ResultsHandler {
 				AbstractDataSample data = (AbstractDataSample) sampleClass_.newInstance();
 				pt.setData(data);
 			} catch (Exception e) {
-				logger.error(e.getMessage(), e);
+				log.error(e.getMessage(), e);
 			}
 		}
 		

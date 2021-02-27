@@ -1,18 +1,17 @@
 package me.transit.parser.data;
 
+import lombok.extern.apachecommons.CommonsLog;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 @Service(value="fileHandlerFactory")
+@CommonsLog
 public class FileHandlerFactory {
-	
-	private Log log = LogFactory.getLog(getClass().getName());
+
 	private final Map<String, AbstractFileHandler> handlers = new HashMap<>();
 
 	@Autowired

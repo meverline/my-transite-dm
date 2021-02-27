@@ -1,23 +1,21 @@
 package me.crime.loader;
 
+import lombok.extern.apachecommons.CommonsLog;
+import me.crime.dao.URCCatagoriesDAO;
+import me.crime.database.URCCatagories;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import me.crime.dao.URCCatagoriesDAO;
-import me.crime.database.URCCatagories;
-
 @Component(value="loadURCCatagories")
+@CommonsLog
 public class LoadURCCatagories {
 
-	protected static Log log_ = LogFactory.getLog(LoadURCCatagories.class);
 	private final URCCatagoriesDAO urcCatagoriesDAO;
 	
 	/**
@@ -46,7 +44,7 @@ public class LoadURCCatagories {
 		// Read in the URC Codes.
 		InputStream s = ClassLoader.getSystemResourceAsStream("me/crime/loader/CrimeData.txt");
 		if (s == null) {
-			 log_.error("unable to find me/crime/loader/CrimeData.txt");
+			 log.error("unable to find me/crime/loader/CrimeData.txt");
 		} else {
 
 			try (BufferedReader bf = new BufferedReader(new InputStreamReader(s))){
@@ -75,7 +73,7 @@ public class LoadURCCatagories {
 				}
 
 			} catch (IOException e) {
-				log_.error(e.getLocalizedMessage(), e);
+				log.error(e.getLocalizedMessage(), e);
 			}
 
 		}

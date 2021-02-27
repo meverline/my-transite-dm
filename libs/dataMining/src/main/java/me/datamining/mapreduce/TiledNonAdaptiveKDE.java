@@ -1,22 +1,20 @@
 package me.datamining.mapreduce;
 
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-
+import lombok.extern.apachecommons.CommonsLog;
 import me.datamining.Kernel.Epanechnikov;
 import me.datamining.Kernel.IDensityKernel;
 import me.datamining.bandwidth.IBandwidth;
 import me.datamining.bandwidth.SlivermanRule;
-import me.math.grid.tiled.SpatialTile;
 import me.math.grid.SpatialGridPoint;
+import me.math.grid.tiled.SpatialTile;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
+@CommonsLog
 public class TiledNonAdaptiveKDE implements ResultsHandler {
 
-	public static Log log = LogFactory.getLog(TiledNonAdaptiveKDE.class);
 
 	private  IDensityKernel denstiyKernel = new Epanechnikov();
 	private  IBandwidth xBandWidth = new SlivermanRule();

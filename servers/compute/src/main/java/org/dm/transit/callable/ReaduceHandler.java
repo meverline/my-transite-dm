@@ -2,11 +2,9 @@ package org.dm.transit.callable;
 
 import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
-import com.amazonaws.services.sqs.model.SendMessageRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.apachecommons.CommonsLog;
 import me.datamining.TileJob;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import java.util.List;
 import java.util.Objects;
@@ -15,9 +13,9 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
+@CommonsLog
 public class ReaduceHandler implements Callable<Void> {
 
-    private final Log log = LogFactory.getLog(getClass().getName());
     private final List<Future<TileJob>> process;
     private final AmazonSQS sqs;
     private final String reduceUrl;

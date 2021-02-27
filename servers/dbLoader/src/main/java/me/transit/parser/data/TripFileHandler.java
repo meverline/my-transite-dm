@@ -1,31 +1,23 @@
 package me.transit.parser.data;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Objects;
-import java.util.Set;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
+import lombok.extern.apachecommons.CommonsLog;
 import me.database.neo4j.IGraphDatabaseDAO;
 import me.transit.dao.RouteDao;
 import me.transit.database.Route;
 import me.transit.database.Trip;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.util.*;
+import java.util.Map.Entry;
 
 @Component(value="tripFileHandler")
+@CommonsLog
 public class TripFileHandler extends AbstractFileHandler {
 
-	private Log log = LogFactory.getLog(getClass().getName());
 	private final IGraphDatabaseDAO graphDatabase;
 	private final RouteDao routeDao;
 	
@@ -163,7 +155,13 @@ public class TripFileHandler extends AbstractFileHandler {
 				for ( Trip trip : data.getValue()) {
 					trip.setRouteTripIndex(ndx);
 					route.getTripList().add(trip);
-					graphDatabase.createRelationShip(route, trip);
+					try {
+						graphDatabase.createRelationShip(route, trip);
+					} catch (Exception e) {
+						log.error(e.getLocalizedMessage() +
+									" Route "+ route.getRouteId() +
+									" Trip " + trip.getId());
+					}
 					ndx++;
 				}
 				

@@ -1,5 +1,13 @@
 package me.transit.parser.data;
 
+import lombok.extern.apachecommons.CommonsLog;
+import me.transit.dao.RouteGeometryDao;
+import me.transit.database.RouteGeometry;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -8,21 +16,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import org.locationtech.jts.geom.Coordinate;
-import org.locationtech.jts.geom.GeometryFactory;
-
-import me.transit.dao.RouteGeometryDao;
-import me.transit.database.RouteGeometry;
-
 @Component(value="shapeFileHandler")
+@CommonsLog
 public class ShapeFileHandler extends AbstractFileHandler {
 
-	private Log log = LogFactory.getLog(getClass().getName());
 	protected final GeometryFactory factory = new GeometryFactory();
 	private RouteGeometryDao routeGeometryDao;
 

@@ -1,17 +1,15 @@
 package me.transit.json;
 
+import com.fasterxml.jackson.databind.util.StdConverter;
+import lombok.extern.apachecommons.CommonsLog;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import com.fasterxml.jackson.databind.util.StdConverter;
-
+@CommonsLog
 public class JsonToCalendarConvert extends StdConverter<String, Calendar> implements CalendarSerailizer{
 
-    private Log log = LogFactory.getLog(JsonToCalendarConvert.class);
     private final SimpleDateFormat formatter = new SimpleDateFormat(CalendarSerailizer.DATE_TIME_FORMAT);
 
     @Override

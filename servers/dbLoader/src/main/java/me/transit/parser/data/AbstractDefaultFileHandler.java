@@ -1,31 +1,25 @@
 package me.transit.parser.data;
 
+import lombok.extern.apachecommons.CommonsLog;
+import me.database.neo4j.IGraphDatabaseDAO;
+import me.transit.annotation.GTFSFileModel;
+import me.transit.annotation.GTFSSetter;
+import me.transit.database.Agency;
+import me.transit.database.TransitData;
+import me.transit.parser.data.converters.DataConverterFactory;
+import me.transit.parser.data.savers.DataSaver;
+import org.reflections.Reflections;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
-import me.transit.database.Agency;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.reflections.Reflections;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import me.database.neo4j.IGraphDatabaseDAO;
-import me.transit.annotation.GTFSFileModel;
-import me.transit.annotation.GTFSSetter;
-import me.transit.database.TransitData;
-import me.transit.parser.data.converters.DataConverterFactory;
-import me.transit.parser.data.savers.DataSaver;
-
+@CommonsLog
 public abstract class AbstractDefaultFileHandler extends AbstractFileHandler {
 
     private static final String LOCATION = "location";
@@ -33,7 +27,6 @@ public abstract class AbstractDefaultFileHandler extends AbstractFileHandler {
     private static final String LONGITUDE = "stop_lon";
     private static final String AGENCYID = "agency_id";
 
-    protected Log log = LogFactory.getLog(getClass().getName());
     private final Map<String, Class<?>> properties = new HashMap<>();
     private final Map<String, Map<String, Method>> classMethodMap = new HashMap<>();
     protected final IGraphDatabaseDAO graphDatabase;
@@ -183,11 +176,11 @@ public abstract class AbstractDefaultFileHandler extends AbstractFileHandler {
             }
 
             if (!methodMap.containsKey(setMethodName)) {
-                throw new NoSuchMethodException(setMethodName + " class: " + objClass.getName() + " |" + name + "| have " + methodMap.keySet().toString());
+                log.warn("method: " + setMethodName + " class: " + objClass.getName() + " |" + name + "| have " + methodMap.keySet().toString() + " header: " + header);
+                rtn.add(null);
+            } else {
+                rtn.add(new DataSaver(methodMap.get(setMethodName), setMethodName, this.getBlackboard(), name, dataConverterFactory));
             }
-
-            rtn.add(new DataSaver(methodMap.get(setMethodName), setMethodName, this.getBlackboard(), name, dataConverterFactory));
-
         }
         return rtn;
     }
@@ -267,14 +260,15 @@ public abstract class AbstractDefaultFileHandler extends AbstractFileHandler {
 
                 while (fldNdx < data.size()) {
                     DataSaver saver = header.get(headerNdx++);
-
-                    String outData = data.get(fldNdx).trim();
-                    if (outData.length() > 0) {
-                        if (saver.getField().compareTo(AbstractDefaultFileHandler.LATITUDE) == 0 ||
-                                saver.getField().compareTo(AbstractDefaultFileHandler.LOCATION) == 0) {
-                            this.saveLocationData(obj, saver, outData, ldata);
-                        } else if (saver.getField().compareTo(AbstractDefaultFileHandler.AGENCYID) != 0) {
-                            saver.save(obj, outData);
+                    if ( saver != null ) {
+                        String outData = data.get(fldNdx).trim();
+                        if (outData.length() > 0) {
+                            if (saver.getField().compareTo(AbstractDefaultFileHandler.LATITUDE) == 0 ||
+                                    saver.getField().compareTo(AbstractDefaultFileHandler.LOCATION) == 0) {
+                                this.saveLocationData(obj, saver, outData, ldata);
+                            } else if (saver.getField().compareTo(AbstractDefaultFileHandler.AGENCYID) != 0) {
+                                saver.save(obj, outData);
+                            }
                         }
                     }
                     fldNdx++;

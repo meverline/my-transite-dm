@@ -1,5 +1,16 @@
 package me.crime.loader;
 
+import lombok.extern.apachecommons.CommonsLog;
+import me.crime.dao.AddressDao;
+import me.crime.dao.CrimeDao;
+import me.crime.dao.URCCatagoriesDAO;
+import me.crime.database.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
+
 import java.lang.reflect.Method;
 import java.sql.SQLException;
 import java.util.Calendar;
@@ -7,26 +18,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
-
-import me.crime.dao.AddressDao;
-import me.crime.dao.CrimeDao;
-import me.crime.dao.URCCatagoriesDAO;
-import me.crime.database.Address;
-import me.crime.database.Arrested;
-import me.crime.database.Crime;
-import me.crime.database.GeoPoint;
-import me.crime.database.URCCatagories;
-import me.crime.database.XmlReadable;
-import me.crime.database.XmlTags;
-
 @Component(value="parseCrimeXml")
+@CommonsLog
 public class ParseCrimeXml extends DefaultHandler implements XmlTags {
 
 	private StringBuffer 	   buffer_ = new StringBuffer();
@@ -40,8 +33,6 @@ public class ParseCrimeXml extends DefaultHandler implements XmlTags {
 	private final CrimeDao crimeDao;
 	private final URCCatagoriesDAO urcCatagoriesDAO;
 
-	protected static Log log_ = LogFactory.getLog(ParseCrimeXml.class);
-	
 	@Autowired
 	public ParseCrimeXml(AddressDao addressDao, CrimeDao crimeDao, URCCatagoriesDAO urcCatagoriesDAO) {
 		this.addressDao = addressDao;
@@ -205,7 +196,7 @@ public class ParseCrimeXml extends DefaultHandler implements XmlTags {
 			setMethod.invoke(obj, args);
 
 		} catch (Exception e) {
-			DataBaseLoader.log_.error("saveData: " + method, e);
+			log.error("saveData: " + method, e);
 			throw new SAXException("saveData:", e);
 		}
 
@@ -234,11 +225,11 @@ public class ParseCrimeXml extends DefaultHandler implements XmlTags {
 				curObject_ = reader;
 
 			} catch (InstantiationException e) {
-				DataBaseLoader.log_.error("startElement: " + className,e);
+				log.error("startElement: " + className,e);
 			} catch (IllegalAccessException e) {
-				DataBaseLoader.log_.error("startElement: " + className,e);
+				log.error("startElement: " + className,e);
 			} catch (ClassNotFoundException e) {
-				DataBaseLoader.log_.error("startElement: " + className,e);
+				log.error("startElement: " + className,e);
 			}
 		}
 

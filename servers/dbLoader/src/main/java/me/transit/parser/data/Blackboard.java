@@ -1,29 +1,28 @@
 package me.transit.parser.data;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.stereotype.Component;
-
+import lombok.extern.apachecommons.CommonsLog;
 import me.math.kdtree.MinBoundingRectangle;
 import me.transit.database.Agency;
 import me.transit.database.RouteGeometry;
 import me.transit.database.ServiceDate;
 import me.transit.database.Trip;
+import org.springframework.stereotype.Component;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Component(value="blackboard")
+@CommonsLog
 public class Blackboard {
 
-	private final Log log = LogFactory.getLog(getClass().getName());
 	private final Map<String, String> routeShortName = new HashMap<>();
 	private final Map<String, RouteGeometry> shaps = new HashMap<>();
 	private final Map<String, ServiceDate> service = new HashMap<>();
 	private final Map<String, RouteTripPair> tripMap = new HashMap<>();
 	private final Map<String, List<Trip>> routeToTrips = new HashMap<>();
 	private final Map<String, Long> routeuuid = new HashMap<>();
+	private final Map<String, Long> stopuuid = new HashMap<>();
 	private Agency agency = null;
 	private MinBoundingRectangle mbr = null;
 
@@ -148,5 +147,7 @@ public class Blackboard {
 	public Map<String, Long> getRouteuuid() {
 		return routeuuid;
 	}
-	
+
+	public Map<String, Long> getStopuuid() { return stopuuid; }
+
 }

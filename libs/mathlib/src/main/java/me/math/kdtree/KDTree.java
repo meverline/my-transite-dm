@@ -15,23 +15,21 @@
 //along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package me.math.kdtree;
 
+import lombok.extern.apachecommons.CommonsLog;
+import me.math.Vertex;
+import me.math.grid.SpatialGridPoint;
+
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import me.math.Vertex;
-import me.math.grid.SpatialGridPoint;
-
+@CommonsLog
 public class KDTree {
 
 	private INode root_ = null;
 	private GridComparator comparator_ = null;
-	private Log log = LogFactory.getLog(KDTree.class);
 
 	/**
 	 * 

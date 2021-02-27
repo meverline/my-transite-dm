@@ -1,7 +1,6 @@
 package me.config;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import lombok.extern.apachecommons.CommonsLog;
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -12,7 +11,6 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
-import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
@@ -22,18 +20,18 @@ import java.util.Properties;
 @EnableTransactionManagement
 @ComponentScan(basePackages="me.transit")
 @PropertySource({ "classpath:persistence-${envTarget:dev}.properties" })
+@CommonsLog
 public class CommonConfigBase {
 	
     @Autowired
     private Environment env;
-	private final Log log = LogFactory.getLog(CommonConfigBase.class);
 
+	/**
+	 *
+	 * @return
+	 */
 	protected Environment getEnv() {
 		return env;
-	}
-
-	protected Log getLog() {
-		return log;
 	}
 
 	/**
@@ -67,7 +65,6 @@ public class CommonConfigBase {
 		sessionFactory.setDataSource(this.dataSource());
 		sessionFactory.setPackagesToScan(this.packageToScan());
 		sessionFactory.setHibernateProperties(this.hibernateProperties());
-		log.info("sessionFactory " + sessionFactory.getObject());
 		return sessionFactory;
 	}
 

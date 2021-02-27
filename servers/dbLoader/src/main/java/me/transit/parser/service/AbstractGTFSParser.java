@@ -2,6 +2,7 @@ package me.transit.parser.service;
 
 import ch.hsr.geohash.GeoHash;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.apachecommons.CommonsLog;
 import me.transit.omd.dao.LocationDao;
 import me.transit.omd.data.Feed;
 import me.transit.omd.data.Location;
@@ -10,8 +11,6 @@ import me.transit.parser.data.Blackboard;
 import me.transit.parser.data.FileHandlerFactory;
 import me.transit.parser.message.MessageAgency;
 import me.transit.parser.message.ParserMessage;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,9 +19,9 @@ import java.sql.SQLException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
+@CommonsLog
 public abstract class AbstractGTFSParser {
 
-	private final Log log = LogFactory.getLog(getClass().getName());
 	private final FileHandlerFactory factory;	
 	private final OpenMobilityData dataFeed = new OpenMobilityData();
 	private List<Location> locList = null;
@@ -80,13 +79,6 @@ public abstract class AbstractGTFSParser {
 	}
 
 	/**
-	 * @return the log
-	 */
-	public Log getLog() {
-		return log;
-	}
-
-	/**
 	 * @return the defaultHandler
 	 */
 	protected FileHandlerFactory getFactory() {
@@ -116,14 +108,14 @@ public abstract class AbstractGTFSParser {
 
 		this.blackboard.reset();
 		for (String dataFile : files) {
-			getLog().info("parse: " + dataFile + " " + diretory);
+			log.info("parse: " + dataFile + " " + diretory);
 			String key = dataFile.trim();
 			this.getFactory().getHandler(key).parse(filePath(diretory, dataFile));
 			
 		}
 		
 		this.getFactory().getHandler("agency.txt").endProcess();
-		getLog().info("done processing: " + diretory);
+		log.info("done processing: " + diretory);
 	}
 
 	/**
@@ -151,7 +143,7 @@ public abstract class AbstractGTFSParser {
 
 			File check = new File(path, "agency.txt");
 			if (check.exists()) {
-				this.getLog().info(path + " ... ");
+				log.info(path + " ... ");
 				this.parse(path);
 			} else {
 				log.warn("agency.txt not found for: " + loc + " pids found ");
@@ -252,7 +244,7 @@ public abstract class AbstractGTFSParser {
 				}
 			}
 		} catch (Exception ex) {
-			this.getLog().error(ex.getLocalizedMessage(), ex);
+			log.error(ex.getLocalizedMessage(), ex);
 		}
 	}
 

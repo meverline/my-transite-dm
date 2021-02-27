@@ -1,17 +1,14 @@
 package org.dm.transit.scheduled;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.concurrent.*;
-
-import com.amazonaws.services.sqs.model.SendMessageRequest;
+import com.amazonaws.services.sqs.AmazonSQS;
+import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
+import com.amazonaws.services.sqs.model.Message;
+import com.amazonaws.services.sqs.model.ReceiveMessageRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.apachecommons.CommonsLog;
 import me.datamining.ComputeTile;
 import me.datamining.PopulateTile;
 import me.datamining.TileJob;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.dm.transit.callable.ComputeTileCallable;
 import org.dm.transit.callable.PopulateJobCallable;
 import org.dm.transit.callable.ReaduceHandler;
@@ -23,16 +20,19 @@ import org.springframework.core.env.Environment;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import com.amazonaws.services.sqs.AmazonSQS;
-import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
-import com.amazonaws.services.sqs.model.Message;
-import com.amazonaws.services.sqs.model.ReceiveMessageRequest;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 @Service
 @PropertySource({ "classpath:persistence-${envTarget:dev}.hmj.properties" })
+@CommonsLog
 public class JobProcessing {
-	
-	private final Log log = LogFactory.getLog(getClass().getName());
+
 	private final ExecutorService executor;
 	private final AmazonSQS sqs;
 	private final String computeUrl;

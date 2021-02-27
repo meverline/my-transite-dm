@@ -1,18 +1,15 @@
 package me.transit.json;
 
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.fasterxml.jackson.databind.util.StdConverter;
+import lombok.extern.apachecommons.CommonsLog;
+import org.apache.commons.codec.binary.Base64;
 import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.io.ParseException;
 import org.locationtech.jts.io.WKBReader;
 
+@CommonsLog
 public class Base64StringToGeometry extends StdConverter<String, Geometry> {
 
-	private final Log log = LogFactory.getLog(getClass().getName());
-	
 	@Override
 	public Geometry convert(String value) {
 		WKBReader georeader = new WKBReader();

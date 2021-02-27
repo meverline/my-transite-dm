@@ -1,18 +1,15 @@
 package me.datamining.metric;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.extern.apachecommons.CommonsLog;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
+@CommonsLog
 public abstract class AbstractSpatialMetric {
 
-	@JsonIgnore
-	public static Log log = LogFactory.getLog(AbstractSpatialMetric.class);
 	@JsonIgnore
 	private Map<Long, IDataProvider> dataList = new HashMap<Long,IDataProvider>();
 	

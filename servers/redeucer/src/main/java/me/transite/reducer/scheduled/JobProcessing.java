@@ -5,14 +5,13 @@ import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
 import com.amazonaws.services.sqs.model.Message;
 import com.amazonaws.services.sqs.model.ReceiveMessageRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.apachecommons.CommonsLog;
 import me.database.mongo.MongoDocumentSession;
 import me.datamining.ComputeTile;
 import me.datamining.PopulateTile;
 import me.datamining.TileJob;
 import me.transite.reducer.callable.ComputeReduceCallable;
 import me.transite.reducer.callable.PopulateReduceCallable;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -29,9 +28,9 @@ import java.util.concurrent.Future;
 
 @Service
 @PropertySource({ "classpath:persistence-${envTarget:dev}.hmj.properties" })
+@CommonsLog
 public class JobProcessing {
-	
-	private final Log log = LogFactory.getLog(getClass().getName());
+
 	private final ExecutorService executor;
 	private final AmazonSQS sqs;
 	private final String reducerUrl;

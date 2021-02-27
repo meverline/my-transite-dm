@@ -48,6 +48,7 @@ public class TransitStopFileHandler extends AbstractDefaultFileHandler {
 		stop.setName(stop.getName().toLowerCase());
 		transiteStopDao.save(stop);
 		getGraphDatabase().addNode(stop);
+		this.getBlackboard().getStopuuid().put(stop.getId(), stop.getUUID());
 	}
 
 	@Override

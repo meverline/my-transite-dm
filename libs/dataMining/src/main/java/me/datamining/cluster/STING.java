@@ -16,22 +16,10 @@
 
 package me.datamining.cluster;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-
-import me.math.grid.AbstractSpatialGrid;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.commons.math3.distribution.BinomialDistribution;
-import org.apache.commons.math3.distribution.NormalDistribution;
-import org.apache.commons.math3.distribution.PoissonDistribution;
-import org.apache.commons.math3.exception.NumberIsTooLargeException;
-
-import org.locationtech.jts.geom.Point;
-
+import lombok.extern.apachecommons.CommonsLog;
 import me.datamining.ClusteringAlgorithm;
 import me.math.Vertex;
+import me.math.grid.AbstractSpatialGrid;
 import me.math.grid.SpatialGridPoint;
 import me.math.grid.array.UniformSpatialGrid;
 import me.math.grid.data.STINGDataSample;
@@ -39,7 +27,17 @@ import me.math.kdtree.IKDSearch;
 import me.math.kdtree.INode;
 import me.math.kdtree.KDTree;
 import me.math.kdtree.search.RangeSearch;
+import org.apache.commons.math3.distribution.BinomialDistribution;
+import org.apache.commons.math3.distribution.NormalDistribution;
+import org.apache.commons.math3.distribution.PoissonDistribution;
+import org.apache.commons.math3.exception.NumberIsTooLargeException;
+import org.locationtech.jts.geom.Point;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+
+@CommonsLog
 public class STING implements ClusteringAlgorithm {
 
 	private AbstractSpatialGrid grid_ = null;
@@ -48,7 +46,6 @@ public class STING implements ClusteringAlgorithm {
 	private double confidence = 0.5;
 	private double density = 1;
 	private KDTree tree_ = null;
-	private Log log = LogFactory.getLog(STING.class);
 
 	/**
 	 * 
