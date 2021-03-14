@@ -212,10 +212,10 @@
 		<module>registration</module>
 		<module>compute</module>
 		<module>redeucer</module>
-		<module>data</module>
 		<module>manager</module>
 		<module>dbLoader</module>
-		<module>web</module>
+		<module>heatmapWeb/gui</module>
+		<module>heatmapWeb</module>
 	</modules>
 
 </project>

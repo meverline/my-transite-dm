@@ -1,6 +1,7 @@
 package me.transit.dao;
 
 import lombok.extern.apachecommons.CommonsLog;
+import me.transit.database.Agency;
 import me.transit.database.Route;
 import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,10 +46,11 @@ public class RouteDao extends TransitDao<Route>  {
 			CriteriaQuery<Route> crit = builder.createQuery(Route.class);
 			
 			Root<Route> root = crit.from(Route.class);
+			Join<Route, Agency> agency_join = root.join("agency", JoinType.INNER);
 
 			crit.select(root).where(
 					builder.and(builder.like(root.get("shortName"), routeNumber),
-								builder.equal(root.get("agency").get("name"), agencyName)
+								builder.equal(agency_join.get("name"), agencyName)
 			));
 
 			rtn = session.createQuery(crit).getResultList();

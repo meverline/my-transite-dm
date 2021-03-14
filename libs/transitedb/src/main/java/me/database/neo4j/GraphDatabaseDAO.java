@@ -297,10 +297,12 @@ public class GraphDatabaseDAO implements IGraphDatabaseDAO {
 		Transaction tx = beginTransaction();
 		try {
 
+			String headSign = visitor.makeHeadSignKey(agency.getName());
+
 			node = graphDb.findNode(Label.label(trip.getClass().getSimpleName()), 
 											FIELD.trip.name(), visitor.makeKey(agency.getName()));
 			Node hs = graphDb.findNode(Label.label(GraphDatabaseDAO.HEAD_SIGN), 
-											FIELD.trip_headSign.name(), visitor.makeHeadSignKey(agency.getName()));
+											FIELD.trip_headSign.name(), headSign);
 
 			if (node == null) {
 				node = graphDb.createNode(Label.label(trip.getClass().getSimpleName()));
@@ -312,9 +314,12 @@ public class GraphDatabaseDAO implements IGraphDatabaseDAO {
 			}
 
 			if (hs == null) {
+				log.info("Adding headsign node label: " + headSign);
 				hs = graphDb.createNode(Label.label(GraphDatabaseDAO.HEAD_SIGN));
-				hs.setProperty(FIELD.trip_headSign.name(), visitor.makeHeadSignKey(agency.getName()));
+				hs.setProperty(FIELD.trip_headSign.name(), headSign);
 				createRelationShip(hs, agency);
+			} else {
+				log.info("Adding headsign node found: " + headSign);
 			}
 
 			tx.success();
@@ -443,11 +448,11 @@ public class GraphDatabaseDAO implements IGraphDatabaseDAO {
 				from = this.addNode(fromRoute);
 			}
 
-			Node tohs = graphDb.findNode(Label.label(GraphDatabaseDAO.HEAD_SIGN), FIELD.trip_headSign.name(),
-					tripVisitor.makeHeadSignKey(fromRoute.getAgency().getName()));
+			String hs = tripVisitor.makeHeadSignKey(fromRoute.getAgency().getName());
+			Node tohs = graphDb.findNode(Label.label(GraphDatabaseDAO.HEAD_SIGN), FIELD.trip_headSign.name(), hs);
 
 			if (to == null || from == null) {
-				log.warn("Warng adding relationsip route to trip: nodes null: " + from + " to " + to);
+				log.warn("Warng adding relationsip route: " + from + " to trip " + to + " nodes null");
 				tx.success();
 				return false;
 			}
@@ -455,8 +460,8 @@ public class GraphDatabaseDAO implements IGraphDatabaseDAO {
 			Relationship relationship = from.createRelationshipTo(to, REL_TYPES.HAS_A);
 			relationship.setProperty(FIELD.className.name(), this.getInterface(fromRoute));
 
-			if (tohs == null || from == null) {
-				log.warn("Warng adding HeadSign relationsip route to trip: nodes null: " + from + " to " + tohs);
+			if (tohs == null ) {
+				log.warn("Warng adding HeadSign relationsip route: " + from + " to heedsign " + tohs +  " null values " + hs);
 				tx.success();
 				return false;
 			}

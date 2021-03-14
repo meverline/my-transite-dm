@@ -9,9 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -52,9 +50,11 @@ public abstract class TransitDao<T extends TransitData> extends AbstractHibernat
 			
 			@SuppressWarnings("unchecked")
 			Root<T> root = (Root<T>) crit.from(this.getDaoClass());
+			Join<T, Agency> agency_join = root.join("uuid", JoinType.INNER);
+
 			crit.select(root.get("id"));
 			crit.where(
-				builder.equal(root.get("agency").get("name"), agency.getName())
+				builder.equal(agency_join.get("name"), agency.getName())
 			);
 			
 			alist = session.createQuery(crit).getResultList();
@@ -86,26 +86,22 @@ public abstract class TransitDao<T extends TransitData> extends AbstractHibernat
 			CriteriaQuery<T> crit = builder.createQuery(this.getDaoClass());
 			
 			Root<T> root = crit.from(this.getDaoClass());
+			Join<T, Agency> agency_join = root.join("agency", JoinType.INNER);
 
 			crit.select(root).where(
 				builder.and(builder.equal(root.get("id"), id),
-							builder.equal(root.get("agency").get("name"), agencyName)
+							builder.equal(agency_join.get("agency").get("name"), agencyName)
 			));
 
-			List<T>  aList = (List<T>) session.createQuery(crit).getResultList();
-					
-			if ( aList.size() < 1 ) {
-				log.info(" Unable to find Id: " + id + " agency " + agencyName);
-			} else {
-				rtn = aList.get(0);
-			}
+			rtn = session.createQuery(crit).getSingleResult();
 
-		} catch (Exception ex) {
+		} catch (Exception | IncompatibleClassChangeError ex) {
 			log.error(getDaoClass().getName() +
-						   ": " + id + 
-						   " " + agencyName +
-						   " " + ex.getClass().getName() +
-						   " " + ex.getLocalizedMessage());
+						   ": id " + id +
+						   ", AN " + agencyName +
+						   ", (" + ex.getClass().getName() +
+						   ") MSG: " + ex.getLocalizedMessage());
+			throw ex;
 		}
 
 		return rtn;

@@ -48,7 +48,7 @@ public class TripFileHandler extends AbstractFileHandler {
 	 */
 	@Override
 	public boolean parse(String shapeFile) throws Exception {
-		boolean rtn = false;
+		boolean rtn;
 		Map<String, List<Trip>> routeToTrips = new HashMap<>();
 		Set<String> invalidService = new HashSet<>();
 
@@ -58,15 +58,15 @@ public class TripFileHandler extends AbstractFileHandler {
 		if (!fp.exists()) {
 			getBlackboard().getTripMap().clear();
 			log.error("file does not exist: " + shapeFile);
-			return rtn;
+			return false;
 		}
 
 		try (BufferedReader inStream = new BufferedReader(new FileReader(shapeFile))){
-			;
+
 			if (!inStream.ready()) {
 				getBlackboard().getTripMap().clear();
 				log.error("file is empty: " + shapeFile);
-				return rtn;
+				return false;
 			}
 
 			List<String> header = new ArrayList<>();
@@ -109,15 +109,17 @@ public class TripFileHandler extends AbstractFileHandler {
 					}
 
 					if (indexMap.containsKey("trip_headsign")) {
-						trip.setHeadSign(data[indexMap.get("trip_headsign")].trim());
+						String headSign = data[indexMap.get("trip_headsign")].trim();
+						trip.setHeadSign(headSign.replaceAll("\"", " ").trim());
 					}
 
 					if (indexMap.containsKey("direction_id")) {
+						int id = Integer.parseInt(data[indexMap.get("direction_id")].trim());
 						try {
-							int id = Integer.parseInt(data[indexMap.get("direction_id")].trim());
 							Trip.DirectionType[] type = Trip.DirectionType.values();
 							trip.setDirectionId(type[id]);
 						} catch (Exception e) {
+							log.warn("invalid direction_id: " + Integer.toString(id));
 						}
 					}
 
