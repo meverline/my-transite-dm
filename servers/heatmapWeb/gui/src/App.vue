@@ -1,28 +1,26 @@
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500,700,400italic|Material+Icons">
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
 
-<template>
-  <div id="app">
-    <md-toolbar class="md-dense">
-      <md-menu-item>Settings</md-menu-item>
-      <md-menu-item>Notifications</md-menu-item>
-      <md-menu-item>About</md-menu-item>
-    </md-toolbar>
-    <vue-splitter-v initial-size="20%">
-      <template slot="left">
-        <p>Query</p>
-      </template>
-      <template slot="'right">
-        <vue-splitter-h>
-          <template slot="top" ><p>Map</p></template>
-          <template slot="bottom">
-            <p>Table</p>
-          </template>
-        </vue-splitter-h>
-      </template>
-    </vue-splitter-v>
-  </div>
-</template>
+<div id="app">
+  <md-toolbar class="md-dense">
+    <md-menu-item>Settings</md-menu-item>
+    <md-menu-item>Notifications</md-menu-item>
+    <md-menu-item>About</md-menu-item>
+  </md-toolbar>
+  <vue-splitter-v initial-size="20%">
+    <template slot="left">
+      <p>Query</p>
+    </template>
+    <template slot="'right">
+      <vue-splitter-h>
+        <template slot="top" ><p>Map</p></template>
+        <template slot="bottom">
+          <p>Table</p>
+        </template>
+      </vue-splitter-h>
+    </template>
+  </vue-splitter-v>
+</div>
 
 <script>
 

@@ -47,8 +47,8 @@
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-spatial</artifactId>
-			<version>5.4.10.Final</version>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.4.20.Final</version>
 		</dependency>
 
 		<dependency>

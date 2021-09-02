@@ -1,6 +1,5 @@
 package me.datamining;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -12,20 +11,21 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 
 import me.datamining.shapes.Shape;
 import me.datamining.types.DataMiningTypes;
+import me.datamining.types.HourOfDay;
 import me.datamining.types.MetricTypes;
 
-@JsonRootName("DMJob")
+@JsonRootName("DataMiningJob")
 public class DataMiningJob {
 	
 	public enum Day { Sun, Mon, Tue, Wen, Thur, Fri, Sat }
 	
 	private String name;
-	private double gridSpaceInMeters = 1609.34; // 1 mile
+	private double gridSpaceInMeters = 1609.34 / 4.0; // 1 mile
 	private DataMiningTypes dataMiningType = DataMiningTypes.KDE_HEATMAP;
 	private MetricTypes metricType = MetricTypes.ServiceFrequnceAtStop;
 	private Shape shape;
-	private String startTime = null;
-	private String endTime = null;
+	private HourOfDay startTime = null;
+	private HourOfDay endTime = null;
 	private List<String> agencies  = new ArrayList<>();
 	private List<Day> weekdays = new ArrayList<>();
 	
@@ -112,7 +112,7 @@ public class DataMiningJob {
 	 * @return the startTime
 	 */
 	@JsonGetter("startTime")
-	public String getStartTime() {
+	public HourOfDay getStartTime() {
 		return startTime;
 	}
 
@@ -120,7 +120,7 @@ public class DataMiningJob {
 	 * @param startTime the startTime to set
 	 */
 	@JsonSetter("startTime")
-	public void setStartTime(String startTime) {
+	public void setStartTime(HourOfDay startTime) {
 		this.startTime = startTime;
 	}
 	
@@ -129,15 +129,14 @@ public class DataMiningJob {
 	 */
 	@JsonIgnore
 	public void setStartTime(Calendar startTime) {
-		SimpleDateFormat format = new SimpleDateFormat("HH:mm");
-		this.startTime = format.format(startTime.getTime());
+		this.startTime = new HourOfDay(startTime.get(Calendar.HOUR_OF_DAY), startTime.get(Calendar.MINUTE));
 	}
 
 	/**
 	 * @return the endTime
 	 */
 	@JsonGetter("endTime")
-	public String getEndTime() {
+	public HourOfDay getEndTime() {
 		return endTime;
 	}
 
@@ -145,17 +144,16 @@ public class DataMiningJob {
 	 * @param endTime the endTime to set
 	 */
 	@JsonSetter("endTime")
-	public void setEndTime(String endTime) {
+	public void setEndTime(HourOfDay endTime) {
 		this.endTime = endTime;
 	}
 	
 	/**
-	 * @param startTime the startTime to set
+	 * @param endTime the startTime to set
 	 */
 	@JsonIgnore
 	public void setEndTime(Calendar endTime) {
-		SimpleDateFormat format = new SimpleDateFormat("HH:mm");
-		this.endTime = format.format(endTime.getTime());
+		this.endTime = new HourOfDay(endTime.get(Calendar.HOUR_OF_DAY), endTime.get(Calendar.MINUTE));
 	}
 
 	/**

@@ -5,6 +5,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import lombok.extern.apachecommons.CommonsLog;
+import me.datamining.DataMiningJob;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -43,8 +44,8 @@ public class JobProcessing {
 
         for (final Message message : messages) {
         	try {
-        		
-        		
+				DataMiningJob job = this.mapper.readValue(message.getBody(), DataMiningJob.class);
+
         	} catch ( Exception ex) {
         		log.error(ex.getLocalizedMessage(), ex);
         	}

@@ -1,10 +1,12 @@
 package me.datamining;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
 import me.math.Vertex;
 
+@JsonRootName("DataItem")
 public class DataItem {
 	
 	private Vertex location = null;

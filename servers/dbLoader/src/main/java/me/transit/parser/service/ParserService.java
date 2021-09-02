@@ -52,7 +52,7 @@ public class  ParserService extends AbstractGTFSParser {
             final List<Message> messages = sqs.receiveMessage(request).getMessages();
             for (final Message message : messages) {
                 try {
-                    this.messageProcessor(new ObjectMapper().readValue(message.getMD5OfBody(), ParserMessage.class));
+                    this.messageProcessor(new ObjectMapper().readValue(message.getBody(), ParserMessage.class));
                 } catch (JsonProcessingException ex) {
                     log.error(ex.getLocalizedMessage(), ex);
                 }

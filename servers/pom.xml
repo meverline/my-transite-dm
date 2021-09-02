@@ -211,7 +211,6 @@
 	<modules>
 		<module>registration</module>
 		<module>compute</module>
-		<module>redeucer</module>
 		<module>manager</module>
 		<module>dbLoader</module>
 		<module>heatmapWeb/gui</module>

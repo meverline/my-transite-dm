@@ -1,51 +1,16 @@
 <template>
   <form id="standardFilters" v-on:submit.prevent="onSubmit">
-    <div>
-      <md-radio v-model="queryType" value="circle">Circle</md-radio>
-      <md-radio v-model="queryType" value="rectangle">Rectangle</md-radio>
-      <md-radio v-model="queryType" value="agency">Agency</md-radio>
-    </div>
-    <div v-if="queryType === 'circle'">
-      <md-field>
-        <label>Distance:</label>
-        <md-input v-model="distance" type="text" maxlength="4" required v-model="initial"/>
-        <md-tooltip md-direction="right">Distance or radius of circle</md-tooltip>
-      </md-field>
-      <md-field>
-        <label>Unit:</label>
-        <md-select id="unit" required v-model="distanceUnits">
-          <md-option value="Meter">Meter</md-option>
-          <md-option value="Kilometer">Kilometer</md-option>
-          <md-option value="Mile">Mile</md-option>
-          <md-option value="Feet">Feet</md-option>
-        </md-select>
-        <md-tooltip md-direction="right">Distance units used</md-tooltip>
-      </md-field>
-      <md-field>
-        <label>Center:</label>
-        <md-input v-model="center" type="text" minlength="14" maxlength="14" required/>
-        <md-tooltip md-direction="right">Center of circle</md-tooltip>
-      </md-field>
-    </div>
-    <div v-else-if="queryType === 'rectangle'">
-      <md-field>
-        <label>Upper Left:</label>
-        <input v-model="upperLeft" type="text" minlength="14" maxlength="14" required/>
-        <md-tooltip md-direction="right">Upper Left corner of geographic box</md-tooltip>
-      </md-field>
-      <md-field>
-        <label>Lower Right:</label>
-        <input v-model="lowerRight" type="text" minlength="14" maxlength="14" required/>
-        <md-tooltip md-direction="right">Lower Left corner of geographic box</md-tooltip>
-      </md-field>
-    </div>
-    <div v-else-if="queryType === 'agency'">
-      <md-content class="md-scrollbar">
-        <select id="v-for-agencys" multiple size="5">
-          <option v-for="value in agencys" v-bind:value="value">{{ value }}</option>
-        </select>
-      </md-content>
-    </div>
+    <md-tabs>
+      <md-tab id="circle" md-label="Circle" >
+        <Circle></Circle>
+      </md-tab>
+      <md-tab id="rectangle" md-label="Rectangle" >
+        <Rectangle></Rectangle>
+      </md-tab>
+      <md-tab id="agency" md-label="Agency" >
+        <Agency></Agency>
+      </md-tab>
+    </md-tabs>
     <md-field>
       <label>Generate:</label>
       <md-select v-model="metric">
@@ -95,21 +60,20 @@
 </template>
 
 <script>
+
+import Circle from "@/components/queryforms/Circle";
+import Rectangle from "@/components/queryforms/Rectangle";
+import Agency from "@/components/queryforms/Agency";
+
 export default {
   name: "QueryLayout",
+  components: {Agency, Rectangle, Circle},
   data: () => ({
-    queryType: 'rectangle',
     metric: '',
     weekdays: [],
     startHour: '',
     endHour: '',
-    agencys: ['Metro', 'ART', 'CUE', 'RideOn', 'FallsChurch', 'FairfaxCity'],
-    upperLeft: '',
-    lowerRight: '',
-    center: '',
-    distance: 10,
-    distanceUnits: 'Meter',
-    showQueryData: false,
+    query: {}
   })
 }
 </script>

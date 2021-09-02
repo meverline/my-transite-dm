@@ -9,8 +9,8 @@ import java.util.concurrent.Callable;
 
 public class ComputeTileCallable implements Callable<TileJob> {
 
-    private TiledNonAdaptiveKDE tiledNonAdaptiveKDE;
-    private ComputeTile job;
+    private final TiledNonAdaptiveKDE tiledNonAdaptiveKDE;
+    private final ComputeTile job;
 
     public ComputeTileCallable(TiledNonAdaptiveKDE tiledNonAdaptiveKDE, ComputeTile computeTile) {
         this.tiledNonAdaptiveKDE = Objects.requireNonNull(tiledNonAdaptiveKDE,"tiledNonAdaptiveKDE can not be null");

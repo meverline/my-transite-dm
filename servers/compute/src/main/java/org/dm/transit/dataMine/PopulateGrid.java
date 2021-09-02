@@ -28,9 +28,7 @@ public class PopulateGrid {
                 search.setPoint(item.getLocation());
                 search.setDistanceInMeters(gridTile.getGridSpacingMeters());
 
-                tree.find(search);
-                List<SpatialGridPoint> results = search.getResults();
-
+                List<SpatialGridPoint> results = tree.find(search);
                 for (SpatialGridPoint pt : results) {
                     pt.getData().addValue(item.getValue());
                 }
