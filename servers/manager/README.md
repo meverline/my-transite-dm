@@ -1,4 +1,4 @@
-## Compute Manager
+ ## Compute Manager
 
 Manages the computation of user requested KDE this 
 involves the following:
