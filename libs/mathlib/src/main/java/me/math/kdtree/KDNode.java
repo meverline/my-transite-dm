@@ -16,129 +16,64 @@
 
 package me.math.kdtree;
 
+import lombok.Data;
 import me.math.Vertex;
 import me.math.grid.SpatialGridPoint;
 
-public class KDNode implements  INode {
+@Data
+public class KDNode implements INode {
 
-  private Vertex center_;
-  private SpatialGridPoint point_;
-  private INode.Direction direction_;
-  private MinBoundingRectangle mbr_;
-  private KDNode left_;
-  private KDNode right_;
-  private INode parent_;
-  private int    depth_ = 0;
+    private Vertex pointVertex; // center
+    private SpatialGridPoint point;
+    private INode.Direction direction;
+    private MinBoundingRectangle MBR;
+    private KDNode left;
+    private KDNode right;
+    private INode parent;
+    private int depth = 0;
 
-  public KDNode(SpatialGridPoint loc, INode.Direction dir, INode parent, int depth)
-  {
-          point_ = loc;
-          direction_ = dir;
-          center_ = loc.getVertex();
-          mbr_ = new MinBoundingRectangle(loc);
-          parent_ = parent;
-          depth_ = depth;
-  }
+    public KDNode(SpatialGridPoint loc, INode.Direction dir, INode parent, int depth) {
+        this.point = loc;
+        this.direction = dir;
+        this.pointVertex = loc.getVertex();
+        this.MBR = new MinBoundingRectangle(loc);
+        this.parent = parent;
+        this.depth = depth;
+    }
 
-  /*
-   * (non-Javadoc)
-   * @see me.math.kdtree.INode#getDepth()
-   */
-  public int getDepth()
-  {
-          return depth_;
-  }
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return getDirection() + " " + getDepth() + " { " +
+                getPoint().getIndex() + " ( " + getPointVertex().getLatitudeDegress() + "," +
+                getPointVertex().getLongitudeDegress() + ")";
+    }
 
-  /*
-   * (non-Javadoc)
-   * @see me.math.kdtree.INode#getPoint()
-   */
-  public SpatialGridPoint getPoint() {
-          return point_;
-  }
+    /*
+     * (non-Javadoc)
+     * @see me.math.kdtree.INode#contains(me.math.Vertex)
+     */
+    public boolean contains(Vertex pt) {
+        return getMBR().contains(pt);
+    }
 
-  /* (non-Javadoc)
-   * @see ciras.math.INode#getPointVertex()
-   */
-  public Vertex getPointVertex()
-  {
-          return center_;
-  }
+    /*
+     * (non-Javadoc)
+     * @see me.math.kdtree.INode#setLeft(me.math.kdtree.INode)
+     */
+    public void setLeft(INode left) {
+        this.left = KDNode.class.cast(left);
+    }
 
-  /*
-   * (non-Javadoc)
-   * @see me.math.kdtree.INode#getDirection()
-   */
-  public INode.Direction getDirection() {
-          return direction_;
-  }
-
-  /*
-   * (non-Javadoc)
-   * @see me.math.kdtree.INode#getMBR()
-   */
-  public MinBoundingRectangle getMBR() {
-          return mbr_;
-  }
-
-  /*
-   * (non-Javadoc)
-   * @see me.math.kdtree.INode#contains(me.math.Vertex)
-   */
-  public boolean contains(Vertex pt)
-  {
-          return getMBR().contains(pt);
-  }
-
-  /*
-   * (non-Javadoc)
-   * @see me.math.kdtree.INode#getLeft()
-   */
-  public INode getLeft() {
-          return left_;
-  }
-
-  /* 
-   * (non-Javadoc)
-   * @see me.math.kdtree.INode#setLeft(me.math.kdtree.INode)
-   */
-  public void setLeft(INode left_) {
-          this.left_ = KDNode.class.cast(left_);
-  }
-
-  /* 
-   * (non-Javadoc)
-   * @see me.math.kdtree.INode#getRight()
-   */
-  public INode getRight() {
-          return right_;
-  }
-
-  /* 
-   * (non-Javadoc)
-   * @see me.math.kdtree.INode#setRight(me.math.kdtree.INode)
-   */
-  public void setRight(INode right_) {
-          this.right_ = KDNode.class.cast(right_);
-  }
-
-  /* 
-   * (non-Javadoc)
-   * @see me.math.kdtree.INode#getParent()
-   */
-  public INode getParent()
-  {
-          return parent_;
-  }
-
-  /* 
-   * (non-Javadoc)
-   * @see java.lang.Object#toString()
-   */
-  public String toString() {
-      return getDirection() + " " + getDepth() + " { " +
-              getPoint().getIndex() + " ( " + getPointVertex().getLatitudeDegress() + "," +
-              getPointVertex().getLongitudeDegress() + ")";
-  }
+    /*
+     * (non-Javadoc)
+     * @see me.math.kdtree.INode#setRight(me.math.kdtree.INode)
+     */
+    public void setRight(INode right) {
+        this.right = KDNode.class.cast(right);
+    }
 
 }

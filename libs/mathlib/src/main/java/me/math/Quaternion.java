@@ -17,6 +17,8 @@
 package me.math;
 
 
+import lombok.Data;
+
 /*************************************************************************
  * Copyright 2007, Robert Sedgewick and Kevin Wayne.
  * Last updated: Tue Sep 29 16:17:41 EDT 2009. 
@@ -41,9 +43,13 @@ package me.math;
  *
  *************************************************************************/
 
+@Data
 public class Quaternion {
 
     private double x0, x1, x2, x3;
+
+    // needed by Lombok
+    protected Quaternion() {}
 
 	// create a new object with the given components
 	public Quaternion(double x0, double x1, double x2, double x3) {
@@ -59,43 +65,6 @@ public class Quaternion {
 		this.x1 = vec.getX();
 		this.x2 = vec.getY();
 		this.x3 = vec.getZ();
-	}
-
-	protected void setX0(double x0) {
-		this.x0 = x0;
-	}
-
-	protected void setX1(double x1) {
-		this.x1 = x1;
-	}
-
-	protected void setX2(double x2) {
-		this.x2 = x2;
-	}
-
-	protected void setX3(double x3) {
-		this.x3 = x3;
-	}
-
-	public double getX0() {
-		return x0;
-	}
-
-	public double getX1() {
-		return x1;
-	}
-
-	public double getX2() {
-		return x2;
-	}
-
-	public double getX3() {
-		return x3;
-	}
-
-	// return a string representation of the invoking object
-	public String toString() {
-		return x0 + " + " + x1 + "i + " + x2 + "j + " + x3 + "k";
 	}
 
 	// return the quaternion norm

@@ -2,7 +2,7 @@ package me.datamining.shapes;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import org.locationtech.jts.geom.Geometry;
+import me.transit.dao.query.SpatialQuery;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "className")
 @JsonSubTypes({ @JsonSubTypes.Type(value = Circle.class, name = "Circle"),
@@ -10,5 +10,5 @@ import org.locationtech.jts.geom.Geometry;
 				@JsonSubTypes.Type(value = Rectanlge.class, name = "Rectanlge") })
 public interface Shape {
 
-	Geometry shape();
+	void setQueryShape(SpatialQuery query);
 }

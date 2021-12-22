@@ -16,148 +16,128 @@
 
 package me.math;
 
+import lombok.Data;
+
 //Written by Kyle Slattery (http://kyleslattery.com)
 //Free to use and edit, so long as above line stays intact
+@Data
 public class VectorMath {
-	private double x,y,z;
-	private double magnitude;
+    private final double x, y, z;
+    private final double magnitude;
 
-	private VectorMath unit;
+    private VectorMath unitVector;
 
-	public VectorMath(boolean isUnit, double x, double y, double z) {
-		this.x = x;
-		this.y = y;
-		this.z = z;
+    public VectorMath(boolean isUnit, double x, double y, double z) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
 
-		magnitude = Math.sqrt(x * x + y * y + z * z);
+        magnitude = Math.sqrt(x * x + y * y + z * z);
 
-		if (isUnit) {
-			this.unit = this;
+        if (isUnit) {
+            this.unitVector = this;
 
-		} else {
-			if (magnitude == 0) {
-				this.unit = new VectorMath(true, 0, 0, 0);
-			} else {
-				this.unit = new VectorMath(true, x / magnitude, y / magnitude,
-						z / magnitude);
-			}
-		}
-	}
+        } else {
+            if (magnitude == 0) {
+                this.unitVector = new VectorMath(true, 0, 0, 0);
+            } else {
+                this.unitVector = new VectorMath(true, x / magnitude, y / magnitude,
+                        z / magnitude);
+            }
+        }
+    }
 
-	public VectorMath(double x, double y, double z) {
+    public VectorMath(double x, double y, double z) {
 
-		this(false, x, y, z);
-	}
+        this(false, x, y, z);
+    }
 
-	// Accessor Methods
-	public double getX() {
-		return x;
-	}
+    // Accessor Methods
+    public String toString() {
+        return "VectorMath(" + x + ", " + y + ", " + z + ")";
+    }
 
-	public double getY() {
-		return y;
-	}
+    // Operations
+    public VectorMath scalarMult(double scalar) {
+        return new VectorMath(x * scalar, y * scalar, z * scalar);
+    }
 
-	public double getZ() {
-		return z;
-	}
+    public VectorMath add(VectorMath vec) {
+        return new VectorMath(x + vec.getX(), y + vec.getY(), z + vec.getZ());
+    }
 
-	public double getMagnitude() {
-		return magnitude;
-	}
+    public VectorMath subtract(VectorMath v) {
+        return (new VectorMath(getX() - v.getX(), getY() - v.getY(), getZ()
+                - v.getZ()));
+    }
 
-	public VectorMath getUnitVector() {
-		return unit;
-	}
+    public VectorMath add(VectorMath[] vec) {
+        double x2, y2, z2;
+        x2 = y2 = z2 = 0;
+        for (VectorMath vectorMath : vec) {
+            x2 += vectorMath.getX();
+            y2 += vectorMath.getY();
+            z2 += vectorMath.getZ();
+        }
 
-	// Operations
-	public VectorMath scalarMult(double scalar) {
-		return new VectorMath(x * scalar, y * scalar, z * scalar);
-	}
+        return new VectorMath(x + x2, y + y2, z + z2);
+    }
 
-	public VectorMath add(VectorMath vec) {
-		return new VectorMath(x + vec.getX(), y + vec.getY(), z + vec.getZ());
-	}
+    public double dot(VectorMath vec) {
+        return x * vec.getX() + y * vec.getY() + z * vec.getZ();
+    }
 
-	public VectorMath subtract(VectorMath v) {
-		return (new VectorMath(getX() - v.getX(), getY() - v.getY(), getZ()
-				- v.getZ()));
-	}
+    public double norm() {
+        return Math.sqrt(Math.abs(Math.pow(getX(), 2))
+                + Math.abs(Math.pow(getY(), 2))
+                + Math.abs(Math.pow(getZ(), 2)));
+    }
 
-	public VectorMath add(VectorMath[] vec) {
-		double x2, y2, z2;
-		x2 = y2 = z2 = 0;
-		for (VectorMath vectorMath : vec) {
-			x2 += vectorMath.getX();
-			y2 += vectorMath.getY();
-			z2 += vectorMath.getZ();
-		}
+    public VectorMath cross(VectorMath vec) {
+        double xi = y * vec.getZ() - z * vec.getY();
+        double yi = z * vec.getX() - x * vec.getZ();
+        double zi = x * vec.getY() - y * vec.getX();
+        return new VectorMath(xi, yi, zi);
 
-		return new VectorMath(x + x2, y + y2, z + z2);
-	}
+    }
 
-	public double dot(VectorMath vec) {
-		return x*vec.getX() + y*vec.getY() + z*vec.getZ();
-	}
-
-	public double norm() {
-		return Math.sqrt(Math.abs(Math.pow(getX(), 2))
-						 + Math.abs(Math.pow(getY(), 2))
-						 + Math.abs(Math.pow(getZ(), 2)));
-	}
-
-	public VectorMath cross(VectorMath vec) {
-		double xi = y*vec.getZ() - z*vec.getY();
-		double yi = z*vec.getX() - x*vec.getZ();
-		double zi = x*vec.getY() - y*vec.getX();
-		return new VectorMath(xi,yi,zi);
-
-	}
-
-    public double angle( VectorMath v)
-    {
+    public double angle(VectorMath v) {
         VectorMath uHat = getUnitVector();
         VectorMath vHat = v.getUnitVector();
 
-        if( uHat.dot(vHat) < 0.0)
-        {
+        if (uHat.dot(vHat) < 0.0) {
             VectorMath w = vHat.subtract(uHat).scalarMult(-1.0);
 
             return Math.PI - 2 * Math.asin(w.getMagnitude() / 2.0);
-        }
-        else
-        {
+        } else {
             VectorMath w = vHat.subtract(uHat);
             return 2 * Math.asin(w.getMagnitude() / 2);
         }
     }
 
     public VectorMath unit() {
-		double m = this.getMagnitude();
-		return new VectorMath(getX() / m, getY() / m, getZ() / m);
-	}
+        double m = this.getMagnitude();
+        return new VectorMath(getX() / m, getY() / m, getZ() / m);
+    }
 
-	public VectorMath minus(VectorMath vec) {
-		return new VectorMath(x-vec.getX(), y-vec.getY(), z-vec.getZ());
-	}
+    public VectorMath minus(VectorMath vec) {
+        return new VectorMath(x - vec.getX(), y - vec.getY(), z - vec.getZ());
+    }
 
     public VectorMath fromHereToThere(VectorMath here) {
-		// here + hereToThere = there
-		// hereToThere = there - here
-		return here.subtract(this);
-	}
+        // here + hereToThere = there
+        // hereToThere = there - here
+        return here.subtract(this);
+    }
 
-	public double distance(VectorMath there) {
-		// here + hereToThere = there
-		// hereToThere = there - here
-		double dx = there.getX() - getX();
-		double dy = there.getY() - getY();
-		double dz = there.getZ() - getZ();
+    public double distance(VectorMath there) {
+        // here + hereToThere = there
+        // hereToThere = there - here
+        double dx = there.getX() - getX();
+        double dy = there.getY() - getY();
+        double dz = there.getZ() - getZ();
 
-		return Math.sqrt(dx * dx + dy * dy + dz * dz);
-	}
+        return Math.sqrt(dx * dx + dy * dy + dz * dz);
+    }
 
-	public String toString() {
-		return "<" + x + ", " + y + ", " + z + ">";
-	}
 }

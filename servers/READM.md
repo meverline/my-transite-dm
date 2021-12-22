@@ -6,3 +6,5 @@ with data
 - heatmapweb: webapp contains the vue gui and web backend
 - compute: computes grids combines the result into single grid section
 - manager: manages the computation servers
+
+needs everything but queries

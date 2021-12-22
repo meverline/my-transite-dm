@@ -19,31 +19,21 @@
 
 package me.math;
 
+import lombok.Data;
 
+@Data
 public class ThreeRotationQuaternion extends Quaternion {
 
-    private double m_angleA;
-	private double m_angleB;
-	private double m_angleC;
+    private final double angleA;
+	private final double angleB;
+	private final double angleC;
 
 	protected ThreeRotationQuaternion(double x0, double x1, double x2,
 			double x3, double a, double b, double c) {
 		super(x0, x1, x2, x3);
-		m_angleA = a;
-		m_angleB = b;
-		m_angleC = c;
-	}
-
-	public double AngleA() {
-		return m_angleA;
-	}
-
-	public double AngleB() {
-		return m_angleB;
-	}
-
-	public double AngleC() {
-		return m_angleC;
+		angleA = a;
+		angleB = b;
+		angleC = c;
 	}
 
 	public static ThreeRotationQuaternion RotationZYX(double alpha, double beta,

@@ -1,15 +1,21 @@
 package me.datamining;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import lombok.Builder;
+import lombok.Data;
+import lombok.extern.jackson.Jacksonized;
 import me.datamining.types.DataMiningTypes;
 import me.math.grid.SpatialGridPoint;
 import me.math.grid.tiled.SpatialTile;
 
 import java.util.List;
 
-@JsonRootName("ComputeTile")
+@Jacksonized
+@Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ComputeTile extends TileJob {
 
     private DataMiningTypes dmType;
@@ -25,31 +31,4 @@ public class ComputeTile extends TileJob {
         this.setGridPoints(gridPoints);
         this.setDmType(type);
     }
-
-    @JsonGetter("target")
-    public SpatialTile getTarget() {
-        return target;
-    }
-
-    @JsonSetter("target")
-    public void setTarget(SpatialTile target) {
-        this.target = target;
-    }
-
-    @JsonGetter("gridPoints")
-    public List<SpatialGridPoint> getGridPoints() {
-        return gridPoints;
-    }
-
-    @JsonSetter("gridPoints")
-    public void setGridPoints(List<SpatialGridPoint> gridPoints) {
-        this.gridPoints = gridPoints;
-    }
-
-    @JsonGetter("dmType")
-    public DataMiningTypes getDmType() { return dmType; }
-
-    @JsonSetter("dmType")
-    public void setDmType(DataMiningTypes dmType) { this.dmType = dmType; }
-
 }

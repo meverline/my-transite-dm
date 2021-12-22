@@ -30,15 +30,15 @@ public class TestQuaternion {
 		Quaternion b = new Quaternion(0.0, 5.0, 1.0, -2.0);
 		
 		assertEquals(3.1622776601683795, a.norm(), 0.01);
-		assertEquals("3.0 + -1.0i + -0.0j + -0.0k", a.conjugate().toString());
-		assertEquals("3.0 + 6.0i + 1.0j + -2.0k", a.plus(b).toString());
-		assertEquals("-5.0 + 15.0i + 5.0j + -5.0k", a.times(b).toString());
-		assertEquals("-5.0 + 15.0i + 1.0j + -7.0k", b.times(a).toString());
+		assertEquals("Quaternion(x0=3.0, x1=-1.0, x2=-0.0, x3=-0.0)", a.conjugate().toString());
+		assertEquals("Quaternion(x0=3.0, x1=6.0, x2=1.0, x3=-2.0)", a.plus(b).toString());
+		assertEquals("Quaternion(x0=-5.0, x1=15.0, x2=5.0, x3=-5.0)", a.times(b).toString());
+		assertEquals("Quaternion(x0=-5.0, x1=15.0, x2=1.0, x3=-7.0)", b.times(a).toString());
 		
-		assertEquals("0.5 + 1.5i + 0.09999999999999998j + -0.7k", a.divides(b).toString());
-		assertEquals("0.3 + -0.1i + -0.0j + -0.0k", a.inverse().toString());
-		assertEquals("0.9999999999999999 + -5.551115123125783E-17i + 0.0j + 0.0k", a.inverse().times(a).toString());
-		assertEquals("0.9999999999999999 + -5.551115123125783E-17i + 0.0j + 0.0k", a.times(a.inverse()).toString());	
+		assertEquals("Quaternion(x0=0.5, x1=1.5, x2=0.09999999999999998, x3=-0.7)", a.divides(b).toString());
+		assertEquals("Quaternion(x0=0.3, x1=-0.1, x2=-0.0, x3=-0.0)", a.inverse().toString());
+		assertEquals("Quaternion(x0=0.9999999999999999, x1=-5.551115123125783E-17, x2=0.0, x3=0.0)", a.inverse().times(a).toString());
+		assertEquals("Quaternion(x0=0.9999999999999999, x1=-5.551115123125783E-17, x2=0.0, x3=0.0)", a.times(a.inverse()).toString());
 	}
 	
 	@Test
@@ -87,25 +87,25 @@ public class TestQuaternion {
 	public void testConjugate() {
 		Quaternion c = Quaternion.conjugate(a);
 		
-		assertEquals("3.0 + -1.0i + -0.0j + -0.0k", c.toString());
+		assertEquals("Quaternion(x0=3.0, x1=-1.0, x2=-0.0, x3=-0.0)", c.toString());
 	}
 	
 	@Test
 	public void testRotation() {
 		Quaternion c = Quaternion.rotationX(45.0);
-		assertEquals("-0.8733046400935156 + -0.4871745124605095i + -0.0j + -0.0k", c.toString());
+		assertEquals("Quaternion(x0=-0.8733046400935156, x1=-0.4871745124605095, x2=-0.0, x3=-0.0)", c.toString());
 		c = Quaternion.rotationY(45.0);
-		assertEquals("-0.8733046400935156 + -0.0i + -0.4871745124605095j + -0.0k", c.toString());
+		assertEquals("Quaternion(x0=-0.8733046400935156, x1=-0.0, x2=-0.4871745124605095, x3=-0.0)", c.toString());
 		c = Quaternion.rotationZ(45.0);
-		assertEquals("-0.8733046400935156 + -0.0i + -0.0j + -0.4871745124605095k", c.toString());
+		assertEquals("Quaternion(x0=-0.8733046400935156, x1=-0.0, x2=-0.0, x3=-0.4871745124605095)", c.toString());
 		
 		c = Quaternion.rotationAxis(vec, vec, 45);
-		assertEquals("-0.8733046400935156 + NaNi + NaNj + NaNk", c.toString());
+		assertEquals("Quaternion(x0=-0.8733046400935156, x1=NaN, x2=NaN, x3=NaN)", c.toString());
 		System.out.println(c.toString());
 		VectorMath vc = Quaternion.rotate(a, vec);
-		assertEquals("<20.0, 0.0, 50.0>", vc.toString());
+		assertEquals("VectorMath(20.0, 0.0, 50.0)", vc.toString());
 	
-		assertEquals("0.9999999999999999 + -5.551115123125783E-17i + 0.0j + 0.0k", a.times(a.inverse()).toString());
+		assertEquals("Quaternion(x0=0.9999999999999999, x1=-5.551115123125783E-17, x2=0.0, x3=0.0)", a.times(a.inverse()).toString());
 		
 	}
 

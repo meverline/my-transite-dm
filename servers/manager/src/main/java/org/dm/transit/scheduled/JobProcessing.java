@@ -46,6 +46,7 @@ public class JobProcessing {
         	try {
 				DataMiningJob job = this.mapper.readValue(message.getBody(), DataMiningJob.class);
 
+
         	} catch ( Exception ex) {
         		log.error(ex.getLocalizedMessage(), ex);
         	}

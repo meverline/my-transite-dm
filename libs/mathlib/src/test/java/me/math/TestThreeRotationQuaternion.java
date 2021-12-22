@@ -10,9 +10,9 @@ public class TestThreeRotationQuaternion {
 	public void testRotationXYZ() {
 		ThreeRotationQuaternion obj = ThreeRotationQuaternion.RotationXYZ(10, 5, 5);
 		
-		assertEquals(10, obj.AngleA(), 0.01);
-		assertEquals(5.0, obj.AngleB(), 0.01);
-		assertEquals(5.0, obj.AngleC(), 0.01);
+		assertEquals(10, obj.getAngleA(), 0.01);
+		assertEquals(5.0, obj.getAngleB(), 0.01);
+		assertEquals(5.0, obj.getAngleC(), 0.01);
 		
 		assertEquals(0.52552007, obj.getX0(), 0.01);
 		assertEquals(-0.51386844005, obj.getX1(), 0.01);
@@ -23,9 +23,9 @@ public class TestThreeRotationQuaternion {
 	public void testRotationYXY() {
 		ThreeRotationQuaternion obj = ThreeRotationQuaternion.RotationYXY(10, 5, 5);
 		
-		assertEquals(10, obj.AngleA(), 0.01);
-		assertEquals(5.0, obj.AngleB(), 0.01);
-		assertEquals(5.0, obj.AngleC(), 0.01);
+		assertEquals(10, obj.getAngleA(), 0.01);
+		assertEquals(5.0, obj.getAngleB(), 0.01);
+		assertEquals(5.0, obj.getAngleC(), 0.01);
 		
 		assertEquals(-0.2777046718066131, obj.getX0(), 0.01);
 		assertEquals(-0.47946213733156917, obj.getX1(), 0.01);
@@ -36,9 +36,9 @@ public class TestThreeRotationQuaternion {
 	public void testRotationZYX() {
 		ThreeRotationQuaternion obj = ThreeRotationQuaternion.RotationZYX(10, 5, 5);
 		
-		assertEquals(10, obj.AngleA(), 0.01);
-		assertEquals(5.0, obj.AngleB(), 0.01);
-		assertEquals(5.0, obj.AngleC(), 0.01);
+		assertEquals(10, obj.getAngleA(), 0.01);
+		assertEquals(5.0, obj.getAngleB(), 0.01);
+		assertEquals(5.0, obj.getAngleC(), 0.01);
 				
 		assertEquals(-0.16139364914672671, obj.getX0(), 0.01);
 		assertEquals(-0.5957731599914555, obj.getX1(), 0.01);

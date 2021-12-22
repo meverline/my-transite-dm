@@ -1,9 +1,8 @@
 package me.datamining;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.*;
+import lombok.Data;
+import lombok.extern.jackson.Jacksonized;
 
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
@@ -13,6 +12,9 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
         @JsonSubTypes.Type(value = ComputeTile.class, name = "ComputeTile"),
         @JsonSubTypes.Type(value = PopulateTile.class, name = "PopulateTile")
 })
+@Jacksonized
+@Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class TileJob {
 
     private String jobNumber;
@@ -21,27 +23,7 @@ public class TileJob {
     public TileJob() {}
 
     public TileJob(String jobNumber, int tileNumber) {
-        this.setJobNumber(jobNumber);
-        this.setTileNumber(tileNumber);
-    }
-
-    @JsonGetter("jobNumber")
-    public String getJobNumber() {
-        return jobNumber;
-    }
-
-    @JsonSetter("jobNumber")
-    public void setJobNumber(String jobNumber) {
         this.jobNumber = jobNumber;
-    }
-
-    @JsonGetter("tileNumber")
-    public int getTileNumber() {
-        return tileNumber;
-    }
-
-    @JsonSetter("tileNumber")
-    public void setTileNumber(int tileNumber) {
         this.tileNumber = tileNumber;
     }
 }

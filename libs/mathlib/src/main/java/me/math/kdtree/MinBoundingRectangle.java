@@ -19,6 +19,8 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+import lombok.Data;
+import lombok.extern.jackson.Jacksonized;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
@@ -35,15 +37,17 @@ import me.math.grid.SpatialGridPoint;
 
 
 @SuppressWarnings("serial")
+@Data
+@Jacksonized
 @JsonRootName(value = "MinBoundingRectangle")
 public class MinBoundingRectangle extends AbstractDocument implements Serializable {
 
 	protected static GeometryFactory factory_ = new GeometryFactory();
 
-	private double bottomlatDegress_ = 90.0;
-	private double toplatDegress_ = -90.0;
-	private double leftlonDegress_ = 180.0;
-	private double rightlonDegress_ = -180.0;
+	private double bottomLatDegress = 90.0;
+	private double topLatDegress = -90.0;
+	private double leftLonDegress = 180.0;
+	private double rightLonDegress = -180.0;
 
 	/**
    * 
@@ -87,10 +91,10 @@ public class MinBoundingRectangle extends AbstractDocument implements Serializab
 	@JsonIgnore
 	public void extend(SpatialGridPoint location) {
 		if (location != null) {
-			bottomlatDegress_ = Math.min(location.getVertex().getLatitudeDegress(), bottomlatDegress_);
-			toplatDegress_ = Math.max(location.getVertex().getLatitudeDegress(), toplatDegress_);
-			leftlonDegress_ = Math.min(location.getVertex().getLongitudeDegress(), leftlonDegress_);
-			rightlonDegress_ = Math.max(location.getVertex().getLongitudeDegress(), rightlonDegress_);
+			bottomLatDegress = Math.min(location.getVertex().getLatitudeDegress(), bottomLatDegress);
+			topLatDegress = Math.max(location.getVertex().getLatitudeDegress(), topLatDegress);
+			leftLonDegress = Math.min(location.getVertex().getLongitudeDegress(), leftLonDegress);
+			rightLonDegress = Math.max(location.getVertex().getLongitudeDegress(), rightLonDegress);
 		}
 	}
 
@@ -101,10 +105,10 @@ public class MinBoundingRectangle extends AbstractDocument implements Serializab
 	@JsonIgnore
 	public void extend(Point location) {
 		if (location != null) {
-			bottomlatDegress_ = Math.min(location.getX(), bottomlatDegress_);
-			toplatDegress_ = Math.max(location.getX(), toplatDegress_);
-			leftlonDegress_ = Math.min(location.getY(), leftlonDegress_);
-			rightlonDegress_ = Math.max(location.getY(), rightlonDegress_);
+			bottomLatDegress = Math.min(location.getX(), bottomLatDegress);
+			topLatDegress = Math.max(location.getX(), topLatDegress);
+			leftLonDegress = Math.min(location.getY(), leftLonDegress);
+			rightLonDegress = Math.max(location.getY(), rightLonDegress);
 
 		}
 	}
@@ -116,10 +120,10 @@ public class MinBoundingRectangle extends AbstractDocument implements Serializab
 	@JsonIgnore
 	public void extend(Vertex location) {
 		if (location != null) {
-			bottomlatDegress_ = Math.min(location.getLatitudeDegress(), bottomlatDegress_);
-			toplatDegress_ = Math.max(location.getLatitudeDegress(), toplatDegress_);
-			leftlonDegress_ = Math.min(location.getLongitudeDegress(), leftlonDegress_);
-			rightlonDegress_ = Math.max(location.getLongitudeDegress(), rightlonDegress_);
+			bottomLatDegress = Math.min(location.getLatitudeDegress(), getBottomLatDegress());
+			topLatDegress = Math.max(location.getLatitudeDegress(), getTopLatDegress());
+			leftLonDegress = Math.min(location.getLongitudeDegress(), getLeftLonDegress());
+			rightLonDegress = Math.max(location.getLongitudeDegress(), getRightLonDegress());
 		}
 	}
 
@@ -130,10 +134,10 @@ public class MinBoundingRectangle extends AbstractDocument implements Serializab
 	@JsonIgnore
 	public void extend(MinBoundingRectangle location) {
 		if (location != null) {
-			bottomlatDegress_ = Math.min(location.getBottomLatDegress(),bottomlatDegress_);
-			toplatDegress_ = Math.max(location.getTopLatDegress(),toplatDegress_);
-			leftlonDegress_ = Math.min(location.getLeftLonDegress(),leftlonDegress_);
-			rightlonDegress_ = Math.max(location.getRightLonDegress(),rightlonDegress_);
+			bottomLatDegress = Math.min(location.getBottomLatDegress(),getBottomLatDegress());
+			topLatDegress = Math.max(location.getTopLatDegress(),getTopLatDegress());
+			leftLonDegress = Math.min(location.getLeftLonDegress(),getLeftLonDegress());
+			rightLonDegress = Math.max(location.getRightLonDegress(),getRightLonDegress());
 
 		}
 	}
@@ -162,10 +166,10 @@ public class MinBoundingRectangle extends AbstractDocument implements Serializab
 	 * @return
 	 */
 	public boolean contains(Vertex center) {
-		return (center.getLatitudeDegress() >= bottomlatDegress_
-				&& center.getLatitudeDegress() <= toplatDegress_
-				&& center.getLongitudeDegress() >= leftlonDegress_ && center
-				.getLongitudeDegress() <= rightlonDegress_);
+		return (center.getLatitudeDegress() >= getBottomLatDegress()
+				&& center.getLatitudeDegress() <= getTopLatDegress()
+				&& center.getLongitudeDegress() >= getLeftLonDegress() && center
+				.getLongitudeDegress() <= getRightLonDegress());
 	}
 
 	/**
@@ -174,13 +178,13 @@ public class MinBoundingRectangle extends AbstractDocument implements Serializab
 	 */
 	@JsonIgnore
 	public Vertex center() {
-		double lat = toplatDegress_;
-		if (bottomlatDegress_ != toplatDegress_) {
-			lat = (bottomlatDegress_ + toplatDegress_) / 2.0;
+		double lat = getTopLatDegress();
+		if (getBottomLatDegress() != getTopLatDegress()) {
+			lat = (getBottomLatDegress() + getTopLatDegress()) / 2.0;
 		}
-		double lon = leftlonDegress_;
-		if (leftlonDegress_ != rightlonDegress_) {
-			lon = (leftlonDegress_ + rightlonDegress_) / 2.0;
+		double lon = getLeftLonDegress();
+		if (getLeftLonDegress() != getRightLonDegress()) {
+			lon = (getLeftLonDegress() + getRightLonDegress()) / 2.0;
 		}
 		return new Vertex(lat, lon);
 	}
@@ -191,94 +195,13 @@ public class MinBoundingRectangle extends AbstractDocument implements Serializab
 	 */
 	@JsonIgnore
 	public boolean isRectangle() {
-		if (bottomlatDegress_ == toplatDegress_) {
+		if (getBottomLatDegress() == getTopLatDegress() ) {
 			return true;
 		}
-		if (leftlonDegress_ == rightlonDegress_) {
+		if (getLeftLonDegress() == getRightLonDegress() ) {
 			return true;
 		}
 		return false;
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	@JsonGetter("bottomLatDegress")
-	public double getBottomLatDegress() {
-		return bottomlatDegress_;
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	@JsonGetter("topLatDegress")
-	public double getTopLatDegress() {
-		return toplatDegress_;
-	}
-	
-	/**
-	 * 
-	 * @param toplatDegress_
-	 */
-	@JsonSetter("topLatDegress")
-	public void setToplatDegress(double toplatDegress_) {
-		this.toplatDegress_ = toplatDegress_;
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	@JsonGetter("leftLonDegress")
-	public double getLeftLonDegress() {
-		return leftlonDegress_;
-	}
-	
-	/**
-	 * 
-	 * @param leftlonDegress_
-	 */
-	@JsonSetter("leftLonDegress")
-	public void setLeftlonDegress(double leftlonDegress_) {
-		this.leftlonDegress_ = leftlonDegress_;
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	@JsonGetter("rightLonDegress")
-	public double getRightLonDegress() {
-		return rightlonDegress_;
-	}
-	
-	/**
-	 * 
-	 * @param rightlonDegress_
-	 */
-	@JsonSetter("rightLonDegress")
-	public void setRightlonDegress(double rightlonDegress_) {
-		this.rightlonDegress_ = rightlonDegress_;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	@JsonSetter("bottomLatDegress")
-	public double getBottomlatDegress_() {
-		return bottomlatDegress_;
-	}
-
-	/**
-	 * 
-	 * @param bottomlatDegress
-	 */
-	@JsonSetter("bottomLatDegress")
-	public void setBottomlatDegress(double bottomlatDegress) {
-		this.bottomlatDegress_ = bottomlatDegress;
 	}
 
 	/**
@@ -317,25 +240,14 @@ public class MinBoundingRectangle extends AbstractDocument implements Serializab
 		return factory_.createPolygon(factory_.createLinearRing(coords), null);
 	}
 
-	@Override
-	public String toString() {
-		return "MinBoundingRectangle{" +
-				"bottomlatDegress_=" + bottomlatDegress_ +
-				", toplatDegress_=" + toplatDegress_ +
-				", leftlonDegress_=" + leftlonDegress_ +
-				", rightlonDegress_=" + rightlonDegress_ +
-				'}';
-	}
-
-
 	/**
 	 * 
 	 * @param top
 	 */
 	@JsonIgnore
 	public void setTop(List<Double> top) {
-		this.toplatDegress_ = top.get(0);
-		this.leftlonDegress_ = top.get(1);
+		this.setTopLatDegress(top.get(0));
+		this.setLeftLonDegress(top.get(1));
 	}
 	
 	/**
@@ -344,24 +256,9 @@ public class MinBoundingRectangle extends AbstractDocument implements Serializab
 	 */
 	@JsonIgnore
 	public void setBottom(List<Double> top) {
-		this.bottomlatDegress_ = top.get(0);
-		this.rightlonDegress_ = top.get(1);
+		this.setBottomLatDegress(top.get(0));
+		this.setRightLonDegress(top.get(1));
 	}
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		MinBoundingRectangle that = (MinBoundingRectangle) o;
-		return Double.compare(that.bottomlatDegress_, bottomlatDegress_) == 0 &&
-				Double.compare(that.toplatDegress_, toplatDegress_) == 0 &&
-				Double.compare(that.leftlonDegress_, leftlonDegress_) == 0 &&
-				Double.compare(that.rightlonDegress_, rightlonDegress_) == 0;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(bottomlatDegress_, toplatDegress_, leftlonDegress_, rightlonDegress_);
-	}
 
 }

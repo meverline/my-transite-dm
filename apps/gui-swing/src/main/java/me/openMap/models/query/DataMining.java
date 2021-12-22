@@ -278,7 +278,7 @@ public class DataMining extends AbstractSearchParameters
 		TransiteStopDao dao = TransiteStopDao.class.cast(DaoBeanFactory
 				.create().getDaoBean(TransiteStopDao.class));
 
-		List<TransitStop> results = dao.query(query);
+		List<TransitStop> results = dao. query(query);
 
 		List<DataDisplayHandler> rtn = new ArrayList<DataDisplayHandler>();
 

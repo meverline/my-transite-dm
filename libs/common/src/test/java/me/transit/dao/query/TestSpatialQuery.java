@@ -91,6 +91,22 @@ public class TestSpatialQuery extends EasyMockSupport {
 		public SpatialQueryTest() {
 			super(TestSpatialQuery.class);
 		}
+
+
+		@Override
+		public void addCircleConstriant(Point pt, double distanceMeters) {
+
+		}
+
+		@Override
+		public void addRectangleConstraint(Point ll, Point ur) {
+
+		}
+
+		@Override
+		public void addPolygonConstraint(List<Point> polygon) {
+
+		}
 	}
 
 }

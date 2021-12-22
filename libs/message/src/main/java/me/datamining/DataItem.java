@@ -1,11 +1,17 @@
 package me.datamining;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
+import lombok.Data;
+import lombok.extern.jackson.Jacksonized;
 import me.math.Vertex;
 
+@Jacksonized
+@Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 @JsonRootName("DataItem")
 public class DataItem {
 	
@@ -18,38 +24,6 @@ public class DataItem {
 	public DataItem(Vertex location, double value) {
 		this.setLocation(location);
 		this.setValue(value);
-	}
-	
-	/**
-	 * @return the location
-	 */
-	@JsonGetter("location")
-	public Vertex getLocation() {
-		return location;
-	}
-
-	/**
-	 * @param location the location to set
-	 */
-	@JsonSetter("location")
-	public void setLocation(Vertex location) {
-		this.location = location;
-	}
-
-	/**
-	 * @return the value
-	 */
-	@JsonGetter("value")
-	public double getValue() {
-		return value;
-	}
-
-	/**
-	 * @param value the value to set
-	 */
-	@JsonGetter("value")
-	public void setValue(double value) {
-		this.value = value;
 	}
 
 }

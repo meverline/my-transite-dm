@@ -3,6 +3,9 @@ package me.datamining.shapes;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.Data;
+import lombok.extern.jackson.Jacksonized;
+import me.transit.dao.query.SpatialQuery;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.GeometryFactory;
@@ -12,11 +15,12 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
 import me.math.Vertex;
+import org.locationtech.jts.geom.Point;
 
-@JsonRootName("Polygon")
+@Jacksonized
+@Data
 public class Polygon implements Shape{
-	
-	private final GeometryFactory factory_  = new GeometryFactory();
+
 	private List<Vertex> coordinates;
 	
 	public Polygon() {
@@ -30,40 +34,13 @@ public class Polygon implements Shape{
 		this.coordinates = coordinates;
 	}
 
-	/**
-	 * @return the coordinates
-	 */
-	@JsonGetter("coordinates")
-	public List<Vertex> getCoordinates() {
-		return coordinates;
-	}
-
-	/**
-	 * @param coordinates the coordinates to set
-	 */
-	@JsonSetter("coordinates")
-	public void setCoordinates(List<Vertex> coordinates) {
-		this.coordinates = coordinates;
-	}
-	
-	/*
-	 * 
-	 */
 	@Override
-	public Geometry shape()  {
-
-		List<Coordinate> coords = new ArrayList<Coordinate>();
-		
-		for ( Vertex pt : getCoordinates() ) {
-			coords.add(pt.toCoordinate());
+	public void setQueryShape(SpatialQuery query) {
+		List<Point> pointList = new ArrayList<>();
+		for (Vertex v : this.getCoordinates()) {
+			pointList.add(v.toPoint());
 		}
-		coords.add(coords.get(0));
-		
-		Coordinate array[] = new Coordinate[coords.size()];
-		coords.toArray(array);
-
-        return factory_.createPolygon(factory_.createLinearRing(array), null);
+		query.addPolygonConstraint(pointList);
 	}
-
 
 }

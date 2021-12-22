@@ -10,10 +10,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @ComponentScan({ "me.transit"})
-public class ComputeApplication implements ApplicationContextAware, CommandLineRunner {
+@EnableScheduling
+public class ComputeApplication implements ApplicationContextAware {
 
     private ApplicationContext applicationContext;
 
@@ -31,8 +33,4 @@ public class ComputeApplication implements ApplicationContextAware, CommandLineR
         return applicationContext;
     }
 
-    @Override
-    public void run(String... args) throws Exception {
-
-    }
 }

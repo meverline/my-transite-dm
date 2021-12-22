@@ -15,7 +15,7 @@ import org.locationtech.jts.geom.Point;
  * @author markeverline
  *
  */
-public class SpatialQuery extends QueryConstraints {
+public abstract class SpatialQuery extends QueryConstraints {
 
 	/**
 	 *
@@ -48,6 +48,8 @@ public class SpatialQuery extends QueryConstraints {
 		add( new CircleTuple(field, pt, distanceMeters));
 	}
 
+	public abstract void addCircleConstriant(Point pt, double distanceMeters);
+
 	/**
 	 *
 	 * @param aClass
@@ -71,6 +73,8 @@ public class SpatialQuery extends QueryConstraints {
 		add( new RectangleTuple( field, ll, ur));
 	}
 
+	public abstract void addRectangleConstraint(Point ll, Point ur);
+
 	/**
 	 *
 	 * @param aClass
@@ -91,5 +95,7 @@ public class SpatialQuery extends QueryConstraints {
 	{
 		add( new PolygonBoxTuple(field, polygon));	
 	}
+
+	public abstract void addPolygonConstraint(List<Point> polygon);
 	
 }

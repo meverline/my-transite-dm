@@ -19,81 +19,59 @@ package me.math;
 
 import java.io.Serializable;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import lombok.Data;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
+import lombok.extern.jackson.Jacksonized;
 
 @JsonRootName(value="Vertex")
 @SuppressWarnings("serial")
+@Jacksonized
+@Data
 public class Vertex implements Serializable {
 
-	private double lat_;
-	private double lon_;
+	private double latitudeDegress;
+	private double longitudeDegress;
 
 	public Vertex()
 	{
 	}
 	
 	public Vertex(double lat, double lon) {
-		lat_ = lat;
-		lon_ = lon;
+		latitudeDegress = lat;
+		longitudeDegress = lon;
 	}
 	
 	public Vertex(Point pt) {
-		lat_ = pt.getCoordinate().x;
-		lon_ = pt.getCoordinate().y;
+		latitudeDegress = pt.getCoordinate().x;
+		longitudeDegress = pt.getCoordinate().y;
 	}
 
 	public Vertex(Vertex copy)
 	{
-		lat_ = copy.getLatitudeDegress();
-		lon_ = copy.getLongitudeDegress();
+		latitudeDegress = copy.getLatitudeDegress();
+		longitudeDegress = copy.getLongitudeDegress();
 	}
 
 	public Vertex(VectorMath vector) {
 		Vertex v = Vertex.getLatLonFromEcf(vector);
-		lat_ = v.getLatitudeDegress();
-		lon_ = v.getLongitudeDegress();
+		latitudeDegress = v.getLatitudeDegress();
+		longitudeDegress = v.getLongitudeDegress();
 	}
 
 	@JsonIgnore
 	public double getLatitudeRadians() {
-		return EarthConstants.toRadians(lat_);
+		return EarthConstants.toRadians(latitudeDegress);
 	}
 
 	@JsonIgnore
 	public double getLongitudeRadians() {
-		return EarthConstants.toRadians(lon_);
+		return EarthConstants.toRadians(longitudeDegress);
 	}
 
-	@JsonGetter("latitude_degress")
-	public double getLatitudeDegress() {
-		return lat_;
-	}
-
-	@JsonGetter("longitude_degress")
-	public double getLongitudeDegress() {
-		return lon_;
-	}
-
-	@JsonGetter("latitude_degress")
-	public void setLatitudeDegress(double value) {
-		lat_ = value;
-	}
-
-	@JsonGetter("longitude_degress")
-	public void setLongitudeDegress(double value) {
-		lon_ = value;
-	}
-
-	@JsonIgnore
-	public String toString() {
-		return "(" + lat_ + ", " + lon_ + ") ";
-	}
-	
 	@JsonIgnore
 	public Coordinate toCoordinate() {
 		return new Coordinate(getLatitudeDegress(), getLongitudeDegress() );
@@ -109,8 +87,8 @@ public class Vertex implements Serializable {
 	@JsonIgnore
 	public void formPoint(Point pt)
 	{
-		lat_ = pt.getCoordinate().x;
-		lon_ = pt.getCoordinate().y;
+		latitudeDegress = pt.getCoordinate().x;
+		longitudeDegress = pt.getCoordinate().y;
 	}
 
 	public boolean equals(Object obj)
