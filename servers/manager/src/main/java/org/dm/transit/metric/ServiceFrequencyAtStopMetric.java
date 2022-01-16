@@ -13,6 +13,10 @@ public class ServiceFrequencyAtStopMetric extends  DataMiningMetric {
 
     private Log logger = LogFactory.getLog(StopQueryMetric.class.getSimpleName());
 
+    // Factory method.
+    protected ServiceFrequencyAtStopMetric() {
+    }
+
     public ServiceFrequencyAtStopMetric(DataMiningJob job,
                            AgencyDao agencyDao,
                            TransiteStopDao transiteStopDao,

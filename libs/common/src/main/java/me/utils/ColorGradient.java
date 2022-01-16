@@ -1,14 +1,19 @@
 package me.utils;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.awt.Color;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
+@Setter
+@Getter
 public class ColorGradient {
 	private ArrayList<MapColor> gradiant_ = null;
 	private ArrayList<Double> steps_ = null;
-	private double high_ = 0.0;
-	private double low_ = 0.0;
+	private double high = 0.0;
+	private double low = 0.0;
 	private int alhpaValue = 85;
 
 	/**
@@ -22,27 +27,11 @@ public class ColorGradient {
 	 */
 	public ColorGradient(Color start, Color end, int theNumSteps, double low,
 			double high, int alphaValue) {
-		high_ = high;
-		low_ = low;
+		this.high = high;
+		this.low = low;
 		gradiant_ = createGradiant(start, end, theNumSteps);
 		setUpSetSize(low, high, theNumSteps);
 		this.setAlhpaValue(alphaValue);
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public int getAlhpaValue() {
-		return alhpaValue;
-	}
-
-	/**
-	 * 
-	 * @param alhpaValue
-	 */
-	private void setAlhpaValue(int alhpaValue) {
-		this.alhpaValue = alhpaValue;
 	}
 
 	/**
@@ -120,22 +109,6 @@ public class ColorGradient {
 
 	/**
 	 * 
-	 * @return
-	 */
-	public double getLow() {
-		return low_;
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public double getHigh() {
-		return high_;
-	}
-
-	/**
-	 * 
 	 * @param value
 	 * @return
 	 */
@@ -166,12 +139,14 @@ public class ColorGradient {
 	/////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////
-	
+
+	@Setter
+	@Getter
 	public static class MapColor {
 
-		private Color primary_ = Color.BLACK;
-		private String primName_ = "black";
-		private int max_ = 0;
+		private Color primaryColor = Color.BLACK;
+		private String primaryName = "black";
+		private int count = 0;
 
 		/**
 		 * 
@@ -187,7 +162,7 @@ public class ColorGradient {
 		public MapColor(String name, int count) {
 			setPrimaryName(name);
 			setCount(count);
-			primary_ = getColor(getPrimaryName(), getPrimaryColor());
+			primaryColor = getColor(getPrimaryName(), getPrimaryColor());
 		}
 
 		/**
@@ -199,8 +174,7 @@ public class ColorGradient {
 		public MapColor(String colorName, Color name, int min) {
 			setPrimaryName(colorName);
 			setCount(min);
-
-			primary_ = name;
+			primaryColor = name;
 		}
 
 		/**
@@ -222,46 +196,6 @@ public class ColorGradient {
 				}
 			}
 			return rtn;
-		}
-
-		/**
-		 * 
-		 * @return
-		 */
-		public String getPrimaryName() {
-			return primName_;
-		}
-
-		/**
-		 * 
-		 * @param name_
-		 */
-		public void setPrimaryName(String name_) {
-			this.primName_ = name_;
-		}
-
-		/**
-		 * 
-		 * @return
-		 */
-		public int getCount() {
-			return max_;
-		}
-
-		/**
-		 * 
-		 * @param max_
-		 */
-		public void setCount(int max_) {
-			this.max_ = max_;
-		}
-
-		/**
-		 * 
-		 * @return
-		 */
-		public Color getPrimaryColor() {
-			return primary_;
 		}
 
 	}

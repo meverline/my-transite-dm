@@ -16,6 +16,8 @@
 
 package me.datamining.cluster;
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.apachecommons.CommonsLog;
 import me.datamining.ClusteringAlgorithm;
 import me.math.Vertex;
@@ -38,6 +40,8 @@ import java.util.HashSet;
 import java.util.List;
 
 @CommonsLog
+@Getter
+@Setter
 public class STING implements ClusteringAlgorithm {
 
 	private AbstractSpatialGrid grid_ = null;
@@ -89,70 +93,6 @@ public class STING implements ClusteringAlgorithm {
 	{
 		grid_ = aGrid;
 		tree_ = aGrid.getTree();
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public int getRangeHi() {
-		return rangeHi;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see me.datamining.ClusteringAlgorithm#setRangeHi(int)
-	 */
-	public void setRangeHi(int rangeHi_) {
-		this.rangeHi = rangeHi_;
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public int getRangeLow() {
-		return rangeLow;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see me.datamining.ClusteringAlgorithm#setRangeLow(int)
-	 */
-	public void setRangeLow(int rangeLow_) {
-		this.rangeLow = rangeLow_;
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public double getConfidence() {
-		return confidence;
-	}
-
-	/**
-	 * 
-	 * @param confidence_
-	 */
-	public void setConfidence(double confidence_) {
-		this.confidence = confidence_;
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public double getDensity() {
-		return density;
-	}
-
-	/**
-	 * 
-	 * @param density_
-	 */
-	public void setDensity(double density_) {
-		this.density = density_;
 	}
 
 	/**
@@ -277,48 +217,26 @@ public class STING implements ClusteringAlgorithm {
 	// /////////////////////////////////////////////////////////////////////////////////////////////
 	// /////////////////////////////////////////////////////////////////////////////////////////////
 
+	@Getter
+	@Setter
 	public static class ClusterNodeEvaluation {
 
-		private double min_;
-		private double max_;
-		private double confThresshold_;
+		private double min;
+		private double max;
+		private double confThresshold;
 
 		public ClusterNodeEvaluation(double min, double max, double threshold) {
 			this.setMax(max);
-			this.setMin_(min);
+			this.setMin(min);
 			this.setConfThresshold(threshold);
-		}
-
-		public double getMin() {
-			return min_;
-		}
-
-		private void setMin_(double min) {
-			min_ = min;
-		}
-
-		public double getMax() {
-			return max_;
-		}
-
-		private void setMax(double max) {
-			max_ = max;
-		}
-
-		public double getConfThresshold() {
-			return confThresshold_;
-		}
-
-		private void setConfThresshold(double confThresshold) {
-			confThresshold_ = confThresshold;
 		}
 
 		public double probablit(double density, double mean, double std) {
 			if (std == 0) {
 				return 0;
 			}
-			return (density * ((max_ - mean) / std))
-					- (density * ((min_ - mean) / std));
+			return (density * ((max - mean) / std))
+					- (density * ((min - mean) / std));
 		}
 
 		public boolean isRelevent(double mean, double std, double number) {
@@ -374,22 +292,20 @@ public class STING implements ClusteringAlgorithm {
 	// /////////////////////////////////////////////////////////////////////////////////////////////
 	// /////////////////////////////////////////////////////////////////////////////////////////////
 
+	@Getter
+	@Setter
 	public class findReleventNodes implements IKDSearch {
 
 		public int relevantCount_ = 0;
-		private ClusterNodeEvaluation evaluator_ = null;
-		private List<SpatialGridPoint> relevent_ = new ArrayList<>();
+		private ClusterNodeEvaluation evaluator = null;
+		private List<SpatialGridPoint> results = new ArrayList<>();
 
 		public findReleventNodes(double min, double max, double threshold) {
-			evaluator_ = new ClusterNodeEvaluation(min, max, threshold);
+			this.setEvaluator(new ClusterNodeEvaluation(min, max, threshold));
 		}
 
 		public boolean endSearch(INode node) {
 			return false;
-		}
-
-		public List<SpatialGridPoint> getResults() {
-			return relevent_;
 		}
 
 		public Vertex getVertex() {
@@ -401,11 +317,11 @@ public class STING implements ClusteringAlgorithm {
 			SpatialGridPoint pt = node.getPoint();
 			if (pt.getData() != null ) {
 				STINGDataSample data = STINGDataSample.class.cast(pt.getData());
-				if (evaluator_.isRelevent(data.average(),
-										  data.standardDeviation(), 
-										  data.getSampleNumber())) {
+				if (getEvaluator().isRelevent(data.average(),
+											  data.standardDeviation(),
+											  data.getSampleNumber())) {
 					data.setChecked(true);
-					relevent_.add(node.getPoint());
+					getResults().add(node.getPoint());
 				}
 			}
 		}

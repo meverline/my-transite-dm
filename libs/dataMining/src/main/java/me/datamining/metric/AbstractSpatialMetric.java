@@ -52,8 +52,5 @@ public abstract class AbstractSpatialMetric {
 			}
 		}
 	}
-	
 
-
-	
 }

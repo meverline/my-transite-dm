@@ -5,6 +5,8 @@ import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.util.List;
 
+import lombok.Getter;
+import lombok.Setter;
 import me.datamining.Kernel.Epanechnikov;
 import me.datamining.Kernel.IDensityKernel;
 import me.datamining.bandwidth.IBandwidth;
@@ -14,13 +16,15 @@ import me.math.grid.AbstractSpatialGrid;
 
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
+@Getter
+@Setter
 public abstract class AbstractDensityEstimateAlgorithm implements DensityEstimateAlgorithm {
 
 	private  IDensityKernel denstiyKernel = new Epanechnikov();
 	private  IBandwidth xBandWidth = new SlivermanRule();
 	private  IBandwidth yBandWidth = new SlivermanRule();
-    private  final DescriptiveStatistics xstats_ = new DescriptiveStatistics();
-    private  final DescriptiveStatistics ystats_ = new DescriptiveStatistics();
+    private  final DescriptiveStatistics xstats = new DescriptiveStatistics();
+    private  final DescriptiveStatistics ystats = new DescriptiveStatistics();
 	private AbstractSpatialGrid grid = null;
 	private  List<SpatialSamplePoint> sampleValues = null;
 	private  double crossCovariance = 0.0;
@@ -43,95 +47,7 @@ public abstract class AbstractDensityEstimateAlgorithm implements DensityEstimat
 		xBandWidth = xsmothParm;
 		yBandWidth = ysmothParm;
 	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public IDensityKernel getDenstiyKernel() {
-		return denstiyKernel;
-	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see me.datamining.DensityEstimateAlgorithm#setDenstiyKernel(me.datamining.Kernel.IDensityKernel)
-	 */
-	public void setDenstiyKernel(IDensityKernel denstiyKernel) {
-		this.denstiyKernel = denstiyKernel;
-	}
-
-	/**
-	 * @return the xBandWidth
-	 */
-	public IBandwidth getXBandWidth() {
-		return xBandWidth;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see me.datamining.DensityEstimateAlgorithm#setXBandWidth(me.datamining.bandwidth.IBandwidth)
-	 */
-	public void setXBandWidth(IBandwidth xBandWidth) {
-		this.xBandWidth = xBandWidth;
-	}
-
-	/**
-	 * @return the yBandWidth
-	 */
-	public IBandwidth getYBandWidth() {
-		return yBandWidth;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see me.datamining.DensityEstimateAlgorithm#setYBandWidth(me.datamining.bandwidth.IBandwidth)
-	 */
-	public void setYBandWidth(IBandwidth yBandWidth) {
-		this.yBandWidth = yBandWidth;
-	}
-
-	/**
-	 * @return the theGrid
-	 */
-	public AbstractSpatialGrid getGrid() {
-		return grid;
-	}
-	
-	/**
-	 * @param theGrid the theGrid to set
-	 */
-	public void setGrid(AbstractSpatialGrid theGrid) {
-		this.grid = theGrid;
-	}
-
-	/**
-	 * @return the sampleValues
-	 */
-	public List<SpatialSamplePoint> getSampleValues() {
-		return sampleValues;
-	}
-
-	/**
-	 * @param sampleValues the sampleValues to set
-	 */
-	public void setSampleValues(List<SpatialSamplePoint> sampleValues) {
-		this.sampleValues = sampleValues;
-	}
-	
-	/**
-	 * @return the crossCovariance
-	 */
-	public double getCrossCovariance() {
-		return crossCovariance;
-	}
-
-	/**
-	 * @param crossCovariance the crossCovariance to set
-	 */
-	public void setCrossCovariance(double crossCovariance) {
-		this.crossCovariance = crossCovariance;
-	}
-	
 	/**
 	 * 
 	 * @param fileName
@@ -226,21 +142,5 @@ public abstract class AbstractDensityEstimateAlgorithm implements DensityEstimat
 
             return Math.abs((d_latitude * d_longitude) / ( samples.size() - 1.0));
     }
-
-	/**
-	 * @return the xstats_
-	 */
-	public DescriptiveStatistics getXstats() {
-		return xstats_;
-	}
-
-	/**
-	 * @return the ystats_
-	 */
-	public DescriptiveStatistics getYstats() {
-		return ystats_;
-	}
-    
-    
 
 }

@@ -1,5 +1,7 @@
 package me.transit.parser.data;
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.apachecommons.CommonsLog;
 import me.math.kdtree.MinBoundingRectangle;
 import me.transit.database.Agency;
@@ -14,10 +16,12 @@ import java.util.Map;
 
 @Component(value="blackboard")
 @CommonsLog
+@Getter
+@Setter
 public class Blackboard {
 
 	private final Map<String, String> routeShortName = new HashMap<>();
-	private final Map<String, RouteGeometry> shaps = new HashMap<>();
+	private final Map<String, RouteGeometry> shapes = new HashMap<>();
 	private final Map<String, ServiceDate> service = new HashMap<>();
 	private final Map<String, RouteTripPair> tripMap = new HashMap<>();
 	private final Map<String, List<Trip>> routeToTrips = new HashMap<>();
@@ -65,57 +69,6 @@ public class Blackboard {
 	}
 
 	/**
-	 * @param agencyId
-	 *            the agencyId to set
-	 */
-	public void setAgency(Agency agencyId) {
-		this.agency = agencyId;
-	}
-
-	/**
-	 * @param agencyId
-	 *            the agencyId to set
-	 */
-	public Agency getAgency() {
-		return this.agency;
-	}
-
-	/**
-	 * @return the routeShortName
-	 */
-	public Map<String, String> getRouteShortName() {
-		return routeShortName;
-	}
-
-	/**
-	 * @return the shaps
-	 */
-	public Map<String, RouteGeometry> getShapes() {
-		return shaps;
-	}
-
-	/**
-	 * @return the service
-	 */
-	public Map<String, ServiceDate> getService() {
-		return service;
-	}
-
-	/**
-	 * @return the tripMap
-	 */
-	public Map<String, RouteTripPair> getTripMap() {
-		return tripMap;
-	}
-
-	/**
-	 * @return the routeToTrips
-	 */
-	public Map<String, List<Trip>> getRouteToTrips() {
-		return routeToTrips;
-	}
-
-	/**
 	 * 
 	 * @param id
 	 * @return
@@ -134,20 +87,11 @@ public class Blackboard {
 	 * @return
 	 */
 	public RouteGeometry getShape(long id) {
-		if (this.shaps.containsKey(Long.toString(id))) {
-			return this.shaps.get(Long.toString(id));
+		if (this.shapes.containsKey(Long.toString(id))) {
+			return this.shapes.get(Long.toString(id));
 		}
 		log.info(this.getClass().getSimpleName() + " Shape not found: " + id);
 		return null;
 	}
-
-	/**
-	 * @return the routeuuid
-	 */
-	public Map<String, Long> getRouteuuid() {
-		return routeuuid;
-	}
-
-	public Map<String, Long> getStopuuid() { return stopuuid; }
 
 }
