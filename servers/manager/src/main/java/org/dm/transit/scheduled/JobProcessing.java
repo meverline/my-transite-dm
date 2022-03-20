@@ -6,6 +6,12 @@ import java.util.concurrent.Executors;
 
 import lombok.extern.apachecommons.CommonsLog;
 import me.datamining.DataMiningJob;
+import me.datamining.mapreduce.DataResult;
+import me.datamining.shapes.Shape;
+import me.math.Vertex;
+import me.math.grid.tiled.TiledSpatialGrid;
+import org.dm.transit.callable.DMJobCallable;
+import org.dm.transit.metric.DataMiningMetric;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -18,6 +24,8 @@ import com.amazonaws.services.sqs.model.Message;
 import com.amazonaws.services.sqs.model.ReceiveMessageRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.dm.transit.metric.MetricFactory;
+
 @Service
 @PropertySource({ "classpath:persistence-${envTarget:dev}.hmj.properties" })
 @CommonsLog
@@ -28,13 +36,17 @@ public class JobProcessing {
 	private final AmazonSQS sqs;
 	private final String url;
 	private final ObjectMapper mapper = new ObjectMapper();
+	private final MetricFactory metricFactory;
+	private final String populateUrl;
 	
 	@Autowired
-	public JobProcessing(Environment env) {
+	public JobProcessing(Environment env, MetricFactory factory) {
 		this.env = env;
 		this.executor = Executors.newFixedThreadPool(Integer.parseInt(env.getProperty("jobs.maxThreads")));
 		this.sqs = AmazonSQSClientBuilder.defaultClient();
 		this.url = env.getProperty("jobs.sqs.url");
+		this.metricFactory = factory;
+		this.populateUrl = env.getProperty("jobs.sqs.populate");
 	}
 
 	@Scheduled(fixedRate = 1000)
@@ -45,9 +57,7 @@ public class JobProcessing {
         for (final Message message : messages) {
         	try {
 				DataMiningJob job = this.mapper.readValue(message.getBody(), DataMiningJob.class);
-
-
-
+				this.executor.submit(new DMJobCallable(this.populateUrl, job, metricFactory));
         	} catch ( Exception ex) {
         		log.error(ex.getLocalizedMessage(), ex);
         	}

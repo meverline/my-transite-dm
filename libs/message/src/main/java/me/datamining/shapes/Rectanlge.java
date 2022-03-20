@@ -42,4 +42,6 @@ public class Rectanlge implements Shape{
 		query.addRectangleConstraint(this.getUpperLeft().toPoint(),
 									 this.getLowerRight().toPoint());
 	}
+
+
 }

@@ -6,6 +6,7 @@ import me.datamining.DataMiningJob;
 import me.datamining.types.MetricTypes;
 import me.transit.dao.AgencyDao;
 import me.transit.dao.TransiteStopDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component(value="metricFactory")
@@ -22,9 +23,10 @@ public class MetricFactory {
      * @param transiteStopDao
      * @param documentSession
      */
-    protected MetricFactory(AgencyDao agencyDao,
-                            TransiteStopDao transiteStopDao,
-                            DocumentSession documentSession)
+    @Autowired
+    public MetricFactory(AgencyDao agencyDao,
+                         TransiteStopDao transiteStopDao,
+                         DocumentSession documentSession)
     {
         this.agencyDao = agencyDao;
         this.transiteStopDao = transiteStopDao;

@@ -2,6 +2,7 @@ package me.datamining.shapes;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import me.math.Vertex;
 import me.transit.dao.query.SpatialQuery;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "className")
@@ -11,4 +12,8 @@ import me.transit.dao.query.SpatialQuery;
 public interface Shape {
 
 	void setQueryShape(SpatialQuery query);
+
+	Vertex getUpperLeft();
+
+	Vertex getLowerRight();
 }

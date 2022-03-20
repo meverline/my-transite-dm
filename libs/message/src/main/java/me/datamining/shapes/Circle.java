@@ -7,9 +7,8 @@ import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 import lombok.extern.jackson.Jacksonized;
 import me.transit.dao.query.SpatialQuery;
-import org.locationtech.jts.geom.Coordinate;
-import org.locationtech.jts.geom.Geometry;
-import org.locationtech.jts.geom.GeometryFactory;
+import me.transit.dao.query.tuple.CircleTuple;
+import org.locationtech.jts.geom.*;
 import org.locationtech.jts.geom.Polygon;
 import org.locationtech.jts.util.GeometricShapeFactory;
 
@@ -50,4 +49,51 @@ public class Circle implements Shape{
 	public void setQueryShape(SpatialQuery query) {
 		query.addCircleConstriant(this.getCenter().toPoint(), this.getDistanceInMeters());
 	}
+
+	protected static double equatorialRadiusInMeters()
+	{
+		return 6378137.0;
+	}
+
+	private List<Vertex> createCirecle() {
+		Point location = this.getCenter().toPoint();
+		double distance = this.getDistanceInMeters() / Circle.equatorialRadiusInMeters() * 2;
+		GeometricShapeFactory shapeFactory = new GeometricShapeFactory();
+		shapeFactory.setNumPoints(32);
+		shapeFactory.setCentre(new Coordinate(location.getX(), location.getY()));
+		shapeFactory.setSize(this.getDistanceInMeters() / Circle.equatorialRadiusInMeters() * 2);
+		Polygon circle = shapeFactory.createCircle();
+
+		List<Vertex> coords = new ArrayList<>();
+		for ( Coordinate coord : circle.getCoordinates()) {
+			coords.add( new Vertex(coord.getX(), coord.getY()) );
+		}
+
+		coords.add(coords.get(0));
+		return coords;
+	}
+
+	public Vertex getUpperLeft() {
+
+		double minWest = -90;
+		double maxNorth = 180.0;
+
+		for (Vertex v : this.createCirecle() ) {
+			minWest = Math.min(minWest, v.getLatitudeDegress());
+			maxNorth = Math.max(maxNorth, v.getLongitudeDegress());
+		}
+		return new Vertex(maxNorth, minWest);
+	}
+
+	public Vertex getLowerRight() {
+		double minWest = 90;
+		double maxNorth = -180.0;
+
+		for (Vertex v : this.createCirecle()) {
+			minWest = Math.max(minWest, v.getLatitudeDegress());
+			maxNorth = Math.min(maxNorth, v.getLongitudeDegress());
+		}
+		return new Vertex(maxNorth, minWest);
+	}
+
 }

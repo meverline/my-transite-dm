@@ -43,4 +43,26 @@ public class Polygon implements Shape{
 		query.addPolygonConstraint(pointList);
 	}
 
+	@Override
+	public Vertex getUpperLeft() {
+		double minWest = -90;
+		double maxNorth = 180.0;
+
+		for (Vertex v : this.getCoordinates()) {
+			minWest = Math.min(minWest, v.getLatitudeDegress());
+			maxNorth = Math.max(maxNorth, v.getLongitudeDegress());
+		}
+		return new Vertex(maxNorth, minWest);
+	}
+
+	public Vertex getLowerRight() {
+		double minWest = 90;
+		double maxNorth = -180.0;
+
+		for (Vertex v : this.getCoordinates()) {
+			minWest = Math.max(minWest, v.getLatitudeDegress());
+			maxNorth = Math.min(maxNorth, v.getLongitudeDegress());
+		}
+		return new Vertex(maxNorth, minWest);
+	}
 }
