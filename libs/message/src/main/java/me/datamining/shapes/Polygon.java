@@ -1,13 +1,11 @@
 package me.datamining.shapes;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.locationtech.jts.geom.Point;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 import me.math.Vertex;
-import me.transit.dao.query.SpatialQuery;
 
 @Data
 public class Polygon implements Shape{
@@ -26,15 +24,7 @@ public class Polygon implements Shape{
 	}
 
 	@Override
-	public void setQueryShape(SpatialQuery query) {
-		List<Point> pointList = new ArrayList<>();
-		for (Vertex v : this.getCoordinates()) {
-			pointList.add(v.toPoint());
-		}
-		query.addPolygonConstraint(pointList);
-	}
-
-	@Override
+	@JsonIgnore
 	public Vertex getUpperLeft() {
 		double minWest = -90;
 		double maxNorth = 180.0;
@@ -46,6 +36,7 @@ public class Polygon implements Shape{
 		return new Vertex(maxNorth, minWest);
 	}
 
+	@JsonIgnore
 	public Vertex getLowerRight() {
 		double minWest = 90;
 		double maxNorth = -180.0;

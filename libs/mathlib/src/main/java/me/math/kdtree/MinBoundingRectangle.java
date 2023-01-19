@@ -18,6 +18,7 @@ package me.math.kdtree;
 import java.io.Serializable;
 import java.util.List;
 
+import org.apache.commons.math3.util.Precision;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
@@ -27,15 +28,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import me.database.nsstore.AbstractDocument;
 import me.math.Vertex;
 import me.math.grid.SpatialGridPoint;
 
-
 @SuppressWarnings("serial")
 @Data
-@EqualsAndHashCode(callSuper=true)
 @JsonRootName(value = "MinBoundingRectangle")
 public class MinBoundingRectangle extends AbstractDocument implements Serializable {
 
@@ -255,6 +253,24 @@ public class MinBoundingRectangle extends AbstractDocument implements Serializab
 	public void setBottom(List<Double> top) {
 		this.setBottomLatDegress(top.get(0));
 		this.setRightLonDegress(top.get(1));
+	}
+	
+	public boolean equals(Object obj) {
+		
+		if ( obj instanceof MinBoundingRectangle ) {
+			double epsilon = 0.000001d;
+			MinBoundingRectangle rhs = MinBoundingRectangle.class.cast(obj);
+			return Precision.equals(getBottomLatDegress(),rhs.getBottomLatDegress(),epsilon) &&
+				   Precision.equals(getRightLonDegress(), rhs.getRightLonDegress(),epsilon) &&
+				   Precision.equals(getTopLatDegress(), rhs.getTopLatDegress(),epsilon) &&
+				   Precision.equals(getLeftLonDegress(), rhs.getLeftLonDegress(),epsilon);
+		}
+		return false;
+	}
+	
+	public int hashCode() {
+		return this.getUpperLeft().hashCode() + 
+			   this.getLowerRight().hashCode();
 	}
 
 

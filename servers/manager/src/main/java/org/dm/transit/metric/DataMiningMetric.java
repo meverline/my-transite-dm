@@ -7,6 +7,10 @@ import me.database.nsstore.DocumentSession;
 import me.database.nsstore.IDocument;
 import me.datamining.DataMiningJob;
 import me.datamining.mapreduce.DataResult;
+import me.datamining.shapes.Circle;
+import me.datamining.shapes.Polygon;
+import me.datamining.shapes.Rectanlge;
+import me.datamining.shapes.Shape;
 import me.math.Vertex;
 import me.transit.dao.AgencyDao;
 import me.transit.dao.TransiteStopDao;
@@ -17,6 +21,8 @@ import me.transit.database.*;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.locationtech.jts.geom.Point;
 
 @Data
 public abstract class DataMiningMetric {
@@ -71,6 +77,31 @@ public abstract class DataMiningMetric {
 
         return rtn;
     }
+    
+    protected void setQueryShape(StopQueryConstraint query, Shape shape)
+    {
+    	if ( shape instanceof Circle) {
+    		Circle circle = Circle.class.cast(shape);
+    		query.addCircleConstriant(circle.getCenter().toPoint(), 
+    								  circle.getDistanceInMeters());
+    		
+    	} else if ( shape instanceof Rectanlge ) {
+    		Rectanlge rectangle = Rectanlge.class.cast(shape);
+    		query.addRectangleConstraint(rectangle.getUpperLeft().toPoint(),
+    									 rectangle.getLowerRight().toPoint());
+    		
+    	} else if ( shape instanceof Polygon ) { 
+    		Polygon polygon = Polygon.class.cast(shape);
+    		
+    		List<Point> pointList = new ArrayList<>();
+    		for (Vertex v : polygon.getCoordinates()) {
+    			pointList.add(v.toPoint());
+    		}
+    		query.addPolygonConstraint(pointList);
+    	} else {
+    		throw new UnsupportedOperationException(shape.getClass().getCanonicalName());
+    	}
+    }
 
     /**
      * Get the data results
@@ -79,7 +110,7 @@ public abstract class DataMiningMetric {
     public List<DataResult> findDataResults() {
         StopQueryConstraint query = new StopQueryConstraint();
 
-        job.getShape().setQueryShape(query);
+        setQueryShape(query, job.getShape());
 
         for (String name : job.getAgencies()) {
             Agency agency = agencyDao.findByName(name);

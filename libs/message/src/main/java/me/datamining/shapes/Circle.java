@@ -8,9 +8,10 @@ import org.locationtech.jts.geom.Point;
 import org.locationtech.jts.geom.Polygon;
 import org.locationtech.jts.util.GeometricShapeFactory;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 import me.math.Vertex;
-import me.transit.dao.query.SpatialQuery;
 
 @Data
 public class Circle implements Shape{
@@ -42,11 +43,6 @@ public class Circle implements Shape{
 		this.center = center;
 	}
 
-	@Override
-	public void setQueryShape(SpatialQuery query) {
-		query.addCircleConstriant(this.getCenter().toPoint(), this.getDistanceInMeters());
-	}
-
 	protected static double equatorialRadiusInMeters()
 	{
 		return 6378137.0;
@@ -71,6 +67,7 @@ public class Circle implements Shape{
 		return coords;
 	}
 
+	@JsonIgnore
 	public Vertex getUpperLeft() {
 
 		double minWest = -90;
@@ -83,6 +80,7 @@ public class Circle implements Shape{
 		return new Vertex(maxNorth, minWest);
 	}
 
+	@JsonIgnore
 	public Vertex getLowerRight() {
 		double minWest = 90;
 		double maxNorth = -180.0;
