@@ -2,7 +2,6 @@ package me.datamining;
 
 import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
-import lombok.extern.jackson.Jacksonized;
 
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
@@ -12,7 +11,6 @@ import lombok.extern.jackson.Jacksonized;
         @JsonSubTypes.Type(value = ComputeTile.class, name = "ComputeTile"),
         @JsonSubTypes.Type(value = PopulateTile.class, name = "PopulateTile")
 })
-@Jacksonized
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TileJob {

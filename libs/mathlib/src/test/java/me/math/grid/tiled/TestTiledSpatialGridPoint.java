@@ -64,6 +64,7 @@ public class TestTiledSpatialGridPoint extends EasyMockSupport {
 	
 	@Test
 	public void testJson() {
+		@SuppressWarnings("unused")
 		ObjectMapper json = new ObjectMapper();
 		Vertex v = new Vertex(-77.286, 38.941);
 		SpatialGridPoint obj = new SpatialGridPoint(10, 10, v, 20, sptile);

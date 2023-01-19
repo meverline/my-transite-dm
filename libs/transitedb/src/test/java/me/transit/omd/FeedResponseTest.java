@@ -1,9 +1,5 @@
 package me.transit.omd;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
 import java.io.FileReader;
 import java.io.IOException;
 

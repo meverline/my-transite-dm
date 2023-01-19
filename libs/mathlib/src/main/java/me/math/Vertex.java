@@ -25,11 +25,9 @@ import lombok.Data;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
-import lombok.extern.jackson.Jacksonized;
 
 @JsonRootName(value="Vertex")
 @SuppressWarnings("serial")
-@Jacksonized
 @Data
 public class Vertex implements Serializable {
 
@@ -101,6 +99,10 @@ public class Vertex implements Serializable {
 		}
 		return false;
 
+	}
+	
+	public int hashCode() {
+		return this.toPoint().hashCode();
 	}
 
 	@JsonIgnore

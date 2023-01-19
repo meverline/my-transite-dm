@@ -48,7 +48,6 @@ public abstract class TransitDao<T extends TransitData> extends AbstractHibernat
 			CriteriaBuilder builder = session.getCriteriaBuilder();
 			CriteriaQuery<Long> crit = builder.createQuery(Long.class);
 			
-			@SuppressWarnings("unchecked")
 			Root<T> root = (Root<T>) crit.from(this.getDaoClass());
 			Join<T, Agency> agency_join = root.join("uuid", JoinType.INNER);
 
@@ -75,7 +74,6 @@ public abstract class TransitDao<T extends TransitData> extends AbstractHibernat
 	/* (non-Javadoc)
 	 * @see me.transit.dao.impl.TransitDao#loadById(long, java.lang.String)
 	 */
-	@SuppressWarnings("unchecked")
 	@Transactional(readOnly = true)
 	public T loadById(String id, String agencyName) {
 		T rtn = null;

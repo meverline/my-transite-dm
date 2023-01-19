@@ -1,6 +1,6 @@
 package org.dm.transit.dataMine;
 
-import lombok.extern.apachecommons.CommonsLog;
+
 import me.datamining.Kernel.Epanechnikov;
 import me.datamining.Kernel.IDensityKernel;
 import me.datamining.bandwidth.IBandwidth;
@@ -10,7 +10,6 @@ import me.math.grid.tiled.SpatialTile;
 
 import java.util.List;
 
-@CommonsLog
 public class TiledNonAdaptiveKDE {
 
     private IDensityKernel kernel = new Epanechnikov();

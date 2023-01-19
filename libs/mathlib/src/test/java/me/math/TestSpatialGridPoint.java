@@ -4,15 +4,15 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import me.math.Vertex;
+
+import org.junit.Test;
+
 import me.math.grid.SpatialGridPoint;
 import me.math.grid.array.UniformSpatialGrid;
 import me.math.grid.data.AbstractDataSample;
 import me.math.grid.data.DensityEstimateDataSample;
 import me.math.kdtree.INode;
 import me.math.kdtree.MinBoundingRectangle;
-
-import org.junit.Test;
 
 public class TestSpatialGridPoint {
 

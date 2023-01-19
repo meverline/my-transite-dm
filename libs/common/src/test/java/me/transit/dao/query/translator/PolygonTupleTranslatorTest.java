@@ -1,6 +1,10 @@
 package me.transit.dao.query.translator;
 
-import me.transit.dao.query.tuple.PolygonBoxTuple;
+import static org.easymock.EasyMock.expect;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.easymock.EasyMock;
 import org.easymock.EasyMockRule;
 import org.easymock.EasyMockSupport;
@@ -13,11 +17,7 @@ import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
 import org.locationtech.jts.geom.Polygon;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.easymock.EasyMock.expect;
-import static org.junit.Assert.*;
+import me.transit.dao.query.tuple.PolygonBoxTuple;
 
 public class PolygonTupleTranslatorTest extends EasyMockSupport {
 

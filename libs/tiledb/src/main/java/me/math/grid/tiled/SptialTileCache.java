@@ -1,16 +1,15 @@
 package me.math.grid.tiled;
 
-import me.database.nsstore.AbstractDocument;
+import java.net.UnknownHostException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import me.database.nsstore.DocumentSession;
 import me.database.nsstore.IDocument;
 import me.math.grid.tiled.dao.TileFragmentDao;
 import me.transit.dao.query.tuple.IQueryTuple;
 import me.transit.dao.query.tuple.NumberTuple;
-
-import java.net.UnknownHostException;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class SptialTileCache {
 

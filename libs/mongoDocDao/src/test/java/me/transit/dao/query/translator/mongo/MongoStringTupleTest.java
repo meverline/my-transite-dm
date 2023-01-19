@@ -1,13 +1,12 @@
 package me.transit.dao.query.translator.mongo;
 
-import me.transit.dao.query.tuple.StringTuple;
 import org.bson.Document;
 import org.easymock.EasyMockRule;
 import org.easymock.EasyMockSupport;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import me.transit.dao.query.tuple.StringTuple;
 
 public class MongoStringTupleTest extends EasyMockSupport {
 

@@ -10,6 +10,8 @@ import java.io.Serializable;
 @MappedSuperclass
 public abstract class TransitData implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	@Column(name = "VERSION")
 	private String version = "0.5";
 

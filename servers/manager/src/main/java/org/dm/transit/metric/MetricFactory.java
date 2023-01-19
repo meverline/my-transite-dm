@@ -1,16 +1,15 @@
 package org.dm.transit.metric;
 
-import lombok.extern.apachecommons.CommonsLog;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import me.database.nsstore.DocumentSession;
 import me.datamining.DataMiningJob;
 import me.datamining.types.MetricTypes;
 import me.transit.dao.AgencyDao;
 import me.transit.dao.TransiteStopDao;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 @Component(value="metricFactory")
-@CommonsLog
 public class MetricFactory {
 
     private final AgencyDao agencyDao;

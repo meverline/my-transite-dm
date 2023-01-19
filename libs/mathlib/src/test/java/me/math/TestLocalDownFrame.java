@@ -42,7 +42,7 @@ public class TestLocalDownFrame {
 			LocalDownFrame dup = json.readValue(str, LocalDownFrame.class);
 			
 		} catch ( IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		

@@ -1,17 +1,14 @@
 package me.transit.dao.query.tuple;
 
-import org.easymock.EasyMockRule;
-import org.easymock.EasyMockSupport;
-import org.junit.Rule;
-import org.junit.Test;
-
 import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
 
 public class TestStringTuple {
 
 	@Test
 	public void testConstructor() {
-		@SuppressWarnings("unused")
+		
 		StringTuple obj = new StringTuple("field", "value", StringTuple.MATCH.CONTAINS);
 
 		assertEquals("field", obj.getField());

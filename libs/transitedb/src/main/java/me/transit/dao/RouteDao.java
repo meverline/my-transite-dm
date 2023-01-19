@@ -93,6 +93,7 @@ public class RouteDao extends TransitDao<Route>  {
 		private final static int BUFFER_SIZE = 200;
 		private ScrollableResults _results = null;
 		private List<Route> _bufferList = new ArrayList<Route>();
+		@SuppressWarnings("unused")
 		private Session _session = null;
 		
 		/**

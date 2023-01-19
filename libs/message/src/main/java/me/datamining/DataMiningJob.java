@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonRootName;
 
 import lombok.Data;
-import lombok.extern.jackson.Jacksonized;
 import me.datamining.shapes.Shape;
 import me.datamining.types.DataMiningTypes;
 import me.datamining.types.HourOfDay;
 import me.datamining.types.MetricTypes;
 
-@Jacksonized
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonRootName("DataMiningJob")

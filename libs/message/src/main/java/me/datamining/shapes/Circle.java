@@ -3,18 +3,15 @@ package me.datamining.shapes;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.*;
-import lombok.Data;
-import lombok.extern.jackson.Jacksonized;
-import me.transit.dao.query.SpatialQuery;
-import me.transit.dao.query.tuple.CircleTuple;
-import org.locationtech.jts.geom.*;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.Point;
 import org.locationtech.jts.geom.Polygon;
 import org.locationtech.jts.util.GeometricShapeFactory;
 
+import lombok.Data;
 import me.math.Vertex;
+import me.transit.dao.query.SpatialQuery;
 
-@Jacksonized
 @Data
 public class Circle implements Shape{
 
@@ -57,6 +54,7 @@ public class Circle implements Shape{
 
 	private List<Vertex> createCirecle() {
 		Point location = this.getCenter().toPoint();
+		@SuppressWarnings("unused")
 		double distance = this.getDistanceInMeters() / Circle.equatorialRadiusInMeters() * 2;
 		GeometricShapeFactory shapeFactory = new GeometricShapeFactory();
 		shapeFactory.setNumPoints(32);

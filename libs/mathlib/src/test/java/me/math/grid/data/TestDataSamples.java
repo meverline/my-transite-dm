@@ -29,11 +29,11 @@ public class TestDataSamples {
 		
 		try {
 			String str = json.writeValueAsString(obj);
+			@SuppressWarnings("unused")
 			DensityEstimateDataSample dup = json.readValue(str, DensityEstimateDataSample.class);
 			
 			
 		} catch ( IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -68,10 +68,11 @@ public class TestDataSamples {
 		
 		try {
 			String str = json.writeValueAsString(obj);
+			@SuppressWarnings("unused")
 			STINGDataSample dup = json.readValue(str, STINGDataSample.class);
 			
 		} catch ( IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 

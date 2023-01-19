@@ -120,6 +120,7 @@ public abstract class DataMiningMetric {
     }
 
     protected boolean coversServiceDate(ServiceDate serviceDate) {
+    	@SuppressWarnings("unused")
         boolean rtn = false;
 
         if ( getJob().getWeekdays() == null || getJob().getWeekdays().isEmpty() ) {

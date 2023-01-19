@@ -29,6 +29,7 @@ import me.transit.json.GeometryToBase64String;
 
 import java.util.Objects;
 
+@SuppressWarnings("unused")
 @Entity
 @Table(name="tran_route_geometry")
 @DiscriminatorColumn(name = "routeGeometry_type")

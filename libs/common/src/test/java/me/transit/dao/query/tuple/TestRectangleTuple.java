@@ -1,16 +1,12 @@
 package me.transit.dao.query.tuple;
 
-import org.easymock.EasyMockRule;
-import org.easymock.EasyMockSupport;
-import org.junit.Before;
-import org.junit.Rule;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class TestRectangleTuple {
 

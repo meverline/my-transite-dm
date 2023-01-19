@@ -20,8 +20,10 @@
 package me.math;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(callSuper=true)
 public class ThreeRotationQuaternion extends Quaternion {
 
     private final double angleA;

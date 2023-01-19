@@ -1,8 +1,5 @@
 package me.transit.dao.query.translator.mongo;
 
-import junit.framework.TestCase;
-import me.transit.dao.query.tuple.CircleTuple;
-import me.utils.TransiteEnums;
 import org.bson.Document;
 import org.easymock.EasyMockRule;
 import org.easymock.EasyMockSupport;
@@ -12,6 +9,9 @@ import org.junit.Test;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
+
+import me.transit.dao.query.tuple.CircleTuple;
+import me.utils.TransiteEnums;
 
 public class MongoCircleTupleTest extends EasyMockSupport {
 

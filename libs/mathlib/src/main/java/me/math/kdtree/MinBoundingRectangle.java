@@ -17,20 +17,17 @@ package me.math.kdtree;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Objects;
 
-import lombok.Data;
-import lombok.extern.jackson.Jacksonized;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
 import org.locationtech.jts.geom.Polygon;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.fasterxml.jackson.annotation.JsonSetter;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import me.database.nsstore.AbstractDocument;
 import me.math.Vertex;
 import me.math.grid.SpatialGridPoint;
@@ -38,7 +35,7 @@ import me.math.grid.SpatialGridPoint;
 
 @SuppressWarnings("serial")
 @Data
-@Jacksonized
+@EqualsAndHashCode(callSuper=true)
 @JsonRootName(value = "MinBoundingRectangle")
 public class MinBoundingRectangle extends AbstractDocument implements Serializable {
 

@@ -1,15 +1,14 @@
 package me.transit.dao.query.translator.mongo;
 
-import me.transit.dao.query.tuple.TimeTuple;
+import java.util.Calendar;
+
 import org.bson.Document;
 import org.easymock.EasyMockRule;
 import org.easymock.EasyMockSupport;
 import org.junit.Rule;
 import org.junit.Test;
 
-import java.util.Calendar;
-
-import static org.junit.Assert.*;
+import me.transit.dao.query.tuple.TimeTuple;
 
 public class MongoTimeTupleTest extends EasyMockSupport {
 

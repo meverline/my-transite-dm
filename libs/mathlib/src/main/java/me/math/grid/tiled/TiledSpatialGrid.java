@@ -8,16 +8,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.locationtech.jts.geom.Point;
+
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.annotation.JsonSetter;
+
 import me.database.nsstore.IDocument;
 import me.math.Vertex;
 import me.math.grid.SpatialGridPoint;
-import me.math.kdtree.INodeCreator;
-import org.locationtech.jts.geom.Point;
 
 @JsonRootName(value = "TiledSpatialGrid")
 public class TiledSpatialGrid extends AbstractTiledSpatialGrid implements IDocument {

@@ -1,6 +1,9 @@
 package me.transit.dao.query.translator;
 
-import me.transit.dao.query.tuple.TimeTuple;
+import static org.easymock.EasyMock.expect;
+
+import java.util.Calendar;
+
 import org.easymock.EasyMock;
 import org.easymock.EasyMockRule;
 import org.easymock.EasyMockSupport;
@@ -8,10 +11,7 @@ import org.hibernate.Criteria;
 import org.junit.Rule;
 import org.junit.Test;
 
-import java.util.Calendar;
-
-import static org.easymock.EasyMock.expect;
-import static org.junit.Assert.*;
+import me.transit.dao.query.tuple.TimeTuple;
 
 public class TimeTupleTranslatorTest extends EasyMockSupport {
 

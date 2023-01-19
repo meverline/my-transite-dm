@@ -90,6 +90,7 @@ public class TestSpatialTile {
 		try {
 			String str = json.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
 			System.out.println(str);
+			@SuppressWarnings("unused")
 			SpatialTile dup = json.readValue(str, SpatialTile.class);
 			
 		} catch ( IOException e) {

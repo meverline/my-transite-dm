@@ -19,7 +19,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
-				<version>3.2.3</version>
 			</plugin>
 		</plugins>
 	</build>
@@ -50,7 +49,6 @@
 		<dependency>
 			<groupId>cglib</groupId>
 			<artifactId>cglib-nodep</artifactId>
-			<version>${cglib.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 
@@ -70,7 +68,6 @@
 		<dependency>
 			<groupId>com.amazonaws</groupId>
 			<artifactId>aws-java-sdk-sqs</artifactId>
-			<version>1.11.648</version>
 		</dependency>
 
 	</dependencies>

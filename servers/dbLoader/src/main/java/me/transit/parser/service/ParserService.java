@@ -22,6 +22,7 @@ public class  ParserService extends AbstractGTFSParser {
 
     private final AmazonSQS sqs = AmazonSQSClientBuilder.defaultClient();
     private final String url;
+    @SuppressWarnings("unused")
     private final IGraphDatabaseDAO graph;
     private boolean stopPolling = false;
 

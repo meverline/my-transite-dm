@@ -4,11 +4,10 @@ import java.util.Random;
 
 import me.math.LocalDownFrame;
 import me.math.Vertex;
+import me.math.grid.SpatialGridPoint;
 import me.math.grid.data.AbstractDataSample;
 import me.math.grid.data.CrossCovData;
-import me.math.grid.tiled.AbstractTiledSpatialGrid;
 import me.math.grid.tiled.SpatialTile;
-import me.math.grid.SpatialGridPoint;
 import me.utils.TransiteEnums;
 
 public class AbstractMapReduceTest {

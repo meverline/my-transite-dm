@@ -1,13 +1,10 @@
 package me.transit.dao.query.tuple;
 
-import org.easymock.EasyMockRule;
-import org.easymock.EasyMockSupport;
-import org.junit.Rule;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 import java.util.Calendar;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 public class TestTimeTuple  {
 
@@ -16,7 +13,7 @@ public class TestTimeTuple  {
 
 		Calendar start = Calendar.getInstance();
 		Calendar end = Calendar.getInstance();
-		@SuppressWarnings("unused")
+		
 		TimeTuple obj = new TimeTuple("field", start, end);
 
 		assertEquals("field", obj.getField());

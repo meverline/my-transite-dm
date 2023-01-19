@@ -93,8 +93,8 @@ public class MongoDocumentSession extends DocumentSession {
 			try {
 				getCollectoin(collection).insertOne(this.toMongoObject(document));
 			} catch (Exception e) {
-				this.log.error("Unable to add " + document.getClass().getName() + ": " + e.getLocalizedMessage());
-				this.log.error(e);
+				log.error("Unable to add " + document.getClass().getName() + ": " + e.getLocalizedMessage());
+				log.error(e);
 			}
 		}
 	}
@@ -108,8 +108,8 @@ public class MongoDocumentSession extends DocumentSession {
 				this.translatorFactory(tuple).getDoucmentQuery(query);
 				getCollectoin(collection).updateOne(query, this.toMongoObject(document));
 			} catch (Exception e) {
-				this.log.error("Unable to update " + document.getClass().getName() + ": " + e.getLocalizedMessage());
-				this.log.error(e);
+				log.error("Unable to update " + document.getClass().getName() + ": " + e.getLocalizedMessage());
+				log.error(e);
 			}
 		}
 	}
@@ -119,8 +119,8 @@ public class MongoDocumentSession extends DocumentSession {
 			try {
 				getCollectoin(collection).deleteOne(this.toMongoObject(document));
 			} catch (Exception e) {
-				this.log.error("Unable to remove " + document.getClass().getName() + ": " + e.getLocalizedMessage());
-				this.log.error(e);
+				log.error("Unable to remove " + document.getClass().getName() + ": " + e.getLocalizedMessage());
+				log.error(e);
 			}
 		}
 	}
@@ -144,8 +144,8 @@ public class MongoDocumentSession extends DocumentSession {
 
 			return Document.parse(this.mapper.writer(filters).writeValueAsString(document));
 		} catch (Exception e) {
-			this.log.error("Unable to encode " + document.getClass().getName() + ": " + e.getLocalizedMessage());
-			this.log.error(e);
+			log.error("Unable to encode " + document.getClass().getName() + ": " + e.getLocalizedMessage());
+			log.error(e);
 			return null;
 		}
 	}

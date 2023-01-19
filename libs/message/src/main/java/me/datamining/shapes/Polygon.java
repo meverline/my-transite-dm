@@ -3,21 +3,12 @@ package me.datamining.shapes;
 import java.util.ArrayList;
 import java.util.List;
 
-import lombok.Data;
-import lombok.extern.jackson.Jacksonized;
-import me.transit.dao.query.SpatialQuery;
-import org.locationtech.jts.geom.Coordinate;
-import org.locationtech.jts.geom.Geometry;
-import org.locationtech.jts.geom.GeometryFactory;
-
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonRootName;
-import com.fasterxml.jackson.annotation.JsonSetter;
-
-import me.math.Vertex;
 import org.locationtech.jts.geom.Point;
 
-@Jacksonized
+import lombok.Data;
+import me.math.Vertex;
+import me.transit.dao.query.SpatialQuery;
+
 @Data
 public class Polygon implements Shape{
 

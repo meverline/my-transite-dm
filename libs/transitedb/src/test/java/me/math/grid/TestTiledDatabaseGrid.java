@@ -43,7 +43,7 @@ import me.math.Vertex;
 import me.math.grid.data.DensityEstimateDataSample;
 import me.math.grid.tiled.SpatialTile;
 import me.math.grid.tiled.TiledSpatialGrid;
-import me.math.grid.SpatialGridPoint;
+
 import me.math.kdtree.KDTree;
 import me.math.kdtree.search.RangeSearch;
 import me.transit.dao.TransiteStopDao;
@@ -105,7 +105,7 @@ public class TestTiledDatabaseGrid extends EasyMockSupport {
 					assertNotNull(pt);
 					assertEquals(row, pt.getRow());
 					assertEquals(col, pt.getCol());
-
+					@SuppressWarnings("unused")
 					int tile = pt.getIndex() / blockSize;
 				}
 			}

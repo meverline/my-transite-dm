@@ -13,10 +13,12 @@ import org.dm.transit.metric.MetricFactory;
 import java.util.List;
 import java.util.concurrent.Callable;
 
+@SuppressWarnings("unused")
 public class DMJobCallable implements Callable<Void> {
 
     private final DataMiningJob job;
     private final MetricFactory metricFactory;
+    
     private final AmazonSQS sqs;
     private final String reduceUrl;
     private final ObjectMapper decoder = new ObjectMapper();

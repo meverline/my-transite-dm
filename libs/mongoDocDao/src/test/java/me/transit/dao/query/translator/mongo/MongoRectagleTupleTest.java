@@ -1,6 +1,5 @@
 package me.transit.dao.query.translator.mongo;
 
-import me.transit.dao.query.tuple.RectangleTuple;
 import org.bson.Document;
 import org.easymock.EasyMockRule;
 import org.easymock.EasyMockSupport;
@@ -11,7 +10,7 @@ import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
 
-import static org.junit.Assert.*;
+import me.transit.dao.query.tuple.RectangleTuple;
 
 public class MongoRectagleTupleTest extends EasyMockSupport {
 

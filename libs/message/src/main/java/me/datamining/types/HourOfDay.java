@@ -1,14 +1,11 @@
 package me.datamining.types;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.fasterxml.jackson.annotation.JsonSetter;
+
 import lombok.Data;
-import lombok.extern.jackson.Jacksonized;
 
 @JsonRootName("HourOfDay")
 @Data
-@Jacksonized
 public class HourOfDay {
 
     private int hour;

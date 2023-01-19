@@ -1,13 +1,11 @@
 package me.datamining.metric;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.extern.apachecommons.CommonsLog;
-
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-@CommonsLog
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public abstract class AbstractSpatialMetric {
 
 	@JsonIgnore

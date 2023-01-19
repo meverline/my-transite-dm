@@ -1,7 +1,18 @@
 package me.transit.parser.service;
 
-import ch.hsr.geohash.GeoHash;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Properties;
+import java.util.concurrent.TimeUnit;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import lombok.extern.apachecommons.CommonsLog;
 import me.transit.omd.dao.LocationDao;
 import me.transit.omd.data.Feed;
@@ -11,13 +22,6 @@ import me.transit.parser.data.Blackboard;
 import me.transit.parser.data.FileHandlerFactory;
 import me.transit.parser.message.MessageAgency;
 import me.transit.parser.message.ParserMessage;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.sql.SQLException;
-import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 @CommonsLog
 public abstract class AbstractGTFSParser {

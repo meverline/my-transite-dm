@@ -13,6 +13,7 @@ import java.util.Map;
 public class DynamoDocumentSession extends DocumentSession {
 
     private final AmazonDynamoDB ddb;
+    @SuppressWarnings("unused")
     private final DynamoDBMapper mapper;
 
     public DynamoDocumentSession(Map<String, String> map) {

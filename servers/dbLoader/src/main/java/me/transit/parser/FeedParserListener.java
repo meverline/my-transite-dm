@@ -1,12 +1,11 @@
 package me.transit.parser;
 
-import me.transit.parser.service.AbstractGTFSParser;
-import me.transit.parser.service.ParserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.PreDestroy;
+
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 
-import javax.annotation.PreDestroy;
+import me.transit.parser.service.AbstractGTFSParser;
 
 public class FeedParserListener implements ApplicationListener<ApplicationReadyEvent> {
 

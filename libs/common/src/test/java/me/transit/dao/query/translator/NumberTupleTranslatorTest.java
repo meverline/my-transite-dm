@@ -1,6 +1,7 @@
 package me.transit.dao.query.translator;
 
-import me.transit.dao.query.tuple.NumberTuple;
+import static org.easymock.EasyMock.expect;
+
 import org.easymock.EasyMock;
 import org.easymock.EasyMockRule;
 import org.easymock.EasyMockSupport;
@@ -8,8 +9,7 @@ import org.hibernate.Criteria;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static org.easymock.EasyMock.expect;
-import static org.junit.Assert.*;
+import me.transit.dao.query.tuple.NumberTuple;
 
 public class NumberTupleTranslatorTest extends EasyMockSupport {
 

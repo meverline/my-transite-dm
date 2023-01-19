@@ -3,17 +3,16 @@ package me.datamining;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.fasterxml.jackson.annotation.JsonSetter;
 
 import lombok.Data;
-import lombok.extern.jackson.Jacksonized;
+import lombok.EqualsAndHashCode;
 import me.math.grid.tiled.SpatialTile;
 
-@Jacksonized
+
 @Data
+@EqualsAndHashCode(callSuper=true)
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonRootName("PopulateTile")
 public class PopulateTile extends TileJob {

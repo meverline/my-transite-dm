@@ -1,6 +1,5 @@
 package me.transit.dao.query.translator;
 
-import junit.framework.TestCase;
 import me.transit.dao.query.tuple.CircleTuple;
 import me.utils.TransiteEnums;
 import org.easymock.EasyMock;

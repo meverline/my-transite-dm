@@ -4,14 +4,8 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import lombok.extern.apachecommons.CommonsLog;
-import me.datamining.DataMiningJob;
-import me.datamining.mapreduce.DataResult;
-import me.datamining.shapes.Shape;
-import me.math.Vertex;
-import me.math.grid.tiled.TiledSpatialGrid;
 import org.dm.transit.callable.DMJobCallable;
-import org.dm.transit.metric.DataMiningMetric;
+import org.dm.transit.metric.MetricFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -24,7 +18,8 @@ import com.amazonaws.services.sqs.model.Message;
 import com.amazonaws.services.sqs.model.ReceiveMessageRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import org.dm.transit.metric.MetricFactory;
+import lombok.extern.apachecommons.CommonsLog;
+import me.datamining.DataMiningJob;
 
 @Service
 @PropertySource({ "classpath:persistence-${envTarget:dev}.hmj.properties" })
@@ -32,6 +27,7 @@ import org.dm.transit.metric.MetricFactory;
 public class JobProcessing {
 
 	private final ExecutorService executor;
+	@SuppressWarnings("unused")
 	private final Environment env;
 	private final AmazonSQS sqs;
 	private final String url;

@@ -84,7 +84,6 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 					builder.equal(root.get("UUID"), uuid)
 			);
 
-			@SuppressWarnings("unchecked")
 			T result = (T) session.createQuery(crit).getSingleResult();
 			session.remove(result);
 
@@ -124,7 +123,6 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 					builder.equal(root.get(property), id)
 			);
 
-			@SuppressWarnings("unchecked")
 			T result = (T) session.createQuery(crit).getSingleResult();
 			rtn = result;
 
@@ -151,7 +149,6 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 					builder.equal(root.get(property), id)
 			);
 
-			@SuppressWarnings("unchecked")
 			T result = (T) session.createQuery(crit).getSingleResult();
 			rtn = result;
 
@@ -186,7 +183,6 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 					builder.equal(root.get("UUID"), id)
 			);
 
-			@SuppressWarnings("unchecked")
 			T result = (T) session.createQuery(crit).getSingleResult();
 			rtn = result;
 
