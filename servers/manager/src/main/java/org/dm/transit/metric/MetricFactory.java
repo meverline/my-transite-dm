@@ -38,7 +38,7 @@ public class MetricFactory {
      * @return
      */
     public DataMiningMetric create(DataMiningJob job) {
-        if ( job.getMetricType()  == MetricTypes.ServiceFrequencyAtStop ) {
+        if ( job.getMetricType()  == MetricTypes.ServiceFrequnceAtStop ) {
             return new ServiceFrequencyAtStopMetric(job,
                                                     this.agencyDao,
                                                     this.transiteStopDao,

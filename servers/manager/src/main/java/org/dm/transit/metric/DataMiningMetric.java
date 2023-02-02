@@ -119,18 +119,22 @@ public abstract class DataMiningMetric {
 
         return this.results(transiteStopDao.query(query));
     }
+    
+    protected long toLong(String data) {
+    	return Long.parseLong(data);
+    }
 
     protected int countStopTimes(TransitStop transitStop, List<StopTime> stopTimes  )
     {
         int count = 0;
         long startTime = 0;
         if ( getJob().getStartTime() != null ) {
-            startTime = getJob().getStartTime().toLong();
+            startTime = toLong(getJob().getStartTime());
         }
 
         long endTime = 2359;
         if ( getJob().getEndTime() != null ) {
-            endTime = getJob().getEndTime().toLong();
+            endTime = toLong(getJob().getEndTime());
         }
 
         for ( StopTime stopTime : stopTimes ) {

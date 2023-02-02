@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import me.datamining.DataMiningJob;
 import me.datamining.mapreduce.DataResult;
 import me.math.Vertex;
+import me.math.grid.AbstractSpatialGrid;
 import me.math.grid.tiled.TiledSpatialGrid;
 import org.dm.transit.metric.DataMiningMetric;
 import org.dm.transit.metric.MetricFactory;
@@ -37,8 +38,8 @@ public class DMJobCallable implements Callable<Void> {
         DataMiningMetric metric = this.metricFactory.create(job);
 
         List<DataResult> resultList = metric.findDataResults();
-        Vertex upperLeft = job.getShape().getUpperLeft();
-        Vertex lowerRight = job.getShape().getLowerRight();
+        Vertex upperLeft = ((AbstractSpatialGrid) job.getShape()).getUpperLeft();
+        Vertex lowerRight = ((AbstractSpatialGrid) job.getShape()).getLowerRight();
 
         TiledSpatialGrid grid = new TiledSpatialGrid(upperLeft, lowerRight, job.getGridSpaceInMeters());
 

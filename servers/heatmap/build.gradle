@@ -29,8 +29,8 @@ version = "0.0.1-SNAPSHOT"
 
 description = ""
 
-sourceCompatibility=11
-targetCompatibility=11
+sourceCompatibility=8
+targetCompatibility=8
 assert System.properties["java.specification.version"] == "11" || "12" || "13" || "14" || "15" || "16" || "17" || "18"
 
 apply from: "gradle/docker.gradle"
@@ -196,7 +196,7 @@ configurations {
 
 repositories {
     // Local maven repository is required for libraries built locally with maven like development jhipster-bom.
-    // mavenLocal()
+    mavenLocal()
     mavenCentral()
     //jhipster-needle-gradle-repositories - JHipster will add additional repositories
 }
